@@ -21,6 +21,26 @@ require("../../assets/configs/function.inc.php");
 				</div>
 				<div class="mod-body-main-content">
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
+					<div class="formCms">
+						<form action="?" method="post" name="formcms">
+							<div>
+								<div class="floatL form_name">ชื่อ</div>
+								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
+								<div class="clear"></div>
+							</div>	
+							<div>
+								<div class="floatL form_name">รายการ</div>
+								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
+								<div class="clear"></div>
+							</div>	
+							<div>
+								<div class="floatL form_name">รายละเอียด</div>
+								<div class="floatL form_input"><textarea name="detail" class="w90p"></textarea></div>
+								<div class="clear"></div>
+							</div>	
+							
+						</form> 
+					</div>
 				</div>
 			</div>
 		</div>
