@@ -1,0 +1,4 @@
+DateTime|:|Ip address|:|User|:|Log
+
+2015-08-08 00:20:46|:|127.0.0.1|:|admin|:|hello
+2015-08-08 00:21:24|:|127.0.0.1|:|admin|:|hello

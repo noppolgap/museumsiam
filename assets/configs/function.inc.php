@@ -136,7 +136,7 @@ function admin_move_image_upload_dir($dir,$file,$width,$height,$crop,$thumbwidth
 		if(!is_dir($path4)) { mkdir($path4,0777); }else{ chmod($path4,0777); }
 
 		include('../../assets/class/abeautifulsite/SimpleImage.php');
-		$img = new abeautifulsite\SimpleImage();
+		$img = new abeautifulsite/SimpleImage();
 		
 		$output = time().'_'.rand(111, 999).'.'.getEXT($file);
 		$original_path = $old_path1.$file;
