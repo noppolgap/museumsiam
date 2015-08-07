@@ -123,4 +123,55 @@ function logs_access($user,$msg) {
 	chmod($dirPath,0744);
 	chmod(_LOG_PATH_,0744);
 }
+function admin_move_image_upload_dir($dir,$file,$width,$height,$crop,$thumbwidth,$thumbheight){
+		$path1 = '../../upload';
+		$path2 = $path1.'/'.$dir;
+		$path3 = $path2.'/'.date("Y_m").'/';
+		$path4 = $path3.'/thumbnail/';
+		$old_path1 = '../../assets/plugin/upload/php/files/';
+		
+		if(!is_dir($path1)) { mkdir($path1,0777); }else{ chmod($path1,0777); }
+		if(!is_dir($path2)) { mkdir($path2,0777); }else{ chmod($path2,0777); }
+		if(!is_dir($path3)) { mkdir($path3,0777); }else{ chmod($path3,0777); }
+		if(!is_dir($path4)) { mkdir($path4,0777); }else{ chmod($path4,0777); }
+
+		include('../../assets/class/abeautifulsite/SimpleImage.php');
+		$img = new abeautifulsite\SimpleImage();
+		
+		$output = time().'_'.rand(111, 999).'.'.getEXT($file);
+		$original_path = $old_path1.$file;
+		$thumb_path = $old_path1.'thumbnail/'.$file;
+
+			try {
+				$img->load($original_path);
+				
+				if($crop){
+					$img->fit_to_width($width)->crop(0, 0, $width, $height);
+				}else{
+					if($width == ''){
+						$img->fit_to_height($height);
+					}else if($height == ''){ 
+						$img->fit_to_width($width);
+					}else{
+						$img->resize($width, $height);	
+					}
+				}
+					
+				
+				$img->save($path3.$output);	
+				
+				$img->thumbnail($thumbwidth, $thumbheight)->save($path4.$output);	
+
+				unlink($original_path);
+				unlink($thumb_path);
+													
+			} catch (Exception $e) {
+			    echo '<span style="color: red;">'.$e->getMessage().'</span>';
+			}
+		
+		chmod($path1,0744);
+		chmod($path2,0744);
+		chmod($path3,0744);
+		chmod($path4,0744);	
+}
 ?>
