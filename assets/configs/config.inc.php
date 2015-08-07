@@ -1,10 +1,6 @@
 <?php 
 	session_start();
-	
-
 	define('_DATA_BASE_HOST_','localhost');
-	
-
 	/*------------ Online ------------
 	define('_DATA_BASE_NAME_','campaignac_mu');
 	define('_DATA_BASE_USER_','campaignac_mu');
@@ -14,7 +10,7 @@
 	define('_DATA_BASE_USER_','root');
 	define('_DATA_BASE_PASS_','1234');
 	/*------------ Page Config ------------*/
-	define('_TITTLE_SITE_','สถาบันพิพิธฑ์การเรียนรู้แห่งชาติ (สพร.)');
+	define('_TITTLE_SITE_','มิวเซียมสยาม (Museum Siam)');
 	define('_FULL_SITE_PATH_','http://localhost:8080/museumsiam');
 	//define('_FULL_SITE_PATH_','http://www.campaignactivity.com/museum');
 	define('_LOG_PATH_','../../log');
