@@ -58,7 +58,7 @@ require("../../assets/configs/function.inc.php");
 						</div>	
 						<div class="floatL stausContent"><span class="staus1"></span> Enable <? //<span class="staus2"></span> Disable ?></div>
 						<div class="floatL EditContent">
-							<a href="#" class="EditContentBtn">Edit</a>
+							<a href="edit.php" class="EditContentBtn">Edit</a>
 							<a href="#" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
@@ -76,7 +76,7 @@ require("../../assets/configs/function.inc.php");
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select>	
-						<a href="edit.php"><img src="../images/fast-forward.svg" alt="next" /></a>
+						<a href="#"><img src="../images/fast-forward.svg" alt="next" /></a>
 						<a href="#"><img src="../images/skip-next.svg" alt="last" /></a>
 					</div>
 					<div class="floatR">หน้า 1 จาก 10</div>

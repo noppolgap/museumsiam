@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+	if($('.mytextarea').length > 0){
         tinymce.init({
             selector: ".mytextarea",
 		    theme: "modern",
@@ -12,5 +13,5 @@ $( document ).ready(function() {
 		    toolbar2: "link image | print preview media | forecolor backcolor emoticons",
 		    image_advtab: true
 		});
-
+	}
 });
