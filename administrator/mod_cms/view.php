@@ -52,9 +52,7 @@ require("../../assets/configs/function.inc.php");
 								<div class="clear"></div>
 							</div>	
 							<div class="btn_action">
-								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
-								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button">
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 							</div>
 						</form> 
 					</div>

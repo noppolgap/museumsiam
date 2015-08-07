@@ -16,7 +16,7 @@ require("../../assets/configs/function.inc.php");
 		<? require('../inc_side.php'); ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 			</div>
@@ -84,7 +84,7 @@ require("../../assets/configs/function.inc.php");
 				</div>
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 			</div>
