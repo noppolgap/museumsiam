@@ -76,7 +76,7 @@ require("../../assets/configs/function.inc.php");
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select>	
-						<a href="#"><img src="../images/fast-forward.svg" alt="next" /></a>
+						<a href="edit.php"><img src="../images/fast-forward.svg" alt="next" /></a>
 						<a href="#"><img src="../images/skip-next.svg" alt="last" /></a>
 					</div>
 					<div class="floatR">หน้า 1 จาก 10</div>
