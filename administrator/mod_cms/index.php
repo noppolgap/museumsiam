@@ -58,7 +58,7 @@ require("../../assets/configs/function.inc.php");
 						</div>	
 						<div class="floatL stausContent"><span class="staus1"></span> Enable <? //<span class="staus2"></span> Disable ?></div>
 						<div class="floatL EditContent">
-							<a href="#" class="EditContentBtn">Edit</a>
+							<a href="edit.php" class="EditContentBtn">Edit</a>
 							<a href="#" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	

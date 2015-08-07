@@ -35,7 +35,7 @@ require("../../assets/configs/function.inc.php");
 							</div>	
 							<div>
 								<div class="floatL form_name">รายละเอียด</div>
-								<div class="floatL form_input"><textarea name="detail" class="w90p">
+								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p">
 นิทรรศการ “เรียงความประเทศไทย” เป็นการบอกเล่าถึงพัฒนาการด้านต่างๆ ของภูมิภาคอุษาคเนย์ นับตั้งแต่สมัยแผ่นดิน “สุวรรณภูมิ” (3,000 ปีก่อน) อันประกอบด้วยอารยธรรมต่างๆ ก่อนการรับวัฒนธรรมจากอินเดียและจีน เรื่อยมาจนถึงกำเนิดสยามประเทศและก้าวสู่ประเทศไทยในปัจจุบัน โดยแบ่งการนำเสนอออกเป็น 3 ช่วง ดังนี้
 
 ช่วงที่ 1 “สุวรรณภูมิ”
@@ -68,6 +68,7 @@ require("../../assets/configs/function.inc.php");
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
+<script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>		
 <script type="text/javascript" src="mod_cms.js"></script>	
 <? logs_access('admin','hello'); ?>	
