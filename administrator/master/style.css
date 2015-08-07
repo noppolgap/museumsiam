@@ -199,7 +199,7 @@ header{
 	font-size: 1.2em;
 }
 /* form */
-.mod-body-main-content > div{
+.mod-body-main-content > .Main_Content{
 	height: 48px;
 	color: #000;
 	margin-left: 15px;	
@@ -296,4 +296,7 @@ header{
 	margin-left: 5px;
 	font-size: 0.85em;
 	top: -5px;
+}
+.imageMain , .imageMain img{
+	width: 400px;
 }

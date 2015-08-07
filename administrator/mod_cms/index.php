@@ -47,7 +47,7 @@ require("../../assets/configs/function.inc.php");
 				<div class="mod-body-main-content">
 					<!-- start loop -->
 					<?php for($i=0;$i<30;$i++){ ?>
-					<div>
+					<div class="Main_Content">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$i?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>

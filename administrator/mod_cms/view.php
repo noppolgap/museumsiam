@@ -15,59 +15,13 @@ require("../../assets/configs/function.inc.php");
 	<div class="main-body marginC">
 		<? require('../inc_side.php'); ?>
 		<div class="mod-body">
-			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
-			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ชื่อเมนู</div>
-					<div class="floatR searchBox">
-						<form name="search" action="?" method="post">
-							<input type="search" name="str_search" value="" />
-							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
-						</form>
-					</div>
-					<div class="clear"></div>						
-				</div>
-				<div class="mod-body-inner-action">
-					<div class="floatL checkAllBox"><label><input type="checkbox" name="checkall" value="0"> เลือกทั้งหมด</label></div>
-					<div class="floatR orderBox">
-						<select onchange="console.log('action');" name="orderby" class="p-Relative">
-					        <option value="order">เลือกการจัดเรียงลำดับ</option>
-					        <option selected="selected" value="order">การจัดเรียงของระบบ</option>
-					        <option value="subject">ชื่อ</option>
-					        <option value="credate">วันที่สร้าง</option>
-					        <option value="status">สถานะข้อมูล</option>
-					    </select>
-					</div>
-					<div class="clear"></div>	
+					<div class="floatL titleBox">เพิ่มรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
-					<div class="imageMain marginC"><img src=../images/logo_thumb.jpg" /></div>
+					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 				</div>
-				<div class="pagination_box">
-					<div class="floatL">จำนวนทั้งหมด <?=$i?> รายการ</div>
-					<div class="floatR pagination_action">
-						<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
-						<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
-						<select name="pagination" class="p-Relative">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-						</select>	
-						<a href="#"><img src="../images/fast-forward.svg" alt="next" /></a>
-						<a href="#"><img src="../images/skip-next.svg" alt="last" /></a>
-					</div>
-					<div class="floatR">หน้า 1 จาก 10</div>
-					<div class="clear"></div>	
-				</div>
-			</div>	
-			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 			</div>
 		</div>
 		<div class="clear"></div>	
