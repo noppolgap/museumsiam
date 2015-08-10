@@ -331,7 +331,7 @@ header{
 	color: #000;
 	font-size: 1.1em;
 }
-.form_input textarea{
+.form_input textarea , .form_input textarea2{
 	min-height: 100px;	
 	resize: none;
 }
