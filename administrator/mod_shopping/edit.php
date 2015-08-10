@@ -20,35 +20,27 @@ require("../../assets/configs/function.inc.php");
 					<div class="floatL titleBox">เพิ่มรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
-					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
+					
 					<div class="formCms">
-						<form action="?" method="post" name="formcms">
+
+						<?php
+
+							$id = $_GET['p'];
+						    $sql= "SELECT * FROM trn_category WHERE Flag <> 2 AND CAT_ID = ".$id." ";
+							$query = mysql_query($sql,$conn);
+
+						?>
+
+						<form action="action.php?edit&p=<?=$id?>" method="post" name="formcms">
+							<?php while($row = mysql_fetch_array($query)) { ?>
 							<div>
-								<div class="floatL form_name">ชื่อ</div>
-								<div class="floatL form_input"><input type="text" name="name" value="my name it musum siam" class="w90p" /></div>
+								<div class="floatL form_name">ชื่อ th</div>
+								<div class="floatL form_input"><input type="text" name="name-th" value="<? echo $row['CAT_DESC_LOC'] ?>" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>	
 							<div>
-								<div class="floatL form_name">รายการ</div>
-								<div class="floatL form_input"><input type="text" name="name" value="นิทรรศการถาวร" class="w90p" /></div>
-								<div class="clear"></div>
-							</div>	
-							<div>
-								<div class="floatL form_name">รายละเอียด</div>
-								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p">
-นิทรรศการ “เรียงความประเทศไทย” เป็นการบอกเล่าถึงพัฒนาการด้านต่างๆ ของภูมิภาคอุษาคเนย์ นับตั้งแต่สมัยแผ่นดิน “สุวรรณภูมิ” (3,000 ปีก่อน) อันประกอบด้วยอารยธรรมต่างๆ ก่อนการรับวัฒนธรรมจากอินเดียและจีน เรื่อยมาจนถึงกำเนิดสยามประเทศและก้าวสู่ประเทศไทยในปัจจุบัน โดยแบ่งการนำเสนอออกเป็น 3 ช่วง ดังนี้
-
-ช่วงที่ 1 “สุวรรณภูมิ”
-นำเสนอเรื่องราวของดินแดนสุวรรณภูมิและประเทศไทยในปัจจุบัน ย้อนกลับไปราว 3,000 ปีก่อนการรับพุทธศาสนาและศาสนาฮินดูเข้ามา จนกระทั่งกลายเป็นศาสนาหลักจนถึงปัจจุบัน
-
-ช่วงที่ 2 “สยามประเทศไทย”
-นำเสนอเรื่องราวการสถาปนากรุงศรีอยุธยา ซึ่งถือเป็นอาณาจักรใหญ่ที่ครอบคลุมดินแดนที่เป็นประเทศไทยในปัจจุบันเกือบทั้งหมด อีกทั้งยังเป็นจุดเปลี่ยนผ่านสำคัญในการกำเนิดขึ้นของ “สยามประเทศไทย”
-
-ช่วงที่ 3 “ประเทศไทย”
-นำเสนอพัฒนาการของดินแดน ผู้คน และสังคมจากแบบจารีตมาสู่สังคมสมัยใหม่ในปัจจุบัน
-
-ทั้ง 3 ช่วงดังกล่าว นำเสนอโดยอธิบายลึกลงไปถึงรายละเอียด ผ่านห้องนิทรรศการจำนวน 17 ห้อง ซึ่งแต่ละห้องมีรายละเอียดสังเขปดังต่อไปนี้								
-								</textarea></div>
+								<div class="floatL form_name">ชื่อ en</div>
+								<div class="floatL form_input"><input type="text" name="name-en" value="<? echo $row['CAT_DESC_ENG'] ?>" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>	
 							<div class="btn_action">
@@ -56,6 +48,7 @@ require("../../assets/configs/function.inc.php");
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 							</div>
+							<? } ?>
 						</form> 
 					</div>
 				</div>

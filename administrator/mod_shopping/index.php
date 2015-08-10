@@ -24,7 +24,7 @@ require("../../assets/configs/function.inc.php");
 				<div class="mod-body-inner-header">
 					<div class="floatL titleBox">ชื่อเมนู</div>
 					<div class="floatR searchBox">
-						<form name="search" action="?" method="post">
+						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
@@ -48,13 +48,18 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-			    $sql= "SELECT * FROM trn_category ORDER BY CREATE_DATE ASC";
-				$query = mysql_query($sql,$conn);
+			    $sql= "SELECT * FROM trn_category WHERE Flag <> 2 ";
+			    if(isset($_GET['search'])){
+			      $sql .= "AND CAT_DESC_LOC like '%".$_POST['str_search']."%' ";
+			    }
+			     $sql .= "ORDER BY CREATE_DATE ASC";
 
-			?>
+			     $query = mysql_query($sql,$conn);
+
+			 ?>
 					<!-- start loop -->
 					<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content">
+								<div class="Main_Content">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$i?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
@@ -63,14 +68,19 @@ require("../../assets/configs/function.inc.php");
 							<div><? echo '<a href="view.php">'. $row['CAT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
-						<div class="floatL stausContent"><span class="staus1"></span> <a href="action.php?enable">Enable</a> <? //<span class="staus2"></span> Disable ?></div>
+						<div class="floatL stausContent">
+						
+						<? if($row['Flag'] == 0){ ?>
+							<span class="staus1"></span> <a href="action.php?enable&p=<?=$row['CAT_ID']?>">
+							Enable
+						</a> <?}  else {?> <span class="staus2"></span> Disable <? } ?></div>
 						<div class="floatL EditContent">
-							<a href="edit.php" class="EditContentBtn">Edit</a>
-							<a href="#" class="DeleteContentBtn">Delete</a>
+							<a href="edit.php?p=<?=$row['CAT_ID']?>" class="EditContentBtn">Edit</a>
+							<a href="action.php?delete&p=<?=$row['CAT_ID']?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
-					</div>
-					<?php } ?>
+				</div>
+							<?php } ?>
 					<!-- end loop -->
 				</div>
 				<div class="pagination_box">

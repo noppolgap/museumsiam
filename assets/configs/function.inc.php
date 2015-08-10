@@ -95,7 +95,7 @@ function ShowMonthYear($myDate) {
         return($myMonth . " " . $myYear);
 }
 function ConvertDate($str){
-	return $str;
+	return date("d M Y", strtotime(trim($str)));
 }
 function logs_access($user,$msg) {
 	if(!is_dir(_LOG_PATH_)) { mkdir(_LOG_PATH_,0777); }else{ chmod(_LOG_PATH_,0777); }

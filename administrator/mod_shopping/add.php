@@ -20,24 +20,20 @@ require("../../assets/configs/function.inc.php");
 					<div class="floatL titleBox">เพิ่มรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
-					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
+					
 					<div class="formCms">
-						<form action="?" method="post" name="formcms">
+						<form action="action.php?add" method="post" name="formcms">
 							<div>
-								<div class="floatL form_name">ชื่อ</div>
-								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
+								<div class="floatL form_name">ชื่อ TH</div>
+								<div class="floatL form_input"><input type="text" name="name-th" value="" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>	
 							<div>
-								<div class="floatL form_name">รายการ</div>
-								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
+								<div class="floatL form_name">ชื่อ En</div>
+								<div class="floatL form_input"><input type="text" name="name-en" value="" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>	
-							<div>
-								<div class="floatL form_name">รายละเอียด</div>
-								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p"></textarea></div>
-								<div class="clear"></div>
-							</div>	
+								
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
