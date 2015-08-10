@@ -37,6 +37,11 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_name">รายละเอียด</div>
 								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p"></textarea></div>
 								<div class="clear"></div>
+							</div>
+							<div>
+								<div class="floatL form_name">Image</div>
+								<div class="floatL form_input"><?=admin_upload_image('photo')?></div>
+								<div class="clear"></div>
 							</div>	
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
@@ -53,9 +58,13 @@ require("../../assets/configs/function.inc.php");
 </div>	
 <? require('../inc_footer.php'); ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
+<link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
+<script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>		
 <script type="text/javascript" src="mod_cms.js"></script>	
 <? logs_access('admin','hello'); ?>	

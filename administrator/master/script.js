@@ -14,4 +14,78 @@ $( document ).ready(function() {
 		    image_advtab: true
 		});
 	}
+	if($('.fileupload').length > 0){
+	    $('.fileupload').fileupload({
+	        dataType: 'json',
+	        done: function (e, data) {
+		        var name = $(this).attr('data-name');
+	            $.each(data.result.files, function (index, file) {
+	                var boxID = thumbBox(name,file.thumbnailUrl);
+	                $('.image_Data').find('#input_'+boxID).val(file.url);
+	            });
+	            console.log(name);
+	        },
+		    progressall: function (e, data) {
+		        var progress = parseInt(data.loaded / data.total * 100, 10);
+		        $('#progress .upload_bar').show().css(
+		            'width',
+		            progress + '%'
+		        );
+		    },
+	        stop: function (e, data) {
+	           $('#progress .upload_bar').hide();
+	           $('.imageBox').show();
+	        }
+	    });			
+	}	
+	
 });
+function thumbBox(path,file){
+	var res = file.split("/");
+	var num = res.length;
+	var point = num-1;
+	var name = res[point];
+		res = res[point].split(".");
+		res = res[0];
+		
+	
+	var box  = '<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'">';	
+		box += '<div class="thumbBoxImage">';
+		box += '<a href="#" onclick="popupImage(\''+(file.replace("/thumbnail/", "/"))+'\'); return false;">';
+		box += '<img alt="" src="'+file+'">';
+		box += '</a>';
+		box += '</div>';
+		box += '<div class="thumbBoxAction dNone p-Absolute">';
+		box += '<a href="#" onclick="delImage(\''+name+'\'); return false;">';
+		box += '<img alt="" src="../images/sign-ban.svg" />';
+		box += '</a>';
+		box += '</div>';
+		box += '</div>';
+    $('.image_'+path+'_Box').prepend(box).show();
+    $('.image_'+path+'_data').append('<input type="hidden" name="'+path+'_file[]" id="input_'+res+'">');
+    
+    return res;
+}
+function delImage(id){
+	$.post( "../master/delete_image.php", { pid: id })
+		.done(function( data ) {
+			var res = id.split(".");
+				res = res[0];
+		    $('#img_'+res).hide("scale" , function() {
+				$(this).remove();
+			});	
+			$('#input_'+res).remove();
+	});		
+
+}
+function popupImage(href){
+	try{
+		$.colorbox({
+			transition: 'fade',
+			height:"75%",
+			href: href
+		});	
+	} catch(err) {
+		window.open(href,'_blank');
+	}
+}
