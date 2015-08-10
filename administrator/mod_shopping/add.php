@@ -35,7 +35,7 @@ require("../../assets/configs/function.inc.php");
 							</div>	
 							<div>
 								<div class="floatL form_name">รายละเอียด</div>
-								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p">888</textarea></div>
+								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p"></textarea></div>
 								<div class="clear"></div>
 							</div>	
 							<div class="btn_action">

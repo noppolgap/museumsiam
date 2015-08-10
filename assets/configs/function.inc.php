@@ -94,6 +94,9 @@ function ShowMonthYear($myDate) {
 		$myYear = sprintf("%d",$myDateArray[0])+543;
         return($myMonth . " " . $myYear);
 }
+function ConvertDate($str){
+	return $str;
+}
 function logs_access($user,$msg) {
 	if(!is_dir(_LOG_PATH_)) { mkdir(_LOG_PATH_,0777); }else{ chmod(_LOG_PATH_,0777); }
 	

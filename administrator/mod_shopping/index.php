@@ -45,18 +45,25 @@ require("../../assets/configs/function.inc.php");
 					<div class="clear"></div>	
 				</div>
 				<div class="mod-body-main-content">
+
+		    <?php
+
+			    $sql= "SELECT * FROM trn_category ORDER BY CREATE_DATE ASC";
+				$query = mysql_query($sql,$conn);
+
+			?>
 					<!-- start loop -->
-					<?php for($i=0;$i<30;$i++){ ?>
+					<?php while($row = mysql_fetch_array($query)) { ?>
 					<div class="Main_Content">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$i?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><a href="view.php">xxxxxxxxxxxx xxxxxxxx xxxxxxx xxx xxxxxxxxxxxx xxxxxxxx xxxxxxx xxx  xxxxxxxxxxxx xxxxxxxx xxxxxxx xxx xxxxxxxxxxxx xxxxxxxx xxxxxxx xxxxxxxxxxxxxxx xxxxxxxx xxxxxxx xxx</a></div>
-							<div>วันที่สร้าง 01/08/2015 | วันที่ปรับปรุง 06/08/2015 | เปิดอ่าน 100 ครั้ง</div>
+							<div><? echo '<a href="view.php">'. $row['CAT_DESC_LOC'].'</a>' ?></div>
+							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
-						<div class="floatL stausContent"><span class="staus1"></span> Enable <? //<span class="staus2"></span> Disable ?></div>
+						<div class="floatL stausContent"><span class="staus1"></span> <a href="action.php?enable">Enable</a> <? //<span class="staus2"></span> Disable ?></div>
 						<div class="floatL EditContent">
 							<a href="edit.php" class="EditContentBtn">Edit</a>
 							<a href="#" class="DeleteContentBtn">Delete</a>
