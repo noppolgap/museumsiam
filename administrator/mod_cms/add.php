@@ -32,13 +32,23 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_name">รายการ</div>
 								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
 								<div class="clear"></div>
+							</div>
+							<div>
+								<div class="floatL form_name">รายการ</div>
+								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
+								<div class="clear"></div>
 							</div>	
 							<div>
+								<div class="floatL form_name">รายการ</div>
+								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
+								<div class="clear"></div>
+							</div>		
+							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียด</div>
 								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p"></textarea></div>
 								<div class="clear"></div>
 							</div>
-							<div>
+							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
 								<div class="floatL form_input"><?=admin_upload_image('photo')?></div>
 								<div class="clear"></div>

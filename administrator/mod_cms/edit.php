@@ -33,7 +33,7 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_input"><input type="text" name="name" value="นิทรรศการถาวร" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>	
-							<div>
+							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียด</div>
 								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p">
 นิทรรศการ “เรียงความประเทศไทย” เป็นการบอกเล่าถึงพัฒนาการด้านต่างๆ ของภูมิภาคอุษาคเนย์ นับตั้งแต่สมัยแผ่นดิน “สุวรรณภูมิ” (3,000 ปีก่อน) อันประกอบด้วยอารยธรรมต่างๆ ก่อนการรับวัฒนธรรมจากอินเดียและจีน เรื่อยมาจนถึงกำเนิดสยามประเทศและก้าวสู่ประเทศไทยในปัจจุบัน โดยแบ่งการนำเสนอออกเป็น 3 ช่วง ดังนี้

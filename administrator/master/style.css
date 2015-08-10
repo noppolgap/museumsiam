@@ -311,8 +311,11 @@ header{
 	padding: 15px;
 }
 .formCms > form > div{
-	min-height: 32px;
+	height: 32px;
 	padding-bottom: 16px;
+}
+.formCms > form > div.bigForm{
+	height: auto;
 }
 .form_name{
 	width: 100px;
