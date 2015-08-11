@@ -16,7 +16,7 @@ require("../../assets/configs/function.inc.php");
 		<?php require('../inc_side.php'); ?>
 		<div class="mod-body">
 				<div class="buttonActionBox">
-					<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button">
+					<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="location.href = 'addUser.php';" >
 					<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
 					<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 				</div>
@@ -46,7 +46,7 @@ require("../../assets/configs/function.inc.php");
 					</div>
 		 <?php require('userMain.php'); ?>
 		 <div class="buttonActionBox">
-					<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button">
+					<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="location.href = 'addUser.php';">
 					<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
 					<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 				</div>
@@ -64,5 +64,18 @@ require("../../assets/configs/function.inc.php");
 <script type="text/javascript" src="../master/script.js"></script>		
 <script type="text/javascript" src="mod_cms.js"></script>	
 <?php logs_access('admin','hello'); ?>	
+
+<script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
+<script type="text/javascript" >
+
+$(document).ready(function(){
+	$('.DeleteContentBtn').bind('click' , function(){
+		return confirm('คุณต้องการลบข้อมูลหรือไม่ ?');
+	});
+	
+});
+		
+	
+</script>
 </body>
 </html>

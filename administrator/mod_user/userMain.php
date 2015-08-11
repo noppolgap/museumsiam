@@ -1,12 +1,12 @@
 
-
 	
 					<div class="mod-body-main-content">
 						<!-- start loop -->
 						<?php 
-
-						$sql = "SELECT * FROM sys_app_user order by USER_ID asc ";
+//active_flag 0 = disable , 1 = Enable ,  2 = Delete 
+						$sql = "SELECT * FROM sys_app_user where ACTIVE_FLAG <> 2 order by USER_ID asc ";
 					$rs = mysql_query($sql) or die(mysql_error());
+					$i = 0 ; 
 					while($row = mysql_fetch_array($rs)){
 					
 						echo "<div class='Main_Content'>";
@@ -20,15 +20,16 @@
 
 						echo "<div>วันที่สร้าง ".$row["CREATE_DATE"]." | วันที่ปรับปรุง ".$row["LAST_UPDATE_DATE"]." </div>";
 						echo "</div>	";
-						echo "<div class='floatL stausContent'><span class='staus1'></span> Enable "."</div>";
-						////<span class='staus2'></span> Disable
+						
+						
 						echo "<div class='floatL EditContent'>";
-						echo "<a href='#' class='EditContentBtn'>Edit</a>";
-						echo "<a href='#' class='DeleteContentBtn'>Delete</a>";
+						
+						echo "<a href='editUser.php?UID=".$row["ID"]."' class='EditContentBtn'>Edit</a>";
+						echo "<a href='delUser.php?UID=".$row["ID"]."' class='DeleteContentBtn' >Delete</a>";
 						echo "</div>";
 						echo " <div class='clear'></div>	";
 						echo " </div>";
-
+$i++;
 				}mysql_free_result($rs);
 
 
