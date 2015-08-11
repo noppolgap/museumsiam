@@ -18,7 +18,7 @@ require("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -94,10 +94,13 @@ require("../../assets/configs/function.inc.php");
 </div>	
 <? require('../inc_footer.php'); ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
+<link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
+<script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>		
 <script type="text/javascript" src="mod_cms.js"></script>	
 <? logs_access('admin','hello'); ?>	
 </body>
 </html>
+<? CloseDB(); ?>	

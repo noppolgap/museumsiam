@@ -38,6 +38,20 @@ $( document ).ready(function() {
 	        }
 	    });			
 	}	
+	if($('.orderContent').length > 0){
+		
+	    $( "#sortable" ).sortable({			
+		    placeholder: "ui-state-highlight",
+			update: function(event, ui) {
+	            $("#sortable").children().each(function(i) {
+	                var li = $(this);
+	                var point = countList - i;
+	                listOrder[point] = new Array(parseInt(li.attr("data-order")), parseInt(li.attr("data-id")),point);
+	            });
+	        }    
+	    });
+	    $( "#sortable" ).disableSelection();
+	}	
 	
 });
 function thumbBox(path,file){
@@ -88,4 +102,38 @@ function popupImage(href){
 	} catch(err) {
 		window.open(href,'_blank');
 	}
+}
+function orderPage(id){
+	var href = 'order.php';
+	try{
+		$.colorbox({
+			transition: 'fade',
+			height:"75%",
+			width:600,
+			href: href,
+			iframe:true,
+			onClosed:function(){ window.location.reload(); }
+		});	
+	} catch(err) {
+		window.open(href,'_blank');
+	}	
+}
+function updateOreder(){
+	
+	var order_data = new Array();
+	var index = 0;
+	
+	$.each( listOrder, function( key, value ) {
+	  if(value != undefined){
+		if(listOrder[key][0] != listOrder[key][2]){
+	  		order_data[index] = new Array(listOrder[key][1],listOrder[key][2]);
+	  		index++;
+	  	}
+	  }
+	});	
+	console.log(order_data);
+	$.post( "order.php", { update: true, order_data: order_data })
+	  .done(function( data ) {
+	    alert('Update Complete');
+	 });
 }
