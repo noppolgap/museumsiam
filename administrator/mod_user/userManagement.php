@@ -119,16 +119,7 @@
 				</td>
 				<td>:
 				</td>
-				<td><?php
-					$sql = "SELECT province_id  , province_desc_loc , province_desc_eng FROM mas_province ";
-					$rs = mysql_query($sql) or die(mysql_error());
-					echo  "<select id='cmbProvince' name = 'province'>";
-					echo "<option value='-1'>กรุณาเลือกจังหวัด</option>";
-				while($row = mysql_fetch_array($rs)){
-				echo "<option value='".$row["province_id"]."'>".$row["province_desc_loc"]."</option>";
-				}mysql_free_result($rs);
-				echo "</select>";
-				?>
+				<td>
 				</td>
 								</tr>
 						<tr>
