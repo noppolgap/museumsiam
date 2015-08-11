@@ -365,3 +365,21 @@ header{
 	width: 20px;
 	height: 20px;
 }
+.orderContent h1{
+    display: inline-block;
+    font-size: 1.1em;
+    font-weight: 600;
+    height: 28px;
+    padding: 5px;
+    width: 433px;
+}
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#sortable li { 
+    font-size: 1em;
+    font-weight: 400;
+    height: 1em;
+    line-height: 1em;
+    margin: 0 5px 5px;
+    padding: 5px;
+}
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; color: #f0f0f0; }
