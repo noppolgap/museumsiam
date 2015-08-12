@@ -71,7 +71,7 @@ function thumbBox(path,file){
 		box += '</div>';
 		box += '<div class="thumbBoxAction dNone p-Absolute">';
 		box += '<a href="#" onclick="delImage(\''+name+'\'); return false;">';
-		box += '<img alt="" src="../images/sign-ban.svg" />';
+		box += '<img alt="" src="../images/small-n-flat/sign-ban.svg" />';
 		box += '</a>';
 		box += '</div>';
 		box += '</div>';

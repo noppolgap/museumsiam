@@ -90,7 +90,7 @@ class UploadHandler
             // is enabled, set to 0 to disable chunked reading of files:
             'readfile_chunk_size' => 10 * 1024 * 1024, // 10 MiB
             // Defines which files can be displayed inline when downloaded:
-            'inline_file_types' => '/\.(gif|jpe?g|png)$/i',
+            'inline_file_types' => '/.(gif|jpe?g|png)$/i',
             // Defines which files (based on their names) are accepted for upload:
             'accept_file_types' => '/.+$/i',
             // The php.ini settings upload_max_filesize and post_max_size
@@ -100,7 +100,7 @@ class UploadHandler
             // The maximum number of files for the upload directory:
             'max_number_of_files' => null,
             // Defines which files are handled as image files:
-            'image_file_types' => '/\.(gif|jpe?g|png)$/i',
+            'image_file_types' => '/.(gif|jpe?g|png)$/i',
             // Use exif_imagetype on all files to correct file extensions:
             'correct_image_extensions' => false,
             // Image resolution restrictions:
@@ -307,7 +307,7 @@ class UploadHandler
 
     protected function get_file_object($file_name) {
         if ($this->is_valid_file_object($file_name)) {
-            $file = new \stdClass();
+            $file = new stdClass();
             $file->name = $file_name;
             $file->size = $this->get_file_size(
                 $this->get_upload_path($file_name)
@@ -788,7 +788,7 @@ class UploadHandler
     protected function imagick_get_image_object($file_path, $no_cache = false) {
         if (empty($this->image_objects[$file_path]) || $no_cache) {
             $this->imagick_destroy_image_object($file_path);
-            $image = new \Imagick();
+            $image = new Imagick();
             if (!empty($this->options['imagick_resource_limits'])) {
                 foreach ($this->options['imagick_resource_limits'] as $type => $limit) {
                     $image->setResourceLimit($type, $limit);
@@ -812,35 +812,35 @@ class UploadHandler
 
     protected function imagick_orient_image($image) {
         $orientation = $image->getImageOrientation();
-        $background = new \ImagickPixel('none');
+        $background = new ImagickPixel('none');
         switch ($orientation) {
-            case \imagick::ORIENTATION_TOPRIGHT: // 2
+            case imagick::ORIENTATION_TOPRIGHT: // 2
                 $image->flopImage(); // horizontal flop around y-axis
                 break;
-            case \imagick::ORIENTATION_BOTTOMRIGHT: // 3
+            case imagick::ORIENTATION_BOTTOMRIGHT: // 3
                 $image->rotateImage($background, 180);
                 break;
-            case \imagick::ORIENTATION_BOTTOMLEFT: // 4
+            case imagick::ORIENTATION_BOTTOMLEFT: // 4
                 $image->flipImage(); // vertical flip around x-axis
                 break;
-            case \imagick::ORIENTATION_LEFTTOP: // 5
+            case imagick::ORIENTATION_LEFTTOP: // 5
                 $image->flopImage(); // horizontal flop around y-axis
                 $image->rotateImage($background, 270);
                 break;
-            case \imagick::ORIENTATION_RIGHTTOP: // 6
+            case imagick::ORIENTATION_RIGHTTOP: // 6
                 $image->rotateImage($background, 90);
                 break;
-            case \imagick::ORIENTATION_RIGHTBOTTOM: // 7
+            case imagick::ORIENTATION_RIGHTBOTTOM: // 7
                 $image->flipImage(); // vertical flip around x-axis
                 $image->rotateImage($background, 270);
                 break;
-            case \imagick::ORIENTATION_LEFTBOTTOM: // 8
+            case imagick::ORIENTATION_LEFTBOTTOM: // 8
                 $image->rotateImage($background, 270);
                 break;
             default:
                 return false;
         }
-        $image->setImageOrientation(\imagick::ORIENTATION_TOPLEFT); // 1
+        $image->setImageOrientation(imagick::ORIENTATION_TOPLEFT); // 1
         return true;
     }
 
@@ -893,7 +893,7 @@ class UploadHandler
         $success = $image->resizeImage(
             $new_width,
             $new_height,
-            isset($options['filter']) ? $options['filter'] : \imagick::FILTER_LANCZOS,
+            isset($options['filter']) ? $options['filter'] : imagick::FILTER_LANCZOS,
             isset($options['blur']) ? $options['blur'] : 1,
             $new_width && $new_height // fit image into constraints if not to be cropped
         );
@@ -913,7 +913,7 @@ class UploadHandler
             case 'jpg':
             case 'jpeg':
                 if (!empty($options['jpeg_quality'])) {
-                    $image->setImageCompression(\imagick::COMPRESSION_JPEG);
+                    $image->setImageCompression(imagick::COMPRESSION_JPEG);
                     $image->setImageCompressionQuality($options['jpeg_quality']);
                 }
                 break;
@@ -962,7 +962,7 @@ class UploadHandler
         $cmd .= ' '.escapeshellarg($new_file_path);
         exec($cmd, $output, $error);
         if ($error) {
-            error_log(implode('\n', $output));
+            error_log(implode('n', $output));
             return false;
         }
         return true;
@@ -971,7 +971,7 @@ class UploadHandler
     protected function get_image_size($file_path) {
         if ($this->options['image_library']) {
             if (extension_loaded('imagick')) {
-                $image = new \Imagick();
+                $image = new Imagick();
                 try {
                     if (@$image->pingImage($file_path)) {
                         $dimensions = array($image->getImageWidth(), $image->getImageHeight());
@@ -979,7 +979,7 @@ class UploadHandler
                         return $dimensions;
                     }
                     return false;
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     error_log($e->getMessage());
                 }
             }
@@ -989,7 +989,7 @@ class UploadHandler
                 exec($cmd, $output, $error);
                 if (!$error && !empty($output)) {
                     // image.jpg JPEG 1920x1080 1920x1080+0+0 8-bit sRGB 465KB 0.000u 0:00.000
-                    $infos = preg_split('/\s+/', substr($output[0], strlen($file_path)));
+                    $infos = preg_split('/s+/', substr($output[0], strlen($file_path)));
                     $dimensions = preg_split('/x/', $infos[2]);
                     return $dimensions;
                 }
@@ -1068,13 +1068,13 @@ class UploadHandler
                     }
                 }
 
-                return md5(date('Y-m-d H:i:s:u').'_'.rand(1111, 9999)) . $extension;
+                return md5(@date('Y-m-d H:i:s:u').'_'.rand(1111, 9999)) . $extension;
             }
             
                 
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,
             $index = null, $content_range = null) {
-        $file = new \stdClass();
+        $file = new stdClass();
                 //MYEDIT to generate unique filename
         $file->name = $this->generate_unique_filename($name);
         

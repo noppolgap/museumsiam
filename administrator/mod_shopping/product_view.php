@@ -16,9 +16,9 @@ require("../../assets/configs/function.inc.php");
 		<? require('../inc_side.php'); ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -52,7 +52,7 @@ require("../../assets/configs/function.inc.php");
 			    if(isset($_GET['search'])){
 			      $sql .= "AND CAT_DESC_LOC like '%".$_POST['str_search']."%' ";
 			    }
-			     $sql .= "ORDER BY ORDER_DATA DESC ";
+			     $sql .= "ORDER BY CREATE_DATE ASC";
 
 			     $query = mysql_query($sql,$conn);
 
@@ -65,7 +65,7 @@ require("../../assets/configs/function.inc.php");
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="product_view.php?.p='.$row['CAT_ID'].' ">'. $row['CAT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="view.php">'. $row['CAT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
@@ -104,7 +104,7 @@ require("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();>
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 			</div>
 		</div>
 		<div class="clear"></div>	
@@ -112,10 +112,10 @@ require("../../assets/configs/function.inc.php");
 </div>	
 <? require('../inc_footer.php'); ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
-<link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
-<script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
-<script type="text/javascript" src="../master/script.js"></script>			
+<link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
+<script type="text/javascript" src="../master/script.js"></script>		
+<script type="text/javascript" src="mod_cms.js"></script>	
 <? logs_access('admin','hello'); ?>	
 </body>
 </html>

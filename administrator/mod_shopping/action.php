@@ -6,8 +6,17 @@ require("../../assets/configs/function.inc.php");
 if(isset($_GET['enable'])){
 
   $id = $_GET['p'];
+  $flag = $_GET['g'];
+  $Flag = "";
+
+  if($flag == 1){
+  	 $Flag = 0;
+  }
+  else{
+  	 $Flag = 1;
+  }
   $update="";
-  $update[]= "Flag = 1";
+  $update[]= "Flag = $Flag";
 
   $sql="UPDATE trn_category SET  ".implode(",",$update)." WHERE CAT_ID =".$id;
   
