@@ -33,7 +33,7 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" type="text/css" href="<?=_FULL_SITE_PATH_?>/assets/plugin/cssreset-min.css" media="all" />
 <link rel="stylesheet" type="text/css" href="<?=_FULL_SITE_PATH_?>/assets/plugin/jquery-ui/jquery-ui.min.css" media="all" />
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<? /* <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> */?>
 <script type="text/javascript">if (!window.jQuery) document.write(unescape('%3Cscript src="<?=_FULL_SITE_PATH_?>/assets/plugin/jquery.min.js"%3E%3C/script%3E'))</script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>	
+<? /* <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> */?>	
 <script type="text/javascript">if (!window.jQuery.ui) document.write(unescape('%3Cscript src="<?=_FULL_SITE_PATH_?>/assets/plugin/jquery-ui/jquery-ui.min.js"%3E%3C/script%3E'))</script>

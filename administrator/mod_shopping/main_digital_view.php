@@ -16,7 +16,7 @@ require("../../assets/configs/function.inc.php");
 		<? require('../inc_side.php'); ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php?g=<?=$_GET['p']?>'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'main_digital_add.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 			</div>
@@ -48,10 +48,9 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-				$id = $_GET['p'];
-			    $sql= "SELECT * FROM  trn_product WHERE Flag <> 2 AND CAT_ID = $id ";
+			    $sql= "SELECT * FROM  trn_main_digital_ach WHERE Flag <> 2  ";
 			    if(isset($_GET['search'])){
-			      $sql .= "AND PRODUCT_DESC_LOC like '%".$_POST['str_search']."%' ";
+			      $sql .= "AND MAIN_DIGITAL_DESC_LOC like '%".$_POST['str_search']."%' ";
 			    }
 			     $sql .= "ORDER BY ORDER_DATA ASC";
 
@@ -65,24 +64,26 @@ require("../../assets/configs/function.inc.php");
 					<!-- start loop -->
 				<?php while($row = mysql_fetch_array($query)) { ?>
 					<div class="Main_Content">
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['PRODUCT_ID']?>"></div>
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['MAIN_DIGITAL_ID']?>"></div>
 						<div class="floatL thumbContent">
-							<a href="product_detail.php?p=<?=$row['PRODUCT_ID']?>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
+							<a href="#>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="product_detail.php?p='.$row['PRODUCT_ID'].'&a='.$row['CAT_ID'].'">'. $row['PRODUCT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="sub_digital_view.php?p='.$row['MAIN_DIGITAL_ID'].'">'. $row['MAIN_DIGITAL_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
-						<? if($row['Flag'] == 0){ ?>
-							<span class="staus1"></span> <a href="product_action.php?enable&p=<?=$row['PRODUCT_ID']?>&g=<?=$row['Flag']?>&a=<?=$row['CAT_ID']?>">
+						<? if($row['FLAG'] == 0){ ?>
+							<span class="staus1"></span> <a href="main_digital_action.php?enable&p=<?=$row['MAIN_DIGITAL_ID']?>&g=<?=$row['FLAG']?>">
 							Enable
-						</a> <?}  else {?> <span class="staus2"></span> 
-						<a href="product_action.php?enable&p=<?=$row['PRODUCT_ID']?>&g=<?=$row['Flag']?>&a=<?=$row['CAT_ID']?>"> Disable </a> <? } ?></div>
+						</a> <?}  else {?> 
+							<span class="staus2"></span> 
+							<a href="main_digital_action.php?enable&p=<?=$row['MAIN_DIGITAL_ID']?>&g=<?=$row['FLAG']?>"> Disable </a> 
+						<? } ?></div>
 						<div class="floatL EditContent">
-							<a href="product_edit.php?p=<?=$row['PRODUCT_ID']?>&g=<?=$row['CAT_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="product_action.php?delete&p=<?=$row['PRODUCT_ID']?>&a=<?=$row['CAT_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="main_digital_edit.php?p=<?=$row['MAIN_DIGITAL_ID']?>" class="EditContentBtn">Edit</a>
+							<a href="main_digital_action.php?delete&p=<?=$row['MAIN_DIGITAL_ID']?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>

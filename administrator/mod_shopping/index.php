@@ -56,6 +56,8 @@ require("../../assets/configs/function.inc.php");
 
 			     $query = mysql_query($sql,$conn);
 
+				 $num_rows = mysql_num_rows($query);
+
 			 ?>
 					<!-- start loop -->
 					<?php while($row = mysql_fetch_array($query)) { ?>
@@ -65,7 +67,7 @@ require("../../assets/configs/function.inc.php");
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="product_view.php?.p='.$row['CAT_ID'].' ">'. $row['CAT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="product_view.php?p='.$row['CAT_ID'].' ">'.$row['CAT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
@@ -81,11 +83,13 @@ require("../../assets/configs/function.inc.php");
 						</div>
 						<div class="clear"></div>	
 				</div>
-							<?php } ?>
+					<?php } ?>		
 					<!-- end loop -->
 				</div>
 				<div class="pagination_box">
-					<div class="floatL">จำนวนทั้งหมด <?=$i?> รายการ</div>
+
+					<div class="floatL">
+ 					  จำนวนทั้งหมด <? 	echo $num_rows; ?>  รายการ </div>
 					<div class="floatR pagination_action">
 						<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 						<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
@@ -104,7 +108,7 @@ require("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();>
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();">
 			</div>
 		</div>
 		<div class="clear"></div>	
