@@ -7,40 +7,57 @@ require("../../assets/configs/function.inc.php");
 <html>
 <head>
 <? require('../inc_meta.php'); ?>		
+<style  >
+    .error , .error span
+    {
+      display:none;
+    }
+    </style>
 </head>
 
 <body>
 <? require('../inc_header.php'); ?>		
 <div class="main-container">
+<?php
+	$moduleID = $_GET['MID'] ;
+
+	$sql = "SELECT * FROM sys_app_module where MODULE_ID = '".$moduleID."' ";
+	$rs = mysql_query($sql) or die(mysql_error());
+	$rowModule = mysql_fetch_array($rs);
+	
+?>
+
 	<div class="main-body marginC">
 		<? require('../inc_side.php'); ?>
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">เพิ่มรายการ</div>					
+					<div class="floatL titleBox">รายละเอียด</div>					
 				</div>
 				<div class="mod-body-main-content">
-					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
+				 
 					<div class="formCms">
 						<form action="?" method="post" name="formcms">
-							<div>
-								<div class="floatL form_name">ชื่อ</div>
-								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
-								<div class="clear"></div>
-							</div>	
-							<div>
-								<div class="floatL form_name">รายการ</div>
-								<div class="floatL form_input"><input type="text" name="name" value="" class="w90p" /></div>
-								<div class="clear"></div>
-							</div>	
-							<div>
-								<div class="floatL form_name">รายละเอียด</div>
-								<div class="floatL form_input"><textarea name="detail" class="w90p"></textarea></div>
-								<div class="clear"></div>
-							</div>	
+							 
+							 
+							 <div >
+                    <div class="floatL form_name">ชื่อภาษาไทย</div>
+                    <div class="floatL form_input">
+                      <input id = "txtNameLoc" type="text" name="txtNameLoc"   class="w90p"  value="<?php echo $rowModule["MODULE_NAME_LOC"] ?>" />
+ 
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div>
+                    <div class="floatL form_name">ชื่อภาษาอังกฤษ</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtNameEng" type="text" name="txtNameEng" value="<?php echo $rowModule["MODULE_NAME_ENG"] ?>" class="w90p" />
+                     
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                   
 							<div class="btn_action">
-								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
-								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 							</div>
 						</form> 

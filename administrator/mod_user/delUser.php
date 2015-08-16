@@ -4,7 +4,7 @@
 	require("../../assets/configs/function.inc.php");
 
 	$userID = $_GET['UID'] ; 
-	$strSQL = "update sys_app_user set ACTIVE_FLAG = 2 where ID = ". $userID ; 
+	$strSQL = "update sys_app_user set ACTIVE_FLAG = 2 , LAST_UPDATE_USER = 'Test' , LAST_UPDATE_DATE = now() , LAST_FUNCTION = 'U' where ID = ". $userID ; 
 	
 	
 	$objQuery = mysql_query($strSQL);

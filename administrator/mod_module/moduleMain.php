@@ -4,10 +4,10 @@
 						<!-- start loop -->
 						<?php 
 					//active_flag 0 = disable , 1 = Enable ,  2 = Delete 
-						$sql = "SELECT * FROM sys_app_user where ACTIVE_FLAG <> 2 ";
+						$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 ";
 						if(isset($_POST['search'])){
-							$sql .= " AND (NAME like '%".$_POST['str_search']."%' or LAST_NAME like '%".$_POST['str_search']."%' ";
-						$sql .= " order by USER_ID asc ";
+							$sql .= " AND (MODULE_NAME_LOC like '%".$_POST['str_search']."%' or MODULE_NAME_ENG like '%".$_POST['str_search']."%' ";
+						$sql .= " order by MODULE_ID asc ";
 		
 			    }
 					$rs = mysql_query($sql) or die(mysql_error());
@@ -16,12 +16,12 @@
 					while($row = mysql_fetch_array($rs)){
 					
 						echo "<div class='Main_Content'>";
-						echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='".$row["USER_ID"]."'></div>";
+						echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='".$row["MODULE_ID"]."'></div>";
 						echo "<div class='floatL thumbContent'>";
-						echo "<a href='viewUser.php?UID=".$row["ID"]."' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
+						echo "<a href='viewModule.php?MID=".$row["MODULE_ID"]."' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
 						echo "</div>";
 						echo "<div class='floatL nameContent'>";
-						echo "<div><a href='viewUser.php?UID=".$row["ID"]."'>".$row["NAME"]." ". $row["LAST_NAME"]."</a></div>";
+						echo "<div><a href='viewModule.php?MID=".$row["MODULE_ID"]."'>".$row["MODULE_NAME_LOC"]."</a></div>";
 
 
 						echo "<div>วันที่สร้าง ".$row["CREATE_DATE"]." | วันที่ปรับปรุง ".$row["LAST_UPDATE_DATE"]." </div>";
@@ -30,8 +30,8 @@
 						
 						echo "<div class='floatL EditContent'>";
 						
-						echo "<a href='editUser.php?UID=".$row["ID"]."' class='EditContentBtn'>Edit</a>";
-						echo "<a href='delUser.php?UID=".$row["ID"]."' class='DeleteContentBtn' >Delete</a>";
+						echo "<a href='editModule.php?MID=".$row["MODULE_ID"]."' class='EditContentBtn'>Edit</a>";
+						echo "<a href='delModule.php?MID=".$row["MODULE_ID"]."' class='DeleteContentBtn' >Delete</a>";
 						echo "</div>";
 						echo " <div class='clear'></div>	";
 						echo " </div>";
