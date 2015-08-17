@@ -17,7 +17,7 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">รายละเอียดรายการ</div>					
+					<div class="floatL titleBox">เพิ่มรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
@@ -26,18 +26,21 @@ require("../../assets/configs/function.inc.php");
 				<?php
 
 					$id = $_GET['p'];
+					$subId = $_GET['g'];
 
-				    $sql= "SELECT * FROM  trn_product WHERE Flag <> 2 AND PRODUCT_ID = $id ";
+				    $sql= "SELECT * FROM  trn_digital_ach WHERE Flag <> 2 AND DIGITAL_ID = $id AND SUB_DIGITAL_ID = $subId ";
 				   
 				    $query = mysql_query($sql,$conn);
 
 				 ?>
 
+
+				<?php while($row = mysql_fetch_array($query)) { ?>
+
 						<form action="?" method="post" name="formcms">
-							<?php while($row = mysql_fetch_array($query)) { ?>
 							<div>
 								<div class="floatL form_name">ชื่อ</div>
-								<div class="floatL form_input"><? echo $row['PRODUCT_DESC_LOC']; ?> </div>
+								<div class="floatL form_input"><? echo $row['DIGITAL_DESC_LOC']; ?> </div>
 								<div class="clear"></div>
 							</div>	
 							<div>
@@ -47,13 +50,14 @@ require("../../assets/configs/function.inc.php");
 								</div>
 								<div class="clear"></div>
 							</div>	
-							<? } ?>
 							<div class="btn_action">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href
-								 = 'product_view.php?p=<?=$_GET['a']?>'">
+								 = 'digital_view.php?p=<?=$_GET['g']?>'">
 							</div>
 						</form> 
-	
+
+
+			<? } ?>
 					</div>
 				</div>
 			</div>

@@ -22,7 +22,14 @@ require("../../assets/configs/function.inc.php");
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ชื่อเมนู</div>
+					<?php
+						 $sql1= "SELECT * FROM  trn_category WHERE Flag <> 2 AND CAT_ID ='".$_GET['p']."' ";
+				   	     $query1 = mysql_query($sql1,$conn);
+					 ?>
+
+					<?php while($row1 = mysql_fetch_array($query1)) { ?>
+						<div class="floatL titleBox"><?=$row1['CAT_DESC_LOC']?></div>
+					<?}?>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />

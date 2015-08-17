@@ -10,7 +10,7 @@ if(isset($_POST['update'])){
 		$update="";
 		$update[]= "ORDER_DATA = ".$value[1];
 					
-		$sql="UPDATE trn_category SET  ".implode(",",$update)." WHERE CAT_ID =".$value[0];
+		$sql="UPDATE trn_digital_ach  SET  ".implode(",",$update)." WHERE DIGITAL_ID =".$value[0];
 		mysql_query($sql,$conn);	    
 	}	
 }else{
@@ -24,19 +24,19 @@ if(isset($_POST['update'])){
 <div class="orderContent">
 	<div>
 		<h1>จัดเรียง</h1>
-		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('digital_view_order');">
+		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('sub_digital_order');">
 	</div> 
 	<ul id="sortable">
 		<?php
 
-			    $sql= "SELECT * FROM trn_category WHERE Flag <> 2 ORDER BY ORDER_DATA DESC";
+			     $sql= "SELECT * FROM trn_digital_ach  WHERE Flag <> 2 AND SUB_DIGITAL_ID = '".$_GET['p']."' ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {
 			 
 		?>
 
-		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA']?>" data-id="<?=$row['CAT_ID']?>"><?=$row['CAT_DESC_LOC']?></li>
+		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA']?>" data-id="<?=$row['DIGITAL_ID']?>"><?=$row['DIGITAL_DESC_LOC']?></li>
 	<? } ?>  
 	</ul>
 </div>	

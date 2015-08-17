@@ -24,7 +24,7 @@ if(isset($_POST['update'])){
 <div class="orderContent">
 	<div>
 		<h1>จัดเรียง</h1>
-		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder();">
+		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('order.php');">
 	</div> 
 	<ul id="sortable">
 	<? for($i=30;$i>0;$i--){ ?>
