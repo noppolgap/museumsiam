@@ -19,16 +19,15 @@ require("../../assets/configs/function.inc.php");
 <? require('../inc_header.php'); ?>		
 <div class="main-container">
 <?php
-	$moduleID = $_GET['MID'] ;
+	$subModuleID = $_GET['SMID'] ;
 
-	$sql = "SELECT * FROM sys_app_module where MODULE_ID = '".$moduleID."' ";
+	$sql = "SELECT * FROM sys_app_sub_module where SUB_MODULE_ID = '".$subModuleID."' ";
 	$rs = mysql_query($sql) or die(mysql_error());
 	$rowModule = mysql_fetch_array($rs);
 	
-	$sql = "SELECT * FROM trn_banner_pic_setting where APP_MODULE_ID = '".$moduleID."' order by LAST_UPDATE_DATE desc Limit 0,1 ";
+	$sql = "SELECT * FROM trn_banner_pic_setting where APP_SUB_MODULE_ID = '".$subModuleID."' order by LAST_UPDATE_DATE desc Limit 0,1 ";
 	$rs = mysql_query($sql) or die(mysql_error());
 	$rowBanner = mysql_fetch_array($rs);
-	
 ?>
 
 	<div class="main-body marginC">
@@ -47,7 +46,7 @@ require("../../assets/configs/function.inc.php");
 							 <div >
                     <div class="floatL form_name">ชื่อภาษาไทย</div>
                     <div class="floatL form_input">
-                      <input id = "txtNameLoc" type="text" name="txtNameLoc"   class="w90p"  value="<?php echo $rowModule["MODULE_NAME_LOC"] ?>" />
+                      <input id = "txtNameLoc" type="text" name="txtNameLoc"   class="w90p"  value="<?php echo $rowModule["SUB_MODULE_NAME_LOC"] ?>" />
  
                     </div>
                     <div class="clear"></div>
@@ -55,7 +54,7 @@ require("../../assets/configs/function.inc.php");
                   <div>
                     <div class="floatL form_name">ชื่อภาษาอังกฤษ</div>
                     <div class="floatL form_input">
-                      <input  id = "txtNameEng" type="text" name="txtNameEng" value="<?php echo $rowModule["MODULE_NAME_ENG"] ?>" class="w90p" />
+                      <input  id = "txtNameEng" type="text" name="txtNameEng" value="<?php echo $rowModule["SUB_MODULE_NAME_ENG"] ?>" class="w90p" />
                      
                     </div>
                     <div class="clear"></div>
