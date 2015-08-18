@@ -23,42 +23,33 @@ require("../../assets/configs/function.inc.php");
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 					<div class="formCms">
 						<? $id = $_GET['g']; ?>
-						<form action="product_action.php?add&p=<?=$id?>" method="post" name="formcms">
-							<?php
-							   $sql= "SELECT CAT_DESC_LOC FROM trn_category WHERE Flag <> 2 AND CAT_ID = $id";
+						<?php
+							   $sql= "SELECT * FROM  trn_sub_digital_ach  WHERE FLAG <> 2 AND SUB_DIGITAL_ID = $id";
 							   $query = mysql_query($sql,$conn);
-							?>
+						?>
+
+						<form action="digital_action.php?add&p=<?=$id?>" method="post" name="formcms">
+					
 							<div>
 								<div class="floatL form_name">หมวดหมู่</div>
-								<input type="hidden" name="cat_id" value="<? echo $id; ?>" class="w90p" />
+								<input type="hidden" name="sub_id" value="<? echo $id; ?>" class="w90p" />
 
 								<? while($row = mysql_fetch_array($query)) {  ?>
-
-									<div class="floatL form_input"><input type="text" name="cat_ids"  class="w90p" value="<? echo $row['CAT_DESC_LOC']; ?>" />
+									<div class="floatL form_input"><input type="text" name="digi_id"  class="w90p" value="<? echo $row['SUB_DIGITAL_DESC_LOC']; ?>" />
 								
 								<?}?>
-
 								</div>
 								<div class="clear"></div>
+				
 							</div>	
 							<div>
 								<div class="floatL form_name">ชื่อ TH</div>
-								<div class="floatL form_input"><input type="text" name="product_name_th" value="" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="name_th" value="" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>
 							<div>
 								<div class="floatL form_name">ชื่อ EN</div>
-								<div class="floatL form_input"><input type="text" name="product_name_en" value="" class="w90p" /></div>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<div class="floatL form_name">ราคาเดิม</div>
-								<div class="floatL form_input"><input type="text" name="price" value="" class="w90p" /></div>
-								<div class="clear"></div>
-							</div>	
-							<div>
-								<div class="floatL form_name">ราคาลด</div>
-								<div class="floatL form_input"><input type="text" name="sale" value="" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="name_en" value="" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>
 							<div>
@@ -70,10 +61,10 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_name">รายละเอียดย่อ EN</div>
 								<div class="floatL form_input"><textarea name="brief_name_en" class="mytextarea2 w90p"></textarea></div>
 								<div class="clear"></div>
-							</div>		
+							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียด</div>
-								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p"></textarea></div>
+								<div class="floatL form_input"><textarea name="detail" value="" class="mytextarea w90p"></textarea></div>
 								<div class="clear"></div>
 							</div>
 							<div class="bigForm">
@@ -84,7 +75,7 @@ require("../../assets/configs/function.inc.php");
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'product_view.php?p=<?=$_GET['g']?>' ">
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'digital_view.php?p=<?=$_GET['g']?>' ">
 							</div>
 						</form> 
 					</div>
