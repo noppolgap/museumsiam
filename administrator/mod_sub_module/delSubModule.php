@@ -3,8 +3,8 @@
 	require("../../assets/configs/connectdb.inc.php");
 	require("../../assets/configs/function.inc.php");
 	$indexPage = "/administrator/mod_sub_module/index.php";
-	$moduleID = $_GET['MID'] ; 
-	$strSQL = "update sys_app_module set ACTIVE_FLAG = 2  , LAST_UPDATE_USER = 'Test' , LAST_UPDATE_DATE = now() , LAST_FUNCTION = 'U' where MODULE_ID = ". $moduleID ; 
+	$subModuleID = $_GET['SMID'] ; 
+	$strSQL = "update sys_app_sub_module set ACTIVE_FLAG = 2  , LAST_UPDATE_USER = 'Test' , LAST_UPDATE_DATE = now() , LAST_FUNCTION = 'U' where SUB_MODULE_ID = ". $subModuleID ; 
 	
 	
 	$objQuery = mysql_query($strSQL);
