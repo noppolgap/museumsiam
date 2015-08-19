@@ -63,7 +63,8 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_name">ราคาลด</div>
 								<div class="floatL form_input"><input type="text" name="sale" value="<? echo $row['SALE']; ?>" class="w90p" /></div>
 								<div class="clear"></div>
-							</div>		
+							</div>
+								
 							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียด</div>
 								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p" value="<? echo $row['DETAIL']; ?>"></textarea></div>
