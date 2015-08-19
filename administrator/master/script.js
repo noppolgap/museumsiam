@@ -52,7 +52,22 @@ $( document ).ready(function() {
 	    });
 	    $( "#sortable" ).disableSelection();
 	}	
-	
+
+	$('.DatePicker').datepicker({
+      showOn: "button",
+      buttonImage: "../images/small-n-flat/calendar.svg",
+      buttonImageOnly: true,
+      buttonText: "Select date",
+      dateFormat: 'd MM yy'
+    });	
+    	
+	$('.DatetimePicker').datetimepicker({
+      showOn: "button",
+      buttonImage: "../images/small-n-flat/calendar.svg",
+      buttonImageOnly: true,
+      buttonText: "Select date",
+      dateFormat: 'd MM yy'
+    });	
 });
 function thumbBox(path,file){
 	var res = file.split("/");

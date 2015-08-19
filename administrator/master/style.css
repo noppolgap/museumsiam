@@ -383,3 +383,16 @@ header{
     padding: 5px;
 }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; color: #f0f0f0; }
+.DatetimePicker , .DatePicker{
+	width: 85%;
+}
+.ui-datepicker-trigger{
+    height: 30px;
+    left: 5px;
+    position: relative;
+    top: 12px;
+    width: 30px;
+}  
+.ui-timepicker-div , .ui-datepicker .ui-datepicker-buttonpane button{
+	font-size: 0.8em !important;
+} 

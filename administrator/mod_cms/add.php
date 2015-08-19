@@ -47,6 +47,16 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_name">รายละเอียด</div>
 								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p"></textarea></div>
 								<div class="clear"></div>
+							</div>	
+							<div class="bigForm">
+								<div class="floatL form_name">วันที่เริ่ม</div>
+								<div class="floatL form_input"><input type="text" name="start" value="" class="DatePicker" /></div>
+								<div class="clear"></div>
+							</div>	
+							<div class="bigForm">
+								<div class="floatL form_name">วันที่จบ</div>
+								<div class="floatL form_input"><input type="text" name="end" value="" class="DatetimePicker" /></div>
+								<div class="clear"></div>
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
@@ -69,12 +79,14 @@ require("../../assets/configs/function.inc.php");
 <? require('../inc_footer.php'); ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
+<link rel="stylesheet" type="text/css" href="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
-<script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
+<script type="text/javascript" src="../../assets/plugin/upload/jquery.fileupload.js"></script>
+<script type="text/javascript" src="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>		
 <script type="text/javascript" src="mod_cms.js"></script>	
 <? logs_access('admin','hello'); ?>	
