@@ -1,0 +1,383 @@
+body{
+	padding-top: 33px ;
+}
+
+/* --------------------------------------------------- Part Side Banner --------------------------------------------------- */
+
+.slide-herobanner .slide{
+	width: 100%;
+	height: 545px;
+	background-position: center center;
+}
+
+
+/* --------------------------------------------------- Part Detail Museum --------------------------------------------------- */
+
+
+
+
+
+/* --------------------------------------------------- Part Event --------------------------------------------------- */
+
+.part-event{
+	background-color: #ececec;
+	padding: 80px 0 45px;
+}
+.box-date-main{
+	width: 640px;
+}
+div.text-title{
+	margin: 10px 15px;
+	float: left;
+	font-size: 75px;
+	text-align: center;
+	text-transform: uppercase;
+	width: 290px;
+	padding: 25px 0;
+}
+.box-tumb-date{
+	float: left;
+	width: 130px;
+	height: 130px;
+	border: 4px solid #fff;
+	background-color: #e4e4e4;
+	margin: 8px 15px;
+}
+.box-tumb-date .text-date{
+	padding:  4px 20px 0;
+	font-size: 25px;
+	color: #fff;
+	text-transform: uppercase;
+}
+.box-tumb-date .text-date span{
+	font-size: 95px;
+	font-family: 'kaniga_patanabold';
+	letter-spacing: 5px;
+	left: -3px;
+	line-height: 54px;
+}
+.box-tumb-date .text-month{
+	width: 100%;
+	background-color: #000;
+	height: 35px;
+	line-height: 35px;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 25px;	
+	color: #fff;
+	position: absolute;
+	bottom: 0px;
+}
+
+.sun{ background-color: #7d0800; }
+.mon{ background-color: #d4aa00; }
+.tue{ background-color: #a72b80; }
+.wed{ background-color: #256031; }
+.thu{ background-color: #b54c0d; }
+.fri{ background-color: #2b6ba7; }
+.sat{ background-color: #422a6b; }
+.today{ border-color: #000; }
+
+.btn-all{ border-color: #6e0904; }
+.btn-all .box-text{
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+.btn-all .box-text p{
+	vertical-align: middle;
+	display: table-cell;
+	text-align: center;
+	font-size: 20px;
+	text-transform: uppercase;
+	font-family: 'kaniga_patanabold';
+}
+.btn-all .box-text p img{
+	display: block;
+	margin: 10px auto 0;
+}
+
+.box-slideevent-main{
+	width: 600px;
+/* 	height: 430px; */
+	border-bottom: 4px solid #000;
+	background-color: #fff;
+	margin-top: 10px;
+}
+.box-slideevent-main .box-content-slide .box-left{
+	width: 250px;
+}
+.box-slideevent-main .box-content-slide .box-right{
+	width: 350px;
+	padding: 4px;
+}
+.box-slideevent-main .box-content-slide .box-right .box-pic{
+	width: 100%;
+}
+.box-slideevent-main .box-content-slide .box-right .box-pic img{
+	width: 100%;	
+}
+.box-slideevent-main .box-content-slide .box-right .box-tag-cate{
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.7);
+	left: 4px;
+	bottom: 4px;
+	width: 342px;
+	line-height: 27px;
+	font-size: 22px;
+	color: #fff;
+	padding: 0 10px 0 30px;
+	text-transform: uppercase;
+}
+.box-slideevent-main .box-content-slide .box-date{
+	width: 100%;
+	height: 130px;
+	padding: 0 8px;
+}
+.box-slideevent-main .box-content-slide .box-date .box-left{
+	font-size: 150px;
+	color: #fff;
+	width: auto;
+	line-height: 135px;	
+}
+.box-slideevent-main .box-content-slide .box-date .box-right{
+	font-size: 40px;
+	width: auto;
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 38px;
+	border-left: 1px solid #fff;
+	width: 101px;
+	padding: 30px 0 0 10px;
+	margin-top: 25px;
+}
+.box-slideevent-main .box-content-slide .box-date .box-right span{
+	font-size: 25px;
+	line-height: 12px;
+}
+.box-slideevent-main .box-content-slide .box-text{
+	padding: 20px 0px 20px 10px;
+}
+.box-slideevent-main .box-content-slide .box-text:before{
+	content: '';
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 8px 8px 8px;
+	border-color: transparent transparent #ffffff transparent;
+	position: absolute;
+	top: -8px;
+	left: 25px;
+}
+.box-slideevent-main .box-content-slide .text-date{
+	margin: 11px 0;	
+}
+.box-slideevent-main .box-content-slide .text-des{
+	height: 60px;
+	overflow: hidden;
+	margin-bottom: 25px;
+}
+.box-slideevent-main .box-float{
+	position: absolute;
+	bottom: 0px;
+	width: 239px;
+	left: 10px;
+}
+.box-slideevent-main .box-float .box-btn-left{
+	float: left;
+}
+.box-slideevent-main .box-float .box-btn-left .btn.black{
+	height: 31px;
+	line-height: 31px;
+	padding: 0 20px;
+	text-transform: uppercase;
+	font-size: 18px;
+	display: table;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	float: left;
+	background-color: #000;
+	color: #fff;
+	width: 117px;
+	text-align: center;
+}
+.box-slideevent-main .box-float .box-btn-left .btn.black:hover{
+	background-color: #6e0904;
+	color: #fff;
+}
+.box-slideevent-main .box-float .box-btn-right{
+	float: right;
+	background-color: #000;
+}
+.box-slideevent-main .box-float .btn-arrow{
+	width: 31px;
+	height: 31px;
+	background: url(../images/icon-arrow.png) no-repeat center center #000;
+	display: block;
+	float: left;
+}
+.box-slideevent-main .box-float .btn-arrow.left{
+	background-position: 4px 5px;
+}
+.box-slideevent-main .box-float .btn-arrow.right{
+	background-position: -18px 5px;
+}
+.box-slideevent-main .box-float .box-number{
+	border-left: 1px solid #333333;
+	border-right: 1px solid #333333;
+	float: left;
+	display: block;
+	color: #a6a6a6;
+	font-size: 16px;
+	text-align: center;
+	padding: 0 4px;
+	line-height: 18px;
+	top: 7px;
+}
+.box-slideevent-main .box-float .box-number p{
+	float: left;
+}
+.box-slideevent-main .box-float .box-number span{
+	font-size: 18px;
+}
+.box-slideevent-main .box-float .box-number .ofCenter{
+	margin: 0 3px;
+}
+
+
+/* --------------------------------------------------- Part News --------------------------------------------------- */
+
+.part-news{
+	padding: 35px 0;
+}
+.part-news .box-title{
+	font-size: 75px;
+	color: #000;
+	margin-bottom: 25px;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: 'kaniga_patanabold';
+}
+.part-news .box-top .box-left{
+	width: 315px;
+}
+.part-news .box-top .box-left .text-title{
+	font-size: 60px;
+	text-transform: uppercase;
+	text-align: left;
+	font-family: 'kaniga_patanabold';
+	margin: 10px 0;
+}
+.part-news .box-top .box-left .text-title span{
+	font-size: 50px;
+	color: #6e0904;
+	line-height: 13px;
+}
+.part-news .box-top .box-left .btn{
+	height: 31px;
+	line-height: 31px;
+	padding: 0 20px;
+	text-transform: uppercase;
+	font-size: 18px;
+	display: table;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	float: left;
+	text-align: center;
+	margin: 40px 0 0 0;
+	width: 120px;
+}
+.part-news .box-top .box-left .btn.black{
+	background-color: #000;
+	color: #fff;
+}
+.part-news .box-top .box-left .btn.black:hover{
+	background-color: #6e0904;
+}
+.part-news .box-top .box-news-bold{
+	border: 4px solid #000;
+	padding: 7px;
+	width: 625px;
+} 
+.part-news .box-top .box-news-bold .box-pic{
+	float: left;
+}
+.part-news .box-top .box-news-bold .box-text{
+	float: right;
+	width: 275px;
+	margin-right: 3px;
+}
+.part-news .box-top .box-news-bold .box-text .text-date{
+	margin: 10px 0;
+}
+.part-news .box-top .box-news-bold .box-text .text-des{
+	margin-bottom: 17px;
+}
+.part-news .box-bottom .box-news-main{
+	margin-top: 15px;
+	display: table;
+	border-bottom: 1px solid #dbdbdb;
+	padding-bottom: 15px;
+}
+.part-news .box-bottom .box-news {
+	float: left;
+	width: 275px;
+}
+.part-news .box-bottom .box-news.mid{
+	margin: 0 51px;
+}
+.part-news .box-bottom .box-news .box-pic{
+	float: none;
+}
+.part-news .box-bottom .box-news .box-text{
+	float: none;
+}
+.part-news .box-bottom .box-news .box-text .text-title{
+	height: 23px;
+	overflow: hidden;
+	margin-top: 10px;
+}
+.part-news .box-bottom .box-news .box-text .text-date{
+	margin: 10px 0;
+}
+.part-news .box-bottom .box-news .box-text .text-des{
+	margin-bottom: 15px;
+}
+
+.part-news .box-right{
+	
+}
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------------------------- Part Data Network --------------------------------------------------- */
+
+
+
+
+
+/* --------------------------------------------------- Part Data Network --------------------------------------------------- */
+
+
+
+
+
+
+/* --------------------------------------------------- Part Exhibition --------------------------------------------------- */
+
+
+
+
+
+/* --------------------------------------------------- Part Knowlage --------------------------------------------------- */

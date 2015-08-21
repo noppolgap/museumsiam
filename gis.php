@@ -7,16 +7,7 @@ require("assets/configs/function.inc.php");
 <html>
 <head>
 <? require('inc_meta.php'); ?>	
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>	
+<link rel="stylesheet" type="text/css" href="css/gis.css" />	
 </head>
 
 <body>

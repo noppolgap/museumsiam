@@ -1,0 +1,36 @@
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+.infobox{
+	padding-top:10px;
+	width: 309px;
+}
+.infobox strong{
+	color: #6f0905;
+	font-size: 1.1em;
+}   
+.infoboxAddress{
+	font-size: 1em;
+	height: 60px;
+	overflow: hidden;
+}   
+.infobox-control-btn{
+	width: 294px;
+	margin: 10px auto 0px;
+}
+.infobox-btn{
+	width: 130px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	color: #fff;
+	background-color: #6f0905;
+	margin-left: 7px;
+	margin-right: 7px;
+	display: inline-block;
+} 
