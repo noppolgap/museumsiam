@@ -17,7 +17,7 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="delete.php">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('order.php');">
 			</div>
 			<div class="mod-body-inner">
@@ -47,19 +47,19 @@ require("../../assets/configs/function.inc.php");
 				<div class="mod-body-main-content">
 					<!-- start loop -->
 					<?php for($i=0;$i<30;$i++){ ?>
-					<div class="Main_Content">
+					<div class="Main_Content" data-id="<?=$i?>">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$i?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><a href="view.php">xxxxxxxxxxxx xxxxxxxx xxxxxxx xxx xxxxxxxxxxxx xxxxxxxx xxxxxxx xxx  xxxxxxxxxxxx xxxxxxxx xxxxxxx xxx xxxxxxxxxxxx xxxxxxxx xxxxxxx xxxxxxxxxxxxxxx xxxxxxxx xxxxxxx xxx</a></div>
+							<div><a href="view.php"> <?=$i?> xxxxxxxxxxxx <?=$i?> xxxxxxxx <?=$i?> xxxxxxx xxx xxxxxxxxxxxx  xxxxxxxx xxxxxxx xxx</a></div>
 							<div>วันที่สร้าง 01/08/2015 | วันที่ปรับปรุง 06/08/2015 | เปิดอ่าน 100 ครั้ง</div>
 						</div>	
 						<div class="floatL stausContent"><span class="staus1"></span> Enable <? //<span class="staus2"></span> Disable ?></div>
 						<div class="floatL EditContent">
 							<a href="edit.php" class="EditContentBtn">Edit</a>
-							<a href="#" class="DeleteContentBtn">Delete</a>
+							<a href="#" class="DeleteContentBtn" data-id="<?=$i?>">Delete</a>
 						</div>
 						<div class="clear"></div>	
 					</div>
@@ -67,7 +67,7 @@ require("../../assets/configs/function.inc.php");
 					<!-- end loop -->
 				</div>
 				<div class="pagination_box">
-					<div class="floatL">จำนวนทั้งหมด <?=$i?> รายการ</div>
+					<div class="floatL">จำนวนทั้งหมด <span class="RowCount"><?=$i?></span> รายการ</div>
 					<div class="floatR pagination_action">
 						<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 						<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
@@ -85,7 +85,7 @@ require("../../assets/configs/function.inc.php");
 			</div>	
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="delete.php">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('order.php')">
 			</div>
 		</div>

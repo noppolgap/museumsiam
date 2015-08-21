@@ -1,3 +1,6 @@
+var temp1;
+var temp2;
+
 $( document ).ready(function() {
 	if($('.mytextarea').length > 0){
         tinymce.init({
@@ -23,7 +26,6 @@ $( document ).ready(function() {
 	                var boxID = thumbBox(name,file.thumbnailUrl);
 	                $('.image_Data').find('#input_'+boxID).val(file.url);
 	            });
-	            console.log(name);
 	        },
 		    progressall: function (e, data) {
 		        var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -53,21 +55,48 @@ $( document ).ready(function() {
 	    $( "#sortable" ).disableSelection();
 	}	
 
-	$('.DatePicker').datepicker({
-      showOn: "button",
-      buttonImage: "../images/small-n-flat/calendar.svg",
-      buttonImageOnly: true,
-      buttonText: "Select date",
-      dateFormat: 'd MM yy'
-    });	
-    	
-	$('.DatetimePicker').datetimepicker({
-      showOn: "button",
-      buttonImage: "../images/small-n-flat/calendar.svg",
-      buttonImageOnly: true,
-      buttonText: "Select date",
-      dateFormat: 'd MM yy'
-    });	
+    if($('.DatePicker').length > 0){	
+		$('.DatePicker').datepicker({
+	      showOn: "button",
+	      buttonImage: "../images/small-n-flat/calendar.svg",
+	      buttonImageOnly: true,
+	      buttonText: "Select date",
+	      dateFormat: 'd MM yy'
+	    });	
+    }
+    if($('.DatetimePicker').length > 0){	
+		$('.DatetimePicker').datetimepicker({
+	      showOn: "button",
+	      buttonImage: "../images/small-n-flat/calendar.svg",
+	      buttonImageOnly: true,
+	      buttonText: "Select date",
+	      dateFormat: 'd MM yy'
+	    });	
+    }
+    if($( "input[name='checkall']" ).length > 0){
+	    temp1 = $( "input[data-pageDelete]" ).attr('data-pageDelete');
+
+	    $("input[name='checkall']").on('change', function () {
+		 	if($("input[name='checkall']").is(':checked')){
+			    $(".checkboxContent input[type='checkbox']").prop('checked',true);
+			}else{
+			    $(".checkboxContent input[type='checkbox']").prop('checked',false);
+			} 
+		});
+		
+		$('.DeleteContentBtn').click(function(e) {
+			var ID = $(this).attr('data-id');
+			var title = $('.Main_Content[data-id="'+ID+'"] > .nameContent > div > a').text();
+			
+			if (confirm("ยืนยันการลบ "+title)) {
+				deleteData(ID);  
+			}	
+		
+			e.preventDefault();
+			e.stopPropagation();
+		});   
+	}
+    
 });
 function thumbBox(path,file){
 	var res = file.split("/");
@@ -146,9 +175,32 @@ function updateOreder(){
 	  	}
 	  }
 	});	
-	console.log(order_data);
 	$.post( "order.php", { update: true, order_data: order_data })
 	  .done(function( data ) {
 	    alert('Update Complete');
 	 });
+}
+function deleteCheck(){
+	if (confirm("ยืนยันการลบทุกหัวข้อที่ได้เลือก")){
+		$('.checkboxContent input:checkbox:checked').map(function() {
+		    deleteData(this.value);
+		});	
+		
+		$("input[name='checkall']").prop('checked',false);
+	}
+}
+function deleteData(id){
+$.post( temp1, { id: id })
+  .done(function( data ) {
+	$('.Main_Content[data-id="'+id+'"]').hide("blind" , function() {
+		$(this).remove();
+		var num_rows = $('.Main_Content').length;
+		if(num_rows == 0){
+			window.location.reload();
+		}else{
+			$('.RowCount').text(parseInt($('.RowCount').text())-1);
+		}	
+	});
+  });	
+
 }
