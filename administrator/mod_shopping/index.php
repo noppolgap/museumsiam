@@ -17,7 +17,7 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="action.php?delete">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();">
 			</div>
 			<div class="mod-body-inner">
@@ -48,9 +48,9 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-			    $sql= "SELECT * FROM trn_category WHERE Flag <> 2 ";
+			    $sql= "SELECT * FROM trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = 7 ";
 			    if(isset($_GET['search'])){
-			      $sql .= "AND CAT_DESC_LOC like '%".$_POST['str_search']."%' ";
+			      $sql .= "AND CONTENT_CAT_DESC_LOC like '%".$_POST['str_search']."%' ";
 			    }
 			     $sql .= "ORDER BY ORDER_DATA DESC ";
 
@@ -61,25 +61,25 @@ require("../../assets/configs/function.inc.php");
 			 ?>
 					<!-- start loop -->
 					<?php while($row = mysql_fetch_array($query)) { ?>
-								<div class="Main_Content">
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$i?>"></div>
+					 <div class="Main_Content" data-id="<?=$row['CONTENT_CAT_ID']?>">
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_CAT_ID']?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="product_view.php?p='.$row['CAT_ID'].' ">'.$row['CAT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="product_view.php?p='.$row['CONTENT_CAT_ID'].' ">'.$row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
-						<? if($row['Flag'] == 0){ ?>
-							<span class="staus1"></span> <a href="action.php?enable&p=<?=$row['CAT_ID']?>&g=<?=$row['Flag']?>">
+						<? if($row['FLAG'] == 0){ ?>
+							<span class="staus1"></span> <a href="action.php?enable&p=<?=$row['CONTENT_CAT_ID']?>&g=<?=$row['FLAG']?>">
 							Enable
 						</a> <?}  else {?> <span class="staus2"></span> 
-						<a href="action.php?enable&p=<?=$row['CAT_ID']?>&g=<?=$row['Flag']?>"> Disable </a> <? } ?></div>
+						<a href="action.php?enable&p=<?=$row['CONTENT_CAT_ID']?>&g=<?=$row['FLAG']?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
-							<a href="edit.php?p=<?=$row['CAT_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="action.php?delete&p=<?=$row['CAT_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="edit.php?p=<?=$row['CONTENT_CAT_ID']?>" class="EditContentBtn">Edit</a>
+							<a href="#" class="DeleteContentBtn" data-id="<?=$row['CONTENT_CAT_ID']?>">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
@@ -107,7 +107,7 @@ require("../../assets/configs/function.inc.php");
 			</div>	
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" >
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();">
 			</div>
 		</div>

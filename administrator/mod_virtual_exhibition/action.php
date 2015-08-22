@@ -62,7 +62,7 @@ if(isset($_GET['add'])){
 	$sql = "INSERT INTO trn_content_category (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
 	mysql_query($sql,$conn) or die($sql);
 
-    header('Location: index.php');
+  header('Location: index.php');
 	
 }
 

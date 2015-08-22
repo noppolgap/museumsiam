@@ -10,7 +10,7 @@ if(isset($_POST['update'])){
 		$update="";
 		$update[]= "ORDER_DATA = ".$value[1];
 					
-		$sql="UPDATE trn_category SET  ".implode(",",$update)." WHERE CAT_ID =".$value[0];
+		$sql="UPDATE trn_content_category SET  ".implode(",",$update)." WHERE CONTENT_CAT_ID =".$value[0];
 		mysql_query($sql,$conn);	    
 	}	
 }else{
@@ -29,14 +29,14 @@ if(isset($_POST['update'])){
 	<ul id="sortable">
 		<?php
 
-			    $sql= "SELECT * FROM trn_category WHERE Flag <> 2 ORDER BY ORDER_DATA DESC";
+			    $sql= "SELECT * FROM trn_content_category WHERE Flag <> 2 AND REF_MODULE_ID = 7 ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {
 			 
 		?>
 
-		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA']?>" data-id="<?=$row['CAT_ID']?>"><?=$row['CAT_DESC_LOC']?></li>
+		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA']?>" data-id="<?=$row['CONTENT_CAT_ID']?>"><?=$row['CONTENT_CAT_DESC_LOC']?></li>
 	<? } ?>  
 	</ul>
 </div>	

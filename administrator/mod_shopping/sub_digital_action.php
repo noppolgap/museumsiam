@@ -45,10 +45,11 @@ if(isset($_GET['delete'])){
 
 if(isset($_GET['add'])){
 
-  unset($insert);
+  /*unset($insert);
     $insert['CAT_ID'] 	= "'".$_POST['cat_id']."'";
 	$insert['PRODUCT_DESC_LOC'] 	= "'".$_POST['product_name_th']."'";
 	$insert['PRODUCT_DESC_ENG'] 	= "'".$_POST['product_name_en']."'";
+	$insert['REF_MODULE_ID'] = 7;
 	$insert['PRICE'] 	= "'".$_POST['price']."'";
 	$insert['SALE'] 	= "'".$_POST['sale']."'";
 	$insert['DETAIL'] 	= "'".$_POST['detail']."'";
@@ -58,6 +59,28 @@ if(isset($_GET['add'])){
 	$insert['LAST_UPDATE_DATE'] = "NOW()";
 					
     $sql = "INSERT INTO trn_product (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
+	mysql_query($sql,$conn) or die($sql);
+
+    header('Location: product_view.php?p='.$_POST['cat_id'].'');*/
+
+  $sql_max = "SELECT MAX( ORDER_DATA ) AS MAX_ORDER FROM trn_content_category WHERE FLAG <> 2 AND REF_MODULE_ID = 7" ;
+  $query_max = mysql_query($sql_max,$conn);
+  $row_max = mysql_fetch_array($query_max);
+  $max = $row_max['MAX_ORDER'];
+  $max++;
+
+    unset($insert);
+	$insert['CONTENT_CAT_DESC_LOC'] 	= "'".$_POST['product_name_th']."'";
+	$insert['CONTENT_CAT_DESC_ENG'] 	= "'".$_POST['product_name_en']."'";
+	$insert['ORDER_DATA'] 	= "'".$max."'";
+	$insert['REF_MODULE_ID'] 	= 5;
+	$insert['FLAG'] 	= 0;
+	$insert['USER_CREATE'] 		= "'admin'";
+	$insert['CREATE_DATE'] 		= "NOW()";
+	$insert['LAST_UPDATE_USER'] = "'admin'";
+	$insert['LAST_UPDATE_DATE'] = "NOW()";
+					
+	$sql = "INSERT INTO trn_content_category (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
 	mysql_query($sql,$conn) or die($sql);
 
     header('Location: product_view.php?p='.$_POST['cat_id'].'');

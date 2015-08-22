@@ -17,18 +17,18 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php?g=<?=$_GET['p']?>'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
 					<?php
-						 $sql1= "SELECT * FROM  trn_category WHERE Flag <> 2 AND CAT_ID ='".$_GET['p']."' ";
+						 $sql1= "SELECT * FROM  trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = 7 AND CONTENT_CAT_ID ='".$_GET['p']."' ";
 				   	     $query1 = mysql_query($sql1,$conn);
 					 ?>
 
 					<?php while($row1 = mysql_fetch_array($query1)) { ?>
-						<div class="floatL titleBox"><?=$row1['CAT_DESC_LOC']?></div>
+						<div class="floatL titleBox"><?=$row1['CONTENT_CAT_DESC_LOC']?></div>
 					<?}?>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
@@ -89,7 +89,7 @@ require("../../assets/configs/function.inc.php");
 						<a href="product_action.php?enable&p=<?=$row['PRODUCT_ID']?>&g=<?=$row['Flag']?>&a=<?=$row['CAT_ID']?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
 							<a href="product_edit.php?p=<?=$row['PRODUCT_ID']?>&g=<?=$row['CAT_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="product_action.php?delete&p=<?=$row['PRODUCT_ID']?>&a=<?=$row['CAT_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="#" class="DeleteContentBtn" data-id="<?=$row['PRODUCT_ID']?>">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
@@ -114,9 +114,6 @@ require("../../assets/configs/function.inc.php");
 				</div>
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 		</div>

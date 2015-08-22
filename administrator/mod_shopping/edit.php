@@ -26,7 +26,7 @@ require("../../assets/configs/function.inc.php");
 						<?php
 
 							$id = $_GET['p'];
-						    $sql= "SELECT * FROM trn_category WHERE Flag <> 2 AND CAT_ID = ".$id." ";
+						    $sql= "SELECT * FROM trn_content_category WHERE Flag <> 2 AND CONTENT_CAT_ID = ".$id." ";
 							$query = mysql_query($sql,$conn);
 
 						?>
@@ -35,12 +35,12 @@ require("../../assets/configs/function.inc.php");
 							<?php while($row = mysql_fetch_array($query)) { ?>
 							<div>
 								<div class="floatL form_name">ชื่อ th</div>
-								<div class="floatL form_input"><input type="text" name="name-th" value="<? echo $row['CAT_DESC_LOC'] ?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="name-th" value="<? echo $row['CONTENT_CAT_DESC_LOC'] ?>" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>	
 							<div>
 								<div class="floatL form_name">ชื่อ en</div>
-								<div class="floatL form_input"><input type="text" name="name-en" value="<? echo $row['CAT_DESC_ENG'] ?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="name-en" value="<? echo $row['CONTENT_CAT_DESC_ENG'] ?>" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>	
 							<div class="btn_action">
