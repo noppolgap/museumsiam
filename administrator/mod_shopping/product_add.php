@@ -25,7 +25,7 @@ require("../../assets/configs/function.inc.php");
 						<? $id = $_GET['g']; ?>
 						<form action="product_action.php?add&p=<?=$id?>" method="post" name="formcms">
 							<?php
-							   $sql= "SELECT CAT_DESC_LOC FROM trn_category WHERE Flag <> 2 AND CAT_ID = $id";
+							   $sql= "SELECT CONTENT_CAT_DESC_LOC FROM trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = 7 AND CONTENT_CAT_ID = $id";
 							   $query = mysql_query($sql,$conn);
 							?>
 							<div>
@@ -34,7 +34,7 @@ require("../../assets/configs/function.inc.php");
 
 								<? while($row = mysql_fetch_array($query)) {  ?>
 
-									<div class="floatL form_input"><input type="text" name="cat_ids"  class="w90p" value="<? echo $row['CAT_DESC_LOC']; ?>" />
+									<div class="floatL form_input"><input type="text" name="cat_ids" readonly="readonly"  class="w90p" value="<? echo $row['CONTENT_CAT_DESC_LOC']; ?>" />
 								
 								<?}?>
 
@@ -59,6 +59,16 @@ require("../../assets/configs/function.inc.php");
 							<div>
 								<div class="floatL form_name">ราคาลด</div>
 								<div class="floatL form_input"><input type="text" name="sale" value="" class="w90p" /></div>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<div class="floatL form_name">วันที่เริ่ม</div>
+								<div class="floatL form_input"><input type="text" name="start" value="" class="DatetimePicker" /></div>
+								<div class="clear"></div>
+							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">วันที่สิ้นสุด</div>
+								<div class="floatL form_input"><input type="text" name="end" value="" class="DatetimePicker" /></div>
 								<div class="clear"></div>
 							</div>
 							<div>
@@ -97,11 +107,13 @@ require("../../assets/configs/function.inc.php");
 <? require('../inc_footer.php'); ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
+<link rel="stylesheet" type="text/css" href="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
+<script type="text/javascript" src="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>	
 <? logs_access('admin','hello'); ?>	
 </body>

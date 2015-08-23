@@ -125,7 +125,7 @@ function thumbBox(path,file){
     return res;
 }
 function delImage(id){
-	$.post( "../master/delete_image.php", { pid: id })
+	$.post( "../master/delete_image.php", { pid: id , type: 1})
 		.done(function( data ) {
 			var res = id.split(".");
 				res = res[0];
@@ -135,6 +135,16 @@ function delImage(id){
 			$('#input_'+res).remove();
 	});		
 
+}
+function delImageEdit(id , path){
+	if (confirm("คุณแน่ใจที่จะลบรูปภาพนี้")){
+		$.post( "../master/delete_image.php", { pid: id , type: 2 , pname: path})
+			.done(function( data ) {
+			    $('#img_edit_'+id).hide("scale" , function() {
+					$(this).remove();
+				});	
+		});
+	}
 }
 function popupImage(href){
 	try{
@@ -147,8 +157,8 @@ function popupImage(href){
 		window.open(href,'_blank');
 	}
 }
-function orderPage(id){
-	var href = 'order.php';
+function orderPage(path){
+	var href = path;
 	try{
 		$.colorbox({
 			transition: 'fade',
@@ -162,7 +172,7 @@ function orderPage(id){
 		window.open(href,'_blank');
 	}	
 }
-function updateOreder(){
+function updateOreder(path){
 	
 	var order_data = new Array();
 	var index = 0;
@@ -175,7 +185,7 @@ function updateOreder(){
 	  	}
 	  }
 	});	
-	$.post( "order.php", { update: true, order_data: order_data })
+	$.post( path, { update: true, order_data: order_data })
 	  .done(function( data ) {
 	    alert('Update Complete');
 	 });

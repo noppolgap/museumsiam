@@ -17,7 +17,7 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">เพิ่มรายการ</div>					
+					<div class="floatL titleBox">แก้ไขรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
 					
@@ -51,6 +51,16 @@ require("../../assets/configs/function.inc.php");
 								<div class="clear"></div>
 							</div>
 							<div>
+								<div class="floatL form_name">วันที่เริ่ม</div>
+								<div class="floatL form_input"><input type="text" name="start" value="<? echo $row['EVENT_START_DATE'] ?>" class="DatetimePicker" /></div>
+								<div class="clear"></div>
+							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">วันที่สิ้นสุด</div>
+								<div class="floatL form_input"><input type="text" name="end" value="<? echo $row['EVENT_END_DATE'] ?>" class="DatetimePicker" /></div>
+								<div class="clear"></div>
+							</div>
+							<div>
 								<div class="floatL form_name">รายละเอียดย่อ TH</div>
 								<div class="floatL form_input"><textarea name="brief_name_th" class="mytextarea2 w90p"><? echo $row['BRIEF_LOC'] ?></textarea></div>
 								<div class="clear"></div>
@@ -64,11 +74,16 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_name">รายละเอียด</div>
 								<div class="floatL form_input"><textarea name="detail" class="mytextarea2 w90p"><? echo $row['CONTENT_DESC_ENG'] ?></textarea></div>
 								<div class="clear"></div>
-							</div>	
+							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">Image</div>
+								<div class="floatL form_input"><?=admin_upload_image_edit('photo',5,$_GET['p'])?></div>
+								<div class="clear"></div>
+							</div>		
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href ='viewVirsualExhib.php?p=<?=$row['CAT_ID']?>' ">
 							</div>
 							<? } ?>
 						</form> 
@@ -81,11 +96,12 @@ require("../../assets/configs/function.inc.php");
 </div>	
 <? require('../inc_footer.php'); ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
+<link rel="stylesheet" type="text/css" href="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
-<link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
-<script type="text/javascript" src="../master/script.js"></script>		
-<script type="text/javascript" src="mod_cms.js"></script>	
+<script type="text/javascript" src="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.js"></script>	
+<script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
+<script type="text/javascript" src="../master/script.js"></script>	
 <? logs_access('admin','hello'); ?>	
 </body>
 </html>

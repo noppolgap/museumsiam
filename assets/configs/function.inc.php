@@ -97,6 +97,9 @@ function ShowMonthYear($myDate) {
 function ConvertDate($str){
 	return date("d M Y", strtotime(trim($str)));
 }
+function ConvertDateToDB($str){
+	return date("Y-m-d H:i:s", strtotime(trim($str)));
+}
 function logs_access($user,$msg) {
 	if(!is_dir(_LOG_PATH_)) { mkdir(_LOG_PATH_,0777); }else{ chmod(_LOG_PATH_,0777); }
 	
@@ -138,13 +141,19 @@ function admin_move_image_upload_dir($dir,$file,$width,$height,$crop,$thumbwidth
 		if(!is_dir($path3)) { mkdir($path3,0777); }else{ chmod($path3,0777); }
 		if(!is_dir($path4)) { mkdir($path4,0777); }else{ chmod($path4,0777); }
 
-		include('../../assets/class/abeautifulsite/SimpleImage.php');
-		$img = new abeautifulsite/SimpleImage();
+		//include('../../assets/class/abeautifulsite/SimpleImage.php');
+		//$img = new abeautifulsite\SimpleImage();
 		
 		$output = time().'_'.rand(111, 999).'.'.getEXT($file);
 		$original_path = $old_path1.$file;
 		$thumb_path = $old_path1.'thumbnail/'.$file;
 
+		copy($original_path,$path3.$output);
+		copy($original_path,$path4.$output);
+		unlink($original_path);
+		unlink($thumb_path);		
+
+		/*
 			try {
 				$img->load($original_path);
 				
@@ -171,11 +180,14 @@ function admin_move_image_upload_dir($dir,$file,$width,$height,$crop,$thumbwidth
 			} catch (Exception $e) {
 			    echo '<span style="color: red;">'.$e->getMessage().'</span>';
 			}
-		
+		*/
+
 		chmod($path1,0744);
 		chmod($path2,0744);
 		chmod($path3,0744);
 		chmod($path4,0744);	
+
+		return $path3.$output;
 }
 function admin_upload_image($name){
 	$str = "";
@@ -186,5 +198,74 @@ function admin_upload_image($name){
 	$str .= '<div class="image_'.$name.'_Box image_Box dNone"></div>'."\n\t";
 	$str .= '<div class="image_'.$name.'_data image_Data dNone"></div>'."\n\t";	
 	return $str;
+}
+function admin_upload_image_edit($name,$type,$id){
+	global $conn;
+
+	$str = "";
+	$str .= '<input class="fileupload" type="file" data-name="'.$name.'" name="files[]" data-url="../../assets/plugin/upload/php/" multiple>'."\n\t";
+	$str .= '<div id="progress">'."\n\t";
+	$str .= '<div class="upload_bar dNone"></div>'."\n\t";
+	$str .= '</div>'."\n\t";
+	$str .= '<div class="image_'.$name.'_Box image_Box">'."\n\t";
+
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID =".$type;
+	$query = mysql_query($sql,$conn);
+	while($row = mysql_fetch_array($query)) {
+		$str .= '<div id="img_edit_'.$row['PIC_ID'].'" class="thumbBoxEdit floatL p-Relative">'."\n\t";
+		$str .= '<div class="thumbBoxImage">'."\n\t";
+		$str .= '<a onclick="popupImage(\''.$row['IMG_PATH'].'\'); return false;" href="#">'."\n\t";
+		$str .= '<img src="'.str_replace_last('/','/thumbnail/',$row['IMG_PATH']).'" alt="">'."\n\t";
+		$str .= '</a>'."\n\t";
+		$str .= '</div>'."\n\t";
+		$str .= '<div class="thumbBoxAction dNone p-Absolute">'."\n\t";
+		$str .= '<a onclick="delImageEdit(\''.$row['PIC_ID'].'\' , \''.$row['IMG_PATH'].'\'); return false;" href="#">'."\n\t";
+		$str .= '<img src="../images/small-n-flat/sign-ban.svg" alt="">'."\n\t";
+		$str .= '</a>'."\n\t";
+		$str .= '</div>'."\n\t";
+		$str .= '</div>'."\n\t";
+	}
+	$str .= '</div>'."\n\t";
+	$str .= '<div class="image_'.$name.'_data image_Data dNone">'."\n\t";
+	$str .= '</div>'."\n\t";	
+	return $str;
+}
+function admin_upload_image_view($name,$type,$id){
+	global $conn;
+
+	$str = "";
+	$str .= '<div class="image_'.$name.'_Box image_Box">'."\n\t";
+
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID =".$type;
+	$query = mysql_query($sql,$conn);
+	while($row = mysql_fetch_array($query)) {
+		$str .= '<div id="img_edit_'.$row['PIC_ID'].'" class="thumbBoxEdit floatL p-Relative">'."\n\t";
+		$str .= '<div class="thumbBoxImage">'."\n\t";
+		$str .= '<a onclick="popupImage(\''.$row['IMG_PATH'].'\'); return false;" href="#">'."\n\t";
+		$str .= '<img src="'.str_replace_last('/','/thumbnail/',$row['IMG_PATH']).'" alt="">'."\n\t";
+		$str .= '</a>'."\n\t";
+		$str .= '</div>'."\n\t";
+		$str .= '</div>'."\n\t";
+	}
+	$str .= '</div>'."\n\t";
+	$str .= '<div class="image_'.$name.'_data image_Data dNone">'."\n\t";
+	$str .= '</div>'."\n\t";	
+	return $str;
+}
+function str_replace_last( $search, $replace, $subject ) {
+    if ( !$search || !$replace || !$subject )
+        return false;
+    
+    $index = strrpos( $subject, $search );
+    if ( $index === false )
+        return $subject;
+    
+    $pre = substr( $subject, 0, $index );
+    
+    $post = substr( $subject, $index );
+    
+    $post = str_replace( $search, $replace, $post );
+    
+    return $pre . $post;
 }
 ?>

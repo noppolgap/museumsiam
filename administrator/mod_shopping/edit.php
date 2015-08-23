@@ -17,7 +17,7 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">เพิ่มรายการ</div>					
+					<div class="floatL titleBox">แก้ไขรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
 					

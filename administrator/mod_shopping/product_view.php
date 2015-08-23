@@ -17,8 +17,8 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php?g=<?=$_GET['p']?>'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete&a=<?=$_GET['p']?>">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('product_order.php?p=<?=$_GET['p']?>');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -29,13 +29,16 @@ require("../../assets/configs/function.inc.php");
 
 					<?php while($row1 = mysql_fetch_array($query1)) { ?>
 						<div class="floatL titleBox"><?=$row1['CONTENT_CAT_DESC_LOC']?></div>
-					<?}?>
+					
 					<div class="floatR searchBox">
-						<form name="search" action="?search" method="post">
+						<form name="search" action="?search&p=<?=$row1['CONTENT_CAT_ID']?>" method="post">
 							<input type="search" name="str_search" value="" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
 					</div>
+
+					<?}?>
+
 					<div class="clear"></div>						
 				</div>
 				<div class="mod-body-inner-action">
@@ -60,7 +63,7 @@ require("../../assets/configs/function.inc.php");
 			    if(isset($_GET['search'])){
 			      $sql .= "AND PRODUCT_DESC_LOC like '%".$_POST['str_search']."%' ";
 			    }
-			     $sql .= "ORDER BY ORDER_DATA ASC";
+			     $sql .= "ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 
@@ -71,7 +74,7 @@ require("../../assets/configs/function.inc.php");
 			 ?>
 					<!-- start loop -->
 				<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content">
+					<div class="Main_Content" data-id="<?=$row['PRODUCT_ID']?>">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['PRODUCT_ID']?>"></div>
 						<div class="floatL thumbContent">
 							<a href="product_detail.php?p=<?=$row['PRODUCT_ID']?>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
@@ -122,10 +125,10 @@ require("../../assets/configs/function.inc.php");
 </div>	
 <? require('../inc_footer.php'); ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
+<link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
-<link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
-<script type="text/javascript" src="../master/script.js"></script>		
-<script type="text/javascript" src="mod_cms.js"></script>	
+<script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="../master/script.js"></script>	
 <? logs_access('admin','hello'); ?>	
 </body>
 </html>

@@ -17,8 +17,8 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="action.php?delete">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('order.php');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -61,8 +61,8 @@ require("../../assets/configs/function.inc.php");
 			 ?>
 					<!-- start loop -->
 					<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content">
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$CONTENT_CAT_ID?>"></div>
+					<div class="Main_Content" data-id="<?=$row['CONTENT_CAT_ID']?>">
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_CAT_ID']?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
@@ -79,7 +79,7 @@ require("../../assets/configs/function.inc.php");
 						<a href="action.php?enable&p=<?=$row['CONTENT_CAT_ID']?>&g=<?=$row['FLAG']?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
 							<a href="edit.php?p=<?=$row['CONTENT_CAT_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="action.php?delete&p=<?=$row['CONTENT_CAT_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="#" class="DeleteContentBtn" data-id="<?=$row['CONTENT_CAT_ID']?>">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
@@ -107,8 +107,8 @@ require("../../assets/configs/function.inc.php");
 			</div>	
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="action.php?delete">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('order.php');">
 			</div>
 		</div>
 		<div class="clear"></div>	

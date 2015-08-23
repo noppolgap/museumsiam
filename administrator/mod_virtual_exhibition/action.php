@@ -28,15 +28,15 @@ if(isset($_GET['enable'])){
 
 if(isset($_GET['delete'])){
 
-  $id = $_GET['p'];
+  $id = $_POST['id'];
   $update="";
-  $update[]= "Flag = 2";
+  $update[]= "FLAG = 2";
 
-  $sql="UPDATE trn_content_category SET  ".implode(",",$update)." WHERE CONTENT_CAT_ID =".$id;
+  echo  $sql="UPDATE trn_content_category SET  ".implode(",",$update)." WHERE CONTENT_CAT_ID =".$id;
   
   mysql_query($sql,$conn);
 	
-  header('Location: index.php');
+  //header('Location: index.php');
 	
 }
 
@@ -69,17 +69,16 @@ if(isset($_GET['add'])){
 if(isset($_GET['edit'])){
 
  $update="";
-    $id = $_GET['p'];
-	$update[]= "CONTENT_CAT_ID = '".$_GET['p']."'";
-	$update[]= "CONTENT_CAT_DESC_LOC = '".$_POST['name-th']."'";
-	$update[]= "CONTENT_CAT_DESC_ENG = '".$_POST['name-en']."'";
+  $id = $_GET['p'];
+	$update[]= "CONTENT_CAT_DESC_LOC = '".$_POST['name_th']."'";
+	$update[]= "CONTENT_CAT_DESC_ENG = '".$_POST['name_en']."'";
 	$update[]= "USER_CREATE = 'admin'";
 	$update[]= "CREATE_DATE= NOW()";
 	$update[]= "LAST_UPDATE_USER = 'admin'";
 	$update[]= "LAST_UPDATE_DATE = NOW()";
 					
     $sql="UPDATE trn_content_category SET  ".implode(",",$update)." WHERE CONTENT_CAT_ID =".$id;
-	mysql_query($sql,$conn);
+	  mysql_query($sql,$conn);
 	
     header('Location: index.php');
 	

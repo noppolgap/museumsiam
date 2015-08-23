@@ -348,6 +348,11 @@ header{
 }
 .thumbBoxEdit{
 	margin-right: 10px;
+	height: 117px;
+	overflow: hidden;
+}
+.thumbBoxImage img{
+	max-width: 150px;
 }
 .thumbBoxEdit:hover .thumbBoxAction{
 	display: block;	

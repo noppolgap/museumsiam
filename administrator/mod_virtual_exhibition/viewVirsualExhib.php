@@ -17,18 +17,28 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addVirsualExhib.php?p=<?=$_GET['p']?>'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage();">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionVirsualExhib.php?delete&p=<?=$_GET['p']?>">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderVirsualExhib.php?p=<?=$_GET['p']?>');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ชื่อเมนู</div>
+
+					<?php
+						 $sql1= "SELECT * FROM  trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = 5 AND CONTENT_CAT_ID ='".$_GET['p']."' ";
+				   	     $query1 = mysql_query($sql1,$conn);
+					 ?>
+
+					<?php while($row1 = mysql_fetch_array($query1)) { ?>
+						<div class="floatL titleBox"><?=$row1['CONTENT_CAT_DESC_LOC']?></div>
+				    
 					<div class="floatR searchBox">
-						<form name="search" action="?search" method="post">
+						<form name="search" action="?search&p=<?=$row1['CONTENT_CAT_ID']?>" method="post">
 							<input type="search" name="str_search" value="" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
 					</div>
+
+					<?}?>
 					<div class="clear"></div>						
 				</div>
 				<div class="mod-body-inner-action">
@@ -63,13 +73,13 @@ require("../../assets/configs/function.inc.php");
 			 ?>
 					<!-- start loop -->
 					<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content">
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$CONTENT_ID?>"></div>
+					<div class="Main_Content" data-id="<?=$row['CONTENT_ID']?>">
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_ID']?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="virsualExhiView.php?p='.$row['CONTENT_ID'].' ">'.$row['CONTENT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="detailVirsualExhib.php?p='.$row['CONTENT_ID'].' ">'.$row['CONTENT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
@@ -81,7 +91,7 @@ require("../../assets/configs/function.inc.php");
 						<a href="actionVirsualExhib.php?enable&p=<?=$row['CONTENT_ID']?>&g=<?=$row['CONTENT_STATUS_FLAG']?>&a=<?=$row['CAT_ID']?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
 							<a href="editVirsualExhib.php?p=<?=$row['CONTENT_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="actionVirsualExhib.php?delete&p=<?=$row['CONTENT_ID']?>&a=<?=$row['CAT_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="#" class="DeleteContentBtn" data-id="<?=$row['CONTENT_ID']?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>

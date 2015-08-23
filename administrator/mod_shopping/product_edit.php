@@ -17,7 +17,7 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">เพิ่มรายการ</div>					
+					<div class="floatL titleBox">แก้ไขรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
@@ -65,13 +65,23 @@ require("../../assets/configs/function.inc.php");
 								<div class="clear"></div>
 							</div>
 							<div>
+								<div class="floatL form_name">วันที่เริ่ม</div>
+								<div class="floatL form_input"><input type="text" name="start" value="<? echo $row['EVENT_START_DATE']; ?>" class="DatetimePicker" /></div>
+								<div class="clear"></div>
+							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">วันที่สิ้นสุด</div>
+								<div class="floatL form_input"><input type="text" name="end" value="<? echo $row['EVENT_END_DATE']; ?>" class="DatetimePicker" /></div>
+								<div class="clear"></div>
+							</div>
+							<div>
 								<div class="floatL form_name">รายละเอียดย่อ TH</div>
-								<div class="floatL form_input"><textarea name="brief_name_th" class="mytextarea2 w90p"></textarea></div>
+								<div class="floatL form_input"><textarea name="brief_name_th" class="mytextarea2 w90p"><? echo $row['BRIEF_LOC']; ?></textarea></div>
 								<div class="clear"></div>
 							</div>
 							<div>
 								<div class="floatL form_name">รายละเอียดย่อ EN</div>
-								<div class="floatL form_input"><textarea name="brief_name_en" class="mytextarea2 w90p"></textarea></div>
+								<div class="floatL form_input"><textarea name="brief_name_en" class="mytextarea2 w90p"><? echo $row['BRIEF_ENG']; ?></textarea></div>
 								<div class="clear"></div>
 							</div>		
 							<div class="bigForm">
@@ -81,7 +91,7 @@ require("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_image('photo')?></div>
+								<div class="floatL form_input"><?=admin_upload_image_edit('photo',7,$_GET['p'])?></div>
 								<div class="clear"></div>
 							</div>	
 
@@ -103,10 +113,12 @@ require("../../assets/configs/function.inc.php");
 <? require('../inc_footer.php'); ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
+<link rel="stylesheet" type="text/css" href="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>	
 <? logs_access('admin','hello'); ?>	
