@@ -4,14 +4,153 @@ body{
 
 /* --------------------------------------------------- Part Side Banner --------------------------------------------------- */
 
+.slide-herobanner{
+	height: 545px;
+	overflow: hidden;
+}
 .slide-herobanner .slide{
 	width: 100%;
 	height: 545px;
 	background-position: center center;
 }
-
+.part-banner .owl-theme .owl-controls .owl-page span{
+	margin: 5px;
+}
+.part-banner .owl-theme .owl-controls{
+	text-align: center;
+	top: -30px;
+}
 
 /* --------------------------------------------------- Part Detail Museum --------------------------------------------------- */
+
+.box-timeopen .text-title{
+	margin-bottom: 10px;
+}
+.box-timeopen .text-date2,
+.box-timeopen .text-time{
+	margin-left: 20px;
+	font-style: italic;
+	font-size: 22px;
+	line-height: 25px;
+}
+
+
+/* ---------------------- Top ---------------------- */
+.box-detail-museum .box-top{
+	padding: 45px 0 25px;
+}
+.box-detail-museum .box-top .box-left{
+	border-right : 1px solid #efefef;
+	width: 580px;
+}
+.box-detail-museum .box-top .box-title{
+	font-size: 50px;
+	color: #000;
+	text-transform: uppercase;
+	margin-bottom: 156px;
+}
+.box-detail-museum .box-top .box-title span{
+	font-size: 45px;
+	color: #8e070b;
+	line-height: 15px;
+}
+
+.box-detail-museum .box-top .box-right{
+	margin-right: 25px;
+	width: 600px;
+}
+.box-detail-museum .box-top .text-title{
+	font-size: 35px;
+	margin-bottom: 10px;
+}
+.box-detail-museum .box-top .text-title2{
+	font-size: 30px;
+	margin-left: 45px;
+}
+.box-detail-museum .box-top .text-title2 span{
+	font-size: 22px;
+	color: #535353;
+	display: inline-block;
+}
+.box-detail-museum .box-top .text-title2 a{
+	color: #b28f50;
+	text-decoration: underline; 
+	font-size: 22px;
+	display: inline-block;
+}
+.box-detail-museum .box-top .row-text{
+	font-style: italic;
+	display: table;
+	padding: 0 10px;
+	margin-left: 45px;
+}
+.box-detail-museum .box-top .row-text p{
+	float: left;
+	height: 26px;
+	line-height: 26px;
+}	
+.box-detail-museum .box-top .row-text .text-1{ width: 400px; }
+.box-detail-museum .box-top .row-text .text-2{ width: 45px; }
+.box-detail-museum .box-top .row-text .text-2{ width: 40px;}
+
+.MarginB{
+	margin-bottom: 13px;
+}
+
+.text-title2.icon-money:before{
+	content: '';
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	background: url(../images/icon-money.png) no-repeat center center;
+	position: absolute;
+	left: -28px;
+	top: 7px;
+}
+
+
+
+/* ---------------------- Middle ---------------------- */
+
+.box-detail-museum .box-middle {
+	background-color: #f2f2f2;
+	padding: 25px 0;
+}
+.box-detail-museum .box-middle .box-right{
+	margin-right: 171px;
+}
+.box-detail-museum .box-middle .box-right p {
+	width: 450px;
+	font-size: 22px;
+	line-height: 25px;
+	margin-top: 12px;
+}
+.box-detail-museum .box-middle .box-right p span{
+	font-style: italic;
+	color: #535353;
+}
+
+/* ---------------------- Bottom ---------------------- */
+
+.box-detail-museum .box-bottom {
+	background-color: #6e0904;
+	padding: 30px 0;
+}
+.box-detail-museum .box-bottom .box-btn{
+	display: table;
+	margin: 0 auto;
+}
+.box-detail-museum .box-bottom .box-btn a{
+	margin: 0 35px;
+	width: 180px;
+	height: 35px;
+	line-height: 35px;
+	letter-spacing: 1px;
+}
+.box-detail-museum .box-bottom .box-btn a:hover{
+	background-color: #b28f50;
+	color: #000;
+}
 
 
 
@@ -200,7 +339,7 @@ div.text-title{
 	float: left;
 	background-color: #000;
 	color: #fff;
-	width: 117px;
+	width: 120px;
 	text-align: center;
 }
 .box-slideevent-main .box-float .box-btn-left .btn.black:hover{
@@ -348,36 +487,275 @@ div.text-title{
 	margin-bottom: 15px;
 }
 
-.part-news .box-right{
-	
+.part-news .box-museum-news-main{
+	border: 4px solid #000;
+	width: 280px;
+}
+.box-museum-news-main .box-title{
+	width: 100%;
+	background-color: #000;
+	text-align: left;
+	font-size: 53px;
+	color: #fff;
+	padding: 5px 10px 22px 10px;
+	margin-bottom: 0px;
+}
+.box-museum-news-main .box-title span{
+	color: #871b15;
+	font-size: 60px;
+	line-height: 20px;
+}
+.box-museum-news-main .box-museum-news{
+	padding: 0 7px;
+}
+.box-museum-news-main .museum-news{
+	padding: 10px 0;
+	border-bottom: 1px solid #d2d2d2;
+}
+.box-museum-news-main .museum-news .box-pic{
+	width: 125px;
+	float: left;
+}
+.box-museum-news-main .museum-news .box-text{
+	width: 125px;
+	float: right;
+	margin-top: 5px;
+}
+.box-museum-news-main .museum-news .text-title{
+	font-size: 20px;
+	line-height: 20px;
+	margin-bottom: 10px;
+	height: 40px;
+	overflow: hidden;
+}
+.box-museum-news .box-btn{
+	display: table;
+	margin: 19px auto;
+}
+
+/* --------------------------------------------------- Part Data Network --------------------------------------------------- */
+
+.part-datanetwork{
+	background-color: #6e0904;
+	padding: 40px 0;
+}
+.part-datanetwork .slide-network{
+	width: 1180px;
+	margin: 0 auto;
+}
+.part-datanetwork .box-title{
+	font-size: 53px;
+	color: #000;
+	display: table;
+	margin: 0 auto 30px;
+	text-transform: uppercase;
+	line-height: 28px;
+}
+.part-datanetwork .box-title span{
+	font-size: 75px;
+	color: #fff;
+	line-height: 55px;
+}
+.box-network{
+	width: 275px;
+	margin: 0 auto;
+}
+.box-network .box-text .text-title{
+	color: #fff;
+}
+.box-network .box-text .text-location{
+	color: #BBBBBB;
+	margin: 10px 0 5px;
+}
+.box-network .box-pic{
+	border: 5px solid rgba(255, 255, 255, 0.3);
+	margin-bottom: 30px;
+}
+.part-datanetwork .box-btn{
+	display: table;
+	margin: 35px auto 0;
+}
+.part-datanetwork .box-btn a{
+	width: 175px;
+	height: 35px;
+	line-height: 35px;
+}
+.part-datanetwork .btn-arrow{
+	width: 31px;
+	height: 31px;
+	background: url(../images/icon-arrow.png) no-repeat center center #000;
+	display: block;
+	float: left;
+	position: absolute;
+	top: 130px;
+}
+.part-datanetwork .btn-arrow.left{
+	background-position: 4px 5px;
+	left: 5px;
+}
+.part-datanetwork .btn-arrow.right{
+	background-position: -18px 5px;
+	right: 5px;
 }
 
 
-
-
-
-
-
-
-
-
-/* --------------------------------------------------- Part Data Network --------------------------------------------------- */
-
-
-
-
-
-/* --------------------------------------------------- Part Data Network --------------------------------------------------- */
-
-
-
-
-
-
 /* --------------------------------------------------- Part Exhibition --------------------------------------------------- */
+.part-exhibition{
+	padding: 45px 0;
+}
+.box-exhibition-main{
+	width: 600px;
+	height: 325px;
+	float: left;
+	border: 4px solid #000;
+	padding: 25px 20px 0 25px;
+}
+.box-exhibition-main .box-title{
+	font-family: 'kaniga_patanabold';
+	font-size: 53px;
+	color: #000;
+	text-transform: uppercase;
+	line-height: 29px;
+}
+.box-exhibition-main .box-title span{
+	font-size: 60px;
+	color: #6e0904;
+	line-height: 42px;
+}
+.box-exhibition-main .box-top .box-btn{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.box-exhibition-main .box-exhibition .box-text{
+	float: left;
+	width: 280px;
+	padding-top: 10px;
+}
+.box-exhibition-main .box-exhibition .box-pic{
+	float: right;
+	width: 240px;
+}
+.box-exhibition-main .box-exhibition .text-title{
+	height: 27px;
+	overflow: hidden;
+}
+.box-exhibition-main .box-exhibition .text-date{
+	margin: 10px 0;
+}
+.box-exhibition-main .box-exhibition .text-des{
+	margin-bottom: 19px;
+}
+.box-exhibition-main .owl-theme .owl-controls{
+	margin-top: 10px;
+}
 
 
+/* --------------------------------------------------- Part Archive --------------------------------------------------- */
+
+.box-archive-main{
+	width: 600px;
+	height: 325px;
+	float: right;
+	border: 4px solid #000;
+	padding: 25px 20px 0 25px;
+}
+.box-archive-main .box-title{
+	font-family: 'kaniga_patanabold';
+	font-size: 53px;
+	color: #000;
+	text-transform: uppercase;
+	line-height: 29px;
+}
+.box-archive-main .box-title span{
+	font-size: 60px;
+	color: #6e0904;
+	line-height: 42px;
+}
+.box-archive-main .box-top .box-btn{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.box-archive-main .box-archive .box-text{
+	float: left;
+	width: 280px;
+	padding-top: 10px;
+}
+.box-archive-main .box-archive .box-pic{
+	float: right;
+	width: 240px;
+}
+.box-archive-main .box-archive .text-title{
+	height: 27px;
+	overflow: hidden;
+}
+.box-archive-main .box-archive .text-date{
+	margin: 10px 0;
+}
+.box-archive-main .box-archive .text-des{
+	margin-bottom: 19px;
+}
+.box-archive-main .owl-theme .owl-controls{
+	margin-top: 10px;
+}
 
 
+/* --------------------------------------------------- Part KnowLedge --------------------------------------------------- */
 
-/* --------------------------------------------------- Part Knowlage --------------------------------------------------- */
+.box-knowledge-main{
+	width: 100%;
+	float: left;
+	clear: both;
+	background-color: #000;
+	padding: 32px 21px 32px 32px;
+	margin-top: 50px;
+}
+.box-knowledge-main .box-left{
+	height: 325px;
+	width: 330px;
+	border-right: 1px solid #1a1a1a;
+}
+.box-knowledge-main .box-title{
+	font-family: 'kaniga_patanabold';
+	font-size: 53px;
+	color: #fff;
+	text-transform: uppercase;
+	line-height: 29px;
+}
+.box-knowledge-main .box-title span{
+	font-size: 75px;
+	color: #6e0904;
+	line-height: 52px;
+}
+.box-knowledge-main .box-left .box-btn{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+.box-knowledge-main .box-left .box-btn a.btn:hover{
+	background-color: #6e0904;
+}
+.box-knowledge-main .box-knowledge-wrap{
+	display: table;
+	margin: 0 auto;
+}
+.box-knowledge-main .box-knowledge{
+	float: left;
+	margin: 0 11px;
+	width: 197px;
+}
+.box-knowledge-main .box-knowledge .text-title{
+	margin: 10px 0;
+}	
+.box-knowledge-main .box-knowledge .text-des{
+	color: #414141;
+	height: 40px;
+	overflow: hidden;
+	margin: 10px 0;
+}	
+.box-knowledge-main .box-knowledge	 .box-btn a.btn:hover{
+	background-color: #b28f50;
+	color: #000;
+}
+	

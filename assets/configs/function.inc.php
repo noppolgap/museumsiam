@@ -101,6 +101,7 @@ function ConvertDateToDB($str){
 	return date("Y-m-d H:i:s", strtotime(trim($str)));
 }
 function logs_access($user,$msg) {
+	/*
 	if(!is_dir(_LOG_PATH_)) { mkdir(_LOG_PATH_,0777); }else{ chmod(_LOG_PATH_,0777); }
 	
 	$dirPath = _LOG_PATH_.'/'.date("Y_m");
@@ -128,6 +129,7 @@ function logs_access($user,$msg) {
 	chmod($FilePath,0744);
 	chmod($dirPath,0744);
 	chmod(_LOG_PATH_,0744);
+	*/
 }
 function admin_move_image_upload_dir($dir,$file,$width,$height,$crop,$thumbwidth,$thumbheight){
 		$path1 = '../../upload';

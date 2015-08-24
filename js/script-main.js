@@ -22,10 +22,25 @@ $(document).ready(function(){
 	});
 	
 	
+	$(".slide-other").owlCarousel({
+		autoPlay: 5000,
+		paginationSpeed : 500,
+		slideSpeed : 500,
+		navigation : false,
+		pagination : false,
+		rewindNav : true,
+		scrollPerPage :true,
+		responsive : true,
+		mouseDrag : false,
+		items : 5
+	});
 	
-	
-	
-	
+	$(".box-other-main .btn-arrow.left").click(function(){
+		$(".slide-other").data('owlCarousel').prev() 
+	});
+	$(".box-other-main .btn-arrow.right").click(function(){
+		$(".slide-other").data('owlCarousel').next() 
+	});
 	
 	
 }); 

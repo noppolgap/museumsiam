@@ -10,51 +10,13 @@ require("assets/configs/function.inc.php");
 
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 
-<script type="text/javascript" src="js/header.js"></script>
-	
+<script type="text/javascript" src="js/index.js"></script>
+
 <script>
 	$(document).ready(function(){
-		$("li.menu1").addClass("active");
-		$(".slide-herobanner").owlCarousel({
-			autoPlay: 5000,
-			paginationSpeed : 500,
-			slideSpeed : 500,
-			singleItem : true,
-			navigation : false,
-			pagination : false,
-			rewindNav : true,
-			scrollPerPage :true,
-			responsive : true,
-			mouseDrag : false,
-		});
-		
-// 		Slide Event
-		var owl = $(".slide-event"),
-		status = $(".box-number");
-		owl.owlCarousel({
-			slideSpeed : 500,
-			navigation : false,
-			singleItem : true,
-			pagination : false,
-			afterAction : afterAction
-		});
-		function updateResult(pos,value){
-			status.find(pos).find(".result").text(value);
-		}
-		function afterAction(){
-			updateResult(".owlItems", this.owl.owlItems.length);
-			updateResult(".currentItem", this.owl.currentItem+1);
-		}
-		$(".box-slideevent-main .btn-arrow.left").click(function(){
-			$(".slide-event").data('owlCarousel').prev() 
-		});
-		$(".box-slideevent-main .btn-arrow.right").click(function(){
-			$(".slide-event").data('owlCarousel').next() 
-		});
-		
+		$("li.menu1").addClass("active");		
 	});
 </script>
-	
 	
 </head>
 
@@ -67,13 +29,15 @@ require("assets/configs/function.inc.php");
 		<div class="slide" style="background-image: url(http://placehold.it/1920x545);"></div>
 		<div class="slide" style="background-image: url(http://placehold.it/1920x545);"></div>
 		<div class="slide" style="background-image: url(http://placehold.it/1920x545);"></div>
+		<div class="slide" style="background-image: url(http://placehold.it/1920x545);"></div>
+		<div class="slide" style="background-image: url(http://placehold.it/1920x545);"></div>
 	</div>
 </div>
 
 <?php include('inc/inc-menu.php'); ?>	
 
-<div  class="part-detail-museum" style="min-height: 100px">
-	
+<div  class="part-detail-museum">
+	<?php include('inc/inc-detail-museum-th.php'); ?>
 </div>
 
 <div class="part-event cf">
@@ -652,6 +616,9 @@ require("assets/configs/function.inc.php");
 							</p>
 						</div>
 					</div>
+					<div class="box-btn cf">
+						<a href="" class="btn black">view all</a>
+					</div>
 				</div>
 			</div>	
 		</div>
@@ -659,17 +626,540 @@ require("assets/configs/function.inc.php");
 </div>
 
 <div class="part-datanetwork">
-
+	<div class="container">
+		<div class="box-title">museum<span>data network</span></div>
+		<div class="box-slide-network-main cf">
+			<div class="slide-network cf">
+				<div class="box-network">
+					<a href="">
+						<div class="box-pic">
+							<img src="http://placehold.it/274x205">
+						</div>
+					</a>
+					<div class="box-text">
+						<a href="">
+							<p class="text-title">
+								Levitated Mass 340 Ton Giant Stone
+							</p>
+						</a>
+						<p class="text-location TcolorWhite">
+							กรุงเทพมหานคร
+						</p>
+						<p class="text-date TcolorGray">
+							28 Jan 2015
+						</p>
+					</div>
+				</div>
+				<div class="box-network">
+					<a href="">
+						<div class="box-pic">
+							<img src="http://placehold.it/274x205">
+						</div>
+					</a>
+					<div class="box-text">
+						<a href="">
+							<p class="text-title">
+								Levitated Mass 340 Ton Giant Stone
+							</p>
+						</a>
+						<p class="text-location TcolorWhite">
+							กรุงเทพมหานคร
+						</p>
+						<p class="text-date TcolorGray">
+							28 Jan 2015
+						</p>
+					</div>
+				</div>
+				<div class="box-network">
+					<a href="">
+						<div class="box-pic">
+							<img src="http://placehold.it/274x205">
+						</div>
+					</a>
+					<div class="box-text">
+						<a href="">
+							<p class="text-title">
+								Levitated Mass 340 Ton Giant Stone
+							</p>
+						</a>
+						<p class="text-location TcolorWhite">
+							กรุงเทพมหานคร
+						</p>
+						<p class="text-date TcolorGray">
+							28 Jan 2015
+						</p>
+					</div>
+				</div>
+				<div class="box-network">
+					<a href="">
+						<div class="box-pic">
+							<img src="http://placehold.it/274x205">
+						</div>
+					</a>
+					<div class="box-text">
+						<a href="">
+							<p class="text-title">
+								Levitated Mass 340 Ton Giant Stone
+							</p>
+						</a>
+						<p class="text-location TcolorWhite">
+							กรุงเทพมหานคร
+						</p>
+						<p class="text-date TcolorGray">
+							28 Jan 2015
+						</p>
+					</div>
+				</div>
+				<div class="box-network">
+					<a href="">
+						<div class="box-pic">
+							<img src="http://placehold.it/274x205">
+						</div>
+					</a>
+					<div class="box-text">
+						<a href="">
+							<p class="text-title">
+								Levitated Mass 340 Ton Giant Stone
+							</p>
+						</a>
+						<p class="text-location TcolorWhite">
+							กรุงเทพมหานคร
+						</p>
+						<p class="text-date TcolorGray">
+							28 Jan 2015
+						</p>
+					</div>
+				</div>
+			</div>
+			<a class="btn-arrow left"></a>
+			<a class="btn-arrow right"></a>
+			<div class="box-btn cf">
+				<a href="" class="btn gold">view all</a>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="part-exhibition">
-
+<div class="part-exhibition cf">
+	<div class="container cf">
+		<div class="box-exhibition-main cf">
+			<div class="box-top">
+				<div class="box-title">Virtual<span>Exhibition</span></div>
+				<div class="box-btn cf">
+					<a href="" class="btn black">view all</a>
+				</div>
+			</div>
+			<div class="box-slide-exhibition-main">
+				<div class="slide-exhibition">
+					<div class="box-exhibition cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+					<div class="box-exhibition cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+					<div class="box-exhibition cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+					<div class="box-exhibition cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+					<div class="box-exhibition cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box-archive-main cf">
+			<div class="box-top">
+				<div class="box-title">Digital<span>Archive</span></div>
+				<div class="box-btn cf">
+					<a href="" class="btn black">view all</a>
+				</div>
+			</div>
+			<div class="box-slide-archive-main">
+				<div class="slide-archive">
+					<div class="box-archive cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+					<div class="box-archive cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+					<div class="box-archive cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+					<div class="box-archive cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+					<div class="box-archive cf">
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box-knowledge-main cf">
+			<div class="box-left">
+				<div class="box-title">KnowLedge<span>Management</span></div>
+				<div class="box-btn cf">
+					<a href="" class="btn gold">view all</a>
+				</div>
+			</div>
+			<div class="box-right">
+				<div class="box-knowledge-wrap">
+					<div class="box-knowledge cf">
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-knowledge cf">
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-knowledge cf">
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-knowledge cf">
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
+						<div class="box-text">
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
+							<p class="text-date TcolorGray">
+								28 Jan 2015
+							</p>
+							<p class="text-des TcolorBlack">
+								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+							</p>
+							<div class="box-btn cf">
+								<a href="" class="btn red">read more ></a>
+								<div class="box-btn-social cf">
+									<a href="#" class="btn-socila fb"></a>
+									<a href="#" class="btn-socila tw"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="part-knowlage">
+<?php include('inc/inc-footer.php'); ?>	
 
-</div>
-
-	
 </body>
 </html>
