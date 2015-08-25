@@ -270,4 +270,14 @@ function str_replace_last( $search, $replace, $subject ) {
     
     return $pre . $post;
 }
+
+function nvl($originalVal , $returnWhenNull)
+{
+	if (is_null($originalVal))
+		return $returnWhenNull ;
+	else if ($originalVal == "")
+		return returnWhenNull ;
+	else 
+		return $originalVal ; 
+}
 ?>
