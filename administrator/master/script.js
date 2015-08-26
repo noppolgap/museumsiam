@@ -36,9 +36,17 @@ $( document ).ready(function() {
 		    },
 	        stop: function (e, data) {
 	           $('#progress .upload_bar').hide();
-	           $('.imageBox').show();
+	           $('.imageBox , .OrderImageBtn').show();
 	        }
 	    });			
+	}
+	if($('.image_Box').length > 0){
+		$('.OrderImageBtn').click(function(e) {
+			orderImagePage();
+		
+			e.preventDefault();
+			e.stopPropagation();
+		}); 
 	}	
 	if($('.orderContent').length > 0){
 		
@@ -97,6 +105,44 @@ $( document ).ready(function() {
 		});   
 	}
     
+    if($( ".OrderingImage" ).length > 0){
+	    if(pop == true){
+	    	var imageBox = window.opener.CallParentImage();
+	    }else{
+		    var imageBox = parent.CallParentImage();
+	    }
+	    
+	    $.each( imageBox[0], function( key, value ) {
+		    $('.sortableBox').append( '<li class="ui-state-default" data-id="'+imageBox[1][key]+'" style="background-image:url(\''+value+'\');">'+(key+1)+'</li>');
+		});
+	    
+	    var start = 0;
+	    var stop = 0;
+	    var imageDataID = 0;
+    	$( "#sortable" ).sortable({			
+		    placeholder: "ui-state-highlight",
+			update: function(event, ui) {
+	            $("#sortable").children().each(function(i) {
+	                var li = $(this);
+	                li.text(i+1);
+	            });
+	        },
+	        start: function( event, ui ) {
+			    start = ui.item.index();
+	        },  
+	        stop: function( event, ui ) {
+			    stop = ui.item.index();
+			    imageDataID = $(this).attr('data-id');
+			    
+			    if(pop == true){
+			    	window.opener.SwapParentImage(start,stop);
+			    }else{
+				    parent.SwapParentImage(start,stop);
+			    }			    
+	        }    
+	    });
+		$( "#sortable" ).disableSelection();	 	   
+	}
 });
 function thumbBox(path,file){
 	var res = file.split("/");
@@ -105,9 +151,10 @@ function thumbBox(path,file){
 	var name = res[point];
 		res = res[point].split(".");
 		res = res[0];
-		
+	var index = $('.image_'+path+'_data input[type="hidden"]').length;
+		index++;
 	
-	var box  = '<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'">';	
+	var box  = '<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'" data-id="'+index+'">';	
 		box += '<div class="thumbBoxImage">';
 		box += '<a href="#" onclick="popupImage(\''+(file.replace("/thumbnail/", "/"))+'\'); return false;">';
 		box += '<img alt="" src="'+file+'">';
@@ -119,7 +166,7 @@ function thumbBox(path,file){
 		box += '</a>';
 		box += '</div>';
 		box += '</div>';
-    $('.image_'+path+'_Box').prepend(box).show();
+    $('.image_'+path+'_Box').append(box).show();
     $('.image_'+path+'_data').append('<input type="hidden" name="'+path+'_file[]" id="input_'+res+'">');
     
     return res;
@@ -213,4 +260,57 @@ $.post( temp1, { id: id })
 	});
   });	
 
+}
+function orderImagePage(){
+	var imageCount = $('.thumbBoxEdit').length;
+	if(imageCount == 0){
+		alert('คุณต้องมีรูปมากกว่า 1 รูป ถึงจะสามารถใช้ความสามารถนี้ได้');
+	}else{
+		/*
+		try{
+			$.colorbox({
+				transition: 'fade',
+				height:"85%",
+				width:700,
+				href: '../master/thumb_order.php',
+				iframe:true,
+				onClosed:function(){ }
+			});	
+		} catch(err) {
+			popup('../master/thumb_order.php?pop','orderImagePage',720,600);
+		}	
+		*/
+		popup('../master/thumb_order.php?pop','orderImagePage',720,600);
+	}
+		
+}
+function popup(url,name,windowWidth,windowHeight){    
+	myleft=(screen.width)?(screen.width-windowWidth)/2:100;	
+	mytop=(screen.height)?(screen.height-windowHeight)/2:100;	
+	properties = "width="+windowWidth+",height="+windowHeight;
+	properties +=",scrollbars=yes, top="+mytop+",left="+myleft;   
+	window.open(url,name,properties);
+}
+function CallParentImage(){
+	var MyImage = new Array();
+		MyImage[0] = new Array();
+		MyImage[1] = new Array();
+	var i = 0;
+	$.each( $('.thumbBoxEdit'), function( key, value ) {
+		MyImage[0][i] = $(this).find('.thumbBoxImage > a > img').attr('src'); 
+		MyImage[1][i] = $(this).attr('data-id'); 
+		i++; 
+	});
+	return MyImage;
+}
+function SwapParentImage(start,stop){
+	console.log(start+' '+stop);
+	
+	swapElements($('.thumbBoxEdit'),stop,start);
+	swapElements($('.image_Data input[type="hidden"]'),stop,start);
+}
+function swapElements(siblings, subjectIndex, objectIndex) {
+    var subject = $(siblings.get(subjectIndex));
+    var object = siblings.get(objectIndex);
+    subject.insertAfter(object);
 }

@@ -330,6 +330,7 @@ header{
 	min-height: 32px;
 	color: #000;
 	font-size: 1.1em;
+	position: relative;
 }
 .form_input textarea , .form_input textarea2{
 	min-height: 100px;	
@@ -401,3 +402,23 @@ header{
 .ui-timepicker-div , .ui-datepicker .ui-datepicker-buttonpane button{
 	font-size: 0.8em !important;
 } 
+.OrderImageBtn{
+	background-image: url('../images/order.svg');
+	background-size: 100% 100%;
+	width: 40px;
+	height: 40px;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+}
+.sortableBox { width: 630px !important; }
+.sortableBox li { 
+	margin: 3px 3px 3px 0  !important; 
+	padding: 1px  !important; 
+	float: left; 
+	width: 150px  !important; 
+	height: 117px  !important; 
+	font-size: 4em  !important; 
+	text-align: center;
+    background-size: cover;
+}
