@@ -40,6 +40,24 @@ require("../../assets/configs/function.inc.php");
 								</div>
 								<div class="clear"></div>
 				
+							</div>
+							<div>
+								<div class="floatL form_name">หมวดฟมู่</div>
+								<div class="floatL form_input">
+ <?php
+					$sql = "SELECT MODULE_ID  , MODULE_NAME_LOC , MODULE_NAME_ENG FROM sys_app_module where ACTIVE_FLAG <> 2 ";
+					$rs = mysql_query($sql) or die(mysql_error());
+					echo  "<select id='cmbModule' name = 'cmbModule'>";
+					echo "<option value='-1'>กรุณาเลือกโมดูล</option>";
+				while($row = mysql_fetch_array($rs)){
+				echo "<option value='".$row["MODULE_ID"]."'>".$row["MODULE_NAME_LOC"]."</option>";
+				}mysql_free_result($rs);
+				echo "</select>";
+				?>
+      <span class="error" >* <span id = "moduleError" style="display:none">กรุณาระบุโมดูลหลัก </span> </span>
+                    </div>
+								</div>
+								<div class="clear"></div>
 							</div>	
 							<div>
 								<div class="floatL form_name">ชื่อ TH</div>
