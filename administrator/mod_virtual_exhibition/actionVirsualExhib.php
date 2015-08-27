@@ -69,13 +69,13 @@ if(isset($_GET['add'])){
 	$retrunID = mysql_insert_id();
 	
 	if(count($_POST['photo_file']) > 0){
-		$index = 0;  
+		$index = 1;  
 	    foreach ($_POST['photo_file'] as $k => $file) {
 		      $filename = admin_move_image_upload_dir('virsual',end(explode('/', $file)),1000,'',false,150,150);
 		
 		      unset($insert);
-		      $insert['CONTENT_ID']   = $retrunID;
-		      $insert['IMG_TYPE']   = "'".getEXT($filename)."'";
+		      $insert['CONTENT_ID'] = $retrunID;
+		      $insert['IMG_TYPE']   = 1;
 		      $insert['IMG_PATH']   = "'".$filename."'";
 		      $insert['CAT_ID']     = "5";
 		      $insert['ORDER_ID']   = "'".$index++."'";
@@ -91,8 +91,8 @@ if(isset($_GET['add'])){
 
 if(isset($_GET['edit'])){
 
-  $update="";
-  $id = $_GET['p'];
+  	$id = $_GET['p'];
+  	$update="";
 	$update[]= "CONTENT_DESC_LOC = '".$_POST['name_th']."'";
 	$update[]= "CONTENT_DESC_ENG = '".$_POST['name_en']."'";
 	$update[]= "BRIEF_LOC = '".$_POST['brief_name_th']."'";
@@ -107,8 +107,39 @@ if(isset($_GET['edit'])){
 					
 	$sql="UPDATE trn_content_detail SET  ".implode(",",$update)." WHERE CONTENT_ID =".$id;
 	mysql_query($sql,$conn);
-	
-   header('Location: viewVirsualExhib.php?p='.$_POST['cat_id'].'');
+
+	if(count($_POST['photo_file']) > 0){
+		$sql_max="SELECT MAX(ORDER_ID) AS MAX_ORDER FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = 5";
+		$query_max = mysql_query($sql_max,$conn);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;		 
+		
+	    foreach ($_POST['photo_file'] as $k => $file) {
+		      $filename = admin_move_image_upload_dir('virsual',end(explode('/', $file)),1000,'',false,150,150);
+		
+		      unset($insert);
+		      $insert['CONTENT_ID']   = $id;
+		      $insert['IMG_TYPE']   = 1;
+		      $insert['IMG_PATH']   = "'".$filename."'";
+		      $insert['CAT_ID']     = "5";
+		      $insert['ORDER_ID']   = $max++;
+		
+		      $sql = "INSERT INTO trn_content_picture (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
+		      mysql_query($sql,$conn) or die($sql);
+	  	}
+	}
+	if(count($_POST['order_position']) > 0){
+		foreach ($_POST['order_position'] as $k => $val) {
+			$update="";
+			$update[]= "ORDER_ID = ".$val;
+					
+			$sql="UPDATE trn_content_picture SET  ".implode(",",$update)." WHERE PIC_ID =".$k;			
+			mysql_query($sql,$conn) or die($sql);
+		}
+	}
+		
+	header('Location: viewVirsualExhib.php?p='.$_POST['cat_id'].'');
 	
 }
 

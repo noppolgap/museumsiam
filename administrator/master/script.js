@@ -42,7 +42,8 @@ $( document ).ready(function() {
 	}
 	if($('.image_Box').length > 0){
 		$('.OrderImageBtn').click(function(e) {
-			orderImagePage();
+			
+			orderImagePage($(this).attr('data-name'));
 		
 			e.preventDefault();
 			e.stopPropagation();
@@ -107,24 +108,29 @@ $( document ).ready(function() {
     
     if($( ".OrderingImage" ).length > 0){
 	    if(pop == true){
-	    	var imageBox = window.opener.CallParentImage();
-	    }else{
-		    var imageBox = parent.CallParentImage();
-	    }
-	    
+		    var pop_location = window.opener;
+		}else{
+			var pop_location = parent;
+		}    
+		
+		var imageBox = pop_location.CallParentImage(box);
+
 	    $.each( imageBox[0], function( key, value ) {
 		    $('.sortableBox').append( '<li class="ui-state-default" data-id="'+imageBox[1][key]+'" style="background-image:url(\''+value+'\');">'+(key+1)+'</li>');
 		});
 	    
 	    var start = 0;
 	    var stop = 0;
-	    var imageDataID = 0;
+	    
     	$( "#sortable" ).sortable({			
 		    placeholder: "ui-state-highlight",
 			update: function(event, ui) {
 	            $("#sortable").children().each(function(i) {
 	                var li = $(this);
 	                li.text(i+1);
+
+					pop_location.updateOrderImageFile(box,$(this).attr('data-id'),(i+1));
+		                
 	            });
 	        },
 	        start: function( event, ui ) {
@@ -132,13 +138,9 @@ $( document ).ready(function() {
 	        },  
 	        stop: function( event, ui ) {
 			    stop = ui.item.index();
-			    imageDataID = $(this).attr('data-id');
 			    
-			    if(pop == true){
-			    	window.opener.SwapParentImage(start,stop);
-			    }else{
-				    parent.SwapParentImage(start,stop);
-			    }			    
+				pop_location.SwapParentImage(box,start,stop);
+		    
 	        }    
 	    });
 		$( "#sortable" ).disableSelection();	 	   
@@ -151,7 +153,7 @@ function thumbBox(path,file){
 	var name = res[point];
 		res = res[point].split(".");
 		res = res[0];
-	var index = $('.image_'+path+'_data input[type="hidden"]').length;
+	var index = $('.thumbBoxEdit').length;
 		index++;
 	
 	var box  = '<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'" data-id="'+index+'">';	
@@ -261,10 +263,16 @@ $.post( temp1, { id: id })
   });	
 
 }
-function orderImagePage(){
+function orderImagePage(name){
 	var imageCount = $('.thumbBoxEdit').length;
+	var dataCount = $('.image_Data input').length;
+	 	temp1 = $('.image_Box_add').length;
+	 	temp2 = name; 
+
 	if(imageCount == 0){
 		alert('คุณต้องมีรูปมากกว่า 1 รูป ถึงจะสามารถใช้ความสามารถนี้ได้');
+	}else if((dataCount > 0) && (temp1 == 0)){
+		alert('ขออภัย คุณไม่สามารถจัดเรียงรูปภาพได้ถ้ามีการเพิ่มรูปภาพ กรุณาบันทึก ก่อน แล้วจึงเรียกใช้ ความสามารถ นี้ใหม่');
 	}else{
 		/*
 		try{
@@ -272,15 +280,13 @@ function orderImagePage(){
 				transition: 'fade',
 				height:"85%",
 				width:700,
-				href: '../master/thumb_order.php',
+				href: '../master/thumb_order.php?box='+name,
 				iframe:true,
 				onClosed:function(){ }
 			});	
-		} catch(err) {
-			popup('../master/thumb_order.php?pop','orderImagePage',720,600);
-		}	
-		*/
-		popup('../master/thumb_order.php?pop','orderImagePage',720,600);
+		} catch(err) { */
+			popup('../master/thumb_order.php?pop&box='+name,'orderImagePage',720,600);
+		//}	
 	}
 		
 }
@@ -291,26 +297,41 @@ function popup(url,name,windowWidth,windowHeight){
 	properties +=",scrollbars=yes, top="+mytop+",left="+myleft;   
 	window.open(url,name,properties);
 }
-function CallParentImage(){
+function CallParentImage(name){
 	var MyImage = new Array();
 		MyImage[0] = new Array();
 		MyImage[1] = new Array();
 	var i = 0;
-	$.each( $('.thumbBoxEdit'), function( key, value ) {
+	$.each( $('.image_'+name+'_Box .thumbBoxEdit'), function( key, value ) {
 		MyImage[0][i] = $(this).find('.thumbBoxImage > a > img').attr('src'); 
 		MyImage[1][i] = $(this).attr('data-id'); 
 		i++; 
 	});
 	return MyImage;
 }
-function SwapParentImage(start,stop){
-	console.log(start+' '+stop);
-	
-	swapElements($('.thumbBoxEdit'),stop,start);
-	swapElements($('.image_Data input[type="hidden"]'),stop,start);
+function SwapParentImage(name,start,stop){
+	swapElements($('.image_'+name+'_Box .thumbBoxEdit'),start,stop);
+	if(temp1 > 0){
+		swapElements($('.image_'+name+'_data input[type="hidden"]'),start,stop);
+	}
 }
 function swapElements(siblings, subjectIndex, objectIndex) {
+
     var subject = $(siblings.get(subjectIndex));
     var object = siblings.get(objectIndex);
-    subject.insertAfter(object);
+    if(subjectIndex < objectIndex){
+    	subject.insertAfter(object);
+    }else{
+    	subject.insertBefore(object);
+    }
+}
+function updateOrderImageFile(name,id,position){
+	if(temp1 == 0){
+		var Count_input = $('.image_'+name+'_data input[name="order_position['+id+']"]').length;
+		if(Count_input == 0){
+			$('.image_'+name+'_data').append('<input type="hidden" name="order_position['+id+']" value="'+position+'">');
+		}else{
+			$('.image_'+name+'_data input[name="order_position['+id+']"]').val(position);
+		}
+	}
 }

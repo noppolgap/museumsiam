@@ -351,6 +351,7 @@ header{
 	margin-right: 10px;
 	height: 117px;
 	overflow: hidden;
+	width: 150px;
 }
 .thumbBoxImage img{
 	max-width: 150px;

@@ -18,7 +18,9 @@ require("../../assets/configs/config.inc.php");
 	var pop = true;
 <?php }else{ ?>
 	var pop = false;
-<?php } ?>
+<?php } 
+	echo "\tvar box = '".$_GET['box']."';\n";
+?>
 </script>
 </body>
 </html>
