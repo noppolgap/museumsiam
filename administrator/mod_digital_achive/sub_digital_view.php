@@ -17,7 +17,7 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_digital_add.php?g=<?=$_GET['p']?>'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="sub_digital_action.php?delete" >
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('sub_digital_order.php?p=<?=$_GET['p']?>');">
 			</div>
 			<div class="mod-body-inner">
@@ -64,7 +64,7 @@ require("../../assets/configs/function.inc.php");
 			 ?>
 					<!-- start loop -->
 				<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content">
+					<div class="Main_Content" data-id="<?=$row['SUB_DIGITAL_ID']?>">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['SUB_DIGITAL_ID']?>"></div>
 						<div class="floatL thumbContent">
 							<a href="sub_digital_action.php?p=<?=$row['SUB_DIGITAL_ID']?>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
@@ -82,7 +82,7 @@ require("../../assets/configs/function.inc.php");
 						<a href="sub_digital_action.php?enable&p=<?=$row['SUB_DIGITAL_ID']?>&g=<?=$row['FLAG']?>&a=<?=$row['MAIN_DIGITAL_ID']?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
 							<a href="sub_digital_edit.php?p=<?=$row['SUB_DIGITAL_ID']?>&g=<?=$row['MAIN_DIGITAL_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="sub_digital_action.php?delete&p=<?=$row['SUB_DIGITAL_ID']?>&a=<?=$row['MAIN_DIGITAL_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="#" data-id="<?=$row['SUB_DIGITAL_ID']?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
@@ -90,7 +90,7 @@ require("../../assets/configs/function.inc.php");
 					<!-- end loop -->
 				</div>
 				<div class="pagination_box">
-					<div class="floatL">จำนวนทั้งหมด <? echo $num_rows; ?>  รายการ</div>
+					<div class="floatL">จำนวนทั้งหมด <span class='RowCount'><? echo $num_rows; ?></span>  รายการ</div>
 					<div class="floatR pagination_action">
 						<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 						<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>

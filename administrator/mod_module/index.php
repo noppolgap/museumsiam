@@ -89,7 +89,7 @@ $i++;
 						<!-- end loop -->
 					</div>
 					<div class="pagination_box">
-						<div class="floatL">จำนวนทั้งหมด <span class='RowCount'><?=$i?> </span>รายการ</div>
+						<div class="floatL">จำนวนทั้งหมด <span class='RowCount'><?=$i?></span> รายการ</div>
 						<div class="floatR pagination_action">
 							<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 							<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>

@@ -30,8 +30,8 @@ if(isset($_GET['enable'])){
 
 if(isset($_GET['delete'])){
 
-  $id = $_GET['p'];
-  $subId = $_GET['a'];
+  $id = $_POST['id'];
+  //$subId = $_GET['a'];
   $update="";
   $update[]= "Flag = 2";
 
@@ -39,7 +39,7 @@ if(isset($_GET['delete'])){
   
   mysql_query($sql,$conn);
 	
-  header('Location: digital_view.php?p='.$subId.'');
+ // header('Location: digital_view.php?p='.$subId.'');
 	
 }
 
