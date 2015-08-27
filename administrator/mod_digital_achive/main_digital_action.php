@@ -29,8 +29,8 @@ if(isset($_GET['enable'])){
 
 if(isset($_GET['delete'])){
 
-  $id = $_GET['p'];
-  $catId = $_GET['a'];
+  $id = $_POST['id'];
+  
   $update="";
   $update[]= "Flag = 2";
 
@@ -38,7 +38,7 @@ if(isset($_GET['delete'])){
   
   mysql_query($sql,$conn);
 	
-  header('Location: main_digital_view.php');
+ // header('Location: main_digital_view.php');
 	
 }
 

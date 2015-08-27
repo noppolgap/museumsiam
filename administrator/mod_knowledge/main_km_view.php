@@ -16,13 +16,13 @@ require("../../assets/configs/function.inc.php");
 		<? require('../inc_side.php'); ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'main_digital_add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="main_digital_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('main_digital_order.php');">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'main_km_add.php'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="main_km_action.php?delete" >
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('main_km_order.php');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ชื่อเมนู</div>
+					<div class="floatL titleBox">หมวดหมู่ KM</div>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />
@@ -48,11 +48,11 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-			    $sql= "SELECT * FROM  trn_main_digital_ach WHERE Flag <> 2  ";
+			    $sql= "SELECT * FROM  trn_content_category WHERE Flag <> 2 and REF_MODULE_ID  = 2 ";
 			    if(isset($_GET['search'])){
-			      $sql .= "AND MAIN_DIGITAL_DESC_LOC like '%".$_POST['str_search']."%' ";
+			      $sql .= "AND CONTENT_CAT_DESC_LOC like '%".$_POST['str_search']."%' ";
 			    }
-			     $sql .= "ORDER BY ORDER_DATA DESC";
+			     $sql .= "ORDER BY ORDER_DATA DESC ";
 
 			     $query = mysql_query($sql,$conn);
 
@@ -63,27 +63,27 @@ require("../../assets/configs/function.inc.php");
 			 ?>
 					<!-- start loop -->
 				<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content" data-id="<?=$row['MAIN_DIGITAL_ID']?>">
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['MAIN_DIGITAL_ID']?>"></div>
+					<div class="Main_Content" data-id="<?=$row['CONTENT_CAT_ID']?>" >
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_CAT_ID']?>"></div>
 						<div class="floatL thumbContent">
 							<a href="#>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="sub_digital_view.php?p='.$row['MAIN_DIGITAL_ID'].'">'. $row['MAIN_DIGITAL_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="km_view.php?cid='.$row['CONTENT_CAT_ID'].'">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
 						<? if($row['FLAG'] == 0){ ?>
-							<span class="staus1"></span> <a href="main_digital_action.php?enable&p=<?=$row['MAIN_DIGITAL_ID']?>&g=<?=$row['FLAG']?>">
+							<span class="staus1"></span> <a href="main_km_action.php?enable&p=<?=$row['CONTENT_CAT_ID']?>&g=<?=$row['FLAG']?>">
 							Enable
 						</a> <?}  else {?> 
 							<span class="staus2"></span> 
-							<a href="main_digital_action.php?enable&p=<?=$row['MAIN_DIGITAL_ID']?>&g=<?=$row['FLAG']?>"> Disable </a> 
+							<a href="main_km_action.php?enable&p=<?=$row['CONTENT_CAT_ID']?>&g=<?=$row['FLAG']?>"> Disable </a> 
 						<? } ?></div>
 						<div class="floatL EditContent">
-							<a href="main_digital_edit.php?p=<?=$row['MAIN_DIGITAL_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="#" data-id="<?=$row['MAIN_DIGITAL_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="main_km_edit.php?p=<?=$row['CONTENT_CAT_ID']?>" class="EditContentBtn">Edit</a>
+							<a href="#" data-id=<?=$row['CONTENT_CAT_ID']?> class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
@@ -91,7 +91,7 @@ require("../../assets/configs/function.inc.php");
 					<!-- end loop -->
 				</div>
 				<div class="pagination_box">
-					<div class="floatL">จำนวนทั้งหมด <span class='RowCount'><? echo $num_rows; ?></span>  รายการ</div>
+					<div class="floatL">จำนวนทั้งหมด  <span class='RowCount'><? echo $num_rows; ?></span>  รายการ</div>
 					<div class="floatR pagination_action">
 						<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 						<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
@@ -108,10 +108,10 @@ require("../../assets/configs/function.inc.php");
 				</div>
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'main_digital_add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="main_digital_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('main_digital_order.php');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'main_km_add.php'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="main_km_action.php?delete">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('main_km_order.php');">
+				<!--<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">-->
 			</div>
 		</div>
 		<div class="clear"></div>	
