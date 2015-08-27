@@ -11,9 +11,48 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 
     <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function (){
-		  
+     $(document).ready(function (){
+
+        
+
+     // $('#cmbProvince').val('-1');
+
+      //defaultDistrict();
+      //defaultSubDistrict();
+
+
+
+
+      $('#cmbProvince').bind('change' , function (){
+      defaultDistrict();
+      $('#cmbDistrict [data-ref="'+ $('#cmbProvince').val()  +'"]').show();
+
+      defaultSubDistrict();
       });
+
+      $('#cmbDistrict').bind('change' , function (){
+      defaultSubDistrict();
+      $('#cmbSubDistrict [data-ref="'+ $('#cmbDistrict').val()  +'"]').show();
+
+      });
+
+
+
+
+      });
+
+      function defaultSubDistrict ()
+      {
+      $('#cmbSubDistrict').val('-1');
+      $('#cmbSubDistrict option').hide();
+      $('#cmbSubDistrict [value="-1"]').show();
+      }
+      function defaultDistrict ()
+      {
+      $('#cmbDistrict').val('-1');
+      $('#cmbDistrict option').hide();
+      $('#cmbDistrict [value="-1"]').show();
+      }
 
        
 
@@ -21,9 +60,20 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 function onValidate() 
       {
         var ret = true ; 
-        $('#nameLocError').hide();
+       $('#nameLocError').hide();
         $('#nameEngError').hide();
-         
+         $('#displayNameError').hide();
+		 $('#addressError').hide();
+		 $('#provinceError').hide() ; 
+        $('#districtError').hide();
+        $('#subDistrictError').hide();
+        $('#postCodeError').hide();
+        $('#telephoneError').hide();
+$('#emailError').hide();
+$('#detailLocError').hide();
+$('#detailEngError').hide();
+$('#latError').hide();
+$('#lonError').hide();
 
         if ($('#txtNameLoc').val() == '')
         {
@@ -35,12 +85,61 @@ function onValidate()
           $('#nameEngError').show();
           ret = false;
         }
-         
+         if($('#txtDisplayName').val() == '')
+		 {
+			 $('#displayNameError').show();
+			 ret = false;
+		 }
+		 if($('#txtAddress').val () == '')
+        {
+          $('#addressError').show();
+          ret= false;
+        }
+        if($('#cmbProvince').val() == '-1')
+        {
+          $('#provinceError').show() ; 
+          ret = false ;
+        }
+        if ($('#cmbDistrict').val() == '-1')
+        {
+            $('#districtError').show();
+            ret = false;
+        }
+        if ($('#cmbSubDistrict').val() == '-1')
+        {
+          $('#subDistrictError').show();
+          ret = false ;
+        }  
+        if($('#txtPostCode').val() == '')
+        {
+          $('#postCodeError').show();
+          ret = false ;
+        }
+        if ($('#txtTelephone').val() == '')
+        {
+          $('#telephoneError').show();
+          ret = false;
+        }
 
+		if($('#txtEmail').val() == '')
+		{
+			$('#emailError').show();
+			ret = false ;
+		}
+		if ($('#txtDetailLoc').val() == '')
+		{
+			$('#detailLocError').show();
+			ret = false ;
+		}
+		if ($('#txtDetailEng').val() == '')
+		{
+			$('#detailEngError').show();
+			ret =false;
+		}
+		
         if (ret)
         {
            document.getElementById("frmcms").submit();
- 
         }
       }
       
@@ -58,17 +157,11 @@ function onValidate()
     <? require('../inc_header.php'); ?>		
 	
 <?php
-		$moduleID = $_GET['MID'] ;
+		$museumID = $_GET['MID'] ;
 
-	$sql = "SELECT * FROM sys_app_module where MODULE_ID = '".$moduleID."' ";
+	$sql = "SELECT * FROM trn_museum_detail where MUSEUM_DETAIL_ID = '".$museumID."' ";
 	$rs = mysql_query($sql) or die(mysql_error());
-	$rowModule = mysql_fetch_array($rs);
-	
-	$sql = "SELECT * FROM trn_banner_pic_setting where APP_MODULE_ID = '".$moduleID."' order by LAST_UPDATE_DATE desc Limit 0,1 ";
-	$rs = mysql_query($sql) or die(mysql_error());
-	$rowBanner = mysql_fetch_array($rs);
-
-	$bannerID = $rowBanner['BANNER_ID'] ;
+	$rowMuseum = mysql_fetch_array($rs);
 ?>
     <div class="main-container">
       <div class="main-body marginC">
@@ -84,36 +177,164 @@ function onValidate()
               <div class="formCms">
                 <form action="?" method="post" name="formcms" id = "frmcms" >
                    <div >
-                    <div class="floatL form_name">ชื่อภาษาไทย</div>
+                  <div class="floatL form_name">ชื่อพิพิธภัณฑ์ภาษาไทย</div>
                     <div class="floatL form_input">
-                      <input id = "txtNameLoc" type="text" name="txtNameLoc"   class="w90p"  value="<?php echo $rowModule["MODULE_NAME_LOC"] ?>" />
-      <span class="error" >* <span id = "nameLocError" style="display:none">กรุณาระบุชื่อภาษาไทย </span> </span>
+                      <input id = "txtNameLoc" type="text" name="txtNameLoc"   class="w90p"  value="<?php echo $rowMuseum['MUSEUM_NAME_LOC']?>" />
+      <span class="error" >* <span id = "nameLocError" style="display:none">กรุณาระบุชื่อพิพิธภัณฑ์ภาษาไทย </span> </span>
                     </div>
                     <div class="clear"></div>
                   </div>
                   <div>
-                    <div class="floatL form_name">ชื่อภาษาอังกฤษ</div>
+                    <div class="floatL form_name">ชื่อพิพิธภัณฑ์ภาษาอังกฤษ</div>
                     <div class="floatL form_input">
-                      <input  id = "txtNameEng" type="text" name="txtNameEng" value="<?php echo $rowModule["MODULE_NAME_ENG"] ?>" class="w90p" />
-                          <span class="error" >* <span id = "nameEngError" style="display:none">กรุณาระบุชื่อภาษาอังกฤษ </span> </span>
+                      <input  id = "txtNameEng" type="text" name="txtNameEng" value="<?php echo $rowMuseum['MUSEUM_NAME_ENG']?>" class="w90p" />
+                          <span class="error" >* <span id = "nameEngError" style="display:none">กรุณาระบุชื่อพิพิธภัณฑ์ภาษาอังกฤษ </span> </span>
                     </div>
                     <div class="clear"></div>
                   </div>
 
-				  <div>
-                    <div class="floatL form_name">URL</div>
+				   <div>
+                    <div class="floatL form_name">ชื่อพิพิธิภัฑณ์ที่ใช้แสดง</div>
                     <div class="floatL form_input">
-                      <input  id = "txtUrlLink" type="text" name="txtUrlLink" value="<?php echo $rowBanner['ICON_LINK'] ?>" class="w90p" />
-                          <span class="error" >* <span id = "urlError" style="display:none">กรุณาระบุ URL</span> </span>
+                      <input  id = "txtDisplayName" type="text" name="txtDisplayName" value="<?php echo $rowMuseum['MUSEUM_DISPLAY_NAME']?>" class="w90p" />
+                          <span class="error" >* <span id = "displayNameError" style="display:none">กรุณาระบุชื่อพิพิธภัณฑ์ที่ใช้แสดง</span> </span>
                     </div>
                     <div class="clear"></div>
                   </div>
 				  
-				   <div>
-                    <div class="floatL form_name">รูปภาพ Icon</div>
+				  <div  class="bigForm">
+                    <div class="floatL form_name">ที่อยู่</div>
                     <div class="floatL form_input">
-                      <input  id = "txtImg" type="text" name="txtImg" value="<?php echo $rowBanner['DESKTOP_ICON_PATH'] ?>" class="w90p" />
-                          <span class="error" >* <span id = "imgError" style="display:none">กรุณาระบุรูปภาพ</span> </span>
+                      <textarea id= "txtAddress" name="txtAddress" class="w90p mytextarea2"><?php echo $rowMuseum['ADDRESS1']?></textarea>
+                      <span class="error" >* <span id = "addressError" style="display:none">กรุณาระบุที่อยู่ </span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
+				  
+				  
+				  <div>
+                    <div class="floatL form_name">จังหวัด</div>
+                    <div class="floatL form_input">
+
+                      <?php
+					$sql = "SELECT province_id  , province_desc_loc , province_desc_eng FROM mas_province ";
+					$rs = mysql_query($sql) or die(mysql_error());
+					echo  "<select id='cmbProvince' name = 'cmbProvince'>";
+					echo "<option value='-1'>กรุณาเลือกจังหวัด</option>";
+				while($row = mysql_fetch_array($rs)){
+					
+					if ( $rowMuseum['PROVINCE_ID'] == $row["province_id"]  )
+						echo "<option value='".$row["province_id"]."' selected>".$row["province_desc_loc"]."</option>";
+					else 
+				echo "<option value='".$row["province_id"]."'>".$row["province_desc_loc"]."</option>";
+				}mysql_free_result($rs);
+				echo "</select>";
+				?>
+        <span class="error" >* <span id = "provinceError" style="display:none">กรุณาระบุจังหวัด </span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div>
+                    <div class="floatL form_name">อำเภอ</div>
+                    <div class="floatL form_input">
+                      <?php
+					connectdb();
+					$sql = "SELECT district_id , province_id , district_desc_loc , district_desc_eng FROM mas_district ";
+					$rs = mysql_query($sql) or die(mysql_error());
+					echo  "<select id='cmbDistrict' name = 'cmbDistrict'>";
+					echo "<option value='-1'>กรุณาเลือกอำเภอ</option>";
+				while($row = mysql_fetch_array($rs)){
+					if ( $rowMuseum['DISTRICT_ID'] == $row["district_id"]  )
+						echo "<option value='".$row["district_id"]."' data-ref='".$row["province_id"]."' selected >".$row["district_desc_loc"]."</option>";
+					else 
+				echo "<option value='".$row["district_id"]."' data-ref='".$row["province_id"]."'>".$row["district_desc_loc"]."</option>";
+				}mysql_free_result($rs);
+				echo "</select>";
+					
+					?>
+         <span class="error" >* <span id = "districtError" style="display:none">กรุณาระบุอำเภอ </span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div>
+                    <div class="floatL form_name">ตำบล</div>
+                    <div class="floatL form_input">
+                      <?php
+					//  echo $rowMuseum['SUB_DISTRICT_ID'];
+					$sql = "SELECT sub_district_id , district_id , sub_district_desc_loc , sub_district_desc_eng FROM mas_sub_district ";
+					$rs = mysql_query($sql) or die(mysql_error());
+					echo  "<select id='cmbSubDistrict' name = 'cmbSubDistrict'>";
+					echo "<option value='-1'>กรุณาเลือกตำบล</option>";
+				while($row = mysql_fetch_array($rs)){
+					if ( $rowMuseum["SUB_DISTRICT_ID"] == $row["sub_district_id"]  )
+						echo "<option value='".$row["sub_district_id"]."' data-ref='".$row["district_id"]."' selected>".$row["sub_district_desc_loc"]."</option>";
+					else 
+						echo "<option value='".$row["sub_district_id"]."' data-ref='".$row["district_id"]."'>".$row["sub_district_desc_loc"]."</option>";
+				}mysql_free_result($rs);
+				echo "</select>";
+				?>
+       <span class="error" >* <span id = "subDistrictError" style="display:none">กรุณาระบุตำบล </span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div>
+                    <div class="floatL form_name">รหัสไปรษณีย์</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtPostCode" type="text" name="txtPostCode" value="<?php echo $rowMuseum['POST_CODE']?>" class="w90p" />
+                      <span class="error" >* <span id = "postCodeError" style="display:none">กรุณาระบุรหัสไปรษณีย์ </span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  <div>
+                    <div class="floatL form_name">โทรศัพท์</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtTelephone" type="text" name="txtTelephone" value="<?php echo $rowMuseum['TELEPHONE']?>" class="w90p" />
+                     <span class="error" >* <span id = "telephoneError" style="display:none">กรุณาระบุเบอร์โทรศัพท์</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
+				  <div>
+                    <div class="floatL form_name">Email</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtEmail" type="text" name="txtEmail" value="<?php echo $rowMuseum['EMAIL']?>" class="w90p" />
+                     <span class="error" >* <span id = "emailError" style="display:none">กรุณาระบุ Email</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
+				  <div  class="bigForm">
+                    <div class="floatL form_name">คำอธิบายพิพิธภัณฑ์ภาษาไทย</div>
+                    <div class="floatL form_input">
+                      <textarea id= "txtDetailLoc" name="txtDetailLoc" class="w90p mytextarea2"><?php echo $rowMuseum['DESCRIPT_LOC']?></textarea>
+                      <span class="error" >* <span id = "detailLocError" style="display:none">กรุณาระบุทคำอธิบายพิพิธภัณฑ์ภาษาไทย</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
+				    <div  class="bigForm">
+                    <div class="floatL form_name">คำอธิบายพิพิธภัณฑ์ภาษาอังกฤษ</div>
+                    <div class="floatL form_input">
+                      <textarea id= "txtDetailEng" name="txtDetailEng" class="w90p mytextarea2"><?php echo $rowMuseum['DESCRIPT_ENG']?></textarea>
+                      <span class="error" >* <span id = "detailEngError" style="display:none">กรุณาระบุทคำอธิบายพิพิธภัณฑ์ภาษาอังกฤษ</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
+				  <div>
+                    <div class="floatL form_name">พิกัดละติจูด</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtLat" type="text" name="txtLat" value="<?php echo $rowMuseum['LAT']?>" class="w90p" />
+                     <span class="error" >* <span id = "latError" style="display:none">กรุณาระบุพิกัดละติจูด</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  <div>
+                    <div class="floatL form_name">พิกัดลองติจูด</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtLon" type="text" name="txtLon" value="<?php echo $rowMuseum['LON']?>" class="w90p" />
+                     <span class="error" >* <span id = "lonError" style="display:none">กรุณาระบุพิกัดลองติจูด</span> </span>
                     </div>
                     <div class="clear"></div>
                   </div>
@@ -124,8 +345,7 @@ function onValidate()
                         <input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 							</div>
               <input type="hidden" name="action" value="submit" />
-			  <input type="hidden" name="MID" value="<?php echo $moduleID?>"/>
-			  <input type="hidden" name="bannerID" value="<?php echo $bannerID?>"/>
+			  <input type="hidden" name="MID" value="<?php echo $museumID?>"/>
                 </form>
               </div>
             </div>
@@ -149,51 +369,53 @@ function onValidate()
  
 if(isset($_POST["action"]) && $_POST["action"] == "submit") {
  $mid = $_POST['MID'];
- $bannerID = $_POST['bannerID'];
- $txtNameLoc = $_POST['txtNameLoc'] ;
-    $txtNameEng = $_POST['txtNameEng'];
+ $txtNameLoc = $_POST['txtNameLoc'];
+    $txtNameEng  = $_POST['txtNameEng'];
     
-	$txtUrlLink = $_POST['txtUrlLink'];
-	$txtImg = $_POST['txtImg'];
+	$txtDisplayName = $_POST['txtDisplayName'];
+	$txtAddress = $_POST['txtAddress'];
+	 $province = $_POST['cmbProvince'];
+    $district = $_POST['cmbDistrict'];
+    $subDistrict = $_POST['cmbSubDistrict'];
+    $txtPostCode = $_POST['txtPostCode'];
+    $txtTelephone = $_POST['txtTelephone'];
+	 $txtEmail = $_POST['txtEmail'];
+	 $txtLat = $_POST['txtLat'];
+	 $txtLon = $_POST['txtLon'];
+	 $txtDetailLoc = $_POST['txtDetailLoc'];
+	 $txtDetailEng = $_POST['txtDetailEng'];
 
-	mysql_query("BEGIN");
-	
-    $strSQL = "update sys_app_module ";
-    $strSQL .="set MODULE_NAME_LOC = '".$txtNameLoc."'";
-	$strSQL .= " ,MODULE_NAME_ENG = '". $txtNameEng ."'";
+	 	
+    $strSQL = "update trn_museum_detail ";
+    $strSQL .="set MUSEUM_NAME_LOC = '".$txtNameLoc."'";
+	$strSQL .= " ,MUSEUM_NAME_ENG = '". $txtNameEng ."'";
+	$strSQL .= " , MUSEUM_DISPLAY_NAME = '".$txtDisplayName."'";
+	$strSQL .= " , ADDRESS1 = '".$txtAddress."'";
+	$strSQL .= " ,DISTRICT_ID = '".$district."'";
+	$strSQL .= " , SUB_DISTRICT_ID = '".$subDistrict."'" ;
+	$strSQL .= " , PROVINCE_ID = '".$province."'";
+	$strSQL .= " , POST_CODE = '".$txtPostCode."'";
+	$strSQL .= " ,TELEPHONE = '".$txtTelephone."'";
+	$strSQL .= " , EMAIL = '".$txtEmail."'";
+	$strSQL .= " , LAT  = '".$txtLat."'";
+	$strSQL .= " , LON  = '".$txtLon."'";
+	$strSQL .= " , DESCRIPT_LOC   = '".$txtDetailLoc."'";
+	$strSQL .= " , DESCRIPT_ENG = '".$txtDetailEng."' ";
 	$strSQL .= " ,LAST_UPDATE_DATE = now() ";
 	$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
 	$strSQL .= " ,LAST_FUNCTION = 'U'";
-	 $strSQL .= " where MODULE_ID = '".$mid."'";
-    $objQueryAppModule = mysql_query($strSQL);
+	 $strSQL .= " where MUSEUM_DETAIL_ID = '".$mid."'";
+    $objQuery  = mysql_query($strSQL);
 	
-	if ( $bannerID == '')
-	{
-		$strSQL = "INSERT INTO trn_banner_pic_setting ";
-	$strSQL .= "(APP_MODULE_ID,DESKTOP_ICON_PATH,ICON_LINK ,USER_CREATE , CREATE_DATE , LAST_FUNCTION) ";
-	$strSQL .= " values ";
-	$strSQL .= "('".$mid."','".$txtImg."','".$txtUrlLink."' , 'Test' , now() , 'A')";
 	 
-	}
-	else {
-		    $strSQL = "update trn_banner_pic_setting ";
-    $strSQL .="set DESKTOP_ICON_PATH = '".$txtImg."'";
-	$strSQL .= " , APP_MODULE_ID = '".$mid."'";
-	$strSQL .= " ,ICON_LINK = '". $txtUrlLink ."'";
-	$strSQL .= " ,LAST_UPDATE_DATE = now() ";
-	$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
-	$strSQL .= " ,LAST_FUNCTION = 'U'";
-	 $strSQL .= " where BANNER_ID = '".$bannerID."'";
-	}
-	$objQueryBannerSetting = mysql_query($strSQL);
-    if(($objQueryAppModule) and ($objQueryBannerSetting))
+    if($objQuery)
     {
-		mysql_query("COMMIT");
+		 
       echo "<script type='text/javascript'>window.location.href = '"._FULL_SITE_PATH_.$indexPage."';</script>";
     }
     else
     {
-			mysql_query("ROLLBACK");
+			 
       echo "Error Save [".$strSQL."]";
     }
 

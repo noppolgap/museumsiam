@@ -333,8 +333,8 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
 	$strSQL .= " ,SUB_DISTRICT_ID = '".$subDistrict."'";
 	$strSQL .= " ,PROVINCE_ID = '".$province."'";
     $strSQL .= " ,POST_CODE = '".$txtPostCode."'";
-	$strSQL .= " ,TELEPHONE = '".txtTelephone."'";
-	$strSQL .= " ,CITIZEN_ID = '".txtCitizenID."'";
+	$strSQL .= " ,TELEPHONE = '".$txtTelephone."'";
+	$strSQL .= " ,CITIZEN_ID = '".$txtCitizenID."'";
 	$strSQL .= " ,LAST_UPDATE_DATE = now() ";
 	$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
 	$strSQL .= " ,LAST_FUNCTION = 'U'";

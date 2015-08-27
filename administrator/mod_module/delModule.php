@@ -3,7 +3,7 @@
 	require("../../assets/configs/connectdb.inc.php");
 	require("../../assets/configs/function.inc.php");
 	$indexPage = "/administrator/mod_module/index.php";
-	$moduleID = $_GET['MID'] ; 
+	$moduleID = $_POST['id'] ; 
 	$strSQL = "update sys_app_module set ACTIVE_FLAG = 2  , LAST_UPDATE_USER = 'Test' , LAST_UPDATE_DATE = now() , LAST_FUNCTION = 'U' where MODULE_ID = ". $moduleID ; 
 	
 	

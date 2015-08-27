@@ -3,8 +3,8 @@
 	require("../../assets/configs/connectdb.inc.php");
 	require("../../assets/configs/function.inc.php");
 	$indexPage = "/administrator/mod_museum_map/index.php";
-	$moduleID = $_GET['MID'] ; 
-	$strSQL = "update sys_app_module set ACTIVE_FLAG = 2  , LAST_UPDATE_USER = 'Test' , LAST_UPDATE_DATE = now() , LAST_FUNCTION = 'U' where MODULE_ID = ". $moduleID ; 
+	$museumID = $_POST['id'] ; 
+	$strSQL = "update trn_museum_detail set ACTIVE_FLAG = 2  , LAST_UPDATE_USER = 'Test' , LAST_UPDATE_DATE = now() , LAST_FUNCTION = 'U' where MUSEUM_DETAIL_ID = ". $museumID ; 
 	
 	
 	$objQuery = mysql_query($strSQL);
@@ -16,6 +16,5 @@
     {
       echo "Error Save [".$strSQL."]";
     }
-	
 
 ?>
