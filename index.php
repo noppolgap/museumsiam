@@ -154,9 +154,11 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 							<div class="box-text">
-								<p class="text-title TcolorRed">
-									Levitated Mass 340 Ton Giant Stone
-								</p>
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
 								<p class="text-date TcolorGray">
 									28 Jan 2015
 								</p>
@@ -173,12 +175,14 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-right">
-							<div class="box-pic">
-								<img src="http://placehold.it/340x405">
-							</div>
-							<div class="box-tag-cate">
-								museum siam
-							</div>
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/287x405">
+								</div>
+								<div class="box-tag-cate">
+									museum siam
+								</div>
+							</a>
 						</div>
 					</div>
 					<div class="box-content-slide cf">
@@ -195,9 +199,11 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 							<div class="box-text">
-								<p class="text-title TcolorRed">
-									Levitated Mass 340 Ton Giant Stone
-								</p>
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
 								<p class="text-date TcolorGray">
 									28 Jan 2015
 								</p>
@@ -214,12 +220,14 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-right">
-							<div class="box-pic">
-								<img src="http://placehold.it/340x405">
-							</div>
-							<div class="box-tag-cate">
-								museum siam
-							</div>
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/287x405">
+								</div>
+								<div class="box-tag-cate">
+									museum siam
+								</div>
+							</a>
 						</div>
 					</div>
 					<div class="box-content-slide cf">
@@ -236,9 +244,11 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 							<div class="box-text">
-								<p class="text-title TcolorRed">
-									Levitated Mass 340 Ton Giant Stone
-								</p>
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
 								<p class="text-date TcolorGray">
 									28 Jan 2015
 								</p>
@@ -255,12 +265,14 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-right">
-							<div class="box-pic">
-								<img src="http://placehold.it/340x405">
-							</div>
-							<div class="box-tag-cate">
-								museum siam
-							</div>
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/287x405">
+								</div>
+								<div class="box-tag-cate">
+									museum siam
+								</div>
+							</a>
 						</div>
 					</div>
 					<div class="box-content-slide cf">
@@ -277,9 +289,11 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 							<div class="box-text">
-								<p class="text-title TcolorRed">
-									Levitated Mass 340 Ton Giant Stone
-								</p>
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
 								<p class="text-date TcolorGray">
 									28 Jan 2015
 								</p>
@@ -296,12 +310,14 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-right">
-							<div class="box-pic">
-								<img src="http://placehold.it/340x405">
-							</div>
-							<div class="box-tag-cate">
-								museum siam
-							</div>
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/287x405">
+								</div>
+								<div class="box-tag-cate">
+									museum siam
+								</div>
+							</a>
 						</div>
 					</div>
 					<div class="box-content-slide cf">
@@ -318,9 +334,11 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 							<div class="box-text">
-								<p class="text-title TcolorRed">
-									Levitated Mass 340 Ton Giant Stone
-								</p>
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
 								<p class="text-date TcolorGray">
 									28 Jan 2015
 								</p>
@@ -337,12 +355,14 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-right">
-							<div class="box-pic">
-								<img src="http://placehold.it/340x405">
-							</div>
-							<div class="box-tag-cate">
-								museum siam
-							</div>
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/287x405">
+								</div>
+								<div class="box-tag-cate">
+									museum siam
+								</div>
+							</a>
 						</div>
 					</div>
 					<div class="box-content-slide cf">
@@ -359,9 +379,11 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 							<div class="box-text">
-								<p class="text-title TcolorRed">
-									Levitated Mass 340 Ton Giant Stone
-								</p>
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
 								<p class="text-date TcolorGray">
 									28 Jan 2015
 								</p>
@@ -378,12 +400,14 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-right">
-							<div class="box-pic">
-								<img src="http://placehold.it/340x405">
-							</div>
-							<div class="box-tag-cate">
-								museum siam
-							</div>
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/287x405">
+								</div>
+								<div class="box-tag-cate">
+									museum siam
+								</div>
+							</a>
 						</div>
 					</div>
 					<div class="box-content-slide cf">
@@ -400,9 +424,11 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 							<div class="box-text">
-								<p class="text-title TcolorRed">
-									Levitated Mass 340 Ton Giant Stone
-								</p>
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
 								<p class="text-date TcolorGray">
 									28 Jan 2015
 								</p>
@@ -419,12 +445,14 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-right">
-							<div class="box-pic">
-								<img src="http://placehold.it/340x405">
-							</div>
-							<div class="box-tag-cate">
-								museum siam
-							</div>
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/287x405">
+								</div>
+								<div class="box-tag-cate">
+									museum siam
+								</div>
+							</a>
 						</div>
 					</div>
 					
@@ -459,13 +487,17 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-right">
 					<div class="box-news-bold cf">
-						<div class="box-pic">
-							<img src="http://placehold.it/274x205">
-						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
 						<div class="box-text">
-							<p class="text-title TcolorRed">
-								Levitated Mass 340 Ton Giant Stone
-							</p>
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
 							<p class="text-date TcolorGray">
 								28 Jan 2015
 							</p>
@@ -486,13 +518,17 @@ require("assets/configs/function.inc.php");
 			<div class="box-bottom">
 				<div class="box-news-main cf">
 					<div class="box-news cf">
-						<div class="box-pic">
-							<img src="http://placehold.it/274x205">
-						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
 						<div class="box-text">
-							<p class="text-title TcolorRed">
-								Levitated Mass 340 Ton Giant Stone
-							</p>
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
 							<p class="text-date TcolorGray">
 								28 Jan 2015
 							</p>
@@ -509,13 +545,17 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 					<div class="box-news cf mid">
-						<div class="box-pic">
-							<img src="http://placehold.it/274x205">
-						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
 						<div class="box-text">
-							<p class="text-title TcolorRed">
-								Levitated Mass 340 Ton Giant Stone
-							</p>
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
 							<p class="text-date TcolorGray">
 								28 Jan 2015
 							</p>
@@ -532,13 +572,17 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 					<div class="box-news cf">
-						<div class="box-pic">
-							<img src="http://placehold.it/274x205">
-						</div>
+						<a href="">
+							<div class="box-pic">
+								<img src="http://placehold.it/274x205">
+							</div>
+						</a>
 						<div class="box-text">
-							<p class="text-title TcolorRed">
-								Levitated Mass 340 Ton Giant Stone
-							</p>
+							<a href="">
+								<p class="text-title TcolorRed">
+									Levitated Mass 340 Ton Giant Stone
+								</p>
+							</a>
 							<p class="text-date TcolorGray">
 								28 Jan 2015
 							</p>
@@ -1053,7 +1097,7 @@ require("assets/configs/function.inc.php");
 						</a>
 						<div class="box-text">
 							<a href="">
-								<p class="text-title TcolorRed">
+								<p class="text-title">
 									Levitated Mass 340 Ton Giant Stone
 								</p>
 							</a>
@@ -1080,7 +1124,7 @@ require("assets/configs/function.inc.php");
 						</a>
 						<div class="box-text">
 							<a href="">
-								<p class="text-title TcolorRed">
+								<p class="text-title">
 									Levitated Mass 340 Ton Giant Stone
 								</p>
 							</a>
@@ -1107,7 +1151,7 @@ require("assets/configs/function.inc.php");
 						</a>
 						<div class="box-text">
 							<a href="">
-								<p class="text-title TcolorRed">
+								<p class="text-title">
 									Levitated Mass 340 Ton Giant Stone
 								</p>
 							</a>
@@ -1134,7 +1178,7 @@ require("assets/configs/function.inc.php");
 						</a>
 						<div class="box-text">
 							<a href="">
-								<p class="text-title TcolorRed">
+								<p class="text-title">
 									Levitated Mass 340 Ton Giant Stone
 								</p>
 							</a>
@@ -1153,6 +1197,8 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 					</div>
+					
+					
 				</div>
 			</div>
 		</div>

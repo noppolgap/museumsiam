@@ -197,8 +197,9 @@ function admin_upload_image($name){
 	$str .= '<div id="progress">'."\n\t";
 	$str .= '<div class="upload_bar dNone"></div>'."\n\t";
 	$str .= '</div>'."\n\t";
-	$str .= '<div class="image_'.$name.'_Box image_Box dNone"></div>'."\n\t";
+	$str .= '<div class="image_'.$name.'_Box image_Box dNone image_Box_add"></div>'."\n\t";
 	$str .= '<div class="image_'.$name.'_data image_Data dNone"></div>'."\n\t";	
+	$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="'.$name.'"></div>'."\n\t";
 	return $str;
 }
 function admin_upload_image_edit($name,$type,$id){
@@ -211,10 +212,11 @@ function admin_upload_image_edit($name,$type,$id){
 	$str .= '</div>'."\n\t";
 	$str .= '<div class="image_'.$name.'_Box image_Box">'."\n\t";
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID =".$type;
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID =".$type." ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql,$conn);
+	$num = mysql_num_rows($query);
 	while($row = mysql_fetch_array($query)) {
-		$str .= '<div id="img_edit_'.$row['PIC_ID'].'" class="thumbBoxEdit floatL p-Relative">'."\n\t";
+		$str .= '<div id="img_edit_'.$row['PIC_ID'].'" data-id="'.$row['PIC_ID'].'" class="thumbBoxEdit floatL p-Relative">'."\n\t";
 		$str .= '<div class="thumbBoxImage">'."\n\t";
 		$str .= '<a onclick="popupImage(\''.$row['IMG_PATH'].'\'); return false;" href="#">'."\n\t";
 		$str .= '<img src="'.str_replace_last('/','/thumbnail/',$row['IMG_PATH']).'" alt="">'."\n\t";
@@ -229,7 +231,12 @@ function admin_upload_image_edit($name,$type,$id){
 	}
 	$str .= '</div>'."\n\t";
 	$str .= '<div class="image_'.$name.'_data image_Data dNone">'."\n\t";
-	$str .= '</div>'."\n\t";	
+	$str .= '</div>'."\n\t";
+	if($num > 0){
+		$str .= '<div class="p-Absolute OrderImageBtn" data-name="'.$name.'"></div>'."\n\t";
+	}else{
+		$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="'.$name.'"></div>'."\n\t";
+	}	
 	return $str;
 }
 function admin_upload_image_view($name,$type,$id){
@@ -241,7 +248,7 @@ function admin_upload_image_view($name,$type,$id){
 	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID =".$type;
 	$query = mysql_query($sql,$conn);
 	while($row = mysql_fetch_array($query)) {
-		$str .= '<div id="img_edit_'.$row['PIC_ID'].'" class="thumbBoxEdit floatL p-Relative">'."\n\t";
+		$str .= '<div class="thumbBoxEdit floatL p-Relative">'."\n\t";
 		$str .= '<div class="thumbBoxImage">'."\n\t";
 		$str .= '<a onclick="popupImage(\''.$row['IMG_PATH'].'\'); return false;" href="#">'."\n\t";
 		$str .= '<img src="'.str_replace_last('/','/thumbnail/',$row['IMG_PATH']).'" alt="">'."\n\t";
@@ -250,8 +257,8 @@ function admin_upload_image_view($name,$type,$id){
 		$str .= '</div>'."\n\t";
 	}
 	$str .= '</div>'."\n\t";
-	$str .= '<div class="image_'.$name.'_data image_Data dNone">'."\n\t";
-	$str .= '</div>'."\n\t";	
+	$str .= '<div class="image_'.$name.'_data image_Data">'."\n\t";
+	$str .= '</div>'."\n\t";
 	return $str;
 }
 function str_replace_last( $search, $replace, $subject ) {

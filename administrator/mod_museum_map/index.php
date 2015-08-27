@@ -14,15 +14,26 @@ require("../../assets/configs/function.inc.php");
 <div class="main-container">
 	<div class="main-body marginC">
 		<? require('../inc_side.php'); ?>
+		<?php
+			$moduleName = "" ; 
+			$sql = "SELECT * FROM sys_app_module where MODULE_ID = '6' ";
+			$rs = mysql_query($sql) or die(mysql_error());
+					
+					$i = 0 ; 
+					while($row = mysql_fetch_array($rs)){
+						$moduleName =  $row['MODULE_NAME_LOC'];
+					}mysql_free_result($rs);						
+					 
+		?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addModule.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="delModule.php">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addMuseumMap.php'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="delMuseumMap.php">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('order.php');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ชื่อเมนู</div>
+					<div class="floatL titleBox"><?php echo $moduleName?></div>
 					<div class="floatR searchBox">
 						<form name="search" action="?" method="post">
 							<input type="search" name="str_search" value="" />
@@ -44,15 +55,15 @@ require("../../assets/configs/function.inc.php");
 					</div>
 					<div class="clear"></div>	
 				</div>
-				
-				<div class="mod-body-main-content">
+				 
+				 <div class="mod-body-main-content">
 						<!-- start loop -->
 						<?php 
 					//active_flag 0 = disable , 1 = Enable ,  2 = Delete 
-						$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 ";
+						$sql = "SELECT * FROM trn_museum_detail where ACTIVE_FLAG <> 2 AND IS_GIS_MUSEUM = 'Y' ";
 						if(isset($_POST['search'])){
-							$sql .= " AND (MODULE_NAME_LOC like '%".$_POST['str_search']."%' or MODULE_NAME_ENG like '%".$_POST['str_search']."%' ";
-						$sql .= " order by MODULE_ID asc ";
+							$sql .= " AND (MUSEUM_NAME_LOC like '%".$_POST['str_search']."%' or MUSEUM_NAME_ENG like '%".$_POST['str_search']."%' ";
+						$sql .= " order by MUSEUM_DETAIL_ID asc ";
 		
 			    }
 					$rs = mysql_query($sql) or die(mysql_error());
@@ -60,13 +71,13 @@ require("../../assets/configs/function.inc.php");
 					$i = 0 ; 
 					while($row = mysql_fetch_array($rs)){
 					
-						echo "<div class='Main_Content' data-id='".$row['MODULE_ID']."'>";
-						echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='".$row["MODULE_ID"]."'></div>";
+						echo "<div class='Main_Content' data-id='".$row['MUSEUM_DETAIL_ID']."'>";
+						echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='".$row["MUSEUM_DETAIL_ID"]."'></div>";
 						echo "<div class='floatL thumbContent'>";
-						echo "<a href='viewModule.php?MID=".$row["MODULE_ID"]."' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
+						echo "<a href='viewMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
 						echo "</div>";
 						echo "<div class='floatL nameContent'>";
-						echo "<div><a href='viewModule.php?MID=".$row["MODULE_ID"]."'>".$row["MODULE_NAME_LOC"]."</a></div>";
+						echo "<div><a href='viewMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."'>".$row["MUSEUM_NAME_LOC"]."</a></div>";
 
 
 						echo "<div>วันที่สร้าง ".$row["CREATE_DATE"]." | วันที่ปรับปรุง ".$row["LAST_UPDATE_DATE"]." </div>";
@@ -75,8 +86,9 @@ require("../../assets/configs/function.inc.php");
 						
 						echo "<div class='floatL EditContent'>";
 						
-						echo "<a href='editModule.php?MID=".$row["MODULE_ID"]."' class='EditContentBtn'>Edit</a>";
-						echo "<a href='#' data-id='".$row['MODULE_ID']."' class='DeleteContentBtn' >Delete</a>";
+						echo "<a href='editMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."' class='EditContentBtn'>Edit</a>";
+						echo "<a href='#' class='DeleteContentBtn' data-id='".$row['MUSEUM_DETAIL_ID']."' >Delete</a>";
+						//href='delMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."'
 						echo "</div>";
 						echo " <div class='clear'></div>	";
 						echo " </div>";
@@ -89,7 +101,7 @@ $i++;
 						<!-- end loop -->
 					</div>
 					<div class="pagination_box">
-						<div class="floatL">จำนวนทั้งหมด <span class='RowCount'><?=$i?></span> รายการ</div>
+						<div class="floatL">จำนวนทั้งหมด  <span class='RowCount'><?=$i?></span> รายการ</div>
 						<div class="floatR pagination_action">
 							<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 							<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
@@ -109,7 +121,7 @@ $i++;
 				 
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addModule.php'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addMuseumMap.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
 			</div>
@@ -137,7 +149,7 @@ $(document).ready(function(){
 	});
 	
 });
-	*/	
+		*/
 	
 </script>
 

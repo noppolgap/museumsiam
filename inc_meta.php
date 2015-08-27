@@ -45,11 +45,17 @@
 <link rel="stylesheet" type="text/css" href="css/resetcss.css" />
 <link rel="stylesheet" type="text/css" href="font/font.css" />
 
+<!-- Lightbox -->
+<link rel="stylesheet" href="css/magnific-popup.css" />
+<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
+
 <!-- Owl Carousel Assets -->
 <script src="owl-carousel/owl.carousel.js"></script>
 <link href="owl-carousel/owl.carousel.css" rel="stylesheet">
 <link href="owl-carousel/owl.theme.css" rel="stylesheet">
 
-
 <!-- CSS Main-->	      
 <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+<!-- Script Main-->
+<script src="js/script-main.js"></script>

@@ -3,7 +3,7 @@
 	require("../../assets/configs/connectdb.inc.php");
 	require("../../assets/configs/function.inc.php");
 
-	$userID = $_GET['UID'] ; 
+	$userID = $_POST['id'] ; 
 	$strSQL = "update sys_app_user set ACTIVE_FLAG = 2 , LAST_UPDATE_USER = 'Test' , LAST_UPDATE_DATE = now() , LAST_FUNCTION = 'U' where ID = ". $userID ; 
 	
 	

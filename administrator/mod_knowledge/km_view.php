@@ -14,15 +14,22 @@ require("../../assets/configs/function.inc.php");
 <div class="main-container">
 	<div class="main-body marginC">
 		<? require('../inc_side.php'); ?>
+		<?php 
+			$id = $_GET['cid'];
+			$sqlCatDesc = "SELECT * FROM  trn_content_category WHERE   CONTENT_CAT_ID = $id ";
+			$query = mysql_query($sqlCatDesc,$conn) ;
+			$rowCatDesc = mysql_fetch_array($query)  ;
+			$catDesc  = $rowCatDesc['CONTENT_CAT_DESC_LOC'];
+		?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_digital_add.php?g=<?=$_GET['p']?>'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="sub_digital_action.php?delete" >
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('sub_digital_order.php?p=<?=$_GET['p']?>');">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'km_add.php?cid=<?=$_GET['cid']?>'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="km_action.php?delete">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('km_order.php?cid=<?=$_GET['cid']?>');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ชื่อเมนู</div>
+					<div class="floatL titleBox">รายละเอียด KM หมวดหมู่  <?=$catDesc?></div>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />
@@ -48,10 +55,10 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-				$id = $_GET['p'];
-			    $sql= "SELECT * FROM  trn_sub_digital_ach WHERE FLAG <> 2 AND MAIN_DIGITAL_ID = $id ";
+			   // $id = $_GET['cid'];
+			    $sql= "SELECT * FROM  trn_content_detail WHERE CONTENT_STATUS_FLAG <> 2 AND CAT_ID = $id ";
 			    if(isset($_GET['search'])){
-			      $sql .= "AND SUB_DIGITAL_DESC_LOC like '%".$_POST['str_search']."%' ";
+			      $sql .= "AND CONTENT_DESC_LOC like '%".$_POST['str_search']."%' ";
 			    }
 			     $sql .= "ORDER BY ORDER_DATA DESC";
 
@@ -64,29 +71,29 @@ require("../../assets/configs/function.inc.php");
 			 ?>
 					<!-- start loop -->
 				<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content" data-id="<?=$row['SUB_DIGITAL_ID']?>">
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['SUB_DIGITAL_ID']?>"></div>
+					<div class="Main_Content" data-id="<?=$row['CONTENT_ID']?>" >
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_ID']?>"></div>
 						<div class="floatL thumbContent">
-							<a href="sub_digital_action.php?p=<?=$row['SUB_DIGITAL_ID']?>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
+							<a href="#" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="digital_view.php?p='.$row['SUB_DIGITAL_ID'].'&a='.$row['MAIN_DIGITAL_ID'].'">'. $row['SUB_DIGITAL_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="km_detail.php?conid='.$row['CONTENT_ID'].'&cid='.$id.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
-						<? if($row['FLAG'] == 0){ ?>
-							<span class="staus1"></span> <a href="sub_digital_action.php?enable&p=<?=$row['SUB_DIGITAL_ID']?>&g=<?=$row['FLAG']?>&a=<?=$row['MAIN_DIGITAL_ID']?>">
+						<? if($row['CONTENT_STATUS_FLAG'] == 0){ ?>
+							<span class="staus1"></span> <a href="km_action.php?enable&conid=<?=$row['CONTENT_ID']?>&flag=<?=$row['CONTENT_STATUS_FLAG']?>&cid=<?=$id?>">
 							Enable
 						</a> <?}  else {?> <span class="staus2"></span> 
-						<a href="sub_digital_action.php?enable&p=<?=$row['SUB_DIGITAL_ID']?>&g=<?=$row['FLAG']?>&a=<?=$row['MAIN_DIGITAL_ID']?>"> Disable </a> <? } ?></div>
+						<a href="km_action.php?enable&conid=<?=$row['CONTENT_ID']?>&flag=<?=$row['CONTENT_STATUS_FLAG']?>&cid=<?=$id?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
-							<a href="sub_digital_edit.php?p=<?=$row['SUB_DIGITAL_ID']?>&g=<?=$row['MAIN_DIGITAL_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="#" data-id="<?=$row['SUB_DIGITAL_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="km_edit.php?conid=<?=$row['CONTENT_ID']?>&cid=<?=$id?>" class="EditContentBtn">Edit</a>
+							<a href="#" data-id=<?=$row['CONTENT_ID']?> class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
-				<?php } ?>
+							<?php } ?>
 					<!-- end loop -->
 				</div>
 				<div class="pagination_box">
@@ -107,7 +114,7 @@ require("../../assets/configs/function.inc.php");
 				</div>
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'main_digital_view.php'">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'main_km_view.php'">
 			</div>
 		</div>
 		<div class="clear"></div>	

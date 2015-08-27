@@ -89,7 +89,7 @@ require("../../assets/configs/function.inc.php");
 				<div class="pagination_box">
 
 					<div class="floatL">
- 					  จำนวนทั้งหมด <? 	echo $num_rows; ?>  รายการ </div>
+ 					  จำนวนทั้งหมด <span class='RowCount'><? 	echo $num_rows; ?></span>  รายการ </div>
 					<div class="floatR pagination_action">
 						<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 						<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
