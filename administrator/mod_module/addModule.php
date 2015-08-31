@@ -64,7 +64,7 @@ function onValidate()
         <div class="mod-body">
           <div class="mod-body-inner">
             <div class="mod-body-inner-header">
-              <div class="floatL titleBox">เพิ่มรายการ</div>
+              <div class="floatL titleBox">เพิ่มระบบ</div>
             </div>
             <div class="mod-body-main-content">
               <!--<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>-->
@@ -107,6 +107,16 @@ function onValidate()
 				   </div>
                  
 				  
+				    <div>
+                    <div class="floatL form_name">&nbsp;&nbsp;</div>
+                    <div class="floatL form_input">
+                      <input  id = "chkHasSubModule" type="checkbox" name="chkHasSubModule" >&nbsp;มีระบบย่อย</input>
+                          
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				   </div>
+				   
                   <div class="btn_action">
                     <input type="button" name="save" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="onValidate()" >
                       <input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
@@ -141,13 +151,20 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
      
 	$txtUrlLink = $_POST['txtUrlLink'];
 	$txtImg = $_POST['txtImg'];
-
+	$chkHasSubModule = $_POST['chkHasSubModule'];
+	
+	$isLastNode = "" ; 
+	if ($chkHasSubModule)
+		$isLastNode = "N";
+	else 
+		$isLastNode= "Y";
+	
 	mysql_query("BEGIN");
 	
     $strSQL = "INSERT INTO sys_app_module ";
-    $strSQL .="(MODULE_NAME_LOC,MODULE_NAME_ENG , USER_CREATE , CREATE_DATE , LAST_FUNCTION ) ";
+    $strSQL .="(MODULE_NAME_LOC,MODULE_NAME_ENG , USER_CREATE , CREATE_DATE , LAST_FUNCTION , IS_LAST_NODE ) ";
     $strSQL .="VALUES ";
-    $strSQL .="('".$txtNameLoc."','".$txtNameEng."','Test' , now() , 'A') ";
+    $strSQL .="('".$txtNameLoc."','".$txtNameEng."','Test' , now() , 'A' , '".$isLastNode."') ";
     $objQueryAppModule = mysql_query($strSQL);
 	$last_id = mysql_insert_id($conn);
 	

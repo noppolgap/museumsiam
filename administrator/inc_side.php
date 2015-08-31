@@ -21,15 +21,22 @@
 	
 	 
 	<a href="../mod_user/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ระบบจัดการผู้ใช้งาน</span></a>
+	<a href="../mod_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบ</span></a>
+	<a href="../mod_sub_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบย่อย</span></a>
+	<a href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่</span></a>
+	<a href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่ย่อย</span></a>
+	<a href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการเนื้อหา</span></a>
+	
+	
+	<!--
 	<a href="../mod_knowledge/main_km_view.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ระบบจัดการองค์ความรู้</span></a>
 	<a href="../mod_digital_achive/main_digital_view.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ระบบจัดการคลังข้อมูลดิจิตอล</span></a>
 	<a href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ระบบจัดการพิพิธภัณฑ์เครือข่าย</span></a>
 	<a href="../mod_virtual_exhibition/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ระบบจัดการพิพิธภัณฑ์เสมือน</span></a>
 	<a href="../mod_museum_map/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ระบบจัดการแผนที่พิพิธภัณฑ์</span></a>
 	<a href="../mod_shopping/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ระบบจัดการระบบ Online</span></a>
-
-	<a href="../mod_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบ</span></a>
-	<a href="../mod_sub_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบย่อย</span></a>
+-->
+	
 
 	<a href="#"><span class="menutab dBlock signoutTab">ออกจากระบบ</span></a>
 </div>

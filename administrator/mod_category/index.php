@@ -16,13 +16,11 @@ require("../../assets/configs/function.inc.php");
 		<? require('../inc_side.php'); ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addModule.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="delModule.php">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('order.php');">
+				 
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ชื่อระบบ</div>
+					<div class="floatL titleBox">กรุณาเลือกระบบ</div>
 					<div class="floatR searchBox">
 						<form name="search" action="?" method="post">
 							<input type="search" name="str_search" value="" />
@@ -32,7 +30,7 @@ require("../../assets/configs/function.inc.php");
 					<div class="clear"></div>						
 				</div>
 				<div class="mod-body-inner-action">
-					<div class="floatL checkAllBox"><label><input type="checkbox" name="checkall" value="0"> เลือกทั้งหมด</label></div>
+					<div class="floatL checkAllBox"> </div>
 					<div class="floatR orderBox">
 						<select onchange="console.log('action');" name="orderby" class="p-Relative">
 					        <option value="order">เลือกการจัดเรียงลำดับ</option>
@@ -46,6 +44,7 @@ require("../../assets/configs/function.inc.php");
 				</div>
 				
 				<div class="mod-body-main-content">
+				
 						<!-- start loop -->
 						<?php 
 					//active_flag 0 = disable , 1 = Enable ,  2 = Delete 
@@ -61,22 +60,20 @@ require("../../assets/configs/function.inc.php");
 					while($row = mysql_fetch_array($rs)){
 					
 						echo "<div class='Main_Content' data-id='".$row['MODULE_ID']."'>";
-						echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='".$row["MODULE_ID"]."'></div>";
+						echo "<div class='floatL checkboxContent'></div>";
 						echo "<div class='floatL thumbContent'>";
-						echo "<a href='viewModule.php?MID=".$row["MODULE_ID"]."' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
+						echo "<a href='main_category_view.php?MID=".$row["MODULE_ID"]."' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
 						echo "</div>";
 						echo "<div class='floatL nameContent'>";
-						echo "<div><a href='viewModule.php?MID=".$row["MODULE_ID"]."'>".$row["MODULE_NAME_LOC"]."</a></div>";
-
-
+						echo "<div><a href='main_category_view.php?MID=".$row["MODULE_ID"]."'>".$row["MODULE_NAME_LOC"]."</a></div>";
 						echo "<div>วันที่สร้าง ".$row["CREATE_DATE"]." | วันที่ปรับปรุง ".$row["LAST_UPDATE_DATE"]." </div>";
 						echo "</div>	";
 						
 						
 						echo "<div class='floatL EditContent'>";
 						
-						echo "<a href='editModule.php?MID=".$row["MODULE_ID"]."' class='EditContentBtn'>Edit</a>";
-						echo "<a href='#' data-id='".$row['MODULE_ID']."' class='DeleteContentBtn' >Delete</a>";
+						echo "";
+						echo "";
 						echo "</div>";
 						echo " <div class='clear'></div>	";
 						echo " </div>";
@@ -109,9 +106,7 @@ $i++;
 				 
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addModule.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
+				 
 			</div>
 		</div>
 		<div class="clear"></div>	

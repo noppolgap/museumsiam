@@ -77,20 +77,20 @@ function onValidate()
         <div class="mod-body">
           <div class="mod-body-inner">
             <div class="mod-body-inner-header">
-              <div class="floatL titleBox">แก้ไขรายการโมดูลย่อย</div>
+              <div class="floatL titleBox">แก้ไขรายการระบบย่อย</div>
             </div>
             <div class="mod-body-main-content">
               <!--<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>-->
               <div class="formCms">
                 <form action="?" method="post" name="formcms" id = "frmcms" >
                    <div >
-                  <div class="floatL form_name">โมดูลหลัก</div>
+                  <div class="floatL form_name">ระบบหลัก</div>
                     <div class="floatL form_input">
                       <?php
-					$sql = "SELECT MODULE_ID  , MODULE_NAME_LOC , MODULE_NAME_ENG FROM sys_app_module where ACTIVE_FLAG <> 2 ";
+					$sql = "SELECT MODULE_ID  , MODULE_NAME_LOC , MODULE_NAME_ENG FROM sys_app_module where ACTIVE_FLAG <> 2 AND IS_LAST_NODE = 'N' ";
 					$rs = mysql_query($sql) or die(mysql_error());
 					echo  "<select id='cmbModule' name = 'cmbModule'>";
-					echo "<option value='-1'>กรุณาเลือกโมดูล</option>";
+					echo "<option value='-1'>กรุณาเลือกระบบ</option>";
 				while($row = mysql_fetch_array($rs)){
 					if ($row["MODULE_ID"] ==  $rowSubModule["MODULE_ID"])
 						echo "<option value='".$row["MODULE_ID"]."' selected>".$row["MODULE_NAME_LOC"]."</option>";
@@ -99,7 +99,7 @@ function onValidate()
 				}mysql_free_result($rs);
 				echo "</select>";
 				?>
-      <span class="error" >* <span id = "moduleError" style="display:none">กรุณาระบุโมดูลหลัก </span> </span>
+      <span class="error" >* <span id = "moduleError" style="display:none">กรุณาระบุระบบหลัก </span> </span>
                     </div>
                     <div class="clear"></div>
                   </div>

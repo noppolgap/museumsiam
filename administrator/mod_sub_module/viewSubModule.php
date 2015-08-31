@@ -21,7 +21,7 @@ require("../../assets/configs/function.inc.php");
 <?php
 	$subModuleID = $_GET['SMID'] ;
 
-	$sql = "SELECT * FROM sys_app_sub_module where SUB_MODULE_ID = '".$subModuleID."' ";
+	$sql = "SELECT sm.* , am.MODULE_NAME_LOC FROM sys_app_sub_module sm inner join sys_app_module am on sm.module_id = am.module_id where SUB_MODULE_ID = '".$subModuleID."' ";
 	$rs = mysql_query($sql) or die(mysql_error());
 	$rowModule = mysql_fetch_array($rs);
 	
@@ -35,14 +35,23 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">รายละเอียด</div>					
+					<div class="floatL titleBox">รายละเอียดระบบย่อย</div>					
 				</div>
 				<div class="mod-body-main-content">
 				 
 					<div class="formCms">
 						<form action="?" method="post" name="formcms">
 							 
-							 
+							
+				<div >
+                  <div class="floatL form_name">ระบบหลัก</div>
+                    <div class="floatL form_input">
+					<input id = "txtModuleDesc" type="text" name="txtModuleDesc"   class="w90p"  value="<?php echo $rowModule["MODULE_NAME_LOC"] ?>" />
+      <span class="error" >* <span id = "moduleError" style="display:none">กรุณาระบุระบบหลัก </span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
 							 <div >
                     <div class="floatL form_name">ชื่อภาษาไทย</div>
                     <div class="floatL form_input">

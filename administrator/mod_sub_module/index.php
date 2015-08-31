@@ -22,7 +22,7 @@ require("../../assets/configs/function.inc.php");
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ชื่อเมนู</div>
+					<div class="floatL titleBox">ชื่อระบบย่อย</div>
 					<div class="floatR searchBox">
 						<form name="search" action="?" method="post">
 							<input type="search" name="str_search" value="" />

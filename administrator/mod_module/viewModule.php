@@ -36,7 +36,7 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">รายละเอียด</div>					
+					<div class="floatL titleBox">รายละเอียดระบบ</div>					
 				</div>
 				<div class="mod-body-main-content">
 				 
@@ -77,6 +77,20 @@ require("../../assets/configs/function.inc.php");
                     </div>
                     <div class="clear"></div>
                   </div>
+				  
+				  <div>
+                    <div class="floatL form_name">&nbsp;&nbsp;</div>
+                    <div class="floatL form_input">
+					<?php 
+					if ($rowModule['IS_LAST_NODE'] == "Y")
+                      echo "<input  id = 'chkHasSubModule' type='checkbox' name='chkHasSubModule' >&nbsp;มีระบบย่อย</input> ";
+					else 
+						echo "<input  id = 'chkHasSubModule' type='checkbox' name='chkHasSubModule' checked >&nbsp;มีระบบย่อย</input> ";
+                          ?>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				   </div>
 							<div class="btn_action">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 							</div>

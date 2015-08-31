@@ -77,7 +77,7 @@ function onValidate()
         <div class="mod-body">
           <div class="mod-body-inner">
             <div class="mod-body-inner-header">
-              <div class="floatL titleBox">แก้ไข</div>
+              <div class="floatL titleBox">แก้ไขระบบ</div>
             </div>
             <div class="mod-body-main-content">
               <!--<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>-->
@@ -118,6 +118,20 @@ function onValidate()
                     <div class="clear"></div>
                   </div>
 				  
+				  <div>
+                    <div class="floatL form_name">&nbsp;&nbsp;</div>
+                    <div class="floatL form_input">
+					<?php 
+					if ($rowModule['IS_LAST_NODE'] == "Y")
+                      echo "<input  id = 'chkHasSubModule' type='checkbox' name='chkHasSubModule' >&nbsp;มีระบบย่อย</input> ";
+					else 
+						echo "<input  id = 'chkHasSubModule' type='checkbox' name='chkHasSubModule' checked >&nbsp;มีระบบย่อย</input> ";
+                          ?>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				   </div>
+				   
                   <div class="btn_action">
                     <input type="button" name="save" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="onValidate()" >
                       <input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
@@ -155,7 +169,14 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
     
 	$txtUrlLink = $_POST['txtUrlLink'];
 	$txtImg = $_POST['txtImg'];
-
+	$chkHasSubModule = $_POST['chkHasSubModule'];
+	
+	$isLastNode = "" ; 
+	if ($chkHasSubModule)
+		$isLastNode = "N";
+	else 
+		$isLastNode= "Y";
+	
 	mysql_query("BEGIN");
 	
     $strSQL = "update sys_app_module ";
@@ -164,6 +185,7 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
 	$strSQL .= " ,LAST_UPDATE_DATE = now() ";
 	$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
 	$strSQL .= " ,LAST_FUNCTION = 'U'";
+	$strSQL .= " ,IS_LAST_NODE = '".$isLastNode."'";
 	 $strSQL .= " where MODULE_ID = '".$mid."'";
     $objQueryAppModule = mysql_query($strSQL);
 	
