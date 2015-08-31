@@ -20,20 +20,18 @@ require("../../assets/configs/function.inc.php");
 					<div class="floatL titleBox">แก้ไขรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
-					
+					<?php
+
+						$id = intval($_GET['p']);
+						$sql= "SELECT * FROM trn_content_detail d join trn_content_category c
+								  on d.CAT_ID = c.CONTENT_CAT_ID WHERE d.CONTENT_STATUS_FLAG <> 2 AND d.CONTENT_ID = ".$id." ";
+						$query = mysql_query($sql,$conn);
+						$row = mysql_fetch_array($query);
+					?>
+					<div class="imageMain marginC"><img src="<?=callThumbList($id,$row['CAT_ID'],true)?>" /></div>
 					<div class="formCms">
 
-						<?php
-
-							$id = $_GET['p'];
-						    $sql= "SELECT * FROM trn_content_detail d join trn_content_category c
-								  on d.CAT_ID = c.CONTENT_CAT_ID WHERE d.CONTENT_STATUS_FLAG <> 2 AND d.CONTENT_ID = ".$id." ";
-							$query = mysql_query($sql,$conn);
-
-						?>
-
 						<form action="actionVirsualExhib.php?edit&p=<?=$id?>" method="post" name="formcms">
-							<?php while($row = mysql_fetch_array($query)) { ?>
 							<input type="hidden" name="cat_id" value="<? echo $row['CAT_ID']; ?>" class="w90p" />
 							<div>
 								<div class="floatL form_name">หมวดหมู่</div>
@@ -55,17 +53,17 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_input"><input type="text" name="start" value="<? echo $row['EVENT_START_DATE'] ?>" class="DatetimePicker" /></div>
 								<div class="clear"></div>
 							</div>
-							<div class="bigForm">
+							<div>
 								<div class="floatL form_name">วันที่สิ้นสุด</div>
 								<div class="floatL form_input"><input type="text" name="end" value="<? echo $row['EVENT_END_DATE'] ?>" class="DatetimePicker" /></div>
 								<div class="clear"></div>
 							</div>
-							<div>
+							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียดย่อ TH</div>
 								<div class="floatL form_input"><textarea name="brief_name_th" class="mytextarea2 w90p"><? echo $row['BRIEF_LOC'] ?></textarea></div>
 								<div class="clear"></div>
 							</div>
-							<div>
+							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียดย่อ EN</div>
 								<div class="floatL form_input"><textarea name="brief_name_en" class="mytextarea2 w90p"><? echo $row['BRIEF_ENG'] ?></textarea></div>
 								<div class="clear"></div>
@@ -77,7 +75,7 @@ require("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_image_edit('photo',5,$_GET['p'])?></div>
+								<div class="floatL form_input"><?=admin_upload_image_edit('photo',$row['CAT_ID'],$id)?></div>
 								<div class="clear"></div>
 							</div>		
 							<div class="btn_action">
@@ -85,7 +83,6 @@ require("../../assets/configs/function.inc.php");
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href ='viewVirsualExhib.php?p=<?=$row['CAT_ID']?>' ">
 							</div>
-							<? } ?>
 						</form> 
 					</div>
 				</div>

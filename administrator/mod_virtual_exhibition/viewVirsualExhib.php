@@ -76,7 +76,7 @@ require("../../assets/configs/function.inc.php");
 					<div class="Main_Content" data-id="<?=$row['CONTENT_ID']?>">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_ID']?>"></div>
 						<div class="floatL thumbContent">
-							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
+							<a href="view.php" class="dBlock" <?=callThumbList($row['CONTENT_ID'],$id,false)?>></a>
 						</div>
 						<div class="floatL nameContent">
 							<div><? echo '<a href="detailVirsualExhib.php?p='.$row['CONTENT_ID'].' ">'.$row['CONTENT_DESC_LOC'].'</a>' ?></div>

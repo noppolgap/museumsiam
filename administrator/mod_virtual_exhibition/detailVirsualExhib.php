@@ -20,19 +20,16 @@ require("../../assets/configs/function.inc.php");
 					<div class="floatL titleBox">รายละเอียดรายการ</div>					
 				</div>
 				<div class="mod-body-main-content">
-					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
-					<div class="formCms">
-
 				<?php
-				
-				    $sql = "SELECT * FROM trn_content_detail WHERE CONTENT_STATUS_FLAG <> 2 AND CONTENT_ID ='".$_GET['p']."' ";
+					$id = intval($_GET['p']);
+				    $sql = "SELECT * FROM trn_content_detail WHERE CONTENT_STATUS_FLAG <> 2 AND CONTENT_ID ='".$id."' ";
 				   
 				    $query = mysql_query($sql,$conn);
-
-				 ?>
-
+					$row = mysql_fetch_array($query);
+				 ?>	
+					<div class="imageMain marginC"><img src="<?=callThumbList($id,$row['CAT_ID'],true)?>" /></div>
+					<div class="formCms">
 						<form action="?" method="post" name="formcms">
-							<?php while($row = mysql_fetch_array($query)) { ?>
 							<div>
 								<div class="floatL form_name">ชื่อ</div>
 								<div class="floatL form_input"><? echo $row['CONTENT_DESC_LOC']; ?> </div>
@@ -47,15 +44,13 @@ require("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_image_view('photo',5,$_GET['p'])?></div>
+								<div class="floatL form_input"><?=admin_upload_image_view('photo',$row['CAT_ID'],$id)?></div>
 								<div class="clear"></div>
 							</div>		
 							<div class="btn_action">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href
 								 = 'viewVirsualExhib.php?p=<?=$row['CAT_ID']?>'">
 							</div>
-
-							<? } ?>
 						</form> 
 	
 					</div>

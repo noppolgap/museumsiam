@@ -57,17 +57,17 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_input"><input type="text" name="start" value="" class="DatetimePicker" /></div>
 								<div class="clear"></div>
 							</div>
-							<div class="bigForm">
+							<div>
 								<div class="floatL form_name">วันที่สิ้นสุด</div>
 								<div class="floatL form_input"><input type="text" name="end" value="" class="DatetimePicker" /></div>
 								<div class="clear"></div>
 							</div>
-							<div>
+							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียดย่อ TH</div>
 								<div class="floatL form_input"><textarea name="brief_name_th" class="mytextarea2 w90p"></textarea></div>
 								<div class="clear"></div>
 							</div>
-							<div>
+							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียดย่อ EN</div>
 								<div class="floatL form_input"><textarea name="brief_name_en" class="mytextarea2 w90p"></textarea></div>
 								<div class="clear"></div>

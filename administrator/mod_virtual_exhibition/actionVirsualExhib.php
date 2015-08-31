@@ -28,13 +28,17 @@ if(isset($_GET['enable'])){
 
 if(isset($_GET['delete'])){
 
-  $id = $_POST['id'];
+  $id = intval($_POST['id']);
+  $pid = intval($_GET['p']);
+  
   $update="";
   $update[]= "CONTENT_STATUS_FLAG = 2";
 
   $sql="UPDATE trn_content_detail SET  ".implode(",",$update)." WHERE CONTENT_ID =".$id;
   
   mysql_query($sql,$conn);
+  
+  deleteImageList($id,$pid);
 	
  // header('Location: viewVirsualExhib.php?p='.$_GET['a'].'');
 	
@@ -77,7 +81,7 @@ if(isset($_GET['add'])){
 		      $insert['CONTENT_ID'] = $retrunID;
 		      $insert['IMG_TYPE']   = 1;
 		      $insert['IMG_PATH']   = "'".$filename."'";
-		      $insert['CAT_ID']     = "5";
+		      $insert['CAT_ID']     = "'".$_GET['p']."'";
 		      $insert['ORDER_ID']   = "'".$index++."'";
 		
 		      $sql = "INSERT INTO trn_content_picture (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
@@ -109,7 +113,7 @@ if(isset($_GET['edit'])){
 	mysql_query($sql,$conn);
 
 	if(count($_POST['photo_file']) > 0){
-		$sql_max="SELECT MAX(ORDER_ID) AS MAX_ORDER FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = 5";
+		$sql_max="SELECT MAX(ORDER_ID) AS MAX_ORDER FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = ".$_POST['cat_id'];
 		$query_max = mysql_query($sql_max,$conn);
 		$row_max = mysql_fetch_array($query_max);
 		$max = $row_max['MAX_ORDER'];
@@ -122,7 +126,7 @@ if(isset($_GET['edit'])){
 		      $insert['CONTENT_ID']   = $id;
 		      $insert['IMG_TYPE']   = 1;
 		      $insert['IMG_PATH']   = "'".$filename."'";
-		      $insert['CAT_ID']     = "5";
+		      $insert['CAT_ID']     = "'".$_POST['cat_id']."'";
 		      $insert['ORDER_ID']   = $max++;
 		
 		      $sql = "INSERT INTO trn_content_picture (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
