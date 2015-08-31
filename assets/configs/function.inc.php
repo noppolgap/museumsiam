@@ -126,9 +126,9 @@ function logs_access($user,$msg) {
 	fwrite($fp, $text_write.$myDateNow." ".$myTimeNow."|:|".find_ip()."|:|".$user."|:|".$msg."\n");
 	fclose($fp); 
 
-	chmod($FilePath,0744);
-	chmod($dirPath,0744);
-	chmod(_LOG_PATH_,0744);
+	chmod($FilePath,0755);
+	chmod($dirPath,0755);
+	chmod(_LOG_PATH_,0755);
 	*/
 }
 function admin_move_image_upload_dir($dir,$file,$width,$height,$crop,$thumbwidth,$thumbheight){
@@ -184,10 +184,10 @@ function admin_move_image_upload_dir($dir,$file,$width,$height,$crop,$thumbwidth
 			}
 		*/
 
-		chmod($path1,0744);
-		chmod($path2,0744);
-		chmod($path3,0744);
-		chmod($path4,0744);	
+		chmod($path1,0755);
+		chmod($path2,0755);
+		chmod($path3,0755);
+		chmod($path4,0755);	
 
 		return $path3.$output;
 }
@@ -276,5 +276,85 @@ function str_replace_last( $search, $replace, $subject ) {
     $post = str_replace( $search, $replace, $post );
     
     return $pre . $post;
+}
+function callThumbList($id,$type,$staus){
+	global $conn;
+	
+	$sql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID =".$type." ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$query = mysql_query($sql,$conn);
+	$num = mysql_num_rows($query);
+	if($num == 1){
+		$row = mysql_fetch_array($query);
+		if($staus){
+			return $row['IMG_PATH'];
+		}else{
+			return 'style="background-image: url(\''.str_replace_last('/','/thumbnail/',$row['IMG_PATH']).'\');"';
+		}
+		
+	}else{
+		if($staus){
+			return '../images/logo_thumb.jpg';
+		}else{
+			return '';
+		}
+	}	
+	
+}
+function deleteImageList($id,$type){
+	global $conn;
+	$dir_path = '';
+	
+	$sql = "SELECT PIC_ID , IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID =".$type." ORDER BY ORDER_ID ASC";
+	$query = mysql_query($sql,$conn);	
+	while($row = mysql_fetch_array($query)) {
+		if($dir_path == ''){
+			$dir_path = dirname($row['IMG_PATH']) . PHP_EOL;
+			$dir_path = trim($dir_path).'/';
+			chmod($dir_path,0777);
+			chmod($dir_path.'/thumbnail',0777);			
+		}
+		if(file_exists($row['IMG_PATH'])){
+			chmod($row['IMG_PATH'],0777);
+			@unlink($row['IMG_PATH']);
+		}
+		$thumb = str_replace_last('/','/thumbnail/',$row['IMG_PATH']);
+		if(file_exists($thumb)){
+			chmod($thumb,0777);
+			@unlink($thumb);
+		}
+		
+		mysql_query("DELETE FROM trn_content_picture WHERE PIC_ID = ".$row['PIC_ID'],$conn);	
+	}		
+	
+	chmod($dir_path,0755);
+	mysql_query("OPTIMIZE TABLE trn_content_picture",$conn);
+}
+function Optimizeimageupload(){
+	$path = '../../assets/plugin/upload/php/files/';	
+	$week = (7 * 24 * 60 * 60);
+	chmod($path,0777);
+		if ($handle = opendir($path)) {
+		
+		    while (false !== ($entry = readdir($handle))) {
+		
+		        if ($entry != "." && $entry != ".." && is_file($path.$entry)) {
+	
+		            $file_date = filemtime($path.$entry);
+					$limit_date = time() - $week;
+					if($file_date <= $limit_date){
+						chmod($path.$entry,0777);
+						@unlink($path.$entry);
+						$thumb = $path.'thumbnail/'.$entry;
+						if(file_exists($thumb)){
+							chmod($thumb,0777);
+							@unlink($thumb);
+						}
+					}
+		        }
+		    }
+		
+		    closedir($handle);
+		}
+	chmod($path,0755);		
 }
 ?>
