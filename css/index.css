@@ -1,6 +1,10 @@
 body{
 	padding-top: 33px ;
 }
+.part-menu{
+	position: relative;
+	top: inherit;
+}
 
 /* --------------------------------------------------- Part Side Banner --------------------------------------------------- */
 
@@ -41,13 +45,17 @@ body{
 }
 .box-detail-museum .box-top .box-left{
 	border-right : 1px solid #efefef;
-	width: 580px;
+	width: 536px;
+	margin-left: 20px;
 }
 .box-detail-museum .box-top .box-title{
 	font-size: 50px;
 	color: #000;
 	text-transform: uppercase;
-	margin-bottom: 156px;
+	margin-bottom: 25px;
+}
+.box-detail-museum .box-top img{
+	margin-bottom: 20px;
 }
 .box-detail-museum .box-top .box-title span{
 	font-size: 45px;
@@ -56,8 +64,7 @@ body{
 }
 
 .box-detail-museum .box-top .box-right{
-	margin-right: 25px;
-	width: 600px;
+	width: 590px;
 }
 .box-detail-museum .box-top .text-title{
 	font-size: 35px;
@@ -77,6 +84,7 @@ body{
 	text-decoration: underline; 
 	font-size: 22px;
 	display: inline-block;
+	font-style: italic;
 }
 .box-detail-museum .box-top .row-text{
 	font-style: italic;
@@ -116,8 +124,11 @@ body{
 	background-color: #f2f2f2;
 	padding: 25px 0;
 }
+.box-detail-museum .box-middle .box-left{
+	margin-left: 20px
+}
 .box-detail-museum .box-middle .box-right{
-	margin-right: 171px;
+	margin-right: 92px;
 }
 .box-detail-museum .box-middle .box-right p {
 	width: 450px;
@@ -206,6 +217,13 @@ div.text-title{
 	color: #fff;
 	position: absolute;
 	bottom: 0px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.box-tumb-date:hover .text-month{
+	background-color: #6e0904;
 }
 
 .sun{ background-color: #7d0800; }
@@ -237,7 +255,7 @@ div.text-title{
 }
 
 .box-slideevent-main{
-	width: 600px;
+	width: 545px;
 /* 	height: 430px; */
 	border-bottom: 4px solid #000;
 	background-color: #fff;
@@ -247,7 +265,7 @@ div.text-title{
 	width: 250px;
 }
 .box-slideevent-main .box-content-slide .box-right{
-	width: 350px;
+	width: 295px;
 	padding: 4px;
 }
 .box-slideevent-main .box-content-slide .box-right .box-pic{
@@ -259,14 +277,17 @@ div.text-title{
 .box-slideevent-main .box-content-slide .box-right .box-tag-cate{
 	position: absolute;
 	background-color: rgba(0, 0, 0, 0.7);
-	left: 4px;
-	bottom: 4px;
-	width: 342px;
+	left: 0px;
+	bottom: 0px;
+	width: 287px;
 	line-height: 27px;
 	font-size: 22px;
 	color: #fff;
 	padding: 0 10px 0 30px;
 	text-transform: uppercase;
+}
+.box-slideevent-main .box-content-slide .text-title:hover{
+	color: #000;
 }
 .box-slideevent-main .box-content-slide .box-date{
 	width: 100%;
@@ -319,7 +340,7 @@ div.text-title{
 .box-slideevent-main .box-float{
 	position: absolute;
 	bottom: 0px;
-	width: 239px;
+	width: 240px;
 	left: 10px;
 }
 .box-slideevent-main .box-float .box-btn-left{
@@ -400,14 +421,15 @@ div.text-title{
 	font-family: 'kaniga_patanabold';
 }
 .part-news .box-top .box-left{
-	width: 315px;
+	width: 290px;
 }
 .part-news .box-top .box-left .text-title{
 	font-size: 60px;
 	text-transform: uppercase;
 	text-align: left;
 	font-family: 'kaniga_patanabold';
-	margin: 10px 0;
+	padding: 12px 0 25px;
+	margin: 0 0 10px;
 }
 .part-news .box-top .box-left .text-title span{
 	font-size: 50px;
@@ -440,7 +462,7 @@ div.text-title{
 .part-news .box-top .box-news-bold{
 	border: 4px solid #000;
 	padding: 7px;
-	width: 625px;
+	width: 599px;
 } 
 .part-news .box-top .box-news-bold .box-pic{
 	float: left;
@@ -449,6 +471,9 @@ div.text-title{
 	float: right;
 	width: 275px;
 	margin-right: 3px;
+}
+.part-news .box-top .box-news-bold .text-title:hover{
+	color: #000;
 }
 .part-news .box-top .box-news-bold .box-text .text-date{
 	margin: 10px 0;
@@ -467,7 +492,7 @@ div.text-title{
 	width: 275px;
 }
 .part-news .box-bottom .box-news.mid{
-	margin: 0 51px;
+	margin: 0 39px;
 }
 .part-news .box-bottom .box-news .box-pic{
 	float: none;
@@ -479,6 +504,9 @@ div.text-title{
 	height: 23px;
 	overflow: hidden;
 	margin-top: 10px;
+}
+.part-news .box-bottom .box-news .box-text .text-title:hover{
+	color: #000;
 }
 .part-news .box-bottom .box-news .box-text .text-date{
 	margin: 10px 0;
@@ -528,6 +556,9 @@ div.text-title{
 	height: 40px;
 	overflow: hidden;
 }
+.box-museum-news-main .museum-news .text-title:hover{
+	color: #000;
+}
 .box-museum-news .box-btn{
 	display: table;
 	margin: 19px auto;
@@ -540,7 +571,7 @@ div.text-title{
 	padding: 40px 0;
 }
 .part-datanetwork .slide-network{
-	width: 1180px;
+	width: 1130px;
 	margin: 0 auto;
 }
 .part-datanetwork .box-title{
@@ -557,11 +588,14 @@ div.text-title{
 	line-height: 55px;
 }
 .box-network{
-	width: 275px;
+	width: 245px;
 	margin: 0 auto;
 }
 .box-network .box-text .text-title{
 	color: #fff;
+}
+.box-network .box-text .text-title:hover{
+	color: #000;
 }
 .box-network .box-text .text-location{
 	color: #BBBBBB;
@@ -587,7 +621,7 @@ div.text-title{
 	display: block;
 	float: left;
 	position: absolute;
-	top: 130px;
+	top: 86px;
 }
 .part-datanetwork .btn-arrow.left{
 	background-position: 4px 5px;
@@ -604,11 +638,11 @@ div.text-title{
 	padding: 45px 0;
 }
 .box-exhibition-main{
-	width: 600px;
+	width: 590px;
 	height: 325px;
 	float: left;
 	border: 4px solid #000;
-	padding: 25px 20px 0 25px;
+	padding: 20px 20px 0 17px;
 }
 .box-exhibition-main .box-title{
 	font-family: 'kaniga_patanabold';
@@ -640,6 +674,9 @@ div.text-title{
 	height: 27px;
 	overflow: hidden;
 }
+.box-exhibition-main .box-exhibition .text-title:hover{
+	color: #000;
+}
 .box-exhibition-main .box-exhibition .text-date{
 	margin: 10px 0;
 }
@@ -654,11 +691,11 @@ div.text-title{
 /* --------------------------------------------------- Part Archive --------------------------------------------------- */
 
 .box-archive-main{
-	width: 600px;
+	width: 590px;
 	height: 325px;
 	float: right;
 	border: 4px solid #000;
-	padding: 25px 20px 0 25px;
+	padding: 20px 20px 0 17px;
 }
 .box-archive-main .box-title{
 	font-family: 'kaniga_patanabold';
@@ -690,6 +727,9 @@ div.text-title{
 	height: 27px;
 	overflow: hidden;
 }
+.box-archive-main .box-archive .text-title:hover{
+	color: #000;
+}
 .box-archive-main .box-archive .text-date{
 	margin: 10px 0;
 }
@@ -708,8 +748,8 @@ div.text-title{
 	float: left;
 	clear: both;
 	background-color: #000;
-	padding: 32px 21px 32px 32px;
-	margin-top: 50px;
+	padding: 25px 18px;
+	margin-top: 22px;
 }
 .box-knowledge-main .box-left{
 	height: 325px;
@@ -742,14 +782,18 @@ div.text-title{
 }
 .box-knowledge-main .box-knowledge{
 	float: left;
-	margin: 0 11px;
+	margin: 0 5px;
 	width: 197px;
 }
 .box-knowledge-main .box-knowledge .text-title{
 	margin: 10px 0;
+	color: #CCCCCC;
+}
+.box-knowledge-main .box-knowledge .text-title:hover{
+	color: #b28f50;
 }	
 .box-knowledge-main .box-knowledge .text-des{
-	color: #414141;
+	color: #878787;
 	height: 40px;
 	overflow: hidden;
 	margin: 10px 0;

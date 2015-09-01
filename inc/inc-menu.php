@@ -2,51 +2,46 @@
 	<div class="container cf">
 		<div class="box-menu cf">
 			<div class="box-logo">
-				<a href="index.php"><img src="images/logo-header.png"/></a>
+				<a href="index.php"><img src="images/th/logo-header.png"/></a>
 			</div>
 			<div class="menu">
 				<ul class="menutop cf">
 					<li class="menu1"><a href="index.php">หน้าแรก</a></li>
-					<li class="menu2"><a class="sub">รู้จักเรา</a>
+					<li class="menu2 sub"><a href="">รู้จักเรา</a>
 						<ul class="submenu-top">
-							<li class="sub1"><a href="#">Supmenu 1</a></li>
-							<li class="sub2"><a href="#">Supmenu 2</a></li>
+							<a href="#"><li class="sub1">Supmenu 1</li></a>
+							<a href="#"><li class="sub2">Supmenu 2</li></a>
 						</ul>
 					</li>
-					<li class="menu3"><a class="sub">บริการของเรา</a>
+					<li class="menu3 sub"><a href="">บริการของเรา</a>
 						<ul class="submenu-top">
-							<li class="sub1"><a href="#">Supmenu 1</a></li>
-							<li class="sub2"><a href="#">Supmenu 2</a></li>
+							<a href="#"><li class="sub1">Supmenu 1</li></a>
+							<a href="#"><li class="sub2">Supmenu 2</li></a>
 						</ul>
 					</li>
-					<li class="menu4"><a class="sub">สิทธิพิเศษ</a>
+					<li class="menu4"><a href="">สิทธิพิเศษ</a></li>
+					<li class="menu5 sub"><a href="">กิจกรรมและข่าวสาร</a>
 						<ul class="submenu-top">
-							<li class="sub1"><a href="#">Supmenu 1</a></li>
-							<li class="sub2"><a href="#">Supmenu 2</a></li>
+							<a href="#"><li class="sub1">Supmenu 1</li></a>
+							<a href="#"><li class="sub2">Supmenu 2</li></a>
 						</ul>
 					</li>
-					<li class="menu5"><a class="sub">กิจกรรมและข่าวสาร</a>
+					<li class="menu6 sub"><a href="">ระบบอื่นๆ ที่เกี่ยวข้อง</a>
 						<ul class="submenu-top">
-							<li class="sub1"><a href="#">Supmenu 1</a></li>
-							<li class="sub2"><a href="#">Supmenu 2</a></li>
+							<a href="#"><li class="sub1">Supmenu 1</li></a>
+							<a href="#"><li class="sub2">Supmenu 2</li></a>
 						</ul>
 					</li>
-					<li class="menu6"><a class="sub">ระบบอื่นๆ ที่เกี่ยวข้อง</a>
+					<li class="menu7 sub"><a href="">ถาม-ตอบ</a>
 						<ul class="submenu-top">
-							<li class="sub1"><a href="#">Supmenu 1</a></li>
-							<li class="sub2"><a href="#">Supmenu 2</a></li>
+							<a href="#"><li class="sub1">Supmenu 1</li></a>
+							<a href="#"><li class="sub2">Supmenu 2</li></a>
 						</ul>
 					</li>
-					<li class="menu7"><a class="sub">ถาม-ตอบ</a>
+					<li class="menu8 sub"><a href="">ติดต่อเรา</a>
 						<ul class="submenu-top">
-							<li class="sub1"><a href="#">Supmenu 1</a></li>
-							<li class="sub2"><a href="#">Supmenu 2</a></li>
-						</ul>
-					</li>
-					<li class="menu8"><a class="sub">ติดต่อเรา</a>
-						<ul class="submenu-top">
-							<li class="sub1"><a href="#">Supmenu 1</a></li>
-							<li class="sub2"><a href="#">Supmenu 2</a></li>
+							<a href="#"><li class="sub1">Supmenu 1</li></a>
+							<a href="#"><li class="sub2">Supmenu 2</li></a>
 						</ul>
 					</li>
 				</ul>
