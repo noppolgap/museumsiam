@@ -79,20 +79,20 @@ require("../../assets/configs/function.inc.php");
 							<a href="#>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="category_view.php?cid='.$row['CONTENT_CAT_ID'].'">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="category_view.php?cid='.$row['CONTENT_CAT_ID'].'&MID='.$MID.'">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
 						<? if($row['FLAG'] == 0){ ?>
-							<span class="staus1"></span> <a href="category_action.php?enable&p=<?=$row['CONTENT_CAT_ID']?>&g=<?=$row['FLAG']?>">
+							<span class="staus1"></span> <a href="category_action.php?enable&cid=<?=$row['CONTENT_CAT_ID']?>&vis=<?=$row['FLAG']?>&MID=<?=$MID?>">
 							Enable
 						</a> <?}  else {?> 
 							<span class="staus2"></span> 
-							<a href="category_action.php?enable&p=<?=$row['CONTENT_CAT_ID']?>&g=<?=$row['FLAG']?>"> Disable </a> 
+							<a href="category_action.php?enable&cid=<?=$row['CONTENT_CAT_ID']?>&vis=<?=$row['FLAG']?>&MID=<?=$MID?>"> Disable </a> 
 						<? } ?></div>
 						<div class="floatL EditContent">
-							<a href="category_edit.php?p=<?=$row['CONTENT_CAT_ID']?>" class="EditContentBtn">Edit</a>
+							<a href="category_edit.php?cid=<?=$row['CONTENT_CAT_ID']?>&MID=<?=$MID?>" class="EditContentBtn">Edit</a>
 							<a href="#" data-id=<?=$row['CONTENT_CAT_ID']?> class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	

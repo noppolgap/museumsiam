@@ -39,7 +39,18 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_input"><input type="text" name="txtDescEng" value="" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>	
-								
+							
+
+ <div>
+                    <div class="floatL form_name">&nbsp;&nbsp;</div>
+                    <div class="floatL form_input">
+                      <input  id = "chkHasSubCategory" type="checkbox" name="chkHasSubCategory" >&nbsp;มีหมวดหมู่ย่อย</input>
+                          
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				   </div>
+				   
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">

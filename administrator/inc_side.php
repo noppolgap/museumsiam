@@ -23,7 +23,7 @@
 	<a href="../mod_user/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ระบบจัดการผู้ใช้งาน</span></a>
 	<a href="../mod_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบ</span></a>
 	<a href="../mod_sub_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบย่อย</span></a>
-	<a href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่</span></a>
+	<a href="../mod_category/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่</span></a>
 	<a href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่ย่อย</span></a>
 	<a href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการเนื้อหา</span></a>
 	

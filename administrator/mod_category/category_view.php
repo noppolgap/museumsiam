@@ -23,12 +23,12 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">แก้ไขหมวดหมู่ <?=$row['MODULE_NAME_LOC'];?></div>					
+					<div class="floatL titleBox">รายละเอียดหมวดหมู่ <?=$row['MODULE_NAME_LOC'];?></div>					
 				</div>
 				<div class="mod-body-main-content">
 					<div class="formCms">
 						<? $id = $_GET['cid']; ?>
-						<form action="category_action.php?edit&MID=<?=$MID?>" method="post" name="formcms">
+						<form action="" method="post" name="formcms">
 							<?php
 							   $sql= "SELECT * FROM trn_content_category 
 							   WHERE Flag <> 2 AND CONTENT_CAT_ID = $id ";
@@ -70,8 +70,7 @@ require("../../assets/configs/function.inc.php");
 							<?}?>
 
 							<div class="btn_action">
-								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
-								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
+								
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'main_category_view.php?MID=<?=$MID?>' ">
 							</div>
 						</form> 
