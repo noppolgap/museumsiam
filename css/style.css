@@ -191,6 +191,7 @@ a{
 }
 .box-lang a{
 	text-transform: uppercase;
+	color: #cacaca;
 }
 .box-lang a:hover{
 	text-decoration: underline;	
@@ -310,6 +311,7 @@ ul.menutop{
 	padding: 0px;	
 }
 ul.menutop li{	
+	font-family: 'kaniga_patanabold';
 	font-size: 22px;
 	text-transform: uppercase;
 	float: left;
@@ -438,8 +440,6 @@ ul.submenu-top li:hover{
 	height: 35px;
 	line-height: 35px;
 }
-
-
 .part-icon{
 	background-color: #6f0600;
 	border-top: 4px solid #000;

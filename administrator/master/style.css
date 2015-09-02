@@ -426,3 +426,30 @@ header{
 	text-align: center;
     background-size: cover;
 }
+.Main_Category_Content{
+	width: 250px;
+	margin: 5px 10px;
+	border: 1px solid #aaa;
+	min-height: 120px;
+}
+.thumbCategoryContent{
+	background-image: url('../images/logo_thumb.jpg');
+	background-size: cover;
+	background-position: center center;
+	width: 230px;
+	height: 170px;
+	margin: 10px;
+	border: 1px solid #aaa;
+}
+.nameCategoryContent{
+	margin: 5px 15px 10px;
+	color: #000;
+}
+.nameCategoryContent > div > a{
+    display: block;
+    font-size: 1.3em;
+    font-weight: 600;
+    height: 1.3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

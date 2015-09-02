@@ -78,7 +78,17 @@ a.btn-forgot:hover{
 	width: 222px;
 }
 
+/* --------------------------------------------------- Forgot --------------------------------------------------- */
 
-
-
-
+.box-forgot {
+	width: 355px;
+}
+.box-forgot .box-top p{
+	font-size: 25px;
+	text-align: center;
+	color: #fff;
+	margin-bottom: 20px;
+}
+.box-forgot .box-bottom .box-btn .btn.black{
+	width: 190px;
+}

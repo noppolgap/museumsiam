@@ -58,7 +58,17 @@ require("../../assets/configs/function.inc.php");
 					
 					$i = 0 ; 
 					while($row = mysql_fetch_array($rs)){
-					
+					?>
+						<div data-id="<?=$row['MODULE_ID']?>" class="Main_Category_Content floatL">
+							<a href="main_category_view.php?MID=<?=$row["MODULE_ID"]?>"><span class="thumbCategoryContent dBlock" <?=callThumbList($row['MODULE_ID'],1,false)?>></span></a>
+							<div class="nameCategoryContent">
+								<div><a href="main_category_view.php?MID=<?=$row["MODULE_ID"]?>"><?=$row["MODULE_NAME_LOC"]?></a></div>
+								<div>วันที่สร้าง <?=$row["CREATE_DATE"]?></div>
+								<div>วันที่ปรับปรุง <?=$row["LAST_UPDATE_DATE"]?></div>
+							</div>	
+						</div>					
+					<?	
+					/*
 						echo "<div class='Main_Content' data-id='".$row['MODULE_ID']."'>";
 						echo "<div class='floatL checkboxContent'></div>";
 						echo "<div class='floatL thumbContent'>";
@@ -75,8 +85,8 @@ require("../../assets/configs/function.inc.php");
 						echo "";
 						echo "";
 						echo "</div>";
-						echo " <div class='clear'></div>	";
-						echo " </div>";
+						echo "<div class='clear'></div>";
+						echo " </div>";*/
 $i++;
 				}mysql_free_result($rs);
 
@@ -84,6 +94,7 @@ $i++;
 						?>
 						 
 						<!-- end loop -->
+						<div class="clear"></div>	
 					</div>
 					<div class="pagination_box">
 						<div class="floatL">จำนวนทั้งหมด <span class='RowCount'><?=$i?></span> รายการ</div>
