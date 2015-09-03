@@ -235,7 +235,7 @@ a{
 .box-btn-social a.yt{ background: url(../images/icon-youtube.png) no-repeat; }
 .box-btn-social a.ig{ background: url(../images/icon-ig.png) no-repeat; }
 
-.box-search input{
+.box-search input[type="text"]{
 	background: url(../images/icon-mag.png) #1a1a1a no-repeat;
 	width: 150px;
 	height: 23px;

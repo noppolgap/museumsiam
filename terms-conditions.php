@@ -49,7 +49,15 @@ require("assets/configs/function.inc.php");
 <div class="part-content-main">
 	<div class="container">
 		<div class="box-content-main">
-
+			<div class="box-condition">
+				
+			</div>
+		</div>
+		<div class="box-btn-condition">
+			<div class="box-btn">
+				<a  href="login.php" class="btn black">ยกเลิก</a>
+				<a  href="createacc.php" class="btn black">ยอมรับเงื่อนไข</a>
+			</div>
 		</div>
 	</div>
 </div>

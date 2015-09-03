@@ -51,102 +51,132 @@ require("assets/configs/function.inc.php");
 <div class="part-content-main">
 	<div class="container">
 		<div class="box-content-main">
-			<div class="box-select-type">
-				<div><input type="radio" name="radio1" value="type1" checked>สมาชิกทั่วไป</div>
-				<div><input type="radio" name="radio1" value="type2">สมาชิกพิพิธภัณฑ์</div>
-			</div>
-			<div  class="box-login-fb">
-				<a href="f#" class="btn-login-fb"><img src="images/form/btn-login-fb.png"/></a>
-			</div>
-			<div class="box-or">
-				<p>
-					<span>OR</span>
-				</p>
-			</div>
 			<div class="box-group-form cf">
 				<div class="box-row cf">
-					<div class="box-left">
+					<div class="box-max">
 						<div class="box-input-text">
-							<p>ชื่อ*</p>
-							<div><input type="text"></div>
-						</div>
-					</div>
-					<div class="box-right">
-						<div class="box-input-text">
-							<p>นามสกุล*</p>
+							<p>ชื่อพิพิธภัณฑ์* (ภาษาไทย)</p>
 							<div><input type="text"></div>
 						</div>
 					</div>
 				</div>
 				<div class="box-row cf">
-					<div class="box-left">
-						<div class="box-input-text radio">
-							<p>เพศ*</p>
-							<div><input type="radio" name="radio2" value="type1" checked>ชาย</div>
-							<div><input type="radio" name="radio2" value="type2">หญิง</div>
-						</div>
-					</div>
-					<div class="box-right">
+					<div class="box-max">
 						<div class="box-input-text">
-							<p>วันเกิด*</p>
+							<p>ชื่อพิพิธภัณฑ์* (ภาษาอังกฤษ)</p>
 							<div><input type="text"></div>
-						</div>
-					</div>
-				</div>
-				<div class="box-row cf">
-					<div class="box-left w600">
-						<div class="box-input-text">
-							<p>อีเมล์*</p>
-							<div><input type="text"></div>
-						</div>
-					</div>
-					<div class="box-right w150">
-						<div class="box-input-text">
-							<p></p>
-							<div class="box-btn">
-								<a  class="btn black">ตรวจสอบ</a>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="box-group-form red cf">
 				<div class="box-row cf">
+					<div class="box-max">
+						<div class="box-input-text">
+							<p>ที่อยู่*</p>
+							<div><input type="text"></div>
+						</div>
+					</div>
+				</div>
+				<div class="box-row cf">
 					<div class="box-left">
 						<div class="box-input-text">
-							<p>รหัสผ่าน*</p>
-							<div><input type="text"></div>
+							<p>จังหวัด</p>
+							<div>
+								<div class="SearchMenu-item">
+									- เลือกจังหวัด -
+									<select class="p-Absolute">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
-							<p></p>
-							<div><span>*กรุณากรอกรหัสผ่านอย่างน้อย 4 ตัวอักษรและต้องเป็นตัวเลข<br>หรือตัวอักษรภาษาอังกฤษเท่านั้น</span></div>
+							<p>อำเภอ/เขต</p>
+							<div>
+								<div class="SearchMenu-item">
+									- เลือกอำเภอ/เขต -
+									<select class="p-Absolute">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
 						<div class="box-input-text">
-							<p>ยืนยันรหัสผ่าน*</p>
+							<p>ตำบล/แขวง</p>
+							<div>
+								<div class="SearchMenu-item">
+									- เลือกตำบล/แขวง -
+									<select class="p-Absolute">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-right">
+						<div class="box-input-text">
+							<p>รหัสไปรษณีย์</p>
 							<div><input type="text"></div>
 						</div>
 					</div>
 				</div>
-			</div>	
-			<div class="box-group-form Bred cf">
 				<div class="box-row cf">
-					<div class="box-left w600">
-						<div class="box-input-text">
-							<p>รหัสประจำตัวประชาชน*</p>
-							<div><input type="text"></div>
+					<div class="box-left">
+						<div class="box-input-text checkbox">
+							<p>วันและเวลาทำการ</p>
+							<div>
+								<input type="checkbox"><span>จ</span>
+							</div>
+							<div>
+								<input type="checkbox"><span>อ</span>
+							</div>
+							<div>
+								<input type="checkbox"><span>พ</span>
+							</div>
+							<div>
+								<input type="checkbox"><span>พฤ</span>
+							</div>
+							<div>
+								<input type="checkbox"><span>ศ</span>
+							</div>
+							<div>
+								<input type="checkbox"><span>ส</span>
+							</div>
+							<div>
+								<input type="checkbox"><span>อา</span>
+							</div>							
 						</div>
 					</div>
-					<div class="box-right w150">
-						<div class="box-input-text">
-							<p></p>
-							<div class="box-btn">
-								<a  class="btn black">ตรวจสอบ</a>
+				</div>
+				<div class="box-row cf">
+					<div class="box-left">
+						<div class="box-input-text time">
+							<div><img src="images/mog-time.png"/></div>
+						</div>
+					</div>
+					<div class="box-right">
+						<div class="box-input-text time">
+							<div class="box-btn submit">
+								<a  href="" class="btn black">กำหนดเอง</a>
 							</div>
 						</div>
 					</div>
@@ -193,76 +223,21 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
+			</div>	
+			<div class="box-group-form Bred cf">
 				<div class="box-row cf">
-					<div class="box-left">
+					<div class="box-left w600">
 						<div class="box-input-text">
-							<p>ที่อยู่</p>
-							<div><textarea></textarea></div>
+							<p>กรุณาแนบเอกสารยืนยัน*</p>
+							<div><input type="text"></div>
 						</div>
 					</div>
-				</div>
-				<div class="box-row cf">
-					<div class="box-left">
+					<div class="box-right w150">
 						<div class="box-input-text">
-							<p>จังหวัด</p>
-							<div>
-								<div class="SearchMenu-item">
-									- เลือกจังหวัด -
-									<select class="p-Absolute">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-								</div>
+							<p></p>
+							<div class="box-btn">
+								<a  class="btn black">ตรวจสอบ</a>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="box-row cf">
-					<div class="box-left">
-						<div class="box-input-text">
-							<p>อำเภอ/เขต</p>
-							<div>
-								<div class="SearchMenu-item">
-									- เลือกอำเภอ/เขต -
-									<select class="p-Absolute">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="box-row cf">
-					<div class="box-left">
-						<div class="box-input-text">
-							<p>ตำบล/แขวง</p>
-							<div>
-								<div class="SearchMenu-item">
-									- เลือกตำบล/แขวง -
-									<select class="p-Absolute">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="box-row cf">
-					<div class="box-left">
-						<div class="box-input-text">
-							<p>รหัสไปรษณีย์</p>
-							<div><textarea></textarea></div>
 						</div>
 					</div>
 				</div>
