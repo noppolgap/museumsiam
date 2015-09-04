@@ -106,7 +106,7 @@ a{
 	line-height: 31px;
 	padding: 0 20px;
 	text-transform: uppercase;
-	font-size: 18px;
+/* 	font-size: 18px; */
 	display: table;
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
@@ -115,6 +115,8 @@ a{
 	float: left;
 	text-align: center;
 	width: 120px;
+	font-family: sans-serif;
+	font-size: 13px;
 }
 .box-btn .btn.red{
 	background-color: #6e0904;
@@ -235,7 +237,7 @@ a{
 .box-btn-social a.yt{ background: url(../images/icon-youtube.png) no-repeat; }
 .box-btn-social a.ig{ background: url(../images/icon-ig.png) no-repeat; }
 
-.box-search input{
+.box-search input[type="text"]{
 	background: url(../images/icon-mag.png) #1a1a1a no-repeat;
 	width: 150px;
 	height: 23px;
@@ -448,11 +450,12 @@ ul.submenu-top li:hover{
 .part-icon .box-icon-main{
 	display: table;
 	margin: 0 auto;
+	text-align: center;
 }
 .part-icon .box-icon-main a{
-	float: left;
-	display: table;
-	margin: 0 45px;
+/* 	float: left; */
+	display: inline-block;
+	margin: 10px 45px;
 }
 
 
@@ -476,6 +479,11 @@ ul.submenu-top li:hover{
 }
 .box-nav ol{
 	font-size: 15px;
+/*
+	font-family: sans-serif;
+	font-size: 12px;
+*/
+	font-family: 'kaniga_patanabold';
 }
 .box-nav ol li{
 	float: left;
@@ -516,7 +524,7 @@ ul.submenu-top li:hover{
 .box-titlepage span{
 	font-size: 40px;
 	color: #8e070b;
-	font-family: 'kaniga_patanaregular';
+/* 	font-family: 'kaniga_patanaregular'; */
 }
 
 .box-freespace{

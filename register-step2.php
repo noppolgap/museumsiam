@@ -17,6 +17,7 @@ require("assets/configs/function.inc.php");
 // 		$("li.menu1").addClass("active");		
 	});
 </script>
+
 	
 </head>
 
@@ -135,7 +136,11 @@ require("assets/configs/function.inc.php");
 					<div class="box-right">
 						<div class="box-input-text">
 							<p>รหัสไปรษณีย์</p>
+<<<<<<< HEAD
 							<div><input type="text"></div>
+=======
+							<div><input type="number" maxlength="5" name="postcode"></div>
+>>>>>>> origin/master
 						</div>
 					</div>
 				</div>
@@ -170,18 +175,105 @@ require("assets/configs/function.inc.php");
 				<div class="box-row cf">
 					<div class="box-left">
 						<div class="box-input-text time">
+<<<<<<< HEAD
 							<div><img src="images/mog-time.png"/></div>
+=======
+							<p id="timeText">เวลาทำการ <span class="amount-time" id="amount-time-all">8:00 - 20:00</span></p>
+							<div class="workingtime" data-box="all">
+								<input type="hidden" name="startdate" class="startdate" value="" />
+								<input type="hidden" name="enddate" class="enddate" value="" />
+							</div>
+>>>>>>> origin/master
 						</div>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text time">
 							<div class="box-btn submit">
+<<<<<<< HEAD
 								<a  href="" class="btn black">กำหนดเอง</a>
+=======
+								<a href="#" class="btn black toogleworkingtimeBlock">กำหนดเอง</a>
+>>>>>>> origin/master
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="box-row cf">
+<<<<<<< HEAD
+=======
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date" value="mon"></div>
+						<div class="fixDateBoxDate">วันจันทร์ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-mon">8:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="mon">
+							<input type="hidden" name="startdate" class="startdate" value="" />
+							<input type="hidden" name="enddate" class="enddate" value="" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date" value="tue"></div>
+						<div class="fixDateBoxDate">วันอังคาร เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-tue">8:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="tue">
+							<input type="hidden" name="startdate" class="startdate" value="" />
+							<input type="hidden" name="enddate" class="enddate" value="" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date" value="wed"></div>
+						<div class="fixDateBoxDate">วันพุธ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-wed">8:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="wed">
+							<input type="hidden" name="startdate" class="startdate" value="" />
+							<input type="hidden" name="enddate" class="enddate" value="" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date" value="thu"></div>
+						<div class="fixDateBoxDate">วันพฤหัสบดี เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-thu">8:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="thu">
+							<input type="hidden" name="startdate" class="startdate" value="" />
+							<input type="hidden" name="enddate" class="enddate" value="" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date" value="fri"></div>
+						<div class="fixDateBoxDate">วันศุกร์ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-fri">8:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="fri">
+							<input type="hidden" name="startdate" class="startdate" value="" />
+							<input type="hidden" name="enddate" class="enddate" value="" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date" value="sat"></div>
+						<div class="fixDateBoxDate">วันเสาร์ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-sat">8:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="sat">
+							<input type="hidden" name="startdate" class="startdate" value="" />
+							<input type="hidden" name="enddate" class="enddate" value="" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date" value="sun"></div>
+						<div class="fixDateBoxDate">วันอาทิตย์ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-sun">8:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="sun">
+							<input type="hidden" name="startdate" class="startdate" value="" />
+							<input type="hidden" name="enddate" class="enddate" value="" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="box-row cf">
+>>>>>>> origin/master
 					<div class="box-left">
 						<div class="box-input-text">
 							<p>โทรศัพท์</p>
@@ -270,6 +362,49 @@ require("assets/configs/function.inc.php");
 
 <?php include('inc/inc-footer.php'); ?>	
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<<<<<<< HEAD
 
+=======
+<script>
+$(function() {
+    $(".workingtime").slider({
+        range: true,
+        min: 0,
+        max: 1440,
+        step: 5,
+        values: [ 480, 1080 ],
+        slide: function( event, ui ) {
+            var hours1 = Math.floor(ui.values[0] / 60);
+            var minutes1 = ui.values[0] - (hours1 * 60);
+
+            if(hours1.length < 10) hours1= '0' + hours;
+            if(minutes1.length < 10) minutes1 = '0' + minutes;
+
+            if(minutes1 == 0) minutes1 = '00';
+
+            var hours2 = Math.floor(ui.values[1] / 60);
+            var minutes2 = ui.values[1] - (hours2 * 60);
+
+            if(hours2.length < 10) hours2= '0' + hours;
+            if(minutes2.length < 10) minutes2 = '0' + minutes;
+
+            if(minutes2 == 0) minutes2 = '00';
+
+            
+			var id = $(this).attr("data-box");
+			$('#amount-time-'+id).text(hours1+':'+minutes1+' - '+hours2+':'+minutes2 );
+            $(this).find('.startdate').val(hours1+':'+minutes1);
+            $(this).find('.enddate').val(hours2+':'+minutes2);
+        }
+    });
+    
+    $('.toogleworkingtimeBlock').on( "click", function(e) {
+		$('.fixDateBox').toggle('blind'); 
+		e.preventDefault();
+		e.stopPropagation(); 
+	});
+});
+</script>
+>>>>>>> origin/master
 </body>
 </html>
