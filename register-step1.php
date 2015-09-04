@@ -155,7 +155,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-left">
 						<div class="box-input-text">
 							<p>โทรศัพท์</p>
-							<div><input type="text"></div>
+							<div><input type="tel" name="telephone" pattern="[0-9]{10}" ></div>
 						</div>
 					</div>
 					<div class="box-right">
@@ -169,7 +169,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-left">
 						<div class="box-input-text">
 							<p>โทรศัพท์มือถือ</p>
-							<div><input type="text"></div>
+							<div><input type="tel" name="mobile" pattern="[0-9]{10}" ></div>
 						</div>
 					</div>
 					<div class="box-right">
@@ -183,7 +183,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-left">
 						<div class="box-input-text">
 							<p>โทรสาร</p>
-							<div><input type="text"></div>
+							<div><input type="tel" name="fax" pattern="[0-9]{10}" ></div>
 						</div>
 					</div>
 					<div class="box-right">
@@ -270,7 +270,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-left">
 						<div class="box-input-text">
 							<p>รหัสยืนยัน</p>
-							<div><img src="http://placehold.it/370x75"></div>
+							<div class="g-recaptcha" data-sitekey="6Ld2VgwTAAAAAEmFQsLXE8zem5b7CCg3Jxbjds6p"></div>
 						</div>
 					</div>
 					<div class="box-right">
@@ -294,6 +294,6 @@ require("assets/configs/function.inc.php");
 
 
 <?php include('inc/inc-footer.php'); ?>	
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>
