@@ -12,6 +12,8 @@ input[type="text"]{
 	border: 1px solid #989898;
 	line-height: 35px;
 	padding: 0 10px;
+	font-family: sans-serif;
+	font-size: 14px;
 }
 textarea{
 	width: 100%;
@@ -21,6 +23,8 @@ textarea{
 	resize: none;
 	padding: 0 10px;
 	line-height: 20px;
+	font-family: sans-serif;
+	font-size: 14px;
 }
 .SearchMenu-item {
 	display: inline-block;
@@ -183,7 +187,7 @@ body#noti .part-content-main{
 	margin: 0 auto 40px; 
 }
 .box-noti p{
-	font-size: 40px;
+	font-size: 35px;
 	letter-spacing: 1px;	
 	text-align: center;
 	font-family: 'kaniga_patanaregular';

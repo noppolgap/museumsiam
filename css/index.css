@@ -223,7 +223,7 @@ div.text-title{
 	transition: all 0.3s ease;
 }
 .box-tumb-date:hover .text-month{
-	background-color: #6e0904;
+	background-color: transparent;
 }
 
 .sun{ background-color: #7d0800; }
@@ -235,7 +235,14 @@ div.text-title{
 .sat{ background-color: #422a6b; }
 .today{ border-color: #000; }
 
-.btn-all{ border-color: #6e0904; }
+.btn-all{ 
+	border-color: #6e0904; 
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.btn-all:hover{ color: #fff; background-color: #000; }
 .btn-all .box-text{
 	display: table;
 	width: 100%;
@@ -467,6 +474,18 @@ div.text-title{
 .part-news .box-top .box-news-bold .box-pic{
 	float: left;
 }
+.part-news .box-top .box-news-bold .box-tag-cate{
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.7);
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	line-height: 27px;
+	font-size: 22px;
+	color: #fff;
+	padding: 0 10px 0 30px;
+	text-transform: uppercase;
+}
 .part-news .box-top .box-news-bold .box-text{
 	float: right;
 	width: 275px;
@@ -497,6 +516,19 @@ div.text-title{
 .part-news .box-bottom .box-news .box-pic{
 	float: none;
 }
+.part-news .box-bottom .box-news .box-tag-cate{
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.7);
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	line-height: 27px;
+	font-size: 22px;
+	color: #fff;
+	padding: 0 10px 0 30px;
+	text-transform: uppercase;
+}
+
 .part-news .box-bottom .box-news .box-text{
 	float: none;
 }

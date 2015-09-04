@@ -251,7 +251,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-right">
 						<div class="box-input-text">
 							<p></p>
-							<div><span>*PLEASE AUTHENTICATE WITH RECAPCHA TO HELP<br>CUT DOWN ON COSTLY ABUSE.</span></div>
+							<div><span>*กรุณกดเพื่อยืนยันตัวตนว่าคุณไม่ใช่โปรแกรมอัตโนมัติ</span></div>
 						</div>
 					</div>
 				</div>

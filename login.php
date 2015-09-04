@@ -51,16 +51,16 @@ require("assets/configs/function.inc.php");
 		<div class="box-content-main">
 			<div class="box-login">
 				<div class="box-top">
-					<input type="text" placeholder="E-MAIL ADDRESS">
-					<input type="text" placeholder="PASSWORD">
+					<input type="text" placeholder="อีเมล">
+					<input type="text" placeholder="รหัสผ่าน">
 				</div>
 				<div class="box-bottom cf">
 					<div class="box-left">
-						<a href="forgot.php" class="btn-forgot">Forgot your password?</a>
+						<a href="forgot.php" class="btn-forgot">ลืมรหัสผ่าน?</a>
 					</div>
 					<div class="box-right">
 						<div class="box-btn">
-							<a  class="btn black">log in</a>
+							<a  class="btn black">เข้าสู่ระบบ</a>
 						</div>
 					</div>
 				</div>
@@ -74,9 +74,9 @@ require("assets/configs/function.inc.php");
 				<a href="f#" class="btn-login-fb"><img src="images/form/btn-login-fb.png"/></a>
 			</div>
 			<div class="box-createacc cf">
-				<p>Don’t have an account?</p>
+				<p>ต้องการสมัครสมาชิก?</p>
 				<div class="box-btn">
-					<a  class="btn black">Create Account now</a>
+					<a  class="btn black">สมัครสมาชิก</a>
 				</div>
 			</div>
 		</div>

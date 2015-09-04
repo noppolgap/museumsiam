@@ -79,6 +79,9 @@
 				<a href=""><img src="http://placehold.it/90x90"></a>
 				<a href=""><img src="http://placehold.it/90x90"></a>
 				<a href=""><img src="http://placehold.it/90x90"></a>
+				<a href=""><img src="http://placehold.it/90x90"></a>
+				<a href=""><img src="http://placehold.it/90x90"></a>
+				<a href=""><img src="http://placehold.it/90x90"></a>
 			</div>
 		</div>
 	</div>

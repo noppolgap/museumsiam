@@ -448,11 +448,12 @@ ul.submenu-top li:hover{
 .part-icon .box-icon-main{
 	display: table;
 	margin: 0 auto;
+	text-align: center;
 }
 .part-icon .box-icon-main a{
-	float: left;
-	display: table;
-	margin: 0 45px;
+/* 	float: left; */
+	display: inline-block;
+	margin: 10px 45px;
 }
 
 
@@ -476,6 +477,11 @@ ul.submenu-top li:hover{
 }
 .box-nav ol{
 	font-size: 15px;
+/*
+	font-family: sans-serif;
+	font-size: 12px;
+*/
+	font-family: 'kaniga_patanabold';
 }
 .box-nav ol li{
 	float: left;
@@ -516,7 +522,7 @@ ul.submenu-top li:hover{
 .box-titlepage span{
 	font-size: 40px;
 	color: #8e070b;
-	font-family: 'kaniga_patanaregular';
+/* 	font-family: 'kaniga_patanaregular'; */
 }
 
 .box-freespace{
