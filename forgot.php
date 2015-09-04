@@ -57,7 +57,7 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-bottom cf">
 					<div class="box-btn cf">
-						<a  class="btn black">Send Password</a>
+						<a  class="btn black">ขอรหัสผ่านใหม่</a>
 					</div>
 				</div>
 			</div>
@@ -67,9 +67,9 @@ require("assets/configs/function.inc.php");
 				</p>
 			</div>
 			<div class="box-createacc cf">
-				<p>Don’t have an account?</p>
+				<p>ต้องการสมัครสมาชิก?</p>
 				<div class="box-btn">
-					<a  class="btn black">Create Account now</a>
+					<a  class="btn black">สมัครสมาชิก</a>
 				</div>
 			</div>
 		</div>

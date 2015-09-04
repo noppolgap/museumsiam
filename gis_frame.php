@@ -17,10 +17,15 @@ require("assets/configs/function.inc.php");
 	    <div class="infoboxAddress">1 หมู่ 7 กระตีบ กำแพงแสน นครปฐม 73180</div>
 	    <div class="infobox-control-btn">
 	      	<div class="infobox-btn btndetail" onclick="showResult3(2416);">รายละเอียด</div>
-		  	<div class="infobox-btn btndirection" onclick="ShowDirectionsPanel();">ขอเส้นทาง</div>
+		  	<div class="infobox-btn btndirection" onclick="parent.getDirections(<?=$_GET['p']?> ,'','<?=$_GET['lat']?>','<?=$_GET['lng']?>');">ขอเส้นทาง</div>
 	    </div>
   	</div>
 </div>
+<script>
+var  startPoint = '';
+</script>	
 </body>
 </html>
 <? CloseDB(); ?>
+
+

@@ -50,77 +50,77 @@ require("assets/configs/function.inc.php");
 				<a>
 					<div class="box-tumb-date  sun  today">
 						<div class="text-date">
-							sun
+							อาทิตย์
 							<span>30</span>
 						</div>
 						<div class="text-month">
-							january
+							พฤศจิกายน
 						</div>
 					</div>
 				</a>
 				<a>
 					<div class="box-tumb-date mon">
 						<div class="text-date">
-							mon
+							จันทร์
 							<span>30</span>
 						</div>
 						<div class="text-month">
-							january
+							พฤศจิกายน
 						</div>
 					</div>
 				</a>
 				<a>
 					<div class="box-tumb-date tue">
 						<div class="text-date">
-							tue
+							อังคาร
 							<span>30</span>
 						</div>
 						<div class="text-month">
-							january
+							พฤศจิกายน
 						</div>
 					</div>
 				</a>
 				<a>
 					<div class="box-tumb-date wed">
 						<div class="text-date">
-							wed
+							พุธ
 							<span>30</span>
 						</div>
 						<div class="text-month">
-							january
+							พฤศจิกายน
 						</div>
 					</div>
 				</a>
 				<a>
 					<div class="box-tumb-date thu">
 						<div class="text-date">
-							thu
+							พฤหัสบดี
 							<span>30</span>
 						</div>
 						<div class="text-month">
-							january
+							พฤศจิกายน
 						</div>
 					</div>
 				</a>
 				<a>
 					<div class="box-tumb-date fri">
 						<div class="text-date">
-							fri
+							ศุกร์
 							<span>30</span>
 						</div>
 						<div class="text-month">
-							january
+							พฤศจิกายน
 						</div>
 					</div>
 				</a>
 				<a>
 					<div class="box-tumb-date sat">
 						<div class="text-date">
-							sat
+							เสาร์
 							<span>30</span>
 						</div>
 						<div class="text-month">
-							january
+							พฤศจิกายน
 						</div>
 					</div>
 				</a>
@@ -128,7 +128,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-tumb-date btn-all">
 						<div class="box-text">
 							<p>
-								view all
+								ดูทั้งหมด
 								<img src="images/icon-arrow-right.png"/>
 							</p>
 						</div>
@@ -148,8 +148,8 @@ require("assets/configs/function.inc.php");
 								</div>
 								<div class="box-right">
 									<p>
-										fri<br>
-										<span>feb 2015</span>
+										ศุกร์<br>
+										<span>พ.ย. 2559</span>
 									</p>
 								</div>
 							</div>
@@ -160,13 +160,13 @@ require("assets/configs/function.inc.php");
 									</p>
 								</a>
 								<p class="text-date TcolorGray">
-									28 Jan 2015
+									28 พ.ย. 2559
 								</p>
 								<p class="text-des TcolorBlack">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
-									<a href="" class="btn red">read more ></a>
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
 									<div class="box-btn-social cf">
 										<a href="#" class="btn-socila fb"></a>
 										<a href="#" class="btn-socila tw"></a>
@@ -180,7 +180,7 @@ require("assets/configs/function.inc.php");
 									<img src="http://placehold.it/287x405">
 								</div>
 								<div class="box-tag-cate">
-									museum siam
+									มิวเซี่ยม สยาม
 								</div>
 							</a>
 						</div>
@@ -193,8 +193,8 @@ require("assets/configs/function.inc.php");
 								</div>
 								<div class="box-right">
 									<p>
-										fri<br>
-										<span>feb 2015</span>
+										ศุกร์<br>
+										<span>พ.ย. 2559</span>
 									</p>
 								</div>
 							</div>
@@ -205,13 +205,13 @@ require("assets/configs/function.inc.php");
 									</p>
 								</a>
 								<p class="text-date TcolorGray">
-									28 Jan 2015
+									28 พ.ย. 2559
 								</p>
 								<p class="text-des TcolorBlack">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
-									<a href="" class="btn red">read more ></a>
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
 									<div class="box-btn-social cf">
 										<a href="#" class="btn-socila fb"></a>
 										<a href="#" class="btn-socila tw"></a>
@@ -225,7 +225,7 @@ require("assets/configs/function.inc.php");
 									<img src="http://placehold.it/287x405">
 								</div>
 								<div class="box-tag-cate">
-									museum siam
+									มิวเซี่ยม สยาม
 								</div>
 							</a>
 						</div>
@@ -238,8 +238,8 @@ require("assets/configs/function.inc.php");
 								</div>
 								<div class="box-right">
 									<p>
-										fri<br>
-										<span>feb 2015</span>
+										ศุกร์<br>
+										<span>พ.ย. 2559</span>
 									</p>
 								</div>
 							</div>
@@ -250,13 +250,13 @@ require("assets/configs/function.inc.php");
 									</p>
 								</a>
 								<p class="text-date TcolorGray">
-									28 Jan 2015
+									28 พ.ย. 2559
 								</p>
 								<p class="text-des TcolorBlack">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
-									<a href="" class="btn red">read more ></a>
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
 									<div class="box-btn-social cf">
 										<a href="#" class="btn-socila fb"></a>
 										<a href="#" class="btn-socila tw"></a>
@@ -270,7 +270,7 @@ require("assets/configs/function.inc.php");
 									<img src="http://placehold.it/287x405">
 								</div>
 								<div class="box-tag-cate">
-									museum siam
+									มิวเซี่ยม สยาม
 								</div>
 							</a>
 						</div>
@@ -283,8 +283,8 @@ require("assets/configs/function.inc.php");
 								</div>
 								<div class="box-right">
 									<p>
-										fri<br>
-										<span>feb 2015</span>
+										ศุกร์<br>
+										<span>พ.ย. 2559</span>
 									</p>
 								</div>
 							</div>
@@ -295,13 +295,13 @@ require("assets/configs/function.inc.php");
 									</p>
 								</a>
 								<p class="text-date TcolorGray">
-									28 Jan 2015
+									28 พ.ย. 2559
 								</p>
 								<p class="text-des TcolorBlack">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
-									<a href="" class="btn red">read more ></a>
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
 									<div class="box-btn-social cf">
 										<a href="#" class="btn-socila fb"></a>
 										<a href="#" class="btn-socila tw"></a>
@@ -315,7 +315,7 @@ require("assets/configs/function.inc.php");
 									<img src="http://placehold.it/287x405">
 								</div>
 								<div class="box-tag-cate">
-									museum siam
+									มิวเซี่ยม สยาม
 								</div>
 							</a>
 						</div>
@@ -328,8 +328,8 @@ require("assets/configs/function.inc.php");
 								</div>
 								<div class="box-right">
 									<p>
-										fri<br>
-										<span>feb 2015</span>
+										ศุกร์<br>
+										<span>พ.ย. 2559</span>
 									</p>
 								</div>
 							</div>
@@ -340,13 +340,13 @@ require("assets/configs/function.inc.php");
 									</p>
 								</a>
 								<p class="text-date TcolorGray">
-									28 Jan 2015
+									28 พ.ย. 2559
 								</p>
 								<p class="text-des TcolorBlack">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
-									<a href="" class="btn red">read more ></a>
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
 									<div class="box-btn-social cf">
 										<a href="#" class="btn-socila fb"></a>
 										<a href="#" class="btn-socila tw"></a>
@@ -360,7 +360,7 @@ require("assets/configs/function.inc.php");
 									<img src="http://placehold.it/287x405">
 								</div>
 								<div class="box-tag-cate">
-									museum siam
+									มิวเซี่ยม สยาม
 								</div>
 							</a>
 						</div>
@@ -373,8 +373,8 @@ require("assets/configs/function.inc.php");
 								</div>
 								<div class="box-right">
 									<p>
-										fri<br>
-										<span>feb 2015</span>
+										ศุกร์<br>
+										<span>พ.ย. 2559</span>
 									</p>
 								</div>
 							</div>
@@ -385,13 +385,13 @@ require("assets/configs/function.inc.php");
 									</p>
 								</a>
 								<p class="text-date TcolorGray">
-									28 Jan 2015
+									28 พ.ย. 2559
 								</p>
 								<p class="text-des TcolorBlack">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
-									<a href="" class="btn red">read more ></a>
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
 									<div class="box-btn-social cf">
 										<a href="#" class="btn-socila fb"></a>
 										<a href="#" class="btn-socila tw"></a>
@@ -405,7 +405,7 @@ require("assets/configs/function.inc.php");
 									<img src="http://placehold.it/287x405">
 								</div>
 								<div class="box-tag-cate">
-									museum siam
+									มิวเซี่ยม สยาม
 								</div>
 							</a>
 						</div>
@@ -418,8 +418,8 @@ require("assets/configs/function.inc.php");
 								</div>
 								<div class="box-right">
 									<p>
-										fri<br>
-										<span>feb 2015</span>
+										ศุกร์<br>
+										<span>พ.ย. 2559</span>
 									</p>
 								</div>
 							</div>
@@ -430,13 +430,13 @@ require("assets/configs/function.inc.php");
 									</p>
 								</a>
 								<p class="text-date TcolorGray">
-									28 Jan 2015
+									28 พ.ย. 2559
 								</p>
 								<p class="text-des TcolorBlack">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
-									<a href="" class="btn red">read more ></a>
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
 									<div class="box-btn-social cf">
 										<a href="#" class="btn-socila fb"></a>
 										<a href="#" class="btn-socila tw"></a>
@@ -450,7 +450,7 @@ require("assets/configs/function.inc.php");
 									<img src="http://placehold.it/287x405">
 								</div>
 								<div class="box-tag-cate">
-									museum siam
+									มิวเซี่ยม สยาม
 								</div>
 							</a>
 						</div>
@@ -459,13 +459,13 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-float">
 					<div class="box-btn-left">
-						<a class="btn black" href="">all day</a>
+						<a class="btn black" href="">กิจกรรมวันนี้</a>
 					</div>
 					<div class="box-btn-right">
 						<a class="btn-arrow left"></a>
 						<div class="box-number cf">
 							<p class="currentItem"><span class="result">30</span></p>
-							<p class="ofCenter"> of </p>
+							<p class="ofCenter"> / </p>
 							<p class="owlItems"><span class="result">00</span></p>
 						</div>
 						<a class="btn-arrow right"></a>
@@ -483,13 +483,16 @@ require("assets/configs/function.inc.php");
 			<div class="box-top cf">
 				<div class="box-left">
 					<div class="text-title">all exhibition<span>news</span></div>
-					<a class="btn black" href="">view all</a>
+					<a class="btn black" href="">ดูทั้งหมด</a>
 				</div>
 				<div class="box-right">
 					<div class="box-news-bold cf">
 						<a href="">
 							<div class="box-pic">
 								<img src="http://placehold.it/274x205">
+								<div class="box-tag-cate">
+									มิวเซี่ยม สยาม
+								</div>
 							</div>
 						</a>
 						<div class="box-text">
@@ -499,13 +502,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -521,6 +524,9 @@ require("assets/configs/function.inc.php");
 						<a href="">
 							<div class="box-pic">
 								<img src="http://placehold.it/274x205">
+								<div class="box-tag-cate">
+									มิวเซี่ยม สยาม
+								</div>
 							</div>
 						</a>
 						<div class="box-text">
@@ -530,13 +536,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -548,6 +554,9 @@ require("assets/configs/function.inc.php");
 						<a href="">
 							<div class="box-pic">
 								<img src="http://placehold.it/274x205">
+								<div class="box-tag-cate">
+									มิวเซี่ยม สยาม
+								</div>
 							</div>
 						</a>
 						<div class="box-text">
@@ -557,13 +566,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -575,6 +584,9 @@ require("assets/configs/function.inc.php");
 						<a href="">
 							<div class="box-pic">
 								<img src="http://placehold.it/274x205">
+								<div class="box-tag-cate">
+									มิวเซี่ยม สยาม
+								</div>
 							</div>
 						</a>
 						<div class="box-text">
@@ -584,13 +596,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -617,7 +629,7 @@ require("assets/configs/function.inc.php");
 								Levitated Mass 340 Ton Giant Stone
 							</p></a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 						</div>
 					</div>
@@ -630,7 +642,7 @@ require("assets/configs/function.inc.php");
 								Levitated Mass 340 Ton Giant Stone
 							</p></a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 						</div>
 					</div>
@@ -643,7 +655,7 @@ require("assets/configs/function.inc.php");
 								Levitated Mass 340 Ton Giant Stone
 							</p></a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 						</div>
 					</div>
@@ -656,12 +668,12 @@ require("assets/configs/function.inc.php");
 								Levitated Mass 340 Ton Giant Stone
 							</p></a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 						</div>
 					</div>
 					<div class="box-btn cf">
-						<a href="" class="btn black">view all</a>
+						<a href="" class="btn black">ดูทั้งหมด</a>
 					</div>
 				</div>
 			</div>	
@@ -690,7 +702,7 @@ require("assets/configs/function.inc.php");
 							กรุงเทพมหานคร
 						</p>
 						<p class="text-date TcolorGray">
-							28 Jan 2015
+							28 พ.ย. 2559
 						</p>
 					</div>
 				</div>
@@ -710,7 +722,7 @@ require("assets/configs/function.inc.php");
 							กรุงเทพมหานคร
 						</p>
 						<p class="text-date TcolorGray">
-							28 Jan 2015
+							28 พ.ย. 2559
 						</p>
 					</div>
 				</div>
@@ -730,7 +742,7 @@ require("assets/configs/function.inc.php");
 							กรุงเทพมหานคร
 						</p>
 						<p class="text-date TcolorGray">
-							28 Jan 2015
+							28 พ.ย. 2559
 						</p>
 					</div>
 				</div>
@@ -750,7 +762,7 @@ require("assets/configs/function.inc.php");
 							กรุงเทพมหานคร
 						</p>
 						<p class="text-date TcolorGray">
-							28 Jan 2015
+							28 พ.ย. 2559
 						</p>
 					</div>
 				</div>
@@ -770,7 +782,7 @@ require("assets/configs/function.inc.php");
 							กรุงเทพมหานคร
 						</p>
 						<p class="text-date TcolorGray">
-							28 Jan 2015
+							28 พ.ย. 2559
 						</p>
 					</div>
 				</div>
@@ -778,7 +790,7 @@ require("assets/configs/function.inc.php");
 			<a class="btn-arrow left"></a>
 			<a class="btn-arrow right"></a>
 			<div class="box-btn cf">
-				<a href="" class="btn gold">view all</a>
+				<a href="" class="btn gold">ดูทั้งหมด</a>
 			</div>
 		</div>
 	</div>
@@ -790,7 +802,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-top">
 				<div class="box-title">Virtual<span>Exhibition</span></div>
 				<div class="box-btn cf">
-					<a href="" class="btn black">view all</a>
+					<a href="" class="btn black">ดูทั้งหมด</a>
 				</div>
 			</div>
 			<div class="box-slide-exhibition-main">
@@ -803,13 +815,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -830,13 +842,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -857,13 +869,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -884,13 +896,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -911,13 +923,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -937,7 +949,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-top">
 				<div class="box-title">Digital<span>Archive</span></div>
 				<div class="box-btn cf">
-					<a href="" class="btn black">view all</a>
+					<a href="" class="btn black">ดูทั้งหมด</a>
 				</div>
 			</div>
 			<div class="box-slide-archive-main">
@@ -950,13 +962,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -977,13 +989,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -1004,13 +1016,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -1031,13 +1043,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -1058,13 +1070,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -1084,7 +1096,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-left">
 				<div class="box-title">KnowLedge<span>Management</span></div>
 				<div class="box-btn cf">
-					<a href="" class="btn gold">view all</a>
+					<a href="" class="btn gold">ดูทั้งหมด</a>
 				</div>
 			</div>
 			<div class="box-right">
@@ -1102,13 +1114,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -1129,13 +1141,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -1156,13 +1168,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
@@ -1183,13 +1195,13 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-date TcolorGray">
-								28 Jan 2015
+								28 พ.ย. 2559
 							</p>
 							<p class="text-des TcolorBlack">
 								Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 							</p>
 							<div class="box-btn cf">
-								<a href="" class="btn red">read more ></a>
+								<a href="" class="btn red">อ่านเพิ่มเติม</a>
 								<div class="box-btn-social cf">
 									<a href="#" class="btn-socila fb"></a>
 									<a href="#" class="btn-socila tw"></a>
