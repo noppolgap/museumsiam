@@ -11,13 +11,6 @@ require("assets/configs/function.inc.php");
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/login.css" />
 <link rel="stylesheet" type="text/css" href="css/register.css" />
-
-<script>
-	$(document).ready(function(){
-// 		$("li.menu1").addClass("active");		
-	});
-</script>
-
 	
 </head>
 
@@ -136,11 +129,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-right">
 						<div class="box-input-text">
 							<p>รหัสไปรษณีย์</p>
-<<<<<<< HEAD
-							<div><input type="text"></div>
-=======
 							<div><input type="number" maxlength="5" name="postcode"></div>
->>>>>>> origin/master
 						</div>
 					</div>
 				</div>
@@ -175,32 +164,22 @@ require("assets/configs/function.inc.php");
 				<div class="box-row cf">
 					<div class="box-left">
 						<div class="box-input-text time">
-<<<<<<< HEAD
-							<div><img src="images/mog-time.png"/></div>
-=======
 							<p id="timeText">เวลาทำการ <span class="amount-time" id="amount-time-all">8:00 - 20:00</span></p>
 							<div class="workingtime" data-box="all">
 								<input type="hidden" name="startdate" class="startdate" value="" />
 								<input type="hidden" name="enddate" class="enddate" value="" />
 							</div>
->>>>>>> origin/master
 						</div>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text time">
 							<div class="box-btn submit">
-<<<<<<< HEAD
-								<a  href="" class="btn black">กำหนดเอง</a>
-=======
 								<a href="#" class="btn black toogleworkingtimeBlock">กำหนดเอง</a>
->>>>>>> origin/master
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="box-row cf">
-<<<<<<< HEAD
-=======
 					<div class="box-max fixDateBox">
 						<div class="fixDateBoxInput"><input type="checkbox" name="date" value="mon"></div>
 						<div class="fixDateBoxDate">วันจันทร์ เวลาทำการ</div>
@@ -273,7 +252,6 @@ require("assets/configs/function.inc.php");
 					</div>
 				</div>
 				<div class="box-row cf">
->>>>>>> origin/master
 					<div class="box-left">
 						<div class="box-input-text">
 							<p>โทรศัพท์</p>
@@ -362,9 +340,6 @@ require("assets/configs/function.inc.php");
 
 <?php include('inc/inc-footer.php'); ?>	
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<<<<<<< HEAD
-
-=======
 <script>
 $(function() {
     $(".workingtime").slider({
@@ -405,6 +380,5 @@ $(function() {
 	});
 });
 </script>
->>>>>>> origin/master
 </body>
 </html>
