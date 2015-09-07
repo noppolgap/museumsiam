@@ -1,0 +1,41 @@
+.box-left.main-content{
+	width: 285px;
+	margin-left: 10px;
+}
+.box-right.main-content{
+	width: 880px;
+	margin-right: 10px;
+}
+.box-left main-content>box-left>div,
+.box-left main-content>box-right>div{
+	width: 100%;
+}
+
+
+/* --------------------------------------------------- Part Left --------------------------------------------------- */
+
+.part-left-title-page{
+	margin-bottom: 20px;
+}
+
+
+
+
+
+/* --------------------------------------------------- Part Right --------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
