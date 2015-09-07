@@ -16,40 +16,48 @@ require("../../assets/configs/function.inc.php");
 		<? require('../inc_side.php'); ?>
 		<?php
 		$MID = $_GET['MID'];
-		$sql = "SELECT * FROM sys_app_module where MODULE_ID = '".$MID."' ";
+		$CID = $_GET['cid'];
+		$sql = "SELECT * FROM trn_content_category where CONTENT_CAT_ID = '".$CID."' ";
 			$rs = mysql_query($sql) or die(mysql_error());
 			$row = mysql_fetch_array($rs);
 		?>
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">รายละเอียดหมวดหมู่ <?=$row['MODULE_NAME_LOC'];?></div>					
+					<div class="floatL titleBox">หมวดหมู่ย่อย ภายใต้ <?=$row['CONTENT_CAT_DESC_LOC'];?></div>					
 				</div>
 				<div class="mod-body-main-content">
 					<div class="formCms">
-						<? $id = $_GET['cid']; ?>
+						<? $id = $_GET['scid']; ?>
 						<form action="" method="post" name="formcms">
 							<?php
-							   $sql= "SELECT * FROM trn_content_category 
-							   WHERE Flag <> 2 AND CONTENT_CAT_ID = $id ";
+							   $sql= "SELECT sc.*  , cc.CONTENT_CAT_DESC_LOC , cc.CONTENT_CAT_DESC_ENG ";
+							   $sql.=" FROM trn_content_sub_category sc ";
+							   $sql.=" inner join trn_content_category cc on cc.CONTENT_CAT_ID = sc.CONTENT_CAT_ID ";
+							   $sql.=" WHERE sc.Flag <> 2 AND sc.SUB_CONTENT_CAT_ID = $id  ";
 							   $query = mysql_query($sql,$conn);
 							?>
 
 							<div>
-
-							   <? while($row = mysql_fetch_array($query)) {  ?>
-						
-								<input type="hidden" name="txtCatID" value="<? echo $row['CONTENT_CAT_ID']; ?>" class="w90p" />
-								
+							   <? while($row = mysql_fetch_array($query)) {  ?>								
 							</div>	
+							
+							<div>
+								<div class="floatL form_name">หมวดหมู่</div>
+								<div class="floatL form_input">
+								<input type="text" name="txtCat" value="<? echo $row['CONTENT_CAT_DESC_LOC']; ?>" class="w90p" />	
+								</div>
+								<div class="clear"></div>
+							</div>
+							
 							<div>
 								<div class="floatL form_name">ชื่อ TH</div>
-								<div class="floatL form_input"><input type="text" name="txtDescLoc" value="<? echo $row['CONTENT_CAT_DESC_LOC']; ?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="txtDescLoc" value="<? echo $row['SUB_CONTENT_CAT_DESC_LOC']; ?>" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>
 							<div>
 								<div class="floatL form_name">ชื่อ EN</div>
-								<div class="floatL form_input"><input type="text" name="txtDescEng" value="<? echo $row['CONTENT_CAT_DESC_ENG']; ?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="txtDescEng" value="<? echo $row['SUB_CONTENT_CAT_DESC_ENG']; ?>" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>
 							
@@ -57,10 +65,10 @@ require("../../assets/configs/function.inc.php");
                     <div class="floatL form_name">&nbsp;&nbsp;</div>
                     <div class="floatL form_input">
 					<?php 
-					if ($row['IS_LAST_NODE'] == "Y")
+					/*if ($row['IS_LAST_NODE'] == "Y")
                       echo "<input  id = 'chkHasSubCategory' type='checkbox' name='chkHasSubCategory' >&nbsp;มีระบบย่อย</input> ";
 					else 
-						echo "<input  id = 'chkHasSubCategory' type='checkbox' name='chkHasSubCategory' checked >&nbsp;มีระบบย่อย</input> ";
+						echo "<input  id = 'chkHasSubCategory' type='checkbox' name='chkHasSubCategory' checked >&nbsp;มีระบบย่อย</input> "; */
                           ?>
                     </div>
                     <div class="clear"></div>
@@ -71,7 +79,7 @@ require("../../assets/configs/function.inc.php");
 
 							<div class="btn_action">
 								
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'main_category_view.php?MID=<?=$MID?>' ">
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'main_sub_category_view.php?MID=<?=$MID?>&cid=<?=$CID?>' ">
 							</div>
 						</form> 
 					</div>

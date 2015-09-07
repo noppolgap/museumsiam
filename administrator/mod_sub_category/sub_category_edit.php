@@ -26,32 +26,21 @@ require("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">แก้ไขหมวดหมู่ ภายใต้ <?=$row['CONTENT_CAT_DESC_LOC'];?></div>					
+					<div class="floatL titleBox">แก้ไขหมวดหมู่ย่อย ภายใต้ <?=$row['CONTENT_CAT_DESC_LOC'];?></div>					
 				</div>
 				<div class="mod-body-main-content">
 					<div class="formCms">
 						<? $id = $_GET['scid']; ?>
 						<form action="sub_category_action.php?edit&MID=<?=$MID?>&cid=<?=$CID?>&scid=<?=$id?>" method="post" name="formcms">
 							<?php
-							   $sql= "SELECT * FROM trn_content_sub_category 
-							   WHERE Flag <> 2 AND SUB_CONTENT_CAT_ID = $id ";
+							   $sql= "SELECT sc.*  , cc.CONTENT_CAT_DESC_LOC , cc.CONTENT_CAT_DESC_ENG ";
+							   $sql.=" FROM trn_content_sub_category sc ";
+							   $sql.=" inner join trn_content_category cc on cc.CONTENT_CAT_ID = sc.CONTENT_CAT_ID ";
+							   $sql.=" WHERE sc.Flag <> 2 AND sc.SUB_CONTENT_CAT_ID = $id  ";
 							   $query = mysql_query($sql,$conn);
 							?>
-
-							
-							
-							
-						
-						
-						
-							
 							<div>
-
-							   <? while($row = mysql_fetch_array($query)) {  ?>
-						
-								<!--<input type="hidden" name="txtCatID" value="<? echo $row['CONTENT_CAT_ID']; ?>" class="w90p" />-->
-								
-								
+							   <? while($row = mysql_fetch_array($query)) {  ?>								
 							</div>	
 							
 							<div>

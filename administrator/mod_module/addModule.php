@@ -96,6 +96,7 @@ function onValidate()
                     <div class="clear"></div>
                   </div>
 				  
+				  <!--
 				   <div>
                     <div class="floatL form_name">รูปภาพ Icon</div>
                     <div class="floatL form_input">
@@ -105,7 +106,13 @@ function onValidate()
                     <div class="clear"></div>
                   </div>
 				   </div>
-                 
+                 -->
+				 <div class="bigForm">
+								<div class="floatL form_name">ูปภาพ Icon</div>
+								<div class="floatL form_input"><?=admin_upload_image('photo')?></div>
+								<div class="clear"></div>
+							</div>	
+							
 				  
 				    <div>
                     <div class="floatL form_name">&nbsp;&nbsp;</div>
@@ -138,6 +145,10 @@ function onValidate()
       <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 
       <script type="text/javascript" src="../master/script.js"></script>
+	  
+	  <script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
+
 
       <? logs_access('admin','hello'); ?>	
 

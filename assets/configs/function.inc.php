@@ -357,4 +357,15 @@ function Optimizeimageupload(){
 		}
 	chmod($path,0755);		
 }
+
+function nvl($originalVal , $returnWhenNull)
+{
+	if (is_null($originalVal))
+		return $returnWhenNull ;
+	else if ($originalVal == "")
+		return returnWhenNull ;
+	else 
+		return $originalVal ; 
+}
+
 ?>

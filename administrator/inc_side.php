@@ -25,7 +25,7 @@
 	<a href="../mod_sub_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบย่อย</span></a>
 	<a href="../mod_category/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่</span></a>
 	<a href="../mod_sub_category/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่ย่อย</span></a>
-	<a href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการเนื้อหา</span></a>
+	<a href="../mod_content/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการเนื้อหา</span></a>
 	
 	
 	<!--
