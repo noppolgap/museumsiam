@@ -8,7 +8,7 @@ require("assets/configs/function.inc.php");
 <head>
 <? require('inc_meta.php'); ?>	
 
-<link rel="stylesheet" type="text/css" href="css/content.css" />
+<link rel="stylesheet" type="text/css" href="css/template.css" />
 
 <script>
 	$(document).ready(function(){
@@ -29,7 +29,7 @@ require("assets/configs/function.inc.php");
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="index.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ระบบสมาชิก</li>
+				<li class="active">กิจกรรมและข่าวสารของมิวเซียมสยาม</li>
 			</ol>
 		</div>
 	</div>
@@ -38,7 +38,8 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container">
 		<div class="box-left">
-			<?php include('inc/inc-left-content-news-event.php'); ?>
+			<?php include('inc/inc-left-content-newsevent.php'); ?>
+			<?php include('inc/inc-left-content-calendar.php'); ?>
 		</div>
 		<div class="box-right">
 			

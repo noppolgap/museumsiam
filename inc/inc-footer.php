@@ -67,7 +67,7 @@
 				<a class="btn-arrow left"></a>
 				<a class="btn-arrow right"></a>
 				<div class="box-btn cf">
-					<a href="" class="btn black">view all</a>
+					<a href="" class="btn black">ดูทั้งหมด</a>
 				</div>
 			</div>			
 			
