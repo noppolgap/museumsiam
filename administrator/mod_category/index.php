@@ -4,7 +4,7 @@ require("../../assets/configs/connectdb.inc.php");
 require("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
-<html>
+<html> 
 <head>
 <? require('../inc_meta.php'); ?>		
 </head>
