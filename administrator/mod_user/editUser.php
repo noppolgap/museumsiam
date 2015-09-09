@@ -67,12 +67,18 @@ function onValidate()
         $('#subDistrictError').hide();
         $('#postCodeError').hide();
         $('#telephoneError').hide();
-
+		$('#passwordError').hide ();
+		
         if ($('#txtEmail').val() == '')
         {
             $('#emailError').show();
             ret = false;
         }
+		if($('#txtPwd').val() == '' )
+		{
+			$('#passwordError').show();
+			ret = false ; 
+		}
         if ($('#txtName').val() == '')
         {
           $('#nameError').show();
@@ -169,6 +175,15 @@ function onValidate()
                     </div>
                     <div class="clear"></div>
                   </div>
+				  <div >
+                    <div class="floatL form_name">Password</div>
+                    <div class="floatL form_input">
+                      <input id = "txtPwd" type="password" name="txtPwd"  value="<?php echo $rowUser["PWD"] ?>" class="w90p"  />
+                      <span class="error" >* <span id = "passwordError" style="display:none">กรุณาระบุ Password </span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
                   <div>
                     <div class="floatL form_name">ชื่อ</div>
                     <div class="floatL form_input">
@@ -282,6 +297,24 @@ function onValidate()
                     <div class="clear"></div>
                   </div>
 
+				  <div>
+                    <div class="floatL form_name">โทรศัพท์เคลื่อนที่</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtMobilePhone" type="text" name="txtMobilePhone" value="<?php echo $rowUser["MOBILE_PHONE"] ?>" class="w90p" />
+                     <span class="error" >* <span id = "modilePhoneError" style="display:none">กรุณาระบุเบอร์โทรศัพท์เคลื่อนที่</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
+				   <div>
+                    <div class="floatL form_name">โทรสาร</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtFax" type="text" name="txtFax" value="<?php echo $rowUser["FAX"] ?>" class="w90p" />
+                     <span class="error" >* <span id = "faxError" style="display:none">กรุณาระบุเบอร์โทรสาร</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
                   <div class="btn_action">
                     <input type="button" name="save" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="onValidate()" >
                       <input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
@@ -324,6 +357,10 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
     $txtPostCode = $_POST['txtPostCode'];
     $txtTelephone = $_POST['txtTelephone'];
 
+	$txtPwd  = $_POST['txtPwd'] ; 
+	$txtMobilePhone = $_POST['txtMobilePhone'] ; 
+	$txtFax = $_POST['txtFax'] ; 
+	
 
     $strSQL = "update sys_app_user ";
     $strSQL .="set NAME = '".$txtName."'";
@@ -338,6 +375,10 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
 	$strSQL .= " ,LAST_UPDATE_DATE = now() ";
 	$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
 	$strSQL .= " ,LAST_FUNCTION = 'U'";
+	$strSQL .= " ,PWD = '".$txtPwd."'";
+	$strSQL .= " ,MOBILE_PHONE = '".$txtMobilePhone."'";
+	$strSQL .= " ,	FAX = '".$txtFax."'";
+	
 	 $strSQL .= " where ID = '".$userID."'";
     $objQuery = mysql_query($strSQL);
     if($objQuery)

@@ -86,7 +86,25 @@ if(isset($_GET['add']) ){
     $sql = "INSERT INTO  trn_content_detail (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
 	
 	mysql_query($sql,$conn) or die($sql);
-
+	$retrunID = mysql_insert_id();
+	
+	if(count($_POST['photo_file']) > 0){
+		$index = 1;  
+	    foreach ($_POST['photo_file'] as $k => $file) {
+		      $filename = admin_move_image_upload_dir('content_'.$_POST['cmbCategory'],end(explode('/', $file)),1000,'',false,150,150);
+		
+		      unset($insert);
+		      $insert['CONTENT_ID'] = $retrunID;
+		      $insert['IMG_TYPE']   = 1;
+		      $insert['IMG_PATH']   = "'".$filename."'";
+		      $insert['CAT_ID']     = "'".$_POST['cmbCategory']."'";
+		      $insert['ORDER_ID']   = "'".$index++."'";
+		
+		      $sql = "INSERT INTO trn_content_picture (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
+		      mysql_query($sql,$conn) or die($sql);
+	  	}
+	}
+	
     header('Location: '.$returnPage );
 	//echo $scriptReturnPath ;
 }
@@ -94,23 +112,64 @@ if(isset($_GET['add']) ){
 
 if(isset($_GET['edit'])){
 
+	$conid = $_GET['conid'] ; 
+	
+  $subCatID = -1 ; 
+  if (isset($_POST['cmbSubCategory']))
+  {
+	  $subCatID = $_POST['cmbSubCategory'];
+  }
+  
  $update="";
   
-	$update[]= "DIGITAL_DESC_LOC = '".$_POST['name_th']."'";
-	$update[]= "DIGITAL_DESC_ENG = '".$_POST['name_en']."'";
-	$update[]= "DETAIL= '".$_POST['detail']."'";
-	$update[]= "USER_CREATE = 'admin'";
-	$update[]= "CREATE_DATE= NOW()";
+	$update[]= "CONTENT_DESC_LOC = '".$_POST['txtDescLoc']."'";
+	$update[]= "CONTENT_DESC_ENG = '".$_POST['txtDescEng']."'";
+	$update[]= "CONTENT_DETAIL_LOC= '".$_POST['txtDetailLoc']."'";
+	$update[]= "CONTENT_DETAIL_ENG= '".$_POST['txtDetailEng']."'";
+	$update[]= "BRIEF_LOC= '".$_POST['txtBriefDescLoc']."'";
+	$update[]= "BRIEF_ENG= '".$_POST['txtBriefDescEng']."'";
 	$update[]= "LAST_UPDATE_USER = 'admin'";
 	$update[]= "LAST_UPDATE_DATE = NOW()";
-					
-    $sql= "UPDATE trn_digital_ach SET  ".implode(",",$update)." WHERE DIGITAL_ID = ".$_POST['digi_id'];
+		
+	$update[]= "CAT_ID = '".$_POST['cmbCategory']."'";
+	$update[]= "SUB_CAT_ID = '".$subCatID."'";
+	
+	
+    $sql= "UPDATE trn_content_detail SET  ".implode(",",$update)." WHERE CONTENT_ID = ".$conid;
 	  mysql_query($sql,$conn);
 	
-    header('Location: digital_view.php?p='.$_POST['sub_id'].' ');
+	if(count($_POST['photo_file']) > 0){
+		$sql_max="SELECT MAX(ORDER_ID) AS MAX_ORDER FROM trn_content_picture WHERE CONTENT_ID = ".$conid." AND CAT_ID = ".$_POST['cmbCategory'];
+		$query_max = mysql_query($sql_max,$conn) or die( $sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;		 
+		
+	    foreach ($_POST['photo_file'] as $k => $file) {
+		      $filename = admin_move_image_upload_dir('content_'.$_POST['cmbCategory'],end(explode('/', $file)),1000,'',false,150,150);
+		
+		      unset($insert);
+		      $insert['CONTENT_ID']   = $conid;
+		      $insert['IMG_TYPE']   = 1;
+		      $insert['IMG_PATH']   = "'".$filename."'";
+		      $insert['CAT_ID']     = "'".$_POST['cmbCategory']."'";
+		      $insert['ORDER_ID']   = $max++;
+		
+		      $sql = "INSERT INTO trn_content_picture (".implode(",",array_keys($insert)).") VALUES (".implode(",",array_values($insert)).")";
+		      mysql_query($sql,$conn) or die($sql);
+	  	}
+	}
+	if(count($_POST['order_position']) > 0){
+		foreach ($_POST['order_position'] as $k => $val) {
+			$update="";
+			$update[]= "ORDER_ID = ".$val;
+					
+			$sql="UPDATE trn_content_picture SET  ".implode(",",$update)." WHERE PIC_ID =".$k;			
+			mysql_query($sql,$conn) or die($sql);
+		}
+	}
 	
-	
-	
+    header('Location: '.$returnPage );
 }
 
 if (isset($_POST['catID'])) {
@@ -135,6 +194,7 @@ if (isset($_POST['catID'])) {
 		//return "Hello" ; 
 	}
 
+	 
 	 
 
     

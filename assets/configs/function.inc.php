@@ -368,4 +368,13 @@ function nvl($originalVal , $returnWhenNull)
 		return $originalVal ; 
 }
 
+ function createPasswordHash($strPlainText) {
+	 return hash('sha512' ,$strPlainText ) ; 
+	 /*
+  if (CRYPT_SHA512 != 1) {
+    throw new Exception('Hashing mechanism not supported.');
+  }
+  return crypt($strPlainText, '$6$rounds=4567$abcdefghijklmnop$');*/
+}
+
 ?>

@@ -95,11 +95,13 @@ require("../../assets/configs/function.inc.php");
 					<?php if( nvl( $row['CONTENT_ID'] , "" )  != "" ){ ?>
 					<div class="Main_Content" data-id="<?=$row['CONTENT_ID']?>" >
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_ID']?>"></div>
+						
+												
 						<div class="floatL thumbContent">
-							<a href="product_detail.php?p=<?=$row['CONTENT_ID']?>&g=<?=$row['CONTENT_DESC_LOC']?>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
+							<a href="product_detail.php?p=<?=$row['CONTENT_ID']?>&g=<?=$row['CONTENT_DESC_LOC']?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'],$row['CONTENT_CAT_ID'],false)?> ></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="digital_detail.php?p='.$row['CONTENT_ID'].'&g='.$row['SUB_DIGITAL_ID'].'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="content_detail.php?conid='.$row['CONTENT_ID'].'&MID='.$MID.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
@@ -110,7 +112,7 @@ require("../../assets/configs/function.inc.php");
 						</a> <?}  else {?> <span class="staus2"></span> 
 						<a href="content_action.php?enable&conid=<?=$row['CONTENT_ID']?>&vis=<?=$row['CONTENT_STATUS_FLAG']?>&MID=<?=$MID?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
-							<a href="content_edit.php?conid=<?=$row['CONTENT_ID']?>" class="EditContentBtn">Edit</a>
+							<a href="content_edit.php?conid=<?=$row['CONTENT_ID']?>&MID=<?=$MID?>" class="EditContentBtn">Edit</a>
 							<a href="#" data-id="<?=$row['CONTENT_ID']?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	

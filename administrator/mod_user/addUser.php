@@ -67,12 +67,17 @@ function onValidate()
         $('#subDistrictError').hide();
         $('#postCodeError').hide();
         $('#telephoneError').hide();
-
+		$('#passwordError').hide ();
         if ($('#txtEmail').val() == '')
         {
             $('#emailError').show();
             ret = false;
         }
+		if($('#txtPwd').val() == '' )
+		{
+			$('#passwordError').show();
+			ret = false ; 
+		}
         if ($('#txtName').val() == '')
         {
           $('#nameError').show();
@@ -161,6 +166,16 @@ function onValidate()
                     </div>
                     <div class="clear"></div>
                   </div>
+				  
+				  <div >
+                    <div class="floatL form_name">Password</div>
+                    <div class="floatL form_input">
+                      <input id = "txtPwd" type="password" name="txtPwd"  value="" class="w90p"  />
+                      <span class="error" >* <span id = "passwordError" style="display:none">กรุณาระบุ Password </span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
                   <div>
                     <div class="floatL form_name">ชื่อ</div>
                     <div class="floatL form_input">
@@ -264,6 +279,24 @@ function onValidate()
                     </div>
                     <div class="clear"></div>
                   </div>
+				  
+				   <div>
+                    <div class="floatL form_name">โทรศัพท์เคลื่อนที่</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtMobilePhone" type="text" name="txtMobilePhone" value="" class="w90p" />
+                     <span class="error" >* <span id = "modilePhoneError" style="display:none">กรุณาระบุเบอร์โทรศัพท์เคลื่อนที่</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+				  
+				   <div>
+                    <div class="floatL form_name">โทรสาร</div>
+                    <div class="floatL form_input">
+                      <input  id = "txtFax" type="text" name="txtFax" value="" class="w90p" />
+                     <span class="error" >* <span id = "faxError" style="display:none">กรุณาระบุเบอร์โทรสาร</span> </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
 
                   <div class="btn_action">
                     <input type="button" name="save" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="onValidate()" >
@@ -304,14 +337,18 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
     $subDistrict = $_POST['cmbSubDistrict'];
     $txtPostCode = $_POST['txtPostCode'];
     $txtTelephone = $_POST['txtTelephone'];
-
+	
+	$txtPwd  = $_POST['txtPwd'] ; 
+	$txtMobilePhone = $_POST['txtMobilePhone'] ; 
+	$txtFax = $_POST['txtFax'] ; 
+	
 
     $strSQL = "INSERT INTO sys_app_user ";
     $strSQL .="(USER_ID,NAME,LAST_NAME,ADDRESS1,DISTRICT_ID,SUB_DISTRICT_ID,PROVINCE_ID";
-    $strSQL .=",POST_CODE,TELEPHONE,EMAIL,CITIZEN_ID,USER_CREATE,CREATE_DATE,LAST_FUNCTION) ";
+    $strSQL .=",POST_CODE,TELEPHONE,EMAIL,CITIZEN_ID,USER_CREATE,CREATE_DATE,LAST_FUNCTION , PWD , MOBILE_PHONE , FAX) ";
     $strSQL .="VALUES ";
     $strSQL .="('".$txtEmail."','".$txtName."','".$txtLastName."','".$txtAddress."','".$district."','".$subDistrict."','".$province."' ";
-    $strSQL .=",'".$txtPostCode."','".$txtTelephone."','".$txtEmail."','".$txtCitizenID."','Test' , now() , 'A') ";
+    $strSQL .=",'".$txtPostCode."','".$txtTelephone."','".$txtEmail."','".$txtCitizenID."','Test' , now() , 'A' , '".createPasswordHash($strPlainText)."'  , '".$txtMobilePhone."' , '".$txtFax."') ";
     $objQuery = mysql_query($strSQL);
     if($objQuery)
     {
