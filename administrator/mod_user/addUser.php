@@ -348,7 +348,7 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
     $strSQL .=",POST_CODE,TELEPHONE,EMAIL,CITIZEN_ID,USER_CREATE,CREATE_DATE,LAST_FUNCTION , PWD , MOBILE_PHONE , FAX) ";
     $strSQL .="VALUES ";
     $strSQL .="('".$txtEmail."','".$txtName."','".$txtLastName."','".$txtAddress."','".$district."','".$subDistrict."','".$province."' ";
-    $strSQL .=",'".$txtPostCode."','".$txtTelephone."','".$txtEmail."','".$txtCitizenID."','Test' , now() , 'A' , '".createPasswordHash($strPlainText)."'  , '".$txtMobilePhone."' , '".$txtFax."') ";
+    $strSQL .=",'".$txtPostCode."','".$txtTelephone."','".$txtEmail."','".$txtCitizenID."','Test' , now() , 'A' , '".createPasswordHash($txtPwd)."'  , '".$txtMobilePhone."' , '".$txtFax."') ";
     $objQuery = mysql_query($strSQL);
     if($objQuery)
     {

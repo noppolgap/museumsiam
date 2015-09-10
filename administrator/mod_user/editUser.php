@@ -179,6 +179,7 @@ function onValidate()
                     <div class="floatL form_name">Password</div>
                     <div class="floatL form_input">
                       <input id = "txtPwd" type="password" name="txtPwd"  value="<?php echo $rowUser["PWD"] ?>" class="w90p"  />
+					  <input id = "hidLastPassword" name = "hidLastPassword" type="hidden"  value="<?php echo $rowUser["PWD"] ?>" />
                       <span class="error" >* <span id = "passwordError" style="display:none">กรุณาระบุ Password </span> </span>
                     </div>
                     <div class="clear"></div>
@@ -361,6 +362,13 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
 	$txtMobilePhone = $_POST['txtMobilePhone'] ; 
 	$txtFax = $_POST['txtFax'] ; 
 	
+	$lastPwd  = $_POST['hidLastPassword'];  
+	
+	$savePwd = $lastPwd ; 
+	if ( createPasswordHash($txtPwd) != $lastPwd)
+	{
+		$savePwd = createPasswordHash($txtPwd);
+	}
 
     $strSQL = "update sys_app_user ";
     $strSQL .="set NAME = '".$txtName."'";
@@ -375,7 +383,7 @@ if(isset($_POST["action"]) && $_POST["action"] == "submit") {
 	$strSQL .= " ,LAST_UPDATE_DATE = now() ";
 	$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
 	$strSQL .= " ,LAST_FUNCTION = 'U'";
-	$strSQL .= " ,PWD = '".$txtPwd."'";
+	$strSQL .= " ,PWD = '".$savePwd."'";
 	$strSQL .= " ,MOBILE_PHONE = '".$txtMobilePhone."'";
 	$strSQL .= " ,	FAX = '".$txtFax."'";
 	
