@@ -18,13 +18,13 @@ require("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addAnswer.php?qa_id=<?=$_GET['qa_id']?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionAnswer.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderAnswer.php');">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderAnswer.php?qa_id=<?=$_GET['qa_id']?>');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
 					<div class="floatL titleBox">ชื่อเมนู</div>
 					<div class="floatR searchBox">
-						<form name="search" action="?search" method="post">
+						<form name="search" action="?search&qa_id=<?=$_GET['qa_id']?>" method="post">
 							<input type="search" name="str_search" value="" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
@@ -50,7 +50,7 @@ require("../../assets/configs/function.inc.php");
 
 			    $sql= "SELECT * FROM trn_qa WHERE FlAG != 2 AND REF_QA_ID = ".$_GET['qa_id']."  ";
 			    if(isset($_GET['search'])){
-			      $sql .= "AND CONTENT like '%".$_POST['str_search']."%' ";
+			    $sql .= "AND CONTENT like '%".$_POST['str_search']."%' ";
 			    }
 			     $sql .= " ORDER BY ORDER_DATA DESC ";
 
@@ -106,9 +106,7 @@ require("../../assets/configs/function.inc.php");
 				</div>
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('order.php');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 		</div>
 		<div class="clear"></div>	

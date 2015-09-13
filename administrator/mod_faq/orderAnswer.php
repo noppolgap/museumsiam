@@ -10,33 +10,33 @@ if(isset($_POST['update'])){
 		$update="";
 		$update[]= "ORDER_DATA = ".$value[1];
 					
-	    $sql= " UPDATE  trn_content_detail  SET  ".implode(",",$update)." WHERE CONTENT_ID =".$value[0];
+	    $sql= " UPDATE  trn_qa  SET  ".implode(",",$update)." WHERE QA_ID =".$value[0];
 		mysql_query($sql,$conn);	    
 	}	
-}else{
-?>
-<!doctype html>
-<html>
-<head>
-<? require('../inc_meta.php'); ?>		
-</head>
-<body>
-<div class="orderContent">
+	}else{
+	?>
+	<!doctype html>
+	<html>
+	<head>
+	<? require('../inc_meta.php'); ?>		
+	</head>
+	<body>
+	<div class="orderContent">
 	<div>
 		<h1>จัดเรียง</h1>
-		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('orderVirsualExhib.php');">
+		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('orderAnswer.php');">
 	</div> 
 	<ul id="sortable">
 		<?php
 
-			    $sql= "SELECT * FROM  trn_content_detail  WHERE CONTENT_STATUS_FLAG <> 2 AND CAT_ID = ".$_GET['p']." ORDER BY ORDER_DATA DESC";
+			    $sql= "SELECT * FROM  trn_qa  WHERE FLAG <> 2 AND REF_QA_ID = ".$_GET['qa_id']." ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {
 			 
 		?>
 
-		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA']?>" data-id="<?=$row['CONTENT_ID']?>"><?=$row['CONTENT_DESC_LOC']?></li>
+		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA']?>" data-id="<?=$row['QA_ID']?>"><?=$row['CONTENT']?></li>
 	<? } ?>  
 	</ul>
 </div>	
