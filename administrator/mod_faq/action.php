@@ -32,7 +32,7 @@ if(isset($_GET['delete'])){
   $update="";
   $update[]= "FLAG = 2";
 
-  echo  $sql="UPDATE trn_qa SET  ".implode(",",$update)." WHERE QA_ID =".$id;
+  $sql="UPDATE trn_qa SET  ".implode(",",$update)." WHERE QA_ID =".$id;
   
   mysql_query($sql,$conn);
 	
