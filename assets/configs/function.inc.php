@@ -194,7 +194,7 @@ function admin_move_image_upload_dir($dir,$file,$width,$height,$crop,$thumbwidth
 function admin_upload_image($name){
 	$str = "";
 	$str .= '<input class="fileupload" type="file" data-name="'.$name.'" name="files[]" data-url="../../assets/plugin/upload/php/" multiple>'."\n\t";
-	$str .= '<div id="progress">'."\n\t";
+	$str .= '<div id="progress_'.$name.'">'."\n\t";
 	$str .= '<div class="upload_bar dNone"></div>'."\n\t";
 	$str .= '</div>'."\n\t";
 	$str .= '<div class="image_'.$name.'_Box image_Box dNone image_Box_add"></div>'."\n\t";
@@ -207,7 +207,7 @@ function admin_upload_image_edit($name,$type,$id){
 
 	$str = "";
 	$str .= '<input class="fileupload" type="file" data-name="'.$name.'" name="files[]" data-url="../../assets/plugin/upload/php/" multiple>'."\n\t";
-	$str .= '<div id="progress">'."\n\t";
+	$str .= '<div id="progress_'.$name.'">'."\n\t";
 	$str .= '<div class="upload_bar dNone"></div>'."\n\t";
 	$str .= '</div>'."\n\t";
 	$str .= '<div class="image_'.$name.'_Box image_Box">'."\n\t";
