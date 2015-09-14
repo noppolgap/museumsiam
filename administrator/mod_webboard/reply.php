@@ -16,15 +16,15 @@ require("../../assets/configs/function.inc.php");
 		<? require('../inc_side.php'); ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addAnswer.php?qa_id=<?=$_GET['qa_id']?>'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionAnswer.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderAnswer.php?qa_id=<?=$_GET['qa_id']?>');">
+				
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionReply.php?delete">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderReply.php?web_id=<?=$_GET['web_id']?>');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
 					<div class="floatL titleBox">ชื่อเมนู</div>
 					<div class="floatR searchBox">
-						<form name="search" action="?search&qa_id=<?=$_GET['qa_id']?>" method="post">
+						<form name="search" action="?search&web_id=<?=$_GET['web_id']?>" method="post">
 							<input type="search" name="str_search" value="" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
@@ -48,7 +48,7 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-			    $sql= "SELECT * FROM trn_qa WHERE FlAG != 2 AND REF_QA_ID = ".$_GET['qa_id']."  ";
+			    $sql= "SELECT * FROM trn_webboard WHERE FlAG != 2 AND REF_WEBBOARD_ID = ".$_GET['web_id']."  ";
 			    if(isset($_GET['search'])){
 			    $sql .= "AND CONTENT like '%".$_POST['str_search']."%' ";
 			    }
@@ -61,25 +61,29 @@ require("../../assets/configs/function.inc.php");
 			 ?>
 					<!-- start loop -->
 					<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content" data-id="<?=$row['QA_ID']?>">
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['QA_ID']?>"></div>
+					<div class="Main_Content" data-id="<?=$row['WEBBOARD_ID']?>">
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['WEBBOARD_ID']?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="detail.php?qa_id='.$row['QA_ID'].'&ref_id='.$row['REF_QA_ID'].' ">'.$row['CONTENT'].'</a>' ?></div>
+							<div><? echo '<a href="detail.php?web_id='.$row['WEBBOARD_ID'].'&ref_id='.$row['REF_WEBBOARD_ID'].' ">'.$row['CONTENT'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
 						<? if($row['FLAG'] == 0){ ?>
-							<span class="staus1"></span> <a href="actionAnswer.php?enable&qa_id=<?=$row['QA_ID']?>&flag=<?=$row['FLAG']?>&ref_id=<?=$row['REF_QA_ID']?>">
+							<span class="staus1"></span> <a href="actionReply.php?enable&web_id=<?=$row['WEBBOARD_ID']?>&flag=<?=$row['FLAG']?>&ref_id=<?=$row['REF_WEBBOARD_ID']?>">
 							Enable
-						</a> <?}  else {?> <span class="staus2"></span> 
-						<a href="actionAnswer.php?enable&qa_id=<?=$row['QA_ID']?>&flag=<?=$row['FLAG']?>&ref_id=<?=$row['REF_QA_ID']?>"> Disable </a> <? } ?></div>
+						</a> 
+						<?}  else {?> 
+						<span class="staus2"></span> 
+						<a href="actionReply.php?enable&web_id=<?=$row['WEBBOARD_ID']?>&flag=<?=$row['FLAG']?>&ref_id=<?=$row['REF_WEBBOARD_ID']?>"> Disable </a> 
+						<? } ?>
+					</div>
 						<div class="floatL EditContent">
-							<a href="editAnswer.php?qa_id=<?=$row['QA_ID']?>&ref_id=<?=$row['REF_QA_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="#" class="DeleteContentBtn" data-id="<?=$row['QA_ID']?>">Delete</a>
+							
+							<a href="#" class="DeleteContentBtn" data-id="<?=$row['WEBBOARD_ID']?>">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
