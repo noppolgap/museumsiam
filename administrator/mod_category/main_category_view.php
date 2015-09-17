@@ -1,38 +1,42 @@
 <?php
-require("../../assets/configs/config.inc.php");
-require("../../assets/configs/connectdb.inc.php");
-require("../../assets/configs/function.inc.php");
+require ("../../assets/configs/config.inc.php");
+require ("../../assets/configs/connectdb.inc.php");
+require ("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('../inc_meta.php'); ?>		
+<?
+	require ('../inc_meta.php');
+ ?>		
 </head>
 
 <body>
-<? require('../inc_header.php'); ?>		
+<?
+	require ('../inc_header.php');
+ ?>		
 <div class="main-container">
 	<div class="main-body marginC">
-		<? require('../inc_side.php'); ?>
+		<?
+		require ('../inc_side.php');
+ ?>
 		
 		<?php
-			$MID = $_GET['MID'] ; 
-			$sql = "SELECT * FROM sys_app_module where MODULE_ID = '".$MID."' ";
-			$rs = mysql_query($sql) or die(mysql_error());
-			$row = mysql_fetch_array($rs);
-			
-			
+		$MID = $_GET['MID'];
+		$sql = "SELECT * FROM sys_app_module where MODULE_ID = '" . $MID . "' ";
+		$rs = mysql_query($sql) or die(mysql_error());
+		$row = mysql_fetch_array($rs);
 		?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'category_add.php?MID=<?=$MID?>'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'category_add.php?MID=<?=$MID ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="category_action.php?delete" >
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('category_order.php');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">หมวดหมู่ <?=$row['MODULE_NAME_LOC'];?></div>
+					<div class="floatL titleBox">หมวดหมู่ <?=$row['MODULE_NAME_LOC']; ?></div>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />
@@ -58,42 +62,39 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-			    $sql= "SELECT * FROM  trn_content_category WHERE Flag <> 2 and REF_MODULE_ID  = '".$MID."' ";
-			    if(isset($_GET['search'])){
-			      $sql .= "AND CONTENT_CAT_DESC_LOC like '%".$_POST['str_search']."%' ";
-			    }
-			     $sql .= "ORDER BY ORDER_DATA DESC ";
+			$sql = "SELECT * FROM  trn_content_category WHERE Flag <> 2 and REF_MODULE_ID  = '" . $MID . "' ";
+			if (isset($_GET['search'])) {
+				$sql .= "AND CONTENT_CAT_DESC_LOC like '%" . $_POST['str_search'] . "%' ";
+			}
+			$sql .= "ORDER BY ORDER_DATA DESC ";
 
-			     $query = mysql_query($sql,$conn);
+			$query = mysql_query($sql, $conn);
 
-			
-			     $num_rows = mysql_num_rows($query);
-			 	
-
+			$num_rows = mysql_num_rows($query);
 			 ?>
 					<!-- start loop -->
 				<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content" data-id="<?=$row['CONTENT_CAT_ID']?>" >
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_CAT_ID']?>"></div>
+					<div class="Main_Content" data-id="<?=$row['CONTENT_CAT_ID'] ?>" >
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_CAT_ID'] ?>"></div>
 						<div class="floatL thumbContent">
 							<a href="#>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
 							<div><? echo '<a href="category_view.php?cid='.$row['CONTENT_CAT_ID'].'&MID='.$MID.'">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
-							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
+							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
 						<? if($row['FLAG'] == 0){ ?>
-							<span class="staus1"></span> <a href="category_action.php?enable&cid=<?=$row['CONTENT_CAT_ID']?>&vis=<?=$row['FLAG']?>&MID=<?=$MID?>">
+							<span class="staus1"></span> <a href="category_action.php?enable&cid=<?=$row['CONTENT_CAT_ID'] ?>&vis=<?=$row['FLAG'] ?>&MID=<?=$MID ?>">
 							Enable
-						</a> <?}  else {?> 
+						</a> <?}  else { ?> 
 							<span class="staus2"></span> 
-							<a href="category_action.php?enable&cid=<?=$row['CONTENT_CAT_ID']?>&vis=<?=$row['FLAG']?>&MID=<?=$MID?>"> Disable </a> 
+							<a href="category_action.php?enable&cid=<?=$row['CONTENT_CAT_ID'] ?>&vis=<?=$row['FLAG'] ?>&MID=<?=$MID ?>"> Disable </a> 
 						<? } ?></div>
 						<div class="floatL EditContent">
-							<a href="category_edit.php?cid=<?=$row['CONTENT_CAT_ID']?>&MID=<?=$MID?>" class="EditContentBtn">Edit</a>
-							<a href="#" data-id=<?=$row['CONTENT_CAT_ID']?> class="DeleteContentBtn">Delete</a>
+							<a href="category_edit.php?cid=<?=$row['CONTENT_CAT_ID'] ?>&MID=<?=$MID ?>" class="EditContentBtn">Edit</a>
+							<a href="#" data-id=<?=$row['CONTENT_CAT_ID'] ?> class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
@@ -118,7 +119,7 @@ require("../../assets/configs/function.inc.php");
 				</div>
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'category_add.php?MID=<?=$MID?>'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'category_add.php?MID=<?=$MID ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="category_action.php?delete" >
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('category_order.php');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
@@ -127,13 +128,15 @@ require("../../assets/configs/function.inc.php");
 		<div class="clear"></div>	
 	</div>
 </div>	
-<? require('../inc_footer.php'); ?>		
+<?
+	require ('../inc_footer.php');
+ ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>			
 <script type="text/javascript" src="mod_cms.js"></script>	
-<? logs_access('admin','hello'); ?>	
+<? logs_access('admin', 'hello'); ?>	
 </body>
 </html>

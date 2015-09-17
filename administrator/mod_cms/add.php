@@ -1,19 +1,25 @@
 <?php
-require("../../assets/configs/config.inc.php");
-require("../../assets/configs/connectdb.inc.php");
-require("../../assets/configs/function.inc.php");
+require ("../../assets/configs/config.inc.php");
+require ("../../assets/configs/connectdb.inc.php");
+require ("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('../inc_meta.php'); ?>		
+<?
+	require ('../inc_meta.php');
+ ?>		
 </head>
 
 <body>
-<? require('../inc_header.php'); ?>		
+<?
+	require ('../inc_header.php');
+ ?>		
 <div class="main-container">
 	<div class="main-body marginC">
-		<? require('../inc_side.php'); ?>
+		<?
+		require ('../inc_side.php');
+ ?>
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -60,7 +66,7 @@ require("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_image('photo')?></div>
+								<div class="floatL form_input"><?=admin_upload_image('photo') ?></div>
 								<div class="clear"></div>
 							</div>	
 							<div class="btn_action">
@@ -76,7 +82,9 @@ require("../../assets/configs/function.inc.php");
 		<div class="clear"></div>	
 	</div>
 </div>	
-<? require('../inc_footer.php'); ?>		
+<?
+	require ('../inc_footer.php');
+ ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.css" media="all" >
@@ -89,6 +97,6 @@ require("../../assets/configs/function.inc.php");
 <script type="text/javascript" src="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>		
 <script type="text/javascript" src="mod_cms.js"></script>	
-<? logs_access('admin','hello'); ?>	
+<? logs_access('admin', 'hello'); ?>	
 </body>
 </html>

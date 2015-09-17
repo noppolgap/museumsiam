@@ -1,19 +1,25 @@
 <?php
-require("../../assets/configs/config.inc.php");
-require("../../assets/configs/connectdb.inc.php");
-require("../../assets/configs/function.inc.php");
+require ("../../assets/configs/config.inc.php");
+require ("../../assets/configs/connectdb.inc.php");
+require ("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('../inc_meta.php'); ?>		
+<?
+	require ('../inc_meta.php');
+ ?>		
 </head>
 
 <body>
-<? require('../inc_header.php'); ?>		
+<?
+	require ('../inc_header.php');
+ ?>		
 <div class="main-container">
 	<div class="main-body marginC">
-		<?php require('../inc_side.php'); ?>
+		<?php
+		require ('../inc_side.php');
+ ?>
 		<div class="mod-body">
 				<div class="buttonActionBox">
 					<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="location.href = 'addUser.php';" >
@@ -47,49 +53,45 @@ require("../../assets/configs/function.inc.php");
 		 
 		 <div class="mod-body-main-content">
 						<!-- start loop -->
-						<?php 
-					//active_flag 0 = disable , 1 = Enable ,  2 = Delete 
-						$sql = "SELECT * FROM sys_app_user where ACTIVE_FLAG <> 2 ";
-						if(isset($_POST['search'])){
-							$sql .= " AND (NAME like '%".$_POST['str_search']."%' or LAST_NAME like '%".$_POST['str_search']."%' ";
-						$sql .= " order by USER_ID asc ";
-		
-			    }
-					$rs = mysql_query($sql) or die(mysql_error());
-					
-					$i = 0 ; 
-					while($row = mysql_fetch_array($rs)){
-					
-						echo "<div class='Main_Content' data-id='".$row['ID']."'>";
-						echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='".$row["USER_ID"]."'></div>";
-						echo "<div class='floatL thumbContent'>";
-						echo "<a href='viewUser.php?UID=".$row["ID"]."' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
-						echo "</div>";
-						echo "<div class='floatL nameContent'>";
-						echo "<div><a href='viewUser.php?UID=".$row["ID"]."'>".$row["NAME"]." ". $row["LAST_NAME"]."</a></div>";
+						<?php
+							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
+							$sql = "SELECT * FROM sys_app_user where ACTIVE_FLAG <> 2 ";
+							if (isset($_POST['search'])) {
+								$sql .= " AND (NAME like '%" . $_POST['str_search'] . "%' or LAST_NAME like '%" . $_POST['str_search'] . "%' ";
+								$sql .= " order by USER_ID asc ";
 
+							}
+							$rs = mysql_query($sql) or die(mysql_error());
 
-						echo "<div>วันที่สร้าง ".$row["CREATE_DATE"]." | วันที่ปรับปรุง ".$row["LAST_UPDATE_DATE"]." </div>";
-						echo "</div>	";
-						
-						
-						echo "<div class='floatL EditContent'>";
-						
-						echo "<a href='editUser.php?UID=".$row["ID"]."' class='EditContentBtn'>Edit</a>";
-						echo "<a href='#' data-id='".$row['ID']."' class='DeleteContentBtn' >Delete</a>";
-						echo "</div>";
-						echo " <div class='clear'></div>	";
-						echo " </div>";
-$i++;
-				}mysql_free_result($rs);
+							$i = 0;
+							while ($row = mysql_fetch_array($rs)) {
 
+								echo "<div class='Main_Content' data-id='" . $row['ID'] . "'>";
+								echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='" . $row["USER_ID"] . "'></div>";
+								echo "<div class='floatL thumbContent'>";
+								echo "<a href='viewUser.php?UID=" . $row["ID"] . "' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
+								echo "</div>";
+								echo "<div class='floatL nameContent'>";
+								echo "<div><a href='viewUser.php?UID=" . $row["ID"] . "'>" . $row["NAME"] . " " . $row["LAST_NAME"] . "</a></div>";
 
+								echo "<div>วันที่สร้าง " . $row["CREATE_DATE"] . " | วันที่ปรับปรุง " . $row["LAST_UPDATE_DATE"] . " </div>";
+								echo "</div>	";
+
+								echo "<div class='floatL EditContent'>";
+
+								echo "<a href='editUser.php?UID=" . $row["ID"] . "' class='EditContentBtn'>Edit</a>";
+								echo "<a href='#' data-id='" . $row['ID'] . "' class='DeleteContentBtn' >Delete</a>";
+								echo "</div>";
+								echo " <div class='clear'></div>	";
+								echo " </div>";
+								$i++;
+							}mysql_free_result($rs);
 						?>
 						 
 						<!-- end loop -->
 					</div>
 					<div class="pagination_box">
-						<div class="floatL">จำนวนทั้งหมด <span class='RowCount'> <?=$i?></span> รายการ</div>
+						<div class="floatL">จำนวนทั้งหมด <span class='RowCount'> <?=$i ?></span> รายการ</div>
 						<div class="floatR pagination_action">
 							<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 							<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
@@ -117,25 +119,26 @@ $i++;
 		
 	</div>
 </div>	
-<? require('../inc_footer.php'); ?>		
+<?
+	require ('../inc_footer.php');
+ ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
 <script type="text/javascript" src="../master/script.js"></script>		
 <script type="text/javascript" src="mod_cms.js"></script>	
-<?php logs_access('admin','hello'); ?>	
+<?php logs_access('admin', 'hello'); ?>	
 
 <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
 <script type="text/javascript" >
-/*
-$(document).ready(function(){
-	$('.DeleteContentBtn').bind('click' , function(){
-		return confirm('คุณต้องการลบข้อมูลหรือไม่ ?');
-	});
-	
-});
-		*/
-	
+	/*
+	 $(document).ready(function(){
+	 $('.DeleteContentBtn').bind('click' , function(){
+	 return confirm('คุณต้องการลบข้อมูลหรือไม่ ?');
+	 });
+
+	 });
+	 */
 </script>
 </body>
 </html>

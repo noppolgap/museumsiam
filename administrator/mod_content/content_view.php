@@ -1,19 +1,25 @@
 <?php
-require("../../assets/configs/config.inc.php");
-require("../../assets/configs/connectdb.inc.php");
-require("../../assets/configs/function.inc.php");
+require ("../../assets/configs/config.inc.php");
+require ("../../assets/configs/connectdb.inc.php");
+require ("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('../inc_meta.php'); ?>		
+<?
+	require ('../inc_meta.php');
+ ?>		
 </head>
 
 <body>
-<? require('../inc_header.php'); ?>		
+<?
+	require ('../inc_header.php');
+ ?>		
 <div class="main-container">
 	<div class="main-body marginC">
-		<? require('../inc_side.php'); ?>
+		<?
+		require ('../inc_side.php');
+ ?>
 		<?
 		$MID = $_GET['MID'];
 		?>
@@ -21,7 +27,7 @@ require("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'content_add.php?MID=<?=$MID ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="content_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('digital_order.php?p=<?=$_GET['p']?>');">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('digital_order.php?p=<?=$_GET['p'] ?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 			<div class="mod-body-inner">
@@ -52,15 +58,14 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-			    
-			   /* $sql= "SELECT * FROM  trn_digital_ach WHERE Flag <> 2 AND SUB_DIGITAL_ID = $id ";
-			    if(isset($_GET['search'])){
-			      $sql .= "AND DIGITAL_DESC_LOC like '%".$_POST['str_search']."%' ";
-			    }
-			     $sql .= "ORDER BY ORDER_DATA DESC";
-				 */
-				 
-				$sql = " SELECT a.* ,cd.* FROM (
+			/* $sql= "SELECT * FROM  trn_digital_ach WHERE Flag <> 2 AND SUB_DIGITAL_ID = $id ";
+			 if(isset($_GET['search'])){
+			 $sql .= "AND DIGITAL_DESC_LOC like '%".$_POST['str_search']."%' ";
+			 }
+			 $sql .= "ORDER BY ORDER_DATA DESC";
+			 */
+
+			$sql = " SELECT a.* ,cd.* FROM (
 							SELECT cc.CONTENT_CAT_ID
 								,cc.CONTENT_CAT_DESC_LOC
 								,cc.CONTENT_CAT_DESC_ENG
@@ -72,52 +77,50 @@ require("../../assets/configs/function.inc.php");
 							LEFT OUTER JOIN trn_content_sub_category sb ON sb.CONTENT_CAT_ID = cc.CONTENT_CAT_ID
 							WHERE cc.REF_MODULE_ID = $MID 
 								AND cc.flag <> 2 ";
-				 if(isset($_GET['search'])){
-							$sql.=" AND ( CONTENT_DESC_LOC like '%".$_POST['str_search']."%' or CONTENT_DESC_ENG like '%".$_POST['str_search']."%' )";
-				 }					 
-				$sql.="			ORDER BY cc.ORDER_DATA DESC 
+			if (isset($_GET['search'])) {
+				$sql .= " AND ( CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )";
+			}
+			$sql .= "			ORDER BY cc.ORDER_DATA DESC 
 								,sb.order_data DESC
 							) a
 						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID 
-						where cd.CONTENT_STATUS_FLAG <>  2 " ; 
+						where cd.CONTENT_STATUS_FLAG <>  2 ";
 
+			$query = mysql_query($sql, $conn);
 
-
-			     $query = mysql_query($sql,$conn);
-
-			
-			     $num_rows = 0 ; //mysql_num_rows($query);
-			 	
-
+			$num_rows = 0;
+			//mysql_num_rows($query);
 			 ?>
 					<!-- start loop -->
 				<?php while($row = mysql_fetch_array($query)) { ?>
 					<?php if( nvl( $row['CONTENT_ID'] , "" )  != "" ){ ?>
-					<div class="Main_Content" data-id="<?=$row['CONTENT_ID']?>" >
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_ID']?>"></div>
+					<div class="Main_Content" data-id="<?=$row['CONTENT_ID'] ?>" >
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_ID'] ?>"></div>
 						
 												
 						<div class="floatL thumbContent">
-							<a href="product_detail.php?p=<?=$row['CONTENT_ID']?>&g=<?=$row['CONTENT_DESC_LOC']?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'],$row['CONTENT_CAT_ID'],false)?> ></a>
+							<a href="product_detail.php?p=<?=$row['CONTENT_ID'] ?>&g=<?=$row['CONTENT_DESC_LOC'] ?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], false) ?> ></a>
 						</div>
 						<div class="floatL nameContent">
 							<div><? echo '<a href="content_detail.php?conid='.$row['CONTENT_ID'].'&MID='.$MID.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
-							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
+							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
 						<? if($row['CONTENT_STATUS_FLAG'] == 0){ ?>
-							<span class="staus1"></span> <a href="content_action.php?enable&conid=<?=$row['CONTENT_ID']?>&vis=<?=$row['CONTENT_STATUS_FLAG']?>&MID=<?=$MID?>">
+							<span class="staus1"></span> <a href="content_action.php?enable&conid=<?=$row['CONTENT_ID'] ?>&vis=<?=$row['CONTENT_STATUS_FLAG'] ?>&MID=<?=$MID ?>">
 							Enable
-						</a> <?}  else {?> <span class="staus2"></span> 
-						<a href="content_action.php?enable&conid=<?=$row['CONTENT_ID']?>&vis=<?=$row['CONTENT_STATUS_FLAG']?>&MID=<?=$MID?>"> Disable </a> <? } ?></div>
+						</a> <?}  else { ?> <span class="staus2"></span> 
+						<a href="content_action.php?enable&conid=<?=$row['CONTENT_ID'] ?>&vis=<?=$row['CONTENT_STATUS_FLAG'] ?>&MID=<?=$MID ?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
-							<a href="content_edit.php?conid=<?=$row['CONTENT_ID']?>&MID=<?=$MID?>" class="EditContentBtn">Edit</a>
-							<a href="#" data-id="<?=$row['CONTENT_ID']?>" class="DeleteContentBtn">Delete</a>
+							<a href="content_edit.php?conid=<?=$row['CONTENT_ID'] ?>&MID=<?=$MID ?>" class="EditContentBtn">Edit</a>
+							<a href="#" data-id="<?=$row['CONTENT_ID'] ?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
-					<?php $num_rows++; } //end if ?>
+					<?php $num_rows++;
+					} //end if
+ ?>
 							<?php } ?>
 					<!-- end loop -->
 				</div>
@@ -141,19 +144,21 @@ require("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 			<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'content_add.php?MID=<?=$MID ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="content_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('digital_order.php?p=<?=$_GET['p']?>');">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('digital_order.php?p=<?=$_GET['p'] ?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 		</div>
 		<div class="clear"></div>	
 	</div>
 </div>	
-<? require('../inc_footer.php'); ?>		
+<?
+	require ('../inc_footer.php');
+ ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>		
-<? logs_access('admin','hello'); ?>	
+<? logs_access('admin', 'hello'); ?>	
 </body>
 </html>

@@ -1,22 +1,28 @@
 <?php
-require("../../assets/configs/config.inc.php");
-require("../../assets/configs/connectdb.inc.php");
-require("../../assets/configs/function.inc.php");
+require ("../../assets/configs/config.inc.php");
+require ("../../assets/configs/connectdb.inc.php");
+require ("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('../inc_meta.php'); ?>		
+<?
+	require ('../inc_meta.php');
+ ?>		
 </head>
 
 <body>
-<? require('../inc_header.php'); ?>		
+<?
+	require ('../inc_header.php');
+ ?>		
 <div class="main-container">
 	<div class="main-body marginC">
-		<? require('../inc_side.php'); ?>
+		<?
+		require ('../inc_side.php');
+ ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addAnswer.php?qa_id=<?=$_GET['qa_id']?>'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addAnswer.php?qa_id=<?=$_GET['qa_id'] ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionAnswer.php?delete">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderAnswer.php');">
 			</div>
@@ -48,38 +54,37 @@ require("../../assets/configs/function.inc.php");
 
 		    <?php
 
-			    $sql= "SELECT * FROM trn_qa WHERE FlAG != 2 AND REF_QA_ID = ".$_GET['qa_id']."  ";
-			    if(isset($_GET['search'])){
-			      $sql .= "AND CONTENT like '%".$_POST['str_search']."%' ";
-			    }
-			     $sql .= " ORDER BY ORDER_DATA DESC ";
+			$sql = "SELECT * FROM trn_qa WHERE FlAG != 2 AND REF_QA_ID = " . $_GET['qa_id'] . "  ";
+			if (isset($_GET['search'])) {
+				$sql .= "AND CONTENT like '%" . $_POST['str_search'] . "%' ";
+			}
+			$sql .= " ORDER BY ORDER_DATA DESC ";
 
-			     $query = mysql_query($sql,$conn);
+			$query = mysql_query($sql, $conn);
 
-				 $num_rows = mysql_num_rows($query);
-
+			$num_rows = mysql_num_rows($query);
 			 ?>
 					<!-- start loop -->
 					<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content" data-id="<?=$row['QA_ID']?>">
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['QA_ID']?>"></div>
+					<div class="Main_Content" data-id="<?=$row['QA_ID'] ?>">
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['QA_ID'] ?>"></div>
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
 							<div><? echo '<a href="answer.php?qa_id='.$row['QA_ID'].' ">'.$row['CONTENT'].'</a>' ?></div>
-							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
+							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
 						<? if($row['FLAG'] == 0){ ?>
-							<span class="staus1"></span> <a href="actionAnswer.php?enable&qa_id=<?=$row['QA_ID']?>&flag=<?=$row['FLAG']?>&ref_id=<?=$row['REF_QA_ID']?>">
+							<span class="staus1"></span> <a href="actionAnswer.php?enable&qa_id=<?=$row['QA_ID'] ?>&flag=<?=$row['FLAG'] ?>&ref_id=<?=$row['REF_QA_ID'] ?>">
 							Enable
-						</a> <?}  else {?> <span class="staus2"></span> 
-						<a href="actionAnswer.php?enable&qa_id=<?=$row['QA_ID']?>&flag=<?=$row['FLAG']?>&ref_id=<?=$row['REF_QA_ID']?>"> Disable </a> <? } ?></div>
+						</a> <?}  else { ?> <span class="staus2"></span> 
+						<a href="actionAnswer.php?enable&qa_id=<?=$row['QA_ID'] ?>&flag=<?=$row['FLAG'] ?>&ref_id=<?=$row['REF_QA_ID'] ?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
-							<a href="editAnswer.php?qa_id=<?=$row['QA_ID']?>&ref_id=<?=$row['REF_QA_ID']?>" class="EditContentBtn">Edit</a>
-							<a href="#" class="DeleteContentBtn" data-id="<?=$row['QA_ID']?>">Delete</a>
+							<a href="editAnswer.php?qa_id=<?=$row['QA_ID'] ?>&ref_id=<?=$row['REF_QA_ID'] ?>" class="EditContentBtn">Edit</a>
+							<a href="#" class="DeleteContentBtn" data-id="<?=$row['QA_ID'] ?>">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>
@@ -114,12 +119,14 @@ require("../../assets/configs/function.inc.php");
 		<div class="clear"></div>	
 	</div>
 </div>	
-<? require('../inc_footer.php'); ?>		
+<?
+	require ('../inc_footer.php');
+ ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>			
-<? logs_access('admin','hello'); ?>	
+<? logs_access('admin', 'hello'); ?>	
 </body>
 </html>

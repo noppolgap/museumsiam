@@ -335,3 +335,14 @@ function updateOrderImageFile(name,id,position){
 		}
 	}
 }
+
+function delIconImageEdit(id  , iconT , path){
+	if (confirm("คุณแน่ใจที่จะลบรูปภาพนี้")){
+		$.post( "../master/delete_icon_image.php", { bannerid: id , iconType: iconT ,  pname: path})
+			.done(function( data ) {
+			    $('#img_edit_'+iconT+'_'+id).hide("scale" , function() {
+					$(this).remove();
+				});	
+		});
+	}
+}

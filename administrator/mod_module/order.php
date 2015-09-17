@@ -18,7 +18,9 @@ if(isset($_POST['update'])){
 <!doctype html>
 <html>
 <head>
-<? require('../inc_meta.php'); ?>		
+<?
+	require ('../inc_meta.php');
+ ?>		
 </head>
 <body>
 <div class="orderContent">
@@ -28,19 +30,19 @@ if(isset($_POST['update'])){
 	</div> 
 	<ul id="sortable">
 	<? for($i=30;$i>0;$i--){ ?>
-		<li class="ui-state-default" data-order="<?=$i?>" data-id="<?=$i?>">Item <?=$i?></li>
+		<li class="ui-state-default" data-order="<?=$i ?>" data-id="<?=$i ?>">Item <?=$i ?></li>
 	<? } ?>  
 	</ul>
 </div>	
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />	
 <script type="text/javascript" src="../master/script.js"></script>	
 <script>
-var listOrder = new Array();
-var countList = $('#sortable li').length;
+	var listOrder = new Array();
+	var countList = $('#sortable li').length; 
 </script>
 </body>
 </html>
 <?php
-}	
+}
 CloseDB();
 ?>	

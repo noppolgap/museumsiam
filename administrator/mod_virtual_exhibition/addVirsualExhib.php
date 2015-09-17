@@ -1,19 +1,25 @@
 <?php
-require("../../assets/configs/config.inc.php");
-require("../../assets/configs/connectdb.inc.php");
-require("../../assets/configs/function.inc.php");
+require ("../../assets/configs/config.inc.php");
+require ("../../assets/configs/connectdb.inc.php");
+require ("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('../inc_meta.php'); ?>		
+<?
+	require ('../inc_meta.php');
+ ?>		
 </head>
 
 <body>
-<? require('../inc_header.php'); ?>		
+<?
+	require ('../inc_header.php');
+ ?>		
 <div class="main-container">
 	<div class="main-body marginC">
-		<? require('../inc_side.php'); ?>
+		<?
+		require ('../inc_side.php');
+ ?>
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -23,11 +29,11 @@ require("../../assets/configs/function.inc.php");
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 					<div class="formCms">
 						<? $id = $_GET['p']; ?>
-						<form action="actionVirsualExhib.php?add&p=<?=$id?>" method="post" name="formcms">
+						<form action="actionVirsualExhib.php?add&p=<?=$id ?>" method="post" name="formcms">
 							<?php
-							   $sql= "SELECT CONTENT_CAT_DESC_LOC FROM trn_content_category WHERE FLAG <> 2 AND CONTENT_CAT_ID = $id
+							$sql = "SELECT CONTENT_CAT_DESC_LOC FROM trn_content_category WHERE FLAG <> 2 AND CONTENT_CAT_ID = $id
 							   AND REF_MODULE_ID = 5";
-							   $query = mysql_query($sql,$conn);
+							$query = mysql_query($sql, $conn);
 							?>
 							<div>
 								<div class="floatL form_name">หมวดหมู่</div>
@@ -37,7 +43,7 @@ require("../../assets/configs/function.inc.php");
 
 									<div class="floatL form_input"><input type="text" name="cat_ids" readonly="readonly"  class="w90p" value="<? echo $row['CONTENT_CAT_DESC_LOC']; ?>" />
 								
-								<?}?>
+								<?} ?>
 
 								</div>
 								<div class="clear"></div>
@@ -79,13 +85,13 @@ require("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_image('photo')?></div>
+								<div class="floatL form_input"><?=admin_upload_image('photo') ?></div>
 								<div class="clear"></div>
 							</div>	
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'viewVirsualExhib.php?p=<?=$_GET['p']?>' ">
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'viewVirsualExhib.php?p=<?=$_GET['p'] ?>' ">
 							</div>
 						</form> 
 					</div>
@@ -95,7 +101,9 @@ require("../../assets/configs/function.inc.php");
 		<div class="clear"></div>	
 	</div>
 </div>	
-<? require('../inc_footer.php'); ?>		
+<?
+	require ('../inc_footer.php');
+ ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.css" media="all" >
@@ -106,6 +114,6 @@ require("../../assets/configs/function.inc.php");
 <script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 <script type="text/javascript" src="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>	
-<? logs_access('admin','hello'); ?>	
+<? logs_access('admin', 'hello'); ?>	
 </body>
 </html>

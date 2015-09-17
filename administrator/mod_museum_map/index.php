@@ -1,29 +1,34 @@
 <?php
-require("../../assets/configs/config.inc.php");
-require("../../assets/configs/connectdb.inc.php");
-require("../../assets/configs/function.inc.php");
+require ("../../assets/configs/config.inc.php");
+require ("../../assets/configs/connectdb.inc.php");
+require ("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('../inc_meta.php'); ?>		
+<?
+	require ('../inc_meta.php');
+ ?>		
 </head>
 
 <body>
-<? require('../inc_header.php'); ?>		
+<?
+	require ('../inc_header.php');
+ ?>		
 <div class="main-container">
 	<div class="main-body marginC">
-		<? require('../inc_side.php'); ?>
+		<?
+		require ('../inc_side.php');
+ ?>
 		<?php
-			$moduleName = "" ; 
-			$sql = "SELECT * FROM sys_app_module where MODULE_ID = '6' ";
-			$rs = mysql_query($sql) or die(mysql_error());
-					
-					$i = 0 ; 
-					while($row = mysql_fetch_array($rs)){
-						$moduleName =  $row['MODULE_NAME_LOC'];
-					}mysql_free_result($rs);						
-					 
+		$moduleName = "";
+		$sql = "SELECT * FROM sys_app_module where MODULE_ID = '6' ";
+		$rs = mysql_query($sql) or die(mysql_error());
+
+		$i = 0;
+		while ($row = mysql_fetch_array($rs)) {
+			$moduleName = $row['MODULE_NAME_LOC'];
+		}mysql_free_result($rs);
 		?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
@@ -58,50 +63,46 @@ require("../../assets/configs/function.inc.php");
 				 
 				 <div class="mod-body-main-content">
 						<!-- start loop -->
-						<?php 
-					//active_flag 0 = disable , 1 = Enable ,  2 = Delete 
-						$sql = "SELECT * FROM trn_museum_detail where ACTIVE_FLAG <> 2 AND IS_GIS_MUSEUM = 'Y' ";
-						if(isset($_POST['search'])){
-							$sql .= " AND (MUSEUM_NAME_LOC like '%".$_POST['str_search']."%' or MUSEUM_NAME_ENG like '%".$_POST['str_search']."%' ";
-						$sql .= " order by MUSEUM_DETAIL_ID asc ";
-		
-			    }
-					$rs = mysql_query($sql) or die(mysql_error());
-					
-					$i = 0 ; 
-					while($row = mysql_fetch_array($rs)){
-					
-						echo "<div class='Main_Content' data-id='".$row['MUSEUM_DETAIL_ID']."'>";
-						echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='".$row["MUSEUM_DETAIL_ID"]."'></div>";
-						echo "<div class='floatL thumbContent'>";
-						echo "<a href='viewMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
-						echo "</div>";
-						echo "<div class='floatL nameContent'>";
-						echo "<div><a href='viewMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."'>".$row["MUSEUM_NAME_LOC"]."</a></div>";
+						<?php
+							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
+							$sql = "SELECT * FROM trn_museum_detail where ACTIVE_FLAG <> 2 AND IS_GIS_MUSEUM = 'Y' ";
+							if (isset($_POST['search'])) {
+								$sql .= " AND (MUSEUM_NAME_LOC like '%" . $_POST['str_search'] . "%' or MUSEUM_NAME_ENG like '%" . $_POST['str_search'] . "%' ";
+								$sql .= " order by MUSEUM_DETAIL_ID asc ";
 
+							}
+							$rs = mysql_query($sql) or die(mysql_error());
 
-						echo "<div>วันที่สร้าง ".$row["CREATE_DATE"]." | วันที่ปรับปรุง ".$row["LAST_UPDATE_DATE"]." </div>";
-						echo "</div>	";
-						
-						
-						echo "<div class='floatL EditContent'>";
-						
-						echo "<a href='editMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."' class='EditContentBtn'>Edit</a>";
-						echo "<a href='#' class='DeleteContentBtn' data-id='".$row['MUSEUM_DETAIL_ID']."' >Delete</a>";
-						//href='delMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."'
-						echo "</div>";
-						echo " <div class='clear'></div>	";
-						echo " </div>";
-$i++;
-				}mysql_free_result($rs);
+							$i = 0;
+							while ($row = mysql_fetch_array($rs)) {
 
+								echo "<div class='Main_Content' data-id='" . $row['MUSEUM_DETAIL_ID'] . "'>";
+								echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='" . $row["MUSEUM_DETAIL_ID"] . "'></div>";
+								echo "<div class='floatL thumbContent'>";
+								echo "<a href='viewMuseumMap.php?MID=" . $row["MUSEUM_DETAIL_ID"] . "' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
+								echo "</div>";
+								echo "<div class='floatL nameContent'>";
+								echo "<div><a href='viewMuseumMap.php?MID=" . $row["MUSEUM_DETAIL_ID"] . "'>" . $row["MUSEUM_NAME_LOC"] . "</a></div>";
 
+								echo "<div>วันที่สร้าง " . $row["CREATE_DATE"] . " | วันที่ปรับปรุง " . $row["LAST_UPDATE_DATE"] . " </div>";
+								echo "</div>	";
+
+								echo "<div class='floatL EditContent'>";
+
+								echo "<a href='editMuseumMap.php?MID=" . $row["MUSEUM_DETAIL_ID"] . "' class='EditContentBtn'>Edit</a>";
+								echo "<a href='#' class='DeleteContentBtn' data-id='" . $row['MUSEUM_DETAIL_ID'] . "' >Delete</a>";
+								//href='delMuseumMap.php?MID=".$row["MUSEUM_DETAIL_ID"]."'
+								echo "</div>";
+								echo " <div class='clear'></div>	";
+								echo " </div>";
+								$i++;
+							}mysql_free_result($rs);
 						?>
 						 
 						<!-- end loop -->
 					</div>
 					<div class="pagination_box">
-						<div class="floatL">จำนวนทั้งหมด  <span class='RowCount'><?=$i?></span> รายการ</div>
+						<div class="floatL">จำนวนทั้งหมด  <span class='RowCount'><?=$i ?></span> รายการ</div>
 						<div class="floatR pagination_action">
 							<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 							<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
@@ -129,7 +130,9 @@ $i++;
 		<div class="clear"></div>	
 	</div>
 </div>	
-<? require('../inc_footer.php'); ?>		
+<?
+	require ('../inc_footer.php');
+ ?>		
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
@@ -137,20 +140,18 @@ $i++;
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>		
 <script type="text/javascript" src="mod_cms.js"></script>	
-<? logs_access('admin','hello'); ?>	
+<? logs_access('admin', 'hello'); ?>	
 
 <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
 <script type="text/javascript" >
+	/*
+	 $(document).ready(function(){
+	 $('.DeleteContentBtn').bind('click' , function(){
+	 return confirm('คุณต้องการลบข้อมูลหรือไม่ ?');
+	 });
 
-/*
-$(document).ready(function(){
-	$('.DeleteContentBtn').bind('click' , function(){
-		return confirm('คุณต้องการลบข้อมูลหรือไม่ ?');
-	});
-	
-});
-		*/
-	
+	 });
+	 */
 </script>
 
 </body>
