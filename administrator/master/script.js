@@ -21,21 +21,21 @@ $( document ).ready(function() {
 	    $('.fileupload').fileupload({
 	        dataType: 'json',
 	        done: function (e, data) {
-		        var name = $(this).attr('data-name');
+		        temp2 = $(this).attr('data-name');
 	            $.each(data.result.files, function (index, file) {
-	                var boxID = thumbBox(name,file.thumbnailUrl);
+	                var boxID = thumbBox(temp2,file.thumbnailUrl);
 	                $('.image_Data').find('#input_'+boxID).val(file.url);
 	            });
 	        },
 		    progressall: function (e, data) {
 		        var progress = parseInt(data.loaded / data.total * 100, 10);
-		        $('#progress .upload_bar').show().css(
+		        $('#progress_'+temp2+' .upload_bar').show().css(
 		            'width',
 		            progress + '%'
 		        );
 		    },
 	        stop: function (e, data) {
-	           $('#progress .upload_bar').hide();
+	           $('#progress_'+temp2+' .upload_bar').hide();
 	           $('.imageBox , .OrderImageBtn').show();
 	        }
 	    });			

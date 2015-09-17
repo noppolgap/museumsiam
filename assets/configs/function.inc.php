@@ -290,6 +290,7 @@ function admin_move_image_upload_dir($dir, $file, $width, $height, $crop, $thumb
 
 function admin_upload_image($name) {
 	$str = "";
+
 	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" multiple>' . "\n\t";
 	$str .= '<div id="progress">' . "\n\t";
 	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
@@ -297,6 +298,7 @@ function admin_upload_image($name) {
 	$str .= '<div class="image_' . $name . '_Box image_Box dNone image_Box_add"></div>' . "\n\t";
 	$str .= '<div class="image_' . $name . '_data image_Data dNone"></div>' . "\n\t";
 	$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
+
 	return $str;
 }
 
@@ -304,6 +306,7 @@ function admin_upload_image_edit($name, $type, $id) {
 	global $conn;
 
 	$str = "";
+
 	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" multiple>' . "\n\t";
 	$str .= '<div id="progress">' . "\n\t";
 	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
@@ -312,6 +315,7 @@ function admin_upload_image_edit($name, $type, $id) {
 
 	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
+
 	$num = mysql_num_rows($query);
 	while ($row = mysql_fetch_array($query)) {
 		$str .= '<div id="img_edit_' . $row['PIC_ID'] . '" data-id="' . $row['PIC_ID'] . '" class="thumbBoxEdit floatL p-Relative">' . "\n\t";
