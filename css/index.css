@@ -34,7 +34,7 @@ body{
 .box-timeopen .text-time{
 	margin-left: 20px;
 	font-style: italic;
-	font-size: 22px;
+	font-size: 14px;
 	line-height: 25px;
 }
 
@@ -67,22 +67,23 @@ body{
 	width: 590px;
 }
 .box-detail-museum .box-top .text-title{
-	font-size: 35px;
+	font-size: 22px;
 	margin-bottom: 10px;
 }
 .box-detail-museum .box-top .text-title2{
-	font-size: 30px;
+	font-size: 22px;
 	margin-left: 45px;
+	line-height: 30px;
 }
 .box-detail-museum .box-top .text-title2 span{
-	font-size: 22px;
+	font-size: 14px;
 	color: #535353;
 	display: inline-block;
 }
 .box-detail-museum .box-top .text-title2 a{
 	color: #b28f50;
 	text-decoration: underline; 
-	font-size: 22px;
+	font-size: 14px;
 	display: inline-block;
 	font-style: italic;
 }
@@ -132,12 +133,12 @@ body{
 }
 .box-detail-museum .box-middle .box-right p {
 	width: 450px;
-	font-size: 22px;
+	font-size: 14px;
 	line-height: 25px;
 	margin-top: 12px;
+	font-style: italic;
 }
 .box-detail-museum .box-middle .box-right p span{
-	font-style: italic;
 	color: #535353;
 }
 
@@ -156,7 +157,6 @@ body{
 	width: 180px;
 	height: 35px;
 	line-height: 35px;
-	letter-spacing: 1px;
 }
 .box-detail-museum .box-bottom .box-btn a:hover{
 	background-color: #b28f50;
@@ -185,6 +185,9 @@ div.text-title{
 	width: 290px;
 	padding: 25px 0;
 }
+div.text-title img{
+	margin: 0 auto;
+}
 .box-tumb-date{
 	float: left;
 	width: 130px;
@@ -194,17 +197,17 @@ div.text-title{
 	margin: 8px 15px;
 }
 .box-tumb-date .text-date{
-	padding:  4px 20px 0;
-	font-size: 25px;
+	padding:  6px 18px 0;
+	font-size: 16px;
 	color: #fff;
 	text-transform: uppercase;
 }
 .box-tumb-date .text-date span{
-	font-size: 95px;
-	font-family: 'kaniga_patanabold';
-	letter-spacing: 5px;
-	left: -3px;
+	font-size: 72px;
+	letter-spacing: 3px;
+	text-align: center;
 	line-height: 54px;
+	margin-top: 5px;
 }
 .box-tumb-date .text-month{
 	width: 100%;
@@ -213,7 +216,7 @@ div.text-title{
 	line-height: 35px;
 	text-transform: uppercase;
 	text-align: center;
-	font-size: 25px;	
+	font-size: 16px;	
 	color: #fff;
 	position: absolute;
 	bottom: 0px;
@@ -252,13 +255,26 @@ div.text-title{
 	vertical-align: middle;
 	display: table-cell;
 	text-align: center;
-	font-size: 20px;
+	font-size: 14px;
 	text-transform: uppercase;
-	font-family: 'kaniga_patanabold';
 }
-.btn-all .box-text p img{
+.btn-all .box-text p span{
+	width: 25px;
+	height: 25px;
 	display: block;
+	vertical-align: middle;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	background: url(../images/icon-arrow-gray.png) no-repeat center top #000;
 	margin: 10px auto 0;
+	background-position: -2px -32px;
+}
+.btn-all:hover .box-text p span{ 
+	background: url(../images/icon-arrow-white.png) no-repeat center top #000;
+	background-position: -2px -32px;
+	background-color: #6e0904;
 }
 
 .box-slideevent-main{

@@ -31,7 +31,8 @@ require("assets/configs/function.inc.php");
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="#">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="#">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">e-SHOPPING</li>
+				<li><a href="#">e-SHOPPING</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active">ของที่ระลึก</li>
 			</ol>
 		</div>
 	</div>
@@ -59,138 +60,6 @@ require("assets/configs/function.inc.php");
 			<div class="box-category-main">
 				<div class="box-title cf">
 					<h2>ของที่ระลึก</h2>
-					<div class="box-btn">
-						<a href="e-shopping-category.php" class="btn gold">ดูทั้งหมด</a>
-					</div>
-				</div>
-				<div class="box-item-main cf">
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="box-pagination-main cf">
-					<ul class="pagination">
-						<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-						<li class="active"><a href="">1</a></li>
-						<li><a href="">2</a></li>
-						<li><a href="">3</a></li>
-						<li><a href="">...</a></li>
-						<li><a href="" class="btn-arrow-right"></a></li>
-					</ul>
-				</div>
-			</div>
-			
-			<div class="box-category-main">
-				<div class="box-title cf">
-					<h2>หนังสือ</h2>
-					<div class="box-btn">
-						<a href="e-shopping-category.php" class="btn gold">ดูทั้งหมด</a>
-					</div>
 				</div>
 				<div class="box-item-main cf">
 					<div class="item">

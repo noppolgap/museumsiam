@@ -38,22 +38,22 @@ $(document).ready(function(){
 	}
 	$('.sub').mouseenter(function(){
 		if ($(this).hasClass("opened")) {
-			$(this).children(".submenu-top").slideUp();
+			$(this).children(".submenu-top").stop().slideUp();
 			$(this).removeClass("rotate");
 			$(this).removeClass("opened");
 		}else{
-			$(this).children(".submenu-top").slideDown();
+			$(this).children(".submenu-top").stop().slideDown();
 			$(this).addClass("rotate");
 			$(this).addClass("opened");
 		}
 	});
 	$('.sub').mouseleave(function(){
 		if ($(this).hasClass("opened")) {
-			$(this).children(".submenu-top").slideUp();
+			$(this).children(".submenu-top").stop().slideUp();
 			$(this).removeClass("rotate");
 			$(this).removeClass("opened");
 		}else{
-			$(this).children(".submenu-top").slideDown();
+			$(this).children(".submenu-top").stop().slideDown();
 			$(this).addClass("rotate");
 			$(this).addClass("opened");
 		}

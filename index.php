@@ -45,7 +45,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-left">
 			<div class="box-date-main cf">
 				<div class="text-title">
-					event all
+					<img src="images/th/index/part2-pic1.png" />
 				</div>
 				<a>
 					<div class="box-tumb-date  sun  today">
@@ -129,7 +129,7 @@ require("assets/configs/function.inc.php");
 						<div class="box-text">
 							<p>
 								ดูทั้งหมด
-								<img src="images/icon-arrow-right.png"/>
+								<span></span>
 							</p>
 						</div>
 					</div>
