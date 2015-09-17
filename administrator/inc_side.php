@@ -30,7 +30,7 @@
 	<a href="../mod_webboard/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการ WEBBOARD</span></a>
 	<a href="../mod_order/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการสินค้า</span></a>
 	
-	
+	<a href="../mod_network_museum/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการพิพทธภัณฑ์เครือข่าย</span></a>
 
 
 	<a href="#"><span class="menutab dBlock signoutTab">ออกจากระบบ</span></a>

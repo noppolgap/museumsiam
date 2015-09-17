@@ -66,7 +66,8 @@ require ("../../assets/configs/function.inc.php");
 					while($row = mysql_fetch_array($rs)){
 					?>
 						<div data-id="<?=$row['MODULE_ID'] ?>" class="Main_Category_Content floatL">
-							<a href="main_category_view.php?MID=<?=$row["MODULE_ID"] ?>"><span class="thumbCategoryContent dBlock" <?=callThumbList($row['MODULE_ID'], 1, false) ?>></span></a>
+							
+							<a href="main_category_view.php?MID=<?=$row["MODULE_ID"] ?>"><span class="thumbCategoryContent dBlock" <?=callIconThumbList('BIG', $row['MODULE_ID'], NULL, true) ?>></span></a>
 							<div class="nameCategoryContent">
 								<div><a href="main_category_view.php?MID=<?=$row["MODULE_ID"] ?>"><?=$row["MODULE_NAME_LOC"] ?></a></div>
 								<div>วันที่สร้าง <?=$row["CREATE_DATE"] ?></div>

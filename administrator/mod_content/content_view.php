@@ -27,7 +27,7 @@ require ("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'content_add.php?MID=<?=$MID ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="content_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('digital_order.php?p=<?=$_GET['p'] ?>');">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 			<div class="mod-body-inner">
@@ -84,7 +84,7 @@ require ("../../assets/configs/function.inc.php");
 								,sb.order_data DESC
 							) a
 						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID 
-						where cd.CONTENT_STATUS_FLAG <>  2 ";
+						where cd.CONTENT_STATUS_FLAG <>  2 ORDER BY cd.ORDER_DATA desc ";
 
 			$query = mysql_query($sql, $conn);
 
@@ -99,7 +99,7 @@ require ("../../assets/configs/function.inc.php");
 						
 												
 						<div class="floatL thumbContent">
-							<a href="product_detail.php?p=<?=$row['CONTENT_ID'] ?>&g=<?=$row['CONTENT_DESC_LOC'] ?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], false) ?> ></a>
+							<a href="content_detail.php?conid=<?=$row['CONTENT_ID'] ?>&MID=<?=$MID ?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], false) ?> ></a>
 						</div>
 						<div class="floatL nameContent">
 							<div><? echo '<a href="content_detail.php?conid='.$row['CONTENT_ID'].'&MID='.$MID.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
@@ -144,7 +144,7 @@ require ("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 			<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'content_add.php?MID=<?=$MID ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="content_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('digital_order.php?p=<?=$_GET['p'] ?>');">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 		</div>

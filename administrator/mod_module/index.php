@@ -69,7 +69,7 @@ require ("../../assets/configs/function.inc.php");
 								echo "<div class='Main_Content' data-id='" . $row['MODULE_ID'] . "'>";
 								echo "<div class='floatL checkboxContent'><input type='checkbox' name='check' value='" . $row["MODULE_ID"] . "'></div>";
 								echo "<div class='floatL thumbContent'>";
-								echo "<a href='viewModule.php?MID=" . $row["MODULE_ID"] . "' class='dBlock' style='background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg')';></a>";
+								echo "<a href='viewModule.php?MID=" . $row["MODULE_ID"] . "' class='dBlock'  " .callIconThumbList('BIG' ,$row['MODULE_ID'] , NULL , true)." ></a>";
 								echo "</div>";
 								echo "<div class='floatL nameContent'>";
 								echo "<div><a href='viewModule.php?MID=" . $row["MODULE_ID"] . "'>" . $row["MODULE_NAME_LOC"] . "</a></div>";

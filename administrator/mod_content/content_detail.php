@@ -19,8 +19,7 @@ require ("../../assets/configs/function.inc.php");
 			<div class="main-body marginC">
 				<?
 				require ('../inc_side.php');
-				?>
-				<?
+
 				$MID = $_GET['MID'];
 				$id = $_GET['conid'];
 				$sql = "SELECT cd.*
@@ -35,13 +34,14 @@ require ("../../assets/configs/function.inc.php");
 									WHERE cd.CONTENT_STATUS_FLAG <> 2
 										AND cd.CONTENT_ID = $id ";
 				$query = mysql_query($sql, $conn);
+				//echo $sql;
 				?>
 
 				<div class="mod-body">
 					<div class="mod-body-inner">
 						<div class="mod-body-inner-header">
 							<div class="floatL titleBox">
-								แก้ไขเนื้อหา
+								รายละเอียดเนื้อหา
 							</div>
 						</div>
 						<div class="mod-body-main-content">
@@ -51,15 +51,14 @@ require ("../../assets/configs/function.inc.php");
 							</div>
 							<div class="formCms">
 
-							<form action="content_action.php?edit&conid=<?=$id ?>&MID=<?=$MID ?>" method="post" name="formcms">
+							<form action="" method="post" name="formcms">
 
 							<div>
 							<div class="floatL form_name">หมวดหมู่</div>
 							<div class="floatL form_input">
 
-							<input type="text" name="txtCategory" id="txtCategory" value="<?=$row['CONTENT_CAT_DESC_LOC']?>" class="w90p" />
+							<input type="text" name="txtCategory" id="txtCategory" value="<?=$row['CONTENT_CAT_DESC_LOC'] ?>" class="w90p" />
 
-							<span class="error" >* <span id = "categoryError" style="display:none">กรุณาเลือกหมวดหมู่ </span> </span>
 							</div>
 							<div class="clear"></div>
 							</div>
@@ -74,15 +73,11 @@ require ("../../assets/configs/function.inc.php");
 									หมวดหมู่ย่อย
 								</div>
 								<div class="floatL form_input" id="divSubCatCmbZone">
-									<?
-									if ($row["IS_LAST_NODE"] == "N") {
-?>
-										 <input type="text" name="txtSubCategory" id="txtSubCategory" value="<?=$row['SUB_CONTENT_CAT_DESC_LOC']?>" class="w90p" />
 
-								<?	}
-									?>
+									<input type="text" name="txtSubCategory" id="txtSubCategory" style="<?=$style ?>" value="<?=$row['SUB_CONTENT_CAT_DESC_LOC'] ?>" class="w90p" />
+
 								</div>
-								<span class="error" >* <span id = "subCategoryError" style="display:none">กรุณาเลือกหมวดหมู่ย่อย </span> </span>
+
 								<div class="clear"></div>
 							</div>
 
@@ -93,42 +88,46 @@ require ("../../assets/configs/function.inc.php");
 								<div class="floatL form_input">
 									<input type="text" name="txtDescLoc" id ="txtDescLoc" value="<?=$row["CONTENT_DESC_LOC"] ?>" class="w90p" />
 								</div>
-								<span class="error" >* <span id = "nameThError" style="display:none">กรุณาระบุชื่อ TH</span> </span>
+
 								<div class="clear"></div>
 							</div>
 							<div>
 							<div class="floatL form_name">ชื่อ EN</div>
 							<div class="floatL form_input"><input type="text" name="txtDescEng" id="txtDescEng" value="<?=$row["CONTENT_DESC_ENG"] ?>" class="w90p" /></div>
-							<span class="error" >* <span id = "nameEnError" style="display:none">กรุณาระบุชื่อ EN</span> </span>
+
 							<div class="clear"></div>
 							</div>
 							<div>
 							<div class="floatL form_name">รายละเอียดย่อ TH</div>
-							<div class="floatL form_input"><textarea name="txtBriefDescLoc" id = "txtBriefDescLoc" class="mytextarea2 w90p"><?=$row["BRIEF_LOC"] ?><
-							/textarea></div>
-							<span class="error" style="display:none">* <span id = "briefThError" style="display:none">กรุณาระบุรายละเอียดย่อ TH</span> </span>
+							<div class="floatL form_input"><textarea name="txtBriefDescLoc" id = "txtBriefDescLoc" class="mytextarea2 w90p"><?=$row["BRIEF_LOC"] ?>
+
+							</textarea></div>
+
 							<div class="clear"></div>
 							</div>
 							<div>
 							<div class="floatL form_name">รายละเอียดย่อ EN</div>
-							<div class="floatL form_input"><textarea name="txtBriefDescEng" id="txtBriefDescEng" class="mytextarea2 w90p"><?=$row["BRIEF_ENG"] ?><
-							/textarea></div>
-							<span class="error"   style="display:none">* <span id = "briefEnError" style="display:none">กรุณาระบุรายละเอียดย่อ EN</span> </span>
+							<div class="floatL form_input"><textarea name="txtBriefDescEng" id="txtBriefDescEng" class="mytextarea2 w90p"><?=$row["BRIEF_ENG"] ?>
+
+							</textarea></div>
+
 							<div class="clear"></div>
 							</div>
 							<div class="bigForm">
 							<div class="floatL form_name">รายละเอียด TH</div>
-							<div class="floatL form_input"><textarea name="txtDetailLoc" id = "txtDetailLoc" value="" class="mytextarea w90p"><?=$row["CONTENT_DETAIL_LOC"] ?><
-							/textarea></div>
-							<span class="error" >* <span id = "detailThError" style="display:none">กรุณาระบุรายละเอียด TH</span> </span>
+							<div class="floatL form_input"><textarea name="txtDetailLoc" id = "txtDetailLoc" value="" class="mytextarea w90p"><?=$row["CONTENT_DETAIL_LOC"] ?>
+
+							</textarea></div>
+
 							<div class="clear"></div>
 							</div>
 
 							<div class="bigForm">
 							<div class="floatL form_name">รายละเอียด EN</div>
-							<div class="floatL form_input"><textarea name="txtDetailEng" id="txtDetailEng" value="" class="mytextarea w90p"><?=$row["CONTENT_DETAIL_ENG"] ?><
-							/textarea></div>
-							<span class="error" >* <span id = "detailEnError" style="display:none">กรุณาระบุรายละเอียด EN</span> </span>
+							<div class="floatL form_input"><textarea name="txtDetailEng" id="txtDetailEng" value="" class="mytextarea w90p"><?=$row["CONTENT_DETAIL_ENG"] ?>
+
+							</textarea></div>
+
 							<div class="clear"></div>
 							</div>
 							<div class="bigForm">
@@ -138,7 +137,7 @@ require ("../../assets/configs/function.inc.php");
 							<div class="clear"></div>
 							</div>
 
-							<?} ?>
+							<? } ?>
 
 							<div class="btn_action">
 
@@ -165,16 +164,6 @@ require ("../../assets/configs/function.inc.php");
 		<script type="text/javascript" src="../master/script.js"></script>
 		<? logs_access('admin', 'hello'); ?>
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-				//divSubCatCmbZone  , divSubCat
-
-			});
-
-			function onValidate() {
-
-			}
-		</script>
 		<style  >
 			.error, .error span {
 				color: red;
