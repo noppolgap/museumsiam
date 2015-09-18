@@ -3,13 +3,14 @@
 			<div class="container cf">
 				<div class="box-left">
 					<div class="box-title">
-						มิวเซียมสยาม
-						<span>Museum Siam</span>
+						<img src="images/th/index/title-museum-main.png"/>
 					</div>
-					<img src="images/pic-detail-meseum1.jpg" alt="pic-detail-meseum1" width="" height="" />
+					<img src="images/pic-detail-meseum1.jpg"/>
 					<div class="box-timeopen">
 						<div class="box-text">
-							<p class="text-title">วันและเวลาทำการ</p>
+							<p class="text-title">
+								<img src="images/th/index/part1-pic1.png" />
+							</p>
 							<p class="text-date2">เปิดให้บริการวันอังคาร-วันอาทิตย์ (ปิดให้บริการทุกวันจันทร์)</p>
 							<p class="text-time">10.00 - 18.00 น.</p>
 						</div>
@@ -17,7 +18,7 @@
 				</div>
 				<div class="box-right">
 					<div class="box-text">
-						<p class="text-title">อัตราค่าเข้าชม</p>
+						<p class="text-title"><img src="images/th/index/part1-pic2.png" /></p>
 						
 						<p class="text-title2 icon-money">บุคคลทั่วไป</p>
 						
@@ -32,7 +33,7 @@
 							<p class="text-3">บาท</p>
 						</div>
 						<div class="row-text BcolorGray cf MarginB">
-							<p class="text-1">ผู้ใหญ่ชาวต่างชาต</p>
+							<p class="text-1">ผู้ใหญ่ชาวต่างชาติ</p>
 							<p class="text-2">200</p>
 							<p class="text-3">บาท</p>
 						</div>
@@ -50,7 +51,7 @@
 							<p class="text-3">บาท</p>
 						</div>
 						<div class="row-text BcolorGray cf MarginB">
-							<p class="text-1">ผู้ใหญ่ชาวต่างชาต</p>
+							<p class="text-1">ผู้ใหญ่ชาวต่างชาติ</p>
 							<p class="text-2">100</p>
 							<p class="text-3">บาท</p>
 						</div>
@@ -64,7 +65,7 @@
 				<div class="box-left">
 					<div class="box-timeopen">
 						<div class="box-text">
-							<p class="text-title">เข้าชมฟรี</p>
+							<p class="text-title"><img src="images/th/index/part1-pic3.png" /></p>
 							<p class="text-date2">วันหยุดนักขัตฤกษ์ที่ประกาศโดยสถาบันพิพิธภัณฑ์การเรียนรู้แห่งชาติ</p>
 							<p class="text-time">ตั้งแต่เวลา 16.00-18.00 น. ของทุกวันทำการ</p>
 						</div>

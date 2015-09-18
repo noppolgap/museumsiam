@@ -106,7 +106,11 @@ $( document ).ready(function() {
 
     if($('.DatePicker').length > 0){	
 		$('.DatePicker').datepicker({
-	      dateFormat: 'd MM yy'
+	      dateFormat: 'd MM yy',
+	      changeMonth: true,
+          changeYear: true,
+          yearRange: "-80:+0"
+          
 	    });	
     }
     

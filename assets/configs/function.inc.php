@@ -590,13 +590,18 @@ function callIconThumbList($iconType, $moduleId, $subModuleId, $genStyleTag) {
 	$num = mysql_num_rows($query);
 	if ($num == 1) {
 		$row = mysql_fetch_array($query);
-		if ($genStyleTag)
-			return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', $row[$fieldNameToGetIcon]) . '\');"';
-		else
+		if ($genStyleTag){
+			if($row[$fieldNameToGetIcon] == ''){
+				return '';	
+			}else{
+				return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', $row[$fieldNameToGetIcon]) . '\');"';
+			}
+		}else{
 			return $row[$fieldNameToGetIcon];
+		}
 	} else {
 		if ($genStyleTag)
-			return '../images/logo_thumb.jpg';
+			return 'style="background-image: url(\'../images/logo_thumb.jpg\');"';
 		else
 			return '';
 
