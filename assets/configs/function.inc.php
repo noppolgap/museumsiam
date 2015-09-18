@@ -603,6 +603,33 @@ function callIconThumbList($iconType, $moduleId, $subModuleId, $genStyleTag) {
 	}
 
 }
+function mysendMail( $to , $to_name , $send , $send_name ,  $subject ,  $message  ){
 
+	require 'assets/plugin/PHPMailer/PHPMailerAutoload.php';
+	
+	//Create a new PHPMailer instance
+	$mail = new PHPMailer();
+	$mail->IsSMTP();
+	$mail->SMTPDebug  = 0;
+	$mail->Debugoutput = 'html';
+	$mail->Host       = _MAIL_HOST_;
+	$mail->Port       = _MAIL_PORT_;
+	$mail->SMTPAuth   = true;
+	$mail->Username   = _MAIL_USER_;
+	$mail->Password   = _MAIL_PASS_;
+	$mail->SetFrom($send, $send_name);
+	$mail->AddAddress($to, $to_name);
+	$mail->Subject = $subject;
+	$mail->Body    = $message;
+	$mail->AltBody = strip_tags($message);
+	$mail->CharSet = 'UTF-8';
+	
+	//Send the message, check for errors
+	if(!$mail->Send()) {
+	  return false;
+	} else {
+	  return true;
+	}	
+}
 
 ?>
