@@ -255,4 +255,162 @@
 	width: inherit;
 }
 
+/* --------------------------------------------------- Shopping Cart --------------------------------------------------- */
+
+#cart .box-right.main-content .box-category-main,
+#cart .box-right.main-content .box-title{
+	margin-bottom: 0px;
+}
+
+.box-table-main{
+	width: 100%;
+	border-bottom: 1px solid #e5e5e5;
+}
+.table-row.head{
+	width: 100%;
+	height: 47px;
+	line-height: 47px;
+}
+.table-row.head>div{
+	display: table-cell;
+	text-align: center;
+	color: #6e0904;
+	font-size: 18px;
+}
+.table-row>div{
+	display: table-cell;
+	text-align: center;
+}
+.table-row.head .column.list,
+.table-row .column.list{
+	width: 430px;
+	text-align: left;
+	padding-left: 20px;
+}
+.table-row.head .column.price,
+.table-row .column.price{
+	width: 150px;
+}
+.table-row.head .column.number,
+.table-row .column.number{
+	width: 150px;
+}
+.table-row.head .column.total,
+.table-row .column.total{
+	width: 150px;
+	text-align: right;
+	padding-right: 20px;
+	line-height: 35px;
+}
+.table-row.list{
+	background-color: #f4f4f4;
+	padding: 20px 0;
+	border-top: 1px solid #e5e5e5;
+	margin-bottom: 1px;
+}
+.table-row.list .box-left{
+	width: 100px;
+}
+.table-row.list .box-right{
+	width: 290px;
+}
+.table-row.list .box-right p{
+	line-height: 20px;
+}
+.table-row.list .box-right .text-id span,
+.table-row.list .box-right .text-cate span{
+	display: inline;
+}
+.table-row.list .column.number input[type="number"]{
+	width: 70px;
+	height: 35px;
+	background: #FFFFFF;
+	border: 1px solid #989898;
+	line-height: 35px;
+	font-family: sans-serif;
+	font-size: 14px;
+	text-align: right;
+}
+
+.table-row.list .box-right .text-detail{
+	margin-top: 5px;
+	color: #8c8c8c;
+}
+.table-row.list .btn-delete{
+	position: absolute;
+	bottom: 10px;
+	right: 20px;
+	color: #737373;
+}
+.table-row.list .btn-delete:before{
+	content: '';
+	width: 1px;
+	height: 15px;
+	background-color: #e5e5e5;
+	display: inline-block;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+.table-row.list .btn-delete:hover{
+	color: #b28f50;
+}
+.table-row.list .btn-delete span.bin{
+	width: 13px;
+	height: 15px;
+	background: url(../images/icon-bin.png) no-repeat center center;
+	display: inline-block;
+	vertical-align: sub;
+	margin-right: 10px;
+}
+.box-btn-back{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+.box-btn-back .btn{
+	width: 185px;
+}
+.box-total-main{
+	width: 375px;
+	min-height: 180px;
+	float: right;
+	clear: both;	
+}
+.box-total-main{
+	margin-top: 20px;
+}
+.box-total-main hr{
+	width: 100%;
+	height: 1px;
+	background-color: #e5e5e5;
+	border: none;
+	clear: both;
+	margin: 20px 0;
+}
+.box-total-main .box-btn.box1 a{
+	float: right;
+}
+.box-total-main .box-btn .btn{
+	width: 185px;
+}
+.box-total-main .box-row .box-left,
+.box-total-main .box-row .box-right{
+	text-align: right;
+	width: 185px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
