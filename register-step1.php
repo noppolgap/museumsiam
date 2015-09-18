@@ -91,14 +91,14 @@ require("assets/configs/function.inc.php");
 					<div class="box-left w600">
 						<div class="box-input-text">
 							<p>อีเมล์*</p>
-							<div><input type="text" name="email"></div>
+							<div><input type="email" name="email"></div>
 						</div>
 					</div>
 					<div class="box-right w150">
 						<div class="box-input-text">
 							<p></p>
 							<div class="box-btn">
-								<a  class="btn black">ตรวจสอบ</a>
+								<a  class="btn black checkEmail">ตรวจสอบ</a>
 							</div>
 						</div>
 					</div>
@@ -133,14 +133,14 @@ require("assets/configs/function.inc.php");
 					<div class="box-left w600">
 						<div class="box-input-text">
 							<p>รหัสประจำตัวประชาชน</p>
-							<div><input type="text" name="idcard"></div>
+							<div><input type="text" name="idcard" maxlength="13"></div>
 						</div>
 					</div>
 					<div class="box-right w150">
 						<div class="box-input-text">
 							<p></p>
 							<div class="box-btn">
-								<a  class="btn black">ตรวจสอบ</a>
+								<a  class="btn black checkIDCard" href="#" >ตรวจสอบ</a>
 							</div>
 						</div>
 					</div>
@@ -298,7 +298,16 @@ require("assets/configs/function.inc.php");
 		telephone:"โทรศัพท์",
 		mobile:"โทรศัพท์มือถือ", 
 		fax:"โทรสาร",
-		postcode:"รหัสไปรษณีย์"
+		postcode:"รหัสไปรษณีย์",
+		captcha:"รหัสยืนยัน",
+		warning0:"ไม่สามารถลงทะเบียนได้เพราะ ",
+		warning1:"กรุณาระบุ ",
+		warning2:"รหัสผ่านไม่ตรงกัน ",
+		warning3:"รูปแบบอีเมล์ไม่ถูกต้อง ",
+		warning4:"รหัสผ่านไม่น้อยกว่า 6 ตัวอีกษร ",
+		warning5:"ไม่ถูกต้อง",
+		warning6:"ถูกต้อง",
+		warning7:"ไม่สามารถใช้งานได้ เพราะถูกใช้งานแล้ว"
 	};
 </script>
 </body>

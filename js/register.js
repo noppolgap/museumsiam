@@ -1,3 +1,4 @@
+var mailStaus = 0;
 $( document ).ready(function() {
 	$(document).on('change', 'select[name="province"]', function() {	
 		$.getJSON( "register-action.php", { type: "province", id: $(this).val() } )
@@ -28,7 +29,7 @@ $( document ).ready(function() {
 	});	
 		
 	$('.btnSubmit').click(function(e) {
-		submitForm();
+		$("#myform").submit();
 		
         e.preventDefault();
         e.stopPropagation();
@@ -47,6 +48,61 @@ $( document ).ready(function() {
         e.preventDefault();
         e.stopPropagation();
     });	 
+	
+	$('.checkIDCard').click(function(e) {
+		
+		var idcard 	= $('input[name="idcard"]').val();
+		if(idcard == ''){
+			alert(mytext['warning1']+" "+mytext['idcard']);
+		}else if(!validatePID(idcard)){
+			alert(mytext['idcard']+" "+mytext['warning5']);
+		}else{
+			alert(mytext['warning6']);
+		}
+		
+        e.preventDefault();
+        e.stopPropagation();
+    });	
+    
+    $('.checkEmail').click(function(e) { 
+	    
+	    var email 	= $('input[name="email"]').val();
+		if(email == ''){
+			alert(mytext['warning1']+" "+mytext['email']);
+		}else if(!isEmailAddress(email)){
+			alert(mytext['warning3']);
+		}else{
+			$.post( "register-action.php", { type: "email", email: email })
+			  .done(function( data ) {
+				  if(data == 0){
+					  alert(mytext['warning6']);
+				  }else{
+					  alert(mytext['warning7']);
+				  }
+			  });
+		}		
+		  
+        e.preventDefault();
+        e.stopPropagation();
+    });
+    
+    $('input[name="email"]').on('blur',function(){
+	    var email 	= $('input[name="email"]').val();
+		if(email == ''){
+			mailStaus = 2;
+		}else if(!isEmailAddress(email)){
+			mailStaus = 2;
+		}else{
+			$.post( "register-action.php", { type: "email", email: email })
+			  .done(function( data ) {
+				  if(data == 0){
+				  	mailStaus = 0;
+				  }else{
+				  	mailStaus = 1;
+				  }
+			  });
+		}	    
+	});	
 
     if($('.DatePicker').length > 0){	
 		$('.DatePicker').datepicker({
@@ -55,8 +111,9 @@ $( document ).ready(function() {
     }
     
 	$("#myform").on('submit',function(){
-	
+
 		var error = false;
+		var msg = mytext['warning0'];
 		var name 		= $('input[name="name"]').val();
 		var surname 	= $('input[name="surname"]').val();
 		var sex 		= $('input[name="sex"]').val();
@@ -70,21 +127,58 @@ $( document ).ready(function() {
 		var fax 		= $('input[name="fax"]').val();
 		var postcode	= $('input[name="postcode"]').val();
 
-
-		if(Enquiry == 0){
-			alert('Plase select Enquiry');	 
-		    return false;
-		}else if(Email == ''){
-			alert('Plase insert Email');	 
-		    return false;
-		}else{
-		    if(grecaptcha.getResponse() == '') {
-				alert("Please fill the captcha!");	 
-				return false;
-		    } else {
-		        return true;
-		    }
+		if(name == ''){
+			msg += "\n - "+mytext['warning1']+" "+mytext['name'];
+			error = true;
+		}
+		if(surname == ''){
+			msg += "\n - "+mytext['warning1']+" "+mytext['surname'];
+			error = true;
+		}
+		if(birthday == ''){
+			msg += "\n - "+mytext['warning1']+" "+mytext['birthday'];
+			error = true;
 		}	
+		if(email == ''){
+			msg += "\n - "+mytext['warning1']+" "+mytext['email'];
+			error = true;
+		}else if(!isEmailAddress(email)){
+			msg += "\n - "+mytext['warning3'];
+			error = true;
+		}else if(mailStaus == 1){
+			msg += "\n - "+mytext['warning7'];
+			error = true;
+		}	
+		if(password1 == ''){
+			msg += "\n - "+mytext['warning1']+" "+mytext['password1'];
+			error = true;
+		}else if(password1.length < 6){
+			msg += "\n - "+mytext['warning4'];
+			error = true;
+		}	
+		if(password2 == ''){
+			msg += "\n - "+mytext['warning1']+" "+mytext['password2'];
+			error = true;
+		}else if(password1 != password2){
+			msg += "\n - "+mytext['warning2'];
+			error = true;
+		}
+		if((!validatePID(idcard)) && (idcard != '')){
+			msg += "\n - "+mytext['idcard']+" "+mytext['warning5'];
+			error = true;
+		}	
+		if(grecaptcha.getResponse() == '') {
+			msg += "\n - "+mytext['warning1']+" "+mytext['captcha'];
+			error = true;
+		}
+			
+		if(error){
+			alert(msg);
+			return false;
+		}else{
+		    return true;
+		}		
+
 	});	    
      
 });  
