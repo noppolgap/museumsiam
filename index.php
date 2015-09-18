@@ -478,11 +478,11 @@ require("assets/configs/function.inc.php");
 
 <div class="part-news cf">
 	<div class="container">
-		<div class="box-title">news</div>
+		<div class="box-title"><img src="images/th/index/part3-pic1.png" /></div>
 		<div class="box-left">
 			<div class="box-top cf">
 				<div class="box-left">
-					<div class="text-title">all exhibition<span>news</span></div>
+					<div class="text-title"><img src="images/th/index/part3-pic2.png" /></div>
 					<a class="btn black" href="">ดูทั้งหมด</a>
 				</div>
 				<div class="box-right">
@@ -616,8 +616,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-right">
 			<div class="box-museum-news-main">
 				<div class="box-title">
-					museum siam
-					<span>news</span>
+					<img src="images/th/index/part3-pic3.png" />
 				</div>
 				<div class="box-museum-news">
 					<div class="museum-news cf">
@@ -683,7 +682,7 @@ require("assets/configs/function.inc.php");
 
 <div class="part-datanetwork">
 	<div class="container">
-		<div class="box-title">museum<span>data network</span></div>
+		<div class="box-title"><img src="images/th/index/part4-pic1.png" /></div>
 		<div class="box-slide-network-main cf">
 			<div class="slide-network cf">
 				<div class="box-network">
@@ -800,7 +799,7 @@ require("assets/configs/function.inc.php");
 	<div class="container cf">
 		<div class="box-exhibition-main cf">
 			<div class="box-top">
-				<div class="box-title">Virtual<span>Exhibition</span></div>
+				<div class="box-title"><img src="images/th/index/part5-pic1.png" /></div>
 				<div class="box-btn cf">
 					<a href="" class="btn black">ดูทั้งหมด</a>
 				</div>
@@ -947,7 +946,7 @@ require("assets/configs/function.inc.php");
 		</div>
 		<div class="box-archive-main cf">
 			<div class="box-top">
-				<div class="box-title">Digital<span>Archive</span></div>
+				<div class="box-title"><img src="images/th/index/part5-pic2.png" /></div>
 				<div class="box-btn cf">
 					<a href="" class="btn black">ดูทั้งหมด</a>
 				</div>
@@ -1094,7 +1093,7 @@ require("assets/configs/function.inc.php");
 		</div>
 		<div class="box-knowledge-main cf">
 			<div class="box-left">
-				<div class="box-title">KnowLedge<span>Management</span></div>
+				<div class="box-title"><img src="images/th/index/part5-pic3.png" /></div>
 				<div class="box-btn cf">
 					<a href="" class="btn gold">ดูทั้งหมด</a>
 				</div>

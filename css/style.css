@@ -44,7 +44,7 @@ a{
 
 
 .box-text .text-title{
-/* 	font-family: 'kaniga_patanabold'; */
+/* 	 */
 	font-size: 22px;
 	line-height: 23px;
 	color: #6e0904;
@@ -56,7 +56,7 @@ a{
 }
 .box-text .text-location{
 	font-family: sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 }
 .box-text .text-date:before{
 	content: '';
@@ -334,7 +334,7 @@ ul.menutop{
 }
 ul.menutop li{	
 /*
-	font-family: 'kaniga_patanabold';
+	
 	font-size: 22px;
 */
 	text-transform: uppercase;
@@ -432,29 +432,38 @@ ul.submenu-top li:hover{
 	color: #000;
 }
 .box-other-main .box-other .text-name{
-	font-size: 25px;
+	font-size: 16px;
 	text-align: center;
 	color: #6f0600;
 	margin: 13px 0;
-	font-family: 'kaniga_patanabold';
+	
 }
 .part-other .btn-arrow{
 	width: 31px;
 	height: 31px;
-	background: url(../images/icon-arrow.png) no-repeat center center #000;
 	display: block;
-	float: left;
+	background: url(../images/icon-arrow-white.png) no-repeat center top #000;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	display: block;
 	position: absolute;
 	top: 130px;
 }
 .part-other .btn-arrow.left{
-	background-position: 4px 5px;
+	background-position: -1px 0px;
 	left: 5px;
 }
 .part-other .btn-arrow.right{
-	background-position: -18px 5px;
+	background-position: 1px -29px;
 	right: 5px;
 }
+.part-other .btn-arrow.left:hover,
+.part-other .btn-arrow.right:hover{
+	background-color: #6e0904;
+}
+
 .part-other .box-btn{
 	display: table;
 	margin: 15px auto 0;
@@ -500,12 +509,12 @@ ul.submenu-top li:hover{
 	background-color: #f4f4f4;
 }
 .box-nav ol{
-	font-size: 15px;
+	font-size: 12px;
 /*
 	font-family: sans-serif;
 	font-size: 12px;
 */
-	font-family: 'kaniga_patanabold';
+	
 }
 .box-nav ol li{
 	float: left;
@@ -537,16 +546,14 @@ ul.submenu-top li:hover{
 	display: table;
 	margin: 0 auto;
 	text-align: center;
-	font-family: 'kaniga_patanabold';
-	font-size: 60px;
+	font-size: 40px;
 	text-transform: uppercase;
 	color: #000;
 	line-height: 40px;	
 }
 .box-titlepage span{
-	font-size: 40px;
+	font-size: 30px;
 	color: #8e070b;
-/* 	font-family: 'kaniga_patanaregular'; */
 }
 
 .box-freespace{

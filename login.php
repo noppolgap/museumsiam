@@ -52,7 +52,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-login">
 				<div class="box-top">
 					<input type="text" placeholder="อีเมล">
-					<input type="text" placeholder="รหัสผ่าน">
+					<input type="password" placeholder="รหัสผ่าน">
 				</div>
 				<div class="box-bottom cf">
 					<div class="box-left">

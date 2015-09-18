@@ -267,13 +267,11 @@ div.text-title img{
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
 	transition: all 0.3s ease;
-	background: url(../images/icon-arrow-gray.png) no-repeat center top #000;
+	background: url(../images/icon-arrow-white.png) no-repeat center top #000;
 	margin: 10px auto 0;
 	background-position: -2px -32px;
 }
 .btn-all:hover .box-text p span{ 
-	background: url(../images/icon-arrow-white.png) no-repeat center top #000;
-	background-position: -2px -32px;
 	background-color: #6e0904;
 }
 
@@ -304,7 +302,7 @@ div.text-title img{
 	bottom: 0px;
 	width: 287px;
 	line-height: 27px;
-	font-size: 22px;
+	font-size: 14px;
 	color: #fff;
 	padding: 0 10px 0 30px;
 	text-transform: uppercase;
@@ -318,13 +316,13 @@ div.text-title img{
 	padding: 0 8px;
 }
 .box-slideevent-main .box-content-slide .box-date .box-left{
-	font-size: 150px;
+	font-size: 100px;
 	color: #fff;
 	width: auto;
 	line-height: 135px;	
 }
 .box-slideevent-main .box-content-slide .box-date .box-right{
-	font-size: 40px;
+	font-size: 30px;
 	width: auto;
 	text-transform: uppercase;
 	color: #fff;
@@ -335,7 +333,7 @@ div.text-title img{
 	margin-top: 25px;
 }
 .box-slideevent-main .box-content-slide .box-date .box-right span{
-	font-size: 25px;
+	font-size: 16px;
 	line-height: 12px;
 }
 .box-slideevent-main .box-content-slide .box-text{
@@ -386,7 +384,7 @@ div.text-title img{
 	width: 120px;
 	text-align: center;
 	font-family: sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 }
 .box-slideevent-main .box-float .box-btn-left .btn.black:hover{
 	background-color: #6e0904;
@@ -399,16 +397,31 @@ div.text-title img{
 .box-slideevent-main .box-float .btn-arrow{
 	width: 31px;
 	height: 31px;
-	background: url(../images/icon-arrow.png) no-repeat center center #000;
+	display: block;
+	background: url(../images/icon-arrow-white.png) no-repeat center top #000;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 	display: block;
 	float: left;
 }
 .box-slideevent-main .box-float .btn-arrow.left{
-	background-position: 4px 5px;
+	background-position: 0px 1px;
 }
 .box-slideevent-main .box-float .btn-arrow.right{
-	background-position: -18px 5px;
+	background-position: 1px -29px;
 }
+.box-slideevent-main .box-float .btn-arrow.left:hover,
+.box-slideevent-main .box-float .btn-arrow.right:hover{
+	background-color: #6e0904;
+}
+
+
+
+
+
+
 .box-slideevent-main .box-float .box-number{
 	border-left: 1px solid #333333;
 	border-right: 1px solid #333333;
@@ -425,7 +438,7 @@ div.text-title img{
 	float: left;
 }
 .box-slideevent-main .box-float .box-number span{
-	font-size: 18px;
+	font-size: 12px;
 }
 .box-slideevent-main .box-float .box-number .ofCenter{
 	margin: 0 3px;
@@ -435,15 +448,18 @@ div.text-title img{
 /* --------------------------------------------------- Part News --------------------------------------------------- */
 
 .part-news{
-	padding: 35px 0;
+	padding: 50px 0;
 }
 .part-news .box-title{
 	font-size: 75px;
 	color: #000;
-	margin-bottom: 25px;
+	margin-bottom: 50px;
 	text-align: center;
 	text-transform: uppercase;
-	font-family: 'kaniga_patanabold';
+	
+}
+.part-news .box-title img{
+	margin: 0 auto;
 }
 .part-news .box-top .box-left{
 	width: 290px;
@@ -452,9 +468,12 @@ div.text-title img{
 	font-size: 60px;
 	text-transform: uppercase;
 	text-align: left;
-	font-family: 'kaniga_patanabold';
-	padding: 12px 0 25px;
+	
+	padding: 30px 0;
 	margin: 0 0 10px;
+}
+.part-news .box-top .box-left .text-title img{
+	margin: 0;
 }
 .part-news .box-top .box-left .text-title span{
 	font-size: 50px;
@@ -477,7 +496,7 @@ div.text-title img{
 	margin: 40px 0 0 0;
 	width: 120px;
 	font-family: sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 }
 .part-news .box-top .box-left .btn.black{
 	background-color: #000;
@@ -501,12 +520,11 @@ div.text-title img{
 	bottom: 0px;
 	width: 100%;
 	line-height: 27px;
-	font-size: 22px;
+	font-size: 14px;
 	color: #fff;
 	padding: 0 10px 0 30px;
 	text-transform: uppercase;
 	font-family: sans-serif;
-	font-size: 16px;
 }
 .part-news .box-top .box-news-bold .box-text{
 	float: right;
@@ -545,7 +563,7 @@ div.text-title img{
 	bottom: 0px;
 	width: 100%;
 	line-height: 27px;
-	font-size: 22px;
+	font-size: 14px;
 	color: #fff;
 	padding: 0 10px 0 30px;
 	text-transform: uppercase;
@@ -579,8 +597,11 @@ div.text-title img{
 	text-align: left;
 	font-size: 53px;
 	color: #fff;
-	padding: 5px 10px 22px 10px;
+	padding: 19px 10px;
 	margin-bottom: 0px;
+}
+.box-museum-news-main .box-title img{
+	margin: 0;
 }
 .box-museum-news-main .box-title span{
 	color: #871b15;
@@ -632,7 +653,7 @@ div.text-title img{
 	font-size: 53px;
 	color: #000;
 	display: table;
-	margin: 0 auto 30px;
+	margin: 0 auto 40px;
 	text-transform: uppercase;
 	line-height: 28px;
 }
@@ -668,23 +689,33 @@ div.text-title img{
 	height: 35px;
 	line-height: 35px;
 }
+
 .part-datanetwork .btn-arrow{
 	width: 31px;
 	height: 31px;
-	background: url(../images/icon-arrow.png) no-repeat center center #000;
 	display: block;
-	float: left;
+	background: url(../images/icon-arrow-white.png) no-repeat center top #000;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	display: block;
 	position: absolute;
 	top: 86px;
 }
 .part-datanetwork .btn-arrow.left{
-	background-position: 4px 5px;
+	background-position: 0px 1px;
 	left: 5px;
 }
 .part-datanetwork .btn-arrow.right{
-	background-position: -18px 5px;
+	background-position: 1px -29px;
 	right: 5px;
 }
+.part-datanetwork .btn-arrow.left:hover,
+.part-datanetwork .btn-arrow.right:hover{
+	background-color: #b28f50;
+}
+
 
 
 /* --------------------------------------------------- Part Exhibition --------------------------------------------------- */
@@ -699,7 +730,6 @@ div.text-title img{
 	padding: 20px 20px 0 17px;
 }
 .box-exhibition-main .box-title{
-	font-family: 'kaniga_patanabold';
 	font-size: 53px;
 	color: #000;
 	text-transform: uppercase;
@@ -752,7 +782,7 @@ div.text-title img{
 	padding: 20px 20px 0 17px;
 }
 .box-archive-main .box-title{
-	font-family: 'kaniga_patanabold';
+	
 	font-size: 53px;
 	color: #000;
 	text-transform: uppercase;
@@ -811,7 +841,7 @@ div.text-title img{
 	border-right: 1px solid #1a1a1a;
 }
 .box-knowledge-main .box-title{
-	font-family: 'kaniga_patanabold';
+	
 	font-size: 53px;
 	color: #fff;
 	text-transform: uppercase;

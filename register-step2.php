@@ -129,7 +129,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-right">
 						<div class="box-input-text">
 							<p>รหัสไปรษณีย์</p>
-							<div><input type="number" maxlength="5" name="postcode"></div>
+							<div><input type="text" maxlength="5" name="postcode"></div>
 						</div>
 					</div>
 				</div>
