@@ -48,7 +48,7 @@ require ("../../assets/configs/function.inc.php");
 						<div class="mod-body-main-content">
 							<div class="formCms">
 
-								<form action="museum_network_action.php?approve&MUID=<?=$MUID ?>" method="post" name="formcms">
+								<form action="museum_network_action.php?deapprove&MUID=<?=$MUID ?>" method="post" name="formcms">
 
 									<? while($rowMuseum = mysql_fetch_array($rs)) {
 									?>
@@ -230,8 +230,8 @@ require ("../../assets/configs/function.inc.php");
 									<?} ?>
 
 									<div class="btn_action">
-										<input type="submit" value="อนุมัติ" class="buttonAction emerald-flat-button" onclick="return confirm('ต้องการอนุมัติหรือไม่');">
-										<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'pending_museum_view.php' ">
+										<input type="submit" value="ยกเลิกการอนุมัติ" class="buttonAction emerald-flat-button" onclick="return confirm('ต้องการยกเลิกการอนุมัติหรือไม่');">
+										<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'approved_museum_view.php' ">
 									</div>
 								</form>
 							</div>

@@ -22,13 +22,13 @@ require ('../inc_header.php');
  ?>
 		<?php
 
-		$sql = "SELECT * FROM  trn_museum_detail where ACTIVE_FLAG <> 2 and IFNULL(APPROVE_FLAG , 'N') = 'N' and IS_GIS_MUSEUM = 'N'";
+		$sql = "SELECT * FROM  trn_museum_detail where ACTIVE_FLAG <> 2 and  APPROVE_FLAG = 'Y' and IS_GIS_MUSEUM = 'N'";
 		$rs = mysql_query($sql) or die(mysql_error());
 		?>
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">พิพิธภัฑณ์เครือข่ายรอการอนุมัติ</div>					
+					<div class="floatL titleBox">พิพิธภัฑณ์เครือข่าย</div>					
 				</div>
 				<div class="mod-body-main-content">
 					<div class="formCms">
@@ -42,7 +42,7 @@ require ('../inc_header.php');
 						<div class="floatL checkboxContent"></div>
 						
 						<div class="floatL nameContent">
-							<div><? echo '<a href="pending_museum_approve.php?MUID='.$row['MUSEUM_DETAIL_ID'].'">'. $row['MUSEUM_NAME_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="approved_museum_deapprove.php?MUID='.$row['MUSEUM_DETAIL_ID'].'">'. $row['MUSEUM_NAME_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
