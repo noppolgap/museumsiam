@@ -13,7 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");		
+		$(".menutop li.menu6,.menu-left li.menu2").addClass("active");		
 	});
 </script>
 	
@@ -53,7 +53,7 @@ require("assets/configs/function.inc.php");
 					<a href="e-booking.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>		
-							
+
 			<div class="box-table-main">
 				<div class="table-row head">
 					<div class="column list">นิทรรศการ</div>
@@ -112,7 +112,7 @@ require("assets/configs/function.inc.php");
 				<div class="box-row cf box2">
 					<div class="box-left">
 						<div class="box-btn box1 cf">
-							<a class="btn black">จองตั๋ว</a>
+							<a class="btn red">จองตั๋ว</a>
 						</div>
 					</div>
 					<div class="box-right">
@@ -123,13 +123,11 @@ require("assets/configs/function.inc.php");
 				</div>
 				
 			</div>
-<!--
 			<div class="box-btn-back">
 				<div class="box-btn cf">
 					<a href="e-shopping.php" class="btn red">ดูสินค้าเพิ่มเติม</a>
 				</div>
 			</div>
--->
 			
 		</div>
 	</div>

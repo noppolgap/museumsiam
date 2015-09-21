@@ -14,7 +14,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");		
+		$(".menutop li.menu6,.menu-left li.menu2").addClass("active");		
 	});
 </script>
 	

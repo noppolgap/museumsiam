@@ -13,7 +13,10 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");		
+		$(".menutop li.menu6,.menu-left li.menu3,.menu-left li.menu3 .submenu1").addClass("active");	
+			if ($('.menu-left li.menu3').hasClass("active")){
+				$('.menu-left li.menu3').children(".submenu-left").css("display","block");
+			}
 	});
 </script>
 	

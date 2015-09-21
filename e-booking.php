@@ -14,7 +14,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu1").addClass("active");		
+		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");		
 	});
 </script>
 	
@@ -50,6 +50,9 @@ require("assets/configs/function.inc.php");
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
 				<h1>e-BOOKING</h1>
+			</div>
+			<div class="box-btn-cart">
+				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 999</a>
 			</div>
 
 			<div class="box-booking-main">
@@ -98,7 +101,7 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-btn cf">
-							<a href="e-booking-cart.php" class="btn red">ดำเนินกาต่อ</a>
+							<a href="e-booking-cart.php" class="btn red">ดำเนินการต่อ</a>
 						</div>
 						<hr class="line-gray"/>
 					</div>
@@ -159,7 +162,7 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-btn cf">
-							<a href="e-booking-cart.php" class="btn red">ดำเนินกาต่อ</a>
+							<a href="e-booking-cart.php" class="btn red">ดำเนินการต่อ</a>
 						</div>
 						<hr class="line-gray"/>
 					</div>

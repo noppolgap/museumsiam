@@ -14,9 +14,6 @@ require("assets/configs/function.inc.php");
 <script>
 	$(document).ready(function(){
 		$(".menutop li.menu5,.menu-left li.menu1").addClass("active");
-		if ($('.menu-left li.menu1').hasClass("active")){
-			$('.menu-left li.menu1').children(".submenu-left").css("display","block");
-		}
 	});
 </script>
 	
@@ -427,7 +424,7 @@ require("assets/configs/function.inc.php");
 			</div>
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>ประกาศจัดซื้อจัดจ้าง</h2>
+					<h2>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h2>
 					<div class="box-btn">
 						<a href="news-event-notice-all.php" class="btn gold">ดูทั้งหมด</a>
 					</div>
