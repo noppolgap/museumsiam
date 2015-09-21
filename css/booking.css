@@ -1,0 +1,187 @@
+/* --------------------------------------------------- E-Booking --------------------------------------------------- */
+
+.box-booking-main{
+	width: 880px;
+	height: 568px;
+	border: 4px solid #000;
+	margin-bottom: 40px;
+}
+.box-booking-main .box-pic{
+	width: 100%;
+	height: auto;
+}
+.box-booking-main .box-content-booking{
+	width: 340px;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.75);
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	padding: 15px;
+}
+.box-content-booking .box-top{
+	font-size: 16px;
+	margin-top: 10px;
+}
+.box-content-booking .box-row{
+	margin-bottom: 30px;
+}
+.box-content-booking .box-top span{
+	display: inline-table;
+	margin-right: 15px;
+}
+.box-content-booking .box-text{
+	margin-bottom: 30px;
+}
+.box-content-booking .box-row .box-input-text p{
+	padding-left: 0px;
+}
+.box-content-booking .box-btn{
+	float: right;
+}
+
+.box-content-booking .box-btn a{
+	width: 185px;
+	margin: 0;
+}
+.box-content-booking hr{
+	clear: both;
+	margin: 30px 0;
+	float: left;
+	width: 100%;
+	height: 1px;
+	border: 0px;
+	background-color: rgba(229, 229, 229, 0.15);
+}
+.box-content-booking .box-detail .text-title{
+	color: #CCCCCC;
+	font-size: 18px;
+	margin-bottom: 30px;
+}
+.box-content-booking .box-detail .text-title span{
+	font-size: 24px;
+	margin-top: 8px;
+}
+.box-content-booking .box-detail .text-des{
+	color: #878787;
+	line-height: 20px;
+}
+
+/* --------------------------------------------------- E-Booking  Finish --------------------------------------------------- */
+
+.box-finish-main{
+	width: 100%;
+	background-color: #fafafa;
+	padding: 50px 70px 40px;
+}
+.box-finish-main .text-title{
+	text-align: center;
+	font-size: 35px;
+	margin-bottom: 20px;
+}
+.box-finish-main .text-title span{
+	font-size: 20px;
+	color: #6e0904;
+	margin-top: 20px;
+}
+.box-finish-main .box-code{
+	font-size: 25px;
+	background-color: #6e0904;
+	color: #fff;
+	padding: 4px 10px;
+	display: table;
+	margin: 0 auto;
+	padding: 12px 30px;
+}
+.box-finish-main .box-code span{
+	display: inline-block;
+}
+.box-finish-main hr{
+	margin: 40px 0;
+}
+.box-finish-main  .box-table-detai{
+	width: 100%;
+}
+.box-finish-main .box-row{
+	display: table;
+	width: 100%;
+	margin: 0px;
+}
+.box-finish-main .column {
+	display: table-cell;
+	width: 25%;
+	text-align: left;
+	padding-left: 20px;
+	border-left: 1px solid #FAFAFA;
+	background-color: #fff;
+	text-align: center;
+	padding: 12px 0px;
+	line-height: 24px;
+}
+.box-finish-main .column:first-child{
+	border-left: none;
+}
+.box-finish-main .box-row.head .column{
+	height: 35px;
+	line-height: 35px;
+	font-size: 18px;
+	color: #6e0904;
+	background-color: #e3e3e3;
+	padding: 0px;
+}
+.box-confident{
+	margin-top: 30px;
+}
+.box-confident p{
+	font-size: 12px;
+	color: #808080;
+	line-height: 23px;
+	padding-left: 70px;
+}
+.box-confident p span{
+	color: #000;
+	text-decoration: underline;
+	margin-bottom: 5px;
+}
+
+/* --------------------------------------------------- E-Booking  Finish --------------------------------------------------- */
+
+.box-waiting-main{
+	width: 100%;
+	background-color: #fafafa;
+	padding: 40px 70px;
+	border-bottom: 4px solid #000;
+}
+.box-waiting-main .text-title{
+	text-align: center;
+	font-size: 35px;
+	margin-bottom: 20px;
+	line-height: 50px;
+	text-transform: uppercase;
+}
+.box-waiting-main .box-text{
+	font-size: 20px;
+	background-color: #6e0904;
+	color: #fff;
+	padding: 4px 10px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 12px 30px;
+	text-align: center;
+	line-height: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

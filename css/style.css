@@ -3,7 +3,7 @@ body{
 	background-color: #fff;
 	font-family: sans-serif, Tahoma ;
 /* 	font-family: 'kaniga_patanaregular'; */
-	font-size: 14px;
+	font-size: 13px;
 	padding-top: 119px;
 /* 	padding-top: 35px; */
 }
@@ -41,14 +41,20 @@ a{
 .BcolorGray{
 	background-color: #f2f2f2;
 }
-
+hr {
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+    border: none;
+}
 
 .box-text .text-title{
 /* 	 */
 	font-size: 22px;
-	line-height: 23px;
 	color: #6e0904;
 	line-height: 27px;
+	height: 54px;
+	overflow: hidden;	
 }
 .box-text .text-date{
 	font-family: sans-serif;
@@ -94,7 +100,7 @@ a{
 }
 .box-text .text-des{
 	font-family: sans-serif;
-	font-size: 12px;
+	font-size: 13px;
 	color: #000;
 	line-height: 20px;
 }
@@ -114,7 +120,7 @@ a{
 	text-align: center;
 	width: 120px;
 	font-family: sans-serif;
-	font-size: 14px;
+	font-size: 13px;
 }
 .box-btn .btn.red{
 	background-color: #6e0904;
@@ -333,10 +339,7 @@ ul.menutop{
 	padding: 0px;	
 }
 ul.menutop li{	
-/*
-	
-	font-size: 22px;
-*/
+	font-size: 14px;
 	text-transform: uppercase;
 	float: left;
 	position: relative;
@@ -441,7 +444,6 @@ ul.submenu-top li:hover{
 .part-other .btn-arrow{
 	width: 31px;
 	height: 31px;
-	display: block;
 	background: url(../images/icon-arrow-white.png) no-repeat center top #000;
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;

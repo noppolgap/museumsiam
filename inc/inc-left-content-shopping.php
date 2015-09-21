@@ -24,26 +24,3 @@
 		</ul>
 	</div>
 </div>
-
-<script>
-	$(document).ready(function(){
-		$('.sub').mouseenter(function(){
-			if ($(this).hasClass("open")) {
-				$(this).children(".submenu-left").stop().slideUp();
-				$(this).removeClass("open");
-			}else{
-				$(this).children(".submenu-left").stop().slideDown();
-				$(this).addClass("open");
-			}
-		});
-		$('.sub').mouseleave(function(){
-			if ($(this).hasClass("open")) {
-				$(this).children(".submenu-left").stop().slideUp();
-				$(this).removeClass("open");
-			}else{
-				$(this).children(".submenu-left").stop().slideDown();
-				$(this).addClass("open");
-			}
-		});
-	});
-</script>

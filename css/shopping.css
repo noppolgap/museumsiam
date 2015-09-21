@@ -15,7 +15,7 @@
 	color: rgb( 140, 140, 140 );
 	text-align: center;
 	font-family: sans-serif;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 /* --------------------------------------------------- Slide Big --------------------------------------------------- */
@@ -206,7 +206,7 @@
 	color: #8c8c8c;
 	margin-top: 20px;
 	font-family: sans-serif;
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 20px;
 }
 .box-text-detail .text-price{
@@ -232,7 +232,7 @@
 	top: -16px;
 }	
 .box-text-detail .text-ship{
-	font-size: 14px;
+	font-size: 13px;
 	color: rgb( 140, 140, 140 );
 	text-align: center;
 	display: table;
@@ -328,7 +328,7 @@
 	border: 1px solid #989898;
 	line-height: 35px;
 	font-family: sans-serif;
-	font-size: 14px;
+	font-size: 13px;
 	text-align: right;
 }
 
@@ -371,7 +371,7 @@
 	width: 185px;
 }
 .box-total-main{
-	width: 375px;
+	width: 385px;
 	min-height: 180px;
 	float: right;
 	clear: both;	
@@ -398,10 +398,116 @@
 	text-align: right;
 	width: 185px;
 }
+.box-total-main .box-row{
+	margin: 25px 0;
+}
+.box-total-main .box-row span{
+	display: inline-block;
+	margin-left: 10px;
+}
+.box-total-main .box-row.box2{
+	margin: 25px 0 0;
+}
+.box-total-main .box-row .box-right{
+	color: #737373;
+}
+.box-total-main .box-row.total .box-left{
+	color: #6e0904;
+	font-size: 18px;
+}
+.box-total-main .box-row.total .box-right{
+	font-size: 18px;
+	color: #000;
+}
 
 
+/* --------------------------------------------------- Address --------------------------------------------------- */
 
+.box-address-main{
+	width: 100%;
+	background-color: #fafafa;
+	padding: 50px 0 30px;
+}
+.box-right.main-content .box-address-main .box-title{
+	font-size: 35px;
+	text-align: center;
+	background-color: transparent;
+}
+.box-form-address-main{
+	width: 700px;
+	margin: 20px auto 0;
+}
+.box-form-address-main>.text-title{
+	font-size: 16px;
+	color: #6e0904;
+}
+.box-form-address-main hr{
+	width: 100%;
+	height: 1px;
+	background-color: #e5e5e5;
+	border: none;
+	clear: both;
+	margin: 15px 0 20px;
+}
 
+.box-form-address-main .box-group{
+	padding: 0 30px;
+	margin-top: 20px;
+}
+.box-form-address-main .box-group input[type="radio"]{
+	position: absolute;
+	top: 6px;
+	left: 3px;
+}
+.box-form-address-main .box-group.form input[type="radio"]{
+	top: 9px;
+}
+.box-form-address-main .box-group.group1 p{
+	line-height: 25px;
+}
+.box-form-address-main .box-group.group1 p.deactive{
+	color: #d3d3d3;
+}
+.box-form-address-main .box-group .box-row{
+	margin-bottom: 10px;
+	font-size: 13px;
+}
+.box-form-address-main .box-group .box-row .box-left{
+	float: left;
+	width: 160px;
+}
+
+.box-form-address-main .box-group .box-row .box-right{
+	float: left;
+	width: 300px;
+}
+.box-form-address-main .box-row .box-input-text p{
+	color: #6e0904;
+	line-height: 35px;
+	padding-bottom: 0px;
+}
+.box-form-address-main .box-row .box-input-text p:after{
+	content: ':';
+	color: #6e0904;
+	position: absolute;
+	right: 10px;
+	top: 0px;
+	display: block;
+}
+.box-form-address-main .box-btn.submit{
+	margin-top: 20px;
+}
+.box-form-address-main .box-btn.submit a{
+	width: 185px;
+	margin: 0 10px;
+}
+
+.box-form-address-main input[type="text"],
+.box-form-address-main  textarea,
+.box-form-address-main .SearchMenu-item
+{
+	background-color: #f4f4f4;
+}
 
 
 
