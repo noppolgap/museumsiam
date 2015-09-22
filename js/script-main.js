@@ -36,7 +36,7 @@ $(document).ready(function(){
 			});
 		});
 	}
-	$('.sub').mouseenter(function(){
+	$('.menutop .sub').mouseenter(function(){
 		if ($(this).hasClass("opened")) {
 			$(this).children(".submenu-top").stop().slideUp();
 			$(this).removeClass("rotate");
@@ -47,7 +47,7 @@ $(document).ready(function(){
 			$(this).addClass("opened");
 		}
 	});
-	$('.sub').mouseleave(function(){
+	$('.menutop .sub').mouseleave(function(){
 		if ($(this).hasClass("opened")) {
 			$(this).children(".submenu-top").stop().slideUp();
 			$(this).removeClass("rotate");
@@ -59,7 +59,29 @@ $(document).ready(function(){
 		}
 	});
 	
-	
+
+	$('.menu-left .sub').mouseenter(function(){
+		if ($(this).hasClass("open")) {
+			$(this).children(".submenu-left").stop().slideUp();
+			$(this).removeClass("open");
+		}else if($(this).hasClass("active")){
+			$(this).children(".submenu-left").css("display","block");
+		}else{
+			$(this).children(".submenu-left").stop().slideDown();
+			$(this).addClass("open");
+		}
+	});
+	$('.menu-left .sub').mouseleave(function(){
+		if ($(this).hasClass("open")) {
+			$(this).children(".submenu-left").stop().slideUp();
+			$(this).removeClass("open");
+		}else if($(this).hasClass("active")){
+			$(this).children(".submenu-left").css("display","block");
+		}else{
+			$(this).children(".submenu-left").stop().slideDown();
+			$(this).addClass("open");
+		}
+	});
 	
 	
 	$('.lightbox').magnificPopup({type:'image'});

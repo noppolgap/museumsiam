@@ -143,9 +143,6 @@ require("assets/configs/function.inc.php");
 			</div>
 			
 			<div class="box-category-main">
-				<div class="box-title cf">
-					<h2>ของที่ระลึก</h2>
-				</div>
 				<div class="box-detailitem-main cf">
 					<div class="box-left">
 						<div class="slide-gallery-main">

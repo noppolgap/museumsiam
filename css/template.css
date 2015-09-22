@@ -450,3 +450,49 @@ ul.pagination li a.btn-arrow-right:hover{
 .part-conming-event .box-btn a{
 	width: inherit;
 }
+
+
+
+/* --------------------------------------------------- Arrow Slide Big --------------------------------------------------- */
+
+.box-social-main{
+	width: 100%;
+	text-align: right;
+	margin-bottom: 10px;
+}
+.box-social-main>a{
+	width: 31px;
+	height: 31px;
+	display: inline-block;
+	margin-left: 10px;
+	background-color: #c6c6c6;
+}
+.box-social-main a.fb{
+	
+}
+.box-social-main a.tw{
+	
+}
+.box-social-main a.g{
+	
+}
+.box-social-main a.line{
+	
+}
+.box-social-main a.fb:hover{
+	
+}
+.box-social-main a.tw:hover{
+	
+}
+.box-social-main a.g:hover{
+	
+}
+.box-social-main a.line:hover{
+	
+}
+
+
+
+
+

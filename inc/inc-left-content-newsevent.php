@@ -13,18 +13,18 @@
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
-			<li class="menu1 sub"><a href="">กิจกรรมและข่าวสาร ของมิวเซียมสยาม</a>
+			<li class="menu1 sub"><a href="">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>
 				<ul class="submenu-left">
 					<li class="submenu1"><a href="">กิจกรรมของมิวเซียมสยาม</a></li>
 					<li class="submenu2"><a href="">ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</a></li>
 					<li class="submenu3"><a href="">ประกาศจัดซื้อจัดจ้าง</a></li>
 				</ul>
 			</li>
-			<li class="menu2 sub"><a href="">กิจกรรมและข่าวสาร ทั้งหมดของทุกระบบ</a>
+			<li class="menu2 sub"><a href="">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="">กิจกรรมและข่าวสาร วันนี้</a></li>
-					<li class="submenu2"><a href="">กิจกรรมและข่าวสาร สัปดาห์นี้</a></li>
-					<li class="submenu3"><a href="">กิจกรรมและข่าวสาร เดือนนี้</a></li>
+					<li class="submenu1"><a href="">วันนี้</a></li>
+					<li class="submenu2"><a href="">สัปดาห์นี้</a></li>
+					<li class="submenu3"><a href="">เดือนนี้</a></li>
 				</ul>
 			</li>
 		</ul>
