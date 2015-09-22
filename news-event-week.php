@@ -13,7 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu2,.menu-left li.menu2 .submenu3").addClass("active");
+		$(".menutop li.menu5,.menu-left li.menu2,.menu-left li.menu2 .submenu2").addClass("active");
 		if ($('.menu-left li.menu2').hasClass("active")){
 			$('.menu-left li.menu2').children(".submenu-left").css("display","block");
 		}
@@ -34,7 +34,7 @@ require("assets/configs/function.inc.php");
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="index.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="news-event-month.php">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ รายวัน</li>
+				<li class="active">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ รายสัปดาห์</li>
 			</ol>
 		</div>
 	</div>
@@ -51,13 +51,13 @@ require("assets/configs/function.inc.php");
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
-				<h1>รายวัน</h1>
+				<h1>รายสัปดาห์</h1>
 			</div>
 			<div class="box-category-main news">
 				<div class="box-title cf">
 					<h2>กิจกรรมของทุกระบบ </h2>
 					<div class="box-btn">
-						<a href="event-day.php" class="btn gold">ดูทั้งหมด</a>
+						<a href="event-week.php" class="btn gold">ดูทั้งหมด</a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -277,7 +277,7 @@ require("assets/configs/function.inc.php");
 				<div class="box-title cf">
 					<h2>ข่าวประชาสัมพันธ์ของทุกระบบ </h2>
 					<div class="box-btn">
-						<a href="news-day.php" class="btn gold">ดูทั้งหมด</a>
+						<a href="news-week.php" class="btn gold">ดูทั้งหมด</a>
 					</div>
 				</div>
 				<div class="box-news-main">

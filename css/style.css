@@ -47,7 +47,9 @@ hr {
     background-color: #e5e5e5;
     border: none;
 }
-
+.Noborder{
+	border: none !important;
+}
 .box-text .text-title{
 /* 	 */
 	font-size: 22px;

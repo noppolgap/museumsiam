@@ -291,8 +291,8 @@ function admin_move_image_upload_dir($dir, $file, $width, $height, $crop, $thumb
 function admin_upload_image($name) {
 	$str = "";
 
-	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" multiple>' . "\n\t";
-	$str .= '<div id="progress">' . "\n\t";
+	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_'. $name .'">' . "\n\t";
 	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
 	$str .= '</div>' . "\n\t";
 	$str .= '<div class="image_' . $name . '_Box image_Box dNone image_Box_add"></div>' . "\n\t";
@@ -307,8 +307,8 @@ function admin_upload_image_edit($name, $type, $id) {
 
 	$str = "";
 
-	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" multiple>' . "\n\t";
-	$str .= '<div id="progress">' . "\n\t";
+	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_'. $name .'">' . "\n\t";
 	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
 	$str .= '</div>' . "\n\t";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
@@ -487,8 +487,8 @@ function admin_upload_icon_edit($name, $iconType, $moduleId, $subModuleId) {
 	global $conn;
 
 	$str = "";
-	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" multiple>' . "\n\t";
-	$str .= '<div id="progress">' . "\n\t";
+	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_'. $name .'">' . "\n\t";
 	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
 	$str .= '</div>' . "\n\t";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
@@ -567,7 +567,6 @@ function admin_upload_icon_image_view($name, $iconType, $moduleId, $subModuleId)
 	$str .= '</div>' . "\n\t";
 	return $str;
 }
-
 function callIconThumbList($iconType, $moduleId, $subModuleId, $genStyleTag) {
 	global $conn;
 
@@ -592,7 +591,7 @@ function callIconThumbList($iconType, $moduleId, $subModuleId, $genStyleTag) {
 		$row = mysql_fetch_array($query);
 		if ($genStyleTag){
 			if($row[$fieldNameToGetIcon] == ''){
-				return '';	
+				return '';
 			}else{
 				return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', $row[$fieldNameToGetIcon]) . '\');"';
 			}
@@ -611,7 +610,7 @@ function callIconThumbList($iconType, $moduleId, $subModuleId, $genStyleTag) {
 function mysendMail( $to , $to_name , $send , $send_name ,  $subject ,  $message  ){
 
 	require 'assets/plugin/PHPMailer/PHPMailerAutoload.php';
-	
+
 	//Create a new PHPMailer instance
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
@@ -628,13 +627,27 @@ function mysendMail( $to , $to_name , $send , $send_name ,  $subject ,  $message
 	$mail->Body    = $message;
 	$mail->AltBody = strip_tags($message);
 	$mail->CharSet = 'UTF-8';
-	
+
 	//Send the message, check for errors
 	if(!$mail->Send()) {
 	  return false;
 	} else {
 	  return true;
-	}	
+	}
 }
 
+function admin_upload_video($name){
+	$str = "";
+
+	$str .= '<input class="VideoUpload" type="file" data-name="' . $name . '" name="video[]" data-url="../../assets/plugin/upload/video/" accept="video/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_'. $name .'">' . "\n\t";
+	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="video_' . $name . '_Box video_Box dNone video_Box_add"></div>' . "\n\t";
+	$str .= '<div class="video_' . $name . '_data video_Data dNone"></div>' . "\n\t";
+	$str .= '<div class="p-Absolute OrderVideoBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
+
+	return $str;
+
+}
 ?>

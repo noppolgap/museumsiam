@@ -224,16 +224,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						
 					</div>
-					<div class="box-pagination-main cf">
-						<ul class="pagination">
-							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">...</a></li>
-							<li><a href="" class="btn-arrow-right"></a></li>
-						</ul>
-					</div>
+
 				</div>
 				
 			</div>
@@ -411,16 +402,6 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						
-					</div>
-					<div class="box-pagination-main cf">
-						<ul class="pagination">
-							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">...</a></li>
-							<li><a href="" class="btn-arrow-right"></a></li>
-						</ul>
 					</div>
 				</div>
 				

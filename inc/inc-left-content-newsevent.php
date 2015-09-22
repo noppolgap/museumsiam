@@ -13,18 +13,18 @@
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
-			<li class="menu1 sub"><a href="">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>
+			<li class="menu1 sub"><a href="news-event-museum.php">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="">กิจกรรมของมิวเซียมสยาม</a></li>
-					<li class="submenu2"><a href="">ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</a></li>
-					<li class="submenu3"><a href="">ประกาศจัดซื้อจัดจ้าง</a></li>
+					<li class="submenu1"><a href="event-museum.php">กิจกรรมของมิวเซียมสยาม</a></li>
+					<li class="submenu2"><a href="news-museum.php">ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</a></li>
+					<li class="submenu3"><a href="news-event-notice-all.php">ประกาศจัดซื้อจัดจ้าง</a></li>
 				</ul>
 			</li>
-			<li class="menu2 sub"><a href="">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</a>
+			<li class="menu2 sub"><a href="news-event-month.php">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="">วันนี้</a></li>
-					<li class="submenu2"><a href="">สัปดาห์นี้</a></li>
-					<li class="submenu3"><a href="">เดือนนี้</a></li>
+					<li class="submenu1"><a href="news-event-month.php">รายเดือน</a></li>
+					<li class="submenu2"><a href="news-event-week.php">รายสัปดาห์</a></li>
+					<li class="submenu3"><a href="news-event-day.php">รายวัน</a></li>
 				</ul>
 			</li>
 		</ul>
