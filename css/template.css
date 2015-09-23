@@ -465,31 +465,34 @@ ul.pagination li a.btn-arrow-right:hover{
 	height: 31px;
 	display: inline-block;
 	margin-left: 10px;
-	background-color: #c6c6c6;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 .box-social-main a.fb{
-	
+	background: url(../images/icon-fb.svg) no-repeat;
 }
 .box-social-main a.tw{
-	
+	background: url(../images/icon-tw.svg) no-repeat;
 }
 .box-social-main a.g{
-	
+	background: url(../images/icon-g.svg) no-repeat;
 }
 .box-social-main a.line{
-	
+	background: url(../images/icon-line.svg) no-repeat;
 }
 .box-social-main a.fb:hover{
-	
+	background: url(../images/icon-fb-hover.svg) no-repeat;
 }
 .box-social-main a.tw:hover{
-	
+	background: url(../images/icon-tw-hover.svg) no-repeat;
 }
 .box-social-main a.g:hover{
-	
+	background: url(../images/icon-g-hover.svg) no-repeat;
 }
 .box-social-main a.line:hover{
-	
+	background: url(../images/icon-line-hover.svg) no-repeat;
 }
 
 

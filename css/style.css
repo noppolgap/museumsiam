@@ -152,14 +152,26 @@ hr {
 	display: block;
 	float: left;
 	margin: 0px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 .box-btn .box-btn-social a.fb{
-	background: url(../images/icon-fb-box.png) no-repeat;
+	background: url(../images/icon-fb.svg) no-repeat;
 	margin: 0  7px 0 0;
 }
-.box-btn .box-btn-social a.tw{
-	background: url(../images/icon-tw-box.png) no-repeat;
+.box-btn .box-btn-social a.fb:hover{
+	background: url(../images/icon-fb-hover.svg) no-repeat;
 }
+
+.box-btn .box-btn-social a.tw{
+	background: url(../images/icon-tw.svg) no-repeat;
+}
+.box-btn .box-btn-social a.tw:hover{
+	background: url(../images/icon-tw-hover.svg) no-repeat;
+}
+
 .box-btn .box-btn-social{
 	float: right;	
 }
@@ -536,8 +548,6 @@ ul.submenu-top li:hover{
 .box-nav ol li.active{
 	color: #8e070b;
 }
-
-
 
 
 /* --------------------------------------------------- Title Page --------------------------------------------------- */

@@ -9,14 +9,11 @@ require("assets/configs/function.inc.php");
 <? require('inc_meta.php'); ?>	
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
-<link rel="stylesheet" type="text/css" href="css/news-event.css" />
+<link rel="stylesheet" type="text/css" href="css/km.css" />
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu1,.menu-left li.menu1 .submenu1").addClass("active");
-		if ($('.menu-left li.menu1').hasClass("active")){
-			$('.menu-left li.menu1').children(".submenu-left").css("display","block");
-		}
+		$(".menutop li.menu6,.menu-left li.menu1").addClass("active");
 	});
 </script>
 	
@@ -32,9 +29,8 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">กิจกรรมของมิวเซียมสยาม</li>
+				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active">ระบบการจัดการความรู้</li>
 			</ol>
 		</div>
 	</div>
@@ -45,14 +41,13 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-newsevent.php'); ?>
-			<?php include('inc/inc-left-content-calendar.php'); ?>
+			<?php include('inc/inc-left-content-km.php'); ?>
 		</div>
 		<div class="box-right main-content">
 
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>กิจกรรมของมิวเซียมสยาม</h2>
+					<h2>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h2>
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
@@ -61,13 +56,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -95,13 +83,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -129,13 +110,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -164,13 +138,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -198,13 +165,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -232,13 +192,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -267,13 +220,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -301,13 +247,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -335,13 +274,6 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
 								</div>
 							</a>
 							<div class="box-text">

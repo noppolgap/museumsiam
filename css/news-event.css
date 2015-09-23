@@ -14,10 +14,10 @@
 .box-tumb {
 	width: 250px;
 	float: left;
-	margin: 10px 0px;
+	margin: 20px 0px;
 }
 .box-tumb.mid{
-	margin: 10px 21px;
+	margin: 20px 21px;
 }
 .box-tumb .box-text .text-title{
 	line-height: 27px;
@@ -220,6 +220,8 @@
 .part-btn-back .box-btn a{
 	width: inherit;
 	float: right;
+	height: 25px;
+	line-height: 25px;
 }
 .box-when{
 	margin-top: 30px;

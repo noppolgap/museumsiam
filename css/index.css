@@ -34,7 +34,7 @@ body{
 .box-timeopen .text-time{
 	margin-left: 20px;
 	font-style: italic;
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 25px;
 }
 
@@ -76,14 +76,14 @@ body{
 	line-height: 30px;
 }
 .box-detail-museum .box-top .text-title2 span{
-	font-size: 14px;
+	font-size: 20px;
 	color: #535353;
 	display: inline-block;
 }
 .box-detail-museum .box-top .text-title2 a{
 	color: #b28f50;
 	text-decoration: underline; 
-	font-size: 14px;
+	font-size: 13px;
 	display: inline-block;
 	font-style: italic;
 }
@@ -384,7 +384,7 @@ div.text-title img{
 	width: 120px;
 	text-align: center;
 	font-family: sans-serif;
-	font-size: 14px;
+	font-size: 13px;
 }
 .box-slideevent-main .box-float .box-btn-left .btn.black:hover{
 	background-color: #6e0904;
@@ -496,7 +496,7 @@ div.text-title img{
 	margin: 40px 0 0 0;
 	width: 120px;
 	font-family: sans-serif;
-	font-size: 14px;
+	font-size: 13px;
 }
 .part-news .box-top .box-left .btn.black{
 	background-color: #000;
@@ -539,6 +539,8 @@ div.text-title img{
 }
 .part-news .box-top .box-news-bold .box-text .text-des{
 	margin-bottom: 17px;
+	height: 60px;
+	overflow: hidden;	
 }
 .part-news .box-bottom .box-news-main{
 	margin-top: 15px;
@@ -585,6 +587,8 @@ div.text-title img{
 }
 .part-news .box-bottom .box-news .box-text .text-des{
 	margin-bottom: 15px;
+	height: 60px;
+	overflow: hidden;	
 }
 
 .part-news .box-museum-news-main{
@@ -819,6 +823,8 @@ div.text-title img{
 }
 .box-archive-main .box-archive .text-des{
 	margin-bottom: 19px;
+	height: 60px;
+	overflow: hidden;	
 }
 .box-archive-main .owl-theme .owl-controls{
 	margin-top: 10px;

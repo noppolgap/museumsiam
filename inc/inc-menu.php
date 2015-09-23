@@ -2,7 +2,7 @@
 	<div class="container cf">
 		<div class="box-menu cf">
 			<div class="box-logo">
-				<a href="index.php"><img src="images/th/logo-header.png"/></a>
+				<a href="index.php"><img src="images/th/logo-header.svg" width="202"/></a>
 			</div>
 			<div class="menu">
 				<ul class="menutop cf">
