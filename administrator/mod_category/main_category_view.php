@@ -66,7 +66,7 @@ require ("../../assets/configs/function.inc.php");
 			if (isset($_GET['search'])) {
 				$sql .= "AND CONTENT_CAT_DESC_LOC like '%" . $_POST['str_search'] . "%' ";
 			}
-			$sql .= "ORDER BY ORDER_DATA DESC ";
+			$sql .= " ORDER BY ORDER_DATA DESC ";
 
 			$query = mysql_query($sql, $conn);
 
@@ -76,11 +76,11 @@ require ("../../assets/configs/function.inc.php");
 				<?php while($row = mysql_fetch_array($query)) { ?>
 					<div class="Main_Content" data-id="<?=$row['CONTENT_CAT_ID'] ?>" >
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_CAT_ID'] ?>"></div>
-						<div class="floatL thumbContent">
+						<!--<div class="floatL thumbContent">
 							<a href="#>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
-						</div>
-						<div class="floatL nameContent">
-							<div><? echo '<a href="category_view.php?cid='.$row['CONTENT_CAT_ID'].'&MID='.$MID.'">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
+						</div>-->
+						<div class="floatL nameContent"> 
+							<div ><? echo '<a href="main_sub_category_view.php?cid='.$row['CONTENT_CAT_ID'].'&MID='.$MID.'&LV=0">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
@@ -136,7 +136,7 @@ require ("../../assets/configs/function.inc.php");
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>			
-<script type="text/javascript" src="mod_cms.js"></script>	
+
 <? logs_access('admin', 'hello'); ?>	
 </body>
 </html>
