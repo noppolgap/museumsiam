@@ -102,6 +102,78 @@ require("assets/configs/function.inc.php");
 							<a href="#" class="btn red">ดาวน์โหลด</a>
 						</div>
 					</div>
+					<div class="box-notice pdf">
+						<div class="box-text">
+							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+							<p class="text-detail">
+								<span>ประเภท: .pdf</span>
+								<span>ขนาด: 0.61 เมกะไบต์</span>
+							</p>
+						</div>
+						<div class="box-btn cf">
+							<a href="#" class="btn red">ดาวน์โหลด</a>
+						</div>
+					</div>
+					<div class="box-notice pdf">
+						<div class="box-text">
+							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+							<p class="text-detail">
+								<span>ประเภท: .pdf</span>
+								<span>ขนาด: 0.61 เมกะไบต์</span>
+							</p>
+						</div>
+						<div class="box-btn cf">
+							<a href="#" class="btn red">ดาวน์โหลด</a>
+						</div>
+					</div>
+					<div class="box-notice pdf">
+						<div class="box-text">
+							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+							<p class="text-detail">
+								<span>ประเภท: .pdf</span>
+								<span>ขนาด: 0.61 เมกะไบต์</span>
+							</p>
+						</div>
+						<div class="box-btn cf">
+							<a href="#" class="btn red">ดาวน์โหลด</a>
+						</div>
+					</div>
+					<div class="box-notice pdf">
+						<div class="box-text">
+							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+							<p class="text-detail">
+								<span>ประเภท: .pdf</span>
+								<span>ขนาด: 0.61 เมกะไบต์</span>
+							</p>
+						</div>
+						<div class="box-btn cf">
+							<a href="#" class="btn red">ดาวน์โหลด</a>
+						</div>
+					</div>
+					<div class="box-notice pdf">
+						<div class="box-text">
+							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+							<p class="text-detail">
+								<span>ประเภท: .pdf</span>
+								<span>ขนาด: 0.61 เมกะไบต์</span>
+							</p>
+						</div>
+						<div class="box-btn cf">
+							<a href="#" class="btn red">ดาวน์โหลด</a>
+						</div>
+					</div>
+					<div class="box-notice pdf">
+						<div class="box-text">
+							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+							<p class="text-detail">
+								<span>ประเภท: .pdf</span>
+								<span>ขนาด: 0.61 เมกะไบต์</span>
+							</p>
+						</div>
+						<div class="box-btn cf">
+							<a href="#" class="btn red">ดาวน์โหลด</a>
+						</div>
+					</div>
 					<div class="box-pagination-main cf Noborder">
 						<ul class="pagination">
 							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>

@@ -13,8 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu,.menu-left li.menu1 .submenu2").addClass("active");
-		
+		$(".menutop li.menu5,.menu-left li.menu1,.menu-left li.menu1 .submenu1").addClass("active");
 		if ($('.menu-left li.menu1').hasClass("active")){
 			$('.menu-left li.menu1').children(".submenu-left").css("display","block");
 		}
@@ -137,7 +136,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
-				<h1>กิจกรรม <span>museum siam</span></h1>
+				<h1>กิจกรรมของมิวเซียมสยาม</h1>
 				<div class="box-btn">
 					<a href="" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
 				</div>
@@ -185,7 +184,7 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="part-tumb-main">
 					<div  class="text-title cf">
-						<p>แกลลอลี่</p>
+						<p>แกลเลอรี</p>
 						<div class="box-btn">
 							<a href="" class="btn black">ดูทั้งหมด</a>
 						</div>
