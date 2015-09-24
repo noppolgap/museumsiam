@@ -19,7 +19,7 @@ require("assets/configs/function.inc.php");
 	
 </head>
 
-<body>
+<body id="km">
 	
 <?php include('inc/inc-top-bar.php'); ?>
 <?php include('inc/inc-menu.php'); ?>	
@@ -45,12 +45,15 @@ require("assets/configs/function.inc.php");
 		</div>
 		<div class="box-right main-content">
 
-			<div class="box-category-main news">
+			<div class="box-category-main news BBlack">
 				<div class="box-title cf">
-					<h2>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h2>
+					<h2>กิจกรรม</h2>
+					<div class="box-btn">
+						<a href="km-event.php" class="btn gold">ดูทั้งหมด</a>
+					</div>
 				</div>
 				<div class="box-news-main">
-					<div class="box-tumb-main cf">
+					<div class="box-tumb-main cf ">
 						
 						<div class="box-tumb cf">
 							<a href="">
@@ -60,14 +63,14 @@ require("assets/configs/function.inc.php");
 							</a>
 							<div class="box-text">
 								<a href="">
-									<p class="text-title TcolorRed">
+									<p class="text-title">
 										Levitated Mass 340 Ton Giant Stone
 									</p>
 								</a>
-								<p class="text-date TcolorGray">
+								<p class="text-date">
 									28 พ.ย. 2559
 								</p>
-								<p class="text-des TcolorBlack">
+								<p class="text-des">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
@@ -87,14 +90,14 @@ require("assets/configs/function.inc.php");
 							</a>
 							<div class="box-text">
 								<a href="">
-									<p class="text-title TcolorRed">
+									<p class="text-title">
 										Levitated Mass 340 Ton Giant Stone
 									</p>
 								</a>
-								<p class="text-date TcolorGray">
+								<p class="text-date">
 									28 พ.ย. 2559
 								</p>
-								<p class="text-des TcolorBlack">
+								<p class="text-des">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
@@ -114,178 +117,14 @@ require("assets/configs/function.inc.php");
 							</a>
 							<div class="box-text">
 								<a href="">
-									<p class="text-title TcolorRed">
+									<p class="text-title">
 										Levitated Mass 340 Ton Giant Stone
 									</p>
 								</a>
-								<p class="text-date TcolorGray">
+								<p class="text-date">
 									28 พ.ย. 2559
 								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<hr class="line-gray"/>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<hr class="line-gray"/>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
+								<p class="text-des">
 									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
 								</p>
 								<div class="box-btn cf">
@@ -298,21 +137,459 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						
-					</div>
-					<div class="box-pagination-main cf">
-						<ul class="pagination">
-							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">...</a></li>
-							<li><a href="" class="btn-arrow-right"></a></li>
-						</ul>
 					</div>
 				</div>
-				
+			</div>
+			
+			<div class="box-category-main news BGray">
+				<div class="box-title cf ">
+					<h2>นิทรรศการ</h2>
+					<div class="box-btn">
+						<a href="km-exhibition.php" class="btn black">ดูทั้งหมด</a>
+					</div>
+				</div>
+				<div class="box-news-main">
+					<div class="box-tumb-main cf ">
+						
+						<div class="box-tumb cf">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box-tumb cf mid">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box-tumb cf">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
 			</div>
 
+			<div class="box-category-main news BGray">
+				<div class="box-title cf ">
+					<h2>การค้นคว้าและอ้างอิง</h2>
+					<div class="box-btn">
+						<a href="km-reseach.php" class="btn black">ดูทั้งหมด</a>
+					</div>
+				</div>
+				<div class="box-news-main">
+					<div class="box-tumb-main cf ">
+						
+						<div class="box-tumb cf">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box-tumb cf mid">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box-tumb cf">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="box-category-main news BGray">
+				<div class="box-title cf ">
+					<h2>ระบบการศึกษา</h2>
+					<div class="box-btn">
+						<a href="km-education.php" class="btn black">ดูทั้งหมด</a>
+					</div>
+				</div>
+				<div class="box-news-main">
+					<div class="box-tumb-main cf ">
+						
+						<div class="box-tumb cf">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box-tumb cf mid">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box-tumb cf">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="box-category-main news BGray">
+				<div class="box-title cf ">
+					<h2>สัมมนาและอบรม</h2>
+					<div class="box-btn">
+						<a href="km-seminar.php" class="btn black">ดูทั้งหมด</a>
+					</div>
+				</div>
+				<div class="box-news-main">
+					<div class="box-tumb-main cf ">
+						
+						<div class="box-tumb cf">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box-tumb cf mid">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="box-tumb cf">
+							<a href="">
+								<div class="box-pic">
+									<img src="http://placehold.it/274x205">
+								</div>
+							</a>
+							<div class="box-text">
+								<a href="">
+									<p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p>
+								</a>
+								<p class="text-date TcolorGray">
+									28 พ.ย. 2559
+								</p>
+								<p class="text-des TcolorBlack">
+									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+								</p>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<div class="box-btn-social cf">
+										<a href="#" class="btn-socila fb"></a>
+										<a href="#" class="btn-socila tw"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="box-category-main news">
+				<div class="box-title cf">
+					<h2>เว็บบอร์ด</h2>
+					<div class="box-btn">
+						<a href="km-webboard.php" class="btn gold">ดูทั้งหมด</a>
+					</div>
+				</div>
+				<div class="box-news-main">
+					<div class="box-table-webboard cf">
+
+						<div class="table-row head cf">
+							<div class="column list">ลำดับ</div>
+							<div class="column topic">เรื่อง</div>
+							<div class="column name">ชื่อ</div>
+							<div class="column reply">ตอบ</div>
+							<div class="column view">อ่าน</div>
+							<div class="column date">ปรับปรุงล่าสุด</div>
+						</div>
+						<div class="table-row list cf">
+							<div class="column list">Q12075</div>
+							<div class="column topic"><a href="km-webboard-topic.php">ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์</a></div>
+							<div class="column name">Coco Toh</div>
+							<div class="column reply">999,999</div>
+							<div class="column view">999,999</div>
+							<div class="column date">9/11/2556 16:55:17</div>
+						</div>
+						<div class="table-row list cf">
+							<div class="column list">Q12075</div>
+							<div class="column topic"><a href="km-webboard-topic.php">ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์</a></div>
+							<div class="column name">Coco Toh</div>
+							<div class="column reply">999,999</div>
+							<div class="column view">999,999</div>
+							<div class="column date">9/11/2556 16:55:17</div>
+						</div>
+						<div class="table-row list cf">
+							<div class="column list">Q12075</div>
+							<div class="column topic"><a href="km-webboard-topic.php">ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์</a></div>
+							<div class="column name">Coco Toh</div>
+							<div class="column reply">999,999</div>
+							<div class="column view">999,999</div>
+							<div class="column date">9/11/2556 16:55:17</div>
+						</div>
+						<div class="table-row list cf">
+							<div class="column list">Q12075</div>
+							<div class="column topic"><a href="km-webboard-topic.php">ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์</a></div>
+							<div class="column name">Coco Toh</div>
+							<div class="column reply">999,999</div>
+							<div class="column view">999,999</div>
+							<div class="column date">9/11/2556 16:55:17</div>
+						</div>
+						<div class="table-row list cf">
+							<div class="column list">Q12075</div>
+							<div class="column topic"><a href="km-webboard-topic.php">ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์</a></div>
+							<div class="column name">Coco Toh</div>
+							<div class="column reply">999,999</div>
+							<div class="column view">999,999</div>
+							<div class="column date">9/11/2556 16:55:17</div>
+						</div>
+
+
+
+
+					</div>
+				</div>
+			</div>
 			
 		</div>
 	</div>
