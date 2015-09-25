@@ -308,6 +308,112 @@ require("assets/configs/function.inc.php");
 						</ul>
 					</div>
 				</div>
+			</div>
+			
+			<div class="box-category-main news BWhite">
+				<div class="box-news-main">
+					<div class="box-tumb-main cf">
+						<div class="box-result-list-main">
+							
+							<div class="result-list cf">
+								<div class="box-left">
+									<div class="box-text">
+										<a href="">
+											<div class="text-title">
+												ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์
+											</div>
+										</a>
+										<div class="text-des">
+											ดิฉันนางสาวภัสรี เดชศรี เป็นนักศึกษาจากสถาบันเทคโนโลยีพระจอมเกล้าฯ ลาดกระบัง คณะครุศาสตร์อุสาหกรรม สาขาสถาปัตยกรรมภายใน...
+										</div>
+									</div>
+								</div>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+								</div>
+							</div>
+							<div class="result-list cf">
+								<div class="box-left">
+									<div class="box-text">
+										<a href="">
+											<div class="text-title">
+												ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์
+											</div>
+										</a>
+										<div class="text-des">
+											ดิฉันนางสาวภัสรี เดชศรี เป็นนักศึกษาจากสถาบันเทคโนโลยีพระจอมเกล้าฯ ลาดกระบัง คณะครุศาสตร์อุสาหกรรม สาขาสถาปัตยกรรมภายใน...
+										</div>
+									</div>
+								</div>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+								</div>
+							</div>
+							<div class="result-list cf">
+								<div class="box-left">
+									<div class="box-text">
+										<a href="">
+											<div class="text-title">
+												ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์
+											</div>
+										</a>
+										<div class="text-des">
+											ดิฉันนางสาวภัสรี เดชศรี เป็นนักศึกษาจากสถาบันเทคโนโลยีพระจอมเกล้าฯ ลาดกระบัง คณะครุศาสตร์อุสาหกรรม สาขาสถาปัตยกรรมภายใน...
+										</div>
+									</div>
+								</div>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+								</div>
+							</div>
+							<div class="result-list cf">
+								<div class="box-left">
+									<div class="box-text">
+										<a href="">
+											<div class="text-title">
+												ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์
+											</div>
+										</a>
+										<div class="text-des">
+											ดิฉันนางสาวภัสรี เดชศรี เป็นนักศึกษาจากสถาบันเทคโนโลยีพระจอมเกล้าฯ ลาดกระบัง คณะครุศาสตร์อุสาหกรรม สาขาสถาปัตยกรรมภายใน...
+										</div>
+									</div>
+								</div>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+								</div>
+							</div>
+							<div class="result-list cf">
+								<div class="box-left">
+									<div class="box-text">
+										<a href="">
+											<div class="text-title">
+												ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์
+											</div>
+										</a>
+										<div class="text-des">
+											ดิฉันนางสาวภัสรี เดชศรี เป็นนักศึกษาจากสถาบันเทคโนโลยีพระจอมเกล้าฯ ลาดกระบัง คณะครุศาสตร์อุสาหกรรม สาขาสถาปัตยกรรมภายใน...
+										</div>
+									</div>
+								</div>
+								<div class="box-btn cf">
+									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="box-pagination-main cf Noborder">
+						<ul class="pagination">
+							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
+							<li class="active"><a href="">1</a></li>
+							<li><a href="">2</a></li>
+							<li><a href="">3</a></li>
+							<li><a href="">...</a></li>
+							<li><a href="" class="btn-arrow-right"></a></li>
+						</ul>
+					</div>
+				</div>
 				
 			</div>
 			
@@ -330,7 +436,7 @@ require("assets/configs/function.inc.php");
 									</div>
 								</div>
 								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านต่อ</a>
+									<a href="" class="btn red">ดาว์นโหลด</a>
 								</div>
 							</div>
 							<div class="result-list cf">
@@ -347,7 +453,7 @@ require("assets/configs/function.inc.php");
 									</div>
 								</div>
 								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านต่อ</a>
+									<a href="" class="btn red">ดาว์นโหลด</a>
 								</div>
 							</div>
 							<div class="result-list cf">
@@ -364,7 +470,7 @@ require("assets/configs/function.inc.php");
 									</div>
 								</div>
 								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านต่อ</a>
+									<a href="" class="btn red">ดาว์นโหลด</a>
 								</div>
 							</div>
 							<div class="result-list cf">
@@ -381,7 +487,7 @@ require("assets/configs/function.inc.php");
 									</div>
 								</div>
 								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านต่อ</a>
+									<a href="" class="btn red">ดาว์นโหลด</a>
 								</div>
 							</div>
 							<div class="result-list cf">
@@ -398,7 +504,7 @@ require("assets/configs/function.inc.php");
 									</div>
 								</div>
 								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านต่อ</a>
+									<a href="" class="btn red">ดาว์นโหลด</a>
 								</div>
 							</div>
 

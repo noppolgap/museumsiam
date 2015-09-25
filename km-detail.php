@@ -13,10 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu1,.menu-left li.menu1 .submenu1").addClass("active");
-		if ($('.menu-left li.menu1').hasClass("active")){
-			$('.menu-left li.menu1').children(".submenu-left").css("display","block");
-		}
+		$(".menutop li.menu6,.menu-left li.menu4").addClass("active");
 			
 		var sync1 = $("#sync1");
 		var sync2 = $("#sync2");
@@ -116,10 +113,10 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-museum.php">กิจกรรมของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ชื่อกิจกรรม</li>
+				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="km.php">ระบบการจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="km-exhibition.php">นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active">ชื่อข่าว</li>
 			</ol>
 		</div>
 	</div>
@@ -130,15 +127,14 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-newsevent.php'); ?>
-			<?php include('inc/inc-left-content-calendar.php'); ?>
+			<?php include('inc/inc-left-content-km.php'); ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
-				<h1>กิจกรรมของมิวเซียมสยาม</h1>
+				<h1>ชื่อหมวดหมู่</h1>
 				<div class="box-btn">
-					<a href="" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
+					<a href="" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
 			<div class="box-newsdetail-main">
@@ -166,13 +162,9 @@ require("assets/configs/function.inc.php");
 					<a class="btn-arrow-slide pev"></a>
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
-						<div class="box-date-tumb">
-							<p class="date">99</p>
-							<p class="month">พ.ย.</p>
-						</div>
 						<div class="box-text">
 							<p class="text-title">Levitated Mass 340 Ton Giant Stone</p>
-							<p class="text-des">by MUSEUM SIAM</p>
+							<p class="text-des pin">ชื่อสถานที่</p>
 						</div>
 					</div>
 				</div>
@@ -212,16 +204,6 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
-				<div class="box-when">
-					<h3>WHEN</h3>
-					<p class="text-date">20 กุมภาพันธ์ - 14 มิถุนายน 2558</p>
-					<p class="text-time">10.30 น. - 18.00 น.</p>
-					<p class="text-location">หอศิลปะวัฒนธรรมกรุงเทพฯ</p>
-				</div>
-				<div class="box-ticket">
-					<h3>TICKET</h3>
-					<p class="text-ticket">Free with Museum Admission</p>
-				</div>
 				<div class="box-news-text">
 					<p>
 						Levitated Mass is a 2012 large-scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art. The installation consists of a 340-ton boulder affixed above a concrete trench through which visitors may walk. The nature, expense and scale of the installation made it an instant topic of discussion The work comprises a 21.5-foot tall boulder mounted on the walls of a 456-foot long concrete trench, surrounded by 2.5 acres of compressed decomposed granite. The boulder is bolted to two shelves affixed to the inner walls of the trench, which descends from ground level to 15 feet below the stone at its center, allowing visitors to stand directly below the megalith.
@@ -235,11 +217,10 @@ require("assets/configs/function.inc.php");
 						Plugin Social
 					</div>
 				</div>
-				
 			</div>
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
+					<a href="" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
 		</div>

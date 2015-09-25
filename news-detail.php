@@ -217,8 +217,13 @@ require("assets/configs/function.inc.php");
 						Levitated Mass is a 2012 large-scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art. The installation consists of a 340-ton boulder affixed above a concrete trench through which visitors may walk. The nature, expense and scale of the installation made it an instant topic of discussion The work comprises a 21.5-foot tall boulder mounted on the walls of a 456-foot long concrete trench, surrounded by 2.5 acres of compressed decomposed granite. The boulder is bolted to two shelves affixed to the inner walls of the trench, which descends from ground level to 15 feet below the stone at its center, allowing visitors to stand directly below the megalith.
 					</p>
 				</div>
-				<div class="box-plugin-social">
-					Plugin Social
+				<div class="box-footer-content cf">
+					<div class="box-date-modified">
+						วันที่แก้ไขล่าสุด :  28 พ.ย. 2559
+					</div>
+					<div class="box-plugin-social">
+						Plugin Social
+					</div>
 				</div>
 				
 			</div>
