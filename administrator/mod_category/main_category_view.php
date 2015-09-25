@@ -80,7 +80,20 @@ require ("../../assets/configs/function.inc.php");
 							<a href="#>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>-->
 						<div class="floatL nameContent"> 
-							<div ><? echo '<a href="main_sub_category_view.php?cid='.$row['CONTENT_CAT_ID'].'&MID='.$MID.'&LV=0">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
+							
+							
+							<? $nextPage = '';
+							if (nvl($row['IS_LAST_NODE'], 'Y') == 'Y') {
+								//content no LV use current LV
+								$nextPage = 'content_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0'   ;
+							} else {
+								//recursive to self page
+								$nextPage = 'main_sub_category_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0' ;
+							}
+							 ?>
+							
+							<div ><? echo '<a href="'.$nextPage.'">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>
+							<!--<div ><? echo '<a href="main_sub_category_view.php?cid='.$row['CONTENT_CAT_ID'].'&MID='.$MID.'&LV=0">'. $row['CONTENT_CAT_DESC_LOC'].'</a>' ?></div>-->
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">

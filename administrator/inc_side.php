@@ -24,13 +24,13 @@
 	<a href="../mod_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบ</span></a>
 	<a href="../mod_sub_module/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการระบบย่อย</span></a>
 	<a href="../mod_category/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่</span></a>
-	<a href="../mod_sub_category/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่ย่อย</span></a>
-	<a href="../mod_content/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการเนื้อหา</span></a>
+	<!--<a href="../mod_sub_category/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการหมวดหมู่ย่อย</span></a>
+	<a href="../mod_content/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการเนื้อหา</span></a>-->
 	<a href="../mod_faq/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการ FAQ</span></a>
 	<a href="../mod_webboard/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการ WEBBOARD</span></a>
 	<a href="../mod_order/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการสินค้า</span></a>
 	
-	<a href="../mod_network_museum/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการพิพทธภัณฑ์เครือข่าย</span></a>
+	<a href="../mod_network_museum/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการพิพิธภัณฑ์เครือข่าย</span></a>
 
 
 	<a href="#"><span class="menutab dBlock signoutTab">ออกจากระบบ</span></a>
