@@ -108,7 +108,8 @@ require ('../inc_header.php');
 							FROM trn_content_category cc
 							LEFT OUTER JOIN trn_content_sub_category sb ON sb.CONTENT_CAT_ID = cc.CONTENT_CAT_ID
 							WHERE cc.REF_MODULE_ID = $MID 
-								AND cc.flag <> 2 ";
+								AND cc.flag <> 2 
+								AND cc.CONTENT_CAT_ID  = $CID ";
 
 			if (isset($SCID) && nvl($SCID, '0') != '0') {
 				$sql .= "	AND sb.SUB_CONTENT_CAT_ID = $SCID ";
