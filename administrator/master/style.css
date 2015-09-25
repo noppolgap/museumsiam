@@ -2,11 +2,11 @@ html{
   height: 100%;
 }
 body {
-  min-height: 100%;     
-  font-size: 1em; 
+  min-height: 100%;
+  font-size: 1em;
   color: #B42024;
   background-color: #fff;
-  font-family: ThaiSansNeue , Tahoma, sans-serif;
+  font-family: sans-serif , Tahoma;
 }
 a:link {text-decoration:none;color: #B42024;}
 a:visited {text-decoration:none;color: #9d0031;}
@@ -56,7 +56,7 @@ a:active {text-decoration:none;color: #9d0031;}
 	background-image: url('../images/bg.jpg');
 	background-position: center bottom;
 	background-repeat: repeat-x;
-	border-bottom: 4px solid #CCCCCC; 
+	border-bottom: 4px solid #CCCCCC;
 }
 .main-body{
 	width: 1000px;
@@ -103,14 +103,15 @@ header{
 .menuhead{
 	font-size: 1.2em;
 	font-weight: 600;
+	padding-bottom: 10px;
 }
 .menutab{
 	background-size: auto 16px;
 	background-repeat: no-repeat;
 	background-position: left center;
-	padding: 1px 0px 1px 25px;
 	border-bottom: 1px solid #f0f0f0;
-	font-size: 1.1em;
+    font-size: 0.9em;
+    padding: 5px 0 5px 25px;
 }
 .menutab:hover , .menutab_active{
 	background-color: #CCCCCC;
@@ -140,7 +141,7 @@ header{
   color: white;
   text-align: center;
   cursor: pointer;
-  border: 0;	
+  border: 0;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 .emerald-flat-button {
@@ -177,7 +178,7 @@ header{
     padding-bottom: 3px;
     padding-top: 3px;
     text-indent: 3px;
-    width: 175px;	
+    width: 175px;
 }
 .searchBox input[type="image"]{
     height: 20px;
@@ -190,7 +191,7 @@ header{
 	background: rgba(243,156,20,0.7);
 	border: 0;
 	-webkit-box-shadow: inset 0 -2px #e8930c;
-	box-shadow: inset 0 -2px #e8930c;    
+	box-shadow: inset 0 -2px #e8930c;
 }
 /* action */
 .mod-body-inner-action{
@@ -200,7 +201,7 @@ header{
 }
 .orderBox{
 	width: 135px;
-	margin-right: 15px;	
+	margin-right: 15px;
 }
 .checkAllBox{
 	font-size: 1.2em;
@@ -209,9 +210,10 @@ header{
 .mod-body-main-content > .Main_Content{
 	height: 48px;
 	color: #000;
-	margin-left: 15px;	
-	margin-right: 15px;	
+	margin-left: 15px;
+	margin-right: 15px;
 	border-bottom: 1px solid #f0f0f0;
+	padding-top: 10px;
 }
 .checkboxContent{
 	width: 30px;
@@ -224,22 +226,23 @@ header{
 .nameContent > div{
 	height: 22px;
 	overflow: hidden;
+	font-size: 0.9em;
 }
 .nameContent > div > a{
 	color: #000;
-	font-size: 1.2em;
+	font-size: 1em;
 }
 .stausContent{
 	padding-left: 5px;
 	width: 65px;
 	height: 48px;
-    line-height: 48px;
+    line-height: 49px;
     cursor: pointer;
-	font-size: 1.2em;
+	font-size: 0.9em;
 }
 .stausContent span{
 	display: inline-block;
-	margin-right: 5px;
+	margin-right: 4px;
 	width: 12px;
 	height: 12px;
 	border-radius: 6px;
@@ -387,7 +390,7 @@ header{
 }
 .sumpricetitle{
 	border-left: 1px solid #aaa;
-} 
+}
 .sumpricetext{
 	text-align: right;
 }
@@ -409,7 +412,7 @@ header{
 	height: 42px;
 }
 .EditContent{
-	padding-top: 12px;
+	padding-top: 6px;
     width: 80px;
     margin-left: 15px;
 }
@@ -429,7 +432,7 @@ header{
 }
 .pagination_box{
 	padding: 15px;
-	font-size: 1.2em;
+	font-size: 0.9em;
 	color: #000;
 }
 .pagination_action{
@@ -477,7 +480,7 @@ header{
 	position: relative;
 }
 .form_input textarea , .form_input textarea2{
-	min-height: 100px;	
+	min-height: 100px;
 	resize: none;
 }
 .btn_action{
@@ -501,7 +504,7 @@ header{
 	max-width: 150px;
 }
 .thumbBoxEdit:hover .thumbBoxAction{
-	display: block;	
+	display: block;
 }
 .thumbBoxAction{
 	width: 20px;
@@ -525,7 +528,7 @@ header{
     width: 433px;
 }
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-#sortable li { 
+#sortable li {
     font-size: 1em;
     font-weight: 400;
     height: 1em;
@@ -543,10 +546,10 @@ header{
     position: absolute;
     top: 0px;
     width: 30px;
-}  
+}
 .ui-timepicker-div , .ui-datepicker .ui-datepicker-buttonpane button{
 	font-size: 0.8em !important;
-} 
+}
 .OrderImageBtn{
 	background-image: url('../images/order.svg');
 	background-size: 100% 100%;
@@ -557,13 +560,13 @@ header{
 	cursor: pointer;
 }
 .sortableBox { width: 630px !important; }
-.sortableBox li { 
-	margin: 3px 3px 3px 0  !important; 
-	padding: 1px  !important; 
-	float: left; 
-	width: 150px  !important; 
-	height: 117px  !important; 
-	font-size: 4em  !important; 
+.sortableBox li {
+	margin: 3px 3px 3px 0  !important;
+	padding: 1px  !important;
+	float: left;
+	width: 150px  !important;
+	height: 117px  !important;
+	font-size: 4em  !important;
 	text-align: center;
     background-size: cover;
 }
