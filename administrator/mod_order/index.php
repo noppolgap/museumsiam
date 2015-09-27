@@ -43,10 +43,10 @@ require("../../assets/configs/function.inc.php");
 					<!-- start loop -->
 				<?php 
 
-					$sql= "SELECT o.ORDER_ID, CONCAT( u.NAME,'  ', u.LAST_NAME ) AS name, u.EMAIL, u.MOBILE_PHONE, u.TELEPHONE, o.FLAG, o.EMS
+				    $sql= "SELECT o.ORDER_ID, CONCAT( u.NAME,'  ', u.LAST_NAME ) AS name, u.EMAIL, u.MOBILE_PHONE, u.TELEPHONE, o.FLAG, o.EMS
 					FROM trn_order o
-					INNER JOIN trn_order_detail d ON o.ORDER_ID = d.ORDER_ID
-					INNER JOIN sys_app_user u ON o.ORDER_ID = u.id
+				
+					INNER JOIN sys_app_user u ON o.CUSTOMER_ID = u.id
 					LEFT JOIN mas_sub_district s ON u.SUB_DISTRICT_ID = s.SUB_DISTRICT_ID
 					LEFT JOIN mas_province p ON p.PROVINCE_ID = u.PROVINCE_ID ";
 

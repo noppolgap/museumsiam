@@ -27,20 +27,21 @@ require("../../assets/configs/function.inc.php");
 				<?php 
 
 					$id = intval($_GET['order_id']);
-					$sql= " SELECT o.ORDER_ID, CONCAT( u.NAME,'  ', u.LAST_NAME ) AS name, u.EMAIL, u.MOBILE_PHONE
+				    $sql= " SELECT o.ORDER_ID, CONCAT( u.NAME,'  ', u.LAST_NAME ) AS name, u.EMAIL, u.MOBILE_PHONE
 							, u.TELEPHONE, o.FLAG, o.EMS, concat(u.ADDRESS1,' ', t.DISTRICT_DESC_LOC,' ', s.SUB_DISTRICT_DESC_LOC,' ',p.PROVINCE_DESC_LOC) as address
 							, o.CREATE_DATE , o.ADDRESS as addr
 							FROM trn_order o
 							INNER JOIN trn_order_detail d ON o.ORDER_ID = d.ORDER_ID
-							INNER JOIN sys_app_user u ON o.ORDER_ID = u.id
+							INNER JOIN sys_app_user u ON o.CUSTOMER_ID = u.id
 							left join mas_district t on t.DISTRICT_ID = u.DISTRICT_ID
 							LEFT JOIN mas_sub_district s ON u.SUB_DISTRICT_ID = s.SUB_DISTRICT_ID
 							LEFT JOIN mas_province p ON p.PROVINCE_ID = u.PROVINCE_ID
-							where o.order_id = '".$id."'  ";
+							where d.order_id = '".$id."'  ";
 
 				   	$query = mysql_query($sql,$conn);
 
 					$num_rows = mysql_num_rows($query);
+
 
  				?>
 
@@ -75,6 +76,26 @@ require("../../assets/configs/function.inc.php");
 						<? } ?>
 						<div class="clear"></div>
 					</div>
+
+					<?php 
+
+					$order_id = intval($_GET['order_id']);
+					$sql_order = " select prod.PRODUCT_ID, prod.PRODUCT_DESC_LOC,  prod.PRICE, orderd.QUATITY,
+							(prod.PRICE * orderd.QUATITY ) total, od.ORDER_ID 
+							from trn_product prod
+							inner join trn_order_detail  orderd on prod.PRODUCT_ID = orderd.PRODUCT_ID
+							left join trn_order od on   od.ORDER_ID = orderd .ORDER_ID
+							WHERE prod.Flag <> 2 AND  orderd.order_id = '".$order_id."' ";
+
+				   	$query_order = mysql_query($sql_order,$conn);
+
+					$num_rows = mysql_num_rows($query_order);
+
+					$num = 1;
+
+
+ 					?>
+
 					<div class="productDetail">
 						<div class="productHeader">
 							<div class="floatL productColumn1" >ลำดับ</div>
@@ -83,42 +104,66 @@ require("../../assets/configs/function.inc.php");
 							<div class="floatL productColumn4" >จำนวน</div>
 							<div class="floatL productColumn5" >รวม</div>
 							<div class="clear"></div>
-						</div>	 		 			
+						</div>
+
+					 <?  ?>
+					<?php while($row_order = mysql_fetch_array($query_order)) { ?>	
+
+
 						<div class="productBody">
-							<div class="floatL productColumn1" >1</div>
+							<div class="floatL productColumn1" ><? echo $num ?></div>
 							<div class="floatL productColumn2" >
-								<div><strong>Code: </strong>GTTH-1183</div>
-								<div>NanoPi</div>
+								<div><strong>Code: </strong><? echo $row_order['PRODUCT_ID']; ?></div>
+								<div><? echo $row_order['PRODUCT_DESC_LOC']; ?></div>
 							</div>
-							<div class="floatL productColumn3" >925.00</div>
-							<div class="floatL productColumn4" >1</div>
-							<div class="floatL productColumn5" >925.00</div>
-							<div class="clear"></div>
-						</div>		 			
-						<div class="productBody">
-							<div class="floatL productColumn1" >2</div>
-							<div class="floatL productColumn2" >
-								<div><strong>Code: </strong>GTTH-1182</div>
-								<div>arduino r3</div>
-							</div>
-							<div class="floatL productColumn3" >500.00</div>
-							<div class="floatL productColumn4" >2</div>
-							<div class="floatL productColumn5" >1,000.00</div>
+							<div class="floatL productColumn3" ><? echo $row_order['PRICE']; ?></div>
+							<div class="floatL productColumn4" ><? echo $row_order['QUATITY']; ?></div>
+							<div class="floatL productColumn5" ><? echo $row_order['total']; ?></div>
 							<div class="clear"></div>
 						</div>
+
+					<? 
+						$num++;
+					} ?>
+
+					<?php 
+
+						$price_id = intval($_GET['order_id']);
+						$sql_price = " select  sum(prod.PRICE * orderd.QUATITY ) total
+									    from trn_product prod
+										inner join trn_order_detail  orderd on prod.PRODUCT_ID = orderd.PRODUCT_ID
+										left join trn_order od on   od.ORDER_ID = orderd .ORDER_ID
+										WHERE prod.Flag <> 2  AND  orderd.order_id = '".$price_id."' ";
+
+					   	$query_price = mysql_query($sql_price,$conn);
+
+						$num_rows = mysql_num_rows($query_price);
+
+ 		
+ 					 	while($row_price = mysql_fetch_array($query_price)) {
+
+					 	$vat = ($row_price['total'] * 7) / 100 ;  
+
+					 	$net = $row_price['total'] - $vat;
+
+					 	?>
+						
 						<div class="productFooter">
 							<div class="sumpricetitle floatL">Price</div>
-							<div class="sumpricetext floatL">925.00</div>
+							<div class="sumpricetext floatL"><? echo $row_price['total']; ?></div>
 							<div class="sumpricetitle floatL">Vat 7%</div>
-							<div class="sumpricetext floatL">64.75</div>
+							<div class="sumpricetext floatL"><? echo $vat ?></div>
 							<div class="sumpricetitle floatL">Net Price</div>
-							<div class="sumpricetext floatL">989.75 </div>
-							<div class="sumpricetitle floatL">Delivery Fee</div>
-							<div class="sumpricetext floatL">70.00 </div>
+							<div class="sumpricetext floatL"><? echo $net ?></div>
+							<!--<div class="sumpricetitle floatL">Delivery Fee</div>
+							<div class="sumpricetext floatL">70.00 </div>-->
 							<div class="sumpricetitle floatL sumpricetitle_last">Total Payment</div>
-							<div class="sumpricetext floatL sumpricetitle_last">1,059.75</div>
+							<div class="sumpricetext floatL sumpricetitle_last"><? echo $net ?></div>
 							<div class="clear"></div>
-						</div>	
+						</div>
+
+					<? } ?>
+							
 					</div>	
 					<div class="clear"></div>		
 				</div>				

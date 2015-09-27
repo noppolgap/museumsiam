@@ -52,7 +52,20 @@ require("assets/configs/function.inc.php");
 					<a href="e-shopping.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>		
-				
+			
+			<?php 
+				    $sql  = "SELECT p.PRODUCT_ID, p.PRODUCT_DESC_LOC,  p.PRICE,  od.QUATITY, (p.PRICE * od.QUATITY ) total,
+							c.CONTENT_CAT_DESC_LOC , p.DETAIL 
+							FROM trn_product  p
+							left join trn_order_detail od on p.PRODUCT_ID = od.PRODUCT_ID
+							left join trn_content_category c on  c.CONTENT_CAT_ID = p.CAT_ID
+							WHERE p.Flag <>2 ";
+
+				     $query = mysql_query($sql,$conn);
+
+					 $num_rows = mysql_num_rows($query);
+			?>
+
 			<div class="box-table-main">
 				<div class="table-row head">
 					<div class="column list">สินค้า</div>
@@ -60,6 +73,10 @@ require("assets/configs/function.inc.php");
 					<div class="column number">จำนวน</div>
 					<div class="column total">มูลค่ารวม</div>
 				</div>
+
+			<?php while($row = mysql_fetch_array($query)) { ?>
+
+
 				<div class="table-row list">
 					<div class="column list cf">
 						<div class="box-left">
@@ -68,94 +85,23 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-right">
-							<p class="text-title">New Look Embroidered Cami Top - Size M</p>
-							<p class="text-id">รหัสสินค้า : <span>999,999</span></p>
-							<p class="text-cate">หมวดหมู่สินค้า : <span>ของที่ระลึก</span></p>
+							<p class="text-title"><? echo $row['PRODUCT_DESC_LOC']; ?></p>
+							<p class="text-id">รหัสสินค้า : <span><? echo $row['PRODUCT_ID']; ?></span></p>
+							<p class="text-cate">หมวดหมู่สินค้า : <span><? echo $row['CONTENT_CAT_DESC_LOC']; ?></span></p>
 							<p class="text-detail">
-								Top by New Look<br>
-								- Lightweight wool-mix fabric<br>
-								- Soft-touch finish<br>
-								- All-over check design
+								<? echo $row['DETAIL']; ?>
 							</p>
 						</div>
 					</div>
-					<div class="column price">999,999</div>
-					<div class="column number"><input type="number" name="number" value="1"></div>
-					<div class="column total">999,999</div>
+					<div class="column price"><? echo $row['SALE']; ?></div>
+					<div class="column number"><input type="number" name="number" value="<? echo $row['QUATITY']; ?>"></div>
+					<div class="column total"><? echo $row['total']; ?></div>
 					<a href="#" class="btn-delete"><span class="bin"></span>ลบรายการสินค้า</a>
 				</div>
-				<div class="table-row list">
-					<div class="column list cf">
-						<div class="box-left">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</div>
-						<div class="box-right">
-							<p class="text-title">New Look Embroidered Cami Top - Size M</p>
-							<p class="text-id">รหัสสินค้า : <span>999,999</span></p>
-							<p class="text-cate">หมวดหมู่สินค้า : <span>ของที่ระลึก</span></p>
-							<p class="text-detail">
-								Top by New Look<br>
-								- Lightweight wool-mix fabric<br>
-								- Soft-touch finish<br>
-								- All-over check design
-							</p>
-						</div>
-					</div>
-					<div class="column price">999,999</div>
-					<div class="column number"><input type="number" name="number" value="1"></div>
-					<div class="column total">999,999</div>
-					<a href="#" class="btn-delete"><span class="bin"></span>ลบรายการสินค้า</a>
-				</div>
-				<div class="table-row list">
-					<div class="column list cf">
-						<div class="box-left">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</div>
-						<div class="box-right">
-							<p class="text-title">New Look Embroidered Cami Top - Size M</p>
-							<p class="text-id">รหัสสินค้า : <span>999,999</span></p>
-							<p class="text-cate">หมวดหมู่สินค้า : <span>ของที่ระลึก</span></p>
-							<p class="text-detail">
-								Top by New Look<br>
-								- Lightweight wool-mix fabric<br>
-								- Soft-touch finish<br>
-								- All-over check design
-							</p>
-						</div>
-					</div>
-					<div class="column price">999,999</div>
-					<div class="column number"><input type="number" name="number" value="1"></div>
-					<div class="column total">999,999</div>
-					<a href="#" class="btn-delete"><span class="bin"></span>ลบรายการสินค้า</a>
-				</div>
-				<div class="table-row list">
-					<div class="column list cf">
-						<div class="box-left">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</div>
-						<div class="box-right">
-							<p class="text-title">New Look Embroidered Cami Top - Size M</p>
-							<p class="text-id">รหัสสินค้า : <span>999,999</span></p>
-							<p class="text-cate">หมวดหมู่สินค้า : <span>ของที่ระลึก</span></p>
-							<p class="text-detail">
-								Top by New Look<br>
-								- Lightweight wool-mix fabric<br>
-								- Soft-touch finish<br>
-								- All-over check design
-							</p>
-						</div>
-					</div>
-					<div class="column price">999,999</div>
-					<div class="column number"><input type="number" name="number" value="1"></div>
-					<div class="column total">999,999</div>
-					<a href="#" class="btn-delete"><span class="bin"></span>ลบรายการสินค้า</a>
-				</div>
+
+
+				<? } ?>
+			
 			</div>
 			
 			<div class="box-total-main cf">
