@@ -1,0 +1,78 @@
+.box-category-main.BBlack .box-news-main{
+	background-color: #000;
+}
+.box-category-main.BBlack .box-tumb .text-title{
+	color: #ccc;
+}
+.box-category-main.BBlack .box-tumb .text-date,
+.box-category-main.BBlack .box-tumb .text-des{
+	color: #878787;
+}
+.box-category-main.BBlack .box-tumb .text-title:hover{
+	color: #b28f50;
+}
+.box-category-main.BBlack .box-tumb .box-btn a.btn.red:hover {
+	background-color: #b28f50;
+	color: #000;
+}
+.box-category-main.BGray .box-title{
+	background-color: #e0e0e0;
+}
+.box-category-main.BGray .box-title h2{
+	color: #6e0904;
+}
+.box-category-main.BGray .box-news-main{
+	border-color: #e0e0e0;
+}
+.box-category-main.BGray2 .box-title{
+	background-color: #e0e0e0;
+}
+.box-category-main.BGray2 .box-title h2{
+	color: #6e0904;
+}
+.box-category-main.BGray2 .box-news-main{
+	border-color: #e0e0e0;
+	background-color: #e0e0e0;
+}
+.box-category-main.BRed .box-title{
+	background-color: #6e0904;
+}
+.box-category-main.BRed .box-title h2{
+	color: #fff;
+}
+.box-right.main-content .box-category-main.BRed .box-btn .btn.gold:hover{
+	background-color: #000;
+}
+.box-category-main.BRed .box-text .text-title
+,.box-category-main.BRed .box-text .text-des{
+	color: #fff;
+}
+.box-category-main.BRed .box-text .text-title:hover{
+	color: #b28f50;
+}
+.box-right.main-content .box-category-main.BRed .box-text .box-btn .btn.black:hover{
+	background-color: #b28f50;
+	color: #000;
+}
+.box-category-main.BRed .box-news-main{
+	border-color: #6e0904;
+	background-color: #6e0904;
+}
+
+.box-row-content .box-left .box-tumb.left{
+	margin-right: 20px;
+}
+.box-row-content .box-left .box-news-main,
+.box-row-content .box-right .box-news-main{
+	padding: 0 18px;
+}
+
+
+
+
+
+
+
+
+
+

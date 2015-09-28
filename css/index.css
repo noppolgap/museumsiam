@@ -29,6 +29,7 @@ body{
 
 .box-timeopen .text-title{
 	margin-bottom: 10px;
+	height: inherit;
 }
 .box-timeopen .text-date2,
 .box-timeopen .text-time{

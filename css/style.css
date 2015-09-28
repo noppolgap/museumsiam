@@ -175,6 +175,19 @@ hr {
 	background-color: #000;
 	color: #fff;
 }
+.box-btn .btn.b360{
+	margin-right: 2px;
+}
+.box-btn .btn.b360:after{
+	content: '';
+	width: 35px;
+	height: 17px;
+	background: url(../images/icon-360.png) no-repeat center center;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 5px;
+}
+
 .box-btn .box-btn-social a{
 	width: 31px;
 	height: 31px;
