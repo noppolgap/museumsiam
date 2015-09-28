@@ -4,17 +4,17 @@ require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
 ?>
 <!doctype html>
-<html> 
+<html>
 <head>
 <?
 	require ('../inc_meta.php');
- ?>		
+ ?>
 </head>
 
 <body>
 <?
 	require ('../inc_header.php');
- ?>		
+ ?>
 <div class="main-container">
 	<div class="main-body marginC">
 		<?
@@ -22,7 +22,7 @@ require ("../../assets/configs/function.inc.php");
  ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				 
+
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -33,7 +33,7 @@ require ("../../assets/configs/function.inc.php");
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
 					</div>
-					<div class="clear"></div>						
+					<div class="clear"></div>
 				</div>
 				<div class="mod-body-inner-action">
 					<div class="floatL checkAllBox"> </div>
@@ -46,34 +46,34 @@ require ("../../assets/configs/function.inc.php");
 					        <option value="status">สถานะข้อมูล</option>
 					    </select>
 					</div>
-					<div class="clear"></div>	
+					<div class="clear"></div>
 				</div>
-				
+
 				<div class="mod-body-main-content">
-				
+
 						<!-- start loop -->
-						<?php 
-					//active_flag 0 = disable , 1 = Enable ,  2 = Delete 
+						<?php
+					//active_flag 0 = disable , 1 = Enable ,  2 = Delete
 						$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 ";
 						if(isset($_POST['search'])){
 							$sql .= " AND (MODULE_NAME_LOC like '%".$_POST['str_search']."%' or MODULE_NAME_ENG like '%".$_POST['str_search']."%' ";
 						$sql .= " order by MODULE_ID asc ";
-		
+
 			    }
 					$rs = mysql_query($sql) or die(mysql_error());
-					
-					$i = 0 ; 
+
+					$i = 0 ;
 					while($row = mysql_fetch_array($rs)){
 					?>
 						<div data-id="<?=$row['MODULE_ID'] ?>" class="Main_Category_Content floatL">
-							
+
 							<a href="main_category_view.php?MID=<?=$row["MODULE_ID"] ?>"><span class="thumbCategoryContent dBlock" <?=callIconThumbList('BIG', $row['MODULE_ID'], NULL, true) ?>></span></a>
 							<div class="nameCategoryContent">
 								<div><a href="main_category_view.php?MID=<?=$row["MODULE_ID"] ?>"><?=$row["MODULE_NAME_LOC"] ?></a></div>
 								<div>วันที่สร้าง <?=$row["CREATE_DATE"] ?></div>
 								<div>วันที่ปรับปรุง <?=$row["LAST_UPDATE_DATE"] ?></div>
-							</div>	
-						</div>					
+							</div>
+						</div>
 					<?
 							/*
 							 echo "<div class='Main_Content' data-id='".$row['MODULE_ID']."'>";
@@ -96,9 +96,9 @@ require ("../../assets/configs/function.inc.php");
 							$i++;
 							}mysql_free_result($rs);
 						?>
-						 
+
 						<!-- end loop -->
-						<div class="clear"></div>	
+						<div class="clear"></div>
 					</div>
 					<div class="pagination_box">
 						<div class="floatL">จำนวนทั้งหมด <span class='RowCount'><?=$i ?></span> รายการ</div>
@@ -109,35 +109,33 @@ require ("../../assets/configs/function.inc.php");
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
-							</select>	
+							</select>
 							<a href="#"><img src="../images/fast-forward.svg" alt="next" /></a>
 							<a href="#"><img src="../images/skip-next.svg" alt="last" /></a>
 						</div>
 						<div class="floatR">หน้า 1 จาก 10</div>
-						<div class="clear"></div>	
+						<div class="clear"></div>
 					</div>
-				
-				 
-				 
-			</div>	
+
+
+
+			</div>
 			<div class="buttonActionBox">
-				 
+
 			</div>
 		</div>
-		<div class="clear"></div>	
+		<div class="clear"></div>
 	</div>
-</div>	
+</div>
 <?
 	require ('../inc_footer.php');
- ?>		
+ ?>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
-<link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
-<script type="text/javascript" src="../master/script.js"></script>		
-<script type="text/javascript" src="mod_cms.js"></script>	
-<? logs_access('admin', 'hello'); ?>	
+<script type="text/javascript" src="../master/script.js"></script>
+<? logs_access('admin', 'hello'); ?>
 
 <script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
 <script type="text/javascript" >
@@ -153,4 +151,4 @@ require ("../../assets/configs/function.inc.php");
 
 </body>
 </html>
-<? CloseDB(); ?>	
+<? CloseDB(); ?>

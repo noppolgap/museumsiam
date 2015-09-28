@@ -70,10 +70,10 @@ require ("../../assets/configs/function.inc.php");
 		?>
 		<link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 		<link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
-		<link rel="stylesheet" type="text/css" href="mod_cms.css" media="all" />
+		
 		<script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
 		<script type="text/javascript" src="../master/script.js"></script>
-		<script type="text/javascript" src="mod_cms.js"></script>
+		
 		<? logs_access('admin', 'hello'); ?>
 	</body>
 </html>

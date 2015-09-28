@@ -139,7 +139,7 @@ require ("../../assets/configs/function.inc.php");
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>			
-<script type="text/javascript" src="mod_cms.js"></script>	
+	
 <? logs_access('admin', 'hello'); ?>	
 </body>
 </html>

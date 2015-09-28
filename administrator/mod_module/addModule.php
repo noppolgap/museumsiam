@@ -9,9 +9,9 @@ $indexPage = "/administrator/mod_module/index.php";
   <head>
     <?
 	require ('../inc_meta.php');
- ?>	
+ ?>
 
- 
+
     <script type="text/javascript">
 		$(document).ready(function() {
 
@@ -48,14 +48,14 @@ $indexPage = "/administrator/mod_module/index.php";
   <body>
     <?
 	require ('../inc_header.php');
- ?>		
+ ?>
 
     <div class="main-container">
       <div class="main-body marginC">
         <?
 		require ('../inc_side.php');
  ?>
-		
+
         <div class="mod-body">
           <div class="mod-body-inner">
             <div class="mod-body-inner-header">
@@ -90,7 +90,7 @@ $indexPage = "/administrator/mod_module/index.php";
                     </div>
                     <div class="clear"></div>
                   </div>
-				  
+
 				  <!--
 				   <div>
                     <div class="floatL form_name">รูปภาพ Icon</div>
@@ -102,29 +102,29 @@ $indexPage = "/administrator/mod_module/index.php";
                   </div>
 				   </div>
                  -->
-				 <div class="bigForm">
+				 <div>
 										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่</div>
 										<div class="floatL form_input"><?=admin_upload_image('BigIcon') ?></div>
 										<div class="clear"></div>
-									</div>	
-									
-									<div class="bigForm">
+									</div>
+
+									<div>
 										<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
 										<div class="floatL form_input"><?=admin_upload_image('SmallIcon') ?></div>
 										<div class="clear"></div>
-									</div>	
-							
-				  
+									</div>
+
+
 				    <div>
                     <div class="floatL form_name">&nbsp;&nbsp;</div>
                     <div class="floatL form_input">
                       <input  id = "chkHasSubModule" type="checkbox" name="chkHasSubModule" >&nbsp;มีระบบย่อย</input>
-                          
+
                     </div>
                     <div class="clear"></div>
                   </div>
 				   </div>
-				   
+
                   <div class="btn_action">
                     <input type="button" name="save" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="onValidate()" >
                       <input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
@@ -139,21 +139,21 @@ $indexPage = "/administrator/mod_module/index.php";
         <div class="clear"></div>
       </div>
     </div>
-    
+
     <?
 	require ('../inc_footer.php');
- ?>		
+ ?>
 
     <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
       <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 
       <script type="text/javascript" src="../master/script.js"></script>
-	  
+
 	  <script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 
 
-      <? logs_access('admin', 'hello'); ?>	
+      <? logs_access('admin', 'hello'); ?>
 
 <?php
 

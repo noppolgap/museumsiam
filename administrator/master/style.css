@@ -61,6 +61,7 @@ a:active {text-decoration:none;color: #9d0031;}
 .main-body{
 	width: 1000px;
 	min-height: 500px;
+	padding-bottom: 20px;
 }
 header{
 	border-bottom: 1px solid #B11116;
@@ -88,6 +89,7 @@ header{
 }
 .mymenu{
 	text-align: right;
+	font-size: 0.8em;
 }
 .mod-body{
 	margin-left: 180px;
@@ -126,7 +128,7 @@ header{
 	height: 40px;
 }
 .titleBox{
-	font-size: 1.4em;
+	font-size: 1.15em;
     font-weight: 600;
     padding: 7px 0 0 15px;
 }
@@ -137,7 +139,7 @@ header{
   width: 90px;
   height: 28px;
   padding: 0;
-  font-size: 16px;
+  font-size: 0.85em;
   color: white;
   text-align: center;
   cursor: pointer;
@@ -185,7 +187,7 @@ header{
     margin-left: 0px;
     margin-right: 5px;
     padding: 2px;
-    top: 9px;
+    top: 7px;
     width: 20px;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 	background: rgba(243,156,20,0.7);
@@ -200,11 +202,15 @@ header{
 	height: 28px;
 }
 .orderBox{
-	width: 135px;
+	width: 165px;
 	margin-right: 15px;
 }
+.orderBox select{
+	font-size: 0.85em;
+	width: 165px;
+}
 .checkAllBox{
-	font-size: 1.2em;
+	font-size: 1em;
 }
 /* form */
 .mod-body-main-content > .Main_Content{
@@ -220,11 +226,11 @@ header{
 }
 .nameContent{
 	width: 500px;
-	height: 44px;
 	margin-right: 15px;
+	height: 44px;
 }
 .nameContent > div{
-	height: 22px;
+	height: 20px;
 	overflow: hidden;
 	font-size: 0.9em;
 }
@@ -432,7 +438,7 @@ header{
 }
 .pagination_box{
 	padding: 15px;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	color: #000;
 }
 .pagination_action{
@@ -470,13 +476,13 @@ header{
 	text-align: right;
 	height: 32px;
 	color: #000;
-	font-size: 1.1em;
+	font-size: 0.9em;
 }
 .form_input{
 	width: 600px;
 	min-height: 32px;
 	color: #000;
-	font-size: 1.1em;
+	font-size: 0.85em;
 	position: relative;
 }
 .form_input textarea , .form_input textarea2{
@@ -589,11 +595,14 @@ header{
 	margin: 5px 15px 10px;
 	color: #000;
 }
+.nameCategoryContent > div{
+	font-size: 0.9em;
+}
 .nameCategoryContent > div > a{
     display: block;
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-weight: 600;
-    height: 1.3em;
+    height: 1.7em;
     overflow: hidden;
     text-overflow: ellipsis;
 }

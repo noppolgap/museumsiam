@@ -8,19 +8,19 @@ require ("../../assets/configs/function.inc.php");
 <head>
 <?
 require ('../inc_meta.php');
- ?>		
+ ?>
 </head>
 
 <body>
 <?
 require ('../inc_header.php');
- ?>		
+ ?>
 <div class="main-container">
 	<div class="main-body marginC">
 		<?
 		require ('../inc_side.php');
  ?>
-		
+
 		<?php
 		$MID = $_GET['MID'];
 		$CID = $_GET['cid'];
@@ -64,7 +64,7 @@ require ('../inc_header.php');
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$backPage ?>'">
 			</div>
 			<div class="mod-body-inner">
-				<div class="mod-body-inner-header"> 
+				<div class="mod-body-inner-header">
 					<div class="floatL titleBox">หมวดหมู่ย่อย  ภายใต้<?=$row['CONTENT_CAT_DESC_LOC']; ?></div>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
@@ -72,7 +72,7 @@ require ('../inc_header.php');
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
 					</div>
-					<div class="clear"></div>						
+					<div class="clear"></div>
 				</div>
 				<div class="mod-body-inner-action">
 					<div class="floatL checkAllBox"><label><input type="checkbox" name="checkall" value="0"> เลือกทั้งหมด</label></div>
@@ -85,7 +85,7 @@ require ('../inc_header.php');
 					        <option value="status">สถานะข้อมูล</option>
 					    </select>
 					</div>
-					<div class="clear"></div>	
+					<div class="clear"></div>
 				</div>
 				<div class="mod-body-main-content">
 
@@ -129,21 +129,21 @@ require ('../inc_header.php');
 								echo '<a href="' . $nextPage . '">' . $row['SUB_CONTENT_CAT_DESC_LOC'] . '</a>';
 							?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
-						</div>	
+						</div>
 						<div class="floatL stausContent">
-						
+
 						<? if($row['FLAG'] == 0){ ?>
 							<span class="staus1"></span> <a href="sub_category_action.php?enable&subcid=<?=$row['SUB_CONTENT_CAT_ID'] ?>&vis=<?=$row['FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID.$subfixAddAndEdit?>">
 							Enable
-						</a> <?}  else { ?> 
-							<span class="staus2"></span> 
-							<a href="sub_category_action.php?enable&subcid=<?=$row['SUB_CONTENT_CAT_ID'] ?>&vis=<?=$row['FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID.$subfixAddAndEdit?>"> Disable </a> 
+						</a> <?}  else { ?>
+							<span class="staus2"></span>
+							<a href="sub_category_action.php?enable&subcid=<?=$row['SUB_CONTENT_CAT_ID'] ?>&vis=<?=$row['FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID.$subfixAddAndEdit?>"> Disable </a>
 						<? } ?></div>
 						<div class="floatL EditContent">
 							<a href="sub_category_edit.php?subcid=<?=$row['SUB_CONTENT_CAT_ID'] ?>&MID=<?=$MID ?>&cid=<?=$CID.$subfixAddAndEdit?>" class="EditContentBtn">Edit</a>
 							<a href="#" data-id=<?=$row['SUB_CONTENT_CAT_ID'] ?> class="DeleteContentBtn">Delete</a>
 						</div>
-						<div class="clear"></div>	
+						<div class="clear"></div>
 				</div>
 							<?php } ?>
 					<!-- end loop -->
@@ -157,14 +157,14 @@ require ('../inc_header.php');
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
-						</select>	
+						</select>
 						<a href="#"><img src="../images/fast-forward.svg" alt="next" /></a>
 						<a href="#"><img src="../images/skip-next.svg" alt="last" /></a>
 					</div>
 					<div class="floatR">หน้า 1 จาก 10</div>
-					<div class="clear"></div>	
+					<div class="clear"></div>
 				</div>
-			</div>	
+			</div>
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_category_add.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="sub_category_action.php?delete" >
@@ -172,18 +172,16 @@ require ('../inc_header.php');
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$backPage ?>'">
 			</div>
 		</div>
-		<div class="clear"></div>	
+		<div class="clear"></div>
 	</div>
-</div>	
+</div>
 <?
 require ('../inc_footer.php');
- ?>		
+ ?>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
-<link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
-<script type="text/javascript" src="../master/script.js"></script>			
-<script type="text/javascript" src="mod_cms.js"></script>	
-<? logs_access('admin', 'hello'); ?>	
+<script type="text/javascript" src="../master/script.js"></script>
+<? logs_access('admin', 'hello'); ?>
 </body>
 </html>
