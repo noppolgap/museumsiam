@@ -2,6 +2,13 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+
+$id = intval($_GET['web_id']);
+if($id == 0){
+	header('Location: index.php');
+}
+
 ?>
 <!doctype html>
 <html>
@@ -45,7 +52,19 @@ require("assets/configs/function.inc.php");
 			<?php include('inc/inc-left-content-km.php'); ?>
 		</div>
 		<div class="box-right main-content">
-			
+
+			<?
+				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
+						   WHERE  WEBBOARD_ID = ".$id." AND FLAG <>2 ORDER BY ORDER_DATA DESC ";
+				
+				$query_qa = mysql_query($sq_qa, $conn);
+
+				$num_rows = mysql_num_rows($query_qa);
+
+				$num = 1;
+
+			?>
+
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
 				<h1>เว็บบอร์ด</h1>
@@ -53,131 +72,81 @@ require("assets/configs/function.inc.php");
 					<a href="km-webboard.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
+
+			<?php while($row = mysql_fetch_array($query_qa)) { ?>
+
 			<div  class="box-topic-main">
+
 				<div class="box-top">
 					<div class="box-topic-title">
-						ต้องการขอข้อมูลและถ่ายรูปพิพิธภัณฑ์เพื่อประกอบปริญญานิพนธ์
+						<? echo $row['CONTENT'] ?>
 					</div>
 				</div>
 				<div class="box-bottom">
 					<div class="box-topic-detail">
 						<p>
-							Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย
+							<? echo $row['DETAIL'] ?>
 						</p>
 					</div>
 					<hr/>
 					<div class="box-footer-topic cf">
 						<div class="box-left">
-							<p>ตั้งโดย : Coco Toh</p>
+							<p>ตั้งโดย : <? echo $row['USER_CREATE'] ?></p>
 						</div>
 						<div class="box-right">
-							<p>9/11/2556 16:55:17</p>
+							<p><? echo ConvertDate($row['LAST_UPDATE_DATE	']) ?></p>
 						</div>
 					</div>
 				</div>
+
 			</div>
 			
+			<?php
+			}
+			 while($row = mysql_fetch_array($query_qa)) { 
+						
+			////ส่วนคำตอบ
+			  $sq_ans = "  SELECT CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
+							WHERE REF_WEBBOARD_ID = ".$id." AND FLAG <>2
+							ORDER BY ORDER_DATA DESC ";
+
+				$query_ans = mysql_query($sq_ans, $conn);
+
+				$num_rows = mysql_num_rows($query_ans);
+
+				$num = 1;
+			?>
+
 			<div  class="box-replay-main">
+
+				<? while($row_ans = mysql_fetch_array($query_ans)) {?> 
+
 				<div class="box-top">
 					<p>
-						ความคิดเห็น 1 :
+						ความคิดเห็น <? echo $num; ?> :
 					</p>
 				</div>
 				<div class="box-bottom">
 					<div class="box-replay-detail">
 						<p>
-							Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย
+							<? echo $row_ans['CONTENT'] ?>
 						</p>
 					</div>
 					<div class="box-footer-replay cf">
 						<div class="box-left">
-							<p>ตอบโดย : Coco Toh</p>
+							<p>ตอบโดย : <? echo $row_ans['USER_CREATE'] ?></p>
 						</div>
 					</div>
 					<hr/>
 				</div>
+
+				<? $num++; } ?>
+
 			</div>
-			<div  class="box-replay-main">
-				<div class="box-top">
-					<p>
-						ความคิดเห็น 2 :
-					</p>
-				</div>
-				<div class="box-bottom">
-					<div class="box-replay-detail">
-						<p>
-							Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย
-						</p>
-					</div>
-					<div class="box-footer-replay cf">
-						<div class="box-left">
-							<p>ตอบโดย : Coco Toh</p>
-						</div>
-					</div>
-					<hr/>
-				</div>
-			</div>
-			<div  class="box-replay-main">
-				<div class="box-top">
-					<p>
-						ความคิดเห็น 3 :
-					</p>
-				</div>
-				<div class="box-bottom">
-					<div class="box-replay-detail">
-						<p>
-							Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย
-						</p>
-					</div>
-					<div class="box-footer-replay cf">
-						<div class="box-left">
-							<p>ตอบโดย : Coco Toh</p>
-						</div>
-					</div>
-					<hr/>
-				</div>
-			</div>
-			<div  class="box-replay-main">
-				<div class="box-top">
-					<p>
-						ความคิดเห็น 4 :
-					</p>
-				</div>
-				<div class="box-bottom">
-					<div class="box-replay-detail">
-						<p>
-							Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย
-						</p>
-					</div>
-					<div class="box-footer-replay cf">
-						<div class="box-left">
-							<p>ตอบโดย : Coco Toh</p>
-						</div>
-					</div>
-					<hr/>
-				</div>
-			</div>
-			<div  class="box-replay-main">
-				<div class="box-top">
-					<p>
-						ความคิดเห็น 5 :
-					</p>
-				</div>
-				<div class="box-bottom">
-					<div class="box-replay-detail">
-						<p>
-							Lorem Ipsum คือ เนื้อหาจำลองแบบเรียบๆ ที่ใช้กันในธุรกิจงานพิมพ์หรืองานเรียงพิมพ์ มันได้กลายมาเป็นเนื้อหาจำลองมาตรฐานของธุรกิจดังกล่าวมาตั้งแต่ศตวรรษที่ 16 เมื่อเครื่องพิมพ์โนเนมเครื่องหนึ่งนำรางตัวพิมพ์มาสลับสับตำแหน่งตัวอักษรเพื่อทำหนังสือตัวอย่าง Lorem Ipsum อยู่ยงคงกระพันมาไม่ใช่แค่เพียงห้าศตวรรษ แต่อยู่มาจนถึงยุคที่พลิกโฉมเข้าสู่งานเรียงพิมพ์ด้วยวิธีทางอิเล็กทรอนิกส์ และยังคงสภาพเดิมไว้อย่างไม่มีการเปลี่ยนแปลง มันได้รับความนิยมมากขึ้นในยุค ค.ศ. 1960 เมื่อแผ่น Letraset วางจำหน่ายโดยมีข้อความบนนั้นเป็น Lorem Ipsum และล่าสุดกว่านั้น คือเมื่อซอฟท์แวร์การทำสื่อสิ่งพิมพ์ (Desktop Publishing) อย่าง Aldus PageMaker ได้รวมเอา Lorem Ipsum เวอร์ชั่นต่างๆ เข้าไว้ในซอฟท์แวร์ด้วย
-						</p>
-					</div>
-					<div class="box-footer-replay cf">
-						<div class="box-left">
-							<p>ตอบโดย : Coco Toh</p>
-						</div>
-					</div>
-					<hr/>
-				</div>
-			</div>
-			
+
+			<? } ?>
+
+
 			<div class="box-pagination-main cf Noborder pageTopic">
 				<ul class="pagination">
 					<li class="deactive"><a href="" class="btn-arrow-left"></a></li>

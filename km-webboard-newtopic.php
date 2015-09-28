@@ -50,9 +50,12 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf">
 				<h1>เว็บบอร์ด</h1>
 				<div class="box-btn">
-					<a href="#" class="btn red">ย้อนกลับ</a>
+					<a href="km-webboard.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
+
+		<form action="webboard_action.php?add" method="post" name="formcms">
+
 			<div class="box-create-topic-main cf">
 				<div class="box-row cf  disible">
 					<div class="box-left">
@@ -67,7 +70,7 @@ require("assets/configs/function.inc.php");
 						หัวข้อ<span>*</span>
 					</div>
 					<div class="box-right">
-						<input type="text">
+						<input type="text" name="content">
 					</div>
 				</div>
 				<div class="box-plugin-text cf">
@@ -80,14 +83,17 @@ require("assets/configs/function.inc.php");
 					</p>
 				</div>
 				<div class="box-btn submit cf">
-					<a href="#" class="btn red">ตั้งกระทู้</a>
-					<a href="#" class="btn red">ลบ</a>
+					<input type="submit" value="ตั้งกระทู้" class="btn red">
+					<input type="reset" value="ลบ" class="btn red">
 				</div>
 				
 			</div>
+
+		</form>
+
 			<div class="box-pagination-main cf">
 				<div class="box-btn topic">
-					<a href="#" class="btn red">ย้อนกลับ</a>
+					<a href="km-webboard.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
 			
