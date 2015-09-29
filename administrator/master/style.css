@@ -273,11 +273,14 @@ header{
 }
 .orderContent , .orderEmsContent{
 	padding-left: 5px;
-	width: 160px;
 	height: 48px;
     line-height: 48px;
     cursor: pointer;
 	font-size: 1.2em;
+}
+.orderContent > div > input{
+	font-size: 0.8em;
+	margin-top: 10px;
 }
 .orderContent select{
 	font-size: 0.8em;
@@ -535,10 +538,10 @@ header{
 }
 #sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 #sortable li {
-    font-size: 1em;
+    font-size: 0.8em;
     font-weight: 400;
     height: 1em;
-    line-height: 1em;
+    line-height: 1.2em;
     margin: 0 5px 5px;
     padding: 5px;
 }
