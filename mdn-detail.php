@@ -9,12 +9,13 @@ require("assets/configs/function.inc.php");
 <? require('inc_meta.php'); ?>	
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
+<link rel="stylesheet" type="text/css" href="css/mdn.css" />
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu2,.menu-left li.menu2 .submenu1").addClass("active");
-			if ($('.menu-left li.menu2').hasClass("active")){
-				$('.menu-left li.menu2').children(".submenu-left").css("display","block");
+		$(".menutop li.menu6,.menu-left li.menu3,.menu-left li.menu3 .submenu1").addClass("active");
+			if ($('.menu-left li.menu3').hasClass("active")){
+				$('.menu-left li.menu3').children(".submenu-left").css("display","block");
 			}
 			
 		var sync1 = $("#sync1");
@@ -116,9 +117,11 @@ require("assets/configs/function.inc.php");
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="da.php">คลังความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="da-category.php">หมวดหมู่</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">หมวดหมู่ย่อย</li>
+				<li><a href="mdn.php">ระบบเครือข่ายพิพิธภัณฑ์</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="mdn-category.php">หมวดหมู่</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="mdn-category2.php">หมวดหมู่</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="mdn-all.php">หมวดหมู่ย่อย</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active">ชื่อพิพิธภัณฑ์</li>
 			</ol>
 		</div>
 	</div>
@@ -129,12 +132,11 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-da.php'); ?>
+			<?php include('inc/inc-left-content-mdn.php'); ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
-				<h1>ชื่อหมวดหมู่</h1>
 				<div class="box-btn">
 					<a href="" class="btn red">ย้อนกลับ</a>
 				</div>
@@ -180,7 +182,6 @@ require("assets/configs/function.inc.php");
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a href="view-360.php" target="_blank" class="btn black b360">ดู</a>
 							<a href="all-media.php" class="btn black">ดูทั้งหมด</a>
 						</div>
 					</div>
@@ -207,11 +208,107 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
-				<div class="box-news-text">
-					<p>
-						Levitated Mass is a 2012 large-scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art. The installation consists of a 340-ton boulder affixed above a concrete trench through which visitors may walk. The nature, expense and scale of the installation made it an instant topic of discussion The work comprises a 21.5-foot tall boulder mounted on the walls of a 456-foot long concrete trench, surrounded by 2.5 acres of compressed decomposed granite. The boulder is bolted to two shelves affixed to the inner walls of the trench, which descends from ground level to 15 feet below the stone at its center, allowing visitors to stand directly below the megalith.
-					</p>
+				<div class="box-gray first">
+					<h3>ที่อยู่และเบอร์ติดต่อ</h3>
+					<p class="text-location">100 ถนนราชดำเนินกลาง แขวงบวรนิเวศ เขตพระนคร กรุงเทพมหานคร 10220</p>
+					<p class="text-tel">+66(0)2 621 0044, +66(0)2 226 5047</p>
+					<p class="text-fax">+66(0)2 621 0043</p>
+					<p class="text-web">http://www.nitasrattanakosin.com/</p>
 				</div>
+				<div class="box-gray">
+					<h3>วันและเวลาทำการ</h3>
+					<p class="text-date">อังคาร - อาทิตย์</p>
+					<p class="text-time">10.30 น. - 18.00 น.</p>
+				</div>
+				<div class="box-gray">
+					<h3>วันและเวลาทำการ</h3>
+					<p class="text-ticket">ผู้ใหญ่ และชาวต่างชาติ ราคา 100 บาท<br>
+					เข้าชมฟรี สำหรับ เด็ก นักเรียน/นักศึกษา ผู้สูงอายุ ภิกษุ สามเณร และ ผู้พิการ</p>
+				</div>
+				<div class="box-gray noIcon">
+					<h3>การเดินทาง</h3>
+					<span>สถานที่สำคัญใกล้เคียง</span>
+					<p>โลหะ ปราสาท วัดราชนัดดาฯ, ลานพลับพลามหาเจษฎาบดินทร์ (ศาลาเฉลิมไทยเก่า), ป้อมมหากาฬ,<br>
+					        พระบรมบรรพต หรือ ภูเขาทอง วัดสระเกศ และอนุสาวรีย์ประชาธิปไตย
+					 </p>
+					<span>สถานที่สำคัญใกล้เคียง</span>
+					<p>โลหะ ปราสาท วัดราชนัดดาฯ, ลานพลับพลามหาเจษฎาบดินทร์ (ศาลาเฉลิมไทยเก่า), ป้อมมหากาฬ,<br>
+					        พระบรมบรรพต หรือ ภูเขาทอง วัดสระเกศ และอนุสาวรีย์ประชาธิปไตย
+					 </p>
+					<span>สถานที่สำคัญใกล้เคียง</span>
+					<p>โลหะ ปราสาท วัดราชนัดดาฯ, ลานพลับพลามหาเจษฎาบดินทร์ (ศาลาเฉลิมไทยเก่า), ป้อมมหากาฬ,<br>
+					        พระบรมบรรพต หรือ ภูเขาทอง วัดสระเกศ และอนุสาวรีย์ประชาธิปไตย
+					 </p>
+				</div>
+				
+				<div class="box-white">
+					<h3>ประวัติความเป็นมา</h3>
+					<p>อาคารบริเวณถนนราชดำเนินกลาง เป็นงานสถาปัตยกรรมที่เป็นส่วนหนึ่งของประวัติศาสตร์กรุงเทพมหานคร นับตั้งแต่มี พระราชดำริของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว(รัชกาลที่ ๕) ให้ตัดถนนราชดำเนินจากพระราชวังดุสิตไปยัง พระบรมมหาราชวัง โดยจัดวางรูปแบบตามลักษณะของ Champs Elysees ในประเทศฝรั่งเศส<br><br>
+						การก่อสร้างถนนราชดำเนินเริ่มตั้งแต่ปี พ.ศ. ๒๔๔๒ ส่วนอาคารตลอดแนวถนนราชดำเนินกลางได้เริ่มดำเนินการในปี พ.ศ. ๒๔๘๐ โดยการเวนคืนที่ดินทั้งสองฝั่งถนนข้างละ ๔๐ เมตร และออกแบบโดยสถาปนิกหลายท่าน ได้แก่ มล.ปุ่ม มาลากุล, คุณหมิว อภัยวงศ์ ซึ่งใช้แนวความคิดในการออกแบบจาก Champ Elysees ตามพระราชดำริเดิมของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว
+					 </p>
+				</div>
+				
+				<div class="box-white">
+					<h3>ประวัติความเป็นมา</h3>
+					<p>อาคารบริเวณถนนราชดำเนินกลาง เป็นงานสถาปัตยกรรมที่เป็นส่วนหนึ่งของประวัติศาสตร์กรุงเทพมหานคร นับตั้งแต่มี พระราชดำริของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว(รัชกาลที่ ๕) ให้ตัดถนนราชดำเนินจากพระราชวังดุสิตไปยัง พระบรมมหาราชวัง โดยจัดวางรูปแบบตามลักษณะของ Champs Elysees ในประเทศฝรั่งเศส<br><br>
+						การก่อสร้างถนนราชดำเนินเริ่มตั้งแต่ปี พ.ศ. ๒๔๔๒ ส่วนอาคารตลอดแนวถนนราชดำเนินกลางได้เริ่มดำเนินการในปี พ.ศ. ๒๔๘๐ โดยการเวนคืนที่ดินทั้งสองฝั่งถนนข้างละ ๔๐ เมตร และออกแบบโดยสถาปนิกหลายท่าน ได้แก่ มล.ปุ่ม มาลากุล, คุณหมิว อภัยวงศ์ ซึ่งใช้แนวความคิดในการออกแบบจาก Champ Elysees ตามพระราชดำริเดิมของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว
+					 </p>
+				</div>
+				<div class="box-white">
+					<h3>ลักษณะทางกายภาพของพิพิธภัณฑ์</h3>
+					<p>อาคารบริเวณถนนราชดำเนินกลาง เป็นงานสถาปัตยกรรมที่เป็นส่วนหนึ่งของประวัติศาสตร์กรุงเทพมหานคร นับตั้งแต่มี พระราชดำริของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว(รัชกาลที่ ๕) ให้ตัดถนนราชดำเนินจากพระราชวังดุสิตไปยัง พระบรมมหาราชวัง โดยจัดวางรูปแบบตามลักษณะของ Champs Elysees ในประเทศฝรั่งเศส<br><br>
+						การก่อสร้างถนนราชดำเนินเริ่มตั้งแต่ปี พ.ศ. ๒๔๔๒ ส่วนอาคารตลอดแนวถนนราชดำเนินกลางได้เริ่มดำเนินการในปี พ.ศ. ๒๔๘๐ โดยการเวนคืนที่ดินทั้งสองฝั่งถนนข้างละ ๔๐ เมตร และออกแบบโดยสถาปนิกหลายท่าน ได้แก่ มล.ปุ่ม มาลากุล, คุณหมิว อภัยวงศ์ ซึ่งใช้แนวความคิดในการออกแบบจาก Champ Elysees ตามพระราชดำริเดิมของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว
+					 </p>
+				</div>
+				
+				<div class="box-white">
+					<h3>ภูมิทัศน์โดยรอบ</h3>
+					<div class="box-img cf">
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+					</div>
+				</div>
+				<div class="box-white">
+					<h3>ภาพถ่ายห้องจัดแสดง</h3>
+					<div class="box-img cf">
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+					</div>
+				</div>
+				<div class="box-white">
+					<h3>วัตถุจัดแสดง</h3>
+					<div class="box-img cf">
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+					</div>
+				</div>
+				<div class="box-white">
+					<h3>วัตถุจัดแสดงที่มีความสำคัญ</h3>
+					<div class="box-img cf">
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+					</div>
+				</div>
+				<div class="box-white">
+					<h3>วัตถุจัดแสดงที่มีความสำคัญ</h3>
+					<div class="box-img cf">
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
+						<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+					</div>
+				</div>
+
+				<div class="box-white social">
+					<h3>เคลือข่ายสังคม</h3>
+					<p><span>Facebook</span><a href="http://www.facebook.com/nitasrattanakosin" target="_blank">http://www.facebook.com/nitasrattanakosin</a></p>
+					<p><span>Twitter </span><a href="http://www.twtter.com/nitasrattanakosin" target="_blank">http://www.twtter.com/nitasrattanakosin</a></p>
+					<p><span>Youtube</span><a href="http://www.youtube.com/nitasrattanakosin" target="_blank">http://www.youtube.com/nitasrattanakosin</a></p>
+				</div>
+
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
 						วันที่แก้ไขล่าสุด :  28 พ.ย. 2559
