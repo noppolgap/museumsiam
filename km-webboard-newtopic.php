@@ -6,7 +6,7 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/km.css" />
@@ -16,13 +16,13 @@ require("assets/configs/function.inc.php");
 		$(".menutop li.menu6,.menu-left li.menu2").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body id="km">
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -45,7 +45,7 @@ require("assets/configs/function.inc.php");
 			<?php include('inc/inc-left-content-km.php'); ?>
 		</div>
 		<div class="box-right main-content">
-			
+
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
 				<h1>เว็บบอร์ด</h1>
@@ -54,7 +54,7 @@ require("assets/configs/function.inc.php");
 				</div>
 			</div>
 
-		<form action="webboard_action.php?add" method="post" name="formcms">
+		<form action="webboard_action.php?add" method="post" name="formcms" id="formcms">
 
 			<div class="box-create-topic-main cf">
 				<div class="box-row cf  disible">
@@ -70,11 +70,11 @@ require("assets/configs/function.inc.php");
 						หัวข้อ<span>*</span>
 					</div>
 					<div class="box-right">
-						<input type="text" name="content">
+						<input type="text" name="content" id="input_content">
 					</div>
 				</div>
 				<div class="box-plugin-text cf">
-					Plugin Text Editer
+					<textarea name="msg" class="mytextarea"></textarea>
 				</div>
 				<div class="condition">
 					<p>
@@ -86,7 +86,7 @@ require("assets/configs/function.inc.php");
 					<input type="submit" value="ตั้งกระทู้" class="btn red">
 					<input type="reset" value="ลบ" class="btn red">
 				</div>
-				
+
 			</div>
 
 		</form>
@@ -96,7 +96,7 @@ require("assets/configs/function.inc.php");
 					<a href="km-webboard.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -105,7 +105,16 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
+<script type="text/javascript" src="assets/plugin/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="js/webboard.js"></script>
+<script type="text/javascript">
+ 	str = [
+			"ไม่สามารถดำเนินการได้ เพราะ",
+			"\n - กรุณาระบุหัวข้อ",
+			"\n - กรุณาระบุเนื้อหา"
+		];
+</script>
 
 </body>
 </html>

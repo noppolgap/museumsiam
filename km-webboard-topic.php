@@ -6,14 +6,14 @@ require("assets/configs/function.inc.php");
 
 $id = intval($_GET['web_id']);
 if($id == 0){
-	header('Location: index.php');
+	header('Location: km.php');
 }
 
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/km.css" />
@@ -23,19 +23,19 @@ if($id == 0){
 		$(".menutop li.menu6,.menu-left li.menu2").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body id="km">
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
 			<ol class="cf">
-				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="km.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="km.php">ระบบการจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">เว็บบอร์ด</li>
@@ -56,7 +56,7 @@ if($id == 0){
 			<?
 				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
 						   WHERE  WEBBOARD_ID = ".$id." AND FLAG <>2 ORDER BY ORDER_DATA DESC ";
-				
+
 				$query_qa = mysql_query($sq_qa, $conn);
 
 				$num_rows = mysql_num_rows($query_qa);
@@ -94,20 +94,18 @@ if($id == 0){
 							<p>ตั้งโดย : <? echo $row['USER_CREATE'] ?></p>
 						</div>
 						<div class="box-right">
-							<p><? echo ConvertDate($row['LAST_UPDATE_DATE	']) ?></p>
+							<p><? echo ConvertDate($row['LAST_UPDATE_DATE']) ?></p>
 						</div>
 					</div>
 				</div>
 
 			</div>
-			
+
 			<?php
-			}
-			 while($row = mysql_fetch_array($query_qa)) { 
-						
+
 			////ส่วนคำตอบ
-			  $sq_ans = "  SELECT CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
-							WHERE REF_WEBBOARD_ID = ".$id." AND FLAG <>2
+			    $sq_ans = "  SELECT CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
+							WHERE REF_WEBBOARD_ID = ".$row['WEBBOARD_ID']." AND FLAG <>2
 							ORDER BY ORDER_DATA DESC ";
 
 				$query_ans = mysql_query($sq_ans, $conn);
@@ -115,11 +113,14 @@ if($id == 0){
 				$num_rows = mysql_num_rows($query_ans);
 
 				$num = 1;
+
+				}
+
 			?>
 
 			<div  class="box-replay-main">
 
-				<? while($row_ans = mysql_fetch_array($query_ans)) {?> 
+				<? while($row_ans = mysql_fetch_array($query_ans)) {?>
 
 				<div class="box-top">
 					<p>
@@ -144,8 +145,6 @@ if($id == 0){
 
 			</div>
 
-			<? } ?>
-
 
 			<div class="box-pagination-main cf Noborder pageTopic">
 				<ul class="pagination">
@@ -157,12 +156,14 @@ if($id == 0){
 					<li><a href="" class="btn-arrow-right"></a></li>
 				</ul>
 			</div>
-			
+
+		<form action="webboard_action.php?answer&web_id=<?=$id?> " method="post" name="formcms">
+
 			<div class="box-form-reply">
 				<div class="text-title">
 					ตอบกระทู้
 				</div>
-				<textarea></textarea>
+				<textarea name="answer" class="mytextarea"></textarea>
 				<div class="condition">
 					<p>
 					<span>ข้อตกลง</span>
@@ -170,16 +171,18 @@ if($id == 0){
 					</p>
 				</div>
 				<div class="box-btn cf">
-					<a href="#" class="btn red">ตอบกระทู้</a>
+					<input type="submit" value="ตอบกระทู้" class="btn red">
 				</div>
 			</div>
-			
+
+		</form>
+
 			<div class="box-pagination-main cf">
 				<div class="box-btn topic">
-					<a href="#" class="btn red">ย้อนกลับ</a>
+					<a href="km-webboard.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -188,7 +191,9 @@ if($id == 0){
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 
+<script type="text/javascript" src="assets/plugin/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="js/webboard.js"></script>
 </body>
 </html>

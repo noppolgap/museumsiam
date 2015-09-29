@@ -633,7 +633,7 @@ require("assets/configs/function.inc.php");
 				<?php
 				//// ส่วนคำถาม
 				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
-						   WHERE REF_WEBBOARD_ID =0
+						   WHERE REF_WEBBOARD_ID = 0
 						   AND FLAG <>2 ORDER BY ORDER_DATA DESC ";
 				
 				$query_qa = mysql_query($sq_qa, $conn);
@@ -659,7 +659,7 @@ require("assets/configs/function.inc.php");
 						<?php while($row = mysql_fetch_array($query_qa)) { 
 						
 						////ส่วนคำตอบ
-						  $sq_ans = " SELECT COUNT( WEBBOARD_ID ) ans FROM trn_webboard
+						  $sq_ans = " SELECT COUNT( WEBBOARD_ID ) ans, COUNT( VISIT_COUNT ) re  FROM trn_webboard
 										WHERE REF_WEBBOARD_ID = ".$row['WEBBOARD_ID']." AND FLAG <>2 ";
 
 							$query_ans = mysql_query($sq_ans, $conn);
@@ -669,16 +669,17 @@ require("assets/configs/function.inc.php");
 
 							<div class="table-row list cf">
 								<div class="column list"><? echo $num ?></div>
-								<div class="column topic"><a href="km-webboard-topic.php"><? echo $row['CONTENT'] ?></a></div>
+								<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID']?>"><? echo my_substring($row['CONTENT'],150); ?></a></div>
 								<div class="column name"><? echo $row['USER_CREATE'] ?></div>
 						
 								<? while($row_ans = mysql_fetch_array($query_ans)) {?> 
 
 								<div class="column reply"> <? echo $row_ans['ans'] ?></div>
+								<div class="column view"><? echo $row_ans['re'] ?></div>
 
 								<? } ?>
 
-								<div class="column view"><? echo $row['LAST_UPDATE_DATE'] ?></div>
+								
 								<div class="column date"><? echo ConvertDate($row['LAST_UPDATE_DATE	']) ?></div>
 							</div>
 
