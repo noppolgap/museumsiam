@@ -45,7 +45,6 @@ require ('../inc_header.php');
 			$sql = "SELECT * FROM trn_content_category where CONTENT_CAT_ID = '" . $CID . "' ";
 		}
 
-		//echo $sql;
 		$rs = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
 
@@ -65,7 +64,7 @@ require ('../inc_header.php');
 				$navigateBackPage .= '&SCID=' . $row['REF_SUB_CONTENT_CAT_ID'];
 		}
 		if($MID == 7) {
-			$link = "xxx";
+			$link = "../mod_shopping/product_add.php.php";
 		}else{
 			$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
 		}
