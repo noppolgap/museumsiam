@@ -675,6 +675,7 @@ function callThumbListFrontEnd($id, $type, $staus) {
 		}
 	}
 
+}
 
 function my_substring($str,$length){
 	return mb_substr($str,0,$length,'UTF-8');
