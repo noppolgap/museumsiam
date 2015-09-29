@@ -64,7 +64,7 @@ require ('../inc_header.php');
 				$navigateBackPage .= '&SCID=' . $row['REF_SUB_CONTENT_CAT_ID'];
 		}
 		if($MID == 7) {
-			$link = "../mod_shopping/product_add.php.php";
+			$link = "../mod_shopping/product_add.php";
 		}else{
 			$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
 		}
