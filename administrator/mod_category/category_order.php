@@ -30,8 +30,8 @@ if(isset($_POST['update'])){
 	</div> 
 	<ul id="sortable">
 		<?php
-
-			     $sql= "SELECT * FROM trn_content_category  WHERE Flag <> 2  and REF_MODULE_ID = 2 ORDER BY ORDER_DATA DESC";
+				$MID = $_GET['MID'];
+			     $sql= "SELECT * FROM trn_content_category  WHERE Flag <> 2  and REF_MODULE_ID = ".$MID." ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {

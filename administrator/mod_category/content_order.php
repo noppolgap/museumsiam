@@ -27,7 +27,7 @@ require ('../inc_meta.php');
 <div class="orderContent">
 	<div>
 		<h1>จัดเรียง</h1>
-		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('content_order');">
+		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('content_order.php');">
 	</div> 
 	<ul id="sortable">
 		<?php
@@ -47,7 +47,8 @@ require ('../inc_meta.php');
 							FROM trn_content_category cc
 							LEFT OUTER JOIN trn_content_sub_category sb ON sb.CONTENT_CAT_ID = cc.CONTENT_CAT_ID
 							WHERE cc.REF_MODULE_ID = $MID 
-								AND cc.flag <> 2 ";
+								AND cc.flag <> 2 
+								AND cc.CONTENT_CAT_ID  = $CID ";
 								if (isset($SCID) && nvl($SCID, '0') != '0') {
 				$sql .= "	AND sb.SUB_CONTENT_CAT_ID = $SCID ";
 			}
@@ -59,6 +60,7 @@ require ('../inc_meta.php');
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {
+			     	
 			 
 		?>
 

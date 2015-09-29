@@ -8,18 +8,18 @@ require ("../../assets/configs/function.inc.php");
 <head>
 <?
 require ('../inc_meta.php');
- ?>
+?>
 </head>
 
 <body>
 <?
 require ('../inc_header.php');
- ?>
+?>
 <div class="main-container">
 	<div class="main-body marginC">
 		<?
 		require ('../inc_side.php');
- ?>
+	?>
 
 		<?php
 		$MID = $_GET['MID'];
@@ -55,17 +55,17 @@ require ('../inc_header.php');
 			if (nvl($row['REF_SUB_CONTENT_CAT_ID'], '0') != '0')
 				$backPage .= '&SCID=' . $row['REF_SUB_CONTENT_CAT_ID'];
 		}
-		?>
+	?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_category_add.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_category_add.php?MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="sub_category_action.php?delete" >
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('sub_category_order.php');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$backPage ?>'">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('sub_category_order.php?MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?= $backPage ?>'">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">หมวดหมู่ย่อย  ภายใต้<?=$row['CONTENT_CAT_DESC_LOC']; ?></div>
+					<div class="floatL titleBox">หมวดหมู่ย่อย  ภายใต้<?= $row['CONTENT_CAT_DESC_LOC']; ?></div>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />
@@ -103,19 +103,21 @@ require ('../inc_header.php');
 			}
 			$sql .= " ORDER BY ORDER_DATA DESC ";
 
+			//echo $sql;
 			$query = mysql_query($sql, $conn);
 
 			$num_rows = mysql_num_rows($query);
-			 ?>
+		?>
 					<!-- start loop -->
-				<?php while($row = mysql_fetch_array($query)) { ?>
-					<div class="Main_Content" data-id="<?=$row['SUB_CONTENT_CAT_ID'] ?>" >
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['SUB_CONTENT_CAT_ID'] ?>"></div>
-						<!--<div class="floatL thumbContent">
-							<a href="#>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
-						</div>-->
+				<?php
+while ($row = mysql_fetch_array($query)) {
+?>
+					<div class="Main_Content" data-id="<?= $row['SUB_CONTENT_CAT_ID'] ?>" >
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?= $row['SUB_CONTENT_CAT_ID'] ?>"></div>
+						 
 						<div class="floatL nameContent">
-							<? $nextPage = '';
+							<?
+							$nextPage = '';
 							if (nvl($row['IS_LAST_NODE'], 'Y') == 'Y') {
 								//content no LV use current LV
 								$nextPage = 'content_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . $LV  . '&SCID=' . $row['SUB_CONTENT_CAT_ID'];
@@ -123,33 +125,47 @@ require ('../inc_header.php');
 								//recursive to self page
 								$nextPage = 'main_sub_category_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . ($LV + 1) . '&SCID=' . $row['SUB_CONTENT_CAT_ID'];
 							}
-							 ?>
+						?>
 							<div><?
-								//echo '<a href="sub_category_view.php?scid='.$row['SUB_CONTENT_CAT_ID'].'&MID='.$MID.'&cid='.$CID.'">'. $row['SUB_CONTENT_CAT_DESC_LOC'].'</a>'
-								echo '<a href="' . $nextPage . '">' . $row['SUB_CONTENT_CAT_DESC_LOC'] . '</a>';
-							?></div>
-							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
+							//echo '<a href="sub_category_view.php?scid='.$row['SUB_CONTENT_CAT_ID'].'&MID='.$MID.'&cid='.$CID.'">'. $row['SUB_CONTENT_CAT_DESC_LOC'].'</a>'
+							echo '<a href="' . $nextPage . '">' . $row['SUB_CONTENT_CAT_DESC_LOC'] . '</a>';
+						?></div>
+							<div>วันที่สร้าง <?
+							echo ConvertDate($row['CREATE_DATE']);
+						?> | วันที่ปรับปรุง <?
+echo ConvertDate($row['LAST_UPDATE_DATE']);
+?></div>
 						</div>
 						<div class="floatL stausContent">
 
-						<? if($row['FLAG'] == 0){ ?>
-							<span class="staus1"></span> <a href="sub_category_action.php?enable&subcid=<?=$row['SUB_CONTENT_CAT_ID'] ?>&vis=<?=$row['FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID.$subfixAddAndEdit?>">
+						<?
+    if ($row['FLAG'] == 0) {
+?>
+							<span class="staus1"></span> <a href="sub_category_action.php?enable&subcid=<?= $row['SUB_CONTENT_CAT_ID'] ?>&vis=<?= $row['FLAG'] ?>&MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>">
 							Enable
-						</a> <?}  else { ?>
+						</a> <?
+						} else {
+					?>
 							<span class="staus2"></span>
-							<a href="sub_category_action.php?enable&subcid=<?=$row['SUB_CONTENT_CAT_ID'] ?>&vis=<?=$row['FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID.$subfixAddAndEdit?>"> Disable </a>
-						<? } ?></div>
+							<a href="sub_category_action.php?enable&subcid=<?= $row['SUB_CONTENT_CAT_ID'] ?>&vis=<?= $row['FLAG'] ?>&MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>"> Disable </a>
+						<?
+						}
+					?></div>
 						<div class="floatL EditContent">
-							<a href="sub_category_edit.php?subcid=<?=$row['SUB_CONTENT_CAT_ID'] ?>&MID=<?=$MID ?>&cid=<?=$CID.$subfixAddAndEdit?>" class="EditContentBtn">Edit</a>
-							<a href="#" data-id=<?=$row['SUB_CONTENT_CAT_ID'] ?> class="DeleteContentBtn">Delete</a>
+							<a href="sub_category_edit.php?subcid=<?= $row['SUB_CONTENT_CAT_ID'] ?>&MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>" class="EditContentBtn">Edit</a>
+							<a href="#" data-id=<?= $row['SUB_CONTENT_CAT_ID'] ?> class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>
 				</div>
-							<?php } ?>
+							<?php
+							}
+						?>
 					<!-- end loop -->
 				</div>
 				<div class="pagination_box">
-					<div class="floatL">จำนวนทั้งหมด  <span class='RowCount'><? echo $num_rows; ?></span>  รายการ</div>
+					<div class="floatL">จำนวนทั้งหมด  <span class='RowCount'><?
+					echo $num_rows;
+				?></span>  รายการ</div>
 					<div class="floatR pagination_action">
 						<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
 						<a href="#"><img src="../images/fast-rewind.svg" alt="previous" /></a>
@@ -166,10 +182,10 @@ require ('../inc_header.php');
 				</div>
 			</div>
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_category_add.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_category_add.php?MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="sub_category_action.php?delete" >
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('sub_category_order.php');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$backPage ?>'">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('sub_category_order.php?MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?= $backPage ?>'">
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -177,11 +193,14 @@ require ('../inc_header.php');
 </div>
 <?
 require ('../inc_footer.php');
- ?>
+?>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
+<link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>
-<? logs_access('admin', 'hello'); ?>
+<?
+logs_access('admin', 'hello');
+?>
 </body>
 </html>

@@ -650,4 +650,29 @@ function admin_upload_video($name){
 	return $str;
 
 }
+
+
+function callThumbListFrontEnd($id, $type, $staus) {
+	global $conn;
+
+	$sql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$query = mysql_query($sql, $conn);
+	$num = mysql_num_rows($query);
+	if ($num == 1) {
+		$row = mysql_fetch_array($query);
+		if ($staus) {
+			return str_replace('../../', '', $row['IMG_PATH']) ;
+		} else {
+			return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', str_replace('../../', '', $row['IMG_PATH'])) . '\');"';
+		}
+
+	} else {
+		if ($staus) {
+			return 'images/logo_thumb.jpg';
+		} else {
+			return '';
+		}
+	}
+
+}
 ?>

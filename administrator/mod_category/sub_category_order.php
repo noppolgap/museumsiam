@@ -10,7 +10,7 @@ if(isset($_POST['update'])){
 		$update="";
 		$update[]= "ORDER_DATA = ".$value[1];
 					
-		echo $sql="UPDATE trn_content_category  SET  ".implode(",",$update)." WHERE CONTENT_CAT_ID =".$value[0];
+		echo $sql="UPDATE trn_content_sub_category  SET  ".implode(",",$update)." WHERE SUB_CONTENT_CAT_ID =".$value[0];
 		mysql_query($sql,$conn);	    
 	}	
 }else{
@@ -50,7 +50,7 @@ require ('../inc_meta.php');
 			 
 		?>
 
-		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['CONTENT_CAT_ID'] ?>"><?=$row['CONTENT_CAT_DESC_LOC'] ?></li>
+		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['SUB_CONTENT_CAT_ID'] ?>"><?=$row['SUB_CONTENT_CAT_DESC_LOC'] ?></li>
 	<? } ?>  
 	</ul>
 </div>	

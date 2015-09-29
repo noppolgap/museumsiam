@@ -42,12 +42,19 @@ require ('../inc_header.php');
 			$sql = "SELECT * FROM trn_content_category where CONTENT_CAT_ID = '" . $CID . "' ";
 		}
 
+		//echo $sql;
 		$rs = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
 
 		$navigateBackPage = '';
-		if ($LV == 0) {
-			$navigateBackPage = 'main_category_view.php?MID=' . $MID;
+		if (nvl($row['IS_LAST_NODE'], 'Y') == 'Y') {
+			//if ($LV == 0) {
+				//if have subCatID must return to page main_sub_cat
+			if (isset($SCID) && nvl($SCID, '') != '') {
+				$navigateBackPage = 'main_sub_category_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . $LV;
+			} else {
+				$navigateBackPage = 'main_category_view.php?MID=' . $MID;
+			}
 		} else {
 			$navigateBackPage = 'main_sub_category_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . $LV;
 
