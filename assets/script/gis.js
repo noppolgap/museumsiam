@@ -1,120 +1,217 @@
-var pos = Array();
-var defaultLat = 13.751426;
-var defaultLot = 100.492582;
+var defaultLat = 13.744444;
+var defaultLot = 100.494148;
+var MyLatitude;
+var MyLongitude;
 var infoWindow;
 var map;
-var marker;
-
-
-
-var museums = [
-	  ['สถานพยาบาลนันอา',13.731558,100.494999,2324,1],
-	  ['โรงพยาบาล บี เอ็น เอช',13.72495,100.535041,2389,2],
-	  ['โรงพยาบาล บี. แคร์ เมดิคอลเซ็นเตอร์',13.943351,100.624591,2360,3],
-	  ['โรงพยาบาล เซ็นทรัล เยนเนอรัล',13.889141,100.606635,2395,4],
-	  ['โรงพยาบาลกรุงเทพคริสเตียน',13.72794,100.531493,2316,5],
-	  ['โรงพยาบาลกลาง',13.746485,100.509166,2374,6],
-	  ['โรงพยาบาลกล้วยน้ำไท',13.713939,100.587632,2323,7],
-	  ['โรงพยาบาลคามิลเลียน',13.740684,100.584845,2328,8],
-	  ['โรงพยาบาลจุฬาลงกรณ์',13.731537,100.536715,2368,9],
-	  ['โรงพยาบาลตากสิน',13.7306,100.508034,2376,10],
-	  ['โรงพยาบาลตำรวจ',13.745289,100.5342225,2382,11],
-	  ['โรงพยาบาลธนบุรี',13.8139765,100.6465915,2330,12],
-	  ['โรงพยาบาลธนบุรี 2',13.7245995,100.6331106,2329,13],
-	  ['โรงพยาบาลนครธน',13.6604605,100.433549,2333,14],
-	  ['โรงพยาบาลนพรัตนราชธานี',13.824964,100.675718,2383,15],
-	  ['โรงพยาบาลนวมินทร์ 9',13.7739587,100.645331,2346,16],
-	  ['โรงพยาบาลบางปะกอก 1',13.678945,100.498943,2349,17],
-	  ['โรงพยาบาลบางโพ',13.806399,100.523454,2335,18],
-	  ['โรงพยาบาลบางไผ่',13.7247015,100.4651045,2344,19],
-	  ['โรงพยาบาลบำรุงราษฎร์',13.74622,100.552424,2400,20],
-	  ['โรงพยาบาลประชาพัฒน์',13.67776,100.498502,2348,21],
-	  ['โรงพยาบาลปิยะเวท',13.753489,100.580007,2366,22],
-	  ['โรงพยาบาลพระมงกุฏเกล้า',13.768382,100.535525,2384,23],
-	  ['โรงพยาบาลพระราม 2',13.651605,100.422063,2334,24],
-	  ['โรงพยาบาลพระราม 9',13.752985,100.571154,2403,25],
-	  ['โรงพยาบาลภูมิพลอดุลยเดช',13.90964,100.617505,2370,26],
-	  ['โรงพยาบาลมงกุฏวัฒนะ',13.893958,100.561631,2363,27],
-	  ['โรงพยาบาลมิชชั่น',13.757675,100.5193975,2327,28],
-	  ['โรงพยาบาลมเหสักข์',13.7233645,100.5235535,2339,29],
-	  ['โรงพยาบาลราชพิพัฒน์',13.751252,100.394137,2377,30],
-	  ['โรงพยาบาลรามคำแหง',13.7604805,100.6271135,2398,31],
-	  ['โรงพยาบาลราษฎร์บูรณะ',13.677926,100.502901,2350,32],
-	  ['โรงพยาบาลวชิรพยาบาล',13.780056,100.50909,2381,33],
-	  ['โรงพยาบาลวิภาราม',13.7231622,100.4762319,2358,34],
-	  ['โรงพยาบาลวิภาวดี',13.845856,100.561814,2392,35],
-	  ['โรงพยาบาลศิครินทร์',13.6542,100.646035,2399,36],
-	  ['โรงพยาบาลศิริราช',13.758173,100.485861,2386,37],
-	  ['โรงพยาบาลสมิติเวช ศรีนครินทร์',13.7170445,100.64281,2390,38],
-	  ['โรงพยาบาลสมิติเวชธนบุรี',13.710591,100.491639,2394,39],
-	  ['โรงพยาบาลสายไหม',13.924094,100.68411,2361,40],
-	  ['โรงพยาบาลสิรินทร',13.717217,100.707305,2379,41],
-	  ['โรงพยาบาลสขสวัสดิ์',13.676112,100.501104,2351,42],
-	  ['โรงพยาบาลสุขุมวิท',13.7188665,100.5871655,2357,43],
-	  ['โรงพยาบาลหัวเฉียว',13.750028,100.515376,2340,44],
-	  ['โรงพยาบาลเกษมราษฎร์ บางแค',13.7103204,100.3986922,2322,45],
-	  ['โรงพยาบาลเกษมราษฎร์ ประชาชื่น',13.8190165,100.5357705,2321,46]	
-];
+var museums;
+var markerArray = [];
+var museumsDetail = [];
+var DirectionID = 0;
+var bounds;
+var directionsDisplay;
+var directionsService;
+var sharedLocation = true;
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 10,
-    center: {lat: defaultLat, lng: defaultLot}
-  });
-  infoWindow = new google.maps.InfoWindow({map: map});
+	directionsService = new google.maps.DirectionsService;
+	directionsDisplay = new google.maps.DirectionsRenderer;
+	map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 10,
+		center: {
+			lat: defaultLat,
+			lng: defaultLot
+		}
+	});
 
+	var rendererOptions = {
+		map: map,
+		suppressMarkers: true,
+		draggable: true
+	}
 
-  setMarkers(map);
+	bounds = new google.maps.LatLngBounds();
+	directionsDisplay.setMap(map);
+	stepDisplay = new google.maps.InfoWindow();
+
+	setMarkers(map);
 }
 
-function setMarkers(map) {
-	
-  var image = {
-    url: 'images/gis_pin.png',
-    size: new google.maps.Size(37, 39),
-    origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(0, 39)
-  };
+function setMarkers(map, markers) {
 
-  var shape = {
-    coords: [1, 1, 1, 20, 18, 20, 18, 1],
-    type: 'poly'
-  };
-  for (var i = 0; i < museums.length; i++) {
-    var museum = museums[i];
-    marker = new google.maps.Marker({
-      position: {lat: museum[1], lng: museum[2]},
-      map: map,
-      icon: image,
-      shape: shape,
-      title: museum[0],
-      zIndex: museum[4]
-    });
-  }
-}
-function getLocation(){
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
+	var image = {
+		url: 'images/gis_pin.svg',
+		size: new google.maps.Size(30, 37),
+		origin: new google.maps.Point(0, 0),
+		anchor: new google.maps.Point(0, 37)
+	};
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
-      map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-  }	
+	infoWindow = new google.maps.InfoWindow(), marker, i;
+
+	for (var i = 0; i < museums.length; i++) {
+		var museum = museums[i];
+		var myLatLng = new google.maps.LatLng(museum[1], museum[2]);
+		bounds.extend(myLatLng);
+		var marker = new google.maps.Marker({
+			position: myLatLng,
+			map: map,
+			icon: image,
+			title: museum[0],
+			zIndex: museum[4]
+		});
+
+		var Mystr = '<iframe src="gis_frame.php?p=' + museum[3] + '&lat=' + museum[1] + '&lng=' + museum[2] + '" id="MapIframe" name="myiFrame" scrolling="no" frameborder="0"></iframe>';
+
+		museumsDetail[i] = Mystr;
+
+		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			return function() {
+
+				infoWindow.setContent('<div> ' + museumsDetail[i] + '</div>');
+				infoWindow.open(map, marker);
+			}
+		})(marker, i));
+
+		map.setCenter(bounds.getCenter());
+		map.fitBounds(bounds);
+		markerArray.push(marker);
+	}
+
+
+	return markerArray;
 }
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
+
+function getLocation() {
+	if (sharedLocation) {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition, showError);
+		} else {
+			showError();
+		}
+	} else {
+		calcRoute(true);
+		console.log(11);
+	}
+
+}
+
+function showPosition(position) {
+	MyLatitude = position.coords.latitude;
+	MyLongitude = position.coords.longitude;
+	sharedLocation = false;
+	calcRoute(true);
+}
+
+function showError(error) {
+	MyLatitude = defaultLat;
+	MyLongitude = defaultLot;
+}
+
+function calcRoute(currentLocation) {
+
+
+	if (currentLocation == true) {
+		if (MyLatitude == undefined) {
+			MyLatitude = defaultLat;
+		}
+		if (MyLongitude == undefined) {
+			MyLongitude = defaultLot;
+		}
+
+		var start = MyLatitude + ' , ' + MyLongitude;
+	} else {
+		var start = currentLocation;
+	}
+
+	var start = MyLatitude + ' , ' + MyLongitude;
+
+
+	var end = endLatitude + ' , ' + endLongitude;
+	var request = {
+		origin: start,
+		destination: end,
+		travelMode: google.maps.TravelMode.DRIVING
+	};
+	directionsService.route(request, function(response, status) {
+		if (status == google.maps.DirectionsStatus.OK) {
+			directionsDisplay.setDirections(response);
+			showSteps(response);
+		}
+	});
+
+	console.log(start);
+	console.log(end);
+
+}
+
+function getDirections(id, currentLocation, maplat, maplong) {
+	DirectionID = id;
+	endLatitude = maplat;
+	endLongitude = maplong;
+
+	if (currentLocation == '') {
+		getLocation();
+	} else {
+		calcRoute(currentLocation);
+	}
+
+	clearMarkers(map, markerArray);
+}
+
+function clearMarkers(map, markers) {
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(null);
+	}
+}
+
+function showSteps(directionResult) {
+
+	var image1 = {
+		url: 'images/gis_pin.svg',
+		size: new google.maps.Size(34, 40)
+	};
+
+	var image2 = {
+		url: 'images/gis_pin.svg',
+		size: new google.maps.Size(34, 40)
+	};
+
+	var myRoute = directionResult.routes[0].legs[0];
+	var step = myRoute.steps.length;
+
+	var marker = new google.maps.Marker({
+		position: myRoute.steps[0].start_point,
+		map: map,
+		icon: image1,
+		title: 'Current Location',
+		draggable: true,
+		zIndex: 5
+	});
+	markerArray.push(marker);
+	/*
+	google.maps.event.addListener(marker, 'dragend', function(event) {
+		var MyLat = event.latLng.lat();
+		var MyLng = event.latLng.lng();
+		var getPosition = MyLat + ' , ' + MyLng;
+		console.log(getPosition);
+		getDirections(DirectionID, getPosition, endLatitude, endLongitude);
+	});
+
+	var infowindow = new google.maps.InfoWindow({
+		content: '<iframe src="gis_frame.php?p=' + DirectionID + '&lat=' + endLatitude + '&lng=' + endLongitude + '" id="MapIframe" name="myiFrame" scrolling="no" frameborder="0"></iframe>'
+	});
+	*/
+	var marker = new google.maps.Marker({
+		position: myRoute.steps[step - 1].end_point,
+		map: map,
+		icon: image2,
+		zIndex: 5
+	});
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(map, marker);
+	});
+
+
+	markerArray.push(marker);
+
 }

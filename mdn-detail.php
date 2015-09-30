@@ -6,7 +6,10 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
+	
+<!-- ScrollIt -->
+<script src="js/scrollIt.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/mdn.css" />
@@ -17,6 +20,9 @@ require("assets/configs/function.inc.php");
 			if ($('.menu-left li.menu3').hasClass("active")){
 				$('.menu-left li.menu3').children(".submenu-left").css("display","block");
 			}
+		$.scrollIt({
+			topOffset: -130 // offste (in px) for fixed top navigation
+		});
 			
 		var sync1 = $("#sync1");
 		var sync2 = $("#sync2");
@@ -208,12 +214,17 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
+				
+				<div class="box-btn cf toBottom">
+					<a class="btn red" data-scroll-nav='1'>กิจกรรมและข่าวสาร</a>
+				</div>
+				
 				<div class="box-gray first">
 					<h3>ที่อยู่และเบอร์ติดต่อ</h3>
 					<p class="text-location">100 ถนนราชดำเนินกลาง แขวงบวรนิเวศ เขตพระนคร กรุงเทพมหานคร 10220</p>
-					<p class="text-tel">+66(0)2 621 0044, +66(0)2 226 5047</p>
-					<p class="text-fax">+66(0)2 621 0043</p>
-					<p class="text-web">http://www.nitasrattanakosin.com/</p>
+					<p class="text-tel"><a href="tel:+66026210044" target="_blank">+66(0)2 621 0044</a> , <a href="tel:+66022265047" target="_blank">+66(0)2 226 5047</a></p>
+					<p class="text-fax"><a href="tel:+66026210043" target="_blank">+66(0)2 621 0043</a></p>
+					<p class="text-web"><a href="http://www.nitasrattanakosin.com/" target="_blank">http://www.nitasrattanakosin.com/</a></p>
 				</div>
 				<div class="box-gray">
 					<h3>วันและเวลาทำการ</h3>
@@ -238,13 +249,6 @@ require("assets/configs/function.inc.php");
 					<span>สถานที่สำคัญใกล้เคียง</span>
 					<p>โลหะ ปราสาท วัดราชนัดดาฯ, ลานพลับพลามหาเจษฎาบดินทร์ (ศาลาเฉลิมไทยเก่า), ป้อมมหากาฬ,<br>
 					        พระบรมบรรพต หรือ ภูเขาทอง วัดสระเกศ และอนุสาวรีย์ประชาธิปไตย
-					 </p>
-				</div>
-				
-				<div class="box-white">
-					<h3>ประวัติความเป็นมา</h3>
-					<p>อาคารบริเวณถนนราชดำเนินกลาง เป็นงานสถาปัตยกรรมที่เป็นส่วนหนึ่งของประวัติศาสตร์กรุงเทพมหานคร นับตั้งแต่มี พระราชดำริของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว(รัชกาลที่ ๕) ให้ตัดถนนราชดำเนินจากพระราชวังดุสิตไปยัง พระบรมมหาราชวัง โดยจัดวางรูปแบบตามลักษณะของ Champs Elysees ในประเทศฝรั่งเศส<br><br>
-						การก่อสร้างถนนราชดำเนินเริ่มตั้งแต่ปี พ.ศ. ๒๔๔๒ ส่วนอาคารตลอดแนวถนนราชดำเนินกลางได้เริ่มดำเนินการในปี พ.ศ. ๒๔๘๐ โดยการเวนคืนที่ดินทั้งสองฝั่งถนนข้างละ ๔๐ เมตร และออกแบบโดยสถาปนิกหลายท่าน ได้แก่ มล.ปุ่ม มาลากุล, คุณหมิว อภัยวงศ์ ซึ่งใช้แนวความคิดในการออกแบบจาก Champ Elysees ตามพระราชดำริเดิมของพระบาทสมเด็จพระจุลจอมเกล้าเจ้าอยู่หัว
 					 </p>
 				</div>
 				
@@ -317,6 +321,154 @@ require("assets/configs/function.inc.php");
 						Plugin Social
 					</div>
 				</div>
+				
+				<div class="box-newsevent-main cf" data-scroll-index="1">
+					<div class="box-category-main news BGray box-left">
+						<div class="box-title cf ">
+							<h2>กิจกรรม</h2>
+						</div>
+						<div class="box-museum-news">
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-category-main news BGray box-right">
+						<div class="box-title cf ">
+							<h2>ข่าวสาร</h2>
+						</div>
+						<div class="box-museum-news">
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+							<div class="museum-news cf">
+								<div class="box-pic">
+									<a href=""><img src="http://placehold.it/274x205"></a>
+								</div>
+								<div class="box-text">
+									<a href=""><p class="text-title TcolorRed">
+										Levitated Mass 340 Ton Giant Stone
+									</p></a>
+									<p class="text-date TcolorGray">
+										28 พ.ย. 2559
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 			<div class="part-btn-back">
 				<div class="box-btn cf">

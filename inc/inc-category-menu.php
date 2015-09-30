@@ -33,7 +33,70 @@ $query = mysql_query($sqlStr, $conn);
 			<li class="menu1">
 				<a href="category.php?MID=<?=$row['MODULE_ID']?>">หน้าหลัก</a>
 			</li>
-			<li class="menu2 sub">
+			
+			
+			<?php 
+			$sqlCategory = "SELECT
+								CONTENT_CAT_ID,
+								CONTENT_CAT_DESC_LOC,
+								CONTENT_CAT_DESC_ENG,
+								IS_LAST_NODE
+							FROM
+								trn_content_category
+							WHERE
+								REF_MODULE_ID = ".$row['MODULE_ID'] ;
+			$sqlCategory.=" AND flag <> 2
+							ORDER BY
+								ORDER_DATA ASC "; 		
+				//firstLoop is Category
+				$categoryRS = mysql_query($sqlCategory) or die(mysql_error());
+					$mainMenuCount = 2; //start with 2
+
+					while ($categoryRow = mysql_fetch_array($categoryRS)) {
+							echo '<li class="menu'.$mainMenuCount.' sub">';
+							
+						if (nvl($categoryRow['IS_LAST_NODE'],'Y') == 'Y')
+						{
+							echo' <a href="content-detail.php?MID='.$row['MODULE_ID'].'&CID='.$categoryRow['CONTENT_CAT_ID'].'">'.$categoryRow['CONTENT_CAT_DESC_LOC'].'</a> ';
+						}
+						else 
+							{
+								//has subCat render list
+								echo' <a href="subcategory.php?MID='.$row['MODULE_ID'].'&CID='.$categoryRow['CONTENT_CAT_ID'].'">'.$categoryRow['CONTENT_CAT_DESC_LOC'].'</a> ';
+								
+								
+								$sqlSubCategory = "SELECT
+														SUB_CONTENT_CAT_ID,
+														SUB_CONTENT_CAT_DESC_LOC,
+														SUB_CONTENT_CAT_DESC_ENG,
+														REF_SUB_CONTENT_CAT_ID,
+														IS_LAST_NODE
+													FROM
+														trn_content_sub_category
+													WHERE
+														CONTENT_CAT_ID = ".$categoryRow['CONTENT_CAT_ID'];
+								$sqlSubCategory .= " AND flag <> 2
+													ORDER BY
+														ORDER_DATA ASC";
+														
+							/*	
+								<ul class="submenu-left">
+					<li class="submenu1">
+						<a href="da-category.php">หมวดหมู่ย่อย</a>
+					</li>
+					<li class="submenu2">
+						<a href="da-category.php">หมวดหมู่ย่อย</a>
+					</li>
+				</ul> */
+							}
+						
+				
+				
+			echo '</li>';
+			$mainMenuCount++;
+					}
+			?> 
+		<!--	<li class="menu2 sub">
 				<a href="da-category.php">โบราณวัตถุ</a>
 				<ul class="submenu-left">
 					<li class="submenu1">
@@ -82,7 +145,7 @@ $query = mysql_query($sqlStr, $conn);
 			</li>
 			<li class="menu7">
 				<a href="da-all.php">MUSE MAG</a>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </div>

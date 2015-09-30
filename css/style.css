@@ -343,6 +343,10 @@ hr {
 	z-index: 100;
 	top: 35px;
 }
+body.notFix .part-menu{
+	position: relative;
+	top: 0px;
+}
 .part-menu.snapmenu{
 	position: fixed;
 	top: 35px;

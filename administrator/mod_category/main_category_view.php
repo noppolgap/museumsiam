@@ -85,7 +85,13 @@ require ("../../assets/configs/function.inc.php");
 							<? $nextPage = '';
 							if (nvl($row['IS_LAST_NODE'], 'Y') == 'Y') {
 								//content no LV use current LV
-								$nextPage = 'content_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0'   ;
+								if($MID == 7){
+									$nextPage = '../mod_shopping/product_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0'   ;
+								}
+								else{
+
+									$nextPage = 'content_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0'   ;
+								}
 							} else {
 								//recursive to self page
 								$nextPage = 'main_sub_category_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0' ;

@@ -63,11 +63,8 @@ require ('../inc_header.php');
 			if (nvl($row['REF_SUB_CONTENT_CAT_ID'], '0') != '0')
 				$navigateBackPage .= '&SCID=' . $row['REF_SUB_CONTENT_CAT_ID'];
 		}
-		if($MID == 7) {
-			$link = "../mod_shopping/product_add.php";
-		}else{
-			$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
-		}
+		
+		$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
 
 		?>
 		<div class="mod-body">
