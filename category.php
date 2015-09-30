@@ -79,7 +79,8 @@ require ("assets/configs/function.inc.php");
 					$sql = " SELECT
 CONTENT_CAT_DESC_LOC,
 CONTENT_CAT_DESC_ENG,
-CONTENT_CAT_ID
+CONTENT_CAT_ID , 
+IS_LAST_NODE
 FROM
 trn_content_category
 WHERE
@@ -107,7 +108,10 @@ order by order_data asc ";
 						echo '<div class="box-title cf">';
 						echo '<h2>' . $categoryName . '</h2>';
 						echo '<div class="box-btn">';
-						echo '<a href="km-event.php" class="btn gold">ดูทั้งหมด</a>';
+						if ( nvl($row['IS_LAST_NODE'],'Y') == 'Y')
+							echo '<a href="all-content.php?MID='.$MID.'&CID='.$categoryID.'" class="btn gold">ดูทั้งหมด</a>';
+						else 	
+						echo '<a href="sub-category.php?MID='.$MID.'&CID='.$categoryID.'" class="btn gold">ดูทั้งหมด</a>';
 						echo '</div>';
 						echo '</div>';
 						echo '<div class="box-news-main">';
@@ -149,12 +153,12 @@ order by order_data asc ";
 								$extraClass = ' mid';
 							}
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href=""> ';
+							echo '<a href="content-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
 							echo ' <div class="box-pic"> ';
 							echo '	<img src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 							echo ' <div class="box-text">';
-							echo ' <a href="">';
+							echo ' <a href="content-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
 							echo ' <p class="text-title">';
 							echo $rowContent['CONTENT_DESC_LOC'];
 							echo ' </p> </a>';
@@ -165,7 +169,7 @@ order by order_data asc ";
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="content-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="#" class="btn-socila fb"></a>';
 							echo ' <a href="#" class="btn-socila tw"></a>';
