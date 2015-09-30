@@ -5,9 +5,9 @@ require ("../../assets/configs/function.inc.php");
 
 if (isset($_GET['enable'])) {
 
-	$id = $_GET['p'];
-	$flag = $_GET['g'];
-	$catId = $_GET['a'];
+	$id = $_GET['proid'];
+	$flag = $_GET['LV'];
+	$catId = $_GET['cid'];
 	$Flag = "";
 
 	if ($flag == 1) {
@@ -18,18 +18,18 @@ if (isset($_GET['enable'])) {
 	$update = "";
 	$update[] = "Flag = $Flag";
 
-	$sql = "UPDATE trn_product SET  " . implode(",", $update) . " WHERE PRODUCT_ID =" . $id;
+	echo $sql = "UPDATE trn_product SET  " . implode(",", $update) . " WHERE PRODUCT_ID =" . $id;
 
 	mysql_query($sql, $conn);
 
-	header('Location: product_view.php?p=' . $catId . ' ');
+	header('Location: product_view.php?MID='.$_GET['MID'].'&cid='.$catId.'&LV='.$_GET['LV'].' ');
 
 }
 
 if (isset($_GET['delete'])) {
 
-	$id = $_POST['id'];
-	$catId = $_GET['a'];
+	$id = $_GET['proid'];
+	$catId = $_GET['cid'];
 	$update = "";
 	$update[] = "Flag = 2";
 
@@ -43,14 +43,14 @@ if (isset($_GET['delete'])) {
 
 if (isset($_GET['add'])) {
 
-	$sql_max = "SELECT MAX( ORDER_DATA ) AS MAX_ORDER FROM trn_product WHERE FLAG <>2 AND CAT_ID =" . $_POST['cat_id'];
+    $sql_max = "SELECT MAX( ORDER_DATA ) AS MAX_ORDER FROM trn_product WHERE FLAG <> 2 AND CAT_ID =".$_GET['cid'];
 	$query_max = mysql_query($sql_max, $conn);
 	$row_max = mysql_fetch_array($query_max);
 	$max = $row_max['MAX_ORDER'];
 	$max++;
 
 	unset($insert);
-	$insert['CAT_ID'] = "'" . $_POST['cat_id'] . "'";
+	$insert['CAT_ID'] = "'" .$_GET['cid']. "'";
 	$insert['PRODUCT_DESC_LOC'] = "'" . $_POST['product_name_th'] . "'";
 	$insert['PRODUCT_DESC_ENG'] = "'" . $_POST['product_name_en'] . "'";
 	$insert['PRICE'] = "'" . $_POST['price'] . "'";
@@ -66,9 +66,9 @@ if (isset($_GET['add'])) {
 	$insert['LAST_UPDATE_USER'] = "'admin'";
 	$insert['LAST_UPDATE_DATE'] = "NOW()";
 
-	$sql = "INSERT INTO trn_product (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+    $sql = "INSERT INTO trn_product (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 	mysql_query($sql, $conn) or die($sql);
-	$retrunID = mysql_insert_id();
+    $retrunID = mysql_insert_id();
 
 	foreach ($_POST['photo_file'] as $k => $file) {
 		$filename = admin_move_image_upload_dir('product', end(explode('/', $file)), 1000, '', false, 150, 150);
@@ -77,13 +77,13 @@ if (isset($_GET['add'])) {
 		$insert['CONTENT_ID'] = $retrunID;
 		$insert['IMG_TYPE'] = "'" . getEXT($filename) . "'";
 		$insert['IMG_PATH'] = "'" . $filename . "'";
-		$insert['CAT_ID'] = "7";
+		$insert['CAT_ID'] = "'" .$_GET['cid']. "'";
 
 		$sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 		mysql_query($sql, $conn) or die($sql);
 	}
 
-	header('Location: product_view.php?p=' . $_POST['cat_id'] . '');
+	header('Location: product_view.php?MID='.$_GET['MID'].'&cid='.$_GET['cid'].'&LV='.$_GET['LV'].' ');
 
 }
 
@@ -106,6 +106,19 @@ if (isset($_GET['edit'])) {
 	$sql = "UPDATE trn_product SET  " . implode(",", $update) . " WHERE PRODUCT_ID = " . $_POST['pro_id'];
 	mysql_query($sql, $conn);
 
-	header('Location: product_view.php?p=' . $_POST['cat_id'] . ' ');
+	foreach ($_POST['photo_file'] as $k => $file) {
+		$filename = admin_move_image_upload_dir('product', end(explode('/', $file)), 1000, '', false, 150, 150);
+
+		unset($insert);
+		$insert['CONTENT_ID'] = "'" . $_POST['cat_id'] . "'";
+		$insert['IMG_TYPE'] = "'" . getEXT($filename) . "'";
+		$insert['IMG_PATH'] = "'" . $filename . "'";
+		$insert['CAT_ID'] = "'" .$_GET['cid']. "'";
+
+		$sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+		mysql_query($sql, $conn) or die($sql);
+	}
+
+	header('Location: product_view.php?MID='.$_GET['MID'].'&cid='.$_GET['cid'].'&LV='.$_GET['LV'].' ');
 
 }

@@ -28,10 +28,10 @@ require ("../../assets/configs/function.inc.php");
 				<div class="mod-body-main-content">
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 					<div class="formCms">
-						<? $id = $_GET['g']; ?>
-						<form action="product_action.php?add&p=<?=$id ?>" method="post" name="formcms">
+						<? $id = $_GET['cid']; ?>
+						<form action="product_action.php?add&MID=<?=$_GET['MID']?>&cid=<?=$id?>&LV=<?$_GET['LV']?>" method="post" name="formcms">
 							<?php
-							$sql = "SELECT CONTENT_CAT_DESC_LOC FROM trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = 7 AND CONTENT_CAT_ID = $id";
+							$sql = "SELECT CONTENT_CAT_DESC_LOC FROM trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = ".$_GET['MID']." AND CONTENT_CAT_ID = $id";
 							$query = mysql_query($sql, $conn);
 							?>
 							<div>
@@ -100,7 +100,7 @@ require ("../../assets/configs/function.inc.php");
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'product_view.php?p=<?=$_GET['g'] ?>' ">
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'product_view.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>' ">
 							</div>
 						</form> 
 					</div>

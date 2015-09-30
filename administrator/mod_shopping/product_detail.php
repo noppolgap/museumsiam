@@ -31,7 +31,7 @@ require ("../../assets/configs/function.inc.php");
 
 				<?php
 
-				$id = $_GET['p'];
+				$id = $_GET['proid'];
 
 				$sql = "SELECT * FROM  trn_product WHERE Flag <> 2 AND PRODUCT_ID = $id ";
 
@@ -54,13 +54,13 @@ require ("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_image_view('photo', 7, $_GET['p']) ?></div>
+								<div class="floatL form_input"><?=admin_upload_image_view('photo', 7, $_GET['proid']) ?></div>
 								<div class="clear"></div>
 							</div>		
 							<? } ?>
 							<div class="btn_action">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href
-								 = 'product_view.php?p=<?=$_GET['a'] ?>'">
+								 = 'product_view.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>'">
 							</div>
 						</form> 
 	

@@ -47,7 +47,7 @@ require("assets/configs/function.inc.php");
 
 			<div class="box-category-main news BBlack">
 				<div class="box-title cf">
-					<h2>กิจกรรมและข่าวสาร</h2>
+					<h2>กิจกรรมและข่าวประชาสัมพันธ์</h2>
 					<div class="box-btn">
 						<a href="mdn-news-event.php" class="btn gold">ดูทั้งหมด</a>
 					</div>
@@ -143,7 +143,7 @@ require("assets/configs/function.inc.php");
 			
 			<div class="box-category-main news BGray">
 				<div class="box-title cf ">
-					<h2>มิวเซี่ยมแนะนำ</h2>
+					<h2>มิวเซียมแนะนำ</h2>
 					<div class="box-btn">
 						<a href="mdn-category.php" class="btn black">ดูทั้งหมด</a>
 					</div>

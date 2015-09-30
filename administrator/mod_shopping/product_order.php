@@ -10,7 +10,7 @@ if(isset($_POST['update'])){
 		$update="";
 		$update[]= "ORDER_DATA = ".$value[1];
 					
-		echo $sql= " UPDATE trn_product  SET  ".implode(",",$update)." WHERE PRODUCT_ID =".$value[0];
+	    $sql= " UPDATE trn_product  SET  ".implode(",",$update)." WHERE PRODUCT_ID =".$value[0];
 		mysql_query($sql,$conn);	    
 	}	
 }else{
@@ -31,7 +31,7 @@ if(isset($_POST['update'])){
 	<ul id="sortable">
 		<?php
 
-			    $sql= "SELECT * FROM trn_product  WHERE Flag <> 2 AND CAT_ID = ".$_GET['p']." ORDER BY ORDER_DATA DESC";
+			    echo $sql= "SELECT * FROM trn_product  WHERE Flag <> 2 AND CAT_ID = ".$_GET['cid']." ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {

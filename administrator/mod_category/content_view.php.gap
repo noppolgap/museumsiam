@@ -45,6 +45,7 @@ require ('../inc_header.php');
 			$sql = "SELECT * FROM trn_content_category where CONTENT_CAT_ID = '" . $CID . "' ";
 		}
 
+		//echo $sql;
 		$rs = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
 
@@ -63,8 +64,11 @@ require ('../inc_header.php');
 			if (nvl($row['REF_SUB_CONTENT_CAT_ID'], '0') != '0')
 				$navigateBackPage .= '&SCID=' . $row['REF_SUB_CONTENT_CAT_ID'];
 		}
-		
-		$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
+		if($MID == 7) {
+			$link = "xxx";
+		}else{
+			$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
+		}
 
 		?>
 		<div class="mod-body">
@@ -122,10 +126,10 @@ require ('../inc_header.php');
 							WHERE cc.REF_MODULE_ID = $MID
 								AND cc.flag <> 2
 								AND cc.CONTENT_CAT_ID  = $CID ";
-							if (isset($SCID) && nvl($SCID, '0') != '0') {
-								$sql .= "	AND sb.SUB_CONTENT_CAT_ID =  $SCID ";
-							}
-			
+
+			if (isset($SCID) && nvl($SCID, '0') != '0') {
+				$sql .= "	AND sb.SUB_CONTENT_CAT_ID = $SCID ";
+			}
 
 			if (isset($_GET['search'])) {
 				$sql .= " AND ( CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )";
@@ -134,12 +138,7 @@ require ('../inc_header.php');
 								,sb.order_data DESC
 							) a
 						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID
-						where cd.CONTENT_STATUS_FLAG <>  2 " ;
-						if (isset($SCID) && nvl($SCID, '0') != '0') {
-				$sql .= "	AND cd.SUB_CAT_ID =  $SCID ";
-			}
-						
-					$sql .= "	ORDER BY cd.ORDER_DATA desc ";
+						where cd.CONTENT_STATUS_FLAG <>  2 ORDER BY cd.ORDER_DATA desc ";
 
 			$query = mysql_query($sql, $conn);
 

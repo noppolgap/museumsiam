@@ -138,7 +138,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf news">
 				<h1>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h1>
 				<div class="box-btn">
-					<a href="" class="btn red">กลับไปข่าวสารของมิวเซียมสยาม</a>
+					<a href="" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
 				</div>
 			</div>
 			<div class="box-newsdetail-main">
@@ -229,7 +229,7 @@ require("assets/configs/function.inc.php");
 			</div>
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="" class="btn red">กลับไปข่าวสารของมิวเซียมสยาม</a>
+					<a href="" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
 				</div>
 			</div>
 		</div>

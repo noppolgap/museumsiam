@@ -28,12 +28,12 @@ require ("../../assets/configs/function.inc.php");
 				<div class="mod-body-main-content">
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 					<div class="formCms">
-						<? $id = $_GET['g'];
-						$pro_id = $_GET['p'];
+						<? $id = $_GET['cid'];
+						$pro_id = $_GET['proid'];
 						?>
-						<form action="product_action.php?edit&p=<?=$id ?>" method="post" name="formcms">
+						<form action="product_action.php?edit&proid=<?=$pro_id ?>&MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>'" method="post" name="formcms">
 							<?php
-							$sql = "SELECT * FROM trn_product p join trn_category c on c.CAT_ID = p.cat_id 
+							$sql = "SELECT * FROM trn_product p join trn_content_category c on c.CONTENT_CAT_ID = p.cat_id 
 							   WHERE p.Flag <> 2 AND p.CAT_ID = $id AND p.PRODUCT_ID = $pro_id";
 							$query = mysql_query($sql, $conn);
 							?>
@@ -45,7 +45,7 @@ require ("../../assets/configs/function.inc.php");
 								<div class="floatL form_name">หมวดหมู่</div>
 								<input type="hidden" name="cat_id" value="<? echo $row['CAT_ID']; ?>" class="w90p" />
 								<input type="hidden" name="pro_id" value="<? echo $row['PRODUCT_ID']; ?>" class="w90p" />
-									<div class="floatL form_input"><input type="text" name="cat_ids"  class="w90p" readonly="readonly" value="<? echo $row['CAT_DESC_LOC']; ?>" />
+									<div class="floatL form_input"><input type="text" name="cat_ids"  class="w90p" readonly="readonly" value="<? echo $row['CONTENT_CAT_DESC_LOC']; ?>" />
 								
 								</div>
 								<div class="clear"></div>
@@ -97,7 +97,7 @@ require ("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_image_edit('photo', 7, $_GET['p']) ?></div>
+								<div class="floatL form_input"><?=admin_upload_image_edit('photo', 7, $_GET['proid']) ?></div>
 								<div class="clear"></div>
 							</div>	
 
@@ -106,7 +106,7 @@ require ("../../assets/configs/function.inc.php");
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'product_view.php?p=<?=$_GET['g'] ?>' ">
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'product_view.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>' ">
 							</div>
 						</form> 
 					</div>

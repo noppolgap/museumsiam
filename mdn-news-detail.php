@@ -117,9 +117,9 @@ require("assets/configs/function.inc.php");
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="mdn.php">ระบบเครือข่ายพิพิธภัณฑ์</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="mdn-news-event.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="mdn-news.php">ข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ชื่อข่าวสาร</li>
+				<li><a href="mdn-news-event.php">กิจกรรมและข่าวประชาสัมพันธ์</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="mdn-news.php">ข่าวประชาสัมพันธ์</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active">ชื่อข่าวประชาสัมพันธ์</li>
 			</ol>
 		</div>
 	</div>

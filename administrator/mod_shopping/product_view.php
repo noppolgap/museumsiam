@@ -22,14 +22,14 @@ require ("../../assets/configs/function.inc.php");
  ?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php?g=<?=$_GET['p'] ?>'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete&a=<?=$_GET['p'] ?>">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('product_order.php?p=<?=$_GET['p'] ?>');">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete&proid=<?=$_GET['p'] ?>">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('product_order.php?cid=<?=$_GET['cid'] ?>');">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
 					<?php
-					$sql1 = "SELECT * FROM  trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = 7 AND CONTENT_CAT_ID ='" . $_GET['p'] . "' ";
+					$sql1 = "SELECT * FROM  trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = '" . $_GET['MID'] . "' AND CONTENT_CAT_ID ='" . $_GET['cid'] . "' ";
 					$query1 = mysql_query($sql1, $conn);
 					 ?>
 
@@ -64,7 +64,7 @@ require ("../../assets/configs/function.inc.php");
 
 		    <?php
 
-			$id = $_GET['p'];
+			$id = $_GET['cid'];
 			$sql = "SELECT * FROM  trn_product WHERE Flag <> 2 AND CAT_ID = $id ";
 			if (isset($_GET['search'])) {
 				$sql .= "AND PRODUCT_DESC_LOC like '%" . $_POST['str_search'] . "%' ";
@@ -80,21 +80,21 @@ require ("../../assets/configs/function.inc.php");
 					<div class="Main_Content" data-id="<?=$row['PRODUCT_ID'] ?>">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['PRODUCT_ID'] ?>"></div>
 						<div class="floatL thumbContent">
-							<a href="product_detail.php?p=<?=$row['PRODUCT_ID'] ?>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
+							<a href="product_detail.php?proid=<?=$row['PRODUCT_ID'] ?>&cid=<?=$row['CAT_ID']?>&LV=<?=$row['FlAG']?>&MID=<?=$row['CAT_ID']?>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="product_detail.php?p='.$row['PRODUCT_ID'].'&a='.$row['CAT_ID'].'">'. $row['PRODUCT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="product_detail.php?proid='.$row['PRODUCT_ID'].'&cid='.$row['CAT_ID'].'&LV='.$row['FlAG'].'&MID='.$row['CAT_ID'].'">'. $row['PRODUCT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">
 						
 						<? if($row['Flag'] == 0){ ?>
-							<span class="staus1"></span> <a href="product_action.php?enable&p=<?=$row['PRODUCT_ID'] ?>&g=<?=$row['Flag'] ?>&a=<?=$row['CAT_ID'] ?>">
+							<span class="staus1"></span> <a href="product_action.php?enable&proid=<?=$row['PRODUCT_ID'] ?>&LV=<?=$row['Flag'] ?>&cid=<?=$row['CAT_ID'] ?>&MID=<?=$_GET['MID']?>">
 							Enable
 						</a> <?}  else { ?> <span class="staus2"></span> 
-						<a href="product_action.php?enable&p=<?=$row['PRODUCT_ID'] ?>&g=<?=$row['Flag'] ?>&a=<?=$row['CAT_ID'] ?>"> Disable </a> <? } ?></div>
+						<a href="product_action.php?enable&proid=<?=$row['PRODUCT_ID'] ?>&LV=<?=$row['Flag'] ?>&cid=<?=$row['CAT_ID'] ?>&MID=<?=$_GET['MID']?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
-							<a href="product_edit.php?p=<?=$row['PRODUCT_ID'] ?>&g=<?=$row['CAT_ID'] ?>" class="EditContentBtn">Edit</a>
+							<a href="product_edit.php?proid=<?=$row['PRODUCT_ID'] ?>&cid=<?=$row['CAT_ID']?>&LV=<?=$row['Flag']?>&MID=<?=$_GET['MID']?> " class="EditContentBtn">Edit</a>
 							<a href="#" class="DeleteContentBtn" data-id="<?=$row['PRODUCT_ID'] ?>">Delete</a>
 						</div>
 						<div class="clear"></div>	
@@ -120,7 +120,7 @@ require ("../../assets/configs/function.inc.php");
 				</div>
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '../mod_category/main_category_view.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>'">
 			</div>
 		</div>
 		<div class="clear"></div>	

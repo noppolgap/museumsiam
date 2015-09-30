@@ -118,7 +118,7 @@ require("assets/configs/function.inc.php");
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="mdn.php">ระบบเครือข่ายพิพิธภัณฑ์</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="mdn-news-event.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="mdn-news-event.php">กิจกรรมและข่าวประชาสัมพันธ์</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="mdn-event.php">กิจกรรม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">ชื่อกิจกรรม</li>
 			</ol>
@@ -138,7 +138,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf news">
 				<h1>กิจกรรมของพิพิธภัณฑ์</h1>
 				<div class="box-btn">
-					<a href="" class="btn red">กลับไปพิพิธภัณฑ์</a>
+					<a href="" class="btn red">เข้าสู่พิพิธภัณฑ์</a>
 				</div>
 			</div>
 			<div class="box-newsdetail-main">
@@ -239,7 +239,7 @@ require("assets/configs/function.inc.php");
 			</div>
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="" class="btn red">กลับไปพิพิธภัณฑ์</a>
+					<a href="" class="btn red">เข้าสู่พิพิธภัณฑ์</a>
 				</div>
 			</div>
 		</div>
