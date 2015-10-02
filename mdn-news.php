@@ -47,6 +47,7 @@ require("assets/configs/function.inc.php");
 	<div class="container cf">
 		<div class="box-left main-content">
 			<?php include('inc/inc-left-content-mdn.php'); ?>
+			<?php include('inc/inc-left-content-calendar.php'); ?>
 		</div>
 		<div class="box-right main-content">
 			

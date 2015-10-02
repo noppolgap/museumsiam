@@ -52,17 +52,33 @@ require("assets/configs/function.inc.php");
 					<a href="" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
+
+			<?php 
+			        $sql_sumorder  = " SELECT count( o.ORDER_ID ) total_order
+										FROM trn_order_detail od
+										LEFT JOIN trn_order o ON od.ORDER_ID = o.ORDER_ID
+										WHERE od.CUSTOMER_ID =1 ";
+
+			     $query_sumorder = mysql_query($sql_sumorder,$conn);
+
+				 $num_rows = mysql_num_rows($query_sumorder);
+
+				 while($row_sumorder = mysql_fetch_array($query_sumorder)){
+			?>
+
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 999</a>
+				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <? echo $row_sumorder['total_order']; ?></a>
 			</div>
+
+			<? } ?>
 
 
 		<?php 
-			        $sql_cat  = "SELECT cc.CONTENT_CAT_DESC_LOC, cc.CONTENT_CAT_ID	 
-					FROM trn_content_category cc
-					JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
-					WHERE cc.REF_MODULE_ID =7
-					AND cc.FLAG <>2 ";
+		        $sql_cat  = "SELECT cc.CONTENT_CAT_DESC_LOC, cc.CONTENT_CAT_ID	 
+				FROM trn_content_category cc
+				JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
+				WHERE cc.REF_MODULE_ID =7
+				AND cc.FLAG = 0 ";
 
 			     $query_cat = mysql_query($sql_cat,$conn);
 
@@ -76,15 +92,15 @@ require("assets/configs/function.inc.php");
 					<h2><? echo $row['CONTENT_CAT_DESC_LOC']; ?></h2>
 					
 					<div class="box-btn">
-						<a href="e-shopping-category.php" class="btn gold">ดูทั้งหมด</a>
+						<a href="e-shopping-category.php?cid=<?=$row['CONTENT_CAT_ID']?>" class="btn gold">ดูทั้งหมด</a>
 					</div>
 				</div>
 				<div class="box-item-main cf">
 
 					<?php 
 						    $sql_proc  = "SELECT * 
-								FROM trn_content_detail
-								WHERE CAT_ID = ".$row['CONTENT_CAT_ID']." AND CONTENT_STATUS_FLAG <>2 ";
+								FROM trn_product
+								WHERE CAT_ID = ".$row['CONTENT_CAT_ID']." AND FLAG = 0 ";
 
 						     $query_proc = mysql_query($sql_proc,$conn);
 
@@ -101,14 +117,14 @@ require("assets/configs/function.inc.php");
 							</div>
 						</a>
 						<div class="box-text">
-							<a href="e-shopping-detail.php">
+							<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>">
 								<p class="text-title">
-									<? echo $row_proc['CONTENT_DESC_LOC']; ?>
+									<? echo $row_proc['PRODUCT_DESC_LOC']; ?>
 								</p>
 							</a>
 							<p class="text-price">
-								ราคาปกติ : <? echo $row_proc['CONTENT_DESC_LOC']; ?> บาท<br>
-								<span>ราคาพิเศษ : <? echo $row_proc['CONTENT_DESC_LOC']; ?> บาท</span>
+								ราคาปกติ : <? echo $row_proc['PRICE']; ?> บาท<br>
+								<span>ราคาพิเศษ : <? echo $row_proc['SALE']; ?> บาท</span>
 							</p>
 						</div>
 					</div>

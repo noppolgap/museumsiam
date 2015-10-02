@@ -46,6 +46,7 @@ require("assets/configs/function.inc.php");
 	<div class="container cf">
 		<div class="box-left main-content">
 			<?php include('inc/inc-left-content-mdn.php'); ?>
+			<?php include('inc/inc-left-content-calendar.php'); ?>
 		</div>
 		<div class="box-right main-content">
 			
@@ -63,6 +64,10 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
+									<div class="box-date-tumb">
+										<p class="date">99</p>
+										<p class="month">พ.ย.</p>
+									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -90,6 +95,10 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
+									<div class="box-date-tumb">
+										<p class="date">99</p>
+										<p class="month">พ.ย.</p>
+									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -117,6 +126,10 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
+									<div class="box-date-tumb">
+										<p class="date">99</p>
+										<p class="month">พ.ย.</p>
+									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -145,6 +158,10 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
+									<div class="box-date-tumb">
+										<p class="date">99</p>
+										<p class="month">พ.ย.</p>
+									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -172,6 +189,10 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
+									<div class="box-date-tumb">
+										<p class="date">99</p>
+										<p class="month">พ.ย.</p>
+									</div>
 								</div>
 							</a>
 							<div class="box-text">
@@ -199,6 +220,10 @@ require("assets/configs/function.inc.php");
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
+									<div class="box-date-tumb">
+										<p class="date">99</p>
+										<p class="month">พ.ย.</p>
+									</div>
 								</div>
 							</a>
 							<div class="box-text">

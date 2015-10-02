@@ -116,7 +116,7 @@
 			</div>
 		</div>
 		<div class="box-btn">
-			<a  class="btn black">ดูกิจกรรมของวันนี้</a>
+			<a  class="btn black">กิจกรรมวันนี้</a>
 		</div>
 	</div>
 </div>

@@ -59,7 +59,7 @@ require("assets/configs/function.inc.php");
 							FROM trn_product  p
 							left join trn_order_detail od on p.PRODUCT_ID = od.PRODUCT_ID
 							left join trn_content_category c on  c.CONTENT_CAT_ID = p.CAT_ID
-							WHERE p.Flag <>2 ";
+							WHERE p.Flag = 0 ";
 
 				     $query = mysql_query($sql,$conn);
 

@@ -3,10 +3,6 @@
 		<div class="container">
 			<div class="box-other-main">
 				<div class="slide-other">
-					
-					<!-- Start Loop -->
-					
-					
 					<div class="box-other">
 						<a href="">
 							<div class="box-pic">
@@ -66,9 +62,7 @@
 								NAME SYSTEM
 							</div>
 						</a>
-					</div>	
-					
-					<!--End Loop -->				
+					</div>					
 				</div>
 				<a class="btn-arrow left"></a>
 				<a class="btn-arrow right"></a>
@@ -102,4 +96,4 @@
 		</div>
 	</div>
 </div>
-<a class="btn-top">TOP</a>
+<a class="btn-top"></a>

@@ -43,7 +43,7 @@
 
 <!-- CSS Reset & Font -->	      
 <link rel="stylesheet" type="text/css" href="css/resetcss.css" />
-<link rel="stylesheet" type="text/css" href="font/font.css" />
+<!-- <link rel="stylesheet" type="text/css" href="font/font.css" /> -->
 
 <!-- Lightbox -->
 <link rel="stylesheet" href="css/magnific-popup.css" />

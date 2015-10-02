@@ -32,7 +32,7 @@
 							<a href="#"><li class="sub2">Supmenu 2</li></a>
 						</ul>
 					</li>
-					<li class="menu7 sub"><a href="">ถาม-ตอบ</a>
+					<li class="menu7 sub"><a href="">คำถามที่พบบ่อย</a>
 						<ul class="submenu-top">
 							<a href="#"><li class="sub1">Supmenu 1</li></a>
 							<a href="#"><li class="sub2">Supmenu 2</li></a>

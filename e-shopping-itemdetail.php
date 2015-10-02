@@ -135,13 +135,51 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf">
 				<h1>e-SHOPPING</h1>
 				<div class="box-btn">
-					<a href="" class="btn red">ย้อนกลับ</a>
+					<a href="e-shopping.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
+
+
+			<?php 
+			     $sql_sumorder  = " SELECT count( o.ORDER_ID ) total_order
+											FROM trn_order_detail od
+											LEFT JOIN trn_order o ON od.ORDER_ID = o.ORDER_ID
+											WHERE od.CUSTOMER_ID =1 ";
+
+			     $query_sumorder = mysql_query($sql_sumorder,$conn);
+
+				 $num_rows = mysql_num_rows($query_sumorder);
+
+				 while($row_sumorder = mysql_fetch_array($query_sumorder)){
+			?>
+
+
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 999</a>
+				<a href="e-shopping-cart.php?<?=$_GET['proid']?>" class="btn-cart">ตะกร้าสินค้า <? echo $row_sumorder['total_order']; ?></a>
 			</div>
-			
+
+			<? } ?>
+
+			<?php 
+			        $sql  = " SELECT *
+								FROM trn_product pro
+								LEFT JOIN trn_content_category cc ON pro.CAT_ID = cc.CONTENT_CAT_ID
+								WHERE pro.PRODUCT_ID = ".$_GET['proid']." AND pro.FLAG = 0 ";
+
+			     $query = mysql_query($sql,$conn);
+
+				 $num_rows = mysql_num_rows($query);
+			?>
+
+			<?php while($row = mysql_fetch_array($query)) { ?>
+
+			<form action="product_action.php?add'" method="post" name="formcms">
+
+			<input type="hidden" name="cus_id" value="1">
+			<input type="hidden" name="price" value="<?$row['PRICE']?>">
+			<input type="hidden" name="proid" value="<?$row['PRODUCT_ID']?>">
+			<input type="hidden" name="cid" value="<?$row['CAT_ID']?>">
+
 			<div class="box-category-main">
 				<div class="box-detailitem-main cf">
 					<div class="box-left">
@@ -192,36 +230,36 @@ require("assets/configs/function.inc.php");
 									</div>
 								</div>
 							</div>
-							<div class="text-id">รหัสสินค้า : xxxxxx</div>
+							<div class="text-id">รหัสสินค้า : <? echo $row['PRODUCT_ID']; ?></div>
 						</div>
 					</div>
 					<div class="box-right">
 						<div class="box-text-detail">
 							<div class="text-tilte">
-								New Look Embroidered Cami Top
+								<? echo $row['PRODUCT_DESC_LOC']; ?>
 							</div>
 							<div class="text-detail">
-								Top by New Look<br>
-								- Lightweight wool-mix fabric<br>
-								- Soft-touch finish<br>
-								- All-over check design
+								<? echo $row['DETAIL']; ?>
 							</div>
 							<div class="text-price">
 								<p>
-									<span>ราคาปกติ : 980 บาท</span>
-									ราคาพิเศษ : 882 บาท
+									<span>ราคาปกติ : <? echo $row['PRICE']; ?> บาท</span>
+									ราคาพิเศษ : <? echo $row['SALE']; ?> บาท
 								</p>
 							</div>
 							<div class="text-ship">
 								Free Shipping
 							</div>
 							<div class="box-btn">
-								<a href="e-shopping-cart.php" class="btn red">หยิบสินค้าลงตะกร้า</a>
+								<a href="e-shopping-action.php?add&proid=<?=$row['PRODUCT_ID']?>" class="btn red">หยิบสินค้าลงตะกร้า</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			</form>
+
+			<? } ?>
 			
 		</div>
 	</div>

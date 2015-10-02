@@ -14,10 +14,10 @@
 	<div class="box-menu-left">
 		<ul class="menu-left">
 			<li class="menu1"><a href="mdn.php">หน้าหลัก</a></li>
-			<li class="menu2 sub"><a href="mdn-news-event.php">กิจกรรมและข่าวสาร</a>
+			<li class="menu2 sub"><a href="mdn-news-event.php">กิจกรรมและข่าวประชาสัมพันธ์</a>
 				<ul class="submenu-left">
 					<li class="submenu1"><a href="mdn-event.php">กิจกรรม</a></li>
-					<li class="submenu2"><a href="mdn-news.php">ข่าวสาร</a></li>
+					<li class="submenu2"><a href="mdn-news.php">ข่าวประชาสัมพันธ์</a></li>
 				</ul>
 			</li>
 			<li class="menu3 sub"><a href="mdn-category.php">ภูมิภาค</a>

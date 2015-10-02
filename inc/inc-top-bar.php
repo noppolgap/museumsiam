@@ -19,7 +19,7 @@
 					<a href="#" class="btn-socila ig"></a>
 				</div>
 				<div class="box-search">
-					<input type="text" placeholder="ค้นหา">
+					<input type="text" placeholder="ค้นหาทั้งหมด">
 				</div>
 				<div class="box-member cf">
 					<a href="login.php">เข้าสู่ระบบ</a>

@@ -121,11 +121,11 @@ textarea{
 }
 .box-row .box-input-text.checkbox div span{
 	position: absolute;
-	top: 8px;
+	top: 13px;
 	left: 9px;
 	width: 15px;
 	text-align: center;
-	font-size: 20px;
+	font-size: 14px;
 	color: #fff;
 	font-style: normal;
 	height: 20px;
@@ -244,17 +244,17 @@ body#noti .part-content-main{
 }
 .fixDateBoxDate{
 	float: left;
-	width: 155px;
+	width: 200px;
 }
 .fixDateBoxTime{
 	float: left;
-	width: 100px;
+	width: 110px;
 }
 .fixDateBoxWorking{
-	margin-left: 300px;    
+	margin-left: 340px;    
 	position: relative;
-    top: 9px;
-    width: 350px;
+	top: 6px;
+	width: 350px;
 }
 .ui-datepicker-title span{
 	display: inline;

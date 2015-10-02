@@ -53,126 +53,83 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf">
 				<h1>e-SHOPPING</h1>
 				<div class="box-btn">
-					<a href="" class="btn red">ย้อนกลับ</a>
+					<a href="e-shopping.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
+
+			<?php 
+			        $sql_sumorder  = " SELECT count(ORDER_ID) total_order
+								FROM trn_order
+								WHERE CUSTOMER_ID = 1 AND FLAG = 0 ";
+
+			     $query_sumorder = mysql_query($sql_sumorder,$conn);
+
+				 $num_rows = mysql_num_rows($query_sumorder);
+
+				 while($row_sumorder = mysql_fetch_array($query_sumorder)){
+			?>
+
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 999</a>
+				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <? echo $row_sumorder['total_order']; ?></a>
 			</div>
+
+			<? } ?>
+
+			<?php 
+			        $sql_cat  = "SELECT cc.CONTENT_CAT_DESC_LOC, cc.CONTENT_CAT_ID	 
+					FROM trn_content_category cc
+					JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
+					WHERE cc.REF_MODULE_ID =7 AND cc.CONTENT_CAT_ID = ".$_GET['cid']."
+					AND cc.FLAG = 0 ";
+
+			     $query_cat = mysql_query($sql_cat,$conn);
+
+				 $num_rows = mysql_num_rows($query_cat);
+			?>
+
 			
 			<div class="box-category-main">
+
+			<?php while($row = mysql_fetch_array($query_cat)) { ?>
+
 				<div class="box-title cf">
-					<h2>ของที่ระลึก</h2>
+					<h2><? echo $row['CONTENT_CAT_DESC_LOC']; ?></h2>
 				</div>
+				<?php 
+						    $sql_proc  = "SELECT * 
+								FROM trn_product
+								WHERE CAT_ID = ".$row['CONTENT_CAT_ID']." AND FLAG = 0  ";
+
+						     $query_proc = mysql_query($sql_proc,$conn);
+
+							 $num_rows = mysql_num_rows($query_proc);
+				?>
+
 				<div class="box-item-main cf">
-					<div class="item">
+
+					<?php while($row_proc = mysql_fetch_array($query_proc)) { ?>
+
+					   <div class="item">
 						<a href="e-shopping-detail.php">
 							<div class="box-pic">
 								<img src="http://placehold.it/194x147">
 							</div>
 						</a>
 						<div class="box-text">
-							<a href="e-shopping-detail.php">
+							<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>">
 								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
+									<? echo $row_proc['PRODUCT_DESC_LOC']; ?>
 								</p>
 							</a>
 							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
+								ราคาปกติ : <? echo $row_proc['PRICE']; ?> บาท<br>
+								<span>ราคาพิเศษ : <? echo $row_proc['SALE']; ?> บาท</span>
 							</p>
 						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<a href="e-shopping-detail.php">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
-							</div>
-						</a>
-						<div class="box-text">
-							<a href="e-shopping-detail.php">
-								<p class="text-title">
-									Fodor's Thailand<br>Fodor's Thailand
-								</p>
-							</a>
-							<p class="text-price">
-								ราคาปกติ : 980 บาท<br>
-								<span>ราคาพิเศษ : 882 บาท</span>
-							</p>
-						</div>
-					</div>
+						<? } ?>
+				</div>
+					
+				<? } ?>
 				</div>
 				<div class="box-pagination-main cf">
 					<ul class="pagination">
