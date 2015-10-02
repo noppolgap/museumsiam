@@ -69,6 +69,16 @@ require ("../../assets/configs/function.inc.php");
 								<div class="floatL form_input"><?=admin_upload_image('photo') ?></div>
 								<div class="clear"></div>
 							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">Video</div>
+								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('gallery'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="clear"></div>
+							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">Video</div>
+								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('photo'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="clear"></div>
+							</div>
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
@@ -85,6 +95,7 @@ require ("../../assets/configs/function.inc.php");
 <?
 	require ('../inc_footer.php');
  ?>
+<div class="dNone"><?=$formUploadVideo?></div>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.css" media="all" >

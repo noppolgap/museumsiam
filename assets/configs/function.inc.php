@@ -637,15 +637,32 @@ function mysendMail( $to , $to_name , $send , $send_name ,  $subject ,  $message
 }
 
 function admin_upload_video($name){
-	$str = "";
+	$str = array();
 
-	$str .= '<input class="VideoUpload" type="file" data-name="' . $name . '" name="video[]" data-url="../../assets/plugin/upload/video/" accept="video/*" multiple>' . "\n\t";
-	$str .= '<div id="progress_'. $name .'">' . "\n\t";
-	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
-	$str .= '</div>' . "\n\t";
-	$str .= '<div class="video_' . $name . '_Box video_Box dNone video_Box_add"></div>' . "\n\t";
-	$str .= '<div class="video_' . $name . '_data video_Data dNone"></div>' . "\n\t";
-	$str .= '<div class="p-Absolute OrderVideoBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
+	$str[0];
+
+	$str[0] .= '<div class="tabs">';
+	$str[0] .= '<ul>';
+	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>';
+	$str[0] .= '<li><a href="#tabs_' . $name . '_2">Embed</a></li>';
+	$str[0] .= '<li><a href="#tabs_' . $name . '_3">Link</a></li>';
+	$str[0] .= '</ul>';
+	$str[0] .= '<div id="tabs_' . $name . '_1">';
+	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" accept="video/*" data-name="' . $name . '">';
+	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="../images/ajax-loader.gif" alt="loading" />';
+	$str[0] .= '<div class="videoDisplay dNone"></div>';
+	$str[0] .= '</div>';
+	$str[0] .= '<div id="tabs_' . $name . '_2">';
+	$str[0] .= '</div>';
+	$str[0] .= '<div id="tabs_' . $name . '_3">';
+	$str[0] .= '</div>';
+	$str[0] .= '</div>';
+
+
+	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
+	$str[1] .= '<input type="hidden" name="my_name" value="' . $name . '" >' . "\n\t";
+	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="video/*" >' . "\n\t";
+	$str[1] .= '</form>' . "\n\t";
 
 	return $str;
 

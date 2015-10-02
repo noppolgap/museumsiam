@@ -1,5 +1,6 @@
 var temp1;
 var temp2;
+var temp3 = true;
 
 $( document ).ready(function() {
 	if($('.mytextarea').length > 0){
@@ -42,27 +43,27 @@ $( document ).ready(function() {
 	    });
 	}
 	if($('.VideoUpload').length > 0){
-	    $('.VideoUpload').fileupload({
-	        dataType: 'json',
-	        done: function (e, data) {
-		        temp2 = $(this).attr('data-name');
-	            $.each(data.result.files, function (index, file) {
-	                var boxID = thumbBox(temp2,file.thumbnailUrl);
-	                $('.video_Data').find('#input_'+boxID).val(file.url);
-	            });
-	        },
-		    progressall: function (e, data) {
-		        temp2 = $(this).attr('data-name');
-		        var progress = parseInt(data.loaded / data.total * 100, 10);
-		        $('#progress_'+temp2+' .upload_bar').show().css(
-		            'width',
-		            progress + '%'
-		        );
-		    },
-	        stop: function (e, data) {
-	           $('#progress_'+temp2+' .upload_bar').hide();
-	           $('.video_Box , .OrderVideoBtn').show();
-	        }
+		$('.VideoUpload').click(function() {
+			if(temp3){
+				var name = $(this).attr('data-name');
+		    	$('form[name="form_' + name + '"] input[type="file"]').click();
+		    }else{
+		    	alert('คุณสามารถอัพโหลดได้ทีล่ะ 1 ไฟล์');
+		    }
+		});
+	    $(".inputUploadVideo").change(function() {
+	    	var name = $(this).attr('data-name');
+
+			if($('iframe[name=iframeTarget]').length<1){
+				var iframe=document.createElement('iframe');
+				$(iframe).css('display','none');
+				$(iframe).attr('src','#');
+				$(iframe).attr('name','iframeTarget');
+				$('body').append(iframe);
+			}
+			$('form[name="form_' + name + '"]').submit();
+	        $('#VideoUpload_loading_' + name).fadeIn();
+	        temp3 = false;
 	    });
 	}
 	if($('.image_Box').length > 0){
@@ -174,6 +175,10 @@ $( document ).ready(function() {
 	        }
 	    });
 		$( "#sortable" ).disableSelection();
+	}
+
+    if($( ".tabs" ).length > 0){
+		$( ".tabs" ).tabs();
 	}
 });
 function thumbBox(path,file){
@@ -375,4 +380,45 @@ function delIconImageEdit(id  , iconT , path){
 				});
 		});
 	}
+}
+function videoCallBack(name,file){
+	$('#VideoUpload_loading_' + name).hide();
+
+	var box  = '<a data-file="'+file+'" href="#" onclick="popupVideo(\''+file+'\'); return false;">';
+		box += '<span></span>';
+		box += '</a>';
+    $('#tabs_' +name+'_1 .videoDisplay').append(box).show();
+
+	temp3 = true;
+}
+function videoAlert(name){
+	if(name == ''){
+		$('.VideoUpload_loading').hide();
+	}else{
+		$('#VideoUpload_loading_' + name).hide();
+	}
+	temp3 = true;
+
+	alert('Upload Error');
+}
+function popupVideo(file){
+	var href = '../master/video_preview.php';
+
+	try{
+		$.colorbox({
+			transition: 'fade',
+			iframe:true,
+			innerWidth:640,
+			innerHeight:440,
+			href: href+'?p='+file
+		});
+	} catch(err) {
+		popup(href+'?pop&p='+file,'popupVideo',640,440);
+	}
+}
+function delPhoto(file){
+	$.post( "../master/delete_video.php", { pname: file})
+		.done(function( data ) {
+			$('.videoDisplay a[data-file="'+file+'"]').remove();
+	});
 }
