@@ -648,13 +648,21 @@ function admin_upload_video($name){
 	$str[0] .= '<li><a href="#tabs_' . $name . '_3">Link</a></li>';
 	$str[0] .= '</ul>';
 	$str[0] .= '<div id="tabs_' . $name . '_1">';
-	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" accept="video/*" data-name="' . $name . '">';
+	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" data-name="' . $name . '">';
 	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="../images/ajax-loader.gif" alt="loading" />';
 	$str[0] .= '<div class="videoDisplay dNone"></div>';
 	$str[0] .= '</div>';
 	$str[0] .= '<div id="tabs_' . $name . '_2">';
+	$str[0] .= '<input type="text" class="Embed_input" name="Embed_input_' . $name . '" />';
+	$str[0] .= '<input class="buttonAction silver-flat-button EmbedUpload" type="button" value="แนบ" data-name="' . $name . '">';
+	$str[0] .= '<span class="video_note">* ใส่แค่รหัสวีดีโอ youtube เท่านั้น</span>';
+	$str[0] .= '<div class="DataBlock">';
+	$str[0] .= '</div>';
 	$str[0] .= '</div>';
 	$str[0] .= '<div id="tabs_' . $name . '_3">';
+	$str[0] .= '<input type="text" class="Link_input" name="Link_input_' . $name . '" />';
+	$str[0] .= '<input class="buttonAction silver-flat-button" type="button" value="แนบ" data-name="' . $name . '">';
+	$str[0] .= '<span class="video_note">* ใส่แค่ url เท่านั้น</span>';
 	$str[0] .= '</div>';
 	$str[0] .= '</div>';
 

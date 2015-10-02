@@ -1,12 +1,10 @@
 <?php
-$file = $_GET['p'];
-$ext = end(explode(".",basename($file)));
-$uploadfile = '../../temp/'.$file;
-
-if(isset($_GET['pop'])){
-	$script = "window.close(); window.opener.delPhoto('".$file."');";
+if(isset($_GET['Embed'])){
+	$MyiFrame = '<iframe width="640" height="390" src="https://www.youtube.com/embed/'.$_GET['p'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>';
 }else{
-	$script = "parent.$.colorbox.close(); parent.delPhoto('".$file."');";
+	$file = $_GET['p'];
+	$ext = end(explode(".",basename($file)));
+	$uploadfile = '../../temp/'.$file;
 }
 ?>
 <!doctype html>
@@ -18,17 +16,13 @@ if(isset($_GET['pop'])){
 </head>
 
 <body>
+<? if(isset($MyiFrame)){
+	echo $MyiFrame;
+}else{ ?>
 <video width="640" height="390" autoplay>
   <source src="<?=$uploadfile?>" type="video/<?=$ext?>">
 	Your browser does not support the video tag.
 </video>
-<a style="display:block; text-align: center; padding: 5px;" href="#" onclick="DeleteMyVideo(); return false;">Delete Video</a>
-<script>
-function DeleteMyVideo(){
-	if (confirm("คุณแน่ใจที่จะลบวีดีโอนี้นี้")){
-		<?=$script?>
-	}
-}
-</script>
+<? } ?>
 </body>
 </html>

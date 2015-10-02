@@ -65,6 +65,25 @@ $( document ).ready(function() {
 	        $('#VideoUpload_loading_' + name).fadeIn();
 	        temp3 = false;
 	    });
+
+	    $('.EmbedUpload').click(function() {
+	    	var name = $(this).attr('data-name');
+			var Myvalue = $('input[name="Embed_input_' + name + '"]').val();
+			if(Myvalue == ''){
+				alert('กรุณากรอกข้อมูล');
+			}else{
+
+			var	msg  = '<div class="Embed_tab">';
+				msg += '<a href="#" onclick="popupEmbed(\''+Myvalue+'\'); return false;">';
+				msg += '<span data-Name="'+Myvalue+'"></span>';
+				msg += '</a>';
+				msg += '</div>';
+
+				$('#tabs_'+name+'_2 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]').css('background-image','url(http://img.youtube.com/vi/'+Myvalue+'/maxresdefault.jpg)');
+				$('input[name="Embed_input_' + name + '"]').val('');
+
+			}
+	    });
 	}
 	if($('.image_Box').length > 0){
 		$('.OrderImageBtn').click(function(e) {
@@ -402,23 +421,40 @@ function videoAlert(name){
 	alert('Upload Error');
 }
 function popupVideo(file){
-	var href = '../master/video_preview.php';
+	var href = '../master/video_preview.php?p='+file;
 
 	try{
 		$.colorbox({
 			transition: 'fade',
 			iframe:true,
 			innerWidth:640,
-			innerHeight:440,
-			href: href+'?p='+file
+			innerHeight:400,
+			href: href
 		});
 	} catch(err) {
-		popup(href+'?pop&p='+file,'popupVideo',640,440);
+		popup(href,'popupVideo',640,400);
 	}
 }
 function delPhoto(file){
-	$.post( "../master/delete_video.php", { pname: file})
-		.done(function( data ) {
-			$('.videoDisplay a[data-file="'+file+'"]').remove();
-	});
+	if (confirm("คุณแน่ใจที่จะลบวีดีโอนี้นี้")){
+		$.post( "../master/delete_video.php", { pname: file})
+			.done(function( data ) {
+				$('.videoDisplay a[data-file="'+file+'"]').remove();
+		});
+	}
+}
+function popupEmbed(file){
+	var href = '../master/video_preview.php?Embed&p='+file;
+
+	try{
+		$.colorbox({
+			transition: 'fade',
+			iframe:true,
+			innerWidth:640,
+			innerHeight:400,
+			href: href
+		});
+	} catch(err) {
+		popup(href,'popupVideo',640,400);
+	}
 }
