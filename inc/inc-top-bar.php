@@ -22,7 +22,12 @@
 					<input type="text" placeholder="ค้นหาทั้งหมด">
 				</div>
 				<div class="box-member cf">
-					<a href="login.php">เข้าสู่ระบบ</a>
+					
+					<? if (isset($_SESSION['user_name']))
+						echo $_SESSION['user_name'];
+else 
+						echo '<a href="login.php">เข้าสู่ระบบ</a>';
+					?>
 					<div class="box-pic">
 						<img src="images/icon-humen.png" alt="icon-humen" width="23" height="23" />
 					</div>

@@ -47,17 +47,30 @@ $query = mysql_query($sqlStr, $conn);
 								REF_MODULE_ID = ".$row['MODULE_ID'] ;
 			$sqlCategory.=" AND flag <> 2
 							ORDER BY
-								ORDER_DATA ASC "; 		
+								ORDER_DATA ASC "; 	
+								
+							 
 				//firstLoop is Category
 				$categoryRS = mysql_query($sqlCategory) or die(mysql_error());
 					$mainMenuCount = 2; //start with 2
 
 					while ($categoryRow = mysql_fetch_array($categoryRS)) {
-							echo '<li class="menu'.$mainMenuCount.' sub">';
+						
+						$isSubCat = '';
+						if (nvl($categoryRow['IS_LAST_NODE'],'Y') == 'N')
+						{
+							$isSubCat = ' sub';
+						}
+						
+						$activeClass = '';
+						if ($CID == $categoryRow['CONTENT_CAT_ID'])
+							$activeClass= ' active';
+						
+						echo '<li class="menu'.$mainMenuCount.$isSubCat.$activeClass.'">';
 							
 						if (nvl($categoryRow['IS_LAST_NODE'],'Y') == 'Y')
 						{
-							echo' <a href="content-detail.php?MID='.$row['MODULE_ID'].'&CID='.$categoryRow['CONTENT_CAT_ID'].'">'.$categoryRow['CONTENT_CAT_DESC_LOC'].'</a> ';
+							echo' <a href="all-content.php?MID='.$row['MODULE_ID'].'&CID='.$categoryRow['CONTENT_CAT_ID'].'">'.$categoryRow['CONTENT_CAT_DESC_LOC'].'</a> ';
 						}
 						else 
 							{

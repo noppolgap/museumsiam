@@ -15,7 +15,7 @@ require ("assets/configs/function.inc.php");
 
 		<script>
 			$(document).ready(function() {
-				$(".menutop li.menu6,.menu-left li.menu4").addClass("active");
+				//$(".menutop li.menu6,.menu-left li.menu4").addClass("active");
 
 				var sync1 = $("#sync1");
 				var sync2 = $("#sync2");
@@ -143,7 +143,8 @@ require ("assets/configs/function.inc.php");
 			<div class="container cf">
 				<div class="box-left main-content">
 					<?php
-					include ('inc/inc-left-content-km.php');
+					include ('inc/inc-category-menu.php');
+					//include ('inc/inc-left-content-km.php');
  ?>
 				</div>
 
@@ -156,12 +157,22 @@ require ("assets/configs/function.inc.php");
 				if (isset($_GET['SCID']))
 					$SCID = $_GET['SCID'];
 
+					$currentPage = 1;
+if (isset($_GET['PG']))
+	$currentPage = $_GET['PG'];
+
+if ($currentPage < 1)
+	$currentPage = 1;
+					
+					
 				$catName = "";
 
 				$backPage = "all-content.php?MID=".$MID."&CID=".$CID;
 				if (isset($_GET['SCID'])) {
 						$backPage.= "$SCID=".$SCID ; 
 					}
+				$backPage.'&PG='.$currentPage ; 
+				
 				$sqlCategory = "";
 				if (isset($_GET['SCID'])) {
 					$sqlCategory = "select SUB_CONTENT_CAT_ID ,
@@ -202,6 +213,7 @@ require ("assets/configs/function.inc.php");
 				WHERE
 				CONTENT_ID = $CONID";
 
+			//	echo $contentSql;
 				$rsContent = mysql_query($contentSql) or die(mysql_error());
 				while ($rowContent = mysql_fetch_array($rsContent)) {
 				
@@ -212,7 +224,7 @@ require ("assets/configs/function.inc.php");
 						<h1><?=$catName ?></h1>
 						<div class="box-btn">
 							
-							<a href="<?=$backPage?>" class="btn red">ย้อนกลับ</a>
+							<a href="<?=$backPage ?>" class="btn red">ย้อนกลับ</a>
 						</div>
 					</div>
 					<div class="box-newsdetail-main">
@@ -229,25 +241,7 @@ require ("assets/configs/function.inc.php");
 									echo '</div>';
 								}
 								?>
-								<!--
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562/ccc">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562/ccc">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562/ccc">
-								</div> -->
+								
 							</div>
 							<a class="btn-arrow-slide pev"></a>
 							<a class="btn-arrow-slide next"></a>
@@ -289,33 +283,13 @@ require ("assets/configs/function.inc.php");
 										echo '</div>';
 									}
 								?>
-									<!--<div class="slide-content">
-										<img src="http://placehold.it/125x94">
-									</div>
-									<div class="slide-content">
-										<img src="images/tumb-sound.jpg">
-									</div>
-									<div class="slide-content">
-										<img src="http://placehold.it/125x94">
-									</div>
-									<div class="slide-content">
-										<img src="images/tumb-vdo.jpg">
-									</div>
-									<div class="slide-content">
-										<img src="http://placehold.it/125x94">
-									</div>
-									<div class="slide-content">
-										<img src="http://placehold.it/125x94/ccc">
-									</div> -->
+									 
 								</div>
 							</div>
 						</div>
 						<div class="box-news-text">
-							<?=$rowContent['CONTENT_DESC_LOC'] ?>
-							<!--
-							<p>
-								Levitated Mass is a 2012 large-scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art. The installation consists of a 340-ton boulder affixed above a concrete trench through which visitors may walk. The nature, expense and scale of the installation made it an instant topic of discussion The work comprises a 21.5-foot tall boulder mounted on the walls of a 456-foot long concrete trench, surrounded by 2.5 acres of compressed decomposed granite. The boulder is bolted to two shelves affixed to the inner walls of the trench, which descends from ground level to 15 feet below the stone at its center, allowing visitors to stand directly below the megalith.
-							</p>-->
+							<?=$rowContent['CONTENT_DETAIL_LOC'] ?>
+							 
 						</div>
 						<div class="box-footer-content cf">
 							<div class="box-date-modified">
@@ -328,7 +302,7 @@ require ("assets/configs/function.inc.php");
 					</div>
 					<div class="part-btn-back">
 						<div class="box-btn cf">
-							<a href="<?=$backPage?>" class="btn red">ย้อนกลับ</a>
+							<a href="<?=$backPage ?>" class="btn red">ย้อนกลับ</a>
 						</div>
 					</div>
 				</div>

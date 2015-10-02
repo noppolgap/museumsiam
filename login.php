@@ -10,7 +10,7 @@ require("assets/configs/function.inc.php");
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/login.css" />
-
+<script src="js/login.js" type="text/javascript" />
 <script>
 	$(document).ready(function(){
 // 		$("li.menu1").addClass("active");		
@@ -51,8 +51,8 @@ require("assets/configs/function.inc.php");
 		<div class="box-content-main">
 			<div class="box-login">
 				<div class="box-top">
-					<input type="text" placeholder="อีเมล">
-					<input type="password" placeholder="รหัสผ่าน">
+					<input type="text" id = "txtEmail"  placeholder="อีเมล">
+					<input type="password"  id = "txtPwd" placeholder="รหัสผ่าน">
 				</div>
 				<div class="box-bottom cf">
 					<div class="box-left">
@@ -60,7 +60,7 @@ require("assets/configs/function.inc.php");
 					</div>
 					<div class="box-right">
 						<div class="box-btn">
-							<a  class="btn black">เข้าสู่ระบบ</a>
+							<a id="btnLogin" class="btn black" >เข้าสู่ระบบ</a>
 						</div>
 					</div>
 				</div>
@@ -76,7 +76,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-createacc cf">
 				<p>ต้องการสมัครสมาชิก?</p>
 				<div class="box-btn">
-					<a  class="btn black">สมัครสมาชิก</a>
+					<a href="register-step1.php" class="btn black">สมัครสมาชิก</a>
 				</div>
 			</div>
 		</div>
