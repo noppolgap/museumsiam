@@ -1,6 +1,10 @@
 <?php
 if(isset($_GET['Embed'])){
 	$MyiFrame = '<iframe width="640" height="390" src="https://www.youtube.com/embed/'.$_GET['p'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>';
+}else if(isset($_GET['Link'])){
+	$file = $_GET['p'];
+	$ext = end(explode(".",basename($file)));
+	$uploadfile = $_GET['p'];
 }else{
 	$file = $_GET['p'];
 	$ext = end(explode(".",basename($file)));

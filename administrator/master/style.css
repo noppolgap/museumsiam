@@ -661,7 +661,7 @@ header{
 .DataBlock{
 	padding-top: 10px;
 }
-.Embed_tab{
+.Embed_tab , .Link_tab{
 	margin-right: 10px;
 	margin-bottom: 10px;
 	margin-left: 10px;
@@ -669,12 +669,33 @@ header{
 	padding-top: 12px;
 	padding-bottom: 12px;
 }
-.Embed_tab span{
+.Embed_tab span , .Link_tab span{
 	background-size: auto 100%;
 	background-position: center;
+	background-repeat: no-repeat;
 	width: 160px;
 	height:90px;
 	border: 1px solid #000;
 	margin-left: 25px;
-	display: block;
+	display: inline-block;
+	margin-right: 250px;
+}
+.Link_tab span.LinkVideoBox{
+	background-image: url('../images/video.svg');
+	background-size: auto 60%;
+}
+.Embed_tab span.EmbedAction , .Link_tab span.LinkAction{
+    display: inline-block;
+    height: 24px;
+    margin-left: 0;
+    margin-right: 20px;
+    top: -35px;
+    width: 24px;
+	border: none;
+}
+.viewEmbed , .viewLink{
+	background-image: url('../images/play.svg');
+}
+.delEmbed , .delLink{
+	background-image: url('../images/small-n-flat/sign-error.svg');
 }

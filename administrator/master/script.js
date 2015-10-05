@@ -72,17 +72,63 @@ $( document ).ready(function() {
 			if(Myvalue == ''){
 				alert('กรุณากรอกข้อมูล');
 			}else{
+				Myvalue = youtube_parser(Myvalue);
+				if(!Myvalue){
+					alert('ข้อมูลไม่ถูกต้อง');
+				}else{
+					var countEmbed = $('#tabs_'+name+'_2 > .DataBlock div[data-value="'+Myvalue+'"]').length;
+					if(countEmbed > 0){
+						alert('ข้อมูลนี้ได้เพิ่มไปแล้ว');
+					}else{
+						var	msg  = '<div class="Embed_tab" data-value="'+Myvalue+'">';
+							msg += '<a href="#" onclick="popupEmbed(\''+Myvalue+'\'); return false;">';
+							msg += '<span data-Name="'+Myvalue+'"></span>';
+							msg += '</a>';
+							msg += '<a href="#" onclick="popupEmbed(\''+Myvalue+'\'); return false;">';
+							msg += '<span class="p-Relative EmbedAction viewEmbed"></span>';
+							msg += '</a>';
+							msg += '<a href="#" onclick="delEmbed(\''+Myvalue+'\',\''+name+'\'); return false;">';
+							msg += '<span class="p-Relative EmbedAction delEmbed"></span>';
+							msg += '</a>';
+							msg += '</div>';
 
-			var	msg  = '<div class="Embed_tab">';
-				msg += '<a href="#" onclick="popupEmbed(\''+Myvalue+'\'); return false;">';
-				msg += '<span data-Name="'+Myvalue+'"></span>';
-				msg += '</a>';
-				msg += '</div>';
+							$('#tabs_'+name+'_2 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]').css('background-image','url(http://img.youtube.com/vi/'+Myvalue+'/maxresdefault.jpg)');
 
-				$('#tabs_'+name+'_2 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]').css('background-image','url(http://img.youtube.com/vi/'+Myvalue+'/maxresdefault.jpg)');
-				$('input[name="Embed_input_' + name + '"]').val('');
-
+							$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="embed|@|'+Myvalue+'">');
+					}
+				}
 			}
+			$('input[name="Embed_input_' + name + '"]').val('');
+	    });
+	    $('.LinkUpload').click(function() {
+	    	var name = $(this).attr('data-name');
+			var Myvalue = $('input[name="Link_input_' + name + '"]').val();
+			if(Myvalue == ''){
+				alert('กรุณากรอกข้อมูล');
+			}else{
+				var countEmbed = $('#tabs_'+name+'_3 > .DataBlock div[data-value="'+Myvalue+'"]').length;
+				if(countEmbed > 0){
+					alert('ข้อมูลนี้ได้เพิ่มไปแล้ว');
+				}else{
+					var	msg  = '<div class="Link_tab" data-value="'+Myvalue+'">';
+						msg += '<a href="#" onclick="popupLink(\''+Myvalue+'\'); return false;">';
+						msg += '<span class="LinkVideoBox" data-Name="'+Myvalue+'"></span>';
+						msg += '</a>';
+						msg += '<a href="#" onclick="popupLink(\''+Myvalue+'\'); return false;">';
+						msg += '<span class="p-Relative LinkAction viewLink"></span>';
+						msg += '</a>';
+						msg += '<a href="#" onclick="delLink(\''+Myvalue+'\',\''+name+'\'); return false;">';
+						msg += '<span class="p-Relative LinkAction delLink"></span>';
+						msg += '</a>';
+						msg += '</div>';
+
+						$('#tabs_'+name+'_3 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]');
+
+						$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="link|@|'+Myvalue+'">');
+
+				}
+			}
+			$('input[name="Link_input_' + name + '"]').val('');
 	    });
 	}
 	if($('.image_Box').length > 0){
@@ -456,5 +502,41 @@ function popupEmbed(file){
 		});
 	} catch(err) {
 		popup(href,'popupVideo',640,400);
+	}
+}
+function delEmbed(file,name){
+	if (confirm("คุณแน่ใจที่จะลบวีดีโอนี้นี้")){
+		$('#tabs_'+name+'_2 > .DataBlock div[data-value="'+file+'"]').remove();
+		$('#DataBlock_'+name+' input[data-value="'+file+'"]').remove();
+	}
+}
+function youtube_parser(url){
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match&&match[7].length==11){
+        return match[7];
+    }else{
+        return false;
+    }
+}
+function popupLink(file){
+	var href = '../master/video_preview.php?Link&p='+file;
+
+	try{
+		$.colorbox({
+			transition: 'fade',
+			iframe:true,
+			innerWidth:640,
+			innerHeight:400,
+			href: href
+		});
+	} catch(err) {
+		popup(href,'popupVideo',640,400);
+	}
+}
+function delLink(file,name){
+	if (confirm("คุณแน่ใจที่จะลบวีดีโอนี้นี้")){
+		$('#tabs_'+name+'_3> .DataBlock div[data-value="'+file+'"]').remove();
+		$('#DataBlock_'+name+' input[data-value="'+file+'"]').remove();
 	}
 }
