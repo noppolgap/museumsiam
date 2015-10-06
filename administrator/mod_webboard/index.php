@@ -79,7 +79,7 @@ require("../../assets/configs/function.inc.php");
 						<a href="action.php?enable&web_id=<?=$row['WEBBOARD_ID']?>&flag=<?=$row['FLAG']?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
 							
-							<a href="#" class="DeleteContentBtn" data-id="<?=$row['QA_ID']?>">Delete</a>
+							<a href="#" class="DeleteContentBtn" data-id="<?=$row['WEBBOARD_ID']?>">Delete</a>
 						</div>
 						<div class="clear"></div>	
 				</div>

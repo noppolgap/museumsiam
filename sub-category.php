@@ -41,6 +41,11 @@ require("assets/configs/function.inc.php");
 		</div>
 		<div class="box-right main-content">
 			
+			<?php 
+			
+		//	MID=3&CID=16
+			
+			?>
 			<div class="box-category-main news BGray2">
 				<div class="box-title cf ">
 					<h2>หมวดหมู่ย่อย</h2>
