@@ -48,7 +48,8 @@ require ("assets/configs/function.inc.php");
 		<div class="part-nav-main"  id="firstbox">
 			<div class="container">
 				<div class="box-nav">
-					<ol class="cf">
+				 <?include ('inc/inc-breadcrumbs.php');?> 
+					<!--<ol class="cf">
 						<li>
 							<a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
 						</li>
@@ -58,7 +59,7 @@ require ("assets/configs/function.inc.php");
 						<li class="active">
 							<?=$moduleName ?>
 						</li>
-					</ol>
+					</ol>-->
 				</div>
 			</div>
 		</div>
@@ -85,8 +86,8 @@ FROM
 trn_content_category
 WHERE
 REF_MODULE_ID = " . $MID;
-					$sql .= " AND flag <> 2
-order by order_data asc ";
+					$sql .= " AND flag  = 0
+order by order_data desc ";
 
 					$categoryName = '';
 					$categoryID = 0;
@@ -129,18 +130,19 @@ order by order_data asc ";
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
-												content.LAST_UPDATE_DATE
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
 											WHERE
 												cat.REF_MODULE_ID = $MID
-											AND cat.flag <> 2
+											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG <> 2 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
 											ORDER BY
-												content.ORDER_DATA ASC
+												content.ORDER_DATA desc
 											LIMIT 0,3 ";
 
 						// start Loop Activity
@@ -154,8 +156,8 @@ order by order_data asc ";
 							}
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="content-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
-							echo ' <div class="box-pic"> ';
-							echo '	<img src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+							echo ' <div class="box-pic" > ';
+							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 							echo ' <div class="box-text">';
 							echo ' <a href="content-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
@@ -163,7 +165,7 @@ order by order_data asc ";
 							echo $rowContent['CONTENT_DESC_LOC'];
 							echo ' </p> </a>';
 							echo ' <p class="text-date">';
-							echo $rowContent['CREATE_DATE'];
+							echo ConvertDate($rowContent['LAST_DATE']);
 							echo ' </p>';
 							echo ' <p class="text-des">';
 							echo $rowContent['BRIEF_LOC'];

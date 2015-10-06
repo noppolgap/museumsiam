@@ -33,12 +33,7 @@ include ('inc/inc-menu.php');
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
-			<ol class="cf">
-				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="km.php">ระบบการจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">สัมมนาและอบรม</li>
-			</ol>
+			<?include ('inc/inc-breadcrumbs.php');?> 
 		</div>
 	</div>
 </div>
@@ -122,35 +117,40 @@ if (isset($_GET['SCID'])) {
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
-												content.LAST_UPDATE_DATE
+												content.LAST_UPDATE_DATE,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
 											WHERE
 												cat.REF_MODULE_ID = $MID
-											AND cat.flag <> 2
+											AND cat.flag  = 0
 											AND cat.CONTENT_CAT_ID = $CID ";
 						if (isset($_GET['SCID']))
 							$getContentSql .= " AND content.SUB_CAT_ID = $SCID ";
 						$getContentSql .= " AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG <> 2 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
 											ORDER BY
-												content.ORDER_DATA ASC
+												content.ORDER_DATA desc
 											Limit 9 offset  " . (9 * ($currentPage - 1));
 
 						$i = 1;
 
 						$rsContent = mysql_query($getContentSql) or die(mysql_error());
+						$rowCount = mysql_num_rows($rsContent);
 						while ($rowContent = mysql_fetch_array($rsContent)) {
 							$extraClass = '';
 							if ($i == 2 || $i == 5 || $i == 8) {
 								$extraClass = ' mid';
 							}
 
+							if ($i  == 4 || $i == 7)
+								echo '<hr class="line-gray"/>';
+								
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="content-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG='.$currentPage.'"> ';
 							echo ' <div class="box-pic"> ';
-							echo '	<img src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+							echo '	<img style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 
 							echo ' </div> </a> ';
 
@@ -161,7 +161,7 @@ if (isset($_GET['SCID'])) {
 							echo ' </p> </a>';
 
 							echo ' <p class="text-date TcolorGray">';
-							echo $rowContent['CREATE_DATE'];
+							echo ConvertDate($rowContent['LAST_DATE']);
 							echo ' </p>';
 
 							echo ' <p class="text-des TcolorBlack">';
@@ -178,8 +178,9 @@ if (isset($_GET['SCID'])) {
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
-							if ($i % 3 == 0)
-								echo '<hr class="line-gray"/>';
+							 
+							// if ($i % 3 ==0 && $rowCount > 6)
+								// echo '<hr class="line-gray"/>';
 							$i++;
 
 						}
@@ -198,14 +199,14 @@ if (isset($_GET['SCID'])) {
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
 											WHERE
 												cat.REF_MODULE_ID = $MID
-											AND cat.flag <> 2
+											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $CID ";
 							if (isset($_GET['SCID']))
 								$countContentSql .= " AND content.SUB_CAT_ID = $SCID ";
 							$countContentSql .= " AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG <> 2 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
 											ORDER BY
-												content.ORDER_DATA ASC ";
+												content.ORDER_DATA desc ";
 
 							$query = mysql_query($countContentSql, $conn);
 

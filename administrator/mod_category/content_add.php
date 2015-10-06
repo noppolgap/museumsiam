@@ -94,12 +94,12 @@ require ('../inc_header.php');
 							
 							<div>
 								<div class="floatL form_name">วันที่เริ่ม</div>
-								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="" class="DatetimePicker" /></div>
+								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="" class="DatePicker" /></div>
 								<div class="clear"></div>
 							</div>
 							<div>
 								<div class="floatL form_name">วันที่สิ้นสุด</div>
-								<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="" class="DatetimePicker" /></div>
+								<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="" class="DatePicker" /></div>
 								<div class="clear"></div>
 							</div>
 							

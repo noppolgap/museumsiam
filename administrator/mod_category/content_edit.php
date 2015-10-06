@@ -109,12 +109,12 @@ require ("../../assets/configs/function.inc.php");
 							
 							<div>
 								<div class="floatL form_name">วันที่เริ่ม</div>
-								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="<?=ConvertDate($row['EVENT_START_DATE']) ?>" class="DatetimePicker" /></div>
+								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="<?=ConvertDate($row['EVENT_START_DATE']) ?>" class="DatePicker" /></div>
 								<div class="clear"></div>
 							</div>
 							<div>
 								<div class="floatL form_name">วันที่สิ้นสุด</div>
-								<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="<?=ConvertDate($row['EVENT_END_DATE']) ?>" class="DatetimePicker" /></div>
+								<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="<?=ConvertDate($row['EVENT_END_DATE']) ?>" class="DatePicker" /></div>
 								<div class="clear"></div>
 							</div>
 							

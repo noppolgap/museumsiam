@@ -116,23 +116,7 @@ require ("assets/configs/function.inc.php");
 		<div class="part-nav-main"  id="firstbox">
 			<div class="container">
 				<div class="box-nav">
-					<ol class="cf">
-						<li>
-							<a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-						</li>
-						<li>
-							<a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-						</li>
-						<li>
-							<a href="km.php">ระบบการจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-						</li>
-						<li>
-							<a href="km-exhibition.php">นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;
-						</li>
-						<li class="active">
-							ชื่อข่าว
-						</li>
-					</ol>
+					<?include ('inc/inc-breadcrumbs.php');?> 
 				</div>
 			</div>
 		</div>
@@ -237,7 +221,7 @@ if ($currentPage < 1)
 								$rsPic = mysql_query($getPicSql) or die(mysql_error());
 								while ($rowPic = mysql_fetch_array($rsPic)) {
 									echo '	<div class="slide-content"> ';
-									echo '<img src="' . callThumbListFrontEnd($rowPic['CONTENT_ID'], $rowPic['CAT_ID'], true) . '">';
+									echo '<img  style="width:754px;height:562px;" src="' . callThumbListFrontEnd($rowPic['CONTENT_ID'], $rowPic['CAT_ID'], true) . '">';
 									echo '</div>';
 								}
 								?>
@@ -279,7 +263,7 @@ if ($currentPage < 1)
 									$rsPic = mysql_query($getPicSql) or die(mysql_error());
 									while ($rowPic = mysql_fetch_array($rsPic)) {
 										echo '	<div class="slide-content"> ';
-										echo '<img src="' . callThumbListFrontEnd($rowPic['CONTENT_ID'], $rowPic['CAT_ID'], true) . '">';
+										echo '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEnd($rowPic['CONTENT_ID'], $rowPic['CAT_ID'], true) . '">';
 										echo '</div>';
 									}
 								?>

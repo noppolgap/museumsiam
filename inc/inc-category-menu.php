@@ -1,4 +1,7 @@
 <?php
+
+if (isset($_GET['MID']))
+{
 $MID = $_GET['MID'];
 
 $sqlStr = " select sysModule.MODULE_ID ,  
@@ -45,9 +48,9 @@ $query = mysql_query($sqlStr, $conn);
 								trn_content_category
 							WHERE
 								REF_MODULE_ID = ".$row['MODULE_ID'] ;
-			$sqlCategory.=" AND flag <> 2
+			$sqlCategory.=" AND flag = 0 
 							ORDER BY
-								ORDER_DATA ASC "; 	
+								ORDER_DATA desc "; 	
 								
 							 
 				//firstLoop is Category
@@ -90,7 +93,7 @@ $query = mysql_query($sqlStr, $conn);
 														CONTENT_CAT_ID = ".$categoryRow['CONTENT_CAT_ID'];
 								$sqlSubCategory .= " AND flag <> 2
 													ORDER BY
-														ORDER_DATA ASC";
+														ORDER_DATA desc";
 														
 							/*	
 								<ul class="submenu-left">
@@ -109,57 +112,11 @@ $query = mysql_query($sqlStr, $conn);
 			$mainMenuCount++;
 					}
 			?> 
-		<!--	<li class="menu2 sub">
-				<a href="da-category.php">โบราณวัตถุ</a>
-				<ul class="submenu-left">
-					<li class="submenu1">
-						<a href="da-category.php">หมวดหมู่ย่อย</a>
-					</li>
-					<li class="submenu2">
-						<a href="da-category.php">หมวดหมู่ย่อย</a>
-					</li>
-				</ul>
-			</li>
-			<li class="menu3 sub">
-				<a href="da-category.php">คลังภาพเก่า</a>
-				<ul class="submenu-left">
-					<li class="submenu1">
-						<a href="da-category.php">หมวดหมู่ย่อย</a>
-					</li>
-					<li class="submenu2">
-						<a href="da-category.php">หมวดหมู่ย่อย</a>
-					</li>
-				</ul>
-			</li>
-			<li class="menu4 sub">
-				<a href="da-category.php">จดหมายเหตุ</a>
-				<ul class="submenu-left">
-					<li class="submenu1">
-						<a href="da-category.php">หมวดหมู่ย่อย</a>
-					</li>
-					<li class="submenu2">
-						<a href="da-category.php">หมวดหมู่ย่อย</a>
-					</li>
-				</ul>
-			</li>
-			<li class="menu5 sub">
-				<a href="da-category-red.php">มัลติมีเดีย</a>
-				<ul class="submenu-left">
-					<li class="submenu1">
-						<a href="da-category-red.php">หมวดหมู่ย่อย</a>
-					</li>
-					<li class="submenu2">
-						<a href="da-category-red.php">หมวดหมู่ย่อย</a>
-					</li>
-				</ul>
-			</li>
-			<li class="menu6">
-				<a href="da-all.php">บทความ</a>
-			</li>
-			<li class="menu7">
-				<a href="da-all.php">MUSE MAG</a>
-			</li> -->
+
 		</ul>
 	</div>
 </div>
 <?php } ?>
+
+<?php }?> <!-- End if -->
+

@@ -50,7 +50,7 @@
 
 .part-gis-main .box-row .box-input-text.checkbox div{
 	height: 35px;
-	    line-height: 54px;
+	line-height: 54px;
 }
 .part-gis-main .box-row .box-input-text.checkbox div span{
 	position: absolute;
@@ -63,6 +63,16 @@
 	font-style: normal;
 	height: 20px;
 	line-height: initial;
+}
+.part-gis-main .box-row .box-input-text.checkbox div span.icon-pin:before{
+	content: '';
+	width: 18px;
+	height: 26px;
+	display: block;
+	position: absolute;
+	top: -30px;
+	left: 16px;
+	background: url(../images/icon-pin-big2.png) no-repeat center center;
 }
 .part-gis-main .box-row .box-input-text.checkbox div:after{
 	top: 26px;
@@ -104,6 +114,17 @@
 	height: 20px;
 	line-height: initial;
 }
+.part-gis-main .box-row .box-input-text .radio span.icon-pin:before{
+	content: '';
+	width: 18px;
+	height: 26px;
+	display: block;
+	position: absolute;
+	top: -30px;
+	left: 41px;
+	background: url(../images/icon-pin-big2.png) no-repeat center center;
+}
+
 .part-gis-main .box-row .box-input-text .radio:before{
 	content: '';
 	width: 8px;
@@ -124,11 +145,128 @@
 	display: block;
 	background-color: #fff;
 }
+.part-gis-main .box-row .box-input-text .radio.active:after{
+	content: '';
+	display: block;
+	width: 12px;
+	height: 12px;
+	border: 1px solid #948382;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	position: absolute;
+	top: -3px;
+	left: -3px;
+}
+.part-gis-main .box-row .box-input-text .radio.active:before{
+	background-color: #948382;
+}
+
+.part-gis-main .box-row.box-2:before{
+	content: '';
+	width: 1px;
+	height: 93px;
+	position: absolute;
+	top: 12px;
+	left: 0px;
+	display: block;
+	background-color: #842e29;
+}
+.part-gis-main .box-row.box-2:after{
+	content: '';
+	width: 1px;
+	height: 93px;
+	position: absolute;
+	top: 12px;
+	right: 0px;
+	display: block;
+	background-color: #842e29;
+}
+
+/* --------------------------------------------------- MAP --------------------------------------------------- */
+
+.part-map-main{
+	min-height: 400px;
+}
 
 
+/* --------------------------------------------------- GIS Detail --------------------------------------------------- */
 
-
-
+.part-detail-main{
+	padding-top: 55px;
+}
+.part-detail-main .box-content-left{
+	width: 333px;
+	float: left;
+}
+.part-detail-main .box-content-right{
+	width: 836px;
+	float: right;
+}
+.box-title-museum{
+	background-color: #842e29;
+	color: #fff;
+	font-size: 27px;
+	padding: 20px 32px;
+}
+.box-title-museum span{
+	font-size: 20px;
+	margin: 10px 0 0;
+}
+.box-title-museum:after{
+	content: '';
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 10px 9px 10px;
+	border-color: transparent transparent #eeeeee transparent;
+	position: absolute;
+	bottom: 0px;
+	left: 32px;
+}
+.box-gray {
+	width: 100%;
+	background-color: #f2f2f2;
+	padding: 20px 25px;
+	margin-bottom: 1px;
+}
+.box-gray p {
+	font-style: italic;
+	margin: 0;
+	padding-left: 35px;
+	font-size: 16px;
+	line-height: 25px;
+}
+.box-gray p:before {
+	content: '';
+	width: 20px;
+	height: 16px;
+	display: inline-block;
+	position: absolute;
+	left: 6px;
+	top: 3px;
+}
+.box-gray p.text-tel:before {
+	background: url(../images/icon-phone.png) no-repeat center center;
+}
+.box-gray p.text-date:before {
+	background: url(../images/icon-cal2.png) no-repeat center center;
+}
+.box-gray p.text-time:before {
+	background: url(../images/icon-clock.png) no-repeat center center;
+}
+.box-gray p.text-ticket:before {
+	background: url(../images/icon-money.png) no-repeat center center;
+}
+.box-slide-big a.btn-arrow-slide.next {
+	right: 11px;
+}
+.box-slide-big a.btn-arrow-slide.pev {
+	left: 11px;
+}
+.box-news-text{
+	padding: 30px 60px;
+}
 
 
 

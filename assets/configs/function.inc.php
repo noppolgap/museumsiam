@@ -707,4 +707,46 @@ function callThumbListFrontEnd($id, $type, $staus) {
 function my_substring($str,$length){
 	return mb_substr($str,0,$length,'UTF-8');
 }
+
+
+function callIconThumbListFrontend($iconType, $moduleId, $subModuleId, $genStyleTag) {
+	global $conn;
+
+	$fieldNameToGetIcon = "";
+	if ($iconType == 'BIG')
+		$fieldNameToGetIcon = "DESKTOP_ICON_PATH";
+	else if ($iconType == 'SMALL')
+		$fieldNameToGetIcon = "MOBILE_ICON_PATH";
+
+	$whereStatement = "";
+	if (isset($moduleId))
+		$whereStatement = " WHERE  APP_MODULE_ID = " . $moduleId;
+	else
+		$whereStatement = " WHERE  APP_SUB_MODULE_ID = " . $subModuleId;
+
+	$sql = "SELECT " . $fieldNameToGetIcon . " FROM trn_banner_pic_setting " . $whereStatement . " order by LAST_UPDATE_DATE desc Limit 0,1";
+
+	//echo $sql;
+	$query = mysql_query($sql, $conn);
+	$num = mysql_num_rows($query);
+	if ($num == 1) {
+		$row = mysql_fetch_array($query);
+		if ($genStyleTag){
+			if($row[$fieldNameToGetIcon] == ''){
+				return '';
+			}else{
+				return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', str_replace('../../', '', $row[$fieldNameToGetIcon])) . '\');"';
+			}
+		}else{
+			return str_replace('../../', '',$row[$fieldNameToGetIcon]);
+		}
+	} else {
+		if ($genStyleTag)
+			return 'style="background-image: url(\'images/logo_thumb.jpg\');"';
+		else
+			return '';
+
+	}
+
+}
 ?>

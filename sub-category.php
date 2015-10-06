@@ -13,7 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu1").addClass("active");
+		//$(".menutop li.menu6,.menu-left li.menu1").addClass("active");
 	});
 </script>
 	
@@ -27,12 +27,7 @@ require("assets/configs/function.inc.php");
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
-			<ol class="cf">
-				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="da.php">คลังความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">หมวดหมู่</li>
-			</ol>
+		 <?include ('inc/inc-breadcrumbs.php');?>
 		</div>
 	</div>
 </div>
@@ -42,7 +37,7 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-da.php'); ?>
+			<?php include ('inc/inc-category-menu.php'); ?>
 		</div>
 		<div class="box-right main-content">
 			

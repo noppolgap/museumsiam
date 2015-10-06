@@ -9,12 +9,33 @@ require("assets/configs/function.inc.php");
 <? require('inc_meta.php'); ?>	
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
+<link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/km.css" />
 <link rel="stylesheet" type="text/css" href="css/gis-main.css" />
 
 <script>
 	$(document).ready(function(){
 		$(".menutop li.menu6").addClass("active");
+		
+		var sync1 = $("#sync1");
+		
+		sync1.owlCarousel({
+			singleItem : true,
+			paginationSpeed : 500,
+			rewindSpeed : 1000,
+			navigation: false,
+			pagination:false,
+			responsiveRefreshRate : 200,
+			mouseDrag : false,
+			rewindNav:true
+		});
+		$(".box-slide-big a.pev").click(function(){	
+			$("#sync1").data('owlCarousel').prev();
+		});
+		$(".box-slide-big a.next").click(function(){	
+			$("#sync1").data('owlCarousel').next();
+		});
+		
 	});
 </script>
 	
@@ -71,7 +92,7 @@ require("assets/configs/function.inc.php");
 						<div class="box-input-text checkbox">
 							<p>เลือกวันทำการ :</p>
 							<div class="noLine">
-								<input type="checkbox"><span>ทุกวัน</span>
+								<input type="checkbox"><span class="icon-pin">ทุกวัน</span>
 							</div>
 							<div>
 								<input type="checkbox"><span>จ</span>
@@ -103,7 +124,7 @@ require("assets/configs/function.inc.php");
 							<p>ราคา :</p>
 							<div>
 								<div class="box-radio cf">
-									<a class="radio"><span>ฟรี</span></a>
+									<a class="radio active"><span class="icon-pin">ฟรี</span></a>
 									<a class="radio"><span>เสียค่าเข้า</span></a>
 								</div>
 							</div>							
@@ -126,9 +147,64 @@ require("assets/configs/function.inc.php");
 </div>
 
 <div class="part-detail-main">
-	<div class="container">
+	<div class="container cf">
+		<div class="box-content-left">
+			<div class="box-title-museum">
+				<div class="title">
+					Rattanakosin<br>Exhibition Hall
+					<span>นิทรรศน์รัตนโกสินทร์</span>
+				</div>
+			</div>
+			<div class="box-gray">
+				<p class="text-date">อังคาร - อาทิตย์</p>
+				<p class="text-time">10.30 น. - 18.00 น.</p>
+			</div>
+			<div class="box-gray">
+				<p class="text-ticket">ผู้ใหญ่ และชาวต่างชาติ ราคา 100 บาท<br>
+				เข้าชมฟรี สำหรับ เด็ก นักเรียน/นักศึกษา ผู้สูงอายุ ภิกษุ สามเณร และ ผู้พิการ</p>
+			</div>
+			<div class="box-gray">
+				<p class="text-tel"><a href="tel:+66026210043" target="_blank">+66(0)2 621 0043</a></p>
+			</div>
+			<div class="box-gray">
+				<div class="box-btn">
+					<a href="" class="btn red">ขอเส้นทาง</a>
+				</div>
 
-
+			</div>
+		</div>
+		<div class="box-content-right">
+			<div class="box-slide-big">
+				<div id="sync1" class="owl-carousel">
+					<div class="slide-content">
+						<img src="http://placehold.it/754x562">
+					</div>
+					<div class="slide-content">
+						<img src="http://placehold.it/754x562/ccc">
+					</div>
+					<div class="slide-content">
+						<img src="http://placehold.it/754x562">
+					</div>
+					<div class="slide-content">
+						<img src="http://placehold.it/754x562/ccc">
+					</div>
+					<div class="slide-content">
+						<img src="http://placehold.it/754x562">
+					</div>
+					<div class="slide-content">
+						<img src="http://placehold.it/754x562/ccc">
+					</div>
+				</div>
+				<a class="btn-arrow-slide pev"></a>
+				<a class="btn-arrow-slide next"></a>
+			</div>
+			<div class="box-news-text">
+				<p>
+					Levitated Mass is a 2012 large-scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art. The installation consists of a 340-ton boulder affixed above a concrete trench through which visitors may walk. The nature, expense and scale of the installation made it an instant topic of discussion The work comprises a 21.5-foot tall boulder mounted on the walls of a 456-foot long concrete trench, surrounded by 2.5 acres of compressed decomposed granite. The boulder is bolted to two shelves affixed to the inner walls of the trench, which descends from ground level to 15 feet below the stone at its center, allowing visitors to stand directly below the megalith.
+				</p>
+			</div>
+			
+		</div>
 	</div>
 </div>
 
