@@ -84,11 +84,12 @@ $( document ).ready(function() {
 							msg += '<a href="#" onclick="popupEmbed(\''+Myvalue+'\'); return false;">';
 							msg += '<span data-Name="'+Myvalue+'"></span>';
 							msg += '</a>';
+							msg += '<input name="video_name" class="video_edit_name" data-value="'+Myvalue+'" value="https://youtu.be/'+Myvalue+'" onblur="editVideoName(\''+Myvalue+'\',\''+name+'\', 2)" />';
 							msg += '<a href="#" onclick="popupEmbed(\''+Myvalue+'\'); return false;">';
-							msg += '<span class="p-Relative EmbedAction viewEmbed"></span>';
+							msg += '<span class="EmbedAction viewEmbed"></span>';
 							msg += '</a>';
 							msg += '<a href="#" onclick="delEmbed(\''+Myvalue+'\',\''+name+'\'); return false;">';
-							msg += '<span class="p-Relative EmbedAction delEmbed"></span>';
+							msg += '<span class="EmbedAction delEmbed"></span>';
 							msg += '</a>';
 							msg += '</div>';
 
@@ -114,11 +115,12 @@ $( document ).ready(function() {
 						msg += '<a href="#" onclick="popupLink(\''+Myvalue+'\'); return false;">';
 						msg += '<span class="LinkVideoBox" data-Name="'+Myvalue+'"></span>';
 						msg += '</a>';
+						msg += '<input name="video_name" class="video_edit_name" data-value="'+Myvalue+'" value="'+Myvalue+'" onblur="editVideoName(\''+Myvalue+'\',\''+name+'\', 3)" />';
 						msg += '<a href="#" onclick="popupLink(\''+Myvalue+'\'); return false;">';
-						msg += '<span class="p-Relative LinkAction viewLink"></span>';
+						msg += '<span class="LinkAction viewLink"></span>';
 						msg += '</a>';
 						msg += '<a href="#" onclick="delLink(\''+Myvalue+'\',\''+name+'\'); return false;">';
-						msg += '<span class="p-Relative LinkAction delLink"></span>';
+						msg += '<span class="LinkAction delLink"></span>';
 						msg += '</a>';
 						msg += '</div>';
 
@@ -446,13 +448,25 @@ function delIconImageEdit(id  , iconT , path){
 		});
 	}
 }
-function videoCallBack(name,file){
+function videoCallBack(name,file,original){
 	$('#VideoUpload_loading_' + name).hide();
 
-	var box  = '<a data-file="'+file+'" href="#" onclick="popupVideo(\''+file+'\'); return false;">';
-		box += '<span></span>';
-		box += '</a>';
-    $('#tabs_' +name+'_1 .videoDisplay').append(box).show();
+	var	msg  = '<div class="Upload_tab" data-value="'+file+'">';
+		msg += '<a href="#" onclick="popupUpload(\''+file+'\'); return false;">';
+		msg += '<span class="UploadVideoBox" data-Name="'+file+'"></span>';
+		msg += '</a>';
+		msg += '<input name="video_name" class="video_edit_name" data-value="'+file+'" value="'+original+'" onblur="editVideoName(\''+file+'\',\''+name+'\', 1)" />';
+		msg += '<a href="#" onclick="popupUpload(\''+file+'\'); return false;">';
+		msg += '<span class="UploadAction viewUpload"></span>';
+		msg += '</a>';
+		msg += '<a href="#" onclick="delUpload(\''+file+'\',\''+name+'\'); return false;">';
+		msg += '<span class="UploadAction delUpload"></span>';
+		msg += '</a>';
+		msg += '</div>';
+
+    $('#tabs_' +name+'_1 .DataBlock').append(msg).show();
+
+	$('#DataBlock_'+name).append('<input type="hidden" data-value="'+file+'" name="video_'+name+'[]" value="upload|@|'+file+'|@|'+original+'">');
 
 	temp3 = true;
 }
@@ -466,7 +480,7 @@ function videoAlert(name){
 
 	alert('Upload Error');
 }
-function popupVideo(file){
+function popupUpload(file){
 	var href = '../master/video_preview.php?p='+file;
 
 	try{
@@ -481,26 +495,26 @@ function popupVideo(file){
 		popup(href,'popupVideo',640,400);
 	}
 }
-function delPhoto(file){
+function delUpload(file,name){
 	if (confirm("คุณแน่ใจที่จะลบวีดีโอนี้นี้")){
 		$.post( "../master/delete_video.php", { pname: file})
 			.done(function( data ) {
-				$('.videoDisplay a[data-file="'+file+'"]').remove();
+				$('#tabs_'+name+'_1 > .DataBlock div[data-value="'+file+'"]').remove();
+				$('#DataBlock_'+name+' input[data-value="'+file+'"]').remove();
 		});
 	}
 }
 function popupEmbed(file){
-	var href = '../master/video_preview.php?Embed&p='+file;
-
 	try{
 		$.colorbox({
 			transition: 'fade',
 			iframe:true,
 			innerWidth:640,
 			innerHeight:400,
-			href: href
+			href: 'http://www.youtube.com/embed/'+file+'?rel=0&amp;wmode=transparent'
 		});
 	} catch(err) {
+		var href = '../master/video_preview.php?Embed&p='+file;
 		popup(href,'popupVideo',640,400);
 	}
 }
@@ -520,7 +534,6 @@ function youtube_parser(url){
     }
 }
 function popupLink(file){
-	var href = '../master/video_preview.php?Link&p='+file;
 
 	try{
 		$.colorbox({
@@ -528,9 +541,10 @@ function popupLink(file){
 			iframe:true,
 			innerWidth:640,
 			innerHeight:400,
-			href: href
+			href: file
 		});
 	} catch(err) {
+		var href = '../master/video_preview.php?Link&p='+file;
 		popup(href,'popupVideo',640,400);
 	}
 }
@@ -539,4 +553,18 @@ function delLink(file,name){
 		$('#tabs_'+name+'_3> .DataBlock div[data-value="'+file+'"]').remove();
 		$('#DataBlock_'+name+' input[data-value="'+file+'"]').remove();
 	}
+}
+function editVideoName(file,name,position){
+	if(position == 1){
+		var myname = 'upload|@|'+file;
+	}else if(position == 2){
+		var myname = 'embed|@|'+file;
+	}else if(position == 3){
+		var myname = 'link|@|'+file;
+	}
+	var str = $('#tabs_'+name+'_'+position+'> .DataBlock div[data-value="'+file+'"] .video_edit_name').val();
+
+		myname += '|@|'+str;
+
+	$('#DataBlock_'+name+' input[data-value="'+file+'"]').val(myname);
 }

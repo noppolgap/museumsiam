@@ -9,6 +9,10 @@ if(isset($_GET['Embed'])){
 	$file = $_GET['p'];
 	$ext = end(explode(".",basename($file)));
 	$uploadfile = '../../temp/'.$file;
+
+	if(!file_exists($uploadfile)){
+		$uploadfile = $file;
+	}
 }
 ?>
 <!doctype html>

@@ -635,7 +635,6 @@ function mysendMail( $to , $to_name , $send , $send_name ,  $subject ,  $message
 	  return true;
 	}
 }
-
 function admin_upload_video($name){
 	$str = array();
 
@@ -650,7 +649,7 @@ function admin_upload_video($name){
 	$str[0] .= '<div id="tabs_' . $name . '_1">'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
 	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="../images/ajax-loader.gif" alt="loading" />'. "\n\t";
-	$str[0] .= '<div class="videoDisplay dNone"></div>'. "\n\t";
+	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
 	$str[0] .= '</div>'. "\n\t";
 	$str[0] .= '<div id="tabs_' . $name . '_2">'. "\n\t";
 	$str[0] .= '<input type="text" class="Embed_input" name="Embed_input_' . $name . '" />'. "\n\t";
@@ -677,9 +676,47 @@ function admin_upload_video($name){
 	return $str;
 
 }
+function admin_view_video($id,$cat){
+	global $conn;
 
+	$str = '';
 
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = ".$cat." ORDER BY ORDER_ID DESC";
+	$query = mysql_query($sql, $conn);
+	while ($row = mysql_fetch_array($query)) {
 
+		if($row['IMG_TYPE'] == 2){
+			$path_image = $row['IMG_PATH'];
+			$path_name = $row['IMG_NAME'];
+			$path_type = 'Upload';
+			$style = 'class="UploadVideoBox"';
+		}else if($row['IMG_TYPE'] == 3){
+			$path_image = $row['IMG_PATH'];
+			$path_name = $row['IMG_NAME'];
+			$path_type = 'Embed';
+			$style = ' style="background-image: url(&quot;http://img.youtube.com/vi/x6tNmen4ylw/maxresdefault.jpg&quot;);"';
+		}else if($row['IMG_TYPE'] == 4){
+			$path_image = $row['IMG_PATH'];
+			$path_name = $row['IMG_NAME'];
+			$path_type = 'Link';
+			$style = ' class="LinkVideoBox"';
+		}
+
+		$str .= '<div class="DataBlock DataBlockEdit">' . "\n\t";
+		$str .= '<div class="'.$path_type.'_tab">' . "\n\t";
+		$str .= '<a onClick="popup'.$path_type.'(\''.$path_image.'\'); return false;" href="#">' . "\n\t";
+		$str .= '<span '.$style.'></span>' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '<input value="'.$path_name.'" class="video_edit_name" disabled name="video_name">' . "\n\t";
+		$str .= '<a onClick="popup'.$path_type.'(\''.$path_image.'\'); return false;" href="#">' . "\n\t";
+		$str .= '<span class="'.$path_type.'Action view'.$path_type.'"></span>' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+	}
+	return $str;
+
+}
 function callThumbListFrontEnd($id, $type, $staus) {
 	global $conn;
 
@@ -703,7 +740,6 @@ function callThumbListFrontEnd($id, $type, $staus) {
 	}
 
 }
-
 function my_substring($str,$length){
 	return mb_substr($str,0,$length,'UTF-8');
 }
