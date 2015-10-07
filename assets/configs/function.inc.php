@@ -348,7 +348,7 @@ function admin_upload_image_view($name, $type, $id) {
 	$str = "";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type;
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 	while ($row = mysql_fetch_array($query)) {
 		$str .= '<div class="thumbBoxEdit floatL p-Relative">' . "\n\t";
@@ -681,7 +681,7 @@ function admin_view_video($id,$cat){
 
 	$str = '';
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = ".$cat." ORDER BY ORDER_ID DESC";
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = ".$cat." ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 	while ($row = mysql_fetch_array($query)) {
 
@@ -760,7 +760,7 @@ function callIconThumbListFrontend($iconType, $moduleId, $subModuleId, $genStyle
 	else
 		$whereStatement = " WHERE  APP_SUB_MODULE_ID = " . $subModuleId;
 
-	$sql = "SELECT " . $fieldNameToGetIcon . " FROM trn_banner_pic_setting " . $whereStatement . " order by LAST_UPDATE_DATE desc Limit 0,1";
+	$sql = "SELECT " . $fieldNameToGetIcon . " FROM trn_banner_pic_setting " . $whereStatement . " order by LAST_UPDATE_DATE ASC Limit 0,1";
 
 	//echo $sql;
 	$query = mysql_query($sql, $conn);
@@ -783,6 +783,132 @@ function callIconThumbListFrontend($iconType, $moduleId, $subModuleId, $genStyle
 			return '';
 
 	}
+
+}
+function callThumbListFrontEndByID($id, $type, $staus) {
+ global $conn;
+
+ $sql = "SELECT IMG_PATH FROM trn_content_picture WHERE PIC_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+ $query = mysql_query($sql, $conn);
+ $num = mysql_num_rows($query);
+ if ($num == 1) {
+  $row = mysql_fetch_array($query);
+  if ($staus) {
+   return str_replace('../../', '', $row['IMG_PATH']) ;
+  } else {
+   return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', str_replace('../../', '', $row['IMG_PATH'])) . '\');"';
+  }
+
+ } else {
+  if ($staus) {
+   return 'images/logo_thumb.jpg';
+  } else {
+   return '';
+  }
+ }
+
+}
+function admin_edit_video($name,$id,$cat){
+	global $conn;
+
+	$str = array();
+
+	$str[0];
+
+	$str[0] .= '<div class="tabs">'. "\n\t";
+	$str[0] .= '<ul>'. "\n\t";
+	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>'. "\n\t";
+	$str[0] .= '<li><a href="#tabs_' . $name . '_2">Embed</a></li>'. "\n\t";
+	$str[0] .= '<li><a href="#tabs_' . $name . '_3">Link</a></li>'. "\n\t";
+	$str[0] .= '</ul>'. "\n\t";
+	$str[0] .= '<div id="tabs_' . $name . '_1">'. "\n\t";
+	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
+	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="../images/ajax-loader.gif" alt="loading" />'. "\n\t";
+
+$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '2' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."'";
+$query = mysql_query($sql, $conn) or die($sql);
+$num = mysql_num_rows($query);
+if($num  == 0){
+	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
+}else{
+	$str[0] .= '<div class="DataBlock">'. "\n\t";
+	while($row = mysql_fetch_array($query)){
+
+	}
+	$str[0] .= '</div>'. "\n\t";
+}
+	$str[0] .= '</div>'. "\n\t";
+	$str[0] .= '<div id="tabs_' . $name . '_2">'. "\n\t";
+	$str[0] .= '<input type="text" class="Embed_input" name="Embed_input_' . $name . '" />'. "\n\t";
+	$str[0] .= '<input class="buttonAction silver-flat-button EmbedUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
+	$str[0] .= '<span class="video_note">* ใส่แค่รหัสวีดีโอ youtube เท่านั้น</span>'. "\n\t";
+
+$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '3' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."'";
+$query = mysql_query($sql, $conn) or die($sql);
+$num = mysql_num_rows($query);
+if($num  == 0){
+	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
+}else{
+	$str[0] .= '<div class="DataBlock">'. "\n\t";
+	while($row = mysql_fetch_array($query)){
+		$str[0] .= '<div class="Embed_tab" data-value="'.$row['IMG_PATH'].'">';
+		$str[0] .= '<a href="#" onclick="popupEmbed(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span data-Name="'.$row['IMG_PATH'].'" style="background-image:url(http://img.youtube.com/vi/'.$row['IMG_NAME'].'/maxresdefault.jpg)"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<input name="video_name" class="video_edit_name" data-value="'.$row['IMG_PATH'].'" disabled value="https://youtu.be/'.$row['IMG_NAME'].'" onblur="editVideoName2(\''.$row['IMG_PATH'].'\',\''.$row['IMG_NAME'].'\', 2)" />';
+		$str[0] .= '<a href="#" onclick="popupEmbed(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="EmbedAction viewEmbed"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<a href="#" onclick="delEditVideo(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\',2); return false;">';
+		$str[0] .= '<span class="EmbedAction delEmbed"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '</div>';
+	}
+	$str[0] .= '</div>'. "\n\t";
+}
+
+	$str[0] .= '</div>'. "\n\t";
+	$str[0] .= '<div id="tabs_' . $name . '_3">'. "\n\t";
+	$str[0] .= '<input type="text" class="Link_input" name="Link_input_' . $name . '" />'. "\n\t";
+	$str[0] .= '<input class="buttonAction silver-flat-button LinkUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
+	$str[0] .= '<span class="video_note">* ใส่แค่ url เท่านั้น</span>'. "\n\t";
+
+$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '4' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."'";
+$query = mysql_query($sql, $conn) or die($sql);
+$num = mysql_num_rows($query);
+if($num  == 0){
+	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
+}else{
+	$str[0] .= '<div class="DataBlock">'. "\n\t";
+	while($row = mysql_fetch_array($query)){
+		$str[0] .= '<div class="Link_tab" data-value="'.$row['IMG_PATH'].'">';
+		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="LinkVideoBox" data-Name="'.$row['IMG_PATH'].'"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<input name="video_name" class="video_edit_name" data-value="'.$row['IMG_PATH'].'" value="'.$row['IMG_NAME'].'" onblur="editVideoName2(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\', 3)" />';
+		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="LinkAction viewLink"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<a href="#" onclick="delEditVideo(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\',3); return false;">';
+		$str[0] .= '<span class="LinkAction delLink"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '</div>';
+	}
+	$str[0] .= '</div>'. "\n\t";
+}
+
+	$str[0] .= '</div>'. "\n\t";
+	$str[0] .= '</div>'. "\n\t";
+
+	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>'. "\n\t";
+
+
+	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
+	$str[1] .= '<input type="hidden" name="my_name" value="' . $name . '" >' . "\n\t";
+	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="video/*" >' . "\n\t";
+	$str[1] .= '</form>' . "\n\t";
+
+	return $str;
 
 }
 ?>

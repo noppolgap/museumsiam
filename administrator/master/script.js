@@ -84,7 +84,7 @@ $( document ).ready(function() {
 							msg += '<a href="#" onclick="popupEmbed(\''+Myvalue+'\'); return false;">';
 							msg += '<span data-Name="'+Myvalue+'"></span>';
 							msg += '</a>';
-							msg += '<input name="video_name" class="video_edit_name" data-value="'+Myvalue+'" value="https://youtu.be/'+Myvalue+'" onblur="editVideoName(\''+Myvalue+'\',\''+name+'\', 2)" />';
+							msg += '<input name="video_name" class="video_edit_name" disabled data-value="'+Myvalue+'" value="https://youtu.be/'+Myvalue+'" onblur="editVideoName(\''+Myvalue+'\',\''+name+'\', 2)" />';
 							msg += '<a href="#" onclick="popupEmbed(\''+Myvalue+'\'); return false;">';
 							msg += '<span class="EmbedAction viewEmbed"></span>';
 							msg += '</a>';
@@ -95,7 +95,7 @@ $( document ).ready(function() {
 
 							$('#tabs_'+name+'_2 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]').css('background-image','url(http://img.youtube.com/vi/'+Myvalue+'/maxresdefault.jpg)');
 
-							$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="embed|@|'+Myvalue+'">');
+							$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="embed|@|'+Myvalue+'|@|'+Myvalue+'">');
 					}
 				}
 			}
@@ -126,7 +126,7 @@ $( document ).ready(function() {
 
 						$('#tabs_'+name+'_3 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]');
 
-						$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="link|@|'+Myvalue+'">');
+						$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="link|@|'+Myvalue+'|@|'+Myvalue+'">');
 
 				}
 			}
@@ -567,4 +567,23 @@ function editVideoName(file,name,position){
 		myname += '|@|'+str;
 
 	$('#DataBlock_'+name+' input[data-value="'+file+'"]').val(myname);
+}
+function editVideoName2(file,name,id,position){
+	var str = $('#tabs_'+name+'_'+position+'> .DataBlock div[data-value="'+file+'"] .video_edit_name').val();
+	var myname = id+'|@|'+str;
+
+	$('#DataBlock_'+name).append('<input type="hidden" data-value="'+file+'" name="video_rename_'+name+'[]" value="'+myname+'">');
+}
+function delEditVideo(file,name,id,position){
+	if (confirm("คุณแน่ใจที่จะลบวีดีโอนี้นี้")){
+		if(position == 1){
+			$('#tabs_'+name+'_1 > .DataBlock div[data-value="'+file+'"]').remove();
+		}else if(position == 2){
+			$('#tabs_'+name+'_2 > .DataBlock div[data-value="'+file+'"]').remove();
+		}else if(position == 3){
+			$('#tabs_'+name+'_3 > .DataBlock div[data-value="'+file+'"]').remove();
+		}
+
+		$('#DataBlock_'+name).append('<input type="hidden" data-value="'+file+'" name="video_delete_'+name+'[]" value="'+id+'">');
+	}
 }
