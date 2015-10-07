@@ -882,6 +882,18 @@ if($num  == 0){
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
 
+		$str[0] .= '<div class="Link_tab" data-value="'.$row['IMG_PATH'].'">';
+		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="LinkVideoBox" data-Name="'.$row['IMG_PATH'].'"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<input name="video_name" class="video_edit_name" data-value="'.$row['IMG_PATH'].'" value="'.$row['IMG_NAME'].'" onblur="editVideoName2(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\', 3)" />';
+		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="LinkAction viewLink"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<a href="#" onclick="delEditVideo(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\',3); return false;">';
+		$str[0] .= '<span class="LinkAction delLink"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '</div>';
 	}
 	$str[0] .= '</div>'. "\n\t";
 }
