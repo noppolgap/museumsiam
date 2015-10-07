@@ -99,7 +99,20 @@ require ("assets/configs/function.inc.php");
 					$("#sync1").data('owlCarousel').next();
 				});
 
+				$(".img-slide-show").each(function() {
+					/* console.log('img '  , $(this));
+
+					 console.log('Width ', $(this).width());
+					 console.log('height ', $(this).css('height'));*/
+					 
+					if ($(this).width() > $(this).height())
+						$(this).width(754);
+
+				});
+
 			});
+
+			 
 		</script>
 
 	</head>
@@ -116,7 +129,9 @@ require ("assets/configs/function.inc.php");
 		<div class="part-nav-main"  id="firstbox">
 			<div class="container">
 				<div class="box-nav">
-					<?include ('inc/inc-breadcrumbs.php');?> 
+					<?
+					include ('inc/inc-breadcrumbs.php');
+				?> 
 				</div>
 			</div>
 		</div>
@@ -216,12 +231,12 @@ if ($currentPage < 1)
 							<div id="sync1" class="owl-carousel">
 								
 								<?php
-								$getPicSql = "select * from trn_content_picture where content_id = $CONID ";
+								$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
 
 								$rsPic = mysql_query($getPicSql) or die(mysql_error());
 								while ($rowPic = mysql_fetch_array($rsPic)) {
 									echo '	<div class="slide-content"> ';
-									echo '<img  style="width:754px;height:562px;" src="' . callThumbListFrontEnd($rowPic['CONTENT_ID'], $rowPic['CAT_ID'], true) . '">';
+									echo '<img class="img-slide-show" style="max-width:754px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
 									echo '</div>';
 								}
 								?>
@@ -246,7 +261,16 @@ if ($currentPage < 1)
 							<a href="#" class="btn g"></a>
 							<a href="#" class="btn line"></a>
 						</div>
-						<div class="part-tumb-main">
+						<?php
+						$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
+						$rsPic = mysql_query($getPicSql) or die(mysql_error());
+						$rowPicturecount = mysql_num_rows($rsPic);
+						$extraStyle = "";
+						if ($rowPicturecount == 1) {
+							$extraStyle = " style='display:none;'";
+						}
+									?>
+						<div class="part-tumb-main" <?=$extraStyle ?> >
 							<div  class="text-title cf">
 								<p>
 									แกลเลอรี
@@ -255,15 +279,15 @@ if ($currentPage < 1)
 									<a href="" class="btn black">ดูทั้งหมด</a>
 								</div>
 							</div>
+							
+									
 							<div class="box-slide-small">
-								<div id="sync2" class="owl-carousel">
+								<div id="sync2" class="owl-carousel" >
 									<?php
-									$getPicSql = "select * from trn_content_picture where content_id = $CONID ";
 
-									$rsPic = mysql_query($getPicSql) or die(mysql_error());
 									while ($rowPic = mysql_fetch_array($rsPic)) {
 										echo '	<div class="slide-content"> ';
-										echo '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEnd($rowPic['CONTENT_ID'], $rowPic['CAT_ID'], true) . '">';
+										echo '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
 										echo '</div>';
 									}
 								?>

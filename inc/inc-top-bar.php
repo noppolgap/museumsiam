@@ -1,3 +1,21 @@
+<?php
+
+//$_SESSION['CURRENT_URL'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$refering_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+
+if ($refering_url != _FULL_SITE_PATH_ . '/login.php') {
+	$_SESSION['last_url'] = $refering_url;
+}
+
+if (!isset($_SESSION['LANG']))
+	$_SESSION['LANG'] = 'TH';
+//TH , EN
+
+if ($_SESSION['LANG'] == 'TH')
+	require ("inc-th-lang.php");
+else if ($_SESSION['LANG'] == 'EN')
+	require ("inc-en-lang.php");
+?>
 <div class="part-top-bar">
 	<div class="box-top">
 		<div class="container cf">
@@ -22,11 +40,12 @@
 					<input type="text" placeholder="ค้นหาทั้งหมด">
 				</div>
 				<div class="box-member cf">
-					
-					<? if (isset($_SESSION['user_name']))
-						echo $_SESSION['user_name'];
-else 
-						echo '<a href="login.php">เข้าสู่ระบบ</a>';
+
+					<?
+					if (isset($_SESSION['user_name']))
+						echo $_SESSION['user_name'] . ' <a href="logout.php">ออกจากระบบ</a>';
+					else
+						echo '<a href="login.php">'.$loginCaption.'</a>';
 					?>
 					<div class="box-pic">
 						<img src="images/icon-humen.png" alt="icon-humen" width="23" height="23" />

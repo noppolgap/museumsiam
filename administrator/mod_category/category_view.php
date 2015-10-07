@@ -51,12 +51,12 @@ require ("../../assets/configs/function.inc.php");
 							</div>
 							<div>
 								<div class="floatL form_name">ชื่อ TH</div>
-								<div class="floatL form_input"><input type="text" name="txtDescLoc" value="<? echo $row['CONTENT_CAT_DESC_LOC']; ?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="txtDescLoc" disabled value="<? echo $row['CONTENT_CAT_DESC_LOC']; ?>" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>
 							<div>
 								<div class="floatL form_name">ชื่อ EN</div>
-								<div class="floatL form_input"><input type="text" name="txtDescEng" value="<? echo $row['CONTENT_CAT_DESC_ENG']; ?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="txtDescEng" disabled value="<? echo $row['CONTENT_CAT_DESC_ENG']; ?>" class="w90p" /></div>
 								<div class="clear"></div>
 							</div>
 
@@ -65,9 +65,9 @@ require ("../../assets/configs/function.inc.php");
                     <div class="floatL form_input">
 					<?php
 						if ($row['IS_LAST_NODE'] == "Y"){
-							echo "<input  id = 'chkHasSubCategory' type='checkbox' name='chkHasSubCategory' >&nbsp;มีระบบย่อย</input> ";
+							echo "<input  id = 'chkHasSubCategory' disabled type='checkbox' name='chkHasSubCategory' >&nbsp;มีระบบย่อย</input> ";
 						}else{
-							echo "<input  id = 'chkHasSubCategory' type='checkbox' name='chkHasSubCategory' checked >&nbsp;มีระบบย่อย</input> ";
+							echo "<input  id = 'chkHasSubCategory' disabled type='checkbox' name='chkHasSubCategory' checked >&nbsp;มีระบบย่อย</input> ";
                         }
                     ?>
                     </div>

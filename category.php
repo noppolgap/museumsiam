@@ -101,8 +101,12 @@ order by order_data desc ";
 						//CONTENT_CAT_DESC_ENG
 
 						$divGroupExtraClass = ' BGray';
-						if ($catCount == 1)
+						$btnExtraClass = 'btn black';
+						
+						if ($catCount == 1){
 							$divGroupExtraClass = ' BBlack';
+							$btnExtraClass = 'btn gold';
+							}
 
 						echo '<div class="box-category-main news ' . $divGroupExtraClass . '">';
 
@@ -110,9 +114,9 @@ order by order_data desc ";
 						echo '<h2>' . $categoryName . '</h2>';
 						echo '<div class="box-btn">';
 						if ( nvl($row['IS_LAST_NODE'],'Y') == 'Y')
-							echo '<a href="all-content.php?MID='.$MID.'&CID='.$categoryID.'" class="btn gold">ดูทั้งหมด</a>';
+							echo '<a href="all-content.php?MID='.$MID.'&CID='.$categoryID.'" class="'.$btnExtraClass.'">ดูทั้งหมด</a>';
 						else 	
-						echo '<a href="sub-category.php?MID='.$MID.'&CID='.$categoryID.'" class="btn gold">ดูทั้งหมด</a>';
+						echo '<a href="sub-category.php?MID='.$MID.'&CID='.$categoryID.'" class="'.$btnExtraClass.'">ดูทั้งหมด</a>';
 						echo '</div>';
 						echo '</div>';
 						echo '<div class="box-news-main">';

@@ -71,7 +71,7 @@ require ("../../assets/configs/function.inc.php");
 							<div class="floatL form_name">หมวดหมู่</div>
 							<div class="floatL form_input">
 
-							<input type="text" name="txtCategory" id="txtCategory" value="<?=$row['CONTENT_CAT_DESC_LOC'] ?>" class="w90p" />
+							<?=$row['CONTENT_CAT_DESC_LOC'] ?>
 
 							</div>
 							<div class="clear"></div>
@@ -86,9 +86,9 @@ require ("../../assets/configs/function.inc.php");
 								<div class="floatL form_name">
 									หมวดหมู่ย่อย
 								</div>
-								<div class="floatL form_input" id="divSubCatCmbZone">
+								<div class="floatL form_input" id="divSubCatCmbZone" style="<?=$style ?>" >
 
-									<input type="text" name="txtSubCategory" id="txtSubCategory" style="<?=$style ?>" value="<?=$row['SUB_CONTENT_CAT_DESC_LOC'] ?>" class="w90p" />
+									<?=$row['SUB_CONTENT_CAT_DESC_LOC'] ?> 
 
 								</div>
 
@@ -100,47 +100,49 @@ require ("../../assets/configs/function.inc.php");
 									ชื่อ TH
 								</div>
 								<div class="floatL form_input">
-									<input type="text" name="txtDescLoc" id ="txtDescLoc" value="<?=$row["CONTENT_DESC_LOC"] ?>" class="w90p" />
+									<?=$row["CONTENT_DESC_LOC"] ?> 
 								</div>
 
 								<div class="clear"></div>
 							</div>
 							<div>
 							<div class="floatL form_name">ชื่อ EN</div>
-							<div class="floatL form_input"><input type="text" name="txtDescEng" id="txtDescEng" value="<?=$row["CONTENT_DESC_ENG"] ?>" class="w90p" /></div>
+							<div class="floatL form_input"><?=$row["CONTENT_DESC_ENG"] ?> </div>
 
 							<div class="clear"></div>
 							</div>
 							<div>
 							<div class="floatL form_name">รายละเอียดย่อ TH</div>
-							<div class="floatL form_input"><textarea name="txtBriefDescLoc" id = "txtBriefDescLoc" class="mytextarea2 w90p"><?=$row["BRIEF_LOC"] ?>
+							<div class="floatL form_input"><?=$row["BRIEF_LOC"] ?>
 
-							</textarea></div>
+							</div>
 
 							<div class="clear"></div>
 							</div>
+							<br/>
 							<div>
 							<div class="floatL form_name">รายละเอียดย่อ EN</div>
-							<div class="floatL form_input"><textarea name="txtBriefDescEng" id="txtBriefDescEng" class="mytextarea2 w90p"><?=$row["BRIEF_ENG"] ?>
+							<div class="floatL form_input"><?=$row["BRIEF_ENG"] ?>
 
-							</textarea></div>
+							 </div>
 
 							<div class="clear"></div>
 							</div>
+							<br/>
 							<div class="bigForm">
 							<div class="floatL form_name">รายละเอียด TH</div>
-							<div class="floatL form_input"><textarea name="txtDetailLoc" id = "txtDetailLoc" value="" class="mytextarea w90p"><?=$row["CONTENT_DETAIL_LOC"] ?>
+							<div class="floatL form_input"><?=$row["CONTENT_DETAIL_LOC"] ?>
 
-							</textarea></div>
+							</div>
 
 							<div class="clear"></div>
 							</div>
 
 							<div class="bigForm">
 							<div class="floatL form_name">รายละเอียด EN</div>
-							<div class="floatL form_input"><textarea name="txtDetailEng" id="txtDetailEng" value="" class="mytextarea w90p"><?=$row["CONTENT_DETAIL_ENG"] ?>
+							<div class="floatL form_input"><?=$row["CONTENT_DETAIL_ENG"] ?>
 
-							</textarea></div>
+							</div>
 
 							<div class="clear"></div>
 							</div>
@@ -184,5 +186,12 @@ require ("../../assets/configs/function.inc.php");
 				color: red;
 			}
 		</style>
+		<script type="text/javascript">
+		$(document).ready(function () {
+			
+			tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
+		});
+		
+		</script>
 	</body>
 </html>

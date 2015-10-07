@@ -99,6 +99,7 @@ if (isset($_GET['add'])) {
 
 	if (count($_POST['photo_file']) > 0) {
 		$index = 1;
+		 
 		foreach ($_POST['photo_file'] as $k => $file) {
 			$filename = admin_move_image_upload_dir('content_' . $CID, end(explode('/', $file)), 1000, '', false, 150, 150);
 
@@ -159,6 +160,7 @@ if (isset($_GET['edit'])) {
 		$max = $row_max['MAX_ORDER'];
 		$max++;
 
+
 		foreach ($_POST['photo_file'] as $k => $file) {
 			$filename = admin_move_image_upload_dir('content_' . $CID, end(explode('/', $file)), 1000, '', false, 150, 150);
 
@@ -175,6 +177,7 @@ if (isset($_GET['edit'])) {
 		}
 	}
 	if (count($_POST['order_position']) > 0) {
+	 
 		foreach ($_POST['order_position'] as $k => $val) {
 			$update = "";
 			$update[] = "ORDER_ID = " . $val;

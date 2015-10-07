@@ -6,14 +6,22 @@ $(document).ready(function() {
 			alert('กรุณาระบุชื่อผู้ใช้งาน');
 		else if ($('#txtPwd').val() == '')
 			alert('กรุณาระบุรหัสผ่าน');
-			
-		$.post('login-action.php', {
-			UID : $('#txtEmail').val(),
-			PWD : $('#txtPwd').val()
-		}).done(function(data) {
+		else {
+			$('#formLogin').submit();
+		}
+		/*	if ($('#txtEmail').val() == '')
+		 alert('กรุณาระบุชื่อผู้ใช้งาน');
+		 else if ($('#txtPwd').val() == '')
+		 alert('กรุณาระบุรหัสผ่าน');
 
-			console.log('done : ' + data);
-		});
+		 $.post('login-action.php', {
+		 UID : $('#txtEmail').val(),
+		 PWD : $('#txtPwd').val()
+		 }).done(function(data) {
+
+		 console.log('done : ' + data);
+
+		 });*/
 
 	});
 
