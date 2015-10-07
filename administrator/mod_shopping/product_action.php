@@ -68,22 +68,26 @@ if (isset($_GET['add'])) {
 
     $sql = "INSERT INTO trn_product (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 	mysql_query($sql, $conn) or die($sql);
-    $retrunID = mysql_insert_id();
+   $retrunID = mysql_insert_id();
 
-	foreach ($_POST['photo_file'] as $k => $file) {
-		$filename = admin_move_image_upload_dir('product', end(explode('/', $file)), 1000, '', false, 150, 150);
+	if (count($_POST['photo_file']) > 0) {
+		$index = 1;
+		foreach ($_POST['photo_file'] as $k => $file) {
+			$filename = admin_move_image_upload_dir('virsual', end(explode('/', $file)), 1000, '', false, 150, 150);
 
-		unset($insert);
-		$insert['CONTENT_ID'] = $retrunID;
-		$insert['IMG_TYPE'] = "'" . getEXT($filename) . "'";
-		$insert['IMG_PATH'] = "'" . $filename . "'";
-		$insert['CAT_ID'] = "'" .$_GET['cid']. "'";
+			unset($insert);
+			$insert['CONTENT_ID'] = $retrunID;
+			$insert['IMG_TYPE'] = 1;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['CAT_ID'] = "'" . $_GET['cid'] . "'";
+			$insert['ORDER_ID'] = "'" . $index++ . "'";
 
-		$sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
-		mysql_query($sql, $conn) or die($sql);
+			echo $sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
 	}
 
-	header('Location: product_view.php?MID='.$_GET['MID'].'&cid='.$_GET['cid'].'&LV='.$_GET['LV'].' ');
+	//header('Location: product_view.php?MID='.$_GET['MID'].'&cid='.$_GET['cid'].'&LV='.$_GET['LV'].' ');
 
 }
 

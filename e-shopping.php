@@ -54,7 +54,7 @@ require("assets/configs/function.inc.php");
 			</div>
 
 			<?php 
-			        $sql_sumorder  = " SELECT count( o.ORDER_ID ) total_order
+			     $sql_sumorder  = " SELECT count( o.ORDER_ID ) total_order
 										FROM trn_order_detail od
 										LEFT JOIN trn_order o ON od.ORDER_ID = o.ORDER_ID
 										WHERE od.CUSTOMER_ID =1 ";

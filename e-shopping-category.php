@@ -58,9 +58,9 @@ require("assets/configs/function.inc.php");
 			</div>
 
 			<?php 
-			        $sql_sumorder  = " SELECT count(ORDER_ID) total_order
-								FROM trn_order
-								WHERE CUSTOMER_ID = 1 AND FLAG = 0 ";
+			     $sql_sumorder  = " SELECT count(ORDER_ID) total_order
+								FROM trn_order_detail
+								WHERE CUSTOMER_ID = 1  ";
 
 			     $query_sumorder = mysql_query($sql_sumorder,$conn);
 
@@ -126,9 +126,9 @@ require("assets/configs/function.inc.php");
 								<span>ราคาพิเศษ : <? echo $row_proc['SALE']; ?> บาท</span>
 							</p>
 						</div>
-						<? } ?>
+						
 				</div>
-					
+				<? } ?>	
 				<? } ?>
 				</div>
 				<div class="box-pagination-main cf">
