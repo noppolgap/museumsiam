@@ -53,7 +53,7 @@ require("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Video</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('gallery',111,57); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('gallery',111,57,'video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
 							<div class="btn_action">

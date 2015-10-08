@@ -684,7 +684,7 @@ header{
 }
 .Link_tab span.LinkVideoBox , .Upload_tab span.UploadVideoBox{
 	background-image: url('../images/video.svg');
-	background-size: auto 60%;
+	background-size: auto 70%;
 }
 .Embed_tab span.EmbedAction , .Link_tab span.LinkAction , .Upload_tab span.UploadAction{
     display: inline-block;

@@ -124,9 +124,11 @@ $( document ).ready(function() {
 						msg += '</a>';
 						msg += '</div>';
 
-						$('#tabs_'+name+'_3 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]');
+						$('#tabs_'+name+'_3 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]').css('background-image','url('+returnFileExtensions(Myvalue)+')');
 
 						$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="link|@|'+Myvalue+'|@|'+Myvalue+'">');
+
+
 
 				}
 			}
@@ -464,7 +466,7 @@ function videoCallBack(name,file,original){
 		msg += '</a>';
 		msg += '</div>';
 
-    $('#tabs_' +name+'_1 .DataBlock').append(msg).show();
+    $('#tabs_' +name+'_1 .DataBlock').append(msg).show().find('span[data-Name="'+file+'"]').css('background-image','url('+returnFileExtensions(file)+')');
 
 	$('#DataBlock_'+name).append('<input type="hidden" data-value="'+file+'" name="video_'+name+'[]" value="upload|@|'+file+'|@|'+original+'">');
 
@@ -586,4 +588,26 @@ function delEditVideo(file,name,id,position){
 
 		$('#DataBlock_'+name).append('<input type="hidden" data-value="'+file+'" name="video_delete_'+name+'[]" value="'+id+'">');
 	}
+}
+function returnFileExtensions(path){
+	var my_array = path.split(".");
+	var last_element = my_array[my_array.length - 1];
+		last_element = last_element.toLowerCase();
+	var image;
+
+	switch (last_element) {
+		case "mp4":
+		case "webm":
+		case "ogv":
+					image = '../images/video2.svg'; break;
+		case "mp3":
+		case "wav":
+		case "ogg":
+		case "m4a":
+					image = '../images/sound.svg'; break;
+		case "swf": image = '../images/flash.svg'; break;
+		default   : image = '../images/file.svg'; break;
+	}
+
+	return image;
 }

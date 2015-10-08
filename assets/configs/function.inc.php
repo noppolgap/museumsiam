@@ -635,7 +635,15 @@ function mysendMail( $to , $to_name , $send , $send_name ,  $subject ,  $message
 	  return true;
 	}
 }
-function admin_upload_video($name){
+function admin_upload_video($name,$type){
+	/*
+		$type เป็น string มี 4 แบบ
+		1. 'video' สำหรับวีดีโอเท่านัน้
+		2. 'sound' สำหรับเสียงเท่านัน้
+		3. 'flash' สำหรับไฟล์ swf เท่านัน้
+		4. 'all' ได้ video sound flash
+	*/
+
 	$str = array();
 
 	$str[0];
@@ -667,10 +675,16 @@ function admin_upload_video($name){
 
 	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>'. "\n\t";
 
+switch ($type) {
+	case "video": $accept = 'video/*';break;
+	case "sound": $accept = 'audio/*';break;
+	case "flash": $accept = '.swf';break;
+	case "all"  : $accept = 'audio/*,video/*,.swf';break;
+}
 
 	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
 	$str[1] .= '<input type="hidden" name="my_name" value="' . $name . '" >' . "\n\t";
-	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="video/*" >' . "\n\t";
+	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="'.$accept.'" >' . "\n\t";
 	$str[1] .= '</form>' . "\n\t";
 
 	return $str;
@@ -689,7 +703,7 @@ function admin_view_video($id,$cat){
 			$path_image = $row['IMG_PATH'];
 			$path_name = $row['IMG_NAME'];
 			$path_type = 'Upload';
-			$style = 'class="UploadVideoBox"';
+			$style = 'class="UploadVideoBox" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"';
 		}else if($row['IMG_TYPE'] == 3){
 			$path_image = $row['IMG_PATH'];
 			$path_name = $row['IMG_NAME'];
@@ -699,7 +713,7 @@ function admin_view_video($id,$cat){
 			$path_image = $row['IMG_PATH'];
 			$path_name = $row['IMG_NAME'];
 			$path_type = 'Link';
-			$style = ' class="LinkVideoBox"';
+			$style = ' class="LinkVideoBox" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"';
 		}
 
 		$str .= '<div class="DataBlock DataBlockEdit">' . "\n\t";
@@ -808,7 +822,8 @@ function callThumbListFrontEndByID($id, $type, $staus) {
  }
 
 }
-function admin_edit_video($name,$id,$cat){
+function admin_edit_video($name,$id,$cat,$type){
+	/* เหมือนตัว add */
 	global $conn;
 
 	$str = array();
@@ -833,7 +848,18 @@ if($num  == 0){
 }else{
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
-
+		$str[0] .= '<div class="Upload_tab" data-value="'.$row['IMG_PATH'].'">';
+		$str[0] .= '<a href="#" onclick="popupUpload(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="UploadVideoBox" data-Name="'.$row['IMG_PATH'].'" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<input name="video_name" class="video_edit_name" data-value="'.$row['IMG_PATH'].'" value="'.$row['IMG_NAME'].'" onblur="editVideoName(\''.$row['IMG_PATH'].'\',\''.$name.'\', 1)" />';
+		$str[0] .= '<a href="#" onclick="popupUpload(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="UploadAction viewUpload"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<a href="#" onclick="delEditVideo(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\',1); return false;">';
+		$str[0] .= '<span class="UploadAction delUpload"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '</div>';
 	}
 	$str[0] .= '</div>'. "\n\t";
 }
@@ -884,7 +910,7 @@ if($num  == 0){
 
 		$str[0] .= '<div class="Link_tab" data-value="'.$row['IMG_PATH'].'">';
 		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
-		$str[0] .= '<span class="LinkVideoBox" data-Name="'.$row['IMG_PATH'].'"></span>';
+		$str[0] .= '<span class="LinkVideoBox" data-Name="'.$row['IMG_PATH'].'" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"></span>';
 		$str[0] .= '</a>';
 		$str[0] .= '<input name="video_name" class="video_edit_name" data-value="'.$row['IMG_PATH'].'" value="'.$row['IMG_NAME'].'" onblur="editVideoName2(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\', 3)" />';
 		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
@@ -903,13 +929,66 @@ if($num  == 0){
 
 	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>'. "\n\t";
 
+switch ($type) {
+	case "video": $accept = 'video/*';break;
+	case "sound": $accept = 'audio/*';break;
+	case "flash": $accept = '.swf';break;
+	case "all"  : $accept = 'audio/*,video/*,.swf';break;
+}
 
 	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
 	$str[1] .= '<input type="hidden" name="my_name" value="' . $name . '" >' . "\n\t";
-	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="video/*" >' . "\n\t";
+	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="'.$accept.'" >' . "\n\t";
 	$str[1] .= '</form>' . "\n\t";
 
 	return $str;
 
+}
+function returnUploadFileExtensions($path){
+
+	switch (getEXT($path)) {
+		case "mp4":
+		case "webm":
+		case "ogv":
+					$image = '../images/video2.svg'; break;
+		case "mp3":
+		case "wav":
+		case "ogg":
+		case "m4a":
+					$image = '../images/sound.svg'; break;
+		case "swf": $image = '../images/flash.svg'; break;
+		default   : $image = '../images/file.svg'; break;
+	}
+
+	return $image;
+}
+function move_video_file($original_path ,  $dir){
+	$path1 = '../../upload';
+	$path2 = $path1 . '/' . $dir;
+	$path3 = $path2 . '/' . date("Y_m") ;
+	$path4 = '../../temp';
+
+	if (!is_dir($path1)) { mkdir($path1, 0777);
+	} else { chmod($path1, 0777);
+	}
+	if (!is_dir($path2)) { mkdir($path2, 0777);
+	} else { chmod($path2, 0777);
+	}
+	if (!is_dir($path3)) { mkdir($path3, 0777);
+	} else { chmod($path3, 0777);
+	}
+	if (!is_dir($path4)) { mkdir($path4, 0777);
+	} else { chmod($path4, 0777);
+	}
+
+	copy($path4 .'/'. $original_path, $path3 . '/' . $original_path);
+	unlink($path4 .'/'. $original_path);
+
+	chmod($path1, 0755);
+	chmod($path2, 0755);
+	chmod($path3, 0755);
+	chmod($path4, 0755);
+
+	return $path3 . '/' . $original_path;
 }
 ?>
