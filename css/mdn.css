@@ -118,20 +118,20 @@
 .box-gray h3,
 .box-white h3 {
 	line-height: 31px;
-	font-size: 20px;
+	font-size: 18px;
 	color: #6e0904;
 }
 .box-gray p{
 	font-style: italic;
 	margin: 10px 0;
 	padding-left: 35px;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 25px;
 }
 .box-white p{
 	margin: 10px 0;
 	padding-left: 5px;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 25px;
 }
 
@@ -168,7 +168,7 @@
 .box-gray.noIcon span{
 	font-weight: bold;
 	font-style: italic;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 25px;
 	margin-top: 10px;
 }

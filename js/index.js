@@ -44,6 +44,7 @@ $(document).ready(function(){
 		scrollPerPage :true,
 		responsive : true,
 		mouseDrag : false,
+		stopOnHover : true
 	});
 	$(".slide-network").owlCarousel({
 		autoPlay: 5000,
@@ -55,7 +56,8 @@ $(document).ready(function(){
 		scrollPerPage :true,
 		responsive : true,
 		mouseDrag : false,
-		items : 4
+		items : 4,
+		stopOnHover : true
 	});
 	$(".slide-exhibition,.slide-archive").owlCarousel({
 		autoPlay: 5000,
@@ -68,6 +70,7 @@ $(document).ready(function(){
 		scrollPerPage :true,
 		responsive : true,
 		mouseDrag : false,
+		stopOnHover : true
 	});
 
 // 		Slide Event
@@ -78,6 +81,7 @@ $(document).ready(function(){
 		navigation : false,
 		singleItem : true,
 		pagination : false,
+		stopOnHover : true,
 		afterAction : afterAction
 	});
 	function updateResult(pos,value){

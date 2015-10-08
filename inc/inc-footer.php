@@ -85,6 +85,20 @@
 			</div>
 		</div>
 	</div>
+	<div class="part-muse">
+		<div class="container">
+			<div class="box-muse cf">
+				<div class="box-left">
+					<input type="text" placeholder="กรอกอีเมล์ของคุณ">
+				</div>
+				<div class="box-right">
+					<div class="box-btn cf">
+						<a href="" class="btn gold">สมัครรับ MUSE MAG</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="part-copy">
 		<div class="container cf">
 			<div class="box-left">

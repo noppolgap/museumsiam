@@ -1,6 +1,6 @@
 <div class="part-left-title-page">
 	<div class="box-title-page">
-		<a href="da.php"><img src="images/th/title-da.png"/></a>
+		<a href="ve.php"><img src="images/th/title-ve.png"/></a>
 	</div>
 </div>
 
@@ -14,10 +14,10 @@
 	<div class="box-menu-left">
 		<ul class="menu-left">
 			<li class="menu1"><a href="ve.php">หน้าหลัก</a></li>
-			<li class="menu2 sub"><a href="ve-category.php">นิทรรศการ</a>
+			<li class="menu2 sub"><a href="ve-exhibition.php">นิทรรศการ</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="ve-category.php">นิทรรศการถาวร</a></li>
-					<li class="submenu2"><a href="ve-category.php">นิทรรศการชั่วคราว</a></li>
+					<li class="submenu1"><a href="ve-permanent.php">นิทรรศการถาวร</a></li>
+					<li class="submenu2"><a href="ve-temporary.php">นิทรรศการชั่วคราว</a></li>
 				</ul>
 			</li>
 			<li class="menu3"><a href="ve-category.php">นิทรรศการเสมือนจริง</a></li>
