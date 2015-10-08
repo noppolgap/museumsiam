@@ -991,4 +991,14 @@ function move_video_file($original_path ,  $dir){
 
 	return $path3 . '/' . $original_path;
 }
+function del_video_file($filename){
+	if (file_exists($filename)) {
+		$path_parts = pathinfo($filename);
+		chmod($path_parts['dirname'], 0777);
+
+		unlink($filename);
+
+		chmod($path_parts['dirname'], 0755);
+	}
+}
 ?>

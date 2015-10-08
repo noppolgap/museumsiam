@@ -580,13 +580,16 @@ function delEditVideo(file,name,id,position){
 	if (confirm("คุณแน่ใจที่จะลบวีดีโอนี้นี้")){
 		if(position == 1){
 			$('#tabs_'+name+'_1 > .DataBlock div[data-value="'+file+'"]').remove();
+			var delValue = 'upload|@|'+id+'|@|'+file;
 		}else if(position == 2){
 			$('#tabs_'+name+'_2 > .DataBlock div[data-value="'+file+'"]').remove();
+			var delValue = 'embed|@|'+id+'|@|'+file;
 		}else if(position == 3){
 			$('#tabs_'+name+'_3 > .DataBlock div[data-value="'+file+'"]').remove();
+			var delValue = 'link|@|'+id+'|@|'+file;
 		}
 
-		$('#DataBlock_'+name).append('<input type="hidden" data-value="'+file+'" name="video_delete_'+name+'[]" value="'+id+'">');
+		$('#DataBlock_'+name).append('<input type="hidden" data-value="'+file+'" name="video_delete_'+name+'[]" value="'+delValue+'">');
 	}
 }
 function returnFileExtensions(path){
