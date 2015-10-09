@@ -51,9 +51,9 @@ require("../../assets/configs/function.inc.php");
 								</div>
 								<div class="clear"></div>
 							</div>
-							<div>
+							<div class="bigForm">
 								<div class="floatL form_name">วีดีโอ</div>
-								<div class="floatL form_input"><?=admin_view_video(111,57)?></div>
+								<div class="floatL form_input"><?=admin_view_video('gallery',111,57)?></div>
 								<div class="clear"></div>
 							</div>
 							<div class="btn_action">

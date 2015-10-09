@@ -135,10 +135,25 @@ function ShowDateShort($myDate) {
 	$myYear = (sprintf("%d", $myDateArray[0]) + 543) - 2500;
 	return ($myDay . " " . $myMonth . " " . $myYear);
 }
+function ShowDateFull($myDate) {
+	$myDateArray = explode("-", $myDate);
+	$myDay = sprintf("%d", $myDateArray[2]);
 
+	$myMonth = returnThaiMonth($myDateArray[1]);
+
+	$myYear = (sprintf("%d", $myDateArray[0]) + 543) - 2500;
+	return ($myDay . " " . $myMonth . " " . $myYear);
+}
 function ShowMonthYear($myDate) {
 	$myDateArray = explode("-", $myDate);
-	switch($myDateArray[1]) {
+
+	$myMonth = returnThaiMonth($myDateArray[1]);
+
+	$myYear = sprintf("%d", $myDateArray[0]) + 543;
+	return ($myMonth . " " . $myYear);
+}
+function returnThaiMonth($str){
+	switch($str) {
 		case "01" :
 			$myMonth = "มกราคม";
 			break;
@@ -176,12 +191,14 @@ function ShowMonthYear($myDate) {
 			$myMonth = "ธันวาคม";
 			break;
 	}
-	$myYear = sprintf("%d", $myDateArray[0]) + 543;
-	return ($myMonth . " " . $myYear);
+	return $myMonth;
 }
-
 function ConvertDate($str) {
-	return date("d M Y", strtotime(trim($str)));
+	if($_SESSION['LANG'] == 'TH'){
+		echo ShowDateFull(trim($str));
+	}else{
+		return date("d M Y", strtotime(trim($str)));
+	}
 }
 
 function ConvertDateToDB($str) {
@@ -313,7 +330,7 @@ function admin_upload_image_edit($name, $type, $id) {
 	$str .= '</div>' . "\n\t";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC";
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " AND IMG_TYPE = 1 ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 
 	$num = mysql_num_rows($query);
@@ -348,7 +365,7 @@ function admin_upload_image_view($name, $type, $id) {
 	$str = "";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC";
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " AND IMG_TYPE = 1 ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 	while ($row = mysql_fetch_array($query)) {
 		$str .= '<div class="thumbBoxEdit floatL p-Relative">' . "\n\t";
@@ -385,7 +402,7 @@ function str_replace_last($search, $replace, $subject) {
 function callThumbList($id, $type, $staus) {
 	global $conn;
 
-	$sql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$sql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " AND IMG_TYPE = 1 ORDER BY ORDER_ID ASC LIMIT 0 , 1";
 	$query = mysql_query($sql, $conn);
 	$num = mysql_num_rows($query);
 	if ($num == 1) {
@@ -410,7 +427,7 @@ function deleteImageList($id, $type) {
 	global $conn;
 	$dir_path = '';
 
-	$sql = "SELECT PIC_ID , IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC";
+	$sql = "SELECT PIC_ID , IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " AND IMG_TYPE = 1 ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 	while ($row = mysql_fetch_array($query)) {
 		if ($dir_path == '') {
@@ -651,7 +668,9 @@ function admin_upload_video($name,$type){
 	$str[0] .= '<div class="tabs">'. "\n\t";
 	$str[0] .= '<ul>'. "\n\t";
 	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>'. "\n\t";
+	if($type == 'video'){
 	$str[0] .= '<li><a href="#tabs_' . $name . '_2">Embed</a></li>'. "\n\t";
+	}
 	$str[0] .= '<li><a href="#tabs_' . $name . '_3">Link</a></li>'. "\n\t";
 	$str[0] .= '</ul>'. "\n\t";
 	$str[0] .= '<div id="tabs_' . $name . '_1">'. "\n\t";
@@ -659,12 +678,14 @@ function admin_upload_video($name,$type){
 	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="../images/ajax-loader.gif" alt="loading" />'. "\n\t";
 	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
 	$str[0] .= '</div>'. "\n\t";
+	if($type == 'video'){
 	$str[0] .= '<div id="tabs_' . $name . '_2">'. "\n\t";
 	$str[0] .= '<input type="text" class="Embed_input" name="Embed_input_' . $name . '" />'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button EmbedUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
 	$str[0] .= '<span class="video_note">* ใส่แค่รหัสวีดีโอ youtube เท่านั้น</span>'. "\n\t";
 	$str[0] .= '<div class="DataBlock"></div>'. "\n\t";
 	$str[0] .= '</div>'. "\n\t";
+	}
 	$str[0] .= '<div id="tabs_' . $name . '_3">'. "\n\t";
 	$str[0] .= '<input type="text" class="Link_input" name="Link_input_' . $name . '" />'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button LinkUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
@@ -679,7 +700,8 @@ switch ($type) {
 	case "video": $accept = 'video/*';break;
 	case "sound": $accept = 'audio/*';break;
 	case "flash": $accept = '.swf';break;
-	case "all"  : $accept = 'audio/*,video/*,.swf';break;
+	case "doc"	: $accept = '.docx,.doc,.xlsx,.xls,.pptx,.ppt,.pdf,.txt';break;
+	case "all"  : $accept = '*.*';break;
 }
 
 	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
@@ -690,12 +712,12 @@ switch ($type) {
 	return $str;
 
 }
-function admin_view_video($id,$cat){
+function admin_view_video($name,$id,$cat){
 	global $conn;
 
 	$str = '';
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = ".$cat." ORDER BY ORDER_ID ASC";
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = ".$cat." AND DIV_NAME = '".$name."' ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 	while ($row = mysql_fetch_array($query)) {
 
@@ -708,7 +730,7 @@ function admin_view_video($id,$cat){
 			$path_image = $row['IMG_PATH'];
 			$path_name = $row['IMG_NAME'];
 			$path_type = 'Embed';
-			$style = ' style="background-image: url(&quot;http://img.youtube.com/vi/x6tNmen4ylw/maxresdefault.jpg&quot;);"';
+			$style = ' style="background-image: url(&quot;http://img.youtube.com/vi/'.$row['IMG_PATH'].'/maxresdefault.jpg&quot;);"';
 		}else if($row['IMG_TYPE'] == 4){
 			$path_image = $row['IMG_PATH'];
 			$path_name = $row['IMG_NAME'];
@@ -827,13 +849,16 @@ function admin_edit_video($name,$id,$cat,$type){
 	global $conn;
 
 	$str = array();
+	$total = 0;
 
 	$str[0];
 
 	$str[0] .= '<div class="tabs">'. "\n\t";
 	$str[0] .= '<ul>'. "\n\t";
 	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>'. "\n\t";
+	if($type == 'video'){
 	$str[0] .= '<li><a href="#tabs_' . $name . '_2">Embed</a></li>'. "\n\t";
+	}
 	$str[0] .= '<li><a href="#tabs_' . $name . '_3">Link</a></li>'. "\n\t";
 	$str[0] .= '</ul>'. "\n\t";
 	$str[0] .= '<div id="tabs_' . $name . '_1">'. "\n\t";
@@ -848,7 +873,7 @@ if($num  == 0){
 }else{
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
-		$str[0] .= '<div class="Upload_tab" data-value="'.$row['IMG_PATH'].'">';
+		$str[0] .= '<div class="Upload_tab" data-value="'.$row['IMG_PATH'].'" data-id="'.$row['PIC_ID'].'">';
 		$str[0] .= '<a href="#" onclick="popupUpload(\''.$row['IMG_PATH'].'\'); return false;">';
 		$str[0] .= '<span class="UploadVideoBox" data-Name="'.$row['IMG_PATH'].'" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"></span>';
 		$str[0] .= '</a>';
@@ -863,7 +888,10 @@ if($num  == 0){
 	}
 	$str[0] .= '</div>'. "\n\t";
 }
+$total += $num;
+
 	$str[0] .= '</div>'. "\n\t";
+	if($type == 'video'){
 	$str[0] .= '<div id="tabs_' . $name . '_2">'. "\n\t";
 	$str[0] .= '<input type="text" class="Embed_input" name="Embed_input_' . $name . '" />'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button EmbedUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
@@ -877,7 +905,7 @@ if($num  == 0){
 }else{
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
-		$str[0] .= '<div class="Embed_tab" data-value="'.$row['IMG_PATH'].'">';
+		$str[0] .= '<div class="Embed_tab" data-value="'.$row['IMG_PATH'].'" data-id="'.$row['PIC_ID'].'">';
 		$str[0] .= '<a href="#" onclick="popupEmbed(\''.$row['IMG_PATH'].'\'); return false;">';
 		$str[0] .= '<span data-Name="'.$row['IMG_PATH'].'" style="background-image:url(http://img.youtube.com/vi/'.$row['IMG_NAME'].'/maxresdefault.jpg)"></span>';
 		$str[0] .= '</a>';
@@ -892,8 +920,10 @@ if($num  == 0){
 	}
 	$str[0] .= '</div>'. "\n\t";
 }
+$total += $num;
 
 	$str[0] .= '</div>'. "\n\t";
+	}
 	$str[0] .= '<div id="tabs_' . $name . '_3">'. "\n\t";
 	$str[0] .= '<input type="text" class="Link_input" name="Link_input_' . $name . '" />'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button LinkUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
@@ -908,7 +938,7 @@ if($num  == 0){
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
 
-		$str[0] .= '<div class="Link_tab" data-value="'.$row['IMG_PATH'].'">';
+		$str[0] .= '<div class="Link_tab" data-value="'.$row['IMG_PATH'].'" data-id="'.$row['PIC_ID'].'">';
 		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
 		$str[0] .= '<span class="LinkVideoBox" data-Name="'.$row['IMG_PATH'].'" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"></span>';
 		$str[0] .= '</a>';
@@ -923,8 +953,12 @@ if($num  == 0){
 	}
 	$str[0] .= '</div>'. "\n\t";
 }
+$total += $num;
 
 	$str[0] .= '</div>'. "\n\t";
+	if($total > 1){
+	$str[0] .= '<div class="OrderImageBtn p-Absolute OrderVideoBtn" data-name="' . $name . '" data-cat="' . $cat . '" data-cID="' . $id . '"></div>'. "\n\t";
+	}
 	$str[0] .= '</div>'. "\n\t";
 
 	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>'. "\n\t";
@@ -933,7 +967,8 @@ switch ($type) {
 	case "video": $accept = 'video/*';break;
 	case "sound": $accept = 'audio/*';break;
 	case "flash": $accept = '.swf';break;
-	case "all"  : $accept = 'audio/*,video/*,.swf';break;
+	case "doc"	: $accept = '.docx,.doc,.xlsx,.xls,.pptx,.ppt,.pdf,.txt';break;
+	case "all"  : $accept = '*.*';break;
 }
 
 	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
@@ -950,13 +985,39 @@ function returnUploadFileExtensions($path){
 		case "mp4":
 		case "webm":
 		case "ogv":
+		case "wmv":
+		case "flv":
+		case "mpg":
+		case "avi":
 					$image = '../images/video2.svg'; break;
 		case "mp3":
 		case "wav":
 		case "ogg":
 		case "m4a":
+		case "wma":
 					$image = '../images/sound.svg'; break;
 		case "swf": $image = '../images/flash.svg'; break;
+		case "docx":
+		case "doc":
+					$image = '../images/word.svg'; break;
+		case "xlsx":
+		case "xls":
+					$image = '../images/excel.svg'; break;
+		case "pptx":
+		case "ppt":
+					$image = '../images/powerpoint.svg'; break;
+		case "rar":
+		case "zip":
+		case "7z":
+					$image = '../images/zip.svg'; break;
+		case "pdf": $image = '../images/pdf.svg'; break;
+		case "txt": $image = '../images/txt.svg'; break;
+		case "png":
+		case "jpg":
+		case "jpeg":
+		case "gip":
+		case "bmp":
+					$image = '../images/picture.svg'; break;
 		default   : $image = '../images/file.svg'; break;
 	}
 

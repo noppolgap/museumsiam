@@ -718,3 +718,16 @@ header{
 .DataBlockEdit .video_edit_name{
 	margin-right: 120px;
 }
+.OrderFileThumb{
+	height: 22px;
+	width: 36px;
+	margin-right: 10px;
+	background-color: #ddd;
+	display: inline-block;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: auto 80%;
+}
+#sortable.sortableFile li.ui-state-default{
+	height: 22px;
+}
