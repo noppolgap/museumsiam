@@ -93,6 +93,16 @@ if($_POST['action'] == 'add'){
 		}
 	}
 
+	if (count($_POST['order_gallery_position']) > 0) {
+		foreach ($_POST['order_gallery_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_ID = " . $val;
+
+			$sql = "UPDATE trn_content_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
 }else if($_POST['action'] == 'del'){
 	echo 3;
 	//video action delete

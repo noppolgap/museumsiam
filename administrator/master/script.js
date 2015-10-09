@@ -93,7 +93,7 @@ $( document ).ready(function() {
 							msg += '</a>';
 							msg += '</div>';
 
-							$('#tabs_'+name+'_2 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]').css('background-image','url(http://img.youtube.com/vi/'+Myvalue+'/maxresdefault.jpg)');
+							$('#tabs_'+name+'_2 .DataBlock').append(msg).show().find('span[data-Name="'+Myvalue+'"]').css('background-image','url(http://img.youtube.com/vi/'+Myvalue+'/maxresdefault.jpg)');
 
 							$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="embed|@|'+Myvalue+'|@|'+Myvalue+'">');
 					}
@@ -124,7 +124,7 @@ $( document ).ready(function() {
 						msg += '</a>';
 						msg += '</div>';
 
-						$('#tabs_'+name+'_3 .DataBlock').append(msg).find('span[data-Name="'+Myvalue+'"]').css('background-image','url('+returnFileExtensions(Myvalue)+')');
+						$('#tabs_'+name+'_3 .DataBlock').append(msg).show().find('span[data-Name="'+Myvalue+'"]').css('background-image','url('+returnFileExtensions(Myvalue)+')');
 
 						$('#DataBlock_'+name).append('<input type="hidden" data-value="'+Myvalue+'" name="video_'+name+'[]" value="link|@|'+Myvalue+'|@|'+Myvalue+'">');
 
@@ -135,6 +135,16 @@ $( document ).ready(function() {
 			$('input[name="Link_input_' + name + '"]').val('');
 	    });
 	}
+	if($('.OrderVideoBtn').length > 0){
+		$('.OrderVideoBtn').click(function(e) {
+
+			orderVideoPage($(this).attr('data-name') , $(this).attr('data-cat') , $(this).attr('data-cID'));
+
+			e.preventDefault();
+			e.stopPropagation();
+		});
+	}
+
 	if($('.image_Box').length > 0){
 		$('.OrderImageBtn').click(function(e) {
 
@@ -246,6 +256,35 @@ $( document ).ready(function() {
 		$( "#sortable" ).disableSelection();
 	}
 
+	if($( ".sortableFile" ).length > 0){
+	    if(pop == true){
+		    var pop_location = window.opener;
+		}else{
+			var pop_location = parent;
+		}
+	    var start = 0;
+	    var stop = 0;
+
+    	$( "#sortable" ).sortable({
+		    placeholder: "ui-state-highlight",
+			update: function(event, ui) {
+	            $("#sortable").children().each(function(i) {
+	                /*var li = $(this);
+	                li.text(i+1);*/
+
+	                pop_location.orderFileAdd(box,$(this).attr('data-id'),(i+1));
+	            });
+	        },
+	        start: function( event, ui ) {
+	        	start = ui.item.index();
+	        },
+	        stop: function( event, ui ) {
+			    stop = ui.item.index();
+
+	        }
+	    });
+		$( "#sortable" ).disableSelection();
+	}
     if($( ".tabs" ).length > 0){
 		$( ".tabs" ).tabs();
 	}
@@ -602,15 +641,68 @@ function returnFileExtensions(path){
 		case "mp4":
 		case "webm":
 		case "ogv":
+		case "wmv":
+		case "flv":
+		case "mpg":
+		case "avi":
 					image = '../images/video2.svg'; break;
 		case "mp3":
 		case "wav":
 		case "ogg":
 		case "m4a":
+		case "wma":
 					image = '../images/sound.svg'; break;
 		case "swf": image = '../images/flash.svg'; break;
+		case "docx":
+		case "doc":
+					image = '../images/word.svg'; break;
+		case "xlsx":
+		case "xls":
+					image = '../images/excel.svg'; break;
+		case "pptx":
+		case "ppt":
+					image = '../images/powerpoint.svg'; break;
+		case "rar":
+		case "zip":
+		case "7z":
+					image = '../images/zip.svg'; break;
+		case "pdf": image = '../images/pdf.svg'; break;
+		case "txt": image = '../images/txt.svg'; break;
+		case "png":
+		case "jpg":
+		case "jpeg":
+		case "gip":
+		case "bmp":
+					image = '../images/picture.svg'; break;
 		default   : image = '../images/file.svg'; break;
+
 	}
 
 	return image;
+}
+function orderVideoPage(page,cat,id){
+	var dataCount = $('#DataBlock_'+page+' input').length;
+	if(dataCount > 0){
+		alert('ขออภัย คุณไม่สามารถจัดเรียงรูปไฟล์ได้ถ้ามีการเพิ่มไฟล์ใหม่ กรุณาบันทึก ก่อน แล้วจึงเรียกใช้ ความสามารถ นี้ใหม่');
+	}else{
+		try{
+			$.colorbox({
+				transition: 'fade',
+				iframe:true,
+				innerWidth:500,
+				innerHeight:650,
+				href: '../master/file_order.php?page='+page+'&cat='+cat+'&cID='+id
+			});
+		} catch(err) {
+			popup('../master/file_order.php?pop&page='+page+'&cat='+cat+'&cID='+id,'orderFile',500,650);
+		}
+	}
+}
+function orderFileAdd(page,id,position){
+		var Count_input = $('#DataBlock_'+page+' input[name="order_position['+id+']"]').length;
+		if(Count_input == 0){
+			$('#DataBlock_'+page).append('<input type="hidden" name="order_'+page+'_position['+id+']" value="'+position+'">');
+		}else{
+			$('#DataBlock_'+page+' input[name="order_'+page+'_position['+id+']"]').val(position);
+		}
 }
