@@ -58,7 +58,7 @@ require("assets/configs/function.inc.php");
 
 			    $sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
 						   WHERE REF_WEBBOARD_ID = 0
-						   AND FLAG <>2 ORDER BY ORDER_DATA DESC LIMIT 0 , 30";
+						   AND FLAG = 0 ORDER BY ORDER_DATA DESC LIMIT 0 , 30";
 
 				$query_qa = mysql_query($sq_qa, $conn);
 
@@ -81,7 +81,7 @@ require("assets/configs/function.inc.php");
 				<?php while($row = mysql_fetch_array($query_qa)) {
 					////ส่วนคำตอบ
 				   $sq_ans = " SELECT COUNT( WEBBOARD_ID ) ans, COUNT( VISIT_COUNT ) re FROM trn_webboard
-								WHERE REF_WEBBOARD_ID = ".$row['WEBBOARD_ID']." AND FLAG <>2 ";
+								WHERE REF_WEBBOARD_ID = ".$row['WEBBOARD_ID']." AND FLAG = 2 ";
 
 					$query_ans = mysql_query($sq_ans, $conn);
 
