@@ -15,28 +15,66 @@
 	background-color: #6e0904;
 }
 ul.menu-left li{
-	padding: 30px 0px 30px 35px;
+	padding: 30px 0px 30px 50px;
 	font-size: 16px;
+	position: relative;
 }
 ul.menu-left li.active{
 	background-color: #6e0904;
 }
 ul.menu-left li a{
 	color: #c78385;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 ul.menu-left li.active a{
 	color: #fff;
 }
+ul.menu-left li:before{
+	content: '';
+	display: block;
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	top: 24px;
+	left: 15px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
 
-
-
-
-
-
-
-
-
-
-
+ul.menu-left li.ac:before{
+	background: url(../images/account/icon-humen.png) center center no-repeat;
+}
+ul.menu-left li.ed:before{
+	background: url(../images/account/icon-edit.png) center center no-repeat;
+}
+ul.menu-left li.ps:before{
+	
+}
+ul.menu-left li.pc:before{
+	
+}
+ul.menu-left li.es:before{
+	
+}
+ul.menu-left li.eb:before{
+	
+}
+ul.menu-left li.mu:before{
+	
+}
+ul.menu-left li.md:before{
+	
+}
+ul.menu-left li.me:before{
+	
+}
+ul.menu-left li.mn:before{
+	
+}
 
 
