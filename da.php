@@ -46,16 +46,103 @@ require("assets/configs/function.inc.php");
 		<div class="box-right main-content">
 
 			<div class="box-category-main news BBlack">
+				
+				
+				<?php 
+				$sqlStr =" SELECT
+									CONTENT_CAT_ID,
+									CONTENT_CAT_DESC_LOC,
+									CONTENT_CAT_DESC_ENG,
+									LINK_URL,
+									IS_LAST_NODE,
+									REF_SUB_MODULE_ID
+							FROM
+								trn_content_category
+							WHERE
+								REF_MODULE_ID = $digial_module_id
+							AND FLAG = 0
+							AND ORDER_DATA = (
+								SELECT
+									max(ORDER_DATA)
+								FROM
+									trn_content_category
+								WHERE
+									REF_MODULE_ID = $digial_module_id
+								AND FLAG = 0
+							)";
+							
+							$rsCat = mysql_query($sqlStr) or die(mysql_error());
+							$rowCat = mysql_fetch_array($rsCat) ;
+							
+							
+				?>
 				<div class="box-title cf">
-					<h2>โบราณวัตถุ</h2>
+					<h2><?=$rowCat['CONTENT_CAT_DESC_LOC']?></h2>
 					<div class="box-btn">
-						<a href="da-category.php" class="btn gold">ดูทั้งหมด</a>
+						<a href="da-all-black.php?MID=<?=$digial_module_id?>&CID=<?=$rowCat['CONTENT_CAT_ID']?>" class="btn gold">ดูทั้งหมด</a>
 					</div>
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
-						
-						<div class="box-tumb cf">
+						<?php 
+						$contentSql = " SELECT
+												cat.CONTENT_CAT_DESC_LOC,
+												cat.CONTENT_CAT_DESC_ENG,
+												cat.CONTENT_CAT_ID,
+												content.CONTENT_ID,
+												content.CONTENT_DESC_LOC,
+												content.CONTENT_DESC_ENG,
+												content.BRIEF_LOC,
+												content.BRIEF_ENG,
+												content.EVENT_START_DATE,
+												content.EVENT_END_DATE,
+												content.CREATE_DATE ,
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+											FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $digial_module_id
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = ".$rowCat['CONTENT_CAT_ID'] ;
+						$contentSql .="		AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+												ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+												
+							$rsContent = mysql_query($contentSql) or die(mysql_error());
+							while ($rowContent = mysql_fetch_array($rsContent) )
+							{
+								echo '<div class="box-tumb cf">';
+							echo '<a href="">';
+								echo '<div class="box-pic">';
+									echo '<img src="http://placehold.it/274x205">';
+								echo '</div>';
+							echo '</a>';
+							echo '<div class="box-text">';
+								echo '<a href="">';
+									echo '<p class="text-title">';
+										echo 'Levitated Mass 340 Ton Giant Stone';
+									echo '</p>';
+								echo '</a>';
+								echo '<p class="text-date">';
+									echo '28 พ.ย. 2559';
+								echo '</p>';
+								echo '<p class="text-des">';
+									echo 'Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..';
+								echo '</p>';
+								echo '<div class="box-btn cf">';
+									echo '<a href="" class="btn red">อ่านเพิ่มเติม</a>';
+									echo '<div class="box-btn-social cf">';
+										echo '<a href="#" class="btn-socila fb"></a>';
+										echo '<a href="#" class="btn-socila tw"></a>';
+									echo '</div>';
+								echo '</div>';
+							echo '</div>';
+						echo '</div>';
+							}
+						?>
+						<!-- <div class="box-tumb cf">
 							<a href="">
 								<div class="box-pic">
 									<img src="http://placehold.it/274x205">
@@ -134,7 +221,7 @@ require("assets/configs/function.inc.php");
 										<a href="#" class="btn-socila tw"></a>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 						
 					</div>

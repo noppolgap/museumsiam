@@ -27,7 +27,12 @@ require("assets/configs/function.inc.php");
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
-			 <?include ('inc/inc-breadcrumbs.php');?> 
+			<ol class="cf">
+		<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="km.php">ระบบการจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active">เว็บบอร์ด</li>
+				</ol>
 		</div>
 	</div>
 </div>
@@ -37,7 +42,7 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include ('inc/inc-category-menu.php'); ?>
+			<?php include('inc/inc-left-content-km.php'); ?>
 		</div>
 		<div class="box-right main-content">
 

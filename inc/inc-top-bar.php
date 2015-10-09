@@ -15,6 +15,8 @@ if ($_SESSION['LANG'] == 'TH')
 	require ("inc-th-lang.php");
 else if ($_SESSION['LANG'] == 'EN')
 	require ("inc-en-lang.php");
+
+require ("inc-cat-id-conf.php");
 ?>
 <div class="part-top-bar">
 	<div class="box-top">

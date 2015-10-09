@@ -135,10 +135,25 @@ function ShowDateShort($myDate) {
 	$myYear = (sprintf("%d", $myDateArray[0]) + 543) - 2500;
 	return ($myDay . " " . $myMonth . " " . $myYear);
 }
+function ShowDateFull($myDate) {
+	$myDateArray = explode("-", $myDate);
+	$myDay = sprintf("%d", $myDateArray[2]);
 
+	$myMonth = returnThaiMonth($myDateArray[1]);
+
+	$myYear = (sprintf("%d", $myDateArray[0]) + 543) - 2500;
+	return ($myDay . " " . $myMonth . " " . $myYear);
+}
 function ShowMonthYear($myDate) {
 	$myDateArray = explode("-", $myDate);
-	switch($myDateArray[1]) {
+
+	$myMonth = returnThaiMonth($myDateArray[1]);
+
+	$myYear = sprintf("%d", $myDateArray[0]) + 543;
+	return ($myMonth . " " . $myYear);
+}
+function returnThaiMonth($str){
+	switch($str) {
 		case "01" :
 			$myMonth = "มกราคม";
 			break;
@@ -176,12 +191,14 @@ function ShowMonthYear($myDate) {
 			$myMonth = "ธันวาคม";
 			break;
 	}
-	$myYear = sprintf("%d", $myDateArray[0]) + 543;
-	return ($myMonth . " " . $myYear);
+	return $myMonth;
 }
-
 function ConvertDate($str) {
-	return date("d M Y", strtotime(trim($str)));
+	if($_SESSION['LANG'] == 'TH'){
+		echo ShowDateFull(trim($str));
+	}else{
+		return date("d M Y", strtotime(trim($str)));
+	}
 }
 
 function ConvertDateToDB($str) {
@@ -635,7 +652,15 @@ function mysendMail( $to , $to_name , $send , $send_name ,  $subject ,  $message
 	  return true;
 	}
 }
-function admin_upload_video($name){
+function admin_upload_video($name,$type){
+	/*
+		$type เป็น string มี 4 แบบ
+		1. 'video' สำหรับวีดีโอเท่านัน้
+		2. 'sound' สำหรับเสียงเท่านัน้
+		3. 'flash' สำหรับไฟล์ swf เท่านัน้
+		4. 'all' ได้ video sound flash
+	*/
+
 	$str = array();
 
 	$str[0];
@@ -643,7 +668,9 @@ function admin_upload_video($name){
 	$str[0] .= '<div class="tabs">'. "\n\t";
 	$str[0] .= '<ul>'. "\n\t";
 	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>'. "\n\t";
+	if($type == 'video'){
 	$str[0] .= '<li><a href="#tabs_' . $name . '_2">Embed</a></li>'. "\n\t";
+	}
 	$str[0] .= '<li><a href="#tabs_' . $name . '_3">Link</a></li>'. "\n\t";
 	$str[0] .= '</ul>'. "\n\t";
 	$str[0] .= '<div id="tabs_' . $name . '_1">'. "\n\t";
@@ -651,12 +678,14 @@ function admin_upload_video($name){
 	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="../images/ajax-loader.gif" alt="loading" />'. "\n\t";
 	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
 	$str[0] .= '</div>'. "\n\t";
+	if($type == 'video'){
 	$str[0] .= '<div id="tabs_' . $name . '_2">'. "\n\t";
 	$str[0] .= '<input type="text" class="Embed_input" name="Embed_input_' . $name . '" />'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button EmbedUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
 	$str[0] .= '<span class="video_note">* ใส่แค่รหัสวีดีโอ youtube เท่านั้น</span>'. "\n\t";
 	$str[0] .= '<div class="DataBlock"></div>'. "\n\t";
 	$str[0] .= '</div>'. "\n\t";
+	}
 	$str[0] .= '<div id="tabs_' . $name . '_3">'. "\n\t";
 	$str[0] .= '<input type="text" class="Link_input" name="Link_input_' . $name . '" />'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button LinkUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
@@ -667,10 +696,17 @@ function admin_upload_video($name){
 
 	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>'. "\n\t";
 
+switch ($type) {
+	case "video": $accept = 'video/*';break;
+	case "sound": $accept = 'audio/*';break;
+	case "flash": $accept = '.swf';break;
+	case "doc"	: $accept = '.swf';break;
+	case "all"  : $accept = 'audio/*,video/*,.swf';break;
+}
 
 	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
 	$str[1] .= '<input type="hidden" name="my_name" value="' . $name . '" >' . "\n\t";
-	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="video/*" >' . "\n\t";
+	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="'.$accept.'" >' . "\n\t";
 	$str[1] .= '</form>' . "\n\t";
 
 	return $str;
@@ -689,7 +725,7 @@ function admin_view_video($id,$cat){
 			$path_image = $row['IMG_PATH'];
 			$path_name = $row['IMG_NAME'];
 			$path_type = 'Upload';
-			$style = 'class="UploadVideoBox"';
+			$style = 'class="UploadVideoBox" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"';
 		}else if($row['IMG_TYPE'] == 3){
 			$path_image = $row['IMG_PATH'];
 			$path_name = $row['IMG_NAME'];
@@ -699,7 +735,7 @@ function admin_view_video($id,$cat){
 			$path_image = $row['IMG_PATH'];
 			$path_name = $row['IMG_NAME'];
 			$path_type = 'Link';
-			$style = ' class="LinkVideoBox"';
+			$style = ' class="LinkVideoBox" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"';
 		}
 
 		$str .= '<div class="DataBlock DataBlockEdit">' . "\n\t";
@@ -808,7 +844,8 @@ function callThumbListFrontEndByID($id, $type, $staus) {
  }
 
 }
-function admin_edit_video($name,$id,$cat){
+function admin_edit_video($name,$id,$cat,$type){
+	/* เหมือนตัว add */
 	global $conn;
 
 	$str = array();
@@ -818,7 +855,9 @@ function admin_edit_video($name,$id,$cat){
 	$str[0] .= '<div class="tabs">'. "\n\t";
 	$str[0] .= '<ul>'. "\n\t";
 	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>'. "\n\t";
+	if($type == 'video'){
 	$str[0] .= '<li><a href="#tabs_' . $name . '_2">Embed</a></li>'. "\n\t";
+	}
 	$str[0] .= '<li><a href="#tabs_' . $name . '_3">Link</a></li>'. "\n\t";
 	$str[0] .= '</ul>'. "\n\t";
 	$str[0] .= '<div id="tabs_' . $name . '_1">'. "\n\t";
@@ -833,11 +872,23 @@ if($num  == 0){
 }else{
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
-
+		$str[0] .= '<div class="Upload_tab" data-value="'.$row['IMG_PATH'].'">';
+		$str[0] .= '<a href="#" onclick="popupUpload(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="UploadVideoBox" data-Name="'.$row['IMG_PATH'].'" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<input name="video_name" class="video_edit_name" data-value="'.$row['IMG_PATH'].'" value="'.$row['IMG_NAME'].'" onblur="editVideoName(\''.$row['IMG_PATH'].'\',\''.$name.'\', 1)" />';
+		$str[0] .= '<a href="#" onclick="popupUpload(\''.$row['IMG_PATH'].'\'); return false;">';
+		$str[0] .= '<span class="UploadAction viewUpload"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '<a href="#" onclick="delEditVideo(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\',1); return false;">';
+		$str[0] .= '<span class="UploadAction delUpload"></span>';
+		$str[0] .= '</a>';
+		$str[0] .= '</div>';
 	}
 	$str[0] .= '</div>'. "\n\t";
 }
 	$str[0] .= '</div>'. "\n\t";
+	if($type == 'video'){
 	$str[0] .= '<div id="tabs_' . $name . '_2">'. "\n\t";
 	$str[0] .= '<input type="text" class="Embed_input" name="Embed_input_' . $name . '" />'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button EmbedUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
@@ -868,6 +919,7 @@ if($num  == 0){
 }
 
 	$str[0] .= '</div>'. "\n\t";
+	}
 	$str[0] .= '<div id="tabs_' . $name . '_3">'. "\n\t";
 	$str[0] .= '<input type="text" class="Link_input" name="Link_input_' . $name . '" />'. "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button LinkUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
@@ -884,7 +936,7 @@ if($num  == 0){
 
 		$str[0] .= '<div class="Link_tab" data-value="'.$row['IMG_PATH'].'">';
 		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
-		$str[0] .= '<span class="LinkVideoBox" data-Name="'.$row['IMG_PATH'].'"></span>';
+		$str[0] .= '<span class="LinkVideoBox" data-Name="'.$row['IMG_PATH'].'" style="background-image:url('.returnUploadFileExtensions($row['IMG_PATH']).')"></span>';
 		$str[0] .= '</a>';
 		$str[0] .= '<input name="video_name" class="video_edit_name" data-value="'.$row['IMG_PATH'].'" value="'.$row['IMG_NAME'].'" onblur="editVideoName2(\''.$row['IMG_PATH'].'\',\''.$name.'\',\''.$row['PIC_ID'].'\', 3)" />';
 		$str[0] .= '<a href="#" onclick="popupLink(\''.$row['IMG_PATH'].'\'); return false;">';
@@ -903,13 +955,87 @@ if($num  == 0){
 
 	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>'. "\n\t";
 
+switch ($type) {
+	case "video": $accept = 'video/*';break;
+	case "sound": $accept = 'audio/*';break;
+	case "flash": $accept = '.swf';break;
+	case "doc"	: $accept = '.swf';break;
+	case "all"  : $accept = 'audio/*,video/*,.swf';break;
+}
 
 	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
 	$str[1] .= '<input type="hidden" name="my_name" value="' . $name . '" >' . "\n\t";
-	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="video/*" >' . "\n\t";
+	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="'.$accept.'" >' . "\n\t";
 	$str[1] .= '</form>' . "\n\t";
 
 	return $str;
 
+}
+function returnUploadFileExtensions($path){
+
+	switch (getEXT($path)) {
+		case "mp4":
+		case "webm":
+		case "ogv":
+		case "wmv":
+		case "flv":
+					$image = '../images/video2.svg'; break;
+		case "mp3":
+		case "wav":
+		case "ogg":
+		case "m4a":
+		case "wma":
+					$image = '../images/sound.svg'; break;
+		case "swf": $image = '../images/flash.svg'; break;
+		case "docx":
+		case "doc":
+					$image = '../images/word.svg'; break;
+		case "xlsx":
+		case "xls":
+					$image = '../images/excel.svg'; break;
+		case "pdf": $image = '../images/pdf.svg'; break;
+		default   : $image = '../images/file.svg'; break;
+	}
+
+	return $image;
+}
+function move_video_file($original_path ,  $dir){
+	$path1 = '../../upload';
+	$path2 = $path1 . '/' . $dir;
+	$path3 = $path2 . '/' . date("Y_m") ;
+	$path4 = '../../temp';
+
+	if (!is_dir($path1)) { mkdir($path1, 0777);
+	} else { chmod($path1, 0777);
+	}
+	if (!is_dir($path2)) { mkdir($path2, 0777);
+	} else { chmod($path2, 0777);
+	}
+	if (!is_dir($path3)) { mkdir($path3, 0777);
+	} else { chmod($path3, 0777);
+	}
+	if (!is_dir($path4)) { mkdir($path4, 0777);
+	} else { chmod($path4, 0777);
+	}
+
+	copy($path4 .'/'. $original_path, $path3 . '/' . $original_path);
+	unlink($path4 .'/'. $original_path);
+
+	chmod($path1, 0755);
+	chmod($path2, 0755);
+	chmod($path3, 0755);
+	chmod($path4, 0755);
+
+	return $path3 . '/' . $original_path;
+}
+function del_video_file($filename){
+	if (file_exists($filename)) {
+		$path_parts = pathinfo($filename);
+		chmod($path_parts['dirname'], 0777);
+
+		unlink($filename);
+
+		chmod($path_parts['dirname'], 0755);
+	}
 }
 ?>

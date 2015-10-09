@@ -1,0 +1,18 @@
+.part-other{
+	display: none;
+}
+.system-row{
+	display: table;
+	margin: 0 auto;
+}
+.system-row .box-other {
+	width: 190px;
+	margin: 10px 20px;
+	float: left;
+}
+.system-row .box-other .text-name {
+	font-size: 16px;
+	text-align: center;
+	color: #6f0600;
+	margin: 13px 0;
+}

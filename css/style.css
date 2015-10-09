@@ -80,8 +80,7 @@ hr {
 	border: none !important;
 }
 .box-text .text-title{
-/* 	 */
-	font-size: 22px;
+	font-size: 18px;
 	color: #6e0904;
 	line-height: 27px;
 	height: 54px;
@@ -550,6 +549,32 @@ ul.submenu-top li:hover{
 	display: inline-block;
 	margin: 10px 45px;
 }
+.part-muse{
+	background-color: #5c0202;
+}
+.part-muse .box-muse{
+	width: 480px;
+	margin: 0 auto;
+	padding: 15px 0px;
+}
+.part-muse input[type="text"] {
+	width: 280px;
+	height: 35px;
+	border: none;
+	padding: 0 12px;
+	background-color: rgba(255, 255, 255, 0.15);
+	margin: 0;
+	color: #fff;
+	line-height: 35px;
+	font-style: italic;
+}
+.part-muse .box-btn .btn{
+	width: inherit;
+	height: 35px;
+	line-height: 35px;
+	width: 185px;
+}
+
 
 
 .part-copy{

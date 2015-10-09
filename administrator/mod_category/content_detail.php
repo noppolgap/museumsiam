@@ -154,6 +154,18 @@ require ("../../assets/configs/function.inc.php");
 							<div class="clear"></div>
 							</div>
 
+<div>
+								<div class="floatL form_name">Video</div>
+								<div class="floatL form_input"><?=admin_view_video('video', $id, $row['CAT_ID']) ?></div>
+								<div class="clear"></div>
+							</div>
+							
+							<div>
+								<div class="floatL form_name">Other File</div>
+								<div class="floatL form_input"><?=admin_view_video('other', $id, $row['CAT_ID']) ?></div>
+								<div class="clear"></div>
+							</div>
+							
 							<? } ?>
 
 							<div class="btn_action">
@@ -187,11 +199,11 @@ require ("../../assets/configs/function.inc.php");
 			}
 		</style>
 		<script type="text/javascript">
-		$(document).ready(function () {
-			
-			tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
-		});
-		
+			$(document).ready(function() {
+
+				tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
+			});
+
 		</script>
 	</body>
 </html>

@@ -177,22 +177,22 @@ require("assets/configs/function.inc.php");
 			<div class="box-slide-big">
 				<div id="sync1" class="owl-carousel">
 					<div class="slide-content">
-						<img src="http://placehold.it/754x562">
+						<img src="http://placehold.it/656x489">
 					</div>
 					<div class="slide-content">
-						<img src="http://placehold.it/754x562/ccc">
+						<img src="http://placehold.it/656x489/ccc">
 					</div>
 					<div class="slide-content">
-						<img src="http://placehold.it/754x562">
+						<img src="http://placehold.it/656x489">
 					</div>
 					<div class="slide-content">
-						<img src="http://placehold.it/754x562/ccc">
+						<img src="http://placehold.it/656x489/ccc">
 					</div>
 					<div class="slide-content">
-						<img src="http://placehold.it/754x562">
+						<img src="http://placehold.it/656x489">
 					</div>
 					<div class="slide-content">
-						<img src="http://placehold.it/754x562/ccc">
+						<img src="http://placehold.it/656x489/ccc">
 					</div>
 				</div>
 				<a class="btn-arrow-slide pev"></a>

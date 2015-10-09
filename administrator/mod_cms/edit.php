@@ -22,7 +22,7 @@ require("../../assets/configs/function.inc.php");
 				<div class="mod-body-main-content">
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 					<div class="formCms">
-						<form action="?" method="post" name="formcms">
+						<form action="action.php" method="post" name="formcms">
 							<div>
 								<div class="floatL form_name">ชื่อ</div>
 								<div class="floatL form_input"><input type="text" name="name" value="my name it musum siam" class="w90p" /></div>
@@ -53,10 +53,11 @@ require("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Video</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('gallery',111,57); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('gallery',111,57,'video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
 							<div class="btn_action">
+								<input type="hidden" name="action" value="edit">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">

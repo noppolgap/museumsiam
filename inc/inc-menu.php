@@ -32,7 +32,8 @@
 								$sqlStr = "SELECT
 												MODULE_ID,
 												MODULE_NAME_LOC,
-												MODULE_NAME_ENG
+												MODULE_NAME_ENG,
+												LINK_URL
 											FROM
 												sys_app_module
 											WHERE
@@ -43,7 +44,7 @@
 								$query = mysql_query($sqlStr, $conn);
 								$classIdx = 1;
  								while($row = mysql_fetch_array($query)) {
-									echo '<a href="category.php?MID='.$row['MODULE_ID'].'"><li class="sub'.$classIdx++.'">'.$row['MODULE_NAME_LOC'].'</li></a>';
+									echo '<a href="'.$row['LINK_URL'].'"?MID='.$row['MODULE_ID'].'"><li class="sub'.$classIdx++.'">'.$row['MODULE_NAME_LOC'].'</li></a>';
 								}				
 							?>
 							<!--<a href="category.php?MID=2"><li class="sub1">ระบบการจัดการความรู้</li></a>-->

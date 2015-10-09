@@ -10,7 +10,7 @@ $uploadfile = $uploaddir.'/'.$name;
 	if(move_uploaded_file($_FILES["my_files"]["tmp_name"],$uploadfile)){
 		$staus = "parent.videoCallBack('".$_POST['my_name']."','".$name."','".str_replace(" ","_",$original[0])."');";
 	} else {
-		$staus = "parent.videoAlert('".$_POST['my_name']."','".str_replace(" ","_",$original[0])."'');";
+		$staus = "parent.videoAlert('".$_POST['my_name']."','".str_replace(" ","_",$original[0])."');";
 	}
 
 chmod($uploaddir, 0755);

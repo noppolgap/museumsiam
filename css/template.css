@@ -149,12 +149,12 @@ hr.line-red{
 	margin: 20px 0 30px;
 }
 .box-right.main-content .box-title-system h1{
-	font-size: 35px;
+	font-size: 22px;
 	float: left;
 }
 .box-right.main-content .box-title-system .box-btn {
 	float: right;
-	margin-top: 5px;
+/* 	margin-top: 5px; */
 }
 .box-right.main-content .box-title-system .box-btn .btn.red {
 	height: 25px;
@@ -202,8 +202,8 @@ hr.line-red{
 }
 .box-right.main-content .box-title h2{
 	float: left;
-	font-size: 20px;
-	line-height: 37px;
+	font-size: 18px;
+	line-height: 33px;
 	color: #fff;
 }
 .box-right.main-content .box-title .box-btn{
@@ -626,7 +626,7 @@ ul.pagination li a.btn-arrow-right:hover{
 	font-size: 40px;
 }
 .box-title-system.news .box-btn{
-	margin-top: 7px;
+/* 	margin-top: 7px; */
 }
 .box-title-system.news .box-btn a{
 	width: inherit;
@@ -669,7 +669,7 @@ ul.pagination li a.btn-arrow-right:hover{
 }
 .box-title-main .box-text{
 	display: inline-block;
-	left: -3px;
+	left: -4px;
 	width: 480px;
 }
 .box-title-main .box-text p.text-title{
@@ -713,7 +713,7 @@ ul.pagination li a.btn-arrow-right:hover{
 	float: left;
 	display: table;
 	line-height: 31px;
-	font-size: 20px;
+	font-size: 18px;
 }
 .part-tumb-main .box-btn{
 	float: right;
@@ -725,8 +725,9 @@ ul.pagination li a.btn-arrow-right:hover{
 .box-news-text{
 	padding: 30px 25px;
 	line-height: 20px;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 25px;
+	color: #666;
 }
 .box-footer-content{
 	margin-bottom: 30px;
@@ -735,6 +736,7 @@ ul.pagination li a.btn-arrow-right:hover{
 	padding: 0 25px;
 	width: 50%;
 	float: left;
+	color: #666;
 }
 .box-plugin-social{
 	padding: 0 25px;
@@ -764,14 +766,14 @@ ul.pagination li a.btn-arrow-right:hover{
 }
 .box-when h3,.box-ticket h3{
 	line-height: 31px;
-	font-size: 20px;
+	font-size: 18px;
 	color: #6e0904;
 }
 .box-when p,.box-ticket p{
 	font-style: italic;
 	margin: 10px 0;
 	padding-left: 35px;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 25px;
 }
 .box-when p.text-date:before {
@@ -822,11 +824,14 @@ ul.pagination li a.btn-arrow-right:hover{
 /* --------------------------------------------------- Slide Big --------------------------------------------------- */
 #sync1{
 	width: 754px;
+	height: 562px;
 	margin: 0 auto 10px;
+	background-color: #000;
 }
 #sync1 img{
-	width: 754px;
-	height: auto;
+	width: auto;
+	height: 562px;
+	margin: 0 auto;
 }
 
 /* --------------------------------------------------- Arrow Slide Big --------------------------------------------------- */
@@ -907,7 +912,7 @@ ul.pagination li a.btn-arrow-right:hover{
 }
 #sync2 .slide-content img{
 	width: auto;
-	height: 100%;
+	height: 94px;
 	margin: 0 auto;
 	filter: alpha(opacity=50);
 	opacity: .5;

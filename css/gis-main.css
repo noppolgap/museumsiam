@@ -234,7 +234,7 @@
 	font-style: italic;
 	margin: 0;
 	padding-left: 35px;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 25px;
 }
 .box-gray p:before {
@@ -258,14 +258,27 @@
 .box-gray p.text-ticket:before {
 	background: url(../images/icon-money.png) no-repeat center center;
 }
-.box-slide-big a.btn-arrow-slide.next {
-	right: 11px;
+.box-content-right #sync1 {
+	width: 656px;
+	height: 489px;
+	background-color: #000;
 }
-.box-slide-big a.btn-arrow-slide.pev {
-	left: 11px;
+.box-content-right #sync1 img {
+	width: auto;
+	height: 489px;
+	margin: 0 auto;
+}
+.box-content-right .box-slide-big a.btn-arrow-slide{
+	top: 207px;
+}
+.box-content-right .box-slide-big a.btn-arrow-slide.pev {
+	left: 60px;
+}
+.box-content-right .box-slide-big a.btn-arrow-slide.next {
+	right: 60px;
 }
 .box-news-text{
-	padding: 30px 60px;
+	padding: 30px 90px;
 }
 
 

@@ -9,12 +9,12 @@ body{
 /* --------------------------------------------------- Part Side Banner --------------------------------------------------- */
 
 .slide-herobanner{
-	height: 545px;
+	height: 500px;
 	overflow: hidden;
 }
 .slide-herobanner .slide{
 	width: 100%;
-	height: 545px;
+	height: 500px;
 	background-position: center center;
 }
 .part-banner .owl-theme .owl-controls .owl-page span{
@@ -323,7 +323,7 @@ div.text-title img{
 	line-height: 135px;	
 }
 .box-slideevent-main .box-content-slide .box-date .box-right{
-	font-size: 30px;
+	font-size: 22px;
 	width: auto;
 	text-transform: uppercase;
 	color: #fff;
@@ -739,7 +739,7 @@ div.text-title img{
 	color: #000;
 	text-transform: uppercase;
 	line-height: 29px;
-}
+    margin-bottom: 15px;}
 .box-exhibition-main .box-title span{
 	font-size: 60px;
 	color: #6e0904;
@@ -787,11 +787,11 @@ div.text-title img{
 	padding: 20px 20px 0 17px;
 }
 .box-archive-main .box-title{
-	
 	font-size: 53px;
 	color: #000;
 	text-transform: uppercase;
 	line-height: 29px;
+	margin-bottom: 15px;
 }
 .box-archive-main .box-title span{
 	font-size: 60px;

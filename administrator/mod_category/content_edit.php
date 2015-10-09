@@ -124,6 +124,17 @@ require ("../../assets/configs/function.inc.php");
 								<div class="clear"></div>
 							</div>	
 
+<div class="bigForm">
+								<div class="floatL form_name">Video</div>
+								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('video',$id,$row['CAT_ID'],'video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="clear"></div>
+							</div>
+							
+							<div class="bigForm">
+								<div class="floatL form_name">Other File</div>
+								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('other',$id,$row['CAT_ID'],'all'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="clear"></div>
+							</div>
 							<?} ?>
 
 							<div class="btn_action">
@@ -142,6 +153,7 @@ require ("../../assets/configs/function.inc.php");
 <?
 	require ('../inc_footer.php');
  ?>		
+ <div class="dNone"><?=$formUploadVideo?></div>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />

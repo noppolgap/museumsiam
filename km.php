@@ -1,18 +1,20 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<?
+require ('inc_meta.php');
+ ?>	
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/km.css" />
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$(".menutop li.menu6,.menu-left li.menu1").addClass("active");
 	});
 </script>
@@ -21,9 +23,28 @@ require("assets/configs/function.inc.php");
 
 <body id="km">
 	
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php
+include ('inc/inc-top-bar.php');
+ ?>
+<?php
+include ('inc/inc-menu.php');
+ ?>	
+<?php
+//get Module ID
+if (!isset($_GET['MID']))
+	$MID = $km_module_id;
+else
+	$MID = $_GET['MID'];
 
+$sqlModule = "select * from sys_app_module where MODULE_ID = " . $MID;
+$moduleName = '';
+$rs = mysql_query($sqlModule) or die(mysql_error());
+
+while ($row = mysql_fetch_array($rs)) {
+	$moduleName = $row['MODULE_NAME_LOC'];
+	// MODULE_NAME_ENG
+}
+		?>
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
@@ -41,11 +62,16 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-km.php'); ?>
+			<?php
+			include ('inc/inc-left-content-km.php');
+ ?>
 		</div>
 		<div class="box-right main-content">
 
-			<div class="box-category-main news BBlack">
+ 
+	
+	
+			 <div class="box-category-main news BBlack">
 				<div class="box-title cf">
 					<h2>กิจกรรม</h2>
 					<div class="box-btn">
@@ -54,88 +80,71 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
-						
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php
+						$categoryID = $event_cat_id;
+						$contentSqlStr = "SELECT
+												cat.CONTENT_CAT_DESC_LOC,
+												cat.CONTENT_CAT_DESC_ENG,
+												cat.CONTENT_CAT_ID,
+												content.CONTENT_ID,
+												content.CONTENT_DESC_LOC,
+												content.CONTENT_DESC_ENG,
+												content.BRIEF_LOC,
+												content.BRIEF_ENG,
+												content.EVENT_START_DATE,
+												content.EVENT_END_DATE,
+												content.CREATE_DATE ,
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+											FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $MID
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = $categoryID
+											AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											ORDER BY
+												content.ORDER_DATA desc
+											LIMIT 0,3 ";
+
+						// start Loop Activity
+						$i = 1;
+						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
+						while ($rowContent = mysql_fetch_array($rsContent)) {
+						$extraClass = '';
+							if ($i == 2) {
+								$extraClass = ' mid';
+							}
+							echo '<div class="box-tumb cf' . $extraClass . '">';
+							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo ' <div class="box-pic" > ';
+							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+							echo ' </div> </a> ';
+							echo ' <div class="box-text">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <p class="text-title">';
+							echo $rowContent['CONTENT_DESC_LOC'];
+							echo ' </p> </a>';
+							echo ' <p class="text-date">';
+							echo ConvertDate($rowContent['LAST_DATE']);
+							echo ' </p>';
+							echo ' <p class="text-des">';
+							echo $rowContent['BRIEF_LOC'];
+							echo ' </p>';
+							echo ' <div class="box-btn cf">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <div class="box-btn-social cf">';
+							echo ' <a href="#" class="btn-socila fb"></a>';
+							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							$i++;
+							}
+						?>
 						
 					</div>
 				</div>
@@ -151,88 +160,71 @@ require("assets/configs/function.inc.php");
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
+						<?php
+						$categoryID = $exhibition_cat_id;
+						$contentSqlStr = "SELECT
+												cat.CONTENT_CAT_DESC_LOC,
+												cat.CONTENT_CAT_DESC_ENG,
+												cat.CONTENT_CAT_ID,
+												content.CONTENT_ID,
+												content.CONTENT_DESC_LOC,
+												content.CONTENT_DESC_ENG,
+												content.BRIEF_LOC,
+												content.BRIEF_ENG,
+												content.EVENT_START_DATE,
+												content.EVENT_END_DATE,
+												content.CREATE_DATE ,
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+											FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $MID
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = $categoryID
+											AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											ORDER BY
+												content.ORDER_DATA desc
+											LIMIT 0,3 ";
+
+						// start Loop Activity
+						$i = 1;
+						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
+						while ($rowContent = mysql_fetch_array($rsContent)) {
+						$extraClass = '';
+							if ($i == 2) {
+								$extraClass = ' mid';
+							}
+							echo '<div class="box-tumb cf' . $extraClass . '">';
+							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo ' <div class="box-pic" > ';
+							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+							echo ' </div> </a> ';
+							echo ' <div class="box-text">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <p class="text-title">';
+							echo $rowContent['CONTENT_DESC_LOC'];
+							echo ' </p> </a>';
+							echo ' <p class="text-date">';
+							echo ConvertDate($rowContent['LAST_DATE']);
+							echo ' </p>';
+							echo ' <p class="text-des">';
+							echo $rowContent['BRIEF_LOC'];
+							echo ' </p>';
+							echo ' <div class="box-btn cf">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <div class="box-btn-social cf">';
+							echo ' <a href="#" class="btn-socila fb"></a>';
+							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							$i++;
+							}
+						?>
 					</div>
 				</div>
 			</div>
@@ -246,89 +238,71 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
-						
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
+						<?php
+						$categoryID = $reseach_cat_id;
+						$contentSqlStr = "SELECT
+												cat.CONTENT_CAT_DESC_LOC,
+												cat.CONTENT_CAT_DESC_ENG,
+												cat.CONTENT_CAT_ID,
+												content.CONTENT_ID,
+												content.CONTENT_DESC_LOC,
+												content.CONTENT_DESC_ENG,
+												content.BRIEF_LOC,
+												content.BRIEF_ENG,
+												content.EVENT_START_DATE,
+												content.EVENT_END_DATE,
+												content.CREATE_DATE ,
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+											FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $MID
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = $categoryID
+											AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											ORDER BY
+												content.ORDER_DATA desc
+											LIMIT 0,3 ";
+
+						// start Loop Activity
+						$i = 1;
+						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
+						while ($rowContent = mysql_fetch_array($rsContent)) {
+						$extraClass = '';
+							if ($i == 2) {
+								$extraClass = ' mid';
+							}
+							echo '<div class="box-tumb cf' . $extraClass . '">';
+							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo ' <div class="box-pic" > ';
+							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+							echo ' </div> </a> ';
+							echo ' <div class="box-text">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <p class="text-title">';
+							echo $rowContent['CONTENT_DESC_LOC'];
+							echo ' </p> </a>';
+							echo ' <p class="text-date">';
+							echo ConvertDate($rowContent['LAST_DATE']);
+							echo ' </p>';
+							echo ' <p class="text-des">';
+							echo $rowContent['BRIEF_LOC'];
+							echo ' </p>';
+							echo ' <div class="box-btn cf">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <div class="box-btn-social cf">';
+							echo ' <a href="#" class="btn-socila fb"></a>';
+							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							$i++;
+							}
+						?>
 					</div>
 				</div>
 			</div>
@@ -343,88 +317,71 @@ require("assets/configs/function.inc.php");
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
+						<?php
+						$categoryID = $education_cat_id;
+						$contentSqlStr = "SELECT
+												cat.CONTENT_CAT_DESC_LOC,
+												cat.CONTENT_CAT_DESC_ENG,
+												cat.CONTENT_CAT_ID,
+												content.CONTENT_ID,
+												content.CONTENT_DESC_LOC,
+												content.CONTENT_DESC_ENG,
+												content.BRIEF_LOC,
+												content.BRIEF_ENG,
+												content.EVENT_START_DATE,
+												content.EVENT_END_DATE,
+												content.CREATE_DATE ,
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+											FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $MID
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = $categoryID
+											AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											ORDER BY
+												content.ORDER_DATA desc
+											LIMIT 0,3 ";
+
+						// start Loop Activity
+						$i = 1;
+						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
+						while ($rowContent = mysql_fetch_array($rsContent)) {
+						$extraClass = '';
+							if ($i == 2) {
+								$extraClass = ' mid';
+							}
+							echo '<div class="box-tumb cf' . $extraClass . '">';
+							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo ' <div class="box-pic" > ';
+							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+							echo ' </div> </a> ';
+							echo ' <div class="box-text">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <p class="text-title">';
+							echo $rowContent['CONTENT_DESC_LOC'];
+							echo ' </p> </a>';
+							echo ' <p class="text-date">';
+							echo ConvertDate($rowContent['LAST_DATE']);
+							echo ' </p>';
+							echo ' <p class="text-des">';
+							echo $rowContent['BRIEF_LOC'];
+							echo ' </p>';
+							echo ' <div class="box-btn cf">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <div class="box-btn-social cf">';
+							echo ' <a href="#" class="btn-socila fb"></a>';
+							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							$i++;
+							}
+						?>
 					</div>
 				</div>
 			</div>
@@ -438,89 +395,71 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
-						
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
+						<?php
+						$categoryID = $seminar_cat_id;
+						$contentSqlStr = "SELECT
+												cat.CONTENT_CAT_DESC_LOC,
+												cat.CONTENT_CAT_DESC_ENG,
+												cat.CONTENT_CAT_ID,
+												content.CONTENT_ID,
+												content.CONTENT_DESC_LOC,
+												content.CONTENT_DESC_ENG,
+												content.BRIEF_LOC,
+												content.BRIEF_ENG,
+												content.EVENT_START_DATE,
+												content.EVENT_END_DATE,
+												content.CREATE_DATE ,
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+											FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $MID
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = $categoryID
+											AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											ORDER BY
+												content.ORDER_DATA desc
+											LIMIT 0,3 ";
+
+						// start Loop Activity
+						$i = 1;
+						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
+						while ($rowContent = mysql_fetch_array($rsContent)) {
+						$extraClass = '';
+							if ($i == 2) {
+								$extraClass = ' mid';
+							}
+							echo '<div class="box-tumb cf' . $extraClass . '">';
+							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo ' <div class="box-pic" > ';
+							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+							echo ' </div> </a> ';
+							echo ' <div class="box-text">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <p class="text-title">';
+							echo $rowContent['CONTENT_DESC_LOC'];
+							echo ' </p> </a>';
+							echo ' <p class="text-date">';
+							echo ConvertDate($rowContent['LAST_DATE']);
+							echo ' </p>';
+							echo ' <p class="text-des">';
+							echo $rowContent['BRIEF_LOC'];
+							echo ' </p>';
+							echo ' <div class="box-btn cf">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <div class="box-btn-social cf">';
+							echo ' <a href="#" class="btn-socila fb"></a>';
+							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							$i++;
+							}
+						?>
 					</div>
 				</div>
 			</div>
@@ -535,91 +474,74 @@ require("assets/configs/function.inc.php");
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
+						<?php
+						$categoryID = $media_cat_id;
+						$contentSqlStr = "SELECT
+												cat.CONTENT_CAT_DESC_LOC,
+												cat.CONTENT_CAT_DESC_ENG,
+												cat.CONTENT_CAT_ID,
+												content.CONTENT_ID,
+												content.CONTENT_DESC_LOC,
+												content.CONTENT_DESC_ENG,
+												content.BRIEF_LOC,
+												content.BRIEF_ENG,
+												content.EVENT_START_DATE,
+												content.EVENT_END_DATE,
+												content.CREATE_DATE ,
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+											FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $MID
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = $categoryID
+											AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											ORDER BY
+												content.ORDER_DATA desc
+											LIMIT 0,3 ";
+
+						// start Loop Activity
+						$i = 1;
+						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
+						while ($rowContent = mysql_fetch_array($rsContent)) {
+						$extraClass = '';
+							if ($i == 2) {
+								$extraClass = ' mid';
+							}
+							echo '<div class="box-tumb cf' . $extraClass . '">';
+							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo ' <div class="box-pic" > ';
+							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+							echo ' </div> </a> ';
+							echo ' <div class="box-text">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <p class="text-title">';
+							echo $rowContent['CONTENT_DESC_LOC'];
+							echo ' </p> </a>';
+							echo ' <p class="text-date">';
+							echo ConvertDate($rowContent['LAST_DATE']);
+							echo ' </p>';
+							echo ' <p class="text-des">';
+							echo $rowContent['BRIEF_LOC'];
+							echo ' </p>';
+							echo ' <div class="box-btn cf">';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <div class="box-btn-social cf">';
+							echo ' <a href="#" class="btn-socila fb"></a>';
+							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							echo ' </div>';
+							$i++;
+							}
+						?>
 					</div>
 				</div>
-			</div>
+			</div>  
 			
 			<div class="box-category-main news">
 				<div class="box-title cf">
@@ -635,13 +557,12 @@ require("assets/configs/function.inc.php");
 				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
 						   WHERE REF_WEBBOARD_ID = 0
 						   AND FLAG <>2 ORDER BY ORDER_DATA DESC ";
-				
+
 				$query_qa = mysql_query($sq_qa, $conn);
 
 				$num_rows = mysql_num_rows($query_qa);
 
 				$num = 1;
-				
 				?>
 
 				<div class="box-news-main">
@@ -669,7 +590,7 @@ require("assets/configs/function.inc.php");
 
 							<div class="table-row list cf">
 								<div class="column list"><? echo $num ?></div>
-								<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID']?>"><? echo my_substring($row['CONTENT'],150); ?></a></div>
+								<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID'] ?>"><? echo my_substring($row['CONTENT'], 150); ?></a></div>
 								<div class="column name"><? echo $row['USER_CREATE'] ?></div>
 						
 								<? while($row_ans = mysql_fetch_array($query_ans)) {?> 
@@ -683,7 +604,9 @@ require("assets/configs/function.inc.php");
 								<div class="column date"><? echo ConvertDate($row['LAST_UPDATE_DATE	']) ?></div>
 							</div>
 
-					   <? $num++;  } ?>
+					   <? $num++;
+	}
+ ?>
 	
 					</div>
 				</div>
@@ -695,9 +618,15 @@ require("assets/configs/function.inc.php");
 
 <div class="box-freespace"></div>
 
+<?php
 
+$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$_SESSION['KM_PREV_PG'] = $current_url;
+?>
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php
+include ('inc/inc-footer.php');
+ ?>	
 
 </body>
 </html>
