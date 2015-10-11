@@ -18,7 +18,7 @@ if (isset($_GET['enable'])) {
 	$update = "";
 	$update[] = "Flag = $Flag";
 
-	echo $sql = "UPDATE trn_product SET  " . implode(",", $update) . " WHERE PRODUCT_ID =" . $id;
+    $sql = "UPDATE trn_product SET  " . implode(",", $update) . " WHERE PRODUCT_ID =" . $id;
 
 	mysql_query($sql, $conn);
 
@@ -28,8 +28,8 @@ if (isset($_GET['enable'])) {
 
 if (isset($_GET['delete'])) {
 
-	$id = $_GET['proid'];
-	$catId = $_GET['cid'];
+	$id = $_POST['id'];
+
 	$update = "";
 	$update[] = "Flag = 2";
 
@@ -82,16 +82,20 @@ if (isset($_GET['add'])) {
 			$insert['CAT_ID'] = "'" . $_GET['cid'] . "'";
 			$insert['ORDER_ID'] = "'" . $index++ . "'";
 
-			echo $sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+		    $sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 			mysql_query($sql, $conn) or die($sql);
 		}
 	}
 
-	//header('Location: product_view.php?MID='.$_GET['MID'].'&cid='.$_GET['cid'].'&LV='.$_GET['LV'].' ');
+	header('Location: product_view.php?MID='.$_GET['MID'].'&cid='.$_GET['cid'].'&LV='.$_GET['LV'].' ');
 
 }
 
 if (isset($_GET['edit'])) {
+
+	$LV = intval($_GET['LV']);
+	$cID = intval($_GET['cid']);
+	$MID = intval($_GET['MID']);
 
 	$update = "";
 
@@ -110,19 +114,21 @@ if (isset($_GET['edit'])) {
 	$sql = "UPDATE trn_product SET  " . implode(",", $update) . " WHERE PRODUCT_ID = " . $_POST['pro_id'];
 	mysql_query($sql, $conn);
 
-	foreach ($_POST['photo_file'] as $k => $file) {
-		$filename = admin_move_image_upload_dir('product', end(explode('/', $file)), 1000, '', false, 150, 150);
+	if (count($_POST['photo_file']) > 0) {
+		foreach ($_POST['photo_file'] as $k => $file) {
+			$filename = admin_move_image_upload_dir('product', end(explode('/', $file)), 1000, '', false, 150, 150);
 
-		unset($insert);
-		$insert['CONTENT_ID'] = "'" . $_POST['cat_id'] . "'";
-		$insert['IMG_TYPE'] = "'" . getEXT($filename) . "'";
-		$insert['IMG_PATH'] = "'" . $filename . "'";
-		$insert['CAT_ID'] = "'" .$_GET['cid']. "'";
+			unset($insert);
+			$insert['CONTENT_ID'] = "'" . $_POST['pro_id'] . "'";
+			$insert['IMG_TYPE'] = "'" . 1 . "'";
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['CAT_ID'] = "'" .$cID. "'";
 
-		$sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
-		mysql_query($sql, $conn) or die($sql);
+			echo $sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
 	}
 
-	header('Location: product_view.php?MID='.$_GET['MID'].'&cid='.$_GET['cid'].'&LV='.$_GET['LV'].' ');
+	header('Location: product_view.php?MID='.$MID.'&cid='.$cID.'&LV='.$LV);
 
 }

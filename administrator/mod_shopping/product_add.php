@@ -29,7 +29,7 @@ require ("../../assets/configs/function.inc.php");
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 					<div class="formCms">
 						<? $id = $_GET['cid']; ?>
-						<form action="product_action.php?add&MID=<?=$_GET['MID']?>&cid=<?=$id?>&LV=<?$_GET['LV']?>" method="post" name="formcms">
+						<form action="product_action.php?add&MID=<?=$_GET['MID']?>&cid=<?=$id?>&LV=<?=$_GET['LV']?>" method="post" name="formcms">
 							<?php
 							$sql = "SELECT CONTENT_CAT_DESC_LOC FROM trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = ".$_GET['MID']." AND CONTENT_CAT_ID = $id";
 							$query = mysql_query($sql, $conn);

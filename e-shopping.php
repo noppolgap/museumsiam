@@ -98,9 +98,19 @@ require("assets/configs/function.inc.php");
 				<div class="box-item-main cf">
 
 					<?php 
-						    $sql_proc  = "SELECT * 
-								FROM trn_product
-								WHERE CAT_ID = ".$row['CONTENT_CAT_ID']." AND FLAG = 0 ";
+						    $sql_proc  = "SELECT prod.PRODUCT_ID, prod.PRODUCT_DESC_LOC, prod.PRICE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
+											FROM trn_product AS prod
+											LEFT JOIN (
+												SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
+												FROM (
+													SELECT * 
+													FROM trn_content_picture
+													ORDER BY ORDER_ID ASC
+												) AS my_table_tmp
+												GROUP BY CONTENT_ID, CAT_ID
+											) AS pic ON prod.PRODUCT_ID = pic.CONTENT_ID
+											AND prod.CAT_ID = pic.CAT_ID 
+											WHERE prod.CAT_ID = ".$row['CONTENT_CAT_ID']." AND prod.FLAG = 0 ORDER BY prod.ORDER_DATA DESC";
 
 						     $query_proc = mysql_query($sql_proc,$conn);
 
@@ -113,7 +123,7 @@ require("assets/configs/function.inc.php");
 					<div class="item">
 						<a href="e-shopping-detail.php">
 							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
+								<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
 							</div>
 						</a>
 						<div class="box-text">

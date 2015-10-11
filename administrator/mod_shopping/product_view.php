@@ -23,7 +23,7 @@ require ("../../assets/configs/function.inc.php");
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete&proid=<?=$_GET['p'] ?>">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete&proid=<?=$_GET['proid'] ?>">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('product_order.php?cid=<?=$_GET['cid'] ?>');">
 			</div>
 			<div class="mod-body-inner">
@@ -80,10 +80,10 @@ require ("../../assets/configs/function.inc.php");
 					<div class="Main_Content" data-id="<?=$row['PRODUCT_ID'] ?>">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['PRODUCT_ID'] ?>"></div>
 						<div class="floatL thumbContent">
-							<a href="product_detail.php?proid=<?=$row['PRODUCT_ID'] ?>&cid=<?=$row['CAT_ID']?>&LV=<?=$row['FlAG']?>&MID=<?=$row['CAT_ID']?>" class="dBlock" style="background-image: url('http://cache.my.kapook.com/imgkapook_2014/31_35_1438829370.jpg');"></a>
+							<a href="product_detail.php?proid=<?=$row['PRODUCT_ID'] ?>&cid=<?=$row['CAT_ID']?>&LV=<?=$row['FlAG']?>&MID=<?=$row['CAT_ID']?>" class="dBlock" <?=callThumbList($row['PRODUCT_ID'], $row['CAT_ID'], false) ?>></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="product_detail.php?proid='.$row['PRODUCT_ID'].'&cid='.$row['CAT_ID'].'&LV='.$row['FlAG'].'&MID='.$row['CAT_ID'].'">'. $row['PRODUCT_DESC_LOC'].'</a>' ?></div>
+							<div><? echo '<a href="product_detail.php?proid='.$row['PRODUCT_ID'].'&cid='.$row['CAT_ID'].'&LV='.$_GET['LV'].'&MID='.$_GET['MID'].'">'. $row['PRODUCT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>	
 						<div class="floatL stausContent">

@@ -31,7 +31,7 @@ if(isset($_POST['update'])){
 	<ul id="sortable">
 		<?php
 
-			    echo $sql= "SELECT * FROM trn_product  WHERE Flag <> 2 AND CAT_ID = ".$_GET['cid']." ORDER BY ORDER_DATA DESC";
+			     $sql= "SELECT * FROM trn_product  WHERE Flag <> 2 AND CAT_ID = ".$_GET['cid']." ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {

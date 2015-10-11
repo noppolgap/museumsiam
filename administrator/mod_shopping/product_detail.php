@@ -54,7 +54,7 @@ require ("../../assets/configs/function.inc.php");
 							</div>
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_image_view('photo', 7, $_GET['proid']) ?></div>
+								<div class="floatL form_input"><?=admin_upload_image_view('photo', $_GET['cid'], $_GET['proid']) ?></div>
 								<div class="clear"></div>
 							</div>		
 							<? } ?>
