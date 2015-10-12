@@ -103,7 +103,7 @@ require ('inc_meta.php');
 
 			if ($(this).width() > $(this).height()) {
 				$(this).width(754);
-
+$(this).css('height' , 'auto');
 				//($('.owl-wrapper-outer').height() - $('.img-slide-show').height())/2
 
 				$(this).css('margin-top', (($('.owl-wrapper-outer').height() - $(this).height()) / 2));

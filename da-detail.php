@@ -100,6 +100,18 @@ require("assets/configs/function.inc.php");
 			$("#sync1").data('owlCarousel').next();
 		});
 			
+		$(".img-slide-show").each(function() {
+
+			if ($(this).width() > $(this).height()) {
+				$(this).width(754);
+				$(this).css('height' , 'auto');
+				//($('.owl-wrapper-outer').height() - $('.img-slide-show').height())/2
+
+				$(this).css('margin-top', (($('.owl-wrapper-outer').height() - $(this).height()) / 2));
+
+			}
+
+		});	
 	});
 </script>
 	
@@ -113,13 +125,24 @@ require("assets/configs/function.inc.php");
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
-			<ol class="cf">
+			<?php
+			if (isset($_SESSION['DA_PREV_PG'])){
+				$prevPage  = $_SESSION['DA_PREV_PG'] ;
+				if (strpos($prevPage, 'black') !== FALSE)
+					include ('inc/inc-da-black-breadcrumbs.php');
+				else if (strpos($prevPage, 'gray') !== FALSE)
+					include ('inc/inc-da-gray-breadcrumbs.php');
+				else if (strpos($prevPage, '.') !== FALSE)
+					include ('inc/inc-da-red-breadcrumbs.php');
+			}
+			?>
+			<!-- <ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="da.php">คลังความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="da-category.php">หมวดหมู่</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">หมวดหมู่ย่อย</li>
-			</ol>
+			</ol> -->
 		</div>
 	</div>
 </div>
@@ -131,41 +154,106 @@ require("assets/configs/function.inc.php");
 		<div class="box-left main-content">
 			<?php include('inc/inc-left-content-da.php'); ?>
 		</div>
+		
 		<div class="box-right main-content">
 			<hr class="line-red"/>
+			
+			<?php
+				$MID = $_GET['MID'];
+				$CID = $_GET['CID'];
+				$CONID = $_GET['CONID'];
+
+				$SCID = "-1";
+				if (isset($_GET['SCID']))
+					$SCID = $_GET['SCID'];
+
+					$currentPage = 1;
+if (isset($_GET['PG']))
+	$currentPage = $_GET['PG'];
+
+if ($currentPage < 1)
+	$currentPage = 1;
+					
+					
+				$catName = "";
+				
+				if (isset($_SESSION['DA_PREV_PG'])){
+				$backPage = $_SESSION['DA_PREV_PG'] ;
+				}
+else {
+				$backPage = "da.php?MID=".$digial_module_id;
+				}
+				$sqlCategory = "";
+				if (isset($_GET['SCID'])) {
+					$sqlCategory = "select SUB_CONTENT_CAT_ID ,
+											CONTENT_CAT_ID ,
+											SUB_CONTENT_CAT_DESC_LOC ,
+											SUB_CONTENT_CAT_DESC_ENG
+											from trn_content_sub_category where SUB_CONTENT_CAT_ID = $SCID ";
+					$rsCat = mysql_query($sqlCategory) or die(mysql_error());
+					while ($rowCat = mysql_fetch_array($rsCat)) {
+						$catName = $rowCat['SUB_CONTENT_CAT_DESC_LOC'];
+					}
+				} else {
+					$sqlCategory = "select CONTENT_CAT_ID ,
+											CONTENT_CAT_DESC_LOC ,
+											CONTENT_CAT_DESC_ENG from trn_content_category where CONTENT_CAT_ID	= $CID ";
+					$rsCat = mysql_query($sqlCategory) or die(mysql_error());
+					while ($rowCat = mysql_fetch_array($rsCat)) {
+						$catName = $rowCat['CONTENT_CAT_DESC_LOC'];
+					}
+				}
+
+				
+
+				$contentSql = "SELECT
+				CONTENT_ID,
+				CAT_ID,
+				CONTENT_DESC_LOC,
+				CONTENT_DESC_ENG,
+				CONTENT_DETAIL_LOC,
+				CONTENT_DETAIL_ENG,
+				CREATE_DATE,
+				LAST_UPDATE_DATE,
+				IFNULL(LAST_UPDATE_DATE , CREATE_DATE) as LAST_DATE ,
+				EVENT_START_DATE,
+				EVENT_END_DATE
+				FROM
+				trn_content_detail
+				WHERE
+				CONTENT_ID = $CONID";
+
+			//	echo $contentSql;
+				$rsContent = mysql_query($contentSql) or die(mysql_error());
+				while ($rowContent = mysql_fetch_array($rsContent)) {
+				
+				?>
+				
 			<div class="box-title-system cf news">
-				<h1>ชื่อหมวดหมู่</h1>
+				<h1><?=$catName?></h1>
 				<div class="box-btn">
-					<a href="" class="btn red">ย้อนกลับ</a>
+					<a href="<?=$backPage ?>" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
 			<div class="box-newsdetail-main">
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
+						<?php
+						$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
+
+						$rsPic = mysql_query($getPicSql) or die(mysql_error());
+						while ($rowPic = mysql_fetch_array($rsPic)) {
+							echo '	<div class="slide-content"> ';
+							echo '<img class="img-slide-show" style="max-width:754px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
+							echo '</div>';
+						}
+								?>
 					</div>
 					<a class="btn-arrow-slide pev"></a>
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
 						<div class="box-text">
-							<p class="text-title">Levitated Mass 340 Ton Giant Stone</p>
+							<p class="text-title"><?=$rowContent['CONTENT_DESC_LOC'] ?></p>
 							<p class="text-des pin">ชื่อสถานที่</p>
 						</div>
 					</div>
@@ -176,7 +264,16 @@ require("assets/configs/function.inc.php");
 					<a href="#" class="btn g"></a>
 					<a href="#" class="btn line"></a>
 				</div>
-				<div class="part-tumb-main">
+				<?php
+				$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
+				$rsPic = mysql_query($getPicSql) or die(mysql_error());
+				$rowPicturecount = mysql_num_rows($rsPic);
+				$extraStyle = "";
+				if ($rowPicturecount == 1) {
+					$extraStyle = " style='display:none;'";
+				}
+									?>
+				<div class="part-tumb-main" >
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
@@ -186,7 +283,15 @@ require("assets/configs/function.inc.php");
 					</div>
 					<div class="box-slide-small">
 						<div id="sync2" class="owl-carousel">
-							<div class="slide-content">
+							<?php
+
+							while ($rowPic = mysql_fetch_array($rsPic)) {
+								echo '	<div class="slide-content"> ';
+								echo '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
+								echo '</div>';
+							}
+								?>
+							<!-- <div class="slide-content">
 								<img src="http://placehold.it/125x94">
 							</div>
 							<div class="slide-content">
@@ -203,18 +308,16 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="slide-content">
 								<img src="http://placehold.it/125x94/ccc">
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
 				<div class="box-news-text">
-					<p>
-						Levitated Mass is a 2012 large-scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art. The installation consists of a 340-ton boulder affixed above a concrete trench through which visitors may walk. The nature, expense and scale of the installation made it an instant topic of discussion The work comprises a 21.5-foot tall boulder mounted on the walls of a 456-foot long concrete trench, surrounded by 2.5 acres of compressed decomposed granite. The boulder is bolted to two shelves affixed to the inner walls of the trench, which descends from ground level to 15 feet below the stone at its center, allowing visitors to stand directly below the megalith.
-					</p>
+					<?=$rowContent['CONTENT_DETAIL_LOC'] ?>
 				</div>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						วันที่แก้ไขล่าสุด :  28 พ.ย. 2559
+						วันที่แก้ไขล่าสุด :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						Plugin Social
@@ -223,10 +326,11 @@ require("assets/configs/function.inc.php");
 			</div>
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="" class="btn red">ย้อนกลับ</a>
+					<a href="<?=$backPage ?>" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
 		</div>
+		<?php } ?>
 	</div>
 </div>
 
