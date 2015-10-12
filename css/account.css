@@ -1,6 +1,8 @@
-/* --------------------------------------------------- Detail --------------------------------------------------- */
+/* --------------------------------------------------- Main --------------------------------------------------- */
 .part-account-main{
 	background-color: #6e0904;
+	border-top: 4px solid #eeeeee;
+	border-bottom: 4px solid #eeeeee;
 }
 .part-account-main .container{
 	background-color: #8e070b;
@@ -13,12 +15,17 @@
 	width: 980px;
 	float: right;
 	background-color: #6e0904;
+	min-height: 680px;
+	padding: 30px 0px;
 }
 ul.menu-left li{
-	padding: 30px 0px 30px 50px;
 	font-size: 16px;
 	position: relative;
 }
+ul.menu-left li a{
+	padding: 30px 0px 30px 45px;
+}
+/* ul.menu-left li:hover, */
 ul.menu-left li.active{
 	background-color: #6e0904;
 }
@@ -32,6 +39,15 @@ ul.menu-left li a{
 ul.menu-left li.active a{
 	color: #fff;
 }
+ul.menu-left li ul.submenu-left li a{
+	padding: 10px 0px 10px 70px;
+}
+ul.menu-left li ul.submenu-left li a{
+	color: #c78385;
+}
+ul.menu-left li ul.submenu-left li.active a{
+	color: #fff;
+}
 ul.menu-left li:before{
 	content: '';
 	display: block;
@@ -39,12 +55,30 @@ ul.menu-left li:before{
 	height: 25px;
 	position: absolute;
 	top: 24px;
-	left: 15px;
+	left: 10px;
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
+ul.menu-left li ul.submenu-left li:before{
+	top: 4px;
+	left: 39px;
+}
+ul.menu-left li.active ul.submenu-left{
+	border-top: 1px solid #8e070b;
+/* 	border-bottom: 1px solid #8e070b; */
+}
+ul.menu-left li ul.submenu-left{
+	border-top: 1px solid #6e0904;
+/* 	border-bottom: 1px solid #6e0904; */
+	padding: 10px 0;
+	display: none;
+}
+ul.menu-left li.lu{
+	border-top: 1px solid #6e0904;
+}
+
 
 ul.menu-left li.ac:before{
 	background: url(../images/account/icon-humen.png) center center no-repeat;
@@ -53,28 +87,319 @@ ul.menu-left li.ed:before{
 	background: url(../images/account/icon-edit.png) center center no-repeat;
 }
 ul.menu-left li.ps:before{
-	
+	background: url(../images/account/icon-password.png) center center no-repeat;
 }
 ul.menu-left li.pc:before{
-	
-}
-ul.menu-left li.es:before{
-	
+	background: url(../images/account/icon-clock.png) center center no-repeat;
 }
 ul.menu-left li.eb:before{
-	
+	background: url(../images/account/icon-book.png) center center no-repeat;
+}
+ul.menu-left li.es:before{
+	background: url(../images/account/icon-bag.png) center center no-repeat;
 }
 ul.menu-left li.mu:before{
-	
+	background: url(../images/account/icon-doc.png) center center no-repeat;
 }
 ul.menu-left li.md:before{
-	
+	background: url(../images/account/icon-house.png) center center no-repeat;
 }
 ul.menu-left li.me:before{
-	
+	background: url(../images/account/icon-cal.png) center center no-repeat;
 }
 ul.menu-left li.mn:before{
-	
+	background: url(../images/account/icon-textbox.png) center center no-repeat;
 }
+ul.menu-left li.lu:before{
+	background: url(../images/account/icon-logout.png) center center no-repeat;
+}
+
+ul.menu-left li.ac:hover:before,
+ul.menu-left li.ac.active:before{
+	background: url(../images/account/icon-humen-hover.png) center center no-repeat;
+}
+ul.menu-left li.ed:hover:before,
+ul.menu-left li.ed.active:before{
+	background: url(../images/account/icon-edit-hover.png) center center no-repeat;
+}
+ul.menu-left li.ps:hover:before,
+ul.menu-left li.ps.active:before{
+	background: url(../images/account/icon-password-hover.png) center center no-repeat;
+}
+ul.menu-left li.pc:hover:before,
+ul.menu-left li.pc.active:before{
+	background: url(../images/account/icon-clock-hover.png) center center no-repeat;
+}
+ul.menu-left li.eb:hover:before,
+ul.menu-left li.eb.active:before{
+	background: url(../images/account/icon-book-hover.png) center center no-repeat;
+}
+ul.menu-left li.es:hover:before,
+ul.menu-left li.es.active:before{
+	background: url(../images/account/icon-bag-hover.png) center center no-repeat;
+}
+ul.menu-left li.mu:hover:before,
+ul.menu-left li.mu.active:before{
+	background: url(../images/account/icon-doc-hover.png) center center no-repeat;
+}
+ul.menu-left li.md:hover:before,
+ul.menu-left li.md.active:before{
+	background: url(../images/account/icon-house-hover.png) center center no-repeat;
+}
+ul.menu-left li.me:hover:before,
+ul.menu-left li.me.active:before{
+	background: url(../images/account/icon-cal-hover.png) center center no-repeat;
+}
+ul.menu-left li.mn:hover:before,
+ul.menu-left li.mn.active:before{
+	background: url(../images/account/icon-textbox-hover.png) center center no-repeat;
+}
+ul.menu-left li.lu:hover:before,
+ul.menu-left li.lu.active:before{
+	background: url(../images/account/icon-logout-hover.png) center center no-repeat;
+}
+
+/* --------------------------------------------------- Detail --------------------------------------------------- */
+
+.box-title{
+	margin-bottom: 20px;
+	padding-left: 20px;
+}
+.box-title h1{
+	color: #fff;
+	font-size: 22px;
+	line-height: 22px;
+	text-transform: uppercase;
+	margin-bottom: 40px;
+	margin-top: 10px;
+}
+.box-title h2 {
+	color: #fff;
+	font-size: 20px;
+	line-height: 20px;
+	text-transform: uppercase;
+	margin-bottom: 40px;
+	margin-top: 30px;
+}
+.box-user{
+	width: 337px;
+	border: 4px solid #8e070b;
+}
+.box-user .box-pic{
+	width: 329px;
+	height: 249px;
+	overflow: hidden;
+}
+.box-user .box-pic:after {
+	content: '';
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 10px 9px 10px;
+	border-color: transparent transparent #8e070b transparent;
+	position: absolute;
+	bottom: 0px;
+	left: 20px;
+}
+.box-user .box-pic img{
+	width: auto;
+	height: 249px;
+}
+.box-user .box-detail{
+	color: #b28f50;
+	background-color: #8e070b; 
+}
+.box-user .box-detail h2{
+	color: #fff;
+	font-size: 22px;
+	line-height: 22px;
+}
+.box-user .box-detail .box-name{
+	 padding: 30px 20px;
+}
+.box-user .box-detail p,
+.box-user .box-detail .row{
+	padding: 0 20px;
+}
+.box-user .box-detail p{
+	margin-bottom: 10px;
+}
+.box-user .box-detail .row{
+	margin-bottom: 5px;
+}
+.box-user .box-detail .row>div{
+	width: 50%;
+}
+.box-user .box-detail .row .box-left:after{
+	content: ":";
+	display:block;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+.box-user .box-detail .row .box-right{
+	padding-left: 20px;
+}
+.box-user .box-btn{
+	width: 100%;
+	background-color: #8e070b; 
+	height: 40px;
+	padding-top: 30px;
+}
+.box-user .box-btn .row>div{
+	width: 50%;
+}
+.box-user .box-btn .row div.box-left{
+	border-right: 1px solid #9a2024;
+}
+.box-user .box-btn a{
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 16px;
+	color: #c78385;
+	margin: 0 auto;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.box-user .box-btn a:hover{
+	color: #fff;
+}
+.box-user .box-btn a:before{
+	content: '';
+	display: inline-block;
+	vertical-align: middle;
+	width: 25px;
+	height: 25px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	margin-right: 20px;
+}
+.box-user .box-btn a.ed:before{
+	background: url(../images/account/icon-edit.png) center center no-repeat;
+}
+.box-user .box-btn a.lu:before{
+	background: url(../images/account/icon-logout.png) center center no-repeat;
+}
+.box-user .box-btn a.ac:before{
+	background: url(../images/account/icon-humen.png) center center no-repeat;
+}
+
+.box-user .box-btn a.ed:hover:before{
+	background: url(../images/account/icon-edit-hover.png) center center no-repeat;
+}
+.box-user .box-btn a.lu:hover:before{
+	background: url(../images/account/icon-logout-hover.png) center center no-repeat;
+}
+.box-user .box-btn a.ac:hover:before{
+	background: url(../images/account/icon-humen-hover.png) center center no-repeat;
+}
+.box-user .box-btn a.ac{
+	margin-left: 20px;
+}
+.box-btn-main{
+	float: none;
+	width: 100%;
+	border-top: 1px solid #8e070b;
+	clear: both;
+	padding: 30px 0 30px;
+}
+.box-btn-main a{
+	margin: 0 22px;
+}
+
+
+/* --------------------------------------------------- Pagination --------------------------------------------------- */
+
+.box-pagination-main{
+	width: 100%;
+	margin: 0 auto;
+	padding: 12px 0;
+	border-top: 1px solid #8E070B;
+	font-size: 13px;
+}
+ul.pagination{
+	text-align: right;
+	display: table;
+	float: right;
+}
+ul.pagination li{
+	display: inline-block;
+	margin: 0 7px;
+	height: 30px;
+	line-height: 30px;
+}
+ul.pagination li a{
+	color: #8d8d8d;
+}
+ul.pagination li.active a,
+ul.pagination li a:hover{
+	font-weight: bold;
+	color: #000;
+}
+ul.pagination li:first-child{
+	margin-left: 0px;
+}
+ul.pagination li:last-child{
+	margin-right: 0px;
+}
+ul.pagination li a.btn-arrow-left,
+ul.pagination li a.btn-arrow-right{
+	width: 30px;
+	height: 29px;
+	display: inline-block;
+	vertical-align: middle;
+	background: url(../images/icon-arrow-gray.png) no-repeat center top #000;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+ul.pagination li a.btn-arrow-left{
+	background-position: -1px -1px;
+	margin-left: 0px;
+}
+ul.pagination li a.btn-arrow-right{
+	background-position: 1px -30px;
+	margin-right: 0px;
+}
+ul.pagination li.deactive a.btn-arrow-left,
+ul.pagination li.deactive a.btn-arrow-right{
+	background: url(../images/icon-arrow-gray.png) no-repeat center top #e4e4e4;
+}
+ul.pagination li.deactive a.btn-arrow-left{
+	background-position: -1px -1px;
+}
+ul.pagination li.deactive a.btn-arrow-right{
+	background-position: 1px -30px;
+}
+ul.pagination li.deactive:hover a.btn-arrow-left{
+	background: url(../images/icon-arrow-gray.png) no-repeat center top #e4e4e4;
+	background-position: -1px -1px;
+}
+ul.pagination li.deactive:hover a.btn-arrow-right{
+	background: url(../images/icon-arrow-gray.png) no-repeat center top #e4e4e4;
+	background-position: 1px -30px;
+}
+
+ul.pagination li a.btn-arrow-left:hover,
+ul.pagination li a.btn-arrow-right:hover{
+	background: url(../images/icon-arrow-white.png) no-repeat center top #8e070b;
+}
+ul.pagination li a.btn-arrow-left:hover{
+	background-position: -1px -1px;
+}
+ul.pagination li a.btn-arrow-right:hover{
+	background: url(../images/icon-arrow-white.png) no-repeat center top #8e070b;
+	background-position: 1px -30px;
+}
+
+
+
+
 
 

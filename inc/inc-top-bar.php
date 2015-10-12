@@ -39,7 +39,10 @@ require ("inc-cat-id-conf.php");
 					<a href="#" class="btn-socila ig"></a>
 				</div>
 				<div class="box-search">
-					<input type="text" placeholder="ค้นหาทั้งหมด">
+					<form name="search_form" method="post" action="system-search.php">
+					<input type="search" name="txt_search_form" placeholder="<?=$txt_find?>">
+					<input type="submit" name="save_search_form" >
+					</form>
 				</div>
 				<div class="box-member cf">
 

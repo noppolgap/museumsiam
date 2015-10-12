@@ -1,4 +1,4 @@
-<?php 
+<?php
 	session_start();
 	define('_DATA_BASE_HOST_','localhost');
 	/*------------ Online ------------
@@ -20,7 +20,14 @@
 	define('_MAIL_PORT_','25');
 	define('_MAIL_USER_','museum@campaignactivity.com');
 	define('_MAIL_PASS_','A3coVotO');
-	/*------------ SEO ------------*/	
+	/*------------ Facebook ID ------------*/
+	define('_FACEBOOK_ID_','895322270557890');
+	define('_FB_SECRET_','bc478e246d2862fb9f02d504b272c506');
+	/*------------ twitter ID ------------*/
+	define('_TWITTER_KEY_','Dws7zj1RcjAqxvmChAXH1qdM5');
+	/*------------ Google API ------------*/
+	define('_GOOGLE_API_','AIzaSyAQKuY74pxx2A61Hrqh_NJrObDl92Cv5ac');
+	/*------------ SEO ------------*/
 	define('_META_KEYWORDS_','มิวเซียม สยาม, สพร., สถาบันพิพิธภัณฑ์การเรียนรู้แห่งชาติ, พิพิธภัณฑ์, พิพิธภัณฑ์ท้องถิ่น, ศูนย์วัฒนธรรม, แหล่งเรียนรู้, ภูมิปัญญา, มรดกวัฒนธรรม, ประวัติศาสตร์ท้องถิ่น, จดหมายเหตุ, พิพิธภัณฑ์วิทยา, Museum Siam, NDMI, National Discovery Museum Institute, Thai Museums , local museum, museum database, thai museums, cultural center, heritage, cultural heritage, intangible cultural heritage, digital archive, museology');
 	define('_META_DESCRIPTION_','มิวเซียมสยาม พิพิธภัณฑ์การเรียนรู้ (Museum Siam: Discovery Museum) ภายใต้ สถาบันพิพิธภัณฑ์การเรียนรู้แห่งชาติ (สพร.) เป็นพิพิธภัณฑ์การเรียนรู้แห่งแรกที่เน้น การสร้างประสบการณ์สดใหม่ในการชมพิพิธภัณฑ์ ซึ่งจัดตั้งขึ้นเพื่อเป็นต้นแบบของ แหล่งเรียนรู้ที่น่ารื่นรมย์ และช่วยยกระดับมาตรฐานการจัดการเรียนรู้ในรูปแบบใหม่');
 ?>

@@ -28,7 +28,7 @@
 					</li>
 					<li class="menu6 sub"><a href="">ระบบอื่นๆ ที่เกี่ยวข้อง</a>
 						<ul class="submenu-top">
-							<? 
+							<?
 								$sqlStr = "SELECT
 												MODULE_ID,
 												MODULE_NAME_LOC,
@@ -44,8 +44,8 @@
 								$query = mysql_query($sqlStr, $conn);
 								$classIdx = 1;
  								while($row = mysql_fetch_array($query)) {
-									echo '<a href="'.$row['LINK_URL'].'"?MID='.$row['MODULE_ID'].'"><li class="sub'.$classIdx++.'">'.$row['MODULE_NAME_LOC'].'</li></a>';
-								}				
+									echo '<a href="'.$row['LINK_URL'].'?MID='.$row['MODULE_ID'].'"><li class="sub'.$classIdx++.'">'.$row['MODULE_NAME_LOC'].'</li></a>';
+								}
 							?>
 							<!--<a href="category.php?MID=2"><li class="sub1">ระบบการจัดการความรู้</li></a>-->
 							<!--<a href="#"><li class="sub2">Supmenu 2</li></a>-->
@@ -67,4 +67,4 @@
 			</div>
 		</div>
 	</div>
-</div>	
+</div>
