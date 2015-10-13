@@ -94,12 +94,14 @@ if((isset($_POST['txt_search_form'])) AND ($_POST['txt_search_form'] != '')){
 				case 3	: $path = 'da-detail.php'; break;
 			}
 
-			$path .= '?MID='.$row_row1['REF_MODULE_ID'].'&amp;CID='.$row_row1['CAT_ID'].'&amp;CONID='.$row_row1['CONTENT_ID'];
+			$path .= '?MID='.$row_row1['REF_MODULE_ID'].'%26CID='.$row_row1['CAT_ID'].'%26CONID='.$row_row1['CONTENT_ID'];
 			$fullpath = _FULL_SITE_PATH_.'/'.$path;
 			$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$row_row1['CONTENT_ID'];
 			$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+			$path = str_replace("%26","&amp;",$path);
 
-
+			$title = htmlspecialchars(trim($row_row1['CONTENT_LOC']));
+			$detail = strip_tags(trim($row_row1['CONTENT_BRIEF']));
 
 ?>
 						<div class="box-tumb cf <?=($index == 2 ? 'mid':'')?>" data-ID="<?=$row_row1['CONTENT_ID']?>" data-cID="<?=$row_row1['CAT_ID']?>" data-share="<?=$fullpath?>">
@@ -108,15 +110,15 @@ if((isset($_POST['txt_search_form'])) AND ($_POST['txt_search_form'] != '')){
 							</a>
 							<div class="box-text">
 								<a href="<?=$path?>">
-									<p class="text-title TcolorRed"><?=$row_row1['CONTENT_LOC']?></p>
+									<p class="text-title TcolorRed"><?=$title?></p>
 								</a>
 								<p class="text-date TcolorGray"><?=ConvertDate($row_row1['CONTENT_DATE'])?></p>
-								<p class="text-des TcolorBlack"><?=$row_row1['CONTENT_BRIEF']?></p>
+								<p class="text-des TcolorBlack"><?=$detail?></p>
 								<div class="box-btn cf">
 									<a href="<?=$path?>" class="btn red"><?=$txt_more?></a>
 									<div class="box-btn-social cf">
-										<a href="<?=$fb_link?>" onclick="shareFB(<?=$row_row1['CONTENT_ID']?>,$(this).attr('href')); return false;" class="btn-socila fb"></a>
-										<a href="<?=$fullpath?>" onclick="shareTW(<?=$row_row1['CONTENT_ID']?>,'<?=$row_row1['CONTENT_LOC']?>',$(this).attr('href')); return false;" class="btn-socila tw"></a>
+										<a href="<?=$fb_link?>" onclick="shareFB('<?=$title?>',$(this).attr('href')); return false;" class="btn-socila fb"></a>
+										<a href="<?=$fullpath?>" onclick="shareTW(<?=$row_row1['CONTENT_ID']?>,'<?=$title?>',$(this).attr('href')); return false;" class="btn-socila tw"></a>
 									</div>
 								</div>
 							</div>

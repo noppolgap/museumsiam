@@ -34,16 +34,16 @@
 	font-size: 15px;
 }
 .part-left-search ::-webkit-input-placeholder {
-	color: #000;  
+	color: #000;
 }
 .part-left-search :-moz-placeholder { /* Firefox 18- */
-	color: #000;  
+	color: #000;
 }
 .part-left-search ::-moz-placeholder {  /* Firefox 19+ */
-	color: #000;  
+	color: #000;
 }
-.part-left-search :-ms-input-placeholder {  
-	color: #000;  
+.part-left-search :-ms-input-placeholder {
+	color: #000;
 }
 
 .box-menu-left{
@@ -89,7 +89,7 @@
 	position: absolute;
 	left: 0px;
 	left: -13px;
-	top: 12px;	
+	top: 12px;
 }
 .box-menu-left .menu-left>li>a:hover,
 .box-menu-left .submenu-left>li>a:hover,
@@ -166,7 +166,7 @@ hr.line-red{
 .box-btn-cart .btn-cart{
 	display: table;
 	height: 43px;
-	background-color: #000;	
+	background-color: #000;
 	color: #fff;
 	line-height: 42px;
 	font-size: 20px;
@@ -207,7 +207,7 @@ hr.line-red{
 	color: #fff;
 }
 .box-right.main-content .box-title .box-btn{
-	float: right;	
+	float: right;
 }
 .box-right.main-content .box-title .box-btn .btn.gold:hover{
 	background-color: #6e0904;
@@ -363,7 +363,7 @@ ul.pagination li a.btn-arrow-right:hover{
 	background-color: #e5e5e5;
 	border: none;
 	clear: both;
-	margin: 10px 0;	
+	margin: 10px 0;
 }
 .part-calendar .box-top-date .month-year{
 	font-size: 18px;
@@ -614,7 +614,7 @@ ul.pagination li a.btn-arrow-right:hover{
 	display: block;
 	position: absolute;
 	right: 0px;
-	top: 20px;	
+	top: 20px;
 }
 
 /* --------------------------------------------------- News Detail --------------------------------------------------- */
@@ -684,7 +684,7 @@ ul.pagination li a.btn-arrow-right:hover{
 	padding-left: 20px;
 }
 .box-title-main .box-text p.text-des.pin{
-	
+
 }
 .box-title-main .box-text p.text-des.pin:before{
 	content: '';
@@ -743,6 +743,9 @@ ul.pagination li a.btn-arrow-right:hover{
 	text-align: right;
 	width: 50%;
 	float: right;
+}
+.box-plugin-social > iframe , .box-plugin-social > span{
+	display: inline-block;
 }
 .part-btn-back{
 	width: 100%;

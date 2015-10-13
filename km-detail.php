@@ -2,188 +2,34 @@
 require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
-?>
-<!doctype html>
-<html>
-<head>
-<?
-require ('inc_meta.php');
- ?>	
 
-<link rel="stylesheet" type="text/css" href="css/template.css" />
-<link rel="stylesheet" type="text/css" href="css/news-event.css" />
-
-<script>
-	$(document).ready(function() {
-		$(".menutop li.menu6,.menu-left li.menu4").addClass("active");
-
-		var sync1 = $("#sync1");
-		var sync2 = $("#sync2");
-
-		sync1.owlCarousel({
-			singleItem : true,
-			paginationSpeed : 500,
-			rewindSpeed : 1000,
-			navigation : false,
-			pagination : false,
-			afterAction : syncPosition,
-			responsiveRefreshRate : 200,
-			mouseDrag : false,
-			rewindNav : true
-		});
-
-		sync2.owlCarousel({
-			paginationSpeed : 500,
-			rewindSpeed : 1000,
-			items : 5,
-			itemsMobile : [320, 5],
-			itemsTablet : [768, 5],
-			itemsDesktop : [1024, 5],
-			navigation : false,
-			pagination : true,
-			responsiveRefreshRate : 100,
-			mouseDrag : false,
-			afterInit : function(el) {
-				el.find(".owl-item").eq(0).addClass("synced");
-			},
-			rewindNav : false
-		});
-
-		function syncPosition(el) {
-			var current = this.currentItem;
-			$("#sync2").find(".owl-item").removeClass("synced").eq(current).addClass("synced")
-			if ($("#sync2").data("owlCarousel") !== undefined) {
-				center(current)
-			}
-		}
-
-
-		$("#sync2").on("click", ".owl-item", function(e) {
-			e.preventDefault();
-			var number = $(this).data("owlItem");
-			sync1.trigger("owl.goTo", number);
-		});
-
-		function center(number) {
-			var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-
-			var num = number;
-			var found = false;
-			for (var i in sync2visible) {
-				if (num === sync2visible[i]) {
-					var found = true;
-				}
-			}
-
-			if (found === false) {
-				if (num > sync2visible[sync2visible.length - 1]) {
-					sync2.trigger("owl.goTo", num - sync2visible.length + 2)
-				} else {
-					if (num - 1 === -1) {
-						num = 0;
-					}
-					sync2.trigger("owl.goTo", num);
-				}
-			} else if (num === sync2visible[sync2visible.length - 1]) {
-				sync2.trigger("owl.goTo", sync2visible[1])
-			} else if (num === sync2visible[0]) {
-				sync2.trigger("owl.goTo", num - 1)
-			}
-		}
-
-
-		$(".box-slide-big a.pev").click(function() {
-			$("#sync1").data('owlCarousel').prev();
-		});
-		$(".box-slide-big a.next").click(function() {
-			$("#sync1").data('owlCarousel').next();
-		});
-
-		$(".img-slide-show").each(function() {
-
-			if ($(this).width() > $(this).height()) {
-				$(this).width(754);
-$(this).css('height' , 'auto');
-				//($('.owl-wrapper-outer').height() - $('.img-slide-show').height())/2
-
-				$(this).css('margin-top', (($('.owl-wrapper-outer').height() - $(this).height()) / 2));
-
-			}
-
-		});
-	});
-</script>
-	
-</head>
-
-<body>
-	
-<?php
-include ('inc/inc-top-bar.php');
- ?>
-<?php
-include ('inc/inc-menu.php');
- ?>	
-
-<div class="part-nav-main"  id="firstbox">
-	<div class="container">
-		<div class="box-nav">
-			<?php
-				include ('inc/inc-km-breadcrumbs.php');
-				?>
-				<!-- 
-			<ol class="cf">
-				
-				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="km.php">ระบบการจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="km-exhibition.php">นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ชื่อข่าว</li>
-			</ol> -->
-		</div>
-	</div>
-</div>
-
-<div class="box-freespace"></div>
-
-<div class="part-main">
-	<div class="container cf">
-		<div class="box-left main-content">
-			<?php
-			include ('inc/inc-left-content-km.php');
- ?>
-		</div>
-		
-		
-		<?php
-				$MID = $_GET['MID'];
-				$CID = $_GET['CID'];
-				$CONID = $_GET['CONID'];
+				$MID = intval($_GET['MID']);
+				$CID = intval($_GET['CID']);
+				$CONID = intval($_GET['CONID']);
 
 				$SCID = "-1";
 				if (isset($_GET['SCID']))
-					$SCID = $_GET['SCID'];
+					$SCID = intval($_GET['SCID']);
 
 					$currentPage = 1;
-if (isset($_GET['PG']))
-	$currentPage = $_GET['PG'];
+				if (isset($_GET['PG']))
+					$currentPage = intval($_GET['PG']);
 
-if ($currentPage < 1)
-	$currentPage = 1;
-					
-					
+				if ($currentPage < 1)
+					$currentPage = 1;
+
+
 				$catName = "";
-				
+
 				if (isset($_SESSION['KM_PREV_PG'])){
-				$backPage = $_SESSION['KM_PREV_PG'] ;
-				}
-else {
-				$backPage = "km.php?MID=".$km_module_id;
-				/*$backPage = "all-content.php?MID=".$MID."&CID=".$CID;
-				if (isset($_GET['SCID'])) {
-						$backPage.= "$SCID=".$SCID ; 
-					}
-				$backPage.'&PG='.$currentPage ; */
+					$backPage = $_SESSION['KM_PREV_PG'] ;
+				}else {
+					$backPage = "km.php?MID=".$km_module_id;
+					/*$backPage = "all-content.php?MID=".$MID."&CID=".$CID;
+					if (isset($_GET['SCID'])) {
+							$backPage.= "$SCID=".$SCID ;
+						}
+					$backPage.'&PG='.$currentPage ; */
 				}
 				$sqlCategory = "";
 				if (isset($_GET['SCID'])) {
@@ -206,15 +52,16 @@ else {
 					}
 				}
 
-				
+				if ($_SESSION['LANG'] == 'TH'){
+					$LANG_SQL = "CONTENT_DESC_LOC AS CONTENT_LOC ,CONTENT_DETAIL_LOC AS CONTENT_DETAIL,BRIEF_LOC AS CONTENT_BRIEF,";
+				}else if ($_SESSION['LANG'] == 'EN'){
+					$LANG_SQL = "CONTENT_DESC_ENG AS CONTENT_LOC ,CONTENT_DETAIL_ENG AS CONTENT_DETAIL,BRIEF_ENG AS CONTENT_BRIEF,";
+				}
 
 				$contentSql = "SELECT
 				CONTENT_ID,
 				CAT_ID,
-				CONTENT_DESC_LOC,
-				CONTENT_DESC_ENG,
-				CONTENT_DETAIL_LOC,
-				CONTENT_DETAIL_ENG,
+				".$LANG_SQL."
 				CREATE_DATE,
 				LAST_UPDATE_DATE,
 				IFNULL(LAST_UPDATE_DATE , CREATE_DATE) as LAST_DATE ,
@@ -227,10 +74,73 @@ else {
 
 			//	echo $contentSql;
 				$rsContent = mysql_query($contentSql) or die(mysql_error());
-				while ($rowContent = mysql_fetch_array($rsContent)) {
-				
-				?>
-				
+				$rowContent = mysql_fetch_array($rsContent);
+
+
+				$title = trim(htmlspecialchars($rowContent['CONTENT_LOC']));
+				$detail = trim($rowContent['CONTENT_DETAIL']);
+				$brief = trim(preg_replace('/\s\s+/', ' ', strip_tags(htmlspecialchars($rowContent['CONTENT_BRIEF']))));
+
+
+//meta site
+$sql_thumb_meta = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND IMG_TYPE = '1' AND CAT_ID = ".$CID." ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+$query_thumb_meta = mysql_query($sql_thumb_meta, $conn);
+$row_thumb_meta = mysql_fetch_array($query_thumb_meta);
+$thumb_meta = trim(str_replace("../../","",$row_thumb_meta['IMG_PATH']));
+
+/* not work
+$page_title = $title;
+$page_description = $brief;
+*/
+$page_image = _FULL_SITE_PATH_.'/'.$thumb_meta;
+
+unset($sql_thumb_meta);
+unset($query_thumb_meta);
+unset($row_thumb_meta);
+unset($thumb_meta);
+
+?>
+<!doctype html>
+<html>
+<head>
+<?
+require ('inc_meta.php');
+ ?>
+
+<link rel="stylesheet" type="text/css" href="css/template.css" />
+<link rel="stylesheet" type="text/css" href="css/news-event.css" />
+
+<script src="js/km-detail.js"></script>
+
+</head>
+
+<body>
+
+<?php
+include ('inc/inc-top-bar.php');
+ ?>
+<?php
+include ('inc/inc-menu.php');
+ ?>
+
+<div class="part-nav-main"  id="firstbox">
+	<div class="container">
+		<div class="box-nav">
+			<?php
+				include ('inc/inc-km-breadcrumbs.php');
+			?>
+		</div>
+	</div>
+</div>
+
+<div class="box-freespace"></div>
+
+<div class="part-main">
+	<div class="container cf">
+		<div class="box-left main-content">
+			<?php include ('inc/inc-left-content-km.php'); ?>
+		</div>
+
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
@@ -242,7 +152,7 @@ else {
 			<div class="box-newsdetail-main">
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
-						<?php
+					<?php
 						$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
 
 						$rsPic = mysql_query($getPicSql) or die(mysql_error());
@@ -251,24 +161,33 @@ else {
 							echo '<img class="img-slide-show" style="max-width:754px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
 							echo '</div>';
 						}
-								?>
+					?>
 					</div>
 					<a class="btn-arrow-slide pev"></a>
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
 						<div class="box-text">
-							<p class="text-title">	<?=$rowContent['CONTENT_DESC_LOC'] ?></p>
+							<p class="text-title">	<?=$title?></p>
 							<p class="text-des pin">ชื่อสถานที่</p>
 						</div>
 					</div>
 				</div>
 				<div class="box-social-main cf">
-					<a href="#" class="btn fb"></a>
-					<a href="#" class="btn tw"></a>
-					<a href="#" class="btn g"></a>
-					<a href="#" class="btn line"></a>
+				<?php
+						$path = 'km-detail.php?MID='.$MID.'%26CID='.$CID.'%26CONID='.$CONID;
+						$fullpath = _FULL_SITE_PATH_.'/'.$path;
+						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$CONID;
+						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+						$gp_link = 'https://plus.google.com/share?url='.$fullpath;
+						$tw_link = $fullpath;
+						$line = 'http://line.me/R/msg/text/?'.$title.'%0D%0A'.$fullpath;
+				?>
+					<a href="<?=$fb_link?>" onclick="shareFB('<?=$title?>',$(this).attr('href')); return false;" class="btn fb"></a>
+					<a href="<?=str_replace("%26","&amp;",$fullpath)?>" onclick="shareTW(<?=$CONID?>,'<?=$title?>',$(this).attr('href')); return false;" class="btn tw"></a>
+					<a href="<?=$gp_link?>" onclick="sharegp('<?=$title?>',$(this).attr('href')); return false;" class="btn g"></a>
+					<a href="<?=$line?>" target="_blank" class="btn line"></a>
 				</div>
-				
+
 				<?php
 				$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
 				$rsPic = mysql_query($getPicSql) or die(mysql_error());
@@ -277,8 +196,8 @@ else {
 				if ($rowPicturecount == 1) {
 					$extraStyle = " style='display:none;'";
 				}
-									?>
-									
+				?>
+
 				<div class="part-tumb-main" <?=$extraStyle ?> >
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
@@ -300,14 +219,22 @@ else {
 					</div>
 				</div>
 				<div class="box-news-text">
-					<?=$rowContent['CONTENT_DETAIL_LOC'] ?>
+					<?=$detail?>
 				</div>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
 						วันที่แก้ไขล่าสุด :  <?= ConvertDate($rowContent['LAST_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
-						Plugin Social
+						<div class="fb-share-button" data-href="<?=$path?>" data-layout="button_count"></div>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?=$fullpath?>">Tweet</a>
+						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="<?=$fullpath?>"></div>
+						<span>
+						<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+						<script type="text/javascript">
+						new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path?>","withUrl":true});
+						</script>
+						</span>
 					</div>
 				</div>
 			</div>
@@ -317,17 +244,15 @@ else {
 				</div>
 			</div>
 		</div>
-		<?php } ?>
 	</div>
 </div>
 
 <div class="box-freespace"></div>
 
-
-
 <?php
 include ('inc/inc-footer.php');
- ?>	
-
+include('inc/inc-social-network.php');
+?>
 </body>
 </html>
+<? CloseDB(); ?>

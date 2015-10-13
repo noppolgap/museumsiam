@@ -148,7 +148,7 @@ $(document).ready(function(){
 
 		  			if(data != ''){
 		  				$('#searchResultBlock > div[data-ID="'+pid+'"] .Search_image_thumb').css({'background-image':'url('+data+')','background-size':'auto 100%'});
-		  				urlShortener(pid,url);
+		  				//urlShortener(pid,url);
 		  			}
 			  });
 		});
@@ -160,12 +160,31 @@ function popup(url,name,windowWidth,windowHeight){
 	mytop=(screen.height)?(screen.height-windowHeight)/2:100;
 	properties = "width="+windowWidth+",height="+windowHeight;
 	properties +=",scrollbars=yes, top="+mytop+",left="+myleft;
-	window.open(url,name,properties);
+	return window.open(url,name,properties);
 }
 function shareFB(id,path){
 	popup(path,'fb_box_'+id,640,580);
 }
+function sharegp(id,path){
+	popup(path,'gp_box_'+id,540,620);
+}
 function shareTW(id,title,path){
+	//var path = 'https://twitter.com/intent/tweet?text='+title+'&url='+path;
+	/*
+	var data_path = $('#searchResultBlock > div[data-ID="'+id+'"] .tw').attr('data-href');
+	if(data_path == undefined){
+		var w1 = popup('','tw_box_'+id,640,580);
+	    jQuery.urlShortener({
+	        longUrl: path,
+	        success: function (shortUrl) {
+				w1.location.href = 'https://twitter.com/intent/tweet?text='+title+'&url='+shortUrl;
+				$('#searchResultBlock > div[data-ID="'+id+'"] .tw').attr('data-href',shortUrl);
+	        }
+	    });
+	}else{
+		var path = 'https://twitter.com/intent/tweet?text='+title+'&url='+data_path;
+		var w1 = popup(path,'tw_box_'+id,640,580);
+	}*/
 	var path = 'https://twitter.com/intent/tweet?text='+title+'&url='+path;
 	popup(path,'tw_box_'+id,640,580);
 }

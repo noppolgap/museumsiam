@@ -7,12 +7,21 @@
 	}
 	if(!isset($page_description)){
 		$page_description = _META_DESCRIPTION_;
-	}			
+	}
+	if(!isset($site_title)){
+		$site_title = _TITTLE_SITE_;
+	}
+	if(!isset($page_type)){
+		$page_type = 'article';
+	}
+	if(!isset($page_image)){
+		$page_image = _FULL_SITE_PATH_.'/fav/fb_cover.jpg';
+	}
 ?>
 <meta charset="UTF-8">
 <title><?=$page_title?></title>
-<meta content="<?=$page_Keywords?>" name="description">
-<meta content="<?=$page_description?>" name="Keywords">
+<meta content="<?=$page_Keywords?>" name="Keywords">
+<meta content="<?=$page_description?>" name="description">
 <meta name="robots" content="index,follow">
 <link rel="apple-touch-icon" sizes="57x57" href="fav/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="fav/apple-icon-60x60.png">
@@ -35,13 +44,25 @@
 <link rel="stylesheet" type="text/css" href="assets/plugin/jquery-ui/jquery-ui.min.css" media="all" />
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">if (!window.jQuery) document.write(unescape('%3Cscript src="assets/plugin/jquery.min.js"%3E%3C/script%3E'))</script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>	
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">if (!window.jQuery.ui) document.write(unescape('%3Cscript src="assets/plugin/jquery-ui/jquery-ui.min.js"%3E%3C/script%3E'))</script>
 
-<!-- Viewport -->	      
+
+<meta property="fb:app_id" content="<?=_FACEBOOK_ID_?>" />
+<meta property="og:title" content="<?=$page_title?>" />
+<meta property="og:site_name" content="<?=$site_title?>"/>
+<meta property="og:url" content="<?=_FULL_SITE_PATH_.'/'.basename($_SERVER['REQUEST_URI']);?>" />
+<meta property="og:description" content="<?=$page_description?>" />
+<meta property="og:type" content="<?=$page_type?>" />
+<meta property="og:locale" content="th_TH" />
+<meta property="article:author" content="http://www.museumsiam.org" />
+<meta property="article:publisher" content="http://www.ndmi.or.th" />
+<meta property="og:image" content="<?=$page_image?>" />
+
+<!-- Viewport -->
 <meta name="viewport" content="width=1280">
 
-<!-- CSS Reset & Font -->	      
+<!-- CSS Reset & Font -->
 <link rel="stylesheet" type="text/css" href="css/resetcss.css" />
 <!-- <link rel="stylesheet" type="text/css" href="font/font.css" /> -->
 
@@ -54,7 +75,7 @@
 <link href="owl-carousel/owl.carousel.css" rel="stylesheet">
 <link href="owl-carousel/owl.theme.css" rel="stylesheet">
 
-<!-- CSS Main-->	      
+<!-- CSS Main-->
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 
 <!-- Script Main-->
