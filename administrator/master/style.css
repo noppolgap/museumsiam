@@ -4,7 +4,7 @@ html{
 body {
   min-height: 100%;
   font-size: 1em;
-  color: #B42024;
+  color: #444444;
   background-color: #fff;
   font-family: sans-serif , Tahoma;
 }
@@ -64,8 +64,10 @@ a:active {text-decoration:none;color: #9d0031;}
 	padding-bottom: 20px;
 }
 header{
-	border-bottom: 1px solid #B11116;
-	margin-bottom: 10px;
+	border-bottom: 1px solid #dedede;
+    margin-bottom: 20px;
+    padding-top: 16px;
+    padding-bottom: 10px;
 }
 .header{
 	padding: 5px;
@@ -83,7 +85,7 @@ header{
 	margin-left: 15px;
 }
 .myAvatar img{
-	border: 2px inset #B11116;
+	border: 1px inset #666666;
 	width: 40px;
 	height: 40px;
 }
@@ -110,13 +112,18 @@ header{
 .menutab{
 	background-size: auto 16px;
 	background-repeat: no-repeat;
-	background-position: left center;
+	background-position: 10px center;
 	border-bottom: 1px solid #f0f0f0;
     font-size: 0.9em;
-    padding: 5px 0 5px 25px;
+    padding: 15px 0 15px 35px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    color: #444444;
 }
 .menutab:hover , .menutab_active{
-	background-color: #CCCCCC;
+	background-color: #000000;
 	color: #fff;
 }
 .signoutTab{
@@ -136,10 +143,10 @@ header{
 .buttonAction{
   position: relative;
   vertical-align: top;
-  width: 90px;
-  height: 28px;
+  width: 120px;
+  height: 30px;
   padding: 0;
-  font-size: 0.85em;
+  font-size: 0.8em;
   color: white;
   text-align: center;
   cursor: pointer;
@@ -147,22 +154,25 @@ header{
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 .emerald-flat-button {
-  background: #2ecc71;
-  border-bottom: 2px solid #28be68;
-  -webkit-box-shadow: inset 0 -2px #28be68;
-  box-shadow: inset 0 -2px #28be68;
+  background: #6E0904;
+}
+.emerald-flat-button:hover {
+  background: #000000;
 }
 .alizarin-flat-button {
-  background: #e74c3c;
-  border-bottom: 2px solid #db4334;
-  -webkit-box-shadow: inset 0 -2px #db4334;
-  box-shadow: inset 0 -2px #db4334;
+ background: #6E0904;
+ /*  border-bottom: 2px solid #6E0904;
+  -webkit-box-shadow: inset 0 -2px #6E0904;
+  box-shadow: inset 0 -2px #6E0904  */
+}
+.alizarin-flat-button:hover {
+ background: #000000;
 }
 .peter-river-flat-button {
-  background: #3498db;
-  border-bottom: 2px solid #2a8bcc;
-  -webkit-box-shadow: inset 0 -2px #2a8bcc;
-  box-shadow: inset 0 -2px #2a8bcc;
+  background: #6E0904;
+}
+.peter-river-flat-button:hover {
+  background: #000000;
 }
 .silver-flat-button {
   background: #bdc3c7;
@@ -182,12 +192,13 @@ header{
 	width: 220px;
 }
 .searchBox input[type="search"]{
-    border: 1px solid #4f81a1;
-    height: 17px;
+    border: 1px solid #888888;
+    height: 25px;
     padding-bottom: 3px;
     padding-top: 3px;
     text-indent: 3px;
     width: 175px;
+    font-size: 0.8em;
 }
 .searchBox input[type="image"]{
     height: 20px;
@@ -197,10 +208,10 @@ header{
     top: 7px;
     width: 20px;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-	background: rgba(243,156,20,0.7);
+	background: rgb(228, 228, 228);
 	border: 0;
-	-webkit-box-shadow: inset 0 -2px #e8930c;
-	box-shadow: inset 0 -2px #e8930c;
+	/*-webkit-box-shadow: inset 0 -2px #e8930c;
+	box-shadow: inset 0 -2px #e8930c;*/
 }
 /* action */
 .mod-body-inner-action{
@@ -209,12 +220,12 @@ header{
 	height: 28px;
 }
 .orderBox{
-	width: 165px;
+	width: 205px;
 	margin-right: 15px;
 }
 .orderBox select{
-	font-size: 0.85em;
-	width: 165px;
+	font-size: 0.8em;
+	width: 203px;
 }
 .checkAllBox{
 	font-size: 1em;
@@ -222,11 +233,12 @@ header{
 /* form */
 .mod-body-main-content > .Main_Content{
 	height: 48px;
-	color: #000;
+	color: #888888;
 	margin-left: 15px;
 	margin-right: 15px;
 	border-bottom: 1px solid #f0f0f0;
-	padding-top: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 .checkboxContent{
 	width: 30px;
@@ -242,7 +254,7 @@ header{
 	font-size: 0.9em;
 }
 .nameContent > div > a{
-	color: #000;
+	color: #444444;
 	font-size: 1em;
 }
 .stausContent{
@@ -428,7 +440,7 @@ header{
 	height: 42px;
 }
 .EditContent{
-	padding-top: 6px;
+	padding-top: 7px;
     width: 80px;
     margin-left: 15px;
 }
@@ -436,15 +448,21 @@ header{
 	text-indent: -9000px;
 	display: inline-block;
 	margin-left: 5px;
-	width: 24px;
-	height: 24px;
-	background-size: 24px 24px;
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
 }
 .EditContentBtn{
 	background-image: url('../images/small-n-flat/notepad.svg');
 }
+.EditContentBtn:hover{
+	background-image: url('../images/small-n-flat/notepad-hover.svg');
+}
 .DeleteContentBtn{
 	background-image: url('../images/small-n-flat/trashcan.svg');
+}
+.DeleteContentBtn:hover{
+	background-image: url('../images/small-n-flat/trashcan-hover.svg');
 }
 .pagination_box{
 	padding: 15px;
