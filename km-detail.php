@@ -158,7 +158,7 @@ include ('inc/inc-menu.php');
 						$rsPic = mysql_query($getPicSql) or die(mysql_error());
 						while ($rowPic = mysql_fetch_array($rsPic)) {
 							echo '	<div class="slide-content"> ';
-							echo '<img class="img-slide-show" style="max-width:754px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
+							echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
 							echo '</div>';
 						}
 					?>

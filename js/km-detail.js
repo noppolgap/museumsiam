@@ -1,5 +1,5 @@
 	$(document).ready(function() {
-		$(".menutop li.menu6,.menu-left li.menu4").addClass("active");
+		$(".menutop li.menu6").addClass("active");
 
 		var sync1 = $("#sync1");
 		var sync2 = $("#sync2");

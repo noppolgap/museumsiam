@@ -144,6 +144,17 @@ function ShowDateFull($myDate) {
 	$myYear = (sprintf("%d", $myDateArray[0]) + 543) - 2500;
 	return ($myDay . " " . $myMonth . " " . $myYear);
 }
+
+function ShowDateYearFull($myDate) {
+	$myDateArray = explode("-", $myDate);
+	$myDay = sprintf("%d", $myDateArray[2]);
+
+	$myMonth = returnThaiMonth($myDateArray[1]);
+
+	$myYear = (sprintf("%d", $myDateArray[0]) + 543) ;
+	return ($myDay . " " . $myMonth . " " . $myYear);
+}
+
 function ShowMonthYear($myDate) {
 	$myDateArray = explode("-", $myDate);
 
@@ -195,7 +206,7 @@ function returnThaiMonth($str){
 }
 function ConvertDate($str) {
 	if($_SESSION['LANG'] == 'TH'){
-		echo ShowDateFull(trim($str));
+		echo ShowDateYearFull(trim($str));
 	}else{
 		return date("d M Y", strtotime(trim($str)));
 	}
@@ -1038,4 +1049,57 @@ function del_video_file($filename){
 		chmod($path_parts['dirname'], 0755);
 	}
 }
+
+function getModuleDescription($moduleID)
+{
+	if (! isset($_SESSION['LANG']))
+		$lang = 'TH' ; 
+	else 
+		$lang = $_SESSION['LANG'] ;
+	$sql = "select MODULE_NAME_LOC , MODULE_NAME_ENG from sys_app_module where MODULE_ID = ".$moduleID ; 
+	$rsModule = mysql_query($sql) or die(mysql_error());
+	$ret  = '';
+	while ($rowModule = mysql_fetch_array($rsModule)) {
+		if ($lang == 'TH')
+			$ret = $rowModule['MODULE_NAME_LOC'];
+		else 
+			$ret = $rowModule['MODULE_NAME_ENG'];
+	}
+	return $ret;
+}
+function getCategoryDescription($catID)
+{
+	if (! isset($_SESSION['LANG']))
+		$lang = 'TH' ; 
+	else 
+		$lang = $_SESSION['LANG'] ;
+	$sql = "select CONTENT_CAT_DESC_LOC , CONTENT_CAT_DESC_ENG from trn_content_category where CONTENT_CAT_ID = ".$catID ; 
+	$rsCat = mysql_query($sql) or die(mysql_error());
+	$ret  = '';
+	while ($rowCat = mysql_fetch_array($rsCat)) {
+		if ($lang == 'TH')
+			$ret = $rowCat['CONTENT_CAT_DESC_LOC'];
+		else 
+			$ret = $rowCat['CONTENT_CAT_DESC_ENG'];
+	}
+	return $ret;
+}
+function getSubCategoryDescription ($subCatID)
+{
+	if (! isset($_SESSION['LANG']))
+		$lang = 'TH' ; 
+	else 
+		$lang = $_SESSION['LANG'] ;
+	$sql = "select SUB_CONTENT_CAT_DESC_LOC , SUB_CONTENT_CAT_DESC_ENG from trn_content_sub_category where SUB_CONTENT_CAT_ID = ".$subCatID ; 
+	$rsSubCat = mysql_query($sql) or die(mysql_error());
+	$ret  = '';
+	while ($rowSubCat = mysql_fetch_array($rsSubCat)) {
+		if ($lang == 'TH')
+			$ret = $rowSubCat['SUB_CONTENT_CAT_DESC_LOC'];
+		else 
+			$ret = $rowSubCat['SUB_CONTENT_CAT_DESC_ENG'];
+	}
+	return $ret;
+}
+
 ?>

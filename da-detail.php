@@ -12,10 +12,10 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu2,.menu-left li.menu2 .submenu1").addClass("active");
-			if ($('.menu-left li.menu2').hasClass("active")){
-				$('.menu-left li.menu2').children(".submenu-left").css("display","block");
-			}
+		$(".menutop li.menu6").addClass("active");
+			// if ($('.menu-left li.menu2').hasClass("active")){
+				// $('.menu-left li.menu2').children(".submenu-left").css("display","block");
+			// }
 			
 		var sync1 = $("#sync1");
 		var sync2 = $("#sync2");
@@ -244,7 +244,7 @@ else {
 						$rsPic = mysql_query($getPicSql) or die(mysql_error());
 						while ($rowPic = mysql_fetch_array($rsPic)) {
 							echo '	<div class="slide-content"> ';
-							echo '<img class="img-slide-show" style="max-width:754px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
+							echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
 							echo '</div>';
 						}
 								?>

@@ -88,13 +88,7 @@ require ('../inc_header.php');
 				<div class="mod-body-inner-action">
 					<div class="floatL checkAllBox"><label><input type="checkbox" name="checkall" value="0"> เลือกทั้งหมด</label></div>
 					<div class="floatR orderBox">
-						<select onchange="console.log('action');" name="orderby" class="p-Relative">
-					        <option value="order">เลือกการจัดเรียงลำดับ</option>
-					        <option selected="selected" value="order">การจัดเรียงของระบบ</option>
-					        <option value="subject">ชื่อ</option>
-					        <option value="credate">วันที่สร้าง</option>
-					        <option value="status">สถานะข้อมูล</option>
-					    </select>
+						 
 					</div>
 					<div class="clear"></div>
 				</div>

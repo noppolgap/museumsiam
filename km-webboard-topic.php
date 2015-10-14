@@ -20,7 +20,7 @@ if($id == 0){
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu2").addClass("active");
+		$(".menutop li.menu6").addClass("active");
 	});
 </script>
 
@@ -37,7 +37,7 @@ if($id == 0){
 			<ol class="cf">
 				<li><a href="km.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="km.php">ระบบการจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="km.php"><?=getModuleDescription($km_module_id);?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">เว็บบอร์ด</li>
 			</ol>
 		</div>

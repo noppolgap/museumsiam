@@ -13,7 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");
+		$(".menutop li.menu6").addClass("active");
 	});
 </script>
 	
@@ -23,30 +23,7 @@ require("assets/configs/function.inc.php");
 	
 <?php include('inc/inc-top-bar.php'); ?>
 <?php include('inc/inc-menu.php'); ?>	
-
-<div class="part-nav-main"  id="firstbox">
-	<div class="container">
-		<div class="box-nav">
-			<ol class="cf">
-				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="km.php">ระบบการจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">กิจกรรม</li>
-			</ol>
-		</div>
-	</div>
-</div>
-
-<div class="box-freespace"></div>
-
-<div class="part-main">
-	<div class="container cf">
-		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-km.php'); ?>
-		</div>
-		<div class="box-right main-content">
-
-<?php
+<?php 
 $MID = $km_module_id;//$_GET['MID'];
 $CID = $event_cat_id ;//$_GET['CID'];
 $CONID = $_GET['CONID'];
@@ -61,6 +38,7 @@ if (isset($_GET['PG']))
 
 if ($currentPage < 1)
 	$currentPage = 1;
+
 
 $catName = "";
 
@@ -77,6 +55,31 @@ if (isset($_GET['SCID'])) {
 	//$backPage .= "$SCID=" . $SCID;
 	$currentParam .= "$SCID=" . $SCID;
 }
+
+?>
+<div class="part-nav-main"  id="firstbox">
+	<div class="container">
+		<div class="box-nav">
+			<ol class="cf">
+				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="km.php"><?=getModuleDescription($km_module_id);?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=getCategoryDescription($CID)?></li>
+			</ol>
+		</div>
+	</div>
+</div>
+
+<div class="box-freespace"></div>
+
+<div class="part-main">
+	<div class="container cf">
+		<div class="box-left main-content">
+			<?php include('inc/inc-left-content-km.php'); ?>
+		</div>
+		<div class="box-right main-content">
+
+<?php
 
 
 $sqlCategory = "";
@@ -140,6 +143,7 @@ if (isset($_GET['SCID'])) {
 												content.ORDER_DATA desc
 											Limit 9 offset  " . (9 * ($currentPage - 1));
 
+					//	echo 'Page '.$currentPage.' Command'. $getContentSql;
 						$i = 1;
 
 						$rsContent = mysql_query($getContentSql) or die(mysql_error());

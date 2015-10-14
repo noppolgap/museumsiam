@@ -13,7 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu1").addClass("active");
+		$(".menutop li.menu6").addClass("active");
 	});
 </script>
 	
@@ -135,7 +135,7 @@ require("assets/configs/function.inc.php");
 					<h2><?=$rowCat['SUB_CONTENT_CAT_DESC_LOC'] ?></h2>
 					<div class="box-btn">
 						<?php if ($rowCat['IS_LAST_NODE'] == 'Y'){?>
-						<a href="da-all-red.php?MID=<?=$MID ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
+						<a href="da-all-red.php?MID=<?=$MID ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>&SCID=<?=$rowCat['SUB_CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
 						<?php } else { ?>
 							<a href="da-category-red.php?MID=<?=$MID ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>&SCID=<?=$rowCat['SUB_CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
 							<?php } ?>

@@ -15,7 +15,14 @@ require ('inc_meta.php');
 
 <script>
 	$(document).ready(function() {
-		$(".menutop li.menu6,.menu-left li.menu1").addClass("active");
+		$(".menutop li.menu6").addClass("active");
+		
+		
+		// var fileName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') +1 );
+		// console.log(fileName) ; 
+// 		
+		  // $(' event.target ''').closest( "li" ).toggleClass( "hilight" );
+		
 	});
 </script>
 	
@@ -36,14 +43,14 @@ if (!isset($_GET['MID']))
 else
 	$MID = $_GET['MID'];
 
-$sqlModule = "select * from sys_app_module where MODULE_ID = " . $MID;
-$moduleName = '';
-$rs = mysql_query($sqlModule) or die(mysql_error());
-
-while ($row = mysql_fetch_array($rs)) {
-	$moduleName = $row['MODULE_NAME_LOC'];
-	// MODULE_NAME_ENG
-}
+// $sqlModule = "select * from sys_app_module where MODULE_ID = " . $MID;
+// $moduleName = '';
+// $rs = mysql_query($sqlModule) or die(mysql_error());
+// 
+// while ($row = mysql_fetch_array($rs)) {
+	// $moduleName = $row['MODULE_NAME_LOC'];
+	// // MODULE_NAME_ENG
+// }
 		?>
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -51,7 +58,7 @@ while ($row = mysql_fetch_array($rs)) {
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ระบบการจัดการความรู้</li>
+				<li class="active"><?=getModuleDescription($km_module_id);?></li>
 			</ol>
 		</div>
 	</div>

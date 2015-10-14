@@ -15,7 +15,7 @@ require ('inc_meta.php');
 
 <script>
 	$(document).ready(function() {
-		$(".menutop li.menu6,.menu-left li.menu1").addClass("active");
+		$(".menutop li.menu6).addClass("active");
 	});
 </script>
 	

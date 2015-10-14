@@ -15,7 +15,7 @@ require ('inc_meta.php');
 
 <script>
 	$(document).ready(function() {
-		$(".menutop li.menu6,.menu-left li.menu1").addClass("active");
+		$(".menutop li.menu6").addClass("active");
 	});
 </script>
 	
@@ -33,8 +33,8 @@ include ('inc/inc-menu.php');
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
-			
-				include ('inc/inc-da-black-breadcrumbs.php');
+			<?
+				include ('inc/inc-da-black-breadcrumbs.php'); ?>
 				<!-- <ol class="cf">
 					<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
@@ -146,7 +146,7 @@ include ('inc/inc-menu.php');
 					<h2><?=$rowCat['SUB_CONTENT_CAT_DESC_LOC'] ?></h2>
 					<div class="box-btn">
 						<?php if ($rowCat['IS_LAST_NODE'] == 'Y'){?>
-						<a href="da-all-black.php?MID=<?=$MID ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
+						<a href="da-all-black.php?MID=<?=$MID ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>&SCID=<?=$rowCat['SUB_CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
 						<?php } else { ?>
 							<a href="da-category-black.php?MID=<?=$MID ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>&SCID=<?=$rowCat['SUB_CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
 							<?php } ?>
