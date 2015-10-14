@@ -1,6 +1,6 @@
 <div class="floatL main-menu">
 	<div class="menuhead">
-		เมนูการใช้งาน
+		Management
 	</div>
 
 	<?php
@@ -29,7 +29,7 @@
 	<a href="../mod_faq/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการ FAQ</span></a>
 	<a href="../mod_webboard/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการ WEBBOARD</span></a>
 	<a href="../mod_order/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการสินค้า</span></a>
-	
+
 	<a href="../mod_network_museum/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการพิพิธภัณฑ์เครือข่าย</span></a>
 
 

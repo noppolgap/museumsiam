@@ -2,39 +2,32 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+	$CID = 11;
+
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/news-event.css" />
 
-<script>
-	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu1").addClass("active");
-		if ($('.menu-left li.menu1').hasClass("active")){
-			$('.menu-left li.menu1').children(".submenu-left").css("display","block");
-		}
-	});
-</script>
-	
+<script src="js/news-event.js"></script>
 </head>
 
 <body>
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
-			<ol class="cf">
-				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="index.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">กิจกรรมและข่าวสารของมิวเซียมสยาม</li>
-			</ol>
+			<?php
+				include ('inc/inc-news-event-breadcrumbs.php');
+			?>
 		</div>
 	</div>
 </div>
@@ -58,7 +51,9 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
-						
+<?php
+	for($i=1;$i<=9;$i++){
+?>
 						<div class="box-tumb cf">
 							<a href="">
 								<div class="box-pic">
@@ -93,182 +88,16 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<hr class="line-gray"/>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										ชื่อระบบ
-									</div>
-									<div class="box-date-tumb">
-										<p class="date">99</p>
-										<p class="month">พ.ย.</p>
-									</div>
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
+<?php
+		if($i == 3){
+			echo '<hr class="line-gray">';
+		}
+	}
+?>
 					</div>
 
 				</div>
-				
+
 			</div>
 			<div class="box-category-main news">
 				<div class="box-title cf">
@@ -279,7 +108,7 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
-						
+
 						<div class="box-tumb cf">
 							<a href="">
 								<div class="box-pic">
@@ -443,10 +272,10 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="box-category-main news">
 				<div class="box-title cf">
@@ -505,9 +334,9 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -516,7 +345,10 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
-
+<?php
+include('inc/inc-footer.php');
+include('inc/inc-social-network.php');
+?>
 </body>
 </html>
+<? CloseDB(); ?>

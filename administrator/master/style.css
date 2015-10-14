@@ -10,7 +10,7 @@ body {
 }
 a:link {text-decoration:none;color: #B42024;}
 a:visited {text-decoration:none;color: #9d0031;}
-a:hover {text-decoration:none;color: #9d0031;}
+a:hover {text-decoration:none;color: #B28F50;}
 a:active {text-decoration:none;color: #9d0031;}
 .marginC{
 	margin: 0px auto;
@@ -53,7 +53,7 @@ a:active {text-decoration:none;color: #9d0031;}
 .w100p{ width: 100%; }
 /*-----------------------------------------*/
 .main-container{
-	background-image: url('../images/bg.jpg');
+	/*background-image: url('../images/bg.jpg');*/
 	background-position: center bottom;
 	background-repeat: repeat-x;
 	border-bottom: 4px solid #CCCCCC;
@@ -92,6 +92,7 @@ header{
 .mymenu{
 	text-align: right;
 	font-size: 0.8em;
+	line-height: 20px;
 }
 .mod-body{
 	margin-left: 180px;
@@ -100,14 +101,17 @@ header{
 	border: 1px solid #DADADA;
 	margin: 10px 0px;
 	min-height: 200px;
+	padding-top: 10px;
 }
 .main-menu{
 	width: 165px;
 }
 .menuhead{
-	font-size: 1.2em;
-	font-weight: 600;
-	padding-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding-top: 7px;
+    padding-bottom: 11px;
+    text-transform: uppercase;
 }
 .menutab{
 	background-size: auto 16px;
@@ -256,6 +260,9 @@ header{
 .nameContent > div > a{
 	color: #444444;
 	font-size: 1em;
+}
+.nameContent > div > a:hover{
+	color: #b28f50;
 }
 .stausContent{
 	padding-left: 5px;
@@ -621,7 +628,7 @@ header{
 }
 .nameCategoryContent{
 	margin: 5px 15px 10px;
-	color: #000;
+	color: #444;
 }
 .nameCategoryContent > div{
 	font-size: 0.9em;
@@ -630,9 +637,14 @@ header{
     display: block;
     font-size: 1.1em;
     font-weight: 600;
-    height: 1.7em;
+    height: 3em;
+    line-height: 23px;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #8A181A;
+}
+.nameCategoryContent > div > a:hover{
+    color: #b28f50;
 }
 .VideoUpload_loading{
 	margin-left: 10px;
