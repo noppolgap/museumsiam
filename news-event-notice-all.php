@@ -49,131 +49,55 @@ require("assets/configs/function.inc.php");
 		</div>
 		<div class="box-right main-content">
 
+			<?php
+
+			    $sql = " SELECT d.CONTENT_DESC_LOC, p.IMG_PATH from trn_content_detail d
+						 LEFT JOIN (
+													SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
+													FROM (
+														SELECT * 
+														FROM trn_content_picture
+														ORDER BY ORDER_ID ASC
+													) AS my_table_tmp
+													GROUP BY CONTENT_ID, CAT_ID
+												) as p on  d.CONTENT_ID = p.CONTENT_ID
+												AND d.CAT_ID = p.CAT_ID
+						WHERE d.CAT_ID = 59 and d.CONTENT_STATUS_FLAG = 0 
+						ORDER BY d.ORDER_DATA DESC LIMIT 0 , 30";
+
+				$query = mysql_query($sql, $conn);
+
+				$num = mysql_num_rows($query);
+
+			?>
+
+ 
 			<div class="box-category-main news">
 				<div class="box-title cf">
 					<h2>ประกาศจัดซื้อจัดจ้าง</h2>
 				</div>
+
 				<div class="box-news-main gray">
+
+			   <? while($row = mysql_fetch_array($query)) {
+			   		$IMG_PATH = str_replace("../../","",$row['IMG_PATH']);
+			   	?>
+
 					<div class="box-notice pdf">
 						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>
 							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
+								<span>ประเภท: <? echo getEXT($IMG_PATH) ?></span>
+								<span>ขนาด: <?=formatSizeUnits(filesize($IMG_PATH))?></span>
 							</p>
 						</div>
 						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
+							<a href="<?=$IMG_PATH?>" target="_blank" class="btn red">ดาวน์โหลด</a>
 						</div>
 					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
-					<div class="box-notice pdf">
-						<div class="box-text">
-							<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-							<p class="text-detail">
-								<span>ประเภท: .pdf</span>
-								<span>ขนาด: 0.61 เมกะไบต์</span>
-							</p>
-						</div>
-						<div class="box-btn cf">
-							<a href="#" class="btn red">ดาวน์โหลด</a>
-						</div>
-					</div>
+
+				<? } ?>
+
 					<div class="box-pagination-main cf Noborder">
 						<ul class="pagination">
 							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
