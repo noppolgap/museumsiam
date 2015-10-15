@@ -50,6 +50,13 @@
 			$categoryRS = mysql_query($sqlCategory) or die(mysql_error());
 			$mainMenuCount = 2;
 
+			if ($_SESSION['LANG'] == 'TH') {
+				$selectedCatColumn = 'CONTENT_CAT_DESC_LOC';
+				$selectedSubCatColumn = 'SUB_CONTENT_CAT_DESC_LOC';
+			} else {
+				$selectedCatColumn = 'CONTENT_CAT_DESC_ENG';
+				$selectedSubCatColumn = 'SUB_CONTENT_CAT_DESC_LOC';
+			}
 			while ($categoryRow = mysql_fetch_array($categoryRS)) {
 
 				$pageColorTheme = '';
@@ -87,11 +94,11 @@
 				echo '<li class="menu' . $mainMenuCount . $isSubCat . $activeClass . '">';
 
 				if (nvl($categoryRow['IS_LAST_NODE'], 'Y') == 'Y') {
-					echo ' <a href="' . $catNextPage . '?MID=' . $digial_module_id . '">' . $categoryRow['CONTENT_CAT_DESC_LOC'] . '</a> ';
+					echo ' <a href="' . $catNextPage . '?MID=' . $digial_module_id . '&CID=' . $categoryRow['CONTENT_CAT_ID'] . '">' . $categoryRow[$selectedCatColumn] . '</a> ';
 				} else {
 
 					//has subCat render list
-					echo ' <a href="' . $catNextPage . '?MID=' . $digial_module_id . '&CID=' . $categoryRow['CONTENT_CAT_ID'] . '">' . $categoryRow['CONTENT_CAT_DESC_LOC'] . '</a> ';
+					echo ' <a href="' . $catNextPage . '?MID=' . $digial_module_id . '&CID=' . $categoryRow['CONTENT_CAT_ID'] . '">' . $categoryRow[$selectedCatColumn] . '</a> ';
 
 					$sqlSubCategory = "SELECT
 														SUB_CONTENT_CAT_ID,
@@ -131,7 +138,7 @@
 							}
 						}
 
-						echo '<li class="submenu' . $subMenuCount++ .$subActive.'"><a href="' . $prePage . $pageColorTheme . '.php?MID=' . $digial_module_id . '&CID=' . $categoryRow['CONTENT_CAT_ID'] . '&SCID=' . $subCategoryRow['SUB_CONTENT_CAT_ID'] . '">' . $subCategoryRow['SUB_CONTENT_CAT_DESC_LOC'] . '</a></li>';
+						echo '<li class="submenu' . $subMenuCount++ . $subActive . '"><a href="' . $prePage . $pageColorTheme . '.php?MID=' . $digial_module_id . '&CID=' . $categoryRow['CONTENT_CAT_ID'] . '&SCID=' . $subCategoryRow['SUB_CONTENT_CAT_ID'] . '">' . $subCategoryRow[$selectedSubCatColumn] . '</a></li>';
 					}
 
 					// <li class="submenu2"><a href="da-category.php">หมวดหมู่ย่อย</a></li>

@@ -1,58 +1,37 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<?
+require ('inc_meta.php');
+ ?>	
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/da.css" />
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$(".menutop li.menu6").addClass("active");
-			// if ($('.menu-left li.menu2').hasClass("active")){
-				// $('.menu-left li.menu2').children(".submenu-left").css("display","block");
-			// }
-	});
+		// if ($('.menu-left li.menu2').hasClass("active")){
+		// $('.menu-left li.menu2').children(".submenu-left").css("display","block");
+		// }
+	}); 
 </script>
 	
 </head>
 
 <body id="km">
 	
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
-
-<div class="part-nav-main"  id="firstbox">
-	<div class="container">
-		<div class="box-nav">
-			
-					<?
-				include ('inc/inc-da-gray-breadcrumbs.php');
-			?> 
-				<!--<ol class="cf"> <li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="da.php">คลังความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="da-category.php">หมวดหมู่</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">หมวดหมู่ย่อย</li> </ol>-->
-			
-		</div>
-	</div>
-</div>
-
-<div class="box-freespace"></div>
-
-
-<div class="part-main">
-	<div class="container cf">
-		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-da.php'); ?>
-		</div>
-		<div class="box-right main-content">
+<?php
+include ('inc/inc-top-bar.php');
+ ?>
+<?php
+include ('inc/inc-menu.php');
+ ?>	
 <?php
 $MID = $_GET['MID'];
 $CID = $_GET['CID'];
@@ -77,11 +56,14 @@ else
 	$backPage = "da.php?MID=" . $digial_module_id;
 
 $currentParam = "?MID=" . $MID . "&CID=" . $CID;
+$currentSCID = '' ;
 if (isset($_GET['SCID'])) {
-	$currentParam .= "$SCID=" . $SCID;
+	$currentParam .= "&SCID=" . $SCID;
+	$currentSCID = "&SCID=" . $SCID;
 }
 
 $sqlCategory = "";
+//echo $currentParam . $_GET['SCID'];
 if (isset($_GET['SCID'])) {
 	$sqlCategory = "select SUB_CONTENT_CAT_ID ,
 											CONTENT_CAT_ID ,
@@ -102,6 +84,31 @@ if (isset($_GET['SCID'])) {
 	}
 }
 ?>
+<div class="part-nav-main"  id="firstbox">
+	<div class="container">
+		<div class="box-nav">
+			
+					<?
+					include ('inc/inc-da-gray-breadcrumbs.php');
+			?> 
+				
+			
+		</div>
+	</div>
+</div>
+
+<div class="box-freespace"></div>
+
+
+<div class="part-main">
+	<div class="container cf">
+		<div class="box-left main-content">
+			<?php
+			include ('inc/inc-left-content-da.php');
+ ?>
+		</div>
+		<div class="box-right main-content">
+
 			<div class="box-category-main news BGray">
 				<div class="box-title cf">
 					<h2><?=$catName ?></h2>
@@ -141,7 +148,7 @@ if (isset($_GET['SCID'])) {
 											Limit 9 offset  " . (9 * ($currentPage - 1));
 
 						$i = 1;
-
+						//echo $getContentSql;
 						$rsContent = mysql_query($getContentSql) or die(mysql_error());
 						$rowCount = mysql_num_rows($rsContent);
 						while ($rowContent = mysql_fetch_array($rsContent)) {
@@ -152,15 +159,15 @@ if (isset($_GET['SCID'])) {
 
 							if ($i == 4 || $i == 7)
 								echo '<hr class="line-gray"/>';
-						
-						echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="da-detail.php?MID='.$MID.'&CID='.$CID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+
+							echo '<div class="box-tumb cf' . $extraClass . '">';
+							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'].$currentSCID . '">';
 							echo '<div class="box-pic">';
 							echo '	<img style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo '</div>';
 							echo '</a>';
 							echo '<div class="box-text">';
-							echo '<a href="da-detail.php?MID='.$MID.'&CID='.$CID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'].$currentSCID . '">';
 							echo '<p class="text-title TcolorRed">';
 							echo $rowContent['CONTENT_DESC_LOC'];
 							echo '</p>';
@@ -169,10 +176,10 @@ if (isset($_GET['SCID'])) {
 							echo ConvertDate($rowContent['LAST_DATE']);
 							echo '</p>';
 							echo '<p class="text-des TcolorBlack">';
-								echo $rowContent['BRIEF_LOC'];
+							echo $rowContent['BRIEF_LOC'];
 							echo '</p>';
 							echo '<div class="box-btn cf">';
-							echo '<a href="da-detail.php?MID='.$MID.'&CID='.$CID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'].$currentSCID . '" class="btn red">อ่านเพิ่มเติม</a>';
 							echo '<div class="box-btn-social cf">';
 							echo '<a href="#" class="btn-socila fb"></a>';
 							echo '<a href="#" class="btn-socila tw"></a>';
@@ -512,7 +519,9 @@ $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION['DA_PREV_PG'] = $current_url;
 ?>
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php
+include ('inc/inc-footer.php');
+ ?>	
 
 </body>
 </html>

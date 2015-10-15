@@ -1,133 +1,138 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<?
+	require ('inc_meta.php');
+ ?>	
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$(".menutop li.menu6").addClass("active");
-			// if ($('.menu-left li.menu2').hasClass("active")){
-				// $('.menu-left li.menu2').children(".submenu-left").css("display","block");
-			// }
-			
+		// if ($('.menu-left li.menu2').hasClass("active")){
+		// $('.menu-left li.menu2').children(".submenu-left").css("display","block");
+		// }
+
 		var sync1 = $("#sync1");
 		var sync2 = $("#sync2");
-		
+
 		sync1.owlCarousel({
 			singleItem : true,
 			paginationSpeed : 500,
 			rewindSpeed : 1000,
-			navigation: false,
-			pagination:false,
+			navigation : false,
+			pagination : false,
 			afterAction : syncPosition,
 			responsiveRefreshRate : 200,
 			mouseDrag : false,
-			rewindNav:true
+			rewindNav : true
 		});
-		
+
 		sync2.owlCarousel({
 			paginationSpeed : 500,
 			rewindSpeed : 1000,
 			items : 5,
-			itemsMobile       : [320,5],
-			itemsTablet       : [768,5],
-			itemsDesktop      : [1024,5],
-			navigation: false,
-			pagination:true,
+			itemsMobile : [320, 5],
+			itemsTablet : [768, 5],
+			itemsDesktop : [1024, 5],
+			navigation : false,
+			pagination : true,
 			responsiveRefreshRate : 100,
 			mouseDrag : false,
-			afterInit : function(el){
-			el.find(".owl-item").eq(0).addClass("synced");
+			afterInit : function(el) {
+				el.find(".owl-item").eq(0).addClass("synced");
 			},
-			rewindNav:false
+			rewindNav : false
 		});
-		
-		function syncPosition(el){
-		var current = this.currentItem;
-			$("#sync2")
-			.find(".owl-item")
-			.removeClass("synced")
-			.eq(current)
-			.addClass("synced")
-			if($("#sync2").data("owlCarousel") !== undefined){
+
+		function syncPosition(el) {
+			var current = this.currentItem;
+			$("#sync2").find(".owl-item").removeClass("synced").eq(current).addClass("synced")
+			if ($("#sync2").data("owlCarousel") !== undefined) {
 				center(current)
 			}
 		}
-		
-		$("#sync2").on("click", ".owl-item", function(e){
+
+
+		$("#sync2").on("click", ".owl-item", function(e) {
 			e.preventDefault();
 			var number = $(this).data("owlItem");
-			sync1.trigger("owl.goTo",number);
+			sync1.trigger("owl.goTo", number);
 		});
-		
-		function center(number){
-		var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-		
-		var num = number;
-		var found = false;
-		for(var i in sync2visible){
-			if(num === sync2visible[i]){
-				var found = true;
-			}
-		}
-		
-		if(found===false){
-			if(num>sync2visible[sync2visible.length-1]){
-				sync2.trigger("owl.goTo", num - sync2visible.length+2)
-			}else{
-				if(num - 1 === -1){
-					num = 0;
+
+		function center(number) {
+			var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
+
+			var num = number;
+			var found = false;
+			for (var i in sync2visible) {
+				if (num === sync2visible[i]) {
+					var found = true;
 				}
-			sync2.trigger("owl.goTo", num);
 			}
-			} else if(num === sync2visible[sync2visible.length-1]){
+
+			if (found === false) {
+				if (num > sync2visible[sync2visible.length - 1]) {
+					sync2.trigger("owl.goTo", num - sync2visible.length + 2)
+				} else {
+					if (num - 1 === -1) {
+						num = 0;
+					}
+					sync2.trigger("owl.goTo", num);
+				}
+			} else if (num === sync2visible[sync2visible.length - 1]) {
 				sync2.trigger("owl.goTo", sync2visible[1])
-			} else if(num === sync2visible[0]){
-				sync2.trigger("owl.goTo", num-1)
+			} else if (num === sync2visible[0]) {
+				sync2.trigger("owl.goTo", num - 1)
 			}
 		}
-		$(".box-slide-big a.pev").click(function(){	
+
+
+		$(".box-slide-big a.pev").click(function() {
 			$("#sync1").data('owlCarousel').prev();
 		});
-		$(".box-slide-big a.next").click(function(){	
+		$(".box-slide-big a.next").click(function() {
 			$("#sync1").data('owlCarousel').next();
 		});
-			
+
 		$(".img-slide-show").each(function() {
 
 			if ($(this).width() > $(this).height()) {
 				$(this).width(754);
-				$(this).css('height' , 'auto');
+				$(this).css('height', 'auto');
 				//($('.owl-wrapper-outer').height() - $('.img-slide-show').height())/2
 
 				$(this).css('margin-top', (($('.owl-wrapper-outer').height() - $(this).height()) / 2));
 
 			}
 
-		});	
-	});
+		});
+	}); 
 </script>
 	
 </head>
 
 <body>
 	
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php
+		include ('inc/inc-top-bar.php');
+ ?>
+<?php
+	include ('inc/inc-menu.php');
+ ?>	
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
 			<?php
-			if (isset($_SESSION['DA_PREV_PG'])){
-				$prevPage  = $_SESSION['DA_PREV_PG'] ;
+			if (isset($_SESSION['DA_PREV_PG'])) {
+				$prevPage = $_SESSION['DA_PREV_PG'];
 				if (strpos($prevPage, 'black') !== FALSE)
 					include ('inc/inc-da-black-breadcrumbs.php');
 				else if (strpos($prevPage, 'gray') !== FALSE)
@@ -146,19 +151,7 @@ require("assets/configs/function.inc.php");
 		</div>
 	</div>
 </div>
-
-<div class="box-freespace"></div>
-
-<div class="part-main">
-	<div class="container cf">
-		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-da.php'); ?>
-		</div>
-		
-		<div class="box-right main-content">
-			<hr class="line-red"/>
-			
-			<?php
+<?php
 				$MID = $_GET['MID'];
 				$CID = $_GET['CID'];
 				$CONID = $_GET['CONID'];
@@ -223,14 +216,29 @@ else {
 				WHERE
 				CONTENT_ID = $CONID";
 
-			//	echo $contentSql;
-				$rsContent = mysql_query($contentSql) or die(mysql_error());
-				while ($rowContent = mysql_fetch_array($rsContent)) {
+			
 				
 				?>
-				
+<div class="box-freespace"></div>
+
+<div class="part-main">
+	<div class="container cf">
+		<div class="box-left main-content">
+			<?php
+			include ('inc/inc-left-content-da.php');
+ ?>
+		</div>
+		
+		<div class="box-right main-content">
+			<hr class="line-red"/>
+			
+			
+			<?//	echo $contentSql;
+				$rsContent = mysql_query($contentSql) or die(mysql_error());
+				while ($rowContent = mysql_fetch_array($rsContent)) {
+					?>	
 			<div class="box-title-system cf news">
-				<h1><?=$catName?></h1>
+				<h1><?=$catName ?></h1>
 				<div class="box-btn">
 					<a href="<?=$backPage ?>" class="btn red">ย้อนกลับ</a>
 				</div>
@@ -313,7 +321,7 @@ else {
 					</div>
 				</div>
 				<div class="box-news-text">
-					<?=$rowContent['CONTENT_DETAIL_LOC'] ?>
+					<?=nl2br(strip_tags($rowContent['CONTENT_DETAIL_LOC'], '<p><br>')); ?>
 				</div>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
@@ -338,7 +346,9 @@ else {
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php
+	include ('inc/inc-footer.php');
+ ?>	
 
 </body>
 </html>
