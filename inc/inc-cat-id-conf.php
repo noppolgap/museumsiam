@@ -14,6 +14,8 @@ $museum_event_cat_id = 60;
 $km_module_id = 2;
 $digial_module_id = 3;
 
+$visual_exhibition = 5;
+
 $new_and_event = 12;
 // End Module ID
 ?>
