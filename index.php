@@ -19,7 +19,6 @@ require ("assets/configs/function.inc.php");
 				$("li.menu1").addClass("active");
 			});
 		</script>
-
 	</head>
 
 	<body>
@@ -815,8 +814,8 @@ require ("assets/configs/function.inc.php");
 					</div>
 					<div class="box-slide-exhibition-main">
 						<div class="slide-exhibition">
-							<?php 
-							
+							<?php
+
 							$MID = $visual_exhibition;
 							$contentSqlStr = "SELECT ";
 							if ($_SESSION['LANG'] == 'TH')
@@ -850,6 +849,16 @@ ORDER BY RAND() LIMIT 0,5 ";
 								if ($rowContent['SUB_CAT_ID'] > 0) {
 									$extraSCID = '&SCID=' . $rowContent['SUB_CAT_ID'];
 								}
+
+
+								$path = 've-detail.php?MID='.$MID.'%26CID='.$categoryID .'%26CONID='.$rowContent['CONTENT_ID'] . $extraSCID;
+								$fullpath = _FULL_SITE_PATH_.'/'.$path;
+								$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$rowContent['CONTENT_ID'];
+								$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+
+								$title = htmlspecialchars(trim($rowContent['CONTENT_DESC']));
+								$detail = strip_tags(trim($rowContent['CONTENT_BRIEF']));
+
 								echo '<div class="box-exhibition cf">';
 								echo '<div class="box-text">';
 								echo '<a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '"> ';
@@ -865,152 +874,29 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo '<div class="box-btn cf">';
 								echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">อ่านเพิ่มเติม</a>';
 								echo '<div class="box-btn-social cf">';
-								echo '<a href="#" class="btn-socila fb"></a>';
-								echo '<a href="#" class="btn-socila tw"></a>';
+								echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+								echo '<a href="'.$fullpath.'" onclick="shareTW('.$rowContent['CONTENT_ID'].',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 								echo '</div>';
 								echo '</div>';
 								echo '</div>';
 
 								echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '">';
-								echo '<div class="box-pic">';
-								echo '<img style="width:197px;height:147px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+								echo '<div class="box-pic box-pic-thumb">';
+								echo '<img src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 								echo '</div>';
 								echo '</a>';
 								echo '</div>';
+								echo "\n\t\t";
 
 							}
 
 							$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 							$_SESSION['VE_PREV_PG'] = $current_url;
-							
-							
-							
+
+
+
 							?>
-							<!--<div class="box-exhibition cf">
-								<div class="box-text">
-									<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p> </a>
-									<p class="text-date TcolorGray">
-										28 พ.ย. 2559
-									</p>
-									<p class="text-des TcolorBlack">
-										Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-									</p>
-									<div class="box-btn cf">
-										<a href="" class="btn red">อ่านเพิ่มเติม</a>
-										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
-										</div>
-									</div>
-								</div>
-								<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div> </a>
-							</div>
-							<div class="box-exhibition cf">
-								<div class="box-text">
-									<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p> </a>
-									<p class="text-date TcolorGray">
-										28 พ.ย. 2559
-									</p>
-									<p class="text-des TcolorBlack">
-										Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-									</p>
-									<div class="box-btn cf">
-										<a href="" class="btn red">อ่านเพิ่มเติม</a>
-										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
-										</div>
-									</div>
-								</div>
-								<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div> </a>
-							</div>
-							<div class="box-exhibition cf">
-								<div class="box-text">
-									<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p> </a>
-									<p class="text-date TcolorGray">
-										28 พ.ย. 2559
-									</p>
-									<p class="text-des TcolorBlack">
-										Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-									</p>
-									<div class="box-btn cf">
-										<a href="" class="btn red">อ่านเพิ่มเติม</a>
-										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
-										</div>
-									</div>
-								</div>
-								<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div> </a>
-							</div>
-							<div class="box-exhibition cf">
-								<div class="box-text">
-									<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p> </a>
-									<p class="text-date TcolorGray">
-										28 พ.ย. 2559
-									</p>
-									<p class="text-des TcolorBlack">
-										Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-									</p>
-									<div class="box-btn cf">
-										<a href="" class="btn red">อ่านเพิ่มเติม</a>
-										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
-										</div>
-									</div>
-								</div>
-								<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div> </a>
-							</div>
-							<div class="box-exhibition cf">
-								<div class="box-text">
-									<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p> </a>
-									<p class="text-date TcolorGray">
-										28 พ.ย. 2559
-									</p>
-									<p class="text-des TcolorBlack">
-										Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-									</p>
-									<div class="box-btn cf">
-										<a href="" class="btn red">อ่านเพิ่มเติม</a>
-										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
-										</div>
-									</div>
-								</div>
-								<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div> </a>
-							</div>-->
+
 						</div>
 					</div>
 				</div>
@@ -1062,6 +948,16 @@ ORDER BY RAND() LIMIT 0,5 ";
 								if ($rowContent['SUB_CAT_ID'] > 0) {
 									$extraSCID = '&SCID=' . $rowContent['SUB_CAT_ID'];
 								}
+
+
+								$path = 'da-detail.php?MID='.$MID.'%26CID='.$categoryID .'%26CONID='.$rowContent['CONTENT_ID'] . $extraSCID;
+								$fullpath = _FULL_SITE_PATH_.'/'.$path;
+								$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$rowContent['CONTENT_ID'];
+								$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+
+								$title = htmlspecialchars(trim($rowContent['CONTENT_DESC']));
+								$detail = strip_tags(trim($rowContent['CONTENT_BRIEF']));
+
 								echo '<div class="box-archive cf">';
 								echo '<div class="box-text">';
 								echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '"> ';
@@ -1077,15 +973,15 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo '<div class="box-btn cf">';
 								echo ' <a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">อ่านเพิ่มเติม</a>';
 								echo '<div class="box-btn-social cf">';
-								echo '<a href="#" class="btn-socila fb"></a>';
-								echo '<a href="#" class="btn-socila tw"></a>';
+								echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+								echo '<a href="'.$fullpath.'" onclick="shareTW('.$rowContent['CONTENT_ID'].',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 								echo '</div>';
 								echo '</div>';
 								echo '</div>';
 
 								echo ' <a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '">';
-								echo '<div class="box-pic">';
-								echo '<img style="width:197px;height:147px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+								echo '<div class="box-pic box-pic-thumb">';
+								echo '<img src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 								echo '</div>';
 								echo '</a>';
 								echo '</div>';
@@ -1141,6 +1037,16 @@ ORDER BY RAND() LIMIT 0,5 ";
 							$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
 							while ($rowContent = mysql_fetch_array($rsContent)) {
 								$categoryID = $rowContent['CONTENT_CAT_ID'];
+
+								$path = 'km-detail.php?MID='.$MID.'%26CID='.$categoryID .'%26CONID='.$rowContent['CONTENT_ID'];;
+								$fullpath = _FULL_SITE_PATH_.'/'.$path;
+								$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$rowContent['CONTENT_ID'];
+								$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+
+								$title = htmlspecialchars(trim($rowContent['CONTENT_DESC']));
+								$detail = strip_tags(trim($rowContent['CONTENT_BRIEF']));
+
+
 								echo '<div class="box-knowledge cf">';
 								echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '"> ';
 								echo '<div class="box-pic">';
@@ -1162,8 +1068,8 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo '<div class="box-btn cf">';
 								echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
 								echo '<div class="box-btn-social cf">';
-								echo '<a href="#" class="btn-socila fb"></a>';
-								echo '<a href="#" class="btn-socila tw"></a>';
+								echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+								echo '<a href="'.$fullpath.'" onclick="shareTW('.$rowContent['CONTENT_ID'].',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 								echo '</div>';
 								echo '</div>';
 								echo '</div>';
@@ -1185,6 +1091,6 @@ ORDER BY RAND() LIMIT 0,5 ";
 		include ('inc/inc-footer.php');
 		include ('inc/inc-social-network.php');
 		?>
-
 	</body>
 </html>
+<? CloseDB(); ?>

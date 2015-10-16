@@ -1,0 +1,168 @@
+.box-right.main-content .box-title-system {
+	margin: 20px 0;
+	padding: 0 20px;
+}
+.box-title-system.news span {
+	display: block;
+	color: #6e0904;
+	font-size: 18px;
+	margin-top: 10px;
+}
+.box-contact-main{
+	background-color: #8e070b;
+}
+.box-contact-main>.box-left{
+	width: 530px;
+	background-color: #f7f7f7;
+	min-height: 400px;
+	padding: 30px 20px;
+}
+.box-contact-main>.box-right{
+	width: 350px;
+	background-color: #8e070b;
+	min-height: 400px;
+}
+/*
+.box-contact-main .box-row{
+	margin-bottom: 15px;
+}
+*/
+.box-contact-main .box-row:last-child{
+	margin-bottom: 0px;
+}
+.box-contact-main .box-row .box-left{
+	width: 170px;
+}
+.box-contact-main .box-row .box-right {
+	width: 310px;
+}
+textarea {
+	height: 120px;
+	padding: 6px 10px;
+}
+.SearchMenu-item{
+	padding-left: 10px;
+}
+.box-left>p{
+	line-height: 35px;
+}
+.box-left>p.con:after{
+	content: "*";
+	display: inline;
+	color: #6e0904;
+	margin-left: 5px;
+}
+.box-btn.submit{
+	margin: 0px;
+}
+.box-btn.submit .btn.red.btnReset{
+	margin-left: 30px;
+}
+
+.box-contact-main .box-top{
+	height: 270px;
+	background: url(../images/contact/logo.png) center center no-repeat #6e0904;
+}
+.box-contact-main .box-bottom{
+	padding: 50px 35px;
+}
+.box-contact-main .box-bottom p{
+	padding-left: 30px;
+	margin-bottom: 30px;
+	font-size: 14px;
+	color: #fff;
+	    line-height: initial;
+}
+.box-contact-main .box-bottom p a{
+	display: inline;
+	color: #fff;
+}
+.box-contact-main .box-bottom p a:hover{
+	text-decoration: underline;
+}
+
+.box-contact-main .box-bottom p:before {
+	content: '';
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.box-contact-main .box-bottom p.text-pin:before {
+	background: url(../images/contact/icon-pin.png) no-repeat center center;
+}
+.box-contact-main .box-bottom p.text-tel:before {
+	background: url(../images/contact/icon-tel.png) no-repeat center center;
+}
+.box-contact-main .box-bottom p.text-email:before {
+	background: url(../images/contact/icon-email.png) no-repeat center center;
+}
+
+.box-map2d-main,
+.box-mapgoogle-main{
+	margin-top: 40px;
+}
+.box-map2d-main .box-btn a,
+.box-mapgoogle-main .box-btn a {
+	width: 175px;
+	height: 35px;
+	line-height: 35px;
+}
+.box-map2d-main .box-btn,
+.box-mapgoogle-main .box-btn{
+	margin-top: 25px;
+}
+
+.box-map{
+	border-top: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	border-bottom: 4px solid #6e0904;
+}
+.box-map img{
+	width: 100%;
+	height: auto;
+}
+
+
+/* --------------------------------------------------- Top Bar --------------------------------------------------- */
+
+.box-carrer-main .box-row{
+	padding: 20px;
+	border-top: 1px solid #eeeeee;
+	margin: 0px;
+}
+.box-carrer-main .box-top{
+	margin-bottom: 20px;
+}
+.box-carrer-main h3{
+	font-size: 16px;
+	line-height: initial;
+	float: left;
+	    width: 750px;
+}
+.box-carrer-main .number{
+	font-size: 16px;
+	line-height: initial;
+	float: right;
+}
+.box-carrer-main .number span{
+	color: #6e0904;
+	display: inline;
+}
+.box-carrer-main .box-btn{
+	margin: 0;
+}
+.box-carrer-main .box-btn a{
+	margin-right: 30px;
+}
+
+
+
+
+
+
+
+

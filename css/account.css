@@ -1,5 +1,6 @@
 /* --------------------------------------------------- Main --------------------------------------------------- */
 .part-account-main{
+	background: url(../images/account/bg-twotone.jpg) center center repeat-y;
 	background-color: #6e0904;
 	border-top: 4px solid #eeeeee;
 	border-bottom: 4px solid #eeeeee;
@@ -16,10 +17,10 @@
 	float: right;
 	background-color: #6e0904;
 	min-height: 680px;
-	padding: 30px 0px;
+	padding: 30px 0px 0px;
 }
 ul.menu-left li{
-	font-size: 16px;
+	font-size: 14px;
 	position: relative;
 }
 ul.menu-left li a{
@@ -67,13 +68,23 @@ ul.menu-left li ul.submenu-left li:before{
 }
 ul.menu-left li.active ul.submenu-left{
 	border-top: 1px solid #8e070b;
-/* 	border-bottom: 1px solid #8e070b; */
+/*
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid #8e070b;
+*/
 }
 ul.menu-left li ul.submenu-left{
-	border-top: 1px solid #6e0904;
-/* 	border-bottom: 1px solid #6e0904; */
+/* 	border-top: 1px solid #6e0904; */
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid #6e0904;
 	padding: 10px 0;
 	display: none;
+}
+ul.menu-left li.last ul.submenu-left{
+	border-bottom: 1px solid transparent;
+}
+ul.menu-left li ul.submenu-left li{
+	font-size: 13px;
 }
 ul.menu-left li.lu{
 	border-top: 1px solid #6e0904;
@@ -167,16 +178,16 @@ ul.menu-left li.lu.active:before{
 }
 .box-title h1{
 	color: #fff;
-	font-size: 22px;
-	line-height: 22px;
+	font-size: 18px;
+	line-height: 18px;
 	text-transform: uppercase;
 	margin-bottom: 40px;
 	margin-top: 10px;
 }
 .box-title h2 {
 	color: #fff;
-	font-size: 20px;
-	line-height: 20px;
+	font-size: 16px;
+	line-height: 16px;
 	text-transform: uppercase;
 	margin-bottom: 40px;
 	margin-top: 30px;
@@ -220,6 +231,7 @@ ul.menu-left li.lu.active:before{
 .box-user .box-detail p,
 .box-user .box-detail .row{
 	padding: 0 20px;
+	font-size: 14px;
 }
 .box-user .box-detail p{
 	margin-bottom: 10px;
@@ -259,6 +271,7 @@ ul.menu-left li.lu.active:before{
 	font-size: 16px;
 	color: #c78385;
 	margin: 0 auto;
+	font-size: 14px;
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
@@ -277,7 +290,7 @@ ul.menu-left li.lu.active:before{
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
 	transition: all 0.3s ease;
-	margin-right: 20px;
+	margin-right: 15px;
 }
 .box-user .box-btn a.ed:before{
 	background: url(../images/account/icon-edit.png) center center no-repeat;

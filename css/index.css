@@ -83,7 +83,7 @@ body{
 }
 .box-detail-museum .box-top .text-title2 a{
 	color: #b28f50;
-	text-decoration: underline; 
+	text-decoration: underline;
 	font-size: 13px;
 	display: inline-block;
 	font-style: italic;
@@ -98,7 +98,7 @@ body{
 	float: left;
 	height: 26px;
 	line-height: 26px;
-}	
+}
 .box-detail-museum .box-top .row-text .text-1{ width: 400px; }
 .box-detail-museum .box-top .row-text .text-2{ width: 45px; }
 .box-detail-museum .box-top .row-text .text-2{ width: 40px;}
@@ -217,7 +217,7 @@ div.text-title img{
 	line-height: 35px;
 	text-transform: uppercase;
 	text-align: center;
-	font-size: 16px;	
+	font-size: 16px;
 	color: #fff;
 	position: absolute;
 	bottom: 0px;
@@ -239,8 +239,8 @@ div.text-title img{
 .sat{ background-color: #422a6b; }
 .today{ border-color: #000; }
 
-.btn-all{ 
-	border-color: #6e0904; 
+.btn-all{
+	border-color: #6e0904;
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
@@ -272,7 +272,7 @@ div.text-title img{
 	margin: 10px auto 0;
 	background-position: -2px -32px;
 }
-.btn-all:hover .box-text p span{ 
+.btn-all:hover .box-text p span{
 	background-color: #6e0904;
 }
 
@@ -294,7 +294,7 @@ div.text-title img{
 	width: 100%;
 }
 .box-slideevent-main .box-content-slide .box-right .box-pic img{
-	width: 100%;	
+	width: 100%;
 }
 .box-slideevent-main .box-content-slide .box-right .box-tag-cate{
 	position: absolute;
@@ -320,7 +320,7 @@ div.text-title img{
 	font-size: 100px;
 	color: #fff;
 	width: auto;
-	line-height: 135px;	
+	line-height: 135px;
 }
 .box-slideevent-main .box-content-slide .box-date .box-right{
 	font-size: 22px;
@@ -352,7 +352,7 @@ div.text-title img{
 	left: 25px;
 }
 .box-slideevent-main .box-content-slide .text-date{
-	margin: 11px 0;	
+	margin: 11px 0;
 }
 .box-slideevent-main .box-content-slide .text-des{
 	height: 60px;
@@ -457,7 +457,7 @@ div.text-title img{
 	margin-bottom: 50px;
 	text-align: center;
 	text-transform: uppercase;
-	
+
 }
 .part-news .box-title img{
 	margin: 0 auto;
@@ -469,7 +469,7 @@ div.text-title img{
 	font-size: 60px;
 	text-transform: uppercase;
 	text-align: left;
-	
+
 	padding: 30px 0;
 	margin: 0 0 10px;
 }
@@ -510,7 +510,7 @@ div.text-title img{
 	border: 4px solid #000;
 	padding: 7px;
 	width: 599px;
-} 
+}
 .part-news .box-top .box-news-bold .box-pic{
 	float: left;
 }
@@ -541,7 +541,7 @@ div.text-title img{
 .part-news .box-top .box-news-bold .box-text .text-des{
 	margin-bottom: 17px;
 	height: 60px;
-	overflow: hidden;	
+	overflow: hidden;
 }
 .part-news .box-bottom .box-news-main{
 	margin-top: 15px;
@@ -566,7 +566,7 @@ div.text-title img{
 	bottom: 0px;
 	width: 100%;
 	line-height: 27px;
-	font-size: 14px;
+	font-size: 13px;
 	color: #fff;
 	padding: 0 10px 0 30px;
 	text-transform: uppercase;
@@ -589,7 +589,7 @@ div.text-title img{
 .part-news .box-bottom .box-news .box-text .text-des{
 	margin-bottom: 15px;
 	height: 60px;
-	overflow: hidden;	
+	overflow: hidden;
 }
 
 .part-news .box-museum-news-main{
@@ -630,7 +630,7 @@ div.text-title img{
 	margin-top: 5px;
 }
 .box-museum-news-main .museum-news .text-title{
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 20px;
 	margin-bottom: 10px;
 	height: 40px;
@@ -825,7 +825,7 @@ div.text-title img{
 .box-archive-main .box-archive .text-des{
 	margin-bottom: 19px;
 	height: 60px;
-	overflow: hidden;	
+	overflow: hidden;
 }
 .box-archive-main .owl-theme .owl-controls{
 	margin-top: 10px;
@@ -848,7 +848,7 @@ div.text-title img{
 	border-right: 1px solid #1a1a1a;
 }
 .box-knowledge-main .box-title{
-	
+
 	font-size: 53px;
 	color: #fff;
 	text-transform: uppercase;
@@ -882,15 +882,19 @@ div.text-title img{
 }
 .box-knowledge-main .box-knowledge .text-title:hover{
 	color: #b28f50;
-}	
+}
 .box-knowledge-main .box-knowledge .text-des{
 	color: #878787;
 	height: 40px;
 	overflow: hidden;
 	margin: 10px 0;
-}	
+}
 .box-knowledge-main .box-knowledge	 .box-btn a.btn:hover{
 	background-color: #b28f50;
 	color: #000;
 }
-	
+
+.box-pic-thumb img{
+    height: 147px;
+    width: 197px;
+}

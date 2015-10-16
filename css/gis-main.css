@@ -1,4 +1,5 @@
 .part-gis-main{
+	background: url(../images/account/bg-twotone.jpg) center center repeat-y;
 	background-color: #6f0600;
 	height: 218px;
 }
@@ -12,6 +13,7 @@
 }
 .part-gis-main .box-right{
 	width: 867px;
+	background-color: #6F0905;
 }
 .part-gis-main .box-title-page img{
 	margin: 59px auto;
@@ -204,7 +206,7 @@
 	float: right;
 }
 .box-title-museum{
-	background-color: #842e29;
+	background-color: #6e0904;
 	color: #fff;
 	font-size: 27px;
 	padding: 20px 32px;

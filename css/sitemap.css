@@ -1,0 +1,47 @@
+.row{
+	margin: 0 auto 40px;
+/* 	display: table; */
+}
+.row:last-child{
+	margin: 0 auto;
+}
+
+.box-list{
+	float: left;
+	width: 300px;
+	margin: 0 50px;
+}
+.box-list h3{
+	font-size: 16px;
+	color: #8e070b;
+	border-bottom: 2px solid #e5e5e5; 
+	padding: 10px 0;
+}
+.box-list h3:hover{
+	color: #000;
+}
+.box-list ul.list{
+	list-style-type: disc;
+	padding: 8px 0 0 30px;
+}
+.box-list ul.list li{
+	padding: 5px 0;
+}
+.box-list ul.list li a:hover{
+	color: #8e070b;
+}
+.box-list ul.sublist{
+	padding: 8px 0 0 30px;
+}
+.box-list ul.sublist li a:before{
+	content: "-";
+	position: absolute;
+	display: block;
+	left: -12px;
+}
+.
+
+
+
+
+
