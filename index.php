@@ -860,7 +860,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 								$detail = strip_tags(trim($rowContent['CONTENT_BRIEF']));
 
 								echo '<div class="box-exhibition cf">';
-								echo '<div class="box-text">';
+								echo '<div class="box-text" style ="max-height:180px;height:180px;">';
 								echo '<a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '"> ';
 								echo '<p class="text-title TcolorRed">';
 								echo $rowContent['CONTENT_DESC'];
@@ -868,7 +868,8 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo '<p class="text-date TcolorGray">';
 								echo ConvertDate($rowContent['LAST_DATE']);
 								echo '</p>';
-								echo '<p class="text-des TcolorBlack">';
+														
+								echo '<p class="text-des TcolorBlack" style = "height:60px; max-height:60px;">';
 								echo $rowContent['CONTENT_BRIEF'];
 								echo '</p>';
 								echo '<div class="box-btn cf">';
@@ -879,14 +880,13 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo '</div>';
 								echo '</div>';
 								echo '</div>';
-
 								echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '">';
-								echo '<div class="box-pic box-pic-thumb">';
-								echo '<img src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+								echo '<div class="box-pic">'; // box-pic-thumb
+								echo '<img style = "width:240px;height:180px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 								echo '</div>';
 								echo '</a>';
 								echo '</div>';
-								echo "\n\t\t";
+								//echo "\n\t\t";
 
 							}
 
@@ -980,8 +980,8 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo '</div>';
 
 								echo ' <a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '">';
-								echo '<div class="box-pic box-pic-thumb">';
-								echo '<img src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+								echo '<div class="box-pic">'; // box-pic-thumb
+								echo '<img style="width:240px;height:180px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 								echo '</div>';
 								echo '</a>';
 								echo '</div>';
