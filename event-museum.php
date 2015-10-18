@@ -56,13 +56,39 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
+
+						<?php
+
+						    $sql = " select d.CONTENT_DESC_LOC, d.CREATE_DATE, d.BRIEF_LOC, p.IMG_PATH
+									from trn_content_detail d
+									left join trn_content_category c on d.cat_id = c.content_cat_id
+									left join trn_content_picture p on d.content_id = p.content_id
+									where c.content_cat_id = 60 and d.sub_cat_id = 130 ";
+
+							$query = mysql_query($sql, $conn);
+
+							$num_rows = mysql_num_rows($query);
+
+							$num = 0;
+					    ?>
+
+					<?php while($row = mysql_fetch_array($query)) { 
+
+					    $IMG_PATH = str_replace("../../","",$row['IMG_PATH']);
+
+						$space = "";
+						$gap = "";
+
 						
-						<div class="box-tumb cf">
+
+					?>
+
+						<div class="box-tumb <? $gap ?>">
 							<a href="">
 								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
+									<img src="<? echo $IMG_PATH ?>">
 									<div class="box-tag-cate">
-										ชื่อระบบ
+										<? echo $row['CONTENT_DESC_LOC'] ?>
 									</div>
 									<div class="box-date-tumb">
 										<p class="date">99</p>
@@ -73,14 +99,14 @@ require("assets/configs/function.inc.php");
 							<div class="box-text">
 								<a href="">
 									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
+										<? echo $row['CONTENT_DESC_LOC'] ?>
 									</p>
 								</a>
 								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
+									<? echo ConvertDate($row['CREATE_DATE']) ?>
 								</p>
 								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
+									<? echo $row['BRIEF_LOC'] ?>
 								</p>
 								<div class="box-btn cf">
 									<a href="" class="btn red">อ่านเพิ่มเติม</a>
@@ -91,6 +117,17 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 						</div>
+					
+
+					<? 
+						$num++;
+					    $line = $num / 3; 
+					}
+						
+					
+					?>
+
+					<!--
 						<div class="box-tumb cf mid">
 							<a href="">
 								<div class="box-pic">
@@ -365,6 +402,7 @@ require("assets/configs/function.inc.php");
 								</div>
 							</div>
 						</div>
+					-->
 						
 					</div>
 					<div class="box-pagination-main cf">

@@ -141,27 +141,46 @@ require("assets/configs/function.inc.php");
 					<a href="" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
 				</div>
 			</div>
+
+			<?php
+
+						    $sql = " select d.CONTENT_DESC_LOC, d.CREATE_DATE, d.BRIEF_LOC, p.IMG_PATH,d.CONTENT_ID,
+						   			d.CONTENT_DETAIL_LOC, d.LAST_UPDATE_DATE, d.content_id
+									from trn_content_detail d
+									left join trn_content_category c on d.cat_id = c.content_cat_id
+									left join trn_content_picture p on d.content_id = p.content_id
+									where c.content_cat_id = 60 and d.sub_cat_id = 131 and d.content_id = ".$_GET['cid']." ";
+
+							$query = mysql_query($sql, $conn);
+
+							$num_rows = mysql_num_rows($query);
+			?>
+
+			<?php while($row = mysql_fetch_array($query)) { ?>
 			<div class="box-newsdetail-main">
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
+
+				<?php
+
+				    $sql_pic = " select  IMG_PATH
+							from  trn_content_picture 
+							where content_id = ".$row['content_id']." ";
+
+					$query_pic = mysql_query($sql_pic, $conn);
+
+					$num_rows = mysql_num_rows($query_pic);
+				?>
+
+				<?php while($row_pic = mysql_fetch_array($query_pic)) { 
+				 $IMG_PATH = str_replace("../../","",$row_pic['IMG_PATH']);
+				?>
+
 						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
+							<img src="<? echo $IMG_PATH ?>">
 						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
+				<? }  ?>
+						
 					</div>
 					<a class="btn-arrow-slide pev"></a>
 					<a class="btn-arrow-slide next"></a>
@@ -171,7 +190,7 @@ require("assets/configs/function.inc.php");
 							<p class="month">พ.ย.</p>
 						</div>
 						<div class="box-text">
-							<p class="text-title">Levitated Mass 340 Ton Giant Stone</p>
+							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>
 							<p class="text-des">by MUSEUM SIAM</p>
 						</div>
 					</div>
@@ -214,12 +233,12 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-text">
 					<p>
-						Levitated Mass is a 2012 large-scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art. The installation consists of a 340-ton boulder affixed above a concrete trench through which visitors may walk. The nature, expense and scale of the installation made it an instant topic of discussion The work comprises a 21.5-foot tall boulder mounted on the walls of a 456-foot long concrete trench, surrounded by 2.5 acres of compressed decomposed granite. The boulder is bolted to two shelves affixed to the inner walls of the trench, which descends from ground level to 15 feet below the stone at its center, allowing visitors to stand directly below the megalith.
+						<? echo $row['CONTENT_DETAIL_LOC'] ?>
 					</p>
 				</div>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						วันที่แก้ไขล่าสุด :  28 พ.ย. 2559
+						วันที่แก้ไขล่าสุด :  <? echo ConvertDate($row['LAST_UPDATE_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						Plugin Social
@@ -227,6 +246,9 @@ require("assets/configs/function.inc.php");
 				</div>
 				
 			</div>
+
+			<? } ?>
+
 			<div class="part-btn-back">
 				<div class="box-btn cf">
 					<a href="" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
