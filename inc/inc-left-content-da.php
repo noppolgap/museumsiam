@@ -123,7 +123,7 @@
 					if ($CID == $categoryRow['CONTENT_CAT_ID'])
 						$displayStyle = 'style="display:block"';
 
-					echo '<ul class="submenu-left ' . $displayStyle . '">';
+					echo '<ul class="submenu-left "' . $displayStyle . '>';
 					while ($subCategoryRow = mysql_fetch_array($subCategoryRS)) {
 						$prePage = '';
 
@@ -133,7 +133,7 @@
 							$prePage = 'da-all-';
 						$subActive = '';
 						if (isset($_GET['SCID'])) {
-							if ($_GET['SCID'] = $subCategoryRow['SUB_CONTENT_CAT_ID']) {
+							if ($_GET['SCID'] == $subCategoryRow['SUB_CONTENT_CAT_ID']) {
 								$subActive = ' active';
 							}
 						}

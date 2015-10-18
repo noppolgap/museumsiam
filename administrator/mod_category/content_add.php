@@ -103,6 +103,35 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 							
+							
+							<div>
+								<div class="floatL form_name">สถานที่ TH</div>
+								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="" class="w90p" /></div>
+								<span class="error" ><span id = "placeThError" style="display:none">กรุณาระบุสถานที่ TH</span> </span>
+								<div class="clear"></div>
+							</div>
+							
+							<div>
+								<div class="floatL form_name">สถานที่  EN</div>
+								<div class="floatL form_input"><input type="text" name="txtPlaceEng" id="txtPlaceEng" value="" class="w90p" /></div>
+								<span class="error" ><span id = "placeEnError" style="display:none">กรุณาระบุสถานที่ EN</span> </span>
+								<div class="clear"></div>
+							</div>
+							
+							<div>
+								<div class="floatL form_name">Lattitude</div>
+								<div class="floatL form_input"><input type="text" name="txtLat" id="txtLat" value="" class="w90p" /></div>
+								<span class="error" ><span id = "lattitudeError" style="display:none">กรุณาระบุ Lattitude</span> </span>
+								<div class="clear"></div>
+							</div>
+							
+							<div>
+								<div class="floatL form_name">Longtitude</div>
+								<div class="floatL form_input"><input type="text" name="txtLon" id="txtLon" value="" class="w90p" /></div>
+								<span class="error" ><span id = "lontitudeError" style="display:none">กรุณาระบุ Lontitude</span> </span>
+								<div class="clear"></div>
+							</div>
+							
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
 								<div class="floatL form_input"><?=admin_upload_image('photo') ?></div>
@@ -112,6 +141,12 @@ require ('../inc_header.php');
 							<div class="bigForm">
 								<div class="floatL form_name">Video</div>
 								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('video','video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="clear"></div>
+							</div>
+							
+							<div class="bigForm">
+								<div class="floatL form_name">Sound</div>
+								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('sound','sound'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
 							

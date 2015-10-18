@@ -524,7 +524,7 @@ function nvl($originalVal, $returnWhenNull) {
 	if (is_null($originalVal))
 		return $returnWhenNull;
 	else if ($originalVal == "")
-		return returnWhenNull;
+		return $returnWhenNull;
 	else
 		return $originalVal;
 }

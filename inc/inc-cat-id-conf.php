@@ -8,6 +8,7 @@ $seminar_cat_id = 8;
 $media_cat_id = 9 ;
 
 $museum_event_cat_id = 60;
+$all_event_cat_id = 61;
 // End Category ID
 
 // Module ID

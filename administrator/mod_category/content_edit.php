@@ -118,6 +118,34 @@ require ("../../assets/configs/function.inc.php");
 								<div class="clear"></div>
 							</div>
 							
+							<div>
+								<div class="floatL form_name">สถานที่ TH</div>
+								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="<?=$row["PLACE_DESC_LOC"]?>" class="w90p" /></div>
+								<span class="error" ><span id = "placeThError" style="display:none">กรุณาระบุสถานที่ TH</span> </span>
+								<div class="clear"></div>
+							</div>
+							
+							<div>
+								<div class="floatL form_name">สถานที่  EN</div>
+								<div class="floatL form_input"><input type="text" name="txtPlaceEng" id="txtPlaceEng" value="<?=$row["PLACE_DESC_ENG"]?>" class="w90p" /></div>
+								<span class="error" ><span id = "placeEnError" style="display:none">กรุณาระบุสถานที่ EN</span> </span>
+								<div class="clear"></div>
+							</div>
+							
+							<div>
+								<div class="floatL form_name">Lattitude</div>
+								<div class="floatL form_input"><input type="text" name="txtLat" id="txtLat" value="<?=$row["LAT"]?>" class="w90p" /></div>
+								<span class="error" ><span id = "lattitudeError" style="display:none">กรุณาระบุ Lattitude</span> </span>
+								<div class="clear"></div>
+							</div>
+							
+							<div>
+								<div class="floatL form_name">Longtitude</div>
+								<div class="floatL form_input"><input type="text" name="txtLon" id="txtLon" value="<?=$row["LON"]?>" class="w90p" /></div>
+								<span class="error" ><span id = "lontitudeError" style="display:none">กรุณาระบุ Lontitude</span> </span>
+								<div class="clear"></div>
+							</div>
+							
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
 								<div class="floatL form_input"><?=admin_upload_image_edit('photo', $row['CAT_ID'], $id) ?></div>
@@ -127,6 +155,12 @@ require ("../../assets/configs/function.inc.php");
 <div class="bigForm">
 								<div class="floatL form_name">Video</div>
 								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('video',$id,$row['CAT_ID'],'video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="clear"></div>
+							</div>
+							
+							<div class="bigForm">
+								<div class="floatL form_name">Sound</div>
+								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('sound',$id,$row['CAT_ID'],'sound'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
 							
