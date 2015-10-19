@@ -440,7 +440,7 @@ function str_replace_last($search, $replace, $subject) {
 function callThumbList($id, $type, $staus) {
 	global $conn;
 
-	$sql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$sql = "SELECT IMG_PATH FROM trn_content_picture WHERE IMG_TYPE = 1 AND CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC LIMIT 0 , 1";
 	$query = mysql_query($sql, $conn);
 	$num = mysql_num_rows($query);
 	if ($num == 1) {
@@ -794,7 +794,7 @@ function admin_view_video($id,$cat,$name){
 function callThumbListFrontEnd($id, $type, $staus) {
 	global $conn;
 
-	$sql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$sql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " AND IMG_TYPE = 1 ORDER BY ORDER_ID ASC LIMIT 0 , 1";
 	$query = mysql_query($sql, $conn);
 	$num = mysql_num_rows($query);
 	if ($num == 1) {

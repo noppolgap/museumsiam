@@ -2,153 +2,10 @@
 require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
-?>
-<!doctype html>
-<html>
-<head>
-<?
-require ('inc_meta.php');
- ?>	
 
-<link rel="stylesheet" type="text/css" href="css/template.css" />
-
-<script>
-	$(document).ready(function() {
-		$(".menutop li.menu6").addClass("active");
-		// if ($('.menu-left li.menu2').hasClass("active")){
-		// $('.menu-left li.menu2').children(".submenu-left").css("display","block");
-		// }
-
-		var sync1 = $("#sync1");
-		var sync2 = $("#sync2");
-
-		sync1.owlCarousel({
-			singleItem : true,
-			paginationSpeed : 500,
-			rewindSpeed : 1000,
-			navigation : false,
-			pagination : false,
-			afterAction : syncPosition,
-			responsiveRefreshRate : 200,
-			mouseDrag : false,
-			rewindNav : true
-		});
-
-		sync2.owlCarousel({
-			paginationSpeed : 500,
-			rewindSpeed : 1000,
-			items : 5,
-			itemsMobile : [320, 5],
-			itemsTablet : [768, 5],
-			itemsDesktop : [1024, 5],
-			navigation : false,
-			pagination : true,
-			responsiveRefreshRate : 100,
-			mouseDrag : false,
-			afterInit : function(el) {
-				el.find(".owl-item").eq(0).addClass("synced");
-			},
-			rewindNav : false
-		});
-
-		function syncPosition(el) {
-			var current = this.currentItem;
-			$("#sync2").find(".owl-item").removeClass("synced").eq(current).addClass("synced")
-			if ($("#sync2").data("owlCarousel") !== undefined) {
-				center(current)
-			}
-		}
-
-
-		$("#sync2").on("click", ".owl-item", function(e) {
-			e.preventDefault();
-			var number = $(this).data("owlItem");
-			sync1.trigger("owl.goTo", number);
-		});
-
-		function center(number) {
-			var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-
-			var num = number;
-			var found = false;
-			for (var i in sync2visible) {
-				if (num === sync2visible[i]) {
-					var found = true;
-				}
-			}
-
-			if (found === false) {
-				if (num > sync2visible[sync2visible.length - 1]) {
-					sync2.trigger("owl.goTo", num - sync2visible.length + 2)
-				} else {
-					if (num - 1 === -1) {
-						num = 0;
-					}
-					sync2.trigger("owl.goTo", num);
-				}
-			} else if (num === sync2visible[sync2visible.length - 1]) {
-				sync2.trigger("owl.goTo", sync2visible[1])
-			} else if (num === sync2visible[0]) {
-				sync2.trigger("owl.goTo", num - 1)
-			}
-		}
-
-
-		$(".box-slide-big a.pev").click(function() {
-			$("#sync1").data('owlCarousel').prev();
-		});
-		$(".box-slide-big a.next").click(function() {
-			$("#sync1").data('owlCarousel').next();
-		});
-
-		$(".img-slide-show").each(function() {
-
-			if ($(this).width() > $(this).height()) {
-				$(this).width(754);
-				$(this).css('height', 'auto');
-				//($('.owl-wrapper-outer').height() - $('.img-slide-show').height())/2
-
-				$(this).css('margin-top', (($('.owl-wrapper-outer').height() - $(this).height()) / 2));
-
-			}
-
-		});
-	});
-</script>
-	
-</head>
-
-<body>
-	
-<?php
-include ('inc/inc-top-bar.php');
- ?>
-<?php
-include ('inc/inc-menu.php');
- ?>	
-
-<div class="part-nav-main"  id="firstbox">
-	<div class="container">
-		<div class="box-nav">
-			<?php
-			if (isset($_SESSION['DA_PREV_PG'])) {
-				$prevPage = $_SESSION['DA_PREV_PG'];
-				if (strpos($prevPage, 'black') !== FALSE)
-					include ('inc/inc-da-black-breadcrumbs.php');
-				else if (strpos($prevPage, 'gray') !== FALSE)
-					include ('inc/inc-da-gray-breadcrumbs.php');
-				else if (strpos($prevPage, '.') !== FALSE)
-					include ('inc/inc-da-red-breadcrumbs.php');
-			}
-			?>
-	
-		</div>
-	</div>
-</div>
-<?php
-$MID = $_GET['MID'];
-$CID = $_GET['CID'];
-$CONID = $_GET['CONID'];
+$MID = intval($_GET['MID']);
+$CID = intval($_GET['CID']);
+$CONID = intval($_GET['CONID']);
 
 $SCID = "-1";
 if (isset($_GET['SCID']))
@@ -202,14 +59,55 @@ $contentSql .= " CREATE_DATE,
 				LAST_UPDATE_DATE,
 				IFNULL(LAST_UPDATE_DATE , CREATE_DATE) as LAST_DATE ,
 				EVENT_START_DATE,
-				EVENT_END_DATE , 
+				EVENT_END_DATE ,
 				LAT , LON
 				FROM
 				trn_content_detail
 				WHERE
 				CONTENT_ID =  " . $CONID;
+
 ?>
-				
+<!doctype html>
+<html>
+<head>
+<?
+require ('inc_meta.php');
+ ?>
+
+<link rel="stylesheet" type="text/css" href="css/template.css" />
+
+<script src="js/da-detail.js"></script>
+
+</head>
+
+<body>
+
+<?php
+include ('inc/inc-top-bar.php');
+ ?>
+<?php
+include ('inc/inc-menu.php');
+ ?>
+
+<div class="part-nav-main"  id="firstbox">
+	<div class="container">
+		<div class="box-nav">
+			<?php
+			if (isset($_SESSION['DA_PREV_PG'])) {
+				$prevPage = $_SESSION['DA_PREV_PG'];
+				if (strpos($prevPage, 'black') !== FALSE)
+					include ('inc/inc-da-black-breadcrumbs.php');
+				else if (strpos($prevPage, 'gray') !== FALSE)
+					include ('inc/inc-da-gray-breadcrumbs.php');
+				else if (strpos($prevPage, '.') !== FALSE)
+					include ('inc/inc-da-red-breadcrumbs.php');
+			}
+			?>
+
+		</div>
+	</div>
+</div>
+
 <div class="box-freespace"></div>
 
 <div class="part-main">
@@ -219,15 +117,13 @@ $contentSql .= " CREATE_DATE,
 			include ('inc/inc-left-content-da.php');
  ?>
 		</div>
-		
+
 		<div class="box-right main-content">
 			<hr class="line-red"/>
-			
-			
 			<?//	echo $contentSql;
 				$rsContent = mysql_query($contentSql) or die(mysql_error());
 				while ($rowContent = mysql_fetch_array($rsContent)) {
-					?>	
+					?>
 			<div class="box-title-system cf news">
 				<h1><?=$catName ?></h1>
 				<div class="box-btn">
@@ -237,16 +133,72 @@ $contentSql .= " CREATE_DATE,
 			<div class="box-newsdetail-main">
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
-						<?php
-						$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
+					<?php
+						$audioPlayer = false;
+						$thumbRender = "\n\n\t";
+						$extraStyle = "";
+						$getPicSql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND CAT_ID = ".$CID." AND ( DIV_NAME !=  'Other' OR DIV_NAME IS NULL ) ORDER BY DIV_NAME ASC , ORDER_ID ASC";
 
 						$rsPic = mysql_query($getPicSql) or die(mysql_error());
-						while ($rowPic = mysql_fetch_array($rsPic)) {
-							echo '	<div class="slide-content"> ';
-							echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
-							echo '</div>';
+						$rowPicturecount = mysql_num_rows($rsPic);
+						if ($rowPicturecount == 1) {
+							$extraStyle = " style='display:none;'";
 						}
-								?>
+						while ($rowPic = mysql_fetch_array($rsPic)) {
+							echo '	<div class="slide-content"> '."\n\t\t";
+							$thumbRender .= '<div class="slide-content">'."\n\t\t";
+							if($rowPic['DIV_NAME'] == 'voice'){
+								$audioPlayer = true;
+								$ext = getEXT($rowPic['IMG_PATH']);
+								$path = $rowPic['IMG_PATH'];
+								if($rowPic['IMG_TYPE'] == 2){
+									$path = str_replace("../../","",$path);
+								}
+							?>
+								<div id="jquery_jplayer_<?=$rowPic['PIC_ID']?>" class="cp-jplayer"></div>
+
+								<div id="cp_container_<?=$rowPic['PIC_ID']?>" class="cp-container">
+									<div class="cp-buffer-holder">
+										<div class="cp-buffer-1"></div>
+										<div class="cp-buffer-2"></div>
+									</div>
+									<div class="cp-progress-holder">
+										<div class="cp-progress-1"></div>
+										<div class="cp-progress-2"></div>
+									</div>
+									<div class="cp-circle-control"></div>
+									<ul class="cp-controls">
+										<li><a class="cp-play" tabindex="<?=$rowPic['PIC_ID']?>">play</a></li>
+										<li><a class="cp-pause" style="display:none;" tabindex="<?=$rowPic['PIC_ID']?>">pause</a></li>
+									</ul>
+								</div>
+							<?
+								$thumbRender .= '<img src="images/tumb-sound.jpg">'."\n\t";
+							}else if($rowPic['DIV_NAME'] == 'video'){
+
+								if($rowPic['IMG_TYPE'] == 3){
+									echo '<iframe width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
+									$thumbRender .= '<img src="http://img.youtube.com/vi/'.$rowPic['IMG_PATH'].'/maxresdefault.jpg">'."\n\t";
+								}else{
+									$ext = getEXT($rowPic['IMG_PATH']);
+									$path = $rowPic['IMG_PATH'];
+									if($rowPic['IMG_TYPE'] == 2){
+										$path = str_replace("../../","",$path);
+									}
+									echo '<video width="754" height="460" controls>'."\n\t";
+									echo '<source src="'.$path.'" type="video/'.$ext.'">'."\n\t";
+									echo '</video>'."\n\t";
+									$thumbRender .= '<img src="images/tumb-vdo.jpg">'."\n\t";
+								}
+
+							}else{
+								echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								$thumbRender .= '<img src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+							}
+							echo '</div>'."\n\t";
+							$thumbRender .= '</div>'."\n\t";
+						}
+					?>
 					</div>
 					<a class="btn-arrow-slide pev"></a>
 					<a class="btn-arrow-slide next"></a>
@@ -272,25 +224,27 @@ $contentSql .= " CREATE_DATE,
 								if ($hasLinkToMap) {
 									echo '</a>';
 								}
- ?>
+ 							?>
 						</div>
 					</div>
 				</div>
 				<div class="box-social-main cf">
-					<a href="#" class="btn fb"></a>
-					<a href="#" class="btn tw"></a>
-					<a href="#" class="btn g"></a>
-					<a href="#" class="btn line"></a>
-				</div>
 				<?php
-				$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
-				$rsPic = mysql_query($getPicSql) or die(mysql_error());
-				$rowPicturecount = mysql_num_rows($rsPic);
-				$extraStyle = "";
-				if ($rowPicturecount == 1) {
-					$extraStyle = " style='display:none;'";
-				}
-									?>
+
+						$path = 'da-detail.php?MID='.$MID.'%26CID='.$CID.'%26CONID='.$CONID;
+						$fullpath = _FULL_SITE_PATH_.'/'.$path;
+						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$CONID;
+						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+						$gp_link = 'https://plus.google.com/share?url='.$fullpath;
+						$tw_link = $fullpath;
+						$line = 'http://line.me/R/msg/text/?'.$title.'%0D%0A'.$fullpath;
+				?>
+					<a href="<?=$fb_link?>" onclick="shareFB('<?=$title?>',$(this).attr('href')); return false;" class="btn fb"></a>
+					<a href="<?=str_replace("%26","&amp;",$fullpath)?>" onclick="shareTW(<?=$CONID?>,'<?=$title?>',$(this).attr('href')); return false;" class="btn tw"></a>
+					<a href="<?=$gp_link?>" onclick="sharegp('<?=$title?>',$(this).attr('href')); return false;" class="btn g"></a>
+					<a href="<?=$line?>" target="_blank" class="btn line"></a>
+				</div>
+
 				<div class="part-tumb-main" >
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
@@ -301,32 +255,7 @@ $contentSql .= " CREATE_DATE,
 					</div>
 					<div class="box-slide-small">
 						<div id="sync2" class="owl-carousel">
-							<?php
-
-							while ($rowPic = mysql_fetch_array($rsPic)) {
-								echo '	<div class="slide-content"> ';
-								echo '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
-								echo '</div>';
-							}
-								?>
-							<!-- <div class="slide-content">
-								<img src="http://placehold.it/125x94">
-							</div>
-							<div class="slide-content">
-								<img src="images/tumb-sound.jpg">
-							</div>
-							<div class="slide-content">
-								<img src="http://placehold.it/125x94">
-							</div>
-							<div class="slide-content">
-								<img src="images/tumb-vdo.jpg">
-							</div>
-							<div class="slide-content">
-								<img src="http://placehold.it/125x94">
-							</div>
-							<div class="slide-content">
-								<img src="http://placehold.it/125x94/ccc">
-							</div> -->
+							<?=$thumbRender?>
 						</div>
 					</div>
 				</div>
@@ -338,7 +267,15 @@ $contentSql .= " CREATE_DATE,
 						วันที่แก้ไขล่าสุด :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
-						Plugin Social
+						<div class="fb-share-button" data-href="<?=$path?>" data-layout="button_count"></div>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?=$fullpath?>">Tweet</a>
+						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="<?=$fullpath?>"></div>
+						<span>
+						<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
+						<script type="text/javascript">
+						new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path?>","withUrl":true});
+						</script>
+						</span>
 					</div>
 				</div>
 			</div>
@@ -358,7 +295,17 @@ $contentSql .= " CREATE_DATE,
 
 <?php
 include ('inc/inc-footer.php');
- ?>	
+include('inc/inc-social-network.php');
+?>
+<? if($audioPlayer){ ?>
+<link rel="stylesheet" href="assets/plugin/circle-player/skin/circle.player.css">
+<script type="text/javascript" src="assets/plugin/jplayer/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="assets/plugin/circle-player/js/jquery.transform2d.js"></script>
+<script type="text/javascript" src="assets/plugin/circle-player/js/jquery.grab.js"></script>
+<script type="text/javascript" src="assets/plugin/circle-player/js/mod.csstransforms.min.js"></script>
+<script type="text/javascript" src="assets/plugin/circle-player/js/circle.player.js"></script>
+<script type="text/javascript" src="audiolist.php?NAME=voice&amp;CID=<?=$CID?>&amp;CONID=<?=$CONID?>"></script>
+<? } ?>
 
 </body>
 </html>

@@ -192,7 +192,7 @@ include ('inc/inc-menu.php');
 									</ul>
 								</div>
 							<?
-								$thumbRender .= '<img src="images/icon_voice.jpg">'."\n\t";
+								$thumbRender .= '<img src="images/tumb-sound.jpg">'."\n\t";
 							}else if($rowPic['DIV_NAME'] == 'video'){
 
 								if($rowPic['IMG_TYPE'] == 3){
@@ -207,7 +207,7 @@ include ('inc/inc-menu.php');
 									echo '<video width="754" height="460" controls>'."\n\t";
 									echo '<source src="'.$path.'" type="video/'.$ext.'">'."\n\t";
 									echo '</video>'."\n\t";
-									$thumbRender .= '<img src="images/icon_video.jpg">'."\n\t";
+									$thumbRender .= '<img src="images/tumb-vdo.jpg">'."\n\t";
 								}
 
 							}else{
