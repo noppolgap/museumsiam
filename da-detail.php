@@ -7,7 +7,7 @@ require ("assets/configs/function.inc.php");
 <html>
 <head>
 <?
-	require ('inc_meta.php');
+require ('inc_meta.php');
  ?>	
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
@@ -113,7 +113,7 @@ require ("assets/configs/function.inc.php");
 			}
 
 		});
-	}); 
+	});
 </script>
 	
 </head>
@@ -121,10 +121,10 @@ require ("assets/configs/function.inc.php");
 <body>
 	
 <?php
-		include ('inc/inc-top-bar.php');
+include ('inc/inc-top-bar.php');
  ?>
 <?php
-	include ('inc/inc-menu.php');
+include ('inc/inc-menu.php');
  ?>	
 
 <div class="part-nav-main"  id="firstbox">
@@ -141,84 +141,75 @@ require ("assets/configs/function.inc.php");
 					include ('inc/inc-da-red-breadcrumbs.php');
 			}
 			?>
-			<!-- <ol class="cf">
-				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="da.php">คลังความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="da-category.php">หมวดหมู่</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">หมวดหมู่ย่อย</li>
-			</ol> -->
+	
 		</div>
 	</div>
 </div>
 <?php
-				$MID = $_GET['MID'];
-				$CID = $_GET['CID'];
-				$CONID = $_GET['CONID'];
+$MID = $_GET['MID'];
+$CID = $_GET['CID'];
+$CONID = $_GET['CONID'];
 
-				$SCID = "-1";
-				if (isset($_GET['SCID']))
-					$SCID = $_GET['SCID'];
+$SCID = "-1";
+if (isset($_GET['SCID']))
+	$SCID = $_GET['SCID'];
 
-					$currentPage = 1;
+$currentPage = 1;
 if (isset($_GET['PG']))
 	$currentPage = $_GET['PG'];
 
 if ($currentPage < 1)
 	$currentPage = 1;
-					
-					
-				$catName = "";
-				
-				if (isset($_SESSION['DA_PREV_PG'])){
-				$backPage = $_SESSION['DA_PREV_PG'] ;
-				}
-else {
-				$backPage = "da.php?MID=".$digial_module_id;
-				}
-				$sqlCategory = "";
-				if (isset($_GET['SCID'])) {
-					$sqlCategory = "select SUB_CONTENT_CAT_ID ,
-											CONTENT_CAT_ID ,
-											SUB_CONTENT_CAT_DESC_LOC ,
-											SUB_CONTENT_CAT_DESC_ENG
-											from trn_content_sub_category where SUB_CONTENT_CAT_ID = $SCID ";
-					$rsCat = mysql_query($sqlCategory) or die(mysql_error());
-					while ($rowCat = mysql_fetch_array($rsCat)) {
-						$catName = $rowCat['SUB_CONTENT_CAT_DESC_LOC'];
-					}
-				} else {
-					$sqlCategory = "select CONTENT_CAT_ID ,
-											CONTENT_CAT_DESC_LOC ,
-											CONTENT_CAT_DESC_ENG from trn_content_category where CONTENT_CAT_ID	= $CID ";
-					$rsCat = mysql_query($sqlCategory) or die(mysql_error());
-					while ($rowCat = mysql_fetch_array($rsCat)) {
-						$catName = $rowCat['CONTENT_CAT_DESC_LOC'];
-					}
-				}
 
-				
+$catName = "";
 
-				$contentSql = "SELECT
-				CONTENT_ID,
-				CAT_ID,
-				CONTENT_DESC_LOC,
-				CONTENT_DESC_ENG,
-				CONTENT_DETAIL_LOC,
-				CONTENT_DETAIL_ENG,
-				CREATE_DATE,
+if (isset($_SESSION['DA_PREV_PG'])) {
+	$backPage = $_SESSION['DA_PREV_PG'];
+} else {
+	$backPage = "da.php?MID=" . $digial_module_id;
+}
+$sqlCategory = "";
+if (isset($_GET['SCID'])) {
+	$sqlCategory = "select SUB_CONTENT_CAT_ID , CONTENT_CAT_ID , ";
+	if ($_SESSION['LANG'] == 'TH')
+		$sqlCategory .= " SUB_CONTENT_CAT_DESC_LOC as SUB_CAT_DESC ";
+	else
+		$sqlCategory .= " SUB_CONTENT_CAT_DESC_ENG as SUB_CAT_DESC ";
+	$sqlCategory .= " from trn_content_sub_category where SUB_CONTENT_CAT_ID = $SCID ";
+	$rsCat = mysql_query($sqlCategory) or die(mysql_error());
+	while ($rowCat = mysql_fetch_array($rsCat)) {
+		$catName = $rowCat['SUB_CAT_DESC'];
+	}
+} else {
+	$sqlCategory = "select CONTENT_CAT_ID , ";
+	if ($_SESSION['LANG'] == 'TH')
+		$sqlCategory .= " CONTENT_CAT_DESC_LOC as CAT_DESC ";
+	else
+		$sqlCategory .= " CONTENT_CAT_DESC_ENG as CAT_DESC ";
+	$sqlCategory .= " from trn_content_category where CONTENT_CAT_ID	= $CID ";
+	$rsCat = mysql_query($sqlCategory) or die(mysql_error());
+	while ($rowCat = mysql_fetch_array($rsCat)) {
+		$catName = $rowCat['CAT_DESC'];
+	}
+}
+
+$contentSql = "SELECT CONTENT_ID, CAT_ID, ";
+if ($_SESSION['LANG'] == 'TH')
+	$contentSql .= " CONTENT_DESC_LOC as CONTENT_DESC ,CONTENT_DETAIL_LOC as DETAIL_DESC ,PLACE_DESC_LOC as PLACE_DESC , ";
+else
+	$contentSql .= " CONTENT_DESC_ENG as CONTENT_DESC ,CONTENT_DETAIL_ENG as DETAIL_DESC ,PLACE_DESC_ENG as PLACE_DESC , ";
+$contentSql .= " CREATE_DATE,
 				LAST_UPDATE_DATE,
 				IFNULL(LAST_UPDATE_DATE , CREATE_DATE) as LAST_DATE ,
 				EVENT_START_DATE,
-				EVENT_END_DATE
+				EVENT_END_DATE , 
+				LAT , LON
 				FROM
 				trn_content_detail
 				WHERE
-				CONTENT_ID = $CONID";
-
-			
+				CONTENT_ID =  " . $CONID;
+?>
 				
-				?>
 <div class="box-freespace"></div>
 
 <div class="part-main">
@@ -261,8 +252,27 @@ else {
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
 						<div class="box-text">
-							<p class="text-title"><?=$rowContent['CONTENT_DESC_LOC'] ?></p>
-							<p class="text-des pin">ชื่อสถานที่</p>
+							<p class="text-title"><?=$rowContent['CONTENT_DESC'] ?></p>
+							<?php
+							$placeStyle = 'style="display:block"';
+							if (nvl($rowContent['PLACE_DESC'], '') == '')
+								$placeStyle = 'style="display:none"';
+							$hasLinkToMap = FALSE;
+							if ((nvl($rowContent['LAT'], '') != '') && (nvl($rowContent['LON'], '')!= '')) {
+								echo '<a href="http://maps.google.com/?q='.$rowContent['LAT'].','.$rowContent['LON'].'" target="_blank">';
+								$hasLinkToMap = TRUE;
+							}
+								?>
+							<p class="text-des pin" <?=$placeStyle ?>>
+								<?php
+								echo $rowContent['PLACE_DESC'];
+							?>
+							</p>
+							<?
+								if ($hasLinkToMap) {
+									echo '</a>';
+								}
+ ?>
 						</div>
 					</div>
 				</div>
@@ -321,7 +331,7 @@ else {
 					</div>
 				</div>
 				<div class="box-news-text">
-					<?=nl2br(strip_tags($rowContent['CONTENT_DETAIL_LOC'], '<p><br>')); ?>
+					<?=nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br>')); ?>
 				</div>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
@@ -347,7 +357,7 @@ else {
 
 
 <?php
-	include ('inc/inc-footer.php');
+include ('inc/inc-footer.php');
  ?>	
 
 </body>

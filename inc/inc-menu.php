@@ -47,8 +47,6 @@
 									echo '<a href="'.$row['LINK_URL'].'?MID='.$row['MODULE_ID'].'"><li class="sub'.$classIdx++.'">'.$row['MODULE_NAME_LOC'].'</li></a>';
 								}
 							?>
-							<!--<a href="category.php?MID=2"><li class="sub1">ระบบการจัดการความรู้</li></a>-->
-							<!--<a href="#"><li class="sub2">Supmenu 2</li></a>-->
 						</ul>
 					</li>
 					<li class="menu7 sub"><a href="faqs.php">คำถามที่พบบ่อย</a>

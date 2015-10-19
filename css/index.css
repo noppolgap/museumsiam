@@ -895,6 +895,18 @@ div.text-title img{
 }
 
 .box-pic-thumb img{
-    height: 147px;
-    width: 197px;
+    height: 180px;
+    width: 240px;
+}
+
+.ve-text-des
+{
+	height:60px; 
+	max-height:60px;
+}
+
+.ve-box-text
+{
+	max-height:180px;
+	height:180px;
 }
