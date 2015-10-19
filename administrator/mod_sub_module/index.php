@@ -50,7 +50,7 @@ require ("../../assets/configs/function.inc.php");
 						<!-- start loop -->
 						<?php
 							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
-							$sql = "SELECT * FROM sys_app_sub_module where ACTIVE_FLAG <> 2 ";
+							$sql = "SELECT * FROM sys_app_sub_module where ACTIVE_FLAG <> 2 order by ORDER_DATA DESC ";
 							if (isset($_POST['search'])) {
 								$sql .= " AND (SUB_MODULE_NAME_LOC like '%" . $_POST['str_search'] . "%' or SUB_MODULE_NAME_ENG like '%" . $_POST['str_search'] . "%' ";
 								$sql .= " order by SUB_MODULE_ID asc ";
@@ -111,7 +111,7 @@ require ("../../assets/configs/function.inc.php");
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addSubModule.php'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('order.php');">
 			</div>
 		</div>
 		<div class="clear"></div>	
@@ -129,17 +129,6 @@ require ("../../assets/configs/function.inc.php");
 
 <? logs_access('admin', 'hello'); ?>	
 
-<script type="text/javascript" src="../../assets/plugin/jquery.min.js"></script>
-<script type="text/javascript" >
-	/*
-	 $(document).ready(function(){
-	 $('.DeleteContentBtn').bind('click' , function(){
-	 return confirm('คุณต้องการลบข้อมูลหรือไม่ ?');
-	 });
-
-	 });
-	 */
-</script>
 
 </body>
 </html>

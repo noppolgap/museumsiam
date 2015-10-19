@@ -8,11 +8,11 @@ if(isset($_POST['update'])){
 	    //echo "Key: $key; Value: $value<br />\n";
 		
 		$update="";
-		$update[]= "LAST_UPDATE_DATE = ".$value[1];
+		$update[]= "ORDER_DATA = ".$value[1];
 					
-		echo $sql="UPDATE trn_category SET  ".implode(",",$update)." WHERE CAT_ID =".$value[0];
-		//mysql_query($sql,$conn);	    
-	}	
+		echo $sql="UPDATE sys_app_module  SET  ".implode(",",$update)." WHERE MODULE_ID =".$value[0];
+		mysql_query($sql,$conn);	    
+	}		
 }else{
 ?>
 <!doctype html>
@@ -29,8 +29,16 @@ if(isset($_POST['update'])){
 		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder();">
 	</div> 
 	<ul id="sortable">
-	<? for($i=30;$i>0;$i--){ ?>
-		<li class="ui-state-default" data-order="<?=$i ?>" data-id="<?=$i ?>">Item <?=$i ?></li>
+	<?php
+				
+			     $sql= "SELECT * FROM sys_app_module  WHERE ACTIVE_FLAG <> 2   ORDER BY ORDER_DATA DESC";
+
+			     $query = mysql_query($sql,$conn);
+			     while($row = mysql_fetch_array($query)) {
+			 
+		?>
+
+		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['MODULE_ID'] ?>"><?=$row['MODULE_NAME_LOC'] ?></li>
 	<? } ?>  
 	</ul>
 </div>	
