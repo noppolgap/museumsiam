@@ -33,8 +33,9 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ระบบเครือข่ายพิพิธภัณฑ์</li>
+				<li>ติดต่อเรา&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li>E-APPLICATION&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active">ตำแหน่งงาน</li>
 			</ol>
 		</div>
 	</div>

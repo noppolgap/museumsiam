@@ -20,7 +20,7 @@ require("assets/configs/function.inc.php");
 	
 </head>
 
-<body id="km">
+<body id="contact">
 	
 <?php include('inc/inc-top-bar.php'); ?>
 <?php include('inc/inc-menu.php'); ?>	
@@ -30,8 +30,8 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ระบบเครือข่ายพิพิธภัณฑ์</li>
+				<li>ติดต่อเรา&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active">E-MAIL SUBMIT FORM ADDRESS & MAP</li>
 			</ol>
 		</div>
 	</div>

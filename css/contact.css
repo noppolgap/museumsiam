@@ -127,11 +127,11 @@ textarea {
 }
 
 
-/* --------------------------------------------------- Top Bar --------------------------------------------------- */
+/* --------------------------------------------------- Career --------------------------------------------------- */
 
 .box-carrer-main .box-row{
 	padding: 20px;
-	border-top: 1px solid #eeeeee;
+	border-top: 1px solid #e5e5e5;
 	margin: 0px;
 }
 .box-carrer-main .box-top{
@@ -160,7 +160,66 @@ textarea {
 }
 
 
+/* --------------------------------------------------- Condition --------------------------------------------------- */
 
+#condition .box-detail-main{
+	padding: 10px 20px;
+}
+#condition .box-detail-main p{
+	margin: 20px 0;
+	line-height: initial;
+}
+
+/* --------------------------------------------------- Detail --------------------------------------------------- */
+
+#detail .box-detail-main{
+	padding: 10px 20px;
+}
+#detail .box-detail-main p{
+	margin: 20px 0;
+	line-height: initial;
+}
+#detail .box-date-modified {
+	padding: 0px;
+}
+#detail .box-footer-content {
+	margin-bottom: 0px;
+}
+#detail .box-carrer-main .box-row{
+	padding: 20px 20px 0;
+	border-top: none;
+}
+#detail .box-detail-main .box-btn{
+	margin: 30px auto;
+}
+
+
+/* --------------------------------------------------- Register --------------------------------------------------- */
+
+#register .box-contact-from{
+	width: 650px;
+	padding: 20px;
+}
+
+#register .box-row .box-left, .box-row .box-right{
+	width: 304px;
+}
+#register .box-contact-from p{
+	text-transform: uppercase;
+}
+#register input[type="text"], #register input[type="tel"], #register input[type="password"], #register input[type="number"], #register input[type="email"], #register textarea{
+	background-color: #fbfbfb;
+	border: 1px solid #d6d6d6;
+}
+#register input[type="radio"] {
+	margin-right: 20px;
+}
+#register .box-row .box-input-text.radio div{
+	margin-right: 40px;
+}
+#register .box-row .box-input-text span{
+	color: inherit;
+}
 
 
 
