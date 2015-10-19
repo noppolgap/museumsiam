@@ -196,9 +196,9 @@ if (isset($_GET['add'])) {
 	}
 
 	//noppol.von 18Oct2015 add Audio File
-	if (count($_POST['video_sound']) > 0) {
+	if (count($_POST['video_voice']) > 0) {
 		$index = 1;
-		foreach ($_POST['video_sound'] as $k => $file) {
+		foreach ($_POST['video_voice'] as $k => $file) {
 
 			$file = explode('|@|', $file);
 
@@ -218,7 +218,7 @@ if (isset($_GET['add'])) {
 			$insert['CAT_ID'] = $CID;
 			$insert['ORDER_ID'] = "'" . $index++ . "'";
 			$insert['IMG_NAME'] = "'" . $file[2] . "'";
-			$insert['DIV_NAME'] = "'sound'";
+			$insert['DIV_NAME'] = "'voice'";
 			//ตั้งตาม name
 
 			$sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
@@ -333,10 +333,10 @@ if (isset($_GET['edit'])) {
 		}
 	}
 
-if (count($_POST['video_sound']) > 0) {
+if (count($_POST['video_voice']) > 0) {
 		$CONTENT_ID = intval($conid);
 		$CAT_ID = intval($CID);
-		$DIV_NAME = 'sound';
+		$DIV_NAME = 'voice';
 
 		$sql = "SELECT ORDER_ID FROM trn_content_picture WHERE CONTENT_ID = " . $CONTENT_ID . " AND CAT_ID = " . $CAT_ID . " AND DIV_NAME =  '" . $DIV_NAME . "' ORDER BY ORDER_ID DESC LIMIT 0 , 1";
 		$query = mysql_query($sql, $conn) or die($sql);
@@ -344,7 +344,7 @@ if (count($_POST['video_sound']) > 0) {
 		$index = $row['ORDER_ID'];
 		$index++;
 
-		foreach ($_POST['video_sound'] as $k => $file) {
+		foreach ($_POST['video_voice'] as $k => $file) {
 
 			$file = explode('|@|', $file);
 
@@ -375,8 +375,8 @@ if (count($_POST['video_sound']) > 0) {
 		}
 	}
 
-	if (count($_POST['video_delete_sound']) > 0) {
-		foreach ($_POST['video_delete_sound'] as $k => $file) {
+	if (count($_POST['video_delete_voice']) > 0) {
+		foreach ($_POST['video_delete_voice'] as $k => $file) {
 			$file = explode('|@|', $file);
 
 			if ($file[0] == 'upload') {
@@ -465,12 +465,40 @@ if (count($_POST['video_sound']) > 0) {
 			mysql_query($sql, $conn) or die($sql);
 		}
 	}
+	/*change position*/
+	if (count($_POST['order_video_position']) > 0) {
+		foreach ($_POST['order_video_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_ID = " . $val;
+
+			$sql = "UPDATE trn_content_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+	if (count($_POST['order_voice_position']) > 0) {
+		foreach ($_POST['order_voice_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_ID = " . $val;
+
+			$sql = "UPDATE trn_content_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+	if (count($_POST['order_other_position']) > 0) {
+		foreach ($_POST['order_other_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_ID = " . $val;
+
+			$sql = "UPDATE trn_content_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
 
 	header('Location: ' . $returnPage);
 }
 
 if (isset($_POST['catID'])) {
-	$subCatSql = "select sc.SUB_CONTENT_CAT_ID , sc.SUB_CONTENT_CAT_DESC_LOC , sc.SUB_CONTENT_CAT_DESC_ENG 
+	$subCatSql = "select sc.SUB_CONTENT_CAT_ID , sc.SUB_CONTENT_CAT_DESC_LOC , sc.SUB_CONTENT_CAT_DESC_ENG
 											   from trn_content_sub_category sc
 											where sc.CONTENT_CAT_ID = '$catID' and sc.flag <> 2
 											ORDER BY sc.ORDER_DATA  desc  ";

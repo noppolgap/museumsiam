@@ -368,7 +368,7 @@ function admin_upload_image_edit($name, $type, $id) {
 	$str .= '</div>' . "\n\t";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC";
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " AND IMG_TYPE = 1 ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 
 	$num = mysql_num_rows($query);
@@ -403,7 +403,7 @@ function admin_upload_image_view($name, $type, $id) {
 	$str = "";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " ORDER BY ORDER_ID ASC";
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $id . " AND CAT_ID =" . $type . " AND IMG_TYPE = 1 ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 	while ($row = mysql_fetch_array($query)) {
 		$str .= '<div class="thumbBoxEdit floatL p-Relative">' . "\n\t";
@@ -738,8 +738,8 @@ switch ($type) {
 	case "video": $accept = 'video/*';break;
 	case "sound": $accept = 'audio/*';break;
 	case "flash": $accept = '.swf';break;
-	case "doc"	: $accept = '.swf';break;
-	case "all"  : $accept = 'audio/*,video/*,.swf';break;
+	case "doc"	: $accept = '.doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.txt,';break;
+	case "all"  : $accept = '*.*';break;
 }
 
 	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
@@ -750,12 +750,12 @@ switch ($type) {
 	return $str;
 
 }
-function admin_view_video($id,$cat){
+function admin_view_video($id,$cat,$name){
 	global $conn;
 
 	$str = '';
 
-	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = ".$cat." ORDER BY ORDER_ID ASC";
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND CAT_ID = ".$cat." AND IMG_TYPE > 1 AND DIV_NAME = '".$name."' ORDER BY ORDER_ID ASC";
 	$query = mysql_query($sql, $conn);
 	while ($row = mysql_fetch_array($query)) {
 
@@ -888,6 +888,8 @@ function admin_edit_video($name,$id,$cat,$type){
 
 	$str = array();
 
+	$total = 0;
+
 	$str[0];
 
 	$str[0] .= '<div class="tabs">'. "\n\t";
@@ -902,12 +904,13 @@ function admin_edit_video($name,$id,$cat,$type){
 	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
 	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="../images/ajax-loader.gif" alt="loading" />'. "\n\t";
 
-$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '2' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."'";
+$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '2' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."' ORDER BY ORDER_ID ASC";
 $query = mysql_query($sql, $conn) or die($sql);
 $num = mysql_num_rows($query);
 if($num  == 0){
 	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
 }else{
+	$total += $num;
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
 		$str[0] .= '<div class="Upload_tab" data-value="'.$row['IMG_PATH'].'">';
@@ -932,12 +935,13 @@ if($num  == 0){
 	$str[0] .= '<input class="buttonAction silver-flat-button EmbedUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
 	$str[0] .= '<span class="video_note">* ใส่แค่รหัสวีดีโอ youtube เท่านั้น</span>'. "\n\t";
 
-$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '3' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."'";
+$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '3' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."' ORDER BY ORDER_ID ASC";
 $query = mysql_query($sql, $conn) or die($sql);
 $num = mysql_num_rows($query);
 if($num  == 0){
 	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
 }else{
+	$total += $num;
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
 		$str[0] .= '<div class="Embed_tab" data-value="'.$row['IMG_PATH'].'">';
@@ -963,12 +967,13 @@ if($num  == 0){
 	$str[0] .= '<input class="buttonAction silver-flat-button LinkUpload" type="button" value="แนบ" data-name="' . $name . '">'. "\n\t";
 	$str[0] .= '<span class="video_note">* ใส่แค่ url เท่านั้น</span>'. "\n\t";
 
-$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '4' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."'";
+$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '4' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."' ORDER BY ORDER_ID ASC";
 $query = mysql_query($sql, $conn) or die($sql);
 $num = mysql_num_rows($query);
 if($num  == 0){
 	$str[0] .= '<div class="DataBlock dNone"></div>'. "\n\t";
 }else{
+	$total += $num;
 	$str[0] .= '<div class="DataBlock">'. "\n\t";
 	while($row = mysql_fetch_array($query)){
 
@@ -988,8 +993,15 @@ if($num  == 0){
 	$str[0] .= '</div>'. "\n\t";
 }
 
+if($total == 0){
+	$total = 'dNone';
+}else{
+	$total = '';
+}
 	$str[0] .= '</div>'. "\n\t";
 	$str[0] .= '</div>'. "\n\t";
+
+	$str[0] .= '<div class="p-Absolute '.$total.' OrderVideoBtn" data-name="' . $name . '" data-cat="' . $cat . '" data-cID="' . $id . '"></div>' . "\n\t";
 
 	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>'. "\n\t";
 
@@ -997,8 +1009,8 @@ switch ($type) {
 	case "video": $accept = 'video/*';break;
 	case "sound": $accept = 'audio/*';break;
 	case "flash": $accept = '.swf';break;
-	case "doc"	: $accept = '.swf';break;
-	case "all"  : $accept = 'audio/*,video/*,.swf';break;
+	case "doc"	: $accept = '.doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.txt,';break;
+	case "all"  : $accept = '*.*';break;
 }
 
 	$str[1]  = '<form action="../master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
@@ -1032,6 +1044,15 @@ function returnUploadFileExtensions($path){
 		case "xls":
 					$image = '../images/excel.svg'; break;
 		case "pdf": $image = '../images/pdf.svg'; break;
+		case "txt": $image = '../images/txt.svg'; break;
+		case "ppt":
+		case "pptx":
+					$image = '../images/powerpoint.svg'; break;
+		case "zip":
+		case "rar":
+		case "7z":
+					$image = '../images/zip.svg'; break;
+
 		default   : $image = '../images/file.svg'; break;
 	}
 
@@ -1080,16 +1101,16 @@ function del_video_file($filename){
 function getModuleDescription($moduleID)
 {
 	if (! isset($_SESSION['LANG']))
-		$lang = 'TH' ; 
-	else 
+		$lang = 'TH' ;
+	else
 		$lang = $_SESSION['LANG'] ;
-	$sql = "select MODULE_NAME_LOC , MODULE_NAME_ENG from sys_app_module where MODULE_ID = ".$moduleID ; 
+	$sql = "select MODULE_NAME_LOC , MODULE_NAME_ENG from sys_app_module where MODULE_ID = ".$moduleID ;
 	$rsModule = mysql_query($sql) or die(mysql_error());
 	$ret  = '';
 	while ($rowModule = mysql_fetch_array($rsModule)) {
 		if ($lang == 'TH')
 			$ret = $rowModule['MODULE_NAME_LOC'];
-		else 
+		else
 			$ret = $rowModule['MODULE_NAME_ENG'];
 	}
 	return $ret;
@@ -1097,16 +1118,16 @@ function getModuleDescription($moduleID)
 function getCategoryDescription($catID)
 {
 	if (! isset($_SESSION['LANG']))
-		$lang = 'TH' ; 
-	else 
+		$lang = 'TH' ;
+	else
 		$lang = $_SESSION['LANG'] ;
-	$sql = "select CONTENT_CAT_DESC_LOC , CONTENT_CAT_DESC_ENG from trn_content_category where CONTENT_CAT_ID = ".$catID ; 
+	$sql = "select CONTENT_CAT_DESC_LOC , CONTENT_CAT_DESC_ENG from trn_content_category where CONTENT_CAT_ID = ".$catID ;
 	$rsCat = mysql_query($sql) or die(mysql_error());
 	$ret  = '';
 	while ($rowCat = mysql_fetch_array($rsCat)) {
 		if ($lang == 'TH')
 			$ret = $rowCat['CONTENT_CAT_DESC_LOC'];
-		else 
+		else
 			$ret = $rowCat['CONTENT_CAT_DESC_ENG'];
 	}
 	return $ret;
@@ -1114,16 +1135,16 @@ function getCategoryDescription($catID)
 function getSubCategoryDescription ($subCatID)
 {
 	if (! isset($_SESSION['LANG']))
-		$lang = 'TH' ; 
-	else 
+		$lang = 'TH' ;
+	else
 		$lang = $_SESSION['LANG'] ;
-	$sql = "select SUB_CONTENT_CAT_DESC_LOC , SUB_CONTENT_CAT_DESC_ENG from trn_content_sub_category where SUB_CONTENT_CAT_ID = ".$subCatID ; 
+	$sql = "select SUB_CONTENT_CAT_DESC_LOC , SUB_CONTENT_CAT_DESC_ENG from trn_content_sub_category where SUB_CONTENT_CAT_ID = ".$subCatID ;
 	$rsSubCat = mysql_query($sql) or die(mysql_error());
 	$ret  = '';
 	while ($rowSubCat = mysql_fetch_array($rsSubCat)) {
 		if ($lang == 'TH')
 			$ret = $rowSubCat['SUB_CONTENT_CAT_DESC_LOC'];
-		else 
+		else
 			$ret = $rowSubCat['SUB_CONTENT_CAT_DESC_ENG'];
 	}
 	return $ret;

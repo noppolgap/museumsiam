@@ -8,13 +8,13 @@ require ("../../assets/configs/function.inc.php");
 <head>
 <?
 require ('../inc_meta.php');
- ?>		
+ ?>
 </head>
 
 <body>
 <?
 require ('../inc_header.php');
- ?>		
+ ?>
 <div class="main-container">
 	<div class="main-body marginC">
 		<?
@@ -31,7 +31,7 @@ require ('../inc_header.php');
 			$subfixAddAndEdit .= '&SCID=' . $SCID;
 		}
 
-	 
+
 
 		$navigateBackPage = '';
 
@@ -43,17 +43,17 @@ require ('../inc_header.php');
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">เพิ่มเนื้อหา</div>					
+					<div class="floatL titleBox">เพิ่มเนื้อหา</div>
 				</div>
 				<div class="mod-body-main-content">
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 					<div class="formCms">
-						
-						 
+
+
 
 						<form action="content_action.php?add&MID=<?=$MID . $subfixAddAndEdit ?>" method="post" name="formcms">
-					
-							 
+
+
 							<div>
 								<div class="floatL form_name">ชื่อ TH</div>
 								<div class="floatL form_input"><input type="text" name="txtDescLoc" id ="txtDescLoc" value="" class="w90p" /></div>
@@ -84,14 +84,14 @@ require ('../inc_header.php');
 								<span class="error" >* <span id = "detailThError" style="display:none">กรุณาระบุรายละเอียด TH</span> </span>
 								<div class="clear"></div>
 							</div>
-							
+
 							<div class="bigForm">
 								<div class="floatL form_name">รายละเอียด EN</div>
 								<div class="floatL form_input"><textarea name="txtDetailEng" id="txtDetailEng" value="" class="mytextarea w90p"></textarea></div>
 								<span class="error" >* <span id = "detailEnError" style="display:none">กรุณาระบุรายละเอียด EN</span> </span>
 								<div class="clear"></div>
 							</div>
-							
+
 							<div>
 								<div class="floatL form_name">วันที่เริ่ม</div>
 								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="" class="DatePicker" /></div>
@@ -102,77 +102,77 @@ require ('../inc_header.php');
 								<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="" class="DatePicker" /></div>
 								<div class="clear"></div>
 							</div>
-							
-							
+
+
 							<div>
 								<div class="floatL form_name">สถานที่ TH</div>
 								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="" class="w90p" /></div>
 								<span class="error" ><span id = "placeThError" style="display:none">กรุณาระบุสถานที่ TH</span> </span>
 								<div class="clear"></div>
 							</div>
-							
+
 							<div>
 								<div class="floatL form_name">สถานที่  EN</div>
 								<div class="floatL form_input"><input type="text" name="txtPlaceEng" id="txtPlaceEng" value="" class="w90p" /></div>
 								<span class="error" ><span id = "placeEnError" style="display:none">กรุณาระบุสถานที่ EN</span> </span>
 								<div class="clear"></div>
 							</div>
-							
+
 							<div>
 								<div class="floatL form_name">Lattitude</div>
 								<div class="floatL form_input"><input type="text" name="txtLat" id="txtLat" value="" class="w90p" /></div>
 								<span class="error" ><span id = "lattitudeError" style="display:none">กรุณาระบุ Lattitude</span> </span>
 								<div class="clear"></div>
 							</div>
-							
+
 							<div>
 								<div class="floatL form_name">Longtitude</div>
 								<div class="floatL form_input"><input type="text" name="txtLon" id="txtLon" value="" class="w90p" /></div>
 								<span class="error" ><span id = "lontitudeError" style="display:none">กรุณาระบุ Lontitude</span> </span>
 								<div class="clear"></div>
 							</div>
-							
+
 							<div class="bigForm">
 								<div class="floatL form_name">Image</div>
 								<div class="floatL form_input"><?=admin_upload_image('photo') ?></div>
 								<div class="clear"></div>
-							</div>	
-							
+							</div>
+
 							<div class="bigForm">
 								<div class="floatL form_name">Video</div>
 								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('video','video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
-							
+
 							<div class="bigForm">
 								<div class="floatL form_name">Sound</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('sound','sound'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('voice','sound'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
-							
+
 							<div class="bigForm">
 								<div class="floatL form_name">Other File</div>
 								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('other','all'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
-							
-							
+
+
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button" onclick="return onValidate();">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$navigateBackPage ?>' ">
 							</div>
-						</form> 
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="clear"></div>	
+		<div class="clear"></div>
 	</div>
-</div>	
+</div>
 <?
 require ('../inc_footer.php');
- ?>		
+ ?>
  <div class="dNone"><?=$formUploadVideo?></div>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
@@ -182,8 +182,8 @@ require ('../inc_footer.php');
 <script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 <script type="text/javascript" src="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="../master/script.js"></script>	
-<? logs_access('admin', 'hello'); ?>	
+<script type="text/javascript" src="../master/script.js"></script>
+<? logs_access('admin', 'hello'); ?>
 
 
 <script type="text/javascript">

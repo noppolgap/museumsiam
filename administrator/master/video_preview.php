@@ -62,7 +62,7 @@ audio{
 
 ?>
 <div class="circleBase">
-	<a href="<?=$uploadfile?>" target="_blank" style="background-image: url('<?=returnUploadFileExtensions($uploadfile);?>');">Download here</a>
+	<a href="download.php?p=<?=$uploadfile?>" target="_blank" style="background-image: url('<?=returnUploadFileExtensions($uploadfile);?>');">Download here</a>
 </div>
 <style type="text/css">
 .circleBase {

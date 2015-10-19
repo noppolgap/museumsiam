@@ -88,7 +88,7 @@ require ("../../assets/configs/function.inc.php");
 								</div>
 								<div class="floatL form_input" id="divSubCatCmbZone" style="<?=$style ?>" >
 
-									<?=$row['SUB_CONTENT_CAT_DESC_LOC'] ?> 
+									<?=$row['SUB_CONTENT_CAT_DESC_LOC'] ?>
 
 								</div>
 
@@ -100,7 +100,7 @@ require ("../../assets/configs/function.inc.php");
 									ชื่อ TH
 								</div>
 								<div class="floatL form_input">
-									<?=$row["CONTENT_DESC_LOC"] ?> 
+									<?=$row["CONTENT_DESC_LOC"] ?>
 								</div>
 
 								<div class="clear"></div>
@@ -146,62 +146,61 @@ require ("../../assets/configs/function.inc.php");
 
 							<div class="clear"></div>
 							</div>
-							
-							
+
+
 							<div>
 								<div class="floatL form_name">สถานที่ TH</div>
 								<div class="floatL form_input"><?=$row["PLACE_DESC_LOC"]?></div>
-								
+
 								<div class="clear"></div>
 							</div>
-							
+
 							<div>
 								<div class="floatL form_name">สถานที่  EN</div>
 								<div class="floatL form_input"><?=$row["PLACE_DESC_ENG"]?></div>
-								
+
 								<div class="clear"></div>
 							</div>
-							
+
 							<div>
 								<div class="floatL form_name">Lattitude</div>
 								<div class="floatL form_input"><?=$row["LAT"]?></div>
-								
+
 								<div class="clear"></div>
 							</div>
-							
+
 							<div>
 								<div class="floatL form_name">Longtitude</div>
 								<div class="floatL form_input"><?=$row["LON"]?></div>
-								
+
 								<div class="clear"></div>
 							</div>
-							
+
 							<div class="bigForm">
 							<div class="floatL form_name">Image</div>
 							<div class="floatL form_input"><?=admin_upload_image_view('photo', $row['CAT_ID'], $id) ?>
-								
+
 							</div>
 							<div class="clear"></div>
 							</div>
-
-<div>
+							<div class="bigForm">
 								<div class="floatL form_name">Video</div>
-								<div class="floatL form_input"><?=admin_view_video(  $id, $row['CAT_ID']) ?></div>
+								<div class="floatL form_input"><?=admin_view_video(  $id, $row['CAT_ID'],'video') ?></div>
 								<div class="clear"></div>
 							</div>
-							
-							<div>
+
+							<div class="bigForm">
 								<div class="floatL form_name">Sound</div>
-								<div class="floatL form_input"><?=admin_view_video(  $id, $row['CAT_ID']) ?></div>
+								<div class="floatL form_input"><?=admin_view_video(  $id, $row['CAT_ID'],'voice') ?></div>
 								<div class="clear"></div>
 							</div>
-							
-							<div>
+
+							<div class="bigForm">
 								<div class="floatL form_name">Other File</div>
-								<div class="floatL form_input"><?=admin_view_video(  $id, $row['CAT_ID']) ?></div>
+								<div class="floatL form_input"><?=admin_view_video(  $id, $row['CAT_ID'],'other') ?></div>
 								<div class="clear"></div>
 							</div>
-							
+
 							<? } ?>
 
 							<div class="btn_action">

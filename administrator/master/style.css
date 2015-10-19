@@ -591,7 +591,7 @@ header{
 .ui-timepicker-div , .ui-datepicker .ui-datepicker-buttonpane button{
 	font-size: 0.8em !important;
 }
-.OrderImageBtn{
+.OrderImageBtn , .OrderVideoBtn{
 	background-image: url('../images/order.svg');
 	background-size: 100% 100%;
 	width: 40px;

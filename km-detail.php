@@ -153,13 +153,37 @@ include ('inc/inc-menu.php');
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
 					<?php
-						$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
+						$thumbRender = "\n\n\t";
+						$extraStyle = "";
+						$getPicSql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND CAT_ID = ".$CID." AND ( DIV_NAME !=  'Other' OR DIV_NAME IS NULL ) ORDER BY DIV_NAME ASC , ORDER_ID ASC";
 
 						$rsPic = mysql_query($getPicSql) or die(mysql_error());
+						$rowPicturecount = mysql_num_rows($rsPic);
+						if ($rowPicturecount == 1) {
+							$extraStyle = " style='display:none;'";
+						}
 						while ($rowPic = mysql_fetch_array($rsPic)) {
-							echo '	<div class="slide-content"> ';
-							echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
-							echo '</div>';
+							echo '	<div class="slide-content"> '."\n\t\t";
+							$thumbRender .= '<div class="slide-content">'."\n\t\t";
+							if($rowPic['DIV_NAME'] == 'voice'){
+								$thumbRender .= '<img  style="width:125px;height:94px;" src="images/">'."\n\t";
+							}else if($rowPic['DIV_NAME'] == 'video'){
+
+								if($rowPic['IMG_TYPE'] == 2){
+									$thumbRender .= '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								}else if($rowPic['IMG_TYPE'] == 3){
+									echo '<iframe width="754" height="562" src="https://www.youtube.com/embed/'.$rowPic['IMG_NAME'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>';
+									$thumbRender .= '<img  style="width:125px;height:94px;" src="http://img.youtube.com/vi/'.$rowPic['IMG_NAME'].'/maxresdefault.jpg">'."\n\t";
+								}else if($rowPic['IMG_TYPE'] == 4){
+									$thumbRender .= '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								}
+
+							}else{
+								echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								$thumbRender .= '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+							}
+							echo '</div>'."\n\t";
+							$thumbRender .= '</div>'."\n\t";
 						}
 					?>
 					</div>
@@ -188,16 +212,6 @@ include ('inc/inc-menu.php');
 					<a href="<?=$line?>" target="_blank" class="btn line"></a>
 				</div>
 
-				<?php
-				$getPicSql = "select * from trn_content_picture where content_id = $CONID order by ORDER_ID asc ";
-				$rsPic = mysql_query($getPicSql) or die(mysql_error());
-				$rowPicturecount = mysql_num_rows($rsPic);
-				$extraStyle = "";
-				if ($rowPicturecount == 1) {
-					$extraStyle = " style='display:none;'";
-				}
-				?>
-
 				<div class="part-tumb-main" <?=$extraStyle ?> >
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
@@ -207,14 +221,7 @@ include ('inc/inc-menu.php');
 					</div>
 					<div class="box-slide-small">
 						<div id="sync2" class="owl-carousel">
-							<?php
-
-							while ($rowPic = mysql_fetch_array($rsPic)) {
-								echo '	<div class="slide-content"> ';
-								echo '<img  style="width:125px;height:94px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">';
-								echo '</div>';
-							}
-								?>
+							<?=$thumbRender?>
 						</div>
 					</div>
 				</div>
