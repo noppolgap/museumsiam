@@ -18,5 +18,7 @@ $digial_module_id = 3;
 $visual_exhibition = 5;
 
 $new_and_event = 12;
+$event_sub_cat_id = 130;
+
 // End Module ID
 ?>

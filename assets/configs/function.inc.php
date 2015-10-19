@@ -231,6 +231,47 @@ function returnThaiMonth($str){
 	}
 	return $myMonth;
 }
+function returnThaiShortMonth($str){
+	switch($str) {
+		case "01" :
+			$myMonth = "ม.ค.";
+			break;
+		case "02" :
+			$myMonth = "ก.พ.";
+			break;
+		case "03" :
+			$myMonth = "มี.ค.";
+			break;
+		case "04" :
+			$myMonth = "เม.ย.";
+			break;
+		case "05" :
+			$myMonth = "พ.ค.";
+			break;
+		case "06" :
+			$myMonth = "มิ.ย.";
+			break;
+		case "07" :
+			$myMonth = "ก.ค.";
+			break;
+		case "08" :
+			$myMonth = "ส.ค.";
+			break;
+		case "09" :
+			$myMonth = "ก.ย.";
+			break;
+		case "10" :
+			$myMonth = "ต.ค.";
+			break;
+		case "11" :
+			$myMonth = "พ.ย.";
+			break;
+		case "12" :
+			$myMonth = "ธ.ค.";
+			break;
+	}
+	return $myMonth;
+}
 function ConvertDate($str) {
 	if($_SESSION['LANG'] == 'TH'){
 		echo ShowDateYearFull(trim($str));
@@ -242,7 +283,18 @@ function ConvertDate($str) {
 function ConvertDateToDB($str) {
 	return date("Y-m-d H:i:s", strtotime(trim($str)));
 }
-
+function ConvertBoxDate($str) {
+	if($_SESSION['LANG'] == 'TH'){
+		$strtotime = strtotime(trim($str));
+		$date[0] = date("d", $strtotime);
+		$date[1] = returnThaiShortMonth(date("m", $strtotime));
+	}else{
+		$strtotime = strtotime(trim($str));
+		$date[0] = date("d", $strtotime);
+		$date[1] = date("M", $strtotime);
+	}
+	return $date;
+}
 function logs_access($user, $msg) {
 	/*
 	 if(!is_dir(_LOG_PATH_)) { mkdir(_LOG_PATH_,0777); }else{ chmod(_LOG_PATH_,0777); }

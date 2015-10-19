@@ -59,6 +59,8 @@ require("assets/configs/function.inc.php");
 
 						<?php
 
+						   $index = 1;
+
 						   $sql = " select d.CONTENT_DESC_LOC, d.CREATE_DATE, d.BRIEF_LOC, p.IMG_PATH,d.CONTENT_ID
 									from trn_content_detail d
 									left join trn_content_category c on d.cat_id = c.content_cat_id
@@ -67,30 +69,17 @@ require("assets/configs/function.inc.php");
 
 							$query = mysql_query($sql, $conn);
 
-							$num_rows = mysql_num_rows($query);
-
-							$num = 0;
-
-						    $space = $num/2;
-							$gap = "";
-
-							if($space == 0){
-
-								$gap = mid;
-							}
-							else{
-								$gap = cf;
-							}
-
-							?>
-
-						<?
 							while($row = mysql_fetch_array($query)) 
 							{
-							$IMG_PATH = str_replace("../../","",$row['IMG_PATH']);
+								$IMG_PATH = str_replace("../../","",$row['IMG_PATH']);
+
+								$gap = "";
+								if($index == 2){
+									$gap = "mid";
+								}
 					    ?>
 						
-						<div class="box-tumb <? echo $gap ?>">
+						<div class="box-tumb <?=$gap?>">
 							<a href="">
 								<div class="box-pic">
 									<img src="<? echo $IMG_PATH ?>">
@@ -109,7 +98,7 @@ require("assets/configs/function.inc.php");
 									<? echo $row['BRIEF_LOC'] ?>
 								</p>
 								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
+									<a href="news-detail.php?cid=<?=$row['CONTENT_ID']?>" class="btn red">อ่านเพิ่มเติม</a>
 									<div class="box-btn-social cf">
 										<a href="#" class="btn-socila fb"></a>
 										<a href="#" class="btn-socila tw"></a>
@@ -120,16 +109,11 @@ require("assets/configs/function.inc.php");
 						
 
 					<? 
-						$num++;
-
-						$line = $num/3;
-				 
-						if($line == 0){
-					?>
-
-							
-					<?
+						if($index == 3){
+							echo '<hr class="line-gray"/>';
+							$index = 0;	
 						}
+						$index++;
 					  } 
 
 					?>

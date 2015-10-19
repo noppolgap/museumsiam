@@ -127,6 +127,21 @@ require("assets/configs/function.inc.php");
 
 <div class="box-freespace"></div>
 
+<?php
+
+						    $sql = " select d.CONTENT_DESC_LOC, d.CREATE_DATE, d.BRIEF_LOC, p.IMG_PATH,d.CONTENT_ID,
+						   			d.CONTENT_DETAIL_LOC, d.LAST_UPDATE_DATE, d.content_id, d.EVENT_START_DATE, d.USER_CREATE
+						   			,d.PLACE_DESC_LOC, d.EVENT_END_DATE
+									from trn_content_detail d
+									left join trn_content_category c on d.cat_id = c.content_cat_id
+									left join trn_content_picture p on d.content_id = p.content_id
+									where c.content_cat_id = 60 and d.sub_cat_id = 130 and d.content_id = ".$_GET['cid']." ";
+
+							$query = mysql_query($sql, $conn);
+
+							$num_rows = mysql_num_rows($query);
+?>
+
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
@@ -138,44 +153,52 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf news">
 				<h1>กิจกรรมของมิวเซียมสยาม</h1>
 				<div class="box-btn">
-					<a href="" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
+					<a href="event-museum.php" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
 				</div>
 			</div>
+
+		<?php while($row = mysql_fetch_array($query)) { 
+
+			 		$sql_pic = " select  IMG_PATH
+							from  trn_content_picture 
+							where content_id = ".$row['content_id']." ";
+
+					$query_pic = mysql_query($sql_pic, $conn);
+				
+
+				 while($row_pic = mysql_fetch_array($query_pic)) { 
+
+				 $IMG_PATH = str_replace("../../","",$row_pic['IMG_PATH']);
+				 $date = ConvertBoxDate($row['EVENT_START_DATE']);
+
+		?>
+
+
+
 			<div class="box-newsdetail-main">
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
 						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
+							<img src="<? echo $IMG_PATH ?>">
 						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562">
-						</div>
-						<div class="slide-content">
-							<img src="http://placehold.it/754x562/ccc">
-						</div>
+						
 					</div>
 					<a class="btn-arrow-slide pev"></a>
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
 						<div class="box-date-tumb">
-							<p class="date">99</p>
-							<p class="month">พ.ย.</p>
+							<p class="date"><?=$date[0]?></p>
+							<p class="month"><?=$date[1]?></p>
 						</div>
 						<div class="box-text">
-							<p class="text-title">Levitated Mass 340 Ton Giant Stone</p>
-							<p class="text-des">by MUSEUM SIAM</p>
+							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>
+							<p class="text-des">By <? echo $row['USER_CREATE'] ?></p>
 						</div>
 					</div>
 				</div>
+
+				<? }  ?>
+
 				<div class="box-social-main cf">
 					<a href="#" class="btn fb"></a>
 					<a href="#" class="btn tw"></a>
@@ -214,9 +237,9 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-when">
 					<h3>WHEN</h3>
-					<p class="text-date">20 กุมภาพันธ์ - 14 มิถุนายน 2558</p>
+					<p class="text-date"><? echo ConvertDate($row['EVENT_START_DATE']) ?> - <? echo ConvertDate($row['EVENT_END_DATE']) ?></p>
 					<p class="text-time">10.30 น. - 18.00 น.</p>
-					<p class="text-location">หอศิลปะวัฒนธรรมกรุงเทพฯ</p>
+					<p class="text-location"><? echo $row['PLACE_DESC_LOC'] ?></p>
 				</div>
 				<div class="box-ticket">
 					<h3>TICKET</h3>
@@ -224,12 +247,12 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-text">
 					<p>
-						Levitated Mass is a 2012 large-scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art. The installation consists of a 340-ton boulder affixed above a concrete trench through which visitors may walk. The nature, expense and scale of the installation made it an instant topic of discussion The work comprises a 21.5-foot tall boulder mounted on the walls of a 456-foot long concrete trench, surrounded by 2.5 acres of compressed decomposed granite. The boulder is bolted to two shelves affixed to the inner walls of the trench, which descends from ground level to 15 feet below the stone at its center, allowing visitors to stand directly below the megalith.
+						<? echo $row['CONTENT_DETAIL_LOC'] ?>
 					</p>
 				</div>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						วันที่แก้ไขล่าสุด :  28 พ.ย. 2559
+						วันที่แก้ไขล่าสุด :  <? echo ConvertDate($row['LAST_UPDATE_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						Plugin Social
@@ -237,9 +260,10 @@ require("assets/configs/function.inc.php");
 				</div>
 				
 			</div>
+		<? } ?>
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
+					<a href="event-museum.php" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
 				</div>
 			</div>
 		</div>
