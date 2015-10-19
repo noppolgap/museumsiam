@@ -843,7 +843,9 @@ ul.pagination li a.btn-arrow-right:hover{
 	height: 562px;
 	margin: 0 auto;
 }
-
+#sync1 .cp-container{
+	margin: 150px auto 0;
+}
 /* --------------------------------------------------- Arrow Slide Big --------------------------------------------------- */
 .box-slide-big a.btn-arrow-slide{
 	width: 30px;
@@ -921,7 +923,7 @@ ul.pagination li a.btn-arrow-right:hover{
 	transition: all 0.3s ease;
 }
 #sync2 .slide-content img{
-	width: auto;
+	width: 125px;
 	height: 94px;
 	margin: 0 auto;
 	filter: alpha(opacity=50);
