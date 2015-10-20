@@ -1201,5 +1201,44 @@ function getSubCategoryDescription ($subCatID)
 	}
 	return $ret;
 }
+function add360function($name){
+	$temp_name = time().'_'.rand(111,999);
+	$str = "";
 
+	$str .= '<input id="fileupload360_' . $name . '" class="fileupload360" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/three_hundred_and_sixty/?n='.$temp_name.'" accept="image/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_'. $name .'">' . "\n\t";
+	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image360_' . $name . '_Box image_Box dNone image_Box_add"></div>' . "\n\t";
+	$str .= '<div class="image360_' . $name . '_data image_Data dNone"><input type="hidden" name="box_image360_' . $name . '" value="' . $temp_name . '" /></div>' . "\n\t";
+
+	return $str;
+}
+function admin_move_image360_upload_dir($dir, $file) {
+	$path1 = '../../upload';
+	$path2 = $path1 . '/' . $dir;
+	$path3 = $path2 . '/' . date("Y_m") . '/';
+	$old_path1 = '../../assets/plugin/upload/three_hundred_and_sixty/files/';
+
+	if (!is_dir($path1)) { mkdir($path1, 0777);
+	} else { chmod($path1, 0777);
+	}
+	if (!is_dir($path2)) { mkdir($path2, 0777);
+	} else { chmod($path2, 0777);
+	}
+	if (!is_dir($path3)) { mkdir($path3, 0777);
+	} else { chmod($path3, 0777);
+	}
+
+	$original_path = $old_path1 . $file;
+
+	copy($original_path, $path3 . $file)or die($original_path);
+	unlink($original_path);
+
+	chmod($path1, 0755);
+	chmod($path2, 0755);
+	chmod($path3, 0755);
+
+	return $path3 . $file;
+}
 ?>

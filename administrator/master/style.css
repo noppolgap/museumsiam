@@ -761,3 +761,14 @@ header{
 #sortable.sortableFile li.ui-state-default{
 	height: 22px;
 }
+.image360thumb{
+	border: 5px #f0f0f0 dashed;
+	padding: 10px;
+	max-width: 80%;
+}
+.image360thumbDel{
+	cursor: pointer;
+	top: 25px;
+	right: 0px;
+	left: 0px;
+}

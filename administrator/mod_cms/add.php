@@ -79,6 +79,11 @@ require ("../../assets/configs/function.inc.php");
 								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('photo','video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">360</div>
+								<div class="floatL form_input"><?=add360function('image1'); ?></div>
+								<div class="clear"></div>
+							</div>
 							<div class="btn_action">
 								<input type="hidden" name="action" value="add">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">

@@ -37,6 +37,24 @@ if($_POST['action'] == 'add'){
 
 		}
 	}
+	if (count($_POST['image1_file360']) > 0) {
+		$index = 1;
+		foreach ($_POST['image1_file360'] as $k => $file) {
+			$filename = admin_move_image360_upload_dir('preview360', end(explode('/', $file)));
+
+			unset($insert);
+			$insert['CONTENT_ID'] = 111; /*retrunID*/
+			$insert['IMG_TYPE'] = 5;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['CAT_ID'] = 57; /* cat ID*/
+			$insert['ORDER_ID'] = "'" . $index++ . "'";
+			$insert['IMG_NAME'] = "'".$_POST['box_image360_image1']."'"; //ตั้งตาม name
+			$insert['DIV_NAME'] = "'image1'";
+
+			$sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
 
 }else if($_POST['action'] == 'edit'){
 	echo 2;

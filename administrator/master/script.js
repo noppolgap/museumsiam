@@ -42,6 +42,54 @@ $( document ).ready(function() {
 	        }
 	    });
 	}
+	if($('.fileupload360').length > 0){
+	    $('.fileupload360').fileupload({
+	        dataType: 'json',
+	        done: function (e, data) {
+		        temp2 = $(this).attr('data-name');
+	            $.each(data.result.files, function (index, file) {
+    				$('.image360_'+temp2+'_data').append('<input type="hidden" name="'+temp2+'_file360[]" value="'+file.url+'">');
+
+	            });
+	        },
+		    progressall: function (e, data) {
+		        temp2 = $(this).attr('data-name');
+		        var progress = parseInt(data.loaded / data.total * 100, 10);
+		        $('#progress_'+temp2+' .upload_bar').show().css(
+		            'width',
+		            progress + '%'
+		        );
+		    },
+	        stop: function (e, data) {
+
+	        	var html  = '';
+	        		html += '<span class="p-Relative" id="preview360Box'+temp2+'">';
+	        		html += '<a href="#" onclick="preview360(\''+temp2+'\','+false+',\'\',\'\'); return false;" >';
+	        		html += '<img class="dBlock image360thumb" src="'+$('input[name="'+temp2+'_file360[]"]').val()+'">';
+	        		html += '</a>';
+	        		html += '<img alt="" src="../images/small-n-flat/sign-ban.svg" class="p-Absolute image360thumbDel" onclick="deleteTemp360(\''+temp2+'\');" />';
+	        		html += '</span>';
+
+	           $('#progress_'+temp2+' .upload_bar').hide();
+	           $('.image360_'+temp2+'_Box').html(html).show();
+	           $('#fileupload360_'+temp2).hide();
+	           $('#preview360Box'+temp2+' .image360thumb').load(function() {
+        			pic_real_width = this.width;
+        			pic_real_width = pic_real_width - 5;
+        			$('#preview360Box'+temp2+' .image360thumbDel').css('left',pic_real_width);
+    		   });
+
+
+	           /*
+	           var d = new Date();
+			   var patten = d.getTime();
+			   	   patten += '_'+Math.floor((Math.random() * 1000) + 1);
+			   $('#fileupload360_'+temp2).attr('data-url','../../assets/plugin/upload/three_hundred_and_sixty/?n='+patten);
+	           $('input[name="box_image360_'+temp2+'"]').val(patten);
+	           */
+	        }
+	    });
+	}
 	if($('.VideoUpload').length > 0){
 		$('.VideoUpload').click(function() {
 			if(temp3){
@@ -705,4 +753,34 @@ function orderFileAdd(page,id,position){
 		}else{
 			$('#DataBlock_'+page+' input[name="order_'+page+'_position['+id+']"]').val(position);
 		}
+}
+function preview360(page,database,cat,id){
+	if(database){
+		var path = '../master/preview360.php?page='+page+'&cat='+cat+'&cID='+id;
+	}else{
+		var box = $('.image360_' + page + '_data input[name="box_image360_'+ page + '"]').val();
+		var path = '../master/preview360.php?box='+box;
+	}
+		try{
+			$.colorbox({
+				transition: 'fade',
+				iframe:true,
+				innerWidth:650,
+				innerHeight:695,
+				href: path
+			});
+		} catch(err) {
+			popup(path,'preview360',650,695);
+		}
+}
+function deleteTemp360(name){
+	if (confirm("คุณแน่ใจที่จะลบภาพนี้")){
+		var obj = $('.image360_'+temp2+'_data input[name="'+temp2+'_file360[]"]');
+		$.each( obj, function( key, value ) {
+			$.post( "../master/del360.php", { name: this.value });
+		});
+		$('.image360_'+temp2+'_data input[name="'+temp2+'_file360[]"]').remove();
+	    $('.image360_'+temp2+'_Box').html('').hide();
+	    $('#fileupload360_'+temp2).show();
+	}
 }
