@@ -92,18 +92,18 @@ require ("../../assets/configs/function.inc.php");
 									</div>
 
 									<div class="bigForm">
-										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่</div>
+										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่ (ขนาด 209 x 218)</div>
 										<div class="floatL form_input">
 											<?=admin_upload_icon_image_view('BigIcon', 'BIG', NULL, $subModuleID) ?>
 											</div>
 										<div class="clear"></div>
 									</div>	
 									
-									<div class="bigForm">
+									<!-- <div class="bigForm">
 										<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
 										<div class="floatL form_input"><?=admin_upload_icon_image_view('SmallIcon', 'SMALL', NULL, $subModuleID) ?></div>
 										<div class="clear"></div>
-									</div>	
+									</div>	 -->
 										 
 									<div class="btn_action">
 										<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">

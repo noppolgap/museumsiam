@@ -81,18 +81,18 @@ require ("../../assets/configs/function.inc.php");
 									</div>
 
 									<div class="bigForm">
-										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่</div>
+										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่ (ขนาด 209 x 218)</div>
 										<div class="floatL form_input">
 											<?=admin_upload_icon_image_view('BigIcon', 'BIG', $moduleID, NULL) ?>
 											</div>
 										<div class="clear"></div>
 									</div>	
 									
-									<div class="bigForm">
+									<!-- <div class="bigForm">
 										<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
 										<div class="floatL form_input"><?=admin_upload_icon_image_view('SmallIcon', 'SMALL', $moduleID, NULL) ?></div>
 										<div class="clear"></div>
-									</div>	
+									</div>	 -->
 
 									<div>
 										<div class="floatL form_name">

@@ -91,28 +91,17 @@ $indexPage = "/administrator/mod_module/index.php";
                     <div class="clear"></div>
                   </div>
 
-				  <!--
-				   <div>
-                    <div class="floatL form_name">รูปภาพ Icon</div>
-                    <div class="floatL form_input">
-                      <input  id = "txtImg" type="text" name="txtImg" value="" class="w90p" />
-                          <span class="error" >* <span id = "imgError" style="display:none">กรุณาระบุรูปภาพ</span> </span>
-                    </div>
-                    <div class="clear"></div>
-                  </div>
-				   </div>
-                 -->
 				 <div>
-										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่</div>
+										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่ (ขนาด 209 x 218)</div>
 										<div class="floatL form_input"><?=admin_upload_image('BigIcon') ?></div>
 										<div class="clear"></div>
 									</div>
 
-									<div>
+									<!-- <div >
 										<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
 										<div class="floatL form_input"><?=admin_upload_image('SmallIcon') ?></div>
 										<div class="clear"></div>
-									</div>
+									</div> -->
 
 
 				    <div>
@@ -172,20 +161,19 @@ if (isset($_POST["action"]) && $_POST["action"] == "submit") {
 	else
 		$isLastNode = "Y";
 
-$bigIconName = "";
-			$smallIconName = "";
+	$bigIconName = "";
+	$smallIconName = "";
 
-			if (count($_POST['BigIcon_file']) > 0) {
-				foreach ($_POST['BigIcon_file'] as $k => $file) {
-					$bigIconName = admin_move_image_upload_dir('icon_files', end(explode('/', $file)), 1000, '', false, 150, 150);
-				}
-			}
-			if (count($_POST['SmallIcon_file']) > 0) {
-				foreach ($_POST['SmallIcon_file'] as $k => $file) {
-					$smallIconName = admin_move_image_upload_dir('icon_files', end(explode('/', $file)), 1000, '', false, 150, 150);
-				}
-			}
-
+	if (count($_POST['BigIcon_file']) > 0) {
+		foreach ($_POST['BigIcon_file'] as $k => $file) {
+			$bigIconName = admin_move_image_upload_dir('icon_files', end(explode('/', $file)), 1000, '', false, 150, 150);
+		}
+	}
+	if (count($_POST['SmallIcon_file']) > 0) {
+		foreach ($_POST['SmallIcon_file'] as $k => $file) {
+			$smallIconName = admin_move_image_upload_dir('icon_files', end(explode('/', $file)), 1000, '', false, 150, 150);
+		}
+	}
 
 	mysql_query("BEGIN");
 
@@ -199,7 +187,7 @@ $bigIconName = "";
 	$strSQL = "INSERT INTO trn_banner_pic_setting ";
 	$strSQL .= "(APP_MODULE_ID , DESKTOP_ICON_PATH , MOBILE_ICON_PATH ,ICON_LINK ,USER_CREATE , CREATE_DATE , LAST_FUNCTION) ";
 	$strSQL .= " values ";
-	$strSQL .= "('" . $last_id . "','" . $bigIconName."','".$smallIconName . "','" . $txtUrlLink . "' , 'Test' , now() , 'A')";
+	$strSQL .= "('" . $last_id . "','" . $bigIconName . "','" . $smallIconName . "','" . $txtUrlLink . "' , 'Test' , now() , 'A')";
 	$objQueryBannerSetting = mysql_query($strSQL);
 	if (($objQueryAppModule) and ($objQueryBannerSetting)) {
 		mysql_query("COMMIT");

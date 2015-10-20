@@ -262,6 +262,51 @@ include ('inc/inc-menu.php');
 				<div class="box-news-text">
 					<?=nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br>')); ?>
 				</div>
+				
+				<div class="box-otherfile-main">
+					<div class="box-title cf">
+						<h2>ไฟล์อื่นๆที่เกี่ยวข้อง</h2>
+					</div>
+					<div class="box-news-main gray">
+						<div class="box-notice pdf">
+							<div class="box-text">
+								<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+								<p class="text-detail">
+									<span>ประเภท: .pdf</span>
+									<span>ขนาด: 0.61 เมกะไบต์</span>
+								</p>
+							</div>
+							<div class="box-btn cf">
+								<a href="#" class="btn red">ดาวน์โหลด</a>
+							</div>
+						</div>
+						<div class="box-notice pdf">
+							<div class="box-text">
+								<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+								<p class="text-detail">
+									<span>ประเภท: .pdf</span>
+									<span>ขนาด: 0.61 เมกะไบต์</span>
+								</p>
+							</div>
+							<div class="box-btn cf">
+								<a href="#" class="btn red">ดาวน์โหลด</a>
+							</div>
+						</div>
+						<div class="box-notice pdf">
+							<div class="box-text">
+								<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+								<p class="text-detail">
+									<span>ประเภท: .pdf</span>
+									<span>ขนาด: 0.61 เมกะไบต์</span>
+								</p>
+							</div>
+							<div class="box-btn cf">
+								<a href="#" class="btn red">ดาวน์โหลด</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
 						วันที่แก้ไขล่าสุด :   <?= ConvertDate($rowContent['LAST_DATE']) ?>

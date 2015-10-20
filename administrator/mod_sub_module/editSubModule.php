@@ -137,18 +137,18 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 									</div>
 
 									<div class="bigForm">
-										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่</div>
+										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่ (ขนาด 209 x 218)</div>
 										<div class="floatL form_input">
 											<?=admin_upload_icon_edit('BigIcon', 'BIG', NULL, $subModuleID) ?>
 											</div>
 										<div class="clear"></div>
 									</div>	
 									
-									<div class="bigForm">
+									<!-- <div class="bigForm">
 										<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
 										<div class="floatL form_input"><?=admin_upload_icon_edit('SmallIcon', 'SMALL', NULL, $subModuleID) ?></div>
 										<div class="clear"></div>
-									</div>	
+									</div>	 -->
 							</div>
 
 							<div class="btn_action">
