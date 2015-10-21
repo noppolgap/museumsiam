@@ -31,8 +31,6 @@ require ('../inc_header.php');
 			$subfixAddAndEdit .= '&SCID=' . $SCID;
 		}
 
-
-
 		$navigateBackPage = '';
 
 		$navigateBackPage = 'content_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . $LV;
@@ -103,7 +101,60 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 
-
+<div>
+								<div class="floatL form_name">เวลาเริ่ม</div>
+								<div class="floatL form_input">
+									<select name="cmbHourStart">
+									<?php
+									for ($idx = 0; $idx < 24; $idx++) {
+										if ($idx < 10)
+											echo '<option value="0' . $idx . '">0' . $idx . '</option>';
+										else
+											echo '<option value="' . $idx . '">' . $idx . '</option>';
+									}
+									?>
+									</select>
+									: <select name="cmbMinuteStart">
+									<?php
+									for ($idx = 0; $idx < 60; $idx++) {
+										if ($idx < 10)
+											echo '<option value="0' . $idx . '">0' . $idx . '</option>';
+										else
+											echo '<option value="' . $idx . '">' . $idx . '</option>';
+									}
+									?>
+									</select>
+									</div>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<div class="floatL form_name">เวลาสิ้นสุด</div>
+								<div class="floatL form_input">
+									
+									<select name="cmbHourEnd">
+									<?php
+									for ($idx = 0; $idx < 24; $idx++) {
+										if ($idx < 10)
+											echo '<option value="0' . $idx . '">0' . $idx . '</option>';
+										else
+											echo '<option value="' . $idx . '">' . $idx . '</option>';
+									}
+									?>
+									</select>
+									: <select name="cmbMinuteEnd">
+									<?php
+									for ($idx = 0; $idx < 60; $idx++) {
+										if ($idx < 10)
+											echo '<option value="0' . $idx . '">0' . $idx . '</option>';
+										else
+											echo '<option value="' . $idx . '">' . $idx . '</option>';
+									}
+									?>
+									</select>
+								</div>
+								<div class="clear"></div>
+							</div>
+							
 							<div>
 								<div class="floatL form_name">สถานที่ TH</div>
 								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="" class="w90p" /></div>
@@ -140,19 +191,28 @@ require ('../inc_header.php');
 
 							<div class="bigForm">
 								<div class="floatL form_name">Video</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('video','video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('video', 'video');
+									echo $uploadvideo[0];
+									$formUploadVideo .= $uploadvideo[1];
+  ?></div>
 								<div class="clear"></div>
 							</div>
 
 							<div class="bigForm">
 								<div class="floatL form_name">Sound</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('voice','sound'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('voice', 'sound');
+									echo $uploadvideo[0];
+									$formUploadVideo .= $uploadvideo[1];
+  ?></div>
 								<div class="clear"></div>
 							</div>
 
 							<div class="bigForm">
 								<div class="floatL form_name">Other File</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('other','all'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('other', 'all');
+									echo $uploadvideo[0];
+									$formUploadVideo .= $uploadvideo[1];
+  ?></div>
 								<div class="clear"></div>
 							</div>
 
@@ -173,7 +233,7 @@ require ('../inc_header.php');
 <?
 require ('../inc_footer.php');
  ?>
- <div class="dNone"><?=$formUploadVideo?></div>
+ <div class="dNone"><?=$formUploadVideo ?></div>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />

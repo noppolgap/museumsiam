@@ -109,6 +109,8 @@ if (isset($_GET['add'])) {
 	$insert['PLACE_DESC_ENG'] = "'" . nvl($_POST['txtPlaceEng'], "") . "'";
 	$insert['LAT'] = "'" . nvl($_POST['txtLat'], "") . "'";
 	$insert['LON'] = "'" . nvl($_POST['txtLon'], "") . "'";
+	$insert['EVENT_START_TIME'] = "'" . nvl($_POST['cmbHourStart'], '') . ':' . nvl($_POST['cmbMinuteStart'], '') . "'";
+	$insert['EVENT_END_TIME'] = "'" . nvl($_POST['cmbHourEnd'], '') . ':' . nvl($_POST['cmbMinuteEnd'], '') . "'";
 	$sql = "INSERT INTO  trn_content_detail (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 
 	mysql_query($sql, $conn) or die($sql);
@@ -264,6 +266,9 @@ if (isset($_GET['edit'])) {
 	$update[] = "LAT = '" . nvl($_POST['txtLat'], "") . "'";
 	$update[] = "LON  = '" . nvl($_POST['txtLon'], "") . "'";
 
+	$update[] = "EVENT_START_TIME = '" . nvl($_POST['cmbHourStart'], '') . ':' . nvl($_POST['cmbMinuteStart'], '') . "'";
+	$update[] = "EVENT_END_TIME = '" . nvl($_POST['cmbHourEnd'], '') . ':' . nvl($_POST['cmbMinuteEnd'], '') . "'";
+
 	$sql = "UPDATE trn_content_detail SET  " . implode(",", $update) . " WHERE CONTENT_ID = " . $conid;
 	mysql_query($sql, $conn);
 
@@ -333,7 +338,7 @@ if (isset($_GET['edit'])) {
 		}
 	}
 
-if (count($_POST['video_voice']) > 0) {
+	if (count($_POST['video_voice']) > 0) {
 		$CONTENT_ID = intval($conid);
 		$CAT_ID = intval($CID);
 		$DIV_NAME = 'voice';
@@ -386,7 +391,6 @@ if (count($_POST['video_voice']) > 0) {
 			mysql_query('DELETE FROM trn_content_picture WHERE PIC_ID = ' . intval($file[1]), $conn) or die($sql);
 		}
 	}
-
 
 	//video action delete
 	if (count($_POST['video_delete_other']) > 0) {

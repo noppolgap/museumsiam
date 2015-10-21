@@ -147,7 +147,32 @@ require ("../../assets/configs/function.inc.php");
 							<div class="clear"></div>
 							</div>
 
-
+<div>
+								<div class="floatL form_name">เวลาเริ่ม</div>
+								<div class="floatL form_input">
+									
+									
+									<?php
+									echo $row['EVENT_START_TIME'];
+									
+									?>
+									</select>
+									</div>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<div class="floatL form_name">เวลาสิ้นสุด</div>
+								<div class="floatL form_input">
+									
+									
+									<?php
+									echo $row['EVENT_END_TIME'];
+									
+									?>
+									</select>
+								</div>
+								<div class="clear"></div>
+							</div>
 							<div>
 								<div class="floatL form_name">สถานที่ TH</div>
 								<div class="floatL form_input"><?=$row["PLACE_DESC_LOC"] ?></div>

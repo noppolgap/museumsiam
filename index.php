@@ -696,6 +696,7 @@ require ("assets/configs/function.inc.php");
 			</div>
 		</div>
 
+<!--Data Network -->
 		<div class="part-datanetwork">
 			<div class="container">
 				<div class="box-title"><img src="images/<?=$picFolderName?>/index/part4-pic1.png" />
@@ -801,6 +802,7 @@ require ("assets/configs/function.inc.php");
 				</div>
 			</div>
 		</div>
+<!--Data Network -->
 
 		<div class="part-exhibition cf">
 			<div class="container cf">

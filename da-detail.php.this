@@ -3,101 +3,68 @@ require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
 
-				$MID = intval($_GET['MID']);
-				$CID = intval($_GET['CID']);
-				$CONID = intval($_GET['CONID']);
+$MID = intval($_GET['MID']);
+$CID = intval($_GET['CID']);
+$CONID = intval($_GET['CONID']);
 
-				$SCID = "-1";
-				if (isset($_GET['SCID']))
-					$SCID = intval($_GET['SCID']);
+$SCID = "-1";
+if (isset($_GET['SCID']))
+	$SCID = $_GET['SCID'];
 
-					$currentPage = 1;
-				if (isset($_GET['PG']))
-					$currentPage = intval($_GET['PG']);
+$currentPage = 1;
+if (isset($_GET['PG']))
+	$currentPage = $_GET['PG'];
 
-				if ($currentPage < 1)
-					$currentPage = 1;
+if ($currentPage < 1)
+	$currentPage = 1;
 
+$catName = "";
 
-				$catName = "";
+if (isset($_SESSION['DA_PREV_PG'])) {
+	$backPage = $_SESSION['DA_PREV_PG'];
+} else {
+	$backPage = "da.php?MID=" . $digial_module_id;
+}
+$sqlCategory = "";
+if (isset($_GET['SCID'])) {
+	$sqlCategory = "select SUB_CONTENT_CAT_ID , CONTENT_CAT_ID , ";
+	if ($_SESSION['LANG'] == 'TH')
+		$sqlCategory .= " SUB_CONTENT_CAT_DESC_LOC as SUB_CAT_DESC ";
+	else
+		$sqlCategory .= " SUB_CONTENT_CAT_DESC_ENG as SUB_CAT_DESC ";
+	$sqlCategory .= " from trn_content_sub_category where SUB_CONTENT_CAT_ID = $SCID ";
+	$rsCat = mysql_query($sqlCategory) or die(mysql_error());
+	while ($rowCat = mysql_fetch_array($rsCat)) {
+		$catName = $rowCat['SUB_CAT_DESC'];
+	}
+} else {
+	$sqlCategory = "select CONTENT_CAT_ID , ";
+	if ($_SESSION['LANG'] == 'TH')
+		$sqlCategory .= " CONTENT_CAT_DESC_LOC as CAT_DESC ";
+	else
+		$sqlCategory .= " CONTENT_CAT_DESC_ENG as CAT_DESC ";
+	$sqlCategory .= " from trn_content_category where CONTENT_CAT_ID	= $CID ";
+	$rsCat = mysql_query($sqlCategory) or die(mysql_error());
+	while ($rowCat = mysql_fetch_array($rsCat)) {
+		$catName = $rowCat['CAT_DESC'];
+	}
+}
 
-				if (isset($_SESSION['KM_PREV_PG'])){
-					$backPage = $_SESSION['KM_PREV_PG'] ;
-				}else {
-					$backPage = "km.php?MID=".$km_module_id;
-					/*$backPage = "all-content.php?MID=".$MID."&CID=".$CID;
-					if (isset($_GET['SCID'])) {
-							$backPage.= "$SCID=".$SCID ;
-						}
-					$backPage.'&PG='.$currentPage ; */
-				}
-				$sqlCategory = "";
-				if (isset($_GET['SCID'])) {
-					$sqlCategory = "select SUB_CONTENT_CAT_ID ,
-											CONTENT_CAT_ID ,
-											SUB_CONTENT_CAT_DESC_LOC ,
-											SUB_CONTENT_CAT_DESC_ENG
-											from trn_content_sub_category where SUB_CONTENT_CAT_ID = $SCID ";
-					$rsCat = mysql_query($sqlCategory) or die(mysql_error());
-					while ($rowCat = mysql_fetch_array($rsCat)) {
-						$catName = $rowCat['SUB_CONTENT_CAT_DESC_LOC'];
-					}
-				} else {
-					$sqlCategory = "select CONTENT_CAT_ID ,
-											CONTENT_CAT_DESC_LOC ,
-											CONTENT_CAT_DESC_ENG from trn_content_category where CONTENT_CAT_ID	= $CID ";
-					$rsCat = mysql_query($sqlCategory) or die(mysql_error());
-					while ($rowCat = mysql_fetch_array($rsCat)) {
-						$catName = $rowCat['CONTENT_CAT_DESC_LOC'];
-					}
-				}
-
-				if ($_SESSION['LANG'] == 'TH'){
-					$LANG_SQL = "CONTENT_DESC_LOC AS CONTENT_LOC ,CONTENT_DETAIL_LOC AS CONTENT_DETAIL,BRIEF_LOC AS CONTENT_BRIEF,PLACE_DESC_LOC as PLACE_DESC , ";
-				}else if ($_SESSION['LANG'] == 'EN'){
-					$LANG_SQL = "CONTENT_DESC_ENG AS CONTENT_LOC ,CONTENT_DETAIL_ENG AS CONTENT_DETAIL,BRIEF_ENG AS CONTENT_BRIEF,PLACE_DESC_ENG as PLACE_DESC , ";
-				}
-
-				$contentSql = "SELECT
-				CONTENT_ID,
-				CAT_ID,
-				".$LANG_SQL."
-				CREATE_DATE,
+$contentSql = "SELECT CONTENT_ID, CAT_ID, ";
+if ($_SESSION['LANG'] == 'TH')
+	$contentSql .= " CONTENT_DESC_LOC as CONTENT_DESC ,CONTENT_DETAIL_LOC as DETAIL_DESC ,PLACE_DESC_LOC as PLACE_DESC , ";
+else
+	$contentSql .= " CONTENT_DESC_ENG as CONTENT_DESC ,CONTENT_DETAIL_ENG as DETAIL_DESC ,PLACE_DESC_ENG as PLACE_DESC , ";
+$contentSql .= " CREATE_DATE,
 				LAST_UPDATE_DATE,
 				IFNULL(LAST_UPDATE_DATE , CREATE_DATE) as LAST_DATE ,
 				EVENT_START_DATE,
-				EVENT_END_DATE
+				EVENT_END_DATE ,
+				LAT , LON
 				FROM
 				trn_content_detail
 				WHERE
-				CONTENT_ID = $CONID";
-
-			//	echo $contentSql;
-				$rsContent = mysql_query($contentSql) or die(mysql_error());
-				$rowContent = mysql_fetch_array($rsContent);
-
-
-				$title = trim(htmlspecialchars($rowContent['CONTENT_LOC']));
-				$detail = trim($rowContent['CONTENT_DETAIL']);
-				$brief = trim(preg_replace('/\s\s+/', ' ', strip_tags(htmlspecialchars($rowContent['CONTENT_BRIEF']))));
-
-
-//meta site
-$sql_thumb_meta = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND IMG_TYPE = '1' AND CAT_ID = ".$CID." ORDER BY ORDER_ID ASC LIMIT 0 , 1";
-$query_thumb_meta = mysql_query($sql_thumb_meta, $conn);
-$row_thumb_meta = mysql_fetch_array($query_thumb_meta);
-$thumb_meta = trim(str_replace("../../","",$row_thumb_meta['IMG_PATH']));
-
-/* not work
-$page_title = $title;
-$page_description = $brief;
-*/
-$page_image = _FULL_SITE_PATH_.'/'.$thumb_meta;
-
-unset($sql_thumb_meta);
-unset($query_thumb_meta);
-unset($row_thumb_meta);
-unset($thumb_meta);
+				CONTENT_ID =  " . $CONID;
 
 ?>
 <!doctype html>
@@ -108,9 +75,8 @@ require ('inc_meta.php');
  ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
-<link rel="stylesheet" type="text/css" href="css/news-event.css" />
 
-<script src="js/km-detail.js"></script>
+<script src="js/da-detail.js"></script>
 
 </head>
 
@@ -127,8 +93,17 @@ include ('inc/inc-menu.php');
 	<div class="container">
 		<div class="box-nav">
 			<?php
-				include ('inc/inc-km-breadcrumbs.php');
+			if (isset($_SESSION['DA_PREV_PG'])) {
+				$prevPage = $_SESSION['DA_PREV_PG'];
+				if (strpos($prevPage, 'black') !== FALSE)
+					include ('inc/inc-da-black-breadcrumbs.php');
+				else if (strpos($prevPage, 'gray') !== FALSE)
+					include ('inc/inc-da-gray-breadcrumbs.php');
+				else if (strpos($prevPage, '.') !== FALSE)
+					include ('inc/inc-da-red-breadcrumbs.php');
+			}
 			?>
+
 		</div>
 	</div>
 </div>
@@ -138,11 +113,17 @@ include ('inc/inc-menu.php');
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include ('inc/inc-left-content-km.php'); ?>
+			<?php
+			include ('inc/inc-left-content-da.php');
+ ?>
 		</div>
 
 		<div class="box-right main-content">
 			<hr class="line-red"/>
+			<?//	echo $contentSql;
+				$rsContent = mysql_query($contentSql) or die(mysql_error());
+				while ($rowContent = mysql_fetch_array($rsContent)) {
+					?>
 			<div class="box-title-system cf news">
 				<h1><?=$catName ?></h1>
 				<div class="box-btn">
@@ -174,7 +155,7 @@ include ('inc/inc-menu.php');
 									$path = str_replace("../../","",$path);
 								}
 							?>
-								<div id="jquery_jplayer_<?=$rowPic['PIC_ID']?>" class="cp-jplayer" data-type="sound"></div>
+								<div id="jquery_jplayer_<?=$rowPic['PIC_ID']?>" class="cp-jplayer"></div>
 
 								<div id="cp_container_<?=$rowPic['PIC_ID']?>" class="cp-container">
 									<div class="cp-buffer-holder">
@@ -196,7 +177,7 @@ include ('inc/inc-menu.php');
 							}else if($rowPic['DIV_NAME'] == 'video'){
 
 								if($rowPic['IMG_TYPE'] == 3){
-									echo '<iframe data-type="embed" width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
+									echo '<iframe width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
 									$thumbRender .= '<img src="http://img.youtube.com/vi/'.$rowPic['IMG_PATH'].'/maxresdefault.jpg">'."\n\t";
 								}else{
 									$ext = getEXT($rowPic['IMG_PATH']);
@@ -204,14 +185,14 @@ include ('inc/inc-menu.php');
 									if($rowPic['IMG_TYPE'] == 2){
 										$path = str_replace("../../","",$path);
 									}
-									echo '<video width="754" height="460" controls data-type="video">'."\n\t";
+									echo '<video width="754" height="460" controls>'."\n\t";
 									echo '<source src="'.$path.'" type="video/'.$ext.'">'."\n\t";
 									echo '</video>'."\n\t";
 									$thumbRender .= '<img src="images/tumb-vdo.jpg">'."\n\t";
 								}
 
 							}else{
-								echo '<img class="img-slide-show" data-type="image" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
 								$thumbRender .= '<img src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
 							}
 							echo '</div>'."\n\t";
@@ -223,33 +204,34 @@ include ('inc/inc-menu.php');
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
 						<div class="box-text">
-							<p class="text-title"><?=$title?></p>
-							
+							<p class="text-title"><?=$rowContent['CONTENT_DESC'] ?></p>
 							<?php
-							$placeClass = ' class="text-des pin" ';
+							$placeStyle = 'style="display:block"';
 							if (nvl($rowContent['PLACE_DESC'], '') == '')
-								$placeClass = ' class="text-des"  style="height: 15px;" ';
+								$placeStyle = 'style="display:none"';
 							$hasLinkToMap = FALSE;
 							if ((nvl($rowContent['LAT'], '') != '') && (nvl($rowContent['LON'], '')!= '')) {
 								echo '<a href="http://maps.google.com/?q='.$rowContent['LAT'].','.$rowContent['LON'].'" target="_blank">';
 								$hasLinkToMap = TRUE;
 							}
 								?>
-							<p  <?=$placeClass?> ><?php
-								echo nvl($rowContent['PLACE_DESC'],"");
-							?></p>
+							<p class="text-des pin" <?=$placeStyle ?>>
+								<?php
+								echo $rowContent['PLACE_DESC'];
+							?>
+							</p>
 							<?
 								if ($hasLinkToMap) {
 									echo '</a>';
 								}
  							?>
- 							
 						</div>
 					</div>
 				</div>
 				<div class="box-social-main cf">
 				<?php
-						$path = 'km-detail.php?MID='.$MID.'%26CID='.$CID.'%26CONID='.$CONID;
+
+						$path = 'da-detail.php?MID='.$MID.'%26CID='.$CID.'%26CONID='.$CONID;
 						$fullpath = _FULL_SITE_PATH_.'/'.$path;
 						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$CONID;
 						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
@@ -263,11 +245,12 @@ include ('inc/inc-menu.php');
 					<a href="<?=$line?>" target="_blank" class="btn line"></a>
 				</div>
 
-				<div class="part-tumb-main" <?=$extraStyle ?> >
+				<div class="part-tumb-main" >
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a href="" class="btn black">ดูทั้งหมด</a>
+							<a href="view-360.php" target="_blank" class="btn black b360">ดู</a>
+							<a href="all-media.php" class="btn black">ดูทั้งหมด</a>
 						</div>
 					</div>
 					<div class="box-slide-small">
@@ -276,20 +259,12 @@ include ('inc/inc-menu.php');
 						</div>
 					</div>
 				</div>
-				
-				<div class="box-when">
-					<h3>WHEN</h3>
-					<p class="text-date"><? echo ConvertDate($row['EVENT_START_DATE']) ?> - <? echo ConvertDate($row['EVENT_END_DATE']) ?></p>
-					<p class="text-time"><? echo $row['EVENT_START_TIME'] ?> - <? echo $row['EVENT_END_TIME'] ?></p>
-					<p class="text-location"><? echo $row['PLACE_DESC_LOC'] ?></p>
-				</div>
-				
 				<div class="box-news-text">
-					<?=$detail?>
+					<?=nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br>')); ?>
 				</div>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						วันที่แก้ไขล่าสุด :  <?= ConvertDate($rowContent['LAST_DATE']) ?>
+						วันที่แก้ไขล่าสุด :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						<div class="fb-share-button" data-href="<?=$path?>" data-layout="button_count"></div>
@@ -310,10 +285,13 @@ include ('inc/inc-menu.php');
 				</div>
 			</div>
 		</div>
+		<?php } ?>
 	</div>
 </div>
 
 <div class="box-freespace"></div>
+
+
 
 <?php
 include ('inc/inc-footer.php');
@@ -328,6 +306,6 @@ include('inc/inc-social-network.php');
 <script type="text/javascript" src="assets/plugin/circle-player/js/circle.player.js"></script>
 <script type="text/javascript" src="audiolist.php?NAME=voice&amp;CID=<?=$CID?>&amp;CONID=<?=$CONID?>"></script>
 <? } ?>
+
 </body>
 </html>
-<? CloseDB(); ?>

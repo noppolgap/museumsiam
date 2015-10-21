@@ -107,6 +107,7 @@ $(this).css('height' , 'auto');
 			}
 
 		});
+		
 	});
 
 function breakMedia(id){

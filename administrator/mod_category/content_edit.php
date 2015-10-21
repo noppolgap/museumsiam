@@ -7,13 +7,13 @@ require ("../../assets/configs/function.inc.php");
 <html>
 <head>
 <?
-	require ('../inc_meta.php');
+require ('../inc_meta.php');
  ?>
 </head>
 
 <body>
 <?
-	require ('../inc_header.php');
+require ('../inc_header.php');
  ?>
 <div class="main-container">
 	<div class="main-body marginC">
@@ -118,30 +118,103 @@ require ("../../assets/configs/function.inc.php");
 								<div class="clear"></div>
 							</div>
 
+<div>
+								<div class="floatL form_name">เวลาเริ่ม</div>
+								<div class="floatL form_input">
+									<select name="cmbHourStart">
+									<?php
+									$timeStart = $row['EVENT_START_TIME'];
+									$timeStartArr = explode(':', $timeStart);
+									for ($idx = 0; $idx < 24; $idx++) {
+										$selected = '';
+										if (intval($timeStartArr[0]) == $idx)
+											$selected = 'selected';
+										if ($idx < 10)
+											echo '<option value="0' . $idx . '" ' . $selected . '>0' . $idx . '</option>';
+										else
+											echo '<option value="' . $idx . '" ' . $selected . '>' . $idx . '</option>';
+									}
+									?>
+									</select>
+									: <select name="cmbMinuteStart">
+									<?php
+									for ($idx = 0; $idx < 60; $idx++) {
+										$selected = '';
+										if (intval($timeStartArr[1]) == $idx)
+											$selected = 'selected';
+
+										if ($idx < 10)
+											echo '<option value="0' . $idx . '" ' . $selected . '>0' . $idx . '</option>';
+										else
+											echo '<option value="' . $idx . '" ' . $selected . '>' . $idx . '</option>';
+									}
+									?>
+									</select>
+									</div>
+								<div class="clear"></div>
+							</div>
+							<div>
+								<div class="floatL form_name">เวลาสิ้นสุด</div>
+								<div class="floatL form_input">
+									
+									<select name="cmbHourEnd">
+									<?php
+									$timeEnd = $row['EVENT_END_TIME'];
+									$timeEndArr = explode(':', $timeEnd);
+									for ($idx = 0; $idx < 24; $idx++) {
+										$selected = '';
+										if (intval($timeEndArr[0]) == $idx)
+											$selected = 'selected';
+
+										if ($idx < 10)
+											echo '<option value="0' . $idx . '" ' . $selected . '>0' . $idx . '</option>';
+										else
+											echo '<option value="' . $idx . '" ' . $selected . '>' . $idx . '</option>';
+									}
+									?>
+									</select>
+									: <select name="cmbMinuteEnd">
+									<?php
+									for ($idx = 0; $idx < 60; $idx++) {
+										$selected = '';
+										if (intval($timeEndArr[1]) == $idx)
+											$selected = 'selected';
+
+										if ($idx < 10)
+											echo '<option value="0' . $idx . '" ' . $selected . ' >0' . $idx . '</option>';
+										else
+											echo '<option value="' . $idx . '" ' . $selected . '>' . $idx . '</option>';
+									}
+									?>
+									</select>
+								</div>
+								<div class="clear"></div>
+							</div>
+							
 							<div>
 								<div class="floatL form_name">สถานที่ TH</div>
-								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="<?=$row["PLACE_DESC_LOC"]?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="<?=$row["PLACE_DESC_LOC"] ?>" class="w90p" /></div>
 								<span class="error" ><span id = "placeThError" style="display:none">กรุณาระบุสถานที่ TH</span> </span>
 								<div class="clear"></div>
 							</div>
 
 							<div>
 								<div class="floatL form_name">สถานที่  EN</div>
-								<div class="floatL form_input"><input type="text" name="txtPlaceEng" id="txtPlaceEng" value="<?=$row["PLACE_DESC_ENG"]?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="txtPlaceEng" id="txtPlaceEng" value="<?=$row["PLACE_DESC_ENG"] ?>" class="w90p" /></div>
 								<span class="error" ><span id = "placeEnError" style="display:none">กรุณาระบุสถานที่ EN</span> </span>
 								<div class="clear"></div>
 							</div>
 
 							<div>
 								<div class="floatL form_name">Lattitude</div>
-								<div class="floatL form_input"><input type="text" name="txtLat" id="txtLat" value="<?=$row["LAT"]?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="txtLat" id="txtLat" value="<?=$row["LAT"] ?>" class="w90p" /></div>
 								<span class="error" ><span id = "lattitudeError" style="display:none">กรุณาระบุ Lattitude</span> </span>
 								<div class="clear"></div>
 							</div>
 
 							<div>
 								<div class="floatL form_name">Longtitude</div>
-								<div class="floatL form_input"><input type="text" name="txtLon" id="txtLon" value="<?=$row["LON"]?>" class="w90p" /></div>
+								<div class="floatL form_input"><input type="text" name="txtLon" id="txtLon" value="<?=$row["LON"] ?>" class="w90p" /></div>
 								<span class="error" ><span id = "lontitudeError" style="display:none">กรุณาระบุ Lontitude</span> </span>
 								<div class="clear"></div>
 							</div>
@@ -154,19 +227,28 @@ require ("../../assets/configs/function.inc.php");
 
 <div class="bigForm">
 								<div class="floatL form_name">Video</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('video',$id,$row['CAT_ID'],'video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('video', $id, $row['CAT_ID'], 'video');
+									echo $uploadvideo[0];
+									$formUploadVideo .= $uploadvideo[1];
+  ?></div>
 								<div class="clear"></div>
 							</div>
 
 							<div class="bigForm">
 								<div class="floatL form_name">Sound</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('voice',$id,$row['CAT_ID'],'sound'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('voice', $id, $row['CAT_ID'], 'sound');
+									echo $uploadvideo[0];
+									$formUploadVideo .= $uploadvideo[1];
+  ?></div>
 								<div class="clear"></div>
 							</div>
 
 							<div class="bigForm">
 								<div class="floatL form_name">Other File</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('other',$id,$row['CAT_ID'],'all'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
+								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('other', $id, $row['CAT_ID'], 'all');
+									echo $uploadvideo[0];
+									$formUploadVideo .= $uploadvideo[1];
+  ?></div>
 								<div class="clear"></div>
 							</div>
 							<?} ?>
@@ -185,9 +267,9 @@ require ("../../assets/configs/function.inc.php");
 	</div>
 </div>
 <?
-	require ('../inc_footer.php');
+require ('../inc_footer.php');
  ?>
- <div class="dNone"><?=$formUploadVideo?></div>
+ <div class="dNone"><?=$formUploadVideo ?></div>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
