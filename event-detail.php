@@ -119,7 +119,25 @@ require("assets/configs/function.inc.php");
 				<li><a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="news-event-museum.php">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="news-museum.php">กิจกรรมของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ชื่อกิจกรรม</li>
+
+				<? 
+					$MID = intval($_GET['MID']);
+					$CID = intval($_GET['CID']);
+					$SID = intval($_GET['SID']);
+					$NID = intval($_GET['NID']);
+
+
+				    $sql_title = " select CONTENT_DESC_LOC from trn_content_detail where CONTENT_ID = $NID";
+
+					$query_title = mysql_query($sql_title, $conn);
+
+
+					while($row_title = mysql_fetch_array($query_title)) {
+				?>
+
+					<li class="active"><? echo $row_title['CONTENT_DESC_LOC'] ?></li>
+
+				<? } ?>
 			</ol>
 		</div>
 	</div>
@@ -129,17 +147,39 @@ require("assets/configs/function.inc.php");
 
 <?php
 
-						    $sql = " select d.CONTENT_DESC_LOC, d.CREATE_DATE, d.BRIEF_LOC, p.IMG_PATH,d.CONTENT_ID,
-						   			d.CONTENT_DETAIL_LOC, d.LAST_UPDATE_DATE, d.content_id, d.EVENT_START_DATE, d.USER_CREATE
-						   			,d.PLACE_DESC_LOC, d.EVENT_END_DATE
-									from trn_content_detail d
-									left join trn_content_category c on d.cat_id = c.content_cat_id
-									left join trn_content_picture p on d.content_id = p.content_id
-									where c.content_cat_id = 60 and d.sub_cat_id = 130 and d.content_id = ".$_GET['cid']." ";
+			    $sql = " SELECT
+							cat.CONTENT_CAT_DESC_LOC,
+							cat.CONTENT_CAT_DESC_ENG,
+							cat.CONTENT_CAT_ID,
+							content.SUB_CAT_ID,
+							content.CONTENT_ID,
+							content.CONTENT_DESC_LOC,
+							content.CONTENT_DESC_ENG,
+							content.BRIEF_LOC,
+							content.BRIEF_ENG,
+							content.EVENT_START_DATE,
+							content.EVENT_END_DATE,
+							content.CREATE_DATE ,
+							content.LAST_UPDATE_DATE ,
+							content.USER_CREATE,
+							content.PLACE_DESC_LOC,
+							IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+						FROM
+							trn_content_category cat
+						INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+						WHERE
+							cat.REF_MODULE_ID = $MID
+						AND cat.flag = 0
+						AND cat.CONTENT_CAT_ID = $CID
+						AND content.SUB_CAT_ID = $SID
+						AND content.APPROVE_FLAG = 'Y'
+						AND content.CONTENT_STATUS_FLAG  = 0 
+						AND content.CONTENT_ID = $NID
+						ORDER BY content.ORDER_DATA desc ";
 
-							$query = mysql_query($sql, $conn);
+				$query = mysql_query($sql, $conn);
 
-							$num_rows = mysql_num_rows($query);
+			    $num_rows = mysql_num_rows($query);
 ?>
 
 <div class="part-main">
@@ -157,30 +197,36 @@ require("assets/configs/function.inc.php");
 				</div>
 			</div>
 
-		<?php while($row = mysql_fetch_array($query)) { 
+		<? 
 
-			 		$sql_pic = " select  IMG_PATH
-							from  trn_content_picture 
-							where content_id = ".$row['content_id']." ";
+			while($row = mysql_fetch_array($query)) {
 
-					$query_pic = mysql_query($sql_pic, $conn);
-				
+			$date = ConvertBoxDate($row['EVENT_START_DATE']);
 
-				 while($row_pic = mysql_fetch_array($query_pic)) { 
-
-				 $IMG_PATH = str_replace("../../","",$row_pic['IMG_PATH']);
-				 $date = ConvertBoxDate($row['EVENT_START_DATE']);
-
-		?>
-
-
+	   ?>
 
 			<div class="box-newsdetail-main">
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
+
+						<? 
+							$sql_pic = " select  IMG_PATH
+							from  trn_content_picture 
+							where content_id = ".$row['CONTENT_ID']." ";
+
+							$query_pic = mysql_query($sql_pic, $conn);
+
+							$num_rows = mysql_num_rows($query_pic); 
+
+							while($row_pic = mysql_fetch_array($query_pic)) { 
+
+								$IMG_PATH = str_replace("../../","",$row_pic['IMG_PATH']);
+						?>
 						<div class="slide-content">
 							<img src="<? echo $IMG_PATH ?>">
 						</div>
+
+						<? }  ?>
 						
 					</div>
 					<a class="btn-arrow-slide pev"></a>
@@ -196,9 +242,6 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
-
-				<? }  ?>
-
 				<div class="box-social-main cf">
 					<a href="#" class="btn fb"></a>
 					<a href="#" class="btn tw"></a>

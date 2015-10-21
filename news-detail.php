@@ -119,7 +119,23 @@ require("assets/configs/function.inc.php");
 				<li><a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="news-event-museum.php">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="news-museum.php">ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ชื่อข่าว</li>
+
+				<? 
+					$MID = intval($_GET['MID']);
+					$CID = intval($_GET['CID']);
+					$SID = intval($_GET['SID']);
+					$NID = intval($_GET['NID']);
+
+				    $sql_title = " select CONTENT_DESC_LOC from trn_content_detail where CONTENT_ID = $NID";
+
+					$query_title = mysql_query($sql_title, $conn);
+
+
+					while($row_title = mysql_fetch_array($query_title)) {
+				?>
+					<li class="active"><? echo $row_title['CONTENT_DESC_LOC'] ?></li>
+
+				<? } ?>
 			</ol>
 		</div>
 	</div>
@@ -138,25 +154,48 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf news">
 				<h1>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h1>
 				<div class="box-btn">
-					<a href="" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
+					<a href="news-museum.php" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
 				</div>
 			</div>
 
 			<?php
 
-						    $sql = " select d.CONTENT_DESC_LOC, d.CREATE_DATE, d.BRIEF_LOC, p.IMG_PATH,d.CONTENT_ID,
-						   			d.CONTENT_DETAIL_LOC, d.LAST_UPDATE_DATE, d.content_id
-									from trn_content_detail d
-									left join trn_content_category c on d.cat_id = c.content_cat_id
-									left join trn_content_picture p on d.content_id = p.content_id
-									where c.content_cat_id = 60 and d.sub_cat_id = 131 and d.content_id = ".$_GET['cid']." ";
+			    $sql = " SELECT
+					cat.CONTENT_CAT_DESC_LOC,
+					cat.CONTENT_CAT_DESC_ENG,
+					cat.CONTENT_CAT_ID,
+					content.SUB_CAT_ID,
+					content.CONTENT_ID,
+					content.CONTENT_DESC_LOC,
+					content.CONTENT_DESC_ENG,
+					content.BRIEF_LOC,
+					content.BRIEF_ENG,
+					content.EVENT_START_DATE,
+					content.EVENT_END_DATE,
+					content.CREATE_DATE ,
+					content.LAST_UPDATE_DATE ,
+					content.USER_CREATE,
+					content.PLACE_DESC_LOC,
+					IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+				FROM
+					trn_content_category cat
+				INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+				WHERE
+					cat.REF_MODULE_ID = $MID
+				AND cat.flag = 0
+				AND cat.CONTENT_CAT_ID = $CID
+				AND content.SUB_CAT_ID = $SID
+				AND content.APPROVE_FLAG = 'Y'
+				AND content.CONTENT_STATUS_FLAG  = 0 
+				AND content.CONTENT_ID = $NID
+				ORDER BY content.ORDER_DATA desc ";
 
-							$query = mysql_query($sql, $conn);
+				$query = mysql_query($sql, $conn);
 
-							$num_rows = mysql_num_rows($query);
-			?>
+				$num_rows = mysql_num_rows($query);
+			
+			while($row = mysql_fetch_array($query)) { ?>
 
-			<?php while($row = mysql_fetch_array($query)) { ?>
 			<div class="box-newsdetail-main">
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
@@ -165,15 +204,16 @@ require("assets/configs/function.inc.php");
 
 				    $sql_pic = " select  IMG_PATH
 							from  trn_content_picture 
-							where content_id = ".$row['content_id']." ";
+							where content_id = ".$row['CONTENT_ID']." ";
 
 					$query_pic = mysql_query($sql_pic, $conn);
 
 					$num_rows = mysql_num_rows($query_pic);
-				?>
-
-				<?php while($row_pic = mysql_fetch_array($query_pic)) { 
+				
+				 while($row_pic = mysql_fetch_array($query_pic)) { 
 				 $IMG_PATH = str_replace("../../","",$row_pic['IMG_PATH']);
+				 $date = ConvertBoxDate($row['EVENT_START_DATE']);
+
 				?>
 
 						<div class="slide-content">
@@ -186,12 +226,12 @@ require("assets/configs/function.inc.php");
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
 						<div class="box-date-tumb">
-							<p class="date">99</p>
-							<p class="month">พ.ย.</p>
+							<p class="date"><?=$date[0]?></p>
+							<p class="month"><?=$date[1]?></p>
 						</div>
 						<div class="box-text">
 							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>
-							<p class="text-des">by MUSEUM SIAM</p>
+							<p class="text-des">by <? echo $row['USER_CREATE'] ?></p>
 						</div>
 					</div>
 				</div>
@@ -251,7 +291,7 @@ require("assets/configs/function.inc.php");
 
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
+					<a href="news-museum.php" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
 				</div>
 			</div>
 		</div>

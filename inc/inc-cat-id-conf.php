@@ -19,6 +19,7 @@ $visual_exhibition = 5;
 
 $new_and_event = 12;
 $event_sub_cat_id = 130;
+$mesum_sub_cat_id = 131;
 
 // End Module ID
 ?>

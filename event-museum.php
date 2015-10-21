@@ -57,12 +57,20 @@ require("assets/configs/function.inc.php");
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
 
-						<?php
-						$index = 1;	
-						  echo    $sql = " SELECT
+					<?php
+
+						if (!isset($_GET['MID']))
+							$MID = $new_and_event;
+						else
+							$MID = $_GET['MID'];
+
+						$index = 1;
+						$categoryID = $museum_event_cat_id;	
+						      $sql = " SELECT
 												cat.CONTENT_CAT_DESC_LOC,
 												cat.CONTENT_CAT_DESC_ENG,
 												cat.CONTENT_CAT_ID,
+												content.SUB_CAT_ID,
 												content.CONTENT_ID,
 												content.CONTENT_DESC_LOC,
 												content.CONTENT_DESC_ENG,
@@ -85,9 +93,9 @@ require("assets/configs/function.inc.php");
 											AND content.CONTENT_STATUS_FLAG  = 0 
 											ORDER BY
 												content.ORDER_DATA desc
-											LIMIT 0,3 ";
+											LIMIT 0,30 ";
 
-							$query = mysql_query($sql, $conn);
+					$query = mysql_query($sql, $conn);
 
 					while($row = mysql_fetch_array($query)) { 
 
@@ -102,7 +110,7 @@ require("assets/configs/function.inc.php");
 					
 
 						echo	'<div class="box-tumb '.$gap.' ">';
-						echo	'<a href="event-detail.php?cid='.$row['CONTENT_ID'].'">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&NID='.$row['CONTENT_ID'].'">';
 					    echo	'<div class="box-pic">';
 						echo	'<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
 						echo    '<div class="box-tag-cate">';
@@ -115,7 +123,7 @@ require("assets/configs/function.inc.php");
 						echo 	'</div>';
 						echo 	'</a>';
 						echo 	'<div class="box-text">';
-						echo	'<a href="event-detail.php?cid='.$row['CONTENT_ID'].'">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&NID='.$row['CONTENT_ID'].'">';
 						echo	'<p class="text-title TcolorRed">';
 						echo		$row['CONTENT_DESC_LOC'];
 						echo	'</p>';
@@ -127,7 +135,7 @@ require("assets/configs/function.inc.php");
 						echo		 $row['BRIEF_LOC'];
 						echo	'</p>';
 						echo	'<div class="box-btn cf">';
-						echo	'<a href="event-detail.php?cid='.$row['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&NID='.$row['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 						echo	'<div class="box-btn-social cf">';
 						echo	'<a href="#" class="btn-socila fb"></a>';
 						echo	'<a href="#" class="btn-socila tw"></a>';
