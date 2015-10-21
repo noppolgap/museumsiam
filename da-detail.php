@@ -134,6 +134,7 @@ include ('inc/inc-menu.php');
 				<div class="box-slide-big">
 					<div id="sync1" class="owl-carousel">
 					<?php
+						$preview360 = 0;
 						$audioPlayer = false;
 						$thumbRender = "\n\n\t";
 						$extraStyle = "";
@@ -145,58 +146,62 @@ include ('inc/inc-menu.php');
 							$extraStyle = " style='display:none;'";
 						}
 						while ($rowPic = mysql_fetch_array($rsPic)) {
-							echo '	<div class="slide-content"> '."\n\t\t";
-							$thumbRender .= '<div class="slide-content">'."\n\t\t";
-							if($rowPic['DIV_NAME'] == 'voice'){
-								$audioPlayer = true;
-								$ext = getEXT($rowPic['IMG_PATH']);
-								$path = $rowPic['IMG_PATH'];
-								if($rowPic['IMG_TYPE'] == 2){
-									$path = str_replace("../../","",$path);
-								}
-							?>
-								<div id="jquery_jplayer_<?=$rowPic['PIC_ID']?>" class="cp-jplayer"></div>
-
-								<div id="cp_container_<?=$rowPic['PIC_ID']?>" class="cp-container">
-									<div class="cp-buffer-holder">
-										<div class="cp-buffer-1"></div>
-										<div class="cp-buffer-2"></div>
-									</div>
-									<div class="cp-progress-holder">
-										<div class="cp-progress-1"></div>
-										<div class="cp-progress-2"></div>
-									</div>
-									<div class="cp-circle-control"></div>
-									<ul class="cp-controls">
-										<li><a class="cp-play" tabindex="<?=$rowPic['PIC_ID']?>">play</a></li>
-										<li><a class="cp-pause" style="display:none;" tabindex="<?=$rowPic['PIC_ID']?>">pause</a></li>
-									</ul>
-								</div>
-							<?
-								$thumbRender .= '<img src="images/tumb-sound.jpg">'."\n\t";
-							}else if($rowPic['DIV_NAME'] == 'video'){
-
-								if($rowPic['IMG_TYPE'] == 3){
-									echo '<iframe width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
-									$thumbRender .= '<img src="http://img.youtube.com/vi/'.$rowPic['IMG_PATH'].'/maxresdefault.jpg">'."\n\t";
-								}else{
+							if($rowPic['IMG_TYPE'] == 5){
+								$preview360++;
+							}else{
+								echo '	<div class="slide-content"> '."\n\t\t";
+								$thumbRender .= '<div class="slide-content">'."\n\t\t";
+								if($rowPic['DIV_NAME'] == 'voice'){
+									$audioPlayer = true;
 									$ext = getEXT($rowPic['IMG_PATH']);
 									$path = $rowPic['IMG_PATH'];
 									if($rowPic['IMG_TYPE'] == 2){
 										$path = str_replace("../../","",$path);
 									}
-									echo '<video width="754" height="460" controls>'."\n\t";
-									echo '<source src="'.$path.'" type="video/'.$ext.'">'."\n\t";
-									echo '</video>'."\n\t";
-									$thumbRender .= '<img src="images/tumb-vdo.jpg">'."\n\t";
-								}
+								?>
+									<div id="jquery_jplayer_<?=$rowPic['PIC_ID']?>" class="cp-jplayer"></div>
 
-							}else{
-								echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
-								$thumbRender .= '<img src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+									<div id="cp_container_<?=$rowPic['PIC_ID']?>" class="cp-container">
+										<div class="cp-buffer-holder">
+											<div class="cp-buffer-1"></div>
+											<div class="cp-buffer-2"></div>
+										</div>
+										<div class="cp-progress-holder">
+											<div class="cp-progress-1"></div>
+											<div class="cp-progress-2"></div>
+										</div>
+										<div class="cp-circle-control"></div>
+										<ul class="cp-controls">
+											<li><a class="cp-play" tabindex="<?=$rowPic['PIC_ID']?>">play</a></li>
+											<li><a class="cp-pause" style="display:none;" tabindex="<?=$rowPic['PIC_ID']?>">pause</a></li>
+										</ul>
+									</div>
+								<?
+									$thumbRender .= '<img src="images/tumb-sound.jpg">'."\n\t";
+								}else if($rowPic['DIV_NAME'] == 'video'){
+
+									if($rowPic['IMG_TYPE'] == 3){
+										echo '<iframe width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
+										$thumbRender .= '<img src="http://img.youtube.com/vi/'.$rowPic['IMG_PATH'].'/maxresdefault.jpg">'."\n\t";
+									}else{
+										$ext = getEXT($rowPic['IMG_PATH']);
+										$path = $rowPic['IMG_PATH'];
+										if($rowPic['IMG_TYPE'] == 2){
+											$path = str_replace("../../","",$path);
+										}
+										echo '<video width="754" height="460" controls>'."\n\t";
+										echo '<source src="'.$path.'" type="video/'.$ext.'">'."\n\t";
+										echo '</video>'."\n\t";
+										$thumbRender .= '<img src="images/tumb-vdo.jpg">'."\n\t";
+									}
+
+								}else{
+									echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+									$thumbRender .= '<img src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								}
+								echo '</div>'."\n\t";
+								$thumbRender .= '</div>'."\n\t";
 							}
-							echo '</div>'."\n\t";
-							$thumbRender .= '</div>'."\n\t";
 						}
 					?>
 					</div>
@@ -250,13 +255,11 @@ include ('inc/inc-menu.php');
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
 						<?php
-							$sql_preview360 = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND IMG_TYPE =  '5' AND CAT_ID = ".$CID;
-							$query_preview360 = mysql_query($sql_preview360, $conn) or die($sql);
-							if(mysql_num_rows($query_preview360) > 0){
+							if($preview360 > 0){
 								echo '<a href="view-360.php?CID='.$CID.'&amp;CONID='.$CONID.'" target="_blank" class="btn black b360">ดู</a>';
 							}
 						?>
-							<a href="all-media.php" class="btn black">ดูทั้งหมด</a>
+							<a href="all-media.php?CID=<?=$CID?>&amp;CONID=<?=$CONID?>" target="_blank" class="btn black">ดูทั้งหมด</a>
 						</div>
 					</div>
 					<div class="box-slide-small">

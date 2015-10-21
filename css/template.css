@@ -599,38 +599,36 @@ ul.pagination li a.btn-arrow-right:hover{
 	position: absolute;
 	left: 3px;
 	top: 16px;
-	background-repeat: no-repeat;
+	background-repeat: repeat-y;
 	background-position: center;
+	background-image: url(../images/icon-file.png);
 }
 .box-notice.video:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 430px;
 }
 .box-notice.sound:before{
-	background-image: url(../images/icon-pdf.png);
-}
-.box-notice.flash:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 280px;
 }
 .box-notice.word:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 505px;
 }
 .box-notice.excel:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 130px;
 }
 .box-notice.pdf:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 660px;
 }
 .box-notice.txt:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 360px;
 }
 .box-notice.powerpoint:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 205px;
 }
 .box-notice.zip:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 585px;
 }
 .box-notice.file:before{
-	background-image: url(../images/icon-pdf.png);
+	background-position: center 55px;
 }
 .box-notice .text-title{
 	font-size: 13px;

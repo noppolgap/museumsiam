@@ -1126,7 +1126,6 @@ function returnFileType($ext){
 		case "m4a":
 		case "wma":
 					$type = 'sound'; break;
-		case "swf": $type = 'flash'; break;
 		case "docx":
 		case "doc":
 					$type = 'word'; break;
