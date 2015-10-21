@@ -59,7 +59,7 @@ require("assets/configs/function.inc.php");
 
 						<?php
 						$index = 1;	
-						     $sql = " SELECT
+						  echo    $sql = " SELECT
 												cat.CONTENT_CAT_DESC_LOC,
 												cat.CONTENT_CAT_DESC_ENG,
 												cat.CONTENT_CAT_ID,
