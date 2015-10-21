@@ -1,8 +1,25 @@
 <?php
+require ("../../assets/configs/config.inc.php");
+
 if(isset($_GET['page'])){
-	require ("../../assets/configs/config.inc.php");
 	require ("../../assets/configs/connectdb.inc.php");
 	require ("../../assets/configs/function.inc.php");
+
+    $sql = "SELECT IMG_PATH , IMG_NAME FROM trn_content_picture WHERE CONTENT_ID = ".intval($_GET['cat'])." AND IMG_TYPE =  '5' AND CAT_ID = ".intval($_GET['cID'])." AND DIV_NAME =  '".$_GET['page']."' ORDER BY ORDER_ID ASC";
+    $query = mysql_query($sql, $conn) or die($sql);
+    $index = mysql_num_rows($query);
+
+
+    $row = mysql_fetch_array($query);
+    $patten = $row['IMG_NAME'];
+
+    list( $dirname, $basename, $extension, $filename ) = array_values( pathinfo($row['IMG_PATH']) );
+
+    if ( $extension != "" ){
+         $extension = "." . $extension;
+    }
+    $path = $dirname.'/';
+
 }else{
 	$index = 0;
 	$patten = $_GET['box'];

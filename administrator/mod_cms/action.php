@@ -121,6 +121,47 @@ if($_POST['action'] == 'add'){
 		}
 	}
 
+	$CONTENT_ID = intval(111);
+	$CAT_ID		= intval(57);
+	$DIV_NAME = 'image1';
+	// delete old file
+	$check = true;
+	if (count($_POST['box_image360_image1']) > 0) {
+		$sql = "SELECT PIC_ID , IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = ".$CONTENT_ID." AND IMG_TYPE =  '5' AND CAT_ID = ".$CAT_ID." AND DIV_NAME =  '".$DIV_NAME ."' ORDER BY ORDER_ID ASC";
+		$query = mysql_query($sql, $conn) or die($sql);
+		while($row = mysql_fetch_array($query)){
+			if($check){
+				$check = false;
+				$path = pathinfo($row['IMG_PATH'] , PATHINFO_DIRNAME);
+				chmod($path, 0777);
+			}
+			if (file_exists($row['IMG_PATH'])) {
+				unlink($row['IMG_PATH']);
+			}
+			mysql_query('DELETE FROM trn_content_picture WHERE PIC_ID = '.$row['PIC_ID'], $conn);
+		}
+		chmod($path, 0755);
+	}
+
+	if (count($_POST['image1_file360']) > 0) {
+		$index = 1;
+		foreach ($_POST['image1_file360'] as $k => $file) {
+			$filename = admin_move_image360_upload_dir('preview360', end(explode('/', $file)));
+
+			unset($insert);
+			$insert['CONTENT_ID'] = 111; /*retrunID*/
+			$insert['IMG_TYPE'] = 5;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['CAT_ID'] = 57; /* cat ID*/
+			$insert['ORDER_ID'] = "'" . $index++ . "'";
+			$insert['IMG_NAME'] = "'".$_POST['box_image360_image1']."'"; //ตั้งตาม name
+			$insert['DIV_NAME'] = "'". $DIV_NAME ."'";
+
+			$sql = "INSERT INTO trn_content_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
 }else if($_POST['action'] == 'del'){
 	echo 3;
 	//video action delete

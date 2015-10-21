@@ -22,11 +22,14 @@
 	color: #fff;
 	background-color: #6e0904;
 }
-.box-ceo p.name-text{
-	line-height: 80px;
+.box-ceo div.name-text{
+	padding: 40px;
 	background-color: #f0f0f0;
 }
-
+.box-ceo div.name-text .box-pic{
+	width: 320px;
+	margin-bottom: 40px;
+}
 .box-acco-main{
 	width: 750px;
 	margin: 30px auto 0;
@@ -77,9 +80,13 @@
 	padding: 8px 20px;
 }
 .list-position li{
-	padding: 8px 15px;
+	padding: 16px 8px;
+	content: " ";
+	display: table;
 	position: relative;
+	width: 100%;
 }
+/*
 .list-position li:before {
 	content: '';
 	display: block;
@@ -89,6 +96,18 @@
 	position: absolute;
 	left: 0px;
 	top: 13px;
+}
+*/
+.list-position li .box-left{
+	width: 230px;
+}
+.list-position li .box-right{
+	width: 400px;
+}
+
+.list-position li .box-pic{
+	width: 230px;
+	height: auto;
 }
 .department{
 	background-color: #6e0904;

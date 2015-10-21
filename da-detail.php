@@ -249,7 +249,13 @@ include ('inc/inc-menu.php');
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a href="view-360.php" target="_blank" class="btn black b360">ดู</a>
+						<?php
+							$sql_preview360 = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND IMG_TYPE =  '5' AND CAT_ID = ".$CID;
+							$query_preview360 = mysql_query($sql_preview360, $conn) or die($sql);
+							if(mysql_num_rows($query_preview360) > 0){
+								echo '<a href="view-360.php?CID='.$CID.'&amp;CONID='.$CONID.'" target="_blank" class="btn black b360">ดู</a>';
+							}
+						?>
 							<a href="all-media.php" class="btn black">ดูทั้งหมด</a>
 						</div>
 					</div>
@@ -262,51 +268,48 @@ include ('inc/inc-menu.php');
 				<div class="box-news-text">
 					<?=nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br>')); ?>
 				</div>
-				
+
+<?php
+	$SqlFile = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND CAT_ID = ".$CID." AND DIV_NAME =  'Other' ORDER BY ORDER_ID ASC";
+	$QueryFile = mysql_query($SqlFile) or die(mysql_error());
+	$numFile = mysql_num_rows($QueryFile);
+	if($numFile > 0){
+?>
 				<div class="box-otherfile-main">
 					<div class="box-title cf">
 						<h2>ไฟล์อื่นๆที่เกี่ยวข้อง</h2>
 					</div>
 					<div class="box-news-main gray">
-						<div class="box-notice pdf">
+					<?php
+						while ($rowFile = mysql_fetch_array($QueryFile)) {
+							$file = str_replace("../../","",$rowFile['IMG_PATH']);
+							if((file_exists($file)) OR ($rowFile['IMG_TYPE'] == 4)){
+								$ext = getEXT($file);
+
+								if(file_exists($file)){
+									$size = formatSizeUnits(filesize($file));
+									$link = 'download.php?p='.$rowFile['PIC_ID'];
+								}else{
+									$size = 'Unknow';
+									$link = $rowFile['IMG_PATH'];
+								}
+					?>
+						<div class="box-notice iconFile <?=returnFileType($ext)?>">
 							<div class="box-text">
-								<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
+								<p class="text-title"><?=$rowFile['IMG_NAME']?></p>
 								<p class="text-detail">
-									<span>ประเภท: .pdf</span>
-									<span>ขนาด: 0.61 เมกะไบต์</span>
+									<span>ประเภท: .<?=$ext?></span>
+									<span>ขนาด: <?=$size?></span>
 								</p>
 							</div>
 							<div class="box-btn cf">
-								<a href="#" class="btn red">ดาวน์โหลด</a>
+								<a href="<?=$link?>" target="_blank" class="btn red">ดาวน์โหลด</a>
 							</div>
 						</div>
-						<div class="box-notice pdf">
-							<div class="box-text">
-								<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-								<p class="text-detail">
-									<span>ประเภท: .pdf</span>
-									<span>ขนาด: 0.61 เมกะไบต์</span>
-								</p>
-							</div>
-							<div class="box-btn cf">
-								<a href="#" class="btn red">ดาวน์โหลด</a>
-							</div>
-						</div>
-						<div class="box-notice pdf">
-							<div class="box-text">
-								<p class="text-title">ราคากลางจ้างพัฒนาหลักสูตร และฝึกอบรมบุคลากรพิพิธภัณฑ์</p>
-								<p class="text-detail">
-									<span>ประเภท: .pdf</span>
-									<span>ขนาด: 0.61 เมกะไบต์</span>
-								</p>
-							</div>
-							<div class="box-btn cf">
-								<a href="#" class="btn red">ดาวน์โหลด</a>
-							</div>
-						</div>
+					<?php } } ?>
 					</div>
 				</div>
-				
+<?php } ?>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
 						วันที่แก้ไขล่าสุด :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
@@ -354,3 +357,4 @@ include('inc/inc-social-network.php');
 
 </body>
 </html>
+<? CloseDB(); ?>

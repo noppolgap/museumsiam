@@ -56,6 +56,11 @@ require("../../assets/configs/function.inc.php");
 								<div class="floatL form_input"><? $uploadvideo = admin_edit_video('gallery',111,57,'video'); echo $uploadvideo[0]; $formUploadVideo .= $uploadvideo[1];  ?></div>
 								<div class="clear"></div>
 							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">360</div>
+								<div class="floatL form_input"><?=edit360function('image1',111,57)?></div>
+								<div class="clear"></div>
+							</div>
 							<div class="btn_action">
 								<input type="hidden" name="action" value="edit">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
@@ -78,6 +83,8 @@ require("../../assets/configs/function.inc.php");
 
 <script type="text/javascript" src="../../assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="../../assets/plugin/upload/jquery.fileupload.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>
 
 <? logs_access('admin','hello'); ?>

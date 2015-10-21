@@ -43,7 +43,8 @@ function changedateformattimepicker($source) {
 }
 
 function getEXT($file) {
-	return strtolower(end(explode('.', $file)));
+	//return strtolower(end(explode('.', $file)));
+	return pathinfo($file , PATHINFO_EXTENSION);
 }
 function formatSizeUnits($bytes){
         if ($bytes >= 1073741824)
@@ -1110,6 +1111,43 @@ function returnUploadFileExtensions($path){
 
 	return $image;
 }
+function returnFileType($ext){
+
+	switch ($ext) {
+		case "mp4":
+		case "webm":
+		case "ogv":
+		case "wmv":
+		case "flv":
+					$type = 'video'; break;
+		case "mp3":
+		case "wav":
+		case "ogg":
+		case "m4a":
+		case "wma":
+					$type = 'sound'; break;
+		case "swf": $type = 'flash'; break;
+		case "docx":
+		case "doc":
+					$type = 'word'; break;
+		case "xlsx":
+		case "xls":
+					$type = 'excel'; break;
+		case "pdf": $type = 'pdf'; break;
+		case "txt": $type = 'txt'; break;
+		case "ppt":
+		case "pptx":
+					$type = 'powerpoint'; break;
+		case "zip":
+		case "rar":
+		case "7z":
+					$type = 'zip'; break;
+
+		default   : $type = 'file'; break;
+	}
+
+	return $type;
+}
 function move_video_file($original_path ,  $dir){
 	$path1 = '../../upload';
 	$path2 = $path1 . '/' . $dir;
@@ -1211,6 +1249,71 @@ function add360function($name){
 	$str .= '</div>' . "\n\t";
 	$str .= '<div class="image360_' . $name . '_Box image_Box dNone image_Box_add"></div>' . "\n\t";
 	$str .= '<div class="image360_' . $name . '_data image_Data dNone"><input type="hidden" name="box_image360_' . $name . '" value="' . $temp_name . '" /></div>' . "\n\t";
+
+	return $str;
+}
+function edit360function($name,$id,$cat){
+	$temp_name = time().'_'.rand(111,999);
+
+	global $conn;
+
+	$str = "\n\t";
+
+	$sql = "SELECT IMG_PATH , IMG_NAME FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '5' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."' ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$query = mysql_query($sql, $conn) or die($sql);
+	$num = mysql_num_rows($query);
+	if($num  == 0){
+		$str .= '<input id="fileupload360_' . $name . '" class="fileupload360" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/three_hundred_and_sixty/?n='.$temp_name.'" accept="image/*" multiple>' . "\n\t";
+		$str .= '<div id="progress_'. $name .'">' . "\n\t";
+		$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '<div class="image360_' . $name . '_Box image_Box dNone image_Box_add"></div>' . "\n\t";
+		$str .= '<div class="image360_' . $name . '_data image_Data dNone"><input type="hidden" name="box_image360_' . $name . '" value="' . $temp_name . '" /></div>' . "\n\t";
+	}else{
+		$row = mysql_fetch_array($query);
+		list($width, $height, $type, $attr) = getimagesize($row['IMG_PATH']);
+
+		$str .= '<input id="fileupload360_' . $name . '" class="fileupload360 dNone" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/three_hundred_and_sixty/?n='.$temp_name.'" accept="image/*" multiple>' . "\n\t";
+		$str .= '<div id="progress_'. $name .'">' . "\n\t";
+		$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '<div class="image360_' . $name . '_Box image_Box image_Box_add">' . "\n\t";
+		$str .= '<span id="preview360Box' . $name . '" class="p-Relative">' . "\n\t";
+		$str .= '<a onclick="preview360(\''.$name.'\',true,\''.$id.'\',\''.$cat.'\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="'.$row['IMG_PATH'].'" class="dBlock image360thumb">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '<img onclick="deletePreview360(\''.$name.'\',\''.$row['IMG_NAME'].'\');" class="p-Absolute image360thumbDel" src="../images/small-n-flat/sign-ban.svg" alt="" style="left: '.($width-5).'px;">' . "\n\t";
+		$str .= '</span>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '<div class="image360_' . $name . '_data image_Data dNone">' . "\n\t";
+		$str .= '<input type="hidden" value="'.$temp_name.'" name="box_image360_' . $name . '">' . "\n\t";
+		$str .= '</div>' . "\n\t";
+	}
+
+	return $str;
+}
+function view360function($name,$id,$cat){
+
+	global $conn;
+
+	$str = "\n\t";
+
+	$sql = "SELECT IMG_PATH , IMG_NAME FROM trn_content_picture WHERE CONTENT_ID = ".$id." AND IMG_TYPE =  '5' AND CAT_ID = ".$cat." AND DIV_NAME =  '".$name."' ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$query = mysql_query($sql, $conn) or die($sql);
+	$num = mysql_num_rows($query);
+	if($num  > 0){
+		$row = mysql_fetch_array($query);
+		list($width, $height, $type, $attr) = getimagesize($row['IMG_PATH']);
+
+		$str .= '<div class="image360_' . $name . '_Box image_Box image_Box_add">' . "\n\t";
+		$str .= '<span id="preview360Box' . $name . '" class="p-Relative">' . "\n\t";
+		$str .= '<a onclick="preview360(\''.$name.'\',true,\''.$id.'\',\''.$cat.'\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="'.$row['IMG_PATH'].'" class="dBlock image360thumb">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</span>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+
+	}
 
 	return $str;
 }

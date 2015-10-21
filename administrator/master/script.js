@@ -784,3 +784,29 @@ function deleteTemp360(name){
 	    $('#fileupload360_'+temp2).show();
 	}
 }
+function deletePreview360(name,file){
+	if (confirm("คุณแน่ใจที่จะลบภาพนี้")){
+		$('.image360_'+name+'_data').append('<input type="hidden" name="'+name+'_Del360" value="'+file+'">');
+
+		var obj = $('.image360_'+name+'_data input[name="'+name+'_file360[]"]');
+		$.each( obj, function( key, value ) {
+			$.post( "../master/del360.php", { name: this.value });
+		});
+		$('.image360_'+name+'_data input[name="'+name+'_file360[]"]').remove();
+	    $('.image360_'+name+'_Box').html('').hide();
+	    $('#fileupload360_'+name).show();
+	}
+	/*
+	if (confirm("คุณแน่ใจที่จะลบภาพนี้")){
+		var obj = $('.image360_'+name+'_data input[name="'+name+'_file360[]"]');
+		$.each( obj, function( key, value ) {
+			//$.post( "../master/del360.php", { name: this.value });
+			//$('.image360_'+temp2+'_data').append('<input type="hidden" name="'+temp2+'_file360[]" value="'+file.url+'">');
+		});
+
+		//$('.image360_'+name+'_data input[name="'+name+'_file360[]"]').remove();
+	    $('.image360_'+name+'_Box').html('').hide();
+	    $('#fileupload360_'+name).show();
+	}
+	*/
+}

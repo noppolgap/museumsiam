@@ -224,7 +224,7 @@ include ('inc/inc-menu.php');
 					<div class="box-title-main">
 						<div class="box-text">
 							<p class="text-title"><?=$title?></p>
-							
+
 							<?php
 							$placeClass = ' class="text-des pin" ';
 							if (nvl($rowContent['PLACE_DESC'], '') == '')
@@ -243,7 +243,7 @@ include ('inc/inc-menu.php');
 									echo '</a>';
 								}
  							?>
- 							
+
 						</div>
 					</div>
 				</div>
@@ -276,17 +276,60 @@ include ('inc/inc-menu.php');
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="box-when">
 					<h3>WHEN</h3>
 					<p class="text-date"><? echo ConvertDate($row['EVENT_START_DATE']) ?> - <? echo ConvertDate($row['EVENT_END_DATE']) ?></p>
 					<p class="text-time"><? echo $row['EVENT_START_TIME'] ?> - <? echo $row['EVENT_END_TIME'] ?></p>
 					<p class="text-location"><? echo $row['PLACE_DESC_LOC'] ?></p>
 				</div>
-				
+
 				<div class="box-news-text">
 					<?=$detail?>
 				</div>
+
+<?php
+	$SqlFile = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND CAT_ID = ".$CID." AND DIV_NAME =  'Other' ORDER BY ORDER_ID ASC";
+	$QueryFile = mysql_query($SqlFile) or die(mysql_error());
+	$numFile = mysql_num_rows($QueryFile);
+	if($numFile > 0){
+?>
+				<div class="box-otherfile-main">
+					<div class="box-title cf">
+						<h2>ไฟล์อื่นๆที่เกี่ยวข้อง</h2>
+					</div>
+					<div class="box-news-main gray">
+					<?php
+						while ($rowFile = mysql_fetch_array($QueryFile)) {
+							$file = str_replace("../../","",$rowFile['IMG_PATH']);
+							if((file_exists($file)) OR ($rowFile['IMG_TYPE'] == 4)){
+								$ext = getEXT($file);
+
+								if(file_exists($file)){
+									$size = formatSizeUnits(filesize($file));
+									$link = 'download.php?p='.$rowFile['PIC_ID'];
+								}else{
+									$size = 'Unknow';
+									$link = $rowFile['IMG_PATH'];
+								}
+					?>
+						<div class="box-notice iconFile <?=returnFileType($ext)?>">
+							<div class="box-text">
+								<p class="text-title"><?=$rowFile['IMG_NAME']?></p>
+								<p class="text-detail">
+									<span>ประเภท: .<?=$ext?></span>
+									<span>ขนาด: <?=$size?></span>
+								</p>
+							</div>
+							<div class="box-btn cf">
+								<a href="<?=$link?>" target="_blank" class="btn red">ดาวน์โหลด</a>
+							</div>
+						</div>
+					<?php } } ?>
+					</div>
+				</div>
+<?php } ?>
+
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
 						วันที่แก้ไขล่าสุด :  <?= ConvertDate($rowContent['LAST_DATE']) ?>

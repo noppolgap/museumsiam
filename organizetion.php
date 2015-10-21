@@ -70,7 +70,30 @@ require("assets/configs/function.inc.php");
 			</div>
 			<div class="box-ceo">
 				<p class="position-text">รอง ผอ.สบร. และ ผอ.สพร.</p>
-				<p class="name-text">นายราเมศ พรหมเย็น</p>
+				<div class="name-text">
+					<div class="box-pic">
+						<img src="images/account/user.jpg" alt="user"/>
+					</div>
+					<p class="name">นายราเมศ พรหมเย็น</p>
+<!--
+					<div class="box-tel">
+						<div class="box-left">
+							เบอร์โทรศัพท์
+						</div>
+						<div class="box-right">
+							<a href="tel:086-5678901">086-5678901</a>
+						</div>
+					</div>
+					<div class="box-email">
+						<div class="box-left">
+							อีเมล
+						</div>
+						<div class="box-right">
+							<a href="tel:086-5678901">poleng.zun@gmail.com</a>
+						</div>
+					</div>
+-->
+				</div>
 			</div>
 			<div class="box-acco-main">
 				
@@ -81,7 +104,16 @@ require("assets/configs/function.inc.php");
 				<div class="content-hide">
 					<div class="box-group-detail">
 						<ul class="list-position">
-							<li>ชื่อตำแหน่ง</li>
+							<li>
+								<div class="box-left">
+									<div class="box-pic">
+										<img src="images/account/user.jpg" alt="user"/>
+									</div>
+								</div>
+								<div class="box-right">
+									
+								</div>
+							</li>
 						</ul>
 						
 						<div class="department">ชื่อแผนก</div>
