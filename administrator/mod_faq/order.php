@@ -31,14 +31,14 @@ if(isset($_POST['update'])){
 	<ul id="sortable">
 		<?php
 
-			    $sql= "SELECT * FROM trn_qa  WHERE FLAG <> 2  ORDER BY ORDER_DATA DESC";
+			    $sql= "SELECT * FROM trn_qa  WHERE FLAG <> 2 AND REF_QA_ID = 0 ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {
 			 
 		?>
 
-		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['QA_ID'] ?>"><?=$row['REF_QA_ID'] ?></li>
+		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['QA_ID'] ?>"><?=$row['CONTENT']?></li>
 	<? } ?>  
 	</ul>
 </div>	
