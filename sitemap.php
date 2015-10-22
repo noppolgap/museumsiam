@@ -38,8 +38,7 @@ require("assets/configs/function.inc.php");
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				site map<br>
-				<span>แผนผังเว็บไซต์</span>
+				<img src="images/th/title-sitemap.png" alt="SITE MAP"/>
 			</p>	
 		</div>
 	</div>

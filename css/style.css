@@ -243,6 +243,8 @@ hr {
 .box-lang{
 	margin-left: 10px;
 	float: left;
+	border-right: 1px solid #262626;
+	padding-right: 20px;
 }
 .box-lang a,
 .box-lang img{
@@ -470,7 +472,12 @@ ul.submenu-top li{
 	text-transform: capitalize;
 	line-height: 25px;
 	text-align: right;
-	margin-bottom: 1px;
+	border-bottom: 1px solid #e5e5e5;
+/* 	margin-bottom: 1px; */
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 /*
 ul.submenu-top li:before{
@@ -492,10 +499,20 @@ ul.submenu-top li:after{
 	background: url(../images/arrow-menu.png) no-repeat center center;
 	position: absolute;
 	right: 13px;
-	top: 13px;
+	top: 14px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
+ul.submenu-top li:hover:after{
+	background: url(../images/arrow-menu-hover.png) no-repeat center center;
+}
+
 ul.submenu-top li:hover{
-	color: #6f0905;
+/* 	color: #6f0905; */
+	color: #fff;
+	background-color: #6e0904;
 }
 
 
@@ -606,12 +623,18 @@ ul.submenu-top li:hover{
 .part-copy{
 	background-color: #000;
 	padding: 10px 0;
+	height: 52px;
 }
-.part-copy p{
+.part-copy .box-logo{
+	position: absolute;
+	top: 0px;
+}
+.part-copy .box-text p{
 	font-size: 11px;
 	font-family: sans-serif;
 	color: #808080;
-	top: 15px;
+	text-align: center;
+	line-height: 39px;
 }
 
 

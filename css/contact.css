@@ -207,11 +207,11 @@ textarea {
 #register .box-contact-from p{
 	text-transform: uppercase;
 }
-#register input[type="text"], #register input[type="tel"], #register input[type="password"], #register input[type="number"], #register input[type="email"], #register textarea{
+#register .box-right.main-content input[type="text"], #register .box-right.main-content input[type="tel"], #register .box-right.main-content input[type="password"], #register .box-right.main-content input[type="number"], #register .box-right.main-content input[type="email"], #register .box-right.main-content textarea{
 	background-color: #fbfbfb;
 	border: 1px solid #d6d6d6;
 }
-#register input[type="radio"] {
+#register .box-right.main-content input[type="radio"] {
 	margin-right: 20px;
 }
 #register .box-row .box-input-text.radio div{

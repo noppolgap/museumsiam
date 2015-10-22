@@ -24,7 +24,7 @@ require("assets/configs/function.inc.php");
 	
 <?php include('inc/inc-menu.php'); ?>	
 
-<div class="part-nav-main" id="firstbox">
+<div class="part-nav-main">
 	<div class="container">
 		<div class="box-nav">
 			<ol class="cf">
@@ -34,8 +34,15 @@ require("assets/configs/function.inc.php");
 		</div>
 	</div>
 </div>
-
-<div class="box-freespace"></div>
+<div class="part-titlepage-main"  id="firstbox">
+	<div class="container">
+		<div class="box-titlepage">
+			<p>
+				<img src="images/th/title-othersystem.png" alt="Other System"/>
+			</p>	
+		</div>
+	</div>
+</div>
 
 <div class="box-other-system">
 	<div class="container">
