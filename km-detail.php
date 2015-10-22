@@ -107,6 +107,7 @@ require ('inc_meta.php');
 <link rel="stylesheet" type="text/css" href="css/news-event.css" />
 
 <script src="js/km-detail.js"></script>
+<script src="js/breakMedia.js"></script>
 
 </head>
 
@@ -339,8 +340,7 @@ include ('inc/inc-menu.php');
 						<span>
 						<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
 						<script type="text/javascript">
-													new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>
-							","withUrl":true});
+													new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>","withUrl":true});
 						</script>
 						</span>
 					</div>

@@ -1134,6 +1134,8 @@ function returnFileType($ext){
 					$type = 'excel'; break;
 		case "pdf": $type = 'pdf'; break;
 		case "txt": $type = 'txt'; break;
+		case "swf":
+		case "fla": $image = 'swf'; break;
 		case "ppt":
 		case "pptx":
 					$type = 'powerpoint'; break;
@@ -1141,7 +1143,16 @@ function returnFileType($ext){
 		case "rar":
 		case "7z":
 					$type = 'zip'; break;
-
+		case "jpg":
+		case "jpeg":
+		case "gif":
+		case "png":
+		case "bmp":
+		case "svg":
+		case "psd":
+		case "tiff":
+		case "raw":
+					$type = 'image'; break;
 		default   : $type = 'file'; break;
 	}
 

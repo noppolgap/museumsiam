@@ -77,6 +77,7 @@ require ('inc_meta.php');
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 
 <script src="js/da-detail.js"></script>
+<script src="js/breakMedia.js"></script>
 
 </head>
 
@@ -159,7 +160,7 @@ include ('inc/inc-menu.php');
 										$path = str_replace("../../","",$path);
 									}
 								?>
-									<div id="jquery_jplayer_<?=$rowPic['PIC_ID']?>" class="cp-jplayer"></div>
+									<div id="jquery_jplayer_<?=$rowPic['PIC_ID']?>" class="cp-jplayer" data-type="sound"></div>
 
 									<div id="cp_container_<?=$rowPic['PIC_ID']?>" class="cp-container">
 										<div class="cp-buffer-holder">
@@ -181,7 +182,7 @@ include ('inc/inc-menu.php');
 								}else if($rowPic['DIV_NAME'] == 'video'){
 
 									if($rowPic['IMG_TYPE'] == 3){
-										echo '<iframe width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
+										echo '<iframe data-type="embed" width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
 										$thumbRender .= '<img src="http://img.youtube.com/vi/'.$rowPic['IMG_PATH'].'/maxresdefault.jpg">'."\n\t";
 									}else{
 										$ext = getEXT($rowPic['IMG_PATH']);
@@ -189,14 +190,14 @@ include ('inc/inc-menu.php');
 										if($rowPic['IMG_TYPE'] == 2){
 											$path = str_replace("../../","",$path);
 										}
-										echo '<video width="754" height="460" controls>'."\n\t";
+										echo '<video width="754" height="460" controls data-type="video">'."\n\t";
 										echo '<source src="'.$path.'" type="video/'.$ext.'">'."\n\t";
 										echo '</video>'."\n\t";
 										$thumbRender .= '<img src="images/tumb-vdo.jpg">'."\n\t";
 									}
 
 								}else{
-									echo '<img class="img-slide-show" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+									echo '<img class="img-slide-show" data-type="image" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
 									$thumbRender .= '<img src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
 								}
 								echo '</div>'."\n\t";

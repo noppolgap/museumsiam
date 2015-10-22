@@ -604,30 +604,36 @@ ul.pagination li a.btn-arrow-right:hover{
 	background-image: url(../images/icon-file.png);
 }
 .box-notice.video:before{
-	background-position: center 430px;
+	background-position: center 580px;
 }
 .box-notice.sound:before{
-	background-position: center 280px;
+	background-position: center 430px;
 }
 .box-notice.word:before{
-	background-position: center 505px;
+	background-position: center 655px;
 }
 .box-notice.excel:before{
-	background-position: center 130px;
+	background-position: center 280px;
 }
 .box-notice.pdf:before{
-	background-position: center 660px;
+	background-position: center 810px;
 }
 .box-notice.txt:before{
-	background-position: center 360px;
+	background-position: center 505px;
 }
 .box-notice.powerpoint:before{
-	background-position: center 205px;
+	background-position: center 355px;
 }
 .box-notice.zip:before{
-	background-position: center 585px;
+	background-position: center 735px;
 }
 .box-notice.file:before{
+	background-position: center 200px;
+}
+.box-notice.image:before{
+	background-position: center 130px;
+}
+.box-notice.swf:before{
 	background-position: center 55px;
 }
 .box-notice .text-title{
