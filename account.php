@@ -23,10 +23,7 @@ require("assets/configs/function.inc.php");
 	
 <?php include('inc/inc-top-bar.php'); ?>
 <?php include('inc/inc-menu.php'); ?>	
-<?php
-	require ('inc/inc-require-userlogin.php');
-		
-?>
+
 <div class="part-nav-main">
 	<div class="container">
 		<div class="box-nav">
@@ -43,8 +40,7 @@ require("assets/configs/function.inc.php");
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				ACCOUNT SETTINGS<br>
-				<span>การต้ังค่าบัญชีผู้ใช้</span>
+				<img src="images/th/title-accout.png" alt="ACCOUNT SETTINGS"/>
 			</p>	
 		</div>
 	</div>
@@ -55,13 +51,6 @@ require("assets/configs/function.inc.php");
 		<div class="box-account-left">
 			<?php include('inc/inc-account-menu.php'); ?>
 		</div>
-		
-		<?php
-		$sqlUser = "select * from sys_app_user where USER_ID = '".$_SESSION['user_name'] ."'";
-		$rs = mysql_query($sql) or die(mysql_error());
-		$row = mysql_fetch_array($rs)
-		
-		?>
 		<div class="box-account-right cf">
 			<div class="box-title">
 				<h1>ข้อมูลส่วนตัว</h1>
@@ -72,7 +61,7 @@ require("assets/configs/function.inc.php");
 						<p>ชื่อ - นามสกุล</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['NAME']." ".$row['LAST_NAME']?></p>
+						<p>นางสาว ชมพูนุช ซัน</p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -80,7 +69,7 @@ require("assets/configs/function.inc.php");
 						<p>เพศ</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['SEX']?></p>
+						<p>หญิง</p>
 					</div>
 				</div>
 				<div class="box-row cf">
