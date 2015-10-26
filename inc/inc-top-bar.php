@@ -3,7 +3,7 @@
 //$_SESSION['CURRENT_URL'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $refering_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 
-if ($refering_url != _FULL_SITE_PATH_ . '/login.php') {
+if ($refering_url != _FULL_SITE_PATH_ . '/login.php' && $refering_url != _FULL_SITE_PATH_ . '/login-action.php') {
 	$_SESSION['last_url'] = $refering_url;
 }
 

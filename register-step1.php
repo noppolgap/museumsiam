@@ -76,8 +76,8 @@ require("assets/configs/function.inc.php");
 					<div class="box-left">
 						<div class="box-input-text radio">
 							<p>เพศ*</p>
-							<div><input type="radio" name="sex" value="male" checked>ชาย</div>
-							<div><input type="radio" name="sex" value="female">หญิง</div>
+							<div><input type="radio" name="sex" value="M" checked>ชาย</div>
+							<div><input type="radio" name="sex" value="F">หญิง</div>
 						</div>
 					</div>
 					<div class="box-right">

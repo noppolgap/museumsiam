@@ -16,7 +16,7 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menu-left li.menu1").addClass("active");
-	});
+	}); 
 </script>
 	
 </head>
@@ -24,8 +24,12 @@ require ('inc_meta.php');
 <body id="account">
 	
 
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php
+	include ('inc/inc-top-bar.php');
+ ?>
+<?php
+	include ('inc/inc-menu.php');
+ ?>	
 <?php
 require ('inc/inc-require-userlogin.php');
 ?>
@@ -65,24 +69,26 @@ require ('inc/inc-require-userlogin.php');
 		//$sqlUser = "select * from sys_app_user where USER_ID = '".$_SESSION['user_name'] ."'";
 		$selectedColumn = "";
 		if ($_SESSION['LANG'] == 'TH')
-			$selectedColumn = "district.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDistrict.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ,province.PROVINCE_DESC_LOC as PROVINCE_DESC ";
-else 
-	$selectedColumn = "district.DISTRICT_DESC_ENG as DISTRICT_DESC ,subDistrict.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC ,province.PROVINCE_DESC_ENG as PROVINCE_DESC " ; 
-	
+			$selectedColumn = "district.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDistrict.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ,province.PROVINCE_DESC_LOC as PROVINCE_DESC , t.TITLE_DESC_LOC as TITLE_DESC , s.SEX_DESC_LOC as SEX_DESC ";
+		else
+			$selectedColumn = "district.DISTRICT_DESC_ENG as DISTRICT_DESC ,subDistrict.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC ,province.PROVINCE_DESC_ENG as PROVINCE_DESC , t.TITLE_DESC_ENG as TITLE_DESC , s.SEX_DESC_ENG as SEX_DESC ";
+
 		$sqlUser = "SELECT
-						u.*, ". $selectedColumn ;
-		$sqlUser.="	FROM
+						u.*, " . $selectedColumn;
+		$sqlUser .= "	FROM
 						sys_app_user u
 					INNER JOIN mas_district district ON district.DISTRICT_ID = u.DISTRICT_ID
 					INNER JOIN mas_sub_district subDistrict ON subDistrict.SUB_DISTRICT_ID = u.SUB_DISTRICT_ID
 					INNER JOIN mas_province province ON province.PROVINCE_ID = u.PROVINCE_ID
+					LEFT JOIN MAS_TITLE_NAME t on t.TITLE_ID = u.TITLE
+					LEFT JOIN MAS_SEX s on s.SEX_ID = u.SEX
 					WHERE
-						u.USER_ID = '".$_SESSION['user_name']."'
+						u.USER_ID = '" . $_SESSION['user_name'] . "'
 					AND ACTIVE_FLAG = '1' ";
 
-		$rs = mysql_query($sql) or die(mysql_error());
+					//echo $sqlUser ;
+		$rs = mysql_query($sqlUser) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
-		
 		?>
  
 		<div class="box-account-right cf">
@@ -96,7 +102,7 @@ else
 					</div>
 					<div class="box-right">
  
-						<p><?=$row['NAME'] . " " . $row['LAST_NAME'] ?></p>
+						<p><?=$row['TITLE_DESC']." ". $row['NAME'] . " " . $row['LAST_NAME'] ?></p>
  
 					</div>
 				</div>
@@ -106,7 +112,7 @@ else
 					</div>
 					<div class="box-right">
  
-						<p><?=$row['SEX'] ?></p>
+						<p><?=$row['SEX_DESC'] ?></p>
  
 					</div>
 				</div>
@@ -163,7 +169,7 @@ else
 						<p>ตำบล/แขวง</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['SUB_DISTRICT_DESC']?></p>
+						<p><?=$row['SUB_DISTRICT_DESC'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -171,7 +177,7 @@ else
 						<p>อำเภอ/เขต</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['DISTRICT_DESC']?></p>
+						<p><?=$row['DISTRICT_DESC'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -179,7 +185,7 @@ else
 						<p>จังหวัด</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['PROVINCE_DESC']?></p>
+						<p><?=$row['PROVINCE_DESC'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -187,7 +193,7 @@ else
 						<p>รหัสไปรษณีย์</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['POST_CODE']?></p>
+						<p><?=$row['POST_CODE'] ?></p>
 					</div>
 				</div>
 			</div>
@@ -198,21 +204,20 @@ else
 					</div>
 					<div class="box-detail cf">
 						<div class="box-name">
-							<h2><?=$row['NAME'] . " " . $row['LAST_NAME'] ?></h2>
+							<h2><?=$row['TITLE_DESC']." ".$row['NAME'] . " " . $row['LAST_NAME'] ?></h2>
 						</div>
 						<p>LOG IN ล่าสุด</p>
 						<div class="row cf">
-							<?php 
-							$logSql = "select * from log_user_login where USER_ID = '".$_SESSION['user_name']."'";
-								$rsLog = mysql_query($logSql) or die(mysql_error());
-		$rowLog = mysql_fetch_array($rsLog);
-		
+							<?php
+							$logSql = "select max(LOGIN_DATE) as LOGIN_DATE from log_user_login where USER_ID = '" . $_SESSION['user_name']  . "'";
+							$rsLog = mysql_query($logSql) or die(mysql_error());
+							$rowLog = mysql_fetch_array($rsLog);
 							?>
 							<div class="box-left">
 								วันที่
 							</div>
 							<div class="box-right">
-								<?=$rowLog['LOGIN_DATE']?>
+								<?=$rowLog['LOGIN_DATE'] ?>
 							</div>
 						</div>
 						<div class="row cf">
@@ -220,7 +225,7 @@ else
 								เวลา
 							</div>
 							<div class="box-right">
-								<?=$rowLog['LOGIN_DATE']?>
+								<?=$rowLog['LOGIN_DATE'] ?>
 							</div>
 						</div>
 					</div>
