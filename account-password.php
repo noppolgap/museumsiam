@@ -40,8 +40,7 @@ require("assets/configs/function.inc.php");
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				ACCOUNT SETTINGS<br>
-				<span>การต้ังค่าบัญชีผู้ใช้</span>
+				<img src="images/th/title-accout.png" alt="ACCOUNT SETTINGS"/>
 			</p>	
 		</div>
 	</div>

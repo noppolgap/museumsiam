@@ -23,15 +23,13 @@ require ('inc_meta.php');
 
 <body id="account">
 	
-<?php
-include ('inc/inc-top-bar.php');
- ?>
-<?php
-include ('inc/inc-menu.php');
- ?>	
+
+<?php include('inc/inc-top-bar.php'); ?>
+<?php include('inc/inc-menu.php'); ?>	
 <?php
 require ('inc/inc-require-userlogin.php');
 ?>
+ 
 <div class="part-nav-main">
 	<div class="container">
 		<div class="box-nav">
@@ -48,8 +46,7 @@ require ('inc/inc-require-userlogin.php');
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				ACCOUNT SETTINGS<br>
-				<span>การต้ังค่าบัญชีผู้ใช้</span>
+				<img src="images/th/title-accout.png" alt="ACCOUNT SETTINGS"/>
 			</p>	
 		</div>
 	</div>
@@ -62,6 +59,7 @@ require ('inc/inc-require-userlogin.php');
 			include ('inc/inc-account-menu.php');
  ?>
 		</div>
+
 		
 		<?php
 		//$sqlUser = "select * from sys_app_user where USER_ID = '".$_SESSION['user_name'] ."'";
@@ -86,6 +84,7 @@ else
 		$row = mysql_fetch_array($rs);
 		
 		?>
+ 
 		<div class="box-account-right cf">
 			<div class="box-title">
 				<h1>ข้อมูลส่วนตัว</h1>
@@ -96,7 +95,9 @@ else
 						<p>ชื่อ - นามสกุล</p>
 					</div>
 					<div class="box-right">
+ 
 						<p><?=$row['NAME'] . " " . $row['LAST_NAME'] ?></p>
+ 
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -104,7 +105,9 @@ else
 						<p>เพศ</p>
 					</div>
 					<div class="box-right">
+ 
 						<p><?=$row['SEX'] ?></p>
+ 
 					</div>
 				</div>
 				<div class="box-row cf">

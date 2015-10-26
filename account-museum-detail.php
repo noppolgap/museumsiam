@@ -45,8 +45,7 @@ require("assets/configs/function.inc.php");
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				ACCOUNT SETTINGS<br>
-				<span>การต้ังค่าบัญชีผู้ใช้</span>
+				<img src="images/th/title-accout.png" alt="ACCOUNT SETTINGS"/>
 			</p>	
 		</div>
 	</div>
@@ -101,7 +100,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -113,7 +112,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -395,7 +394,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -407,7 +406,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -421,7 +420,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -433,7 +432,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -452,7 +451,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -464,7 +463,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -519,7 +518,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -531,7 +530,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -579,10 +578,36 @@ require("assets/configs/function.inc.php");
 			<div class="box-line cf"><hr></div>		
 			
 			<div class="row-main cf">
+				<div class="box-left">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>ภูมิทัศน์โดยรอบ<br>(ภาษาไทย)</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-right">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>ภูมิทัศน์โดยรอบ<br>(ภาษาไทย)</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							<p>ภูมิทัศน์โดยรอบ</p>
+							
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -592,11 +617,26 @@ require("assets/configs/function.inc.php");
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf mT">
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -605,10 +645,36 @@ require("assets/configs/function.inc.php");
 			<div class="box-line cf"><hr></div>		
 			
 			<div class="row-main cf">
+				<div class="box-left">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>ภาพถ่ายห้องจัดแสดง<br>(ภาษาไทย)</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-right">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>ภาพถ่ายห้องจัดแสดง<br>(ภาษาไทย)</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							<p>ภาพถ่ายห้องจัดแสดง</p>
+							
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -618,11 +684,26 @@ require("assets/configs/function.inc.php");
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf mT">
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -631,10 +712,36 @@ require("assets/configs/function.inc.php");
 			<div class="box-line cf"><hr></div>		
 			
 			<div class="row-main cf">
+				<div class="box-left">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>วัตถุจัดแสดง<br>(ภาษาไทย)</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-right">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>วัตถุจัดแสดง<br>(ภาษาไทย)</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							<p>วัตถุจัดแสดง</p>
+							
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -644,11 +751,59 @@ require("assets/configs/function.inc.php");
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf mT">
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-main cf">
+				<div class="box-left addW">
+					<div class="box-row cf ">
+						<div class="box-left">
+							
+						</div>
+						<div class="box-right ">
+							<div class="box-input-text cf">
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -657,10 +812,36 @@ require("assets/configs/function.inc.php");
 			<div class="box-line cf"><hr></div>		
 			
 			<div class="row-main cf">
+				<div class="box-left">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>วัตถุจัดแสดง<br>ที่มีความสำคัญ<br>(ภาษาไทย)</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-right">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>วัตถุจัดแสดง<br>ที่มีความสำคัญ<br>(ภาษาไทย)</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							<p>วัตถุจัดแสดง<br>ที่มีความสำคัญ</p>
+							
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -670,11 +851,55 @@ require("assets/configs/function.inc.php");
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf mT">
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-main cf">
+				<div class="box-left addW">
+					<div class="box-row cf ">
+						<div class="box-left">
+							
+						</div>
+						<div class="box-right ">
+							<div class="box-input-text cf">
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -690,7 +915,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -702,7 +927,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -712,7 +937,7 @@ require("assets/configs/function.inc.php");
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-
+							
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -722,11 +947,26 @@ require("assets/configs/function.inc.php");
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf mT">
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -742,7 +982,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -754,7 +994,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -770,7 +1010,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -782,7 +1022,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 75px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -792,7 +1032,7 @@ require("assets/configs/function.inc.php");
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-
+							
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -802,11 +1042,26 @@ require("assets/configs/function.inc.php");
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf mT">
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
-								<div class="box-tumb"></div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -822,7 +1077,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -834,7 +1089,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -850,7 +1105,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -862,12 +1117,52 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div style="height: 120px;"><textarea name="address"></textarea></div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
+			<div class="row-main cf">
+				<div class="box-left addW">
+					<div class="box-row cf ">
+						<div class="box-left">
+							
+						</div>
+						<div class="box-right ">
+							<div class="box-input-text cf">
+								<div class="box-btn">
+									<a class="btn black">BROWES</a>
+								</div>
+								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
+							</div>
+							<div class="box-input-text cf mT">
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+								<div class="box-tumb">
+									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<a class="btn-delete"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box-line cf"><hr></div>		
 
 			<div class="box-title">
 				<h2>Social Network</h2>
@@ -915,8 +1210,6 @@ require("assets/configs/function.inc.php");
 					</div>
 				</div>
 			</div>
-			
-			
 			
 
 			<div class="box-btn-main cf">
