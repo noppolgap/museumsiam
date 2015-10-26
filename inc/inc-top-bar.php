@@ -48,7 +48,7 @@ require ("inc-cat-id-conf.php");
 
 					<?
 					if (isset($_SESSION['user_name']))
-						echo $_SESSION['user_name'] . ' <a href="logout.php">ออกจากระบบ</a>';
+						echo '<a href="account.php">'. $_SESSION['user_name'] . '</a> <a href="logout.php">ออกจากระบบ</a>';
 					else
 						echo '<a href="login.php">'.$loginCaption.'</a>';
 					?>
