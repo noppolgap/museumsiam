@@ -7,26 +7,29 @@
 			<div class="menu">
 				<ul class="menutop cf">
 					<li class="menu1"><a href="index.php">หน้าแรก</a></li>
-					<li class="menu2 sub"><a href="">รู้จักเรา</a>
+					<li class="menu2 sub"><a href="about.php">รู้จักเรา</a>
 						<ul class="submenu-top">
-							<a href="#"><li class="sub1">Supmenu 1</li></a>
-							<a href="#"><li class="sub2">Supmenu 2</li></a>
+							<a href="about.php"><li class="sub1">ความเป็นมาของเรา</li></a>
+							<a href="organization.php"><li class="sub2">โครงสร้างของเรา</li></a>
 						</ul>
 					</li>
-					<li class="menu3 sub"><a href="">บริการของเรา</a>
+					<li class="menu3 sub"><a href="service-knowlage.php">บริการของเรา</a>
 						<ul class="submenu-top">
-							<a href="#"><li class="sub1">Supmenu 1</li></a>
-							<a href="#"><li class="sub2">Supmenu 2</li></a>
+							<a href="service-knowlage.php"><li class="sub1">ห้องคลังความรู้</li></a>
+							<a href="service-archive.php"><li class="sub2">ห้องคลังโบราณวัตถุ</li></a>
+							<a href="service-restaurant.php"><li class="sub3">ร้านอาหาร</li></a>
+							<a href="#"><li class="sub4">Muse Shop</li></a>
+							<a href="service-spaceforrent.php"><li class="sub5">พื้นที่ให้เช่า</li></a>
 						</ul>
 					</li>
 					<li class="menu4"><a href="">สิทธิพิเศษ</a></li>
-					<li class="menu5 sub"><a href="">กิจกรรมและข่าวสาร</a>
+					<li class="menu5 sub"><a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>
 						<ul class="submenu-top">
-							<a href="#"><li class="sub1">Supmenu 1</li></a>
-							<a href="#"><li class="sub2">Supmenu 2</li></a>
+							<a href="news-event-museum.php"><li class="sub1">กิจกรรมและข่าวสารของมิวเซียมสยาม</li></a>
+							<a href="news-event-month.php"><li class="sub2">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</li></a>
 						</ul>
 					</li>
-					<li class="menu6 sub"><a href="">ระบบอื่นๆ ที่เกี่ยวข้อง</a>
+					<li class="menu6 sub"><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>
 						<ul class="submenu-top">
 							<?
 								$sqlStr = "SELECT
@@ -49,16 +52,11 @@
 							?>
 						</ul>
 					</li>
-					<li class="menu7 sub"><a href="faqs.php">คำถามที่พบบ่อย</a>
+					<li class="menu7 sub"><a href="faqs.php">คำถามที่พบบ่อย</a></li>
+					<li class="menu8 sub"><a href="contact.php">ติดต่อเรา</a>
 						<ul class="submenu-top">
-							<a href="#"><li class="sub1">Supmenu 1</li></a>
-							<a href="#"><li class="sub2">Supmenu 2</li></a>
-						</ul>
-					</li>
-					<li class="menu8 sub"><a href="">ติดต่อเรา</a>
-						<ul class="submenu-top">
-							<a href="#"><li class="sub1">Supmenu 1</li></a>
-							<a href="#"><li class="sub2">Supmenu 2</li></a>
+							<a href="contact.php"><li class="sub1">E-MAIL SUBMIT FORM ADDRESS & MAP</li></a>
+							<a href="contact-eapp.php"><li class="sub2">E-APPLICATION</li></a>
 						</ul>
 					</li>
 				</ul>

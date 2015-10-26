@@ -1,0 +1,29 @@
+.box-pic-main{
+	margin-bottom: 10px;
+}
+.box-right.main-content p{
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.line-gray{
+	width: 800px;
+}
+.box-text1-main, .box-text2-main {
+    padding: 40px 30px;
+    width: 800px;
+    margin: 0 auto;
+}
+.box-text1-main>p{
+	margin-top: 20px;
+}
+.box-text1-main p.text1{
+	margin-top: 0px;
+}
+.box-text1-main p.text2{
+	margin-top: 40px;
+}
+.box-text1-main p.text4 img{
+	margin:40px auto 0;
+}
+
