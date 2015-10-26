@@ -8,7 +8,7 @@ require ("assets/configs/function.inc.php");
 <head>
 <?
 require ('inc_meta.php');
- ?>	
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/km.css" />
@@ -16,26 +16,26 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu6").addClass("active");
-		
-		
+
+
 		// var fileName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') +1 );
-		// console.log(fileName) ; 
-// 		
+		// console.log(fileName) ;
+//
 		  // $(' event.target ''').closest( "li" ).toggleClass( "hilight" );
-		
+
 	});
 </script>
-	
+
 </head>
 
 <body id="km">
-	
+
 <?php
 include ('inc/inc-top-bar.php');
  ?>
 <?php
 include ('inc/inc-menu.php');
- ?>	
+ ?>
 <?php
 //get Module ID
 if (!isset($_GET['MID']))
@@ -46,7 +46,7 @@ else
 // $sqlModule = "select * from sys_app_module where MODULE_ID = " . $MID;
 // $moduleName = '';
 // $rs = mysql_query($sqlModule) or die(mysql_error());
-// 
+//
 // while ($row = mysql_fetch_array($rs)) {
 	// $moduleName = $row['MODULE_NAME_LOC'];
 	// // MODULE_NAME_ENG
@@ -75,9 +75,9 @@ else
 		</div>
 		<div class="box-right main-content">
 
- 
-	
-	
+
+
+
 			 <div class="box-category-main news BBlack">
 				<div class="box-title cf">
 					<h2>กิจกรรม</h2>
@@ -102,7 +102,7 @@ else
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -152,11 +152,11 @@ else
 							$i++;
 							}
 						?>
-						
+
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="box-category-main news BGray">
 				<div class="box-title cf ">
 					<h2>นิทรรศการ</h2>
@@ -166,7 +166,7 @@ else
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
-						
+
 						<?php
 						$categoryID = $exhibition_cat_id;
 						$contentSqlStr = "SELECT
@@ -182,7 +182,7 @@ else
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -260,7 +260,7 @@ else
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -313,7 +313,7 @@ else
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="box-category-main news BGray">
 				<div class="box-title cf ">
 					<h2>ระบบการศึกษา</h2>
@@ -323,7 +323,7 @@ else
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
-						
+
 						<?php
 						$categoryID = $education_cat_id;
 						$contentSqlStr = "SELECT
@@ -339,7 +339,7 @@ else
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -392,7 +392,7 @@ else
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="box-category-main news BGray">
 				<div class="box-title cf ">
 					<h2>สัมมนาและอบรม</h2>
@@ -417,7 +417,7 @@ else
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -470,7 +470,7 @@ else
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="box-category-main news BGray">
 				<div class="box-title cf ">
 					<h2>สื่อการเรียนรู้</h2>
@@ -480,7 +480,7 @@ else
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
-						
+
 						<?php
 						$categoryID = $media_cat_id;
 						$contentSqlStr = "SELECT
@@ -496,7 +496,7 @@ else
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -548,8 +548,8 @@ else
 						?>
 					</div>
 				</div>
-			</div>  
-			
+			</div>
+
 			<div class="box-category-main news">
 				<div class="box-title cf">
 					<h2>เว็บบอร์ด</h2>
@@ -560,23 +560,29 @@ else
 
 
 				<?php
+
+			    $badword = null;
+			    $goodword = null;
+			    $sql_weo = "SELECT trn_weo_word , trn_weo_replace FROM trn_weo";
+			    $query_weo=mysql_query($sql_weo);
+			    while($Row_weo=mysql_fetch_row($query_weo)){
+			    	$badword[] = $Row_weo[0];
+			    	$goodword[] = $Row_weo[1];
+			    }
+
 				//// ส่วนคำถาม
-				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
-						   WHERE REF_WEBBOARD_ID = 0
-						   AND FLAG <>2 ORDER BY ORDER_DATA DESC ";
+				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE , VISIT_COUNT FROM trn_webboard
+						WHERE REF_WEBBOARD_ID = 0
+						AND FLAG = 0 ORDER BY ORDER_DATA DESC Limit 0,15";
 
 				$query_qa = mysql_query($sq_qa, $conn);
-
-				$num_rows = mysql_num_rows($query_qa);
-
-				$num = 1;
 				?>
 
 				<div class="box-news-main">
 					<div class="box-table-webboard cf">
 
 						<div class="table-row head cf">
-							<div class="column list">ลำดับ</div>
+							<div class="column list">เลขที่กระทู้</div>
 							<div class="column topic">เรื่อง</div>
 							<div class="column name">ชื่อ</div>
 							<div class="column reply">ตอบ</div>
@@ -584,41 +590,39 @@ else
 							<div class="column date">ปรับปรุงล่าสุด</div>
 						</div>
 
-						<?php while($row = mysql_fetch_array($query_qa)) { 
-						
-						////ส่วนคำตอบ
-						  $sq_ans = " SELECT COUNT( WEBBOARD_ID ) ans, COUNT( VISIT_COUNT ) re  FROM trn_webboard
-										WHERE REF_WEBBOARD_ID = ".$row['WEBBOARD_ID']." AND FLAG <>2 ";
 
-							$query_ans = mysql_query($sq_ans, $conn);
+				<?php while($row = mysql_fetch_array($query_qa)) {
 
-							$num_rows = mysql_num_rows($query_ans);
-						?>
+					$content = trim(str_replace("\\","",$row['CONTENT']));
+					$content = str_replace($badword,$goodword, $content);
 
-							<div class="table-row list cf">
-								<div class="column list"><? echo $num ?></div>
-								<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID'] ?>"><? echo my_substring($row['CONTENT'], 150); ?></a></div>
-								<div class="column name"><? echo $row['USER_CREATE'] ?></div>
-						
-								<? while($row_ans = mysql_fetch_array($query_ans)) {?> 
+					////ส่วนคำตอบ
+				   $sq_ans = " SELECT COUNT( WEBBOARD_ID ) ans FROM trn_webboard
+								WHERE REF_WEBBOARD_ID = ".$row['WEBBOARD_ID']." AND FLAG = 0 ";
 
-								<div class="column reply"> <? echo $row_ans['ans'] ?></div>
-								<div class="column view"><? echo $row_ans['re'] ?></div>
+					$query_ans = mysql_query($sq_ans, $conn);
+					$row_ans = mysql_fetch_array($query_ans);
 
-								<? } ?>
 
-								
-								<div class="column date"><? echo ConvertDate($row['LAST_UPDATE_DATE	']) ?></div>
-							</div>
+					$detail = str_replace($goodword, $badword, $detail);
+				?>
 
-					   <? $num++;
-	}
- ?>
-	
+				<div class="table-row list cf">
+					<div class="column list"><?=str_pad($row['WEBBOARD_ID'], 5, 0, STR_PAD_LEFT)?></div>
+					<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID'] ?>"><?=$content?></a></div>
+					<div class="column name"><? echo $row['USER_CREATE'] ?></div>
+					<div class="column reply"><? echo $row_ans['ans'] ?></div>
+					<div class="column view"><? echo $row['VISIT_COUNT'] ?></div>
+					<div class="column date"><? echo ConvertDate($row['LAST_UPDATE_DATE']) ?></div>
+				</div>
+
+
+			 <? } ?>
+
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -633,7 +637,7 @@ $_SESSION['KM_PREV_PG'] = $current_url;
 
 <?php
 include ('inc/inc-footer.php');
- ?>	
+ ?>
 
 </body>
 </html>

@@ -13,9 +13,9 @@
 							<a href="organization.php"><li class="sub2">โครงสร้างของเรา</li></a>
 						</ul>
 					</li>
-					<li class="menu3 sub"><a href="service-knowlage.php">บริการของเรา</a>
+					<li class="menu3 sub"><a href="service-knowledge.php">บริการของเรา</a>
 						<ul class="submenu-top">
-							<a href="service-knowlage.php"><li class="sub1">ห้องคลังความรู้</li></a>
+							<a href="service-knowledge.php"><li class="sub1">ห้องคลังความรู้</li></a>
 							<a href="service-archive.php"><li class="sub2">ห้องคลังโบราณวัตถุ</li></a>
 							<a href="service-restaurant.php"><li class="sub3">ร้านอาหาร</li></a>
 							<a href="#"><li class="sub4">Muse Shop</li></a>

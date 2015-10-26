@@ -57,10 +57,20 @@
 .mfp-ajax-cur {
   cursor: progress; }
 
-.mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+.mfp-zoom-out-cur {
+/*
   cursor: -moz-zoom-out;
   cursor: -webkit-zoom-out;
-  cursor: zoom-out; }
+  cursor: zoom-out;
+*/
+cursor: default; }
+.mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+/*
+  cursor: -moz-zoom-out;
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out;
+*/
+cursor: pointer; }
 
 .mfp-zoom {
   cursor: pointer;
@@ -149,7 +159,9 @@ button::-moz-focus-inner {
   right: -6px;
   text-align: right;
   padding-right: 6px;
-  width: 100%; }
+/*   width: 100%;  */
+      width: 20px;
+      cursor: pointer;}
 
 .mfp-counter {
   position: absolute;

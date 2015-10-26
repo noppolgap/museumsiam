@@ -2,6 +2,19 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+//$_SESSION['UID'] = '9';
+//$_SESSION['user_name'] = 'porn.egazine@gmail.com';
+require("inc/inc-require-userlogin.php");
+
+$sql = "SELECT NAME , LAST_NAME , USER_ID FROM sys_app_user WHERE ID = ".$_SESSION['UID']." AND CITIZEN_ID IS NOT NULL";
+$query = mysql_query($sql, $conn);
+if(mysql_num_rows($query) == 0){
+	header('Location:'. _FULL_SITE_PATH_ . "/login.php");
+}else{
+	$row = mysql_fetch_array($query);
+	$my_name = $row['NAME'].' '.$row['LAST_NAME'];
+	$my_user = $row['USER_ID'];
+}
 ?>
 <!doctype html>
 <html>
@@ -62,7 +75,7 @@ require("assets/configs/function.inc.php");
 						<p>ชื่อ</p>
 					</div>
 					<div class="box-right">
-						<p>ชื่อ และ นามสกุล</p>
+						<p><?=$my_name?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -80,6 +93,7 @@ require("assets/configs/function.inc.php");
 					<p>
 					<span>ข้อตกลง</span>
 						ขอสงวนสิทธิ์ในการตรวจสอบข้อความก่อนแสดงบนหน้าเว็บและใช้ดุลพินิจที่จะลบกระทู้ใดๆ ที่มีข้อความที่ไม่เหมาะสม ไม่สุภาพหรือพาดพิงถึงลุคคลใดๆ ในการเสื่อมเสีย
+						<input name="my_username" value="<?=$my_user?>" type="hidden">
 					</p>
 				</div>
 				<div class="box-btn submit cf">

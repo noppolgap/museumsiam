@@ -1,0 +1,292 @@
+.box-category-main.BBlack .box-news-main{
+	background-color: #000;
+}
+.box-category-main.BBlack .box-tumb .text-title{
+	color: #ccc;
+}
+.box-category-main.BBlack .box-tumb .text-date,
+.box-category-main.BBlack .box-tumb .text-des{
+	color: #878787;
+}
+.box-category-main.BBlack .box-tumb .text-title:hover{
+	color: #b28f50;
+}
+.box-category-main.BBlack .box-tumb .box-btn a.btn.red:hover {
+	background-color: #b28f50;
+	color: #000;
+}
+.box-category-main.BGray .box-title{
+	background-color: #e0e0e0;
+}
+.box-category-main.BGray .box-title h2{
+	color: #6e0904;
+}
+.box-category-main.BGray .box-news-main{
+	border-color: #e0e0e0;
+}
+.box-category-main.BGray2 .box-title{
+	background-color: #e0e0e0;
+}
+.box-category-main.BGray2 .box-title h2{
+	color: #6e0904;
+}
+.box-category-main.BGray2 .box-news-main{
+	border-color: #e0e0e0;
+	background-color: #e0e0e0;
+}
+.box-category-main.BRed .box-title{
+	background-color: #6e0904;
+}
+.box-category-main.BRed .box-title h2{
+	color: #fff;
+}
+.box-right.main-content .box-category-main.BRed .box-btn .btn.gold:hover{
+	background-color: #000;
+}
+.box-category-main.BRed .box-text .text-title
+,.box-category-main.BRed .box-text .text-des{
+	color: #fff;
+}
+.box-category-main.BRed .box-text .text-title:hover{
+	color: #b28f50;
+}
+.box-right.main-content .box-category-main.BRed .box-text .box-btn .btn.black:hover{
+	background-color: #b28f50;
+	color: #000;
+}
+.box-category-main.BRed .box-news-main{
+	border-color: #6e0904;
+	background-color: #6e0904;
+}
+
+
+.box-category-main.BRed2 .box-title{
+	background-color: #6e0904;
+}
+.box-category-main.BRed2 .box-title h2{
+	color: #fff;
+}
+.box-right.main-content .box-category-main.BRed2 .box-btn .btn.gold:hover{
+	background-color: #000;
+}
+.box-right.main-content .box-category-main.BRed2 .box-text .box-btn .btn.black:hover{
+	background-color: #b28f50;
+	color: #000;
+}
+.box-category-main.BRed2 .box-news-main{
+	border-color: #6e0904;
+}
+
+
+.box-row-content .box-left .box-tumb.left{
+	margin-right: 20px;
+}
+.box-row-content .box-left .box-news-main,
+.box-row-content .box-right .box-news-main{
+	padding: 0 18px;
+}
+
+.box-category-main.news .box-title p{
+	font-size: 20px;
+	line-height: 37px;
+	float: right;
+	color: #6e0904;
+}
+.box-category-main.news .box-title p span{
+	display: inline-block;
+	color: #000;
+	font-size: 22px;
+}
+
+
+/* --------------------------------------------------- News & Event --------------------------------------------------- */
+
+.box-newsdetail-main .box-gray{
+	width: 100%;
+	background-color: #f2f2f2;
+	padding: 20px 25px 10px;
+	margin-bottom: 1px;	
+}
+.box-newsdetail-main .box-white{
+	width: 100%;
+	padding: 20px 25px 0px;
+}
+
+.box-gray.first{
+	margin-top: 30px;
+}
+.box-gray h3,
+.box-white h3 {
+	line-height: 31px;
+	font-size: 18px;
+	color: #6e0904;
+}
+.box-gray p{
+	font-style: italic;
+	margin: 10px 0;
+	padding-left: 35px;
+	font-size: 14px;
+	line-height: 25px;
+}
+.box-white p{
+	margin: 10px 0;
+	padding-left: 5px;
+	font-size: 14px;
+	line-height: 25px;
+}
+
+.box-gray p:before {
+	content: '';
+	width: 20px;
+	height: 16px;
+	display: inline-block;
+	position: absolute;
+	left: 6px;
+	top: 3px;
+}
+.box-gray p.text-date:before {
+	background: url(../images/icon-cal2.png) no-repeat center center;
+}
+.box-gray p.text-time:before {
+	background: url(../images/icon-clock.png) no-repeat center center;
+}
+.box-gray p.text-location:before {
+	background: url(../images/icon-pin2.png) no-repeat center center;
+}
+.box-gray p.text-web:before {
+	background: url(../images/icon-com.png) no-repeat center center;
+}
+.box-gray p.text-fax:before {
+	background: url(../images/icon-fax.png) no-repeat center center;
+}
+.box-gray p.text-ticket:before {
+	background: url(../images/icon-money.png) no-repeat center center;
+}
+.box-gray p.text-tel:before {
+	background: url(../images/icon-phone.png) no-repeat center center;
+}
+.box-gray.noIcon span{
+	font-weight: bold;
+	font-style: italic;
+	font-size: 14px;
+	line-height: 25px;
+	margin-top: 10px;
+}
+.box-gray.noIcon p{
+	margin: 0px 0px 20px;
+}
+.box-gray p a,
+.box-white p a{
+	display: inline-block;
+	color: #000;
+}
+.box-gray p a:hover,
+.box-white p a:hover{
+	color: #6e0904;
+}
+
+.box-white .box-img{
+	margin-top: 10px;
+}
+.box-white .box-img img{
+	width: 342px;
+	height: auto;
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+.box-white .box-img img.right{
+	margin-right: 0px;
+}
+
+.box-newsdetail-main .box-white.social{
+	border-top: 1px solid #eeeeee;
+	margin: 20px 0;
+	padding: 20px 25px;
+}
+.box-newsdetail-main .box-white.social p span{
+	display: inline-block;
+	margin-right: 20px;
+	font-weight: bold;
+	width: 100px;
+	font-style: italic;
+}
+.box-newsdetail-main .box-white.social p span:after{
+	content: ':';
+	position: absolute;
+	right: 0px;
+}
+.box-newsdetail-main .box-white.social p{
+	margin: 20px 0;
+}
+.box-newsdetail-main .box-white.social p:last-child{
+	margin-bottom: 0px;
+}
+
+.box-btn.toBottom{
+	display: table;
+	margin: 25px auto 0;
+}
+.box-btn.toBottom a.btn{
+	width: inherit;
+}
+.box-btn.toBottom a.btn:after{
+	content: '';
+	display: inline-block;
+	width: 9px;
+	height: 9px;
+	background: url(../images/icon-arrow-down.png) no-repeat center center;
+	margin-left: 10px;
+}
+
+
+.box-right.main-content .box-category-main.box-left,
+.box-right.main-content .box-category-main.box-right{
+	width: 365px;
+	border: 4px solid #e0e0e0;
+	margin-bottom: 40px;
+}
+.box-right.main-content .box-category-main.box-left .box-title,
+.box-right.main-content .box-category-main.box-right .box-title{
+	padding: 10px 15px 0px 10px;
+}
+.box-museum-news{
+	padding: 10px;
+}
+.museum-news{
+	padding: 10px 0;
+	border-bottom: 1px solid #d2d2d2;
+}
+.museum-news:last-child{
+	border-bottom: none;
+}
+.museum-news .box-pic {
+	width: 125px;
+	float: left;
+}
+.museum-news .box-text {
+	width: 200px;
+	float: right;
+	margin-top: 5px;
+}
+.museum-news .text-title {
+	font-size: 14px;
+	line-height: 18px;
+	margin-bottom: 10px;
+	height: 40px;
+	overflow: hidden;
+}
+.museum-news .text-title:hover {
+	color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+
