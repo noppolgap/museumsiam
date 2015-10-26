@@ -13,7 +13,7 @@
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
-			<li class="menu1"><a href="service-knowlage.php">ห้องคลังความรู้</a></li>
+			<li class="menu1"><a href="service-knowledge.php">ห้องคลังความรู้</a></li>
 			<li class="menu2"><a href="service-archive.php">ห้องคลังโบราณวัตถุ</a></li>
 			<li class="menu3"><a href="service-restaurant.php">ร้านอาหาร</a></li>
 			<li class="menu4"><a href="#">Muse Shop</a></li>

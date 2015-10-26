@@ -36,5 +36,25 @@ $(document).ready(function(){
 			alert(msg);
 		}
 	});
+	$("#replyTopic").submit(function(e) {
+		var error = false;
+		var input1 = tinyMCE.activeEditor.getContent();
+		var msg = str[0];
+
+		if(input1 == ''){
+			error = true;
+			msg += str[1];
+		}
+
+		if(error){
+			e.preventDefault();
+			alert(msg);
+		}
+	});
 
 });
+function editAccout(){
+	if(confirm(card)){
+		window.location.href = 'account-edit.php';
+	}
+}

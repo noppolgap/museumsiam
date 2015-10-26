@@ -82,9 +82,9 @@
 		<div class="box-bottom">
 			<div class="container cf">
 				<div class="box-btn cf">
-					<a href="images/mog-pic.png" class="btn black lightbox">แผนที่</a>
-					<a href="images/mog-pic.png" class="btn black lightbox">ที่จอดรถ</a>
-					<a href="images/mog-pic.png" class="btn black lightbox">การเดินทาง</a>
+					<a href="images/th/map.jpg" class="btn black lightbox">แผนที่</a>
+					<a href="images/th/park.jpg" class="btn black lightbox">ที่จอดรถ</a>
+					<a href="images/th/transport.jpg" class="btn black lightbox">การเดินทาง</a>
 				</div>
 			</div>
 		</div>

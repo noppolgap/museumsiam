@@ -1,20 +1,62 @@
+.box-account-right{
+	padding-bottom: 30px;
+}
 .box-news-main{
-	width: 960px;
-	    margin-left: 20px;
+	width: 940px;
+	margin-left: 40px;
 }
 .box-notice{
 	padding: 15px 140px 15px 10px;
 }
 .box-notice .text-title{
 	margin-bottom: 0px;
+	font-size: 18px;
 }
 .box-notice .box-btn{
 	top: 11px;
 }
-
-
-
-
-
+.box-notice .box-btn.opened a{
+	background-color: #000;
+}
+.content-hide{
+	display: none;
+}
+.content-hide .box-content{
+	margin: 20px auto 0;
+	line-height: 20px;
+/* 	display: table; */
+	padding: 20px;
+	background-color: #eee ;
+}
+.content-hide .box-content p{
+	font-size: 16px;
+	margin-bottom: 15px;
+	text-align: center;
+}
+.content-hide .box-content input,
+.content-hide .box-content span{
+	float: left;
+	line-height: 35px;
+	font-size: 16px;
+}
+.content-hide .box-content input{
+	width: 150px;
+}
+.content-hide .box-content span{
+	margin: 0 25px;
+}
+.box-notice .box-content .box-btn {
+	position: relative;
+	top: 0px;
+	margin: 15px auto 0px;
+	display: table;
+}
+.box-notice .box-content .box-btn .btn{
+	width: auto;
+}
+.box-notice .box-content .box-input-row{
+	margin: 0 auto;
+	display: table;
+}
 
 

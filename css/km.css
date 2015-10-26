@@ -135,7 +135,7 @@
 .box-btn.topic{
 	float: right;
 }
-.box-btn.topic a.btn{ 
+.box-btn.topic a.btn{
 	height: 25px;
 	line-height: 25px;
 }
@@ -228,6 +228,9 @@
 	width: 792px;
 	margin: 0 auto;
 	padding: 30px 0;
+}
+.box-topic-detail span , .box-topic-detail a , .box-topic-detail strong , .box-replay-detail span , .box-replay-detail a , .box-replay-detail strong{
+	display: inline;
 }
 .box-topic-main .box-bottom hr{
 	background-color: #fff;
