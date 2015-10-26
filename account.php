@@ -1,18 +1,20 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<?
+require ('inc_meta.php');
+ ?>	
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/account.css" />
 <link rel="stylesheet" type="text/css" href="css/account-detail.css" />
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$(".menu-left li.menu1").addClass("active");
 	});
 </script>
@@ -21,11 +23,14 @@ require("assets/configs/function.inc.php");
 
 <body id="account">
 	
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
 <?php
-	require ('inc/inc-require-userlogin.php');
-		
+include ('inc/inc-top-bar.php');
+ ?>
+<?php
+include ('inc/inc-menu.php');
+ ?>	
+<?php
+require ('inc/inc-require-userlogin.php');
 ?>
 <div class="part-nav-main">
 	<div class="container">
@@ -53,13 +58,32 @@ require("assets/configs/function.inc.php");
 <div class="part-account-main">
 	<div class="container cf">
 		<div class="box-account-left">
-			<?php include('inc/inc-account-menu.php'); ?>
+			<?php
+			include ('inc/inc-account-menu.php');
+ ?>
 		</div>
 		
 		<?php
-		$sqlUser = "select * from sys_app_user where USER_ID = '".$_SESSION['user_name'] ."'";
+		//$sqlUser = "select * from sys_app_user where USER_ID = '".$_SESSION['user_name'] ."'";
+		$selectedColumn = "";
+		if ($_SESSION['LANG'] == 'TH')
+			$selectedColumn = "district.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDistrict.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ,province.PROVINCE_DESC_LOC as PROVINCE_DESC ";
+else 
+	$selectedColumn = "district.DISTRICT_DESC_ENG as DISTRICT_DESC ,subDistrict.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC ,province.PROVINCE_DESC_ENG as PROVINCE_DESC " ; 
+	
+		$sqlUser = "SELECT
+						u.*, ". $selectedColumn ;
+		$sqlUser.="	FROM
+						sys_app_user u
+					INNER JOIN mas_district district ON district.DISTRICT_ID = u.DISTRICT_ID
+					INNER JOIN mas_sub_district subDistrict ON subDistrict.SUB_DISTRICT_ID = u.SUB_DISTRICT_ID
+					INNER JOIN mas_province province ON province.PROVINCE_ID = u.PROVINCE_ID
+					WHERE
+						u.USER_ID = '".$_SESSION['user_name']."'
+					AND ACTIVE_FLAG = '1' ";
+
 		$rs = mysql_query($sql) or die(mysql_error());
-		$row = mysql_fetch_array($rs)
+		$row = mysql_fetch_array($rs);
 		
 		?>
 		<div class="box-account-right cf">
@@ -72,7 +96,7 @@ require("assets/configs/function.inc.php");
 						<p>ชื่อ - นามสกุล</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['NAME']." ".$row['LAST_NAME']?></p>
+						<p><?=$row['NAME'] . " " . $row['LAST_NAME'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -80,7 +104,7 @@ require("assets/configs/function.inc.php");
 						<p>เพศ</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['SEX']?></p>
+						<p><?=$row['SEX'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -88,7 +112,7 @@ require("assets/configs/function.inc.php");
 						<p>วันเกิด</p>
 					</div>
 					<div class="box-right">
-						<p>9 กันยายน 2531</p>
+						<p><?=$row['BIRTHDAY'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -96,7 +120,7 @@ require("assets/configs/function.inc.php");
 						<p>โทรศัพท์</p>
 					</div>
 					<div class="box-right">
-						<p>02-3456789</p>
+						<p><?=$row['TELEPHONE'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -104,7 +128,7 @@ require("assets/configs/function.inc.php");
 						<p>โทรศัพท์มือถือ</p>
 					</div>
 					<div class="box-right">
-						<p>086-6656556</p>
+						<p><?=$row['MOBILE_PHONE'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -112,7 +136,7 @@ require("assets/configs/function.inc.php");
 						<p>โทรสาร</p>
 					</div>
 					<div class="box-right">
-						<p>02-3456789</p>
+						<p><?=$row['FAX'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -120,7 +144,7 @@ require("assets/configs/function.inc.php");
 						<p>รหัสประจำตัวประชาชน</p>
 					</div>
 					<div class="box-right">
-						<p>1255688954213</p>
+						<p><?=$row['CITIZEN_ID'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -128,7 +152,7 @@ require("assets/configs/function.inc.php");
 						<p>ที่อยู่</p>
 					</div>
 					<div class="box-right">
-						<p>96 เอกพัฒนาอพาทเมนต์ ห้อง 810 ซ.ลาดพร้าว26</p>
+						<p><?=$row['ADDRESS1'] ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -136,7 +160,7 @@ require("assets/configs/function.inc.php");
 						<p>ตำบล/แขวง</p>
 					</div>
 					<div class="box-right">
-						<p>แขวงลาดยาว</p>
+						<p><?=$row['SUB_DISTRICT_DESC']?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -144,7 +168,7 @@ require("assets/configs/function.inc.php");
 						<p>อำเภอ/เขต</p>
 					</div>
 					<div class="box-right">
-						<p>เขตจตุจักร</p>
+						<p><?=$row['DISTRICT_DESC']?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -152,7 +176,7 @@ require("assets/configs/function.inc.php");
 						<p>จังหวัด</p>
 					</div>
 					<div class="box-right">
-						<p>กรุงเทพมหานคร</p>
+						<p><?=$row['PROVINCE_DESC']?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -160,7 +184,7 @@ require("assets/configs/function.inc.php");
 						<p>รหัสไปรษณีย์</p>
 					</div>
 					<div class="box-right">
-						<p>10220</p>
+						<p><?=$row['POST_CODE']?></p>
 					</div>
 				</div>
 			</div>
@@ -171,15 +195,21 @@ require("assets/configs/function.inc.php");
 					</div>
 					<div class="box-detail cf">
 						<div class="box-name">
-							<h2>นางสาว ชมพูนุช ซัน</h2>
+							<h2><?=$row['NAME'] . " " . $row['LAST_NAME'] ?></h2>
 						</div>
 						<p>LOG IN ล่าสุด</p>
 						<div class="row cf">
+							<?php 
+							$logSql = "select * from log_user_login where USER_ID = '".$_SESSION['user_name']."'";
+								$rsLog = mysql_query($logSql) or die(mysql_error());
+		$rowLog = mysql_fetch_array($rsLog);
+		
+							?>
 							<div class="box-left">
 								วันที่
 							</div>
 							<div class="box-right">
-								20 มิถุนายน 2558
+								<?=$rowLog['LOGIN_DATE']?>
 							</div>
 						</div>
 						<div class="row cf">
@@ -187,7 +217,7 @@ require("assets/configs/function.inc.php");
 								เวลา
 							</div>
 							<div class="box-right">
-								14:03น.
+								<?=$rowLog['LOGIN_DATE']?>
 							</div>
 						</div>
 					</div>
@@ -197,7 +227,7 @@ require("assets/configs/function.inc.php");
 								<a href="account-edit.php" class="ed">แก้ไขข้อมูล</a>
 							</div>
 							<div class="box-right">
-								<a href="account-edit.php" class="lu">ออกจากระบบ</a>
+								<a href="logout.php" class="lu">ออกจากระบบ</a>
 							</div>
 						</div>
 					</div>
@@ -213,7 +243,9 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php
+include ('inc/inc-footer.php');
+ ?>	
 
 </body>
 </html>
