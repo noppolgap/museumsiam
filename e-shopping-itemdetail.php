@@ -166,7 +166,7 @@ require("assets/configs/function.inc.php");
 			        $sql  = " SELECT *
 								FROM trn_product pro
 								LEFT JOIN trn_content_category cc ON pro.CAT_ID = cc.CONTENT_CAT_ID
-								WHERE pro.PRODUCT_ID = ".$_GET['proid']." AND pro.FLAG = 0 ";
+								WHERE pro.PRODUCT_ID = ".$PROID." AND pro.FLAG = 0 ";
 
 			     $query = mysql_query($sql,$conn);
 
@@ -188,6 +188,17 @@ require("assets/configs/function.inc.php");
 						<div class="slide-gallery-main">
 							<div class="box-slide-big">
 								<div id="sync1" class="owl-carousel">
+
+						<? 
+
+						$getPicSql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = AND CAT_ID =  ORDER_ID ASC";
+
+						$query_pic = mysql_query($getPicSql,$conn);
+
+				 		$num_rows = mysql_num_rows($query_pic);
+
+						?>
+
 									<div class="slide-content">
 										<img src="http://placehold.it/462x304">
 									</div>

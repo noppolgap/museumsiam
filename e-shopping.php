@@ -75,10 +75,10 @@ require("assets/configs/function.inc.php");
 
 		<?php 
 		        $sql_cat  = "SELECT cc.CONTENT_CAT_DESC_LOC, cc.CONTENT_CAT_ID	 
-				FROM trn_content_category cc
-				JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
-				WHERE cc.REF_MODULE_ID =7
-				AND cc.FLAG = 0 ";
+					FROM trn_content_category cc
+					JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
+					WHERE cc.REF_MODULE_ID = $education_cat_id
+					AND cc.FLAG = 0 ";
 
 			     $query_cat = mysql_query($sql_cat,$conn);
 
