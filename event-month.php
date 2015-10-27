@@ -2,6 +2,7 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
 ?>
 <!doctype html>
 <html>
@@ -90,7 +91,7 @@ require("assets/configs/function.inc.php");
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.CAT_ID = $museum_event_cat_id ";
+											AND content.CAT_ID = $all_event_cat_id ";
 							$sql .= " AND (EVENT_START_DATE <= '".date('Y-m-t')."' AND EVENT_END_DATE >= '".date('Y-m-1')."')";
 						    $sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
@@ -109,7 +110,7 @@ require("assets/configs/function.inc.php");
 
 
 						/*social*/
-						$path = 'event-detail.php?MID='.$MID.'%26CID='.$museum_event_cat_id.'%26SID='.$row['SUB_CAT_ID'].'%26CONID='.$row['CONTENT_ID'].'%26date=month';
+						$path = 'event-detail.php?MID='.$MID.'%26CID='.$categoryID.'%26SID='.$row['SUB_CAT_ID'].'%26CONID='.$row['CONTENT_ID'].'%26date=month';
 						$fullpath = _FULL_SITE_PATH_.'/'.$path;
 						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$row['CONTENT_ID'];
 						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
@@ -120,9 +121,9 @@ require("assets/configs/function.inc.php");
 						/*social*/
 
 						echo	'<div class="box-tumb '.$gap.' ">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$museum_event_cat_id.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month">';
 					    echo	'<div class="box-pic">';
-						echo	'<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $museum_event_cat_id, true) . '">';
+						echo	'<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $categoryID, true) . '">';
 						echo    '<div class="box-tag-cate">';
 						echo  	$title;
 						echo 	'</div>';
@@ -133,7 +134,7 @@ require("assets/configs/function.inc.php");
 						echo 	'</div>';
 						echo 	'</a>';
 						echo 	'<div class="box-text">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$museum_event_cat_id.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month">';
 						echo	'<p class="text-title TcolorRed">';
 						echo	$title;
 						echo	'</p>';
@@ -145,7 +146,7 @@ require("assets/configs/function.inc.php");
 						echo	$detail;
 						echo	'</p>';
 						echo	'<div class="box-btn cf">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$museum_event_cat_id.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month" class="btn red">อ่านเพิ่มเติม</a>';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month" class="btn red">อ่านเพิ่มเติม</a>';
 						echo	'<div class="box-btn-social cf">';
 						echo  	'<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 						echo  	'<a href="'.$fullpath.'" onclick="shareTW(\''.$row_row1['CONTENT_ID'].'\',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';

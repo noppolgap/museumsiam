@@ -69,7 +69,15 @@ require("assets/configs/function.inc.php");
 				<div class="box-title cf">
 					<h2><?=$row_CAT['CONTENT_CAT_LOC']?></h2>
 					<div class="box-btn">
-						<a href="event-day.php" class="btn gold">ดูทั้งหมด</a>
+
+						<?  $link_page = "";
+							$catId = $row_CAT['CONTENT_CAT_ID'];
+
+							if($row_CAT['CONTENT_CAT_ID'] == $all_event_cat_id ){ $link_page = "event-day.php";}
+							else{ $link_page = "news-day.php";}
+						 ?>
+
+						<a href="<? echo $link_page ?>" class="btn gold">ดูทั้งหมด</a>
 					</div>
 				</div>
 				<div class="box-news-main">
