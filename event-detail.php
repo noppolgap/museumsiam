@@ -71,13 +71,47 @@ require("assets/configs/function.inc.php");
 				 
 				 <?
 				  $back_link = "";
+
+				  switch ($date_page) {
+				    case "date":
+				        $back_link = "news-event-day.php";
+				        break;
+				    case "month":
+				        $back_link = "news-event-month.php";
+				        break;
+				    case "week":
+				        $back_link = "news-event-week.php";
+				        break;
+				    case "eventall":
+				    	$back_link = "news-event-museum.php";
+				    break;
+				    case "newsall":
+				    	$back_link = "news-event-museum.php";
+				    break;
+				    case "news_month":
+				    	$back_link = "news-month.php";
+				    break;
+				    case "event_month":
+				    	$back_link = "event-month.php";
+				    break;
+				    case "event_week":
+				    	$back_link = "event-week.php";
+				    break;
+				    case "news_week":
+				    	$back_link = "news-week.php";
+				    break;
+				    case "news_day":
+				    	$back_link = "news-day.php";
+				    break;
+				    case "event_day":
+				    	$back_link = "event-day.php";
+				    break;
+				    case "":
+				    	$back_link = "event-museum.php";
+				    break;
+				}
 				 
-				if($date_page == "date"){ $back_link = "news-event-day.php"; }
-				else if($date_page == "month"){ $back_link = "news-event-month.php"; }
-				else if($date_page == "week"){ $back_link = "news-event-week.php"; }
-				else if($date_page == "eventall"){ $back_link = "news-event-museum.php"; }
-				else if($date_page == "newsall"){ $back_link = "nnews-event-museum.php"; }
-				else{ $back_link = "event-museum.php"; }?>
+				?>
 
 					<a href="<? echo $back_link ?>" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
 				</div>

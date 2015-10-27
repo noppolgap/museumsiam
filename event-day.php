@@ -121,7 +121,7 @@ $_SESSION['EVENT_PREV_PG'] = $current_url;
 
 
 						/*social*/
-						$path = 'event-detail.php?MID='.$MID.'%26CID='.$categoryID.'%26SID='.$row['SUB_CAT_ID'].'%26CONID='.$row['CONTENT_ID'].'%26date=month';
+						$path = 'event-detail.php?MID='.$MID.'%26CID='.$categoryID.'%26SID='.$row['SUB_CAT_ID'].'%26CONID='.$row['CONTENT_ID'].'%26date=event_day';
 						$fullpath = _FULL_SITE_PATH_.'/'.$path;
 						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$row['CONTENT_ID'];
 						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
@@ -132,7 +132,7 @@ $_SESSION['EVENT_PREV_PG'] = $current_url;
 						/*social*/
 
 						echo	'<div class="box-tumb '.$gap.' ">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=event_day">';
 					    echo	'<div class="box-pic">';
 						echo	'<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $categoryID, true) . '">';
 						echo    '<div class="box-tag-cate">';
@@ -145,7 +145,7 @@ $_SESSION['EVENT_PREV_PG'] = $current_url;
 						echo 	'</div>';
 						echo 	'</a>';
 						echo 	'<div class="box-text">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=event_day">';
 						echo	'<p class="text-title TcolorRed">';
 						echo	$title;
 						echo	'</p>';
@@ -157,7 +157,7 @@ $_SESSION['EVENT_PREV_PG'] = $current_url;
 						echo	$detail;
 						echo	'</p>';
 						echo	'<div class="box-btn cf">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month" class="btn red">อ่านเพิ่มเติม</a>';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=event_day" class="btn red">อ่านเพิ่มเติม</a>';
 						echo	'<div class="box-btn-social cf">';
 						echo  	'<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 						echo  	'<a href="'.$fullpath.'" onclick="shareTW(\''.$row_row1['CONTENT_ID'].'\',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
