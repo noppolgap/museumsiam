@@ -296,6 +296,12 @@ function ConvertBoxDate($str) {
 	}
 	return $date;
 }
+function x_week_range($date) {
+    $ts = strtotime($date);
+    $start = (date('w', $ts) == 0) ? $ts : strtotime('last sunday', $ts);
+    return array(date('Y-m-d', $start),
+                 date('Y-m-d', strtotime('next saturday', $start)));
+}
 function logs_access($user, $msg) {
 	/*
 	 if(!is_dir(_LOG_PATH_)) { mkdir(_LOG_PATH_,0777); }else{ chmod(_LOG_PATH_,0777); }

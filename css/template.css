@@ -134,7 +134,9 @@
 	right: 0px;
 	top: 17px;
 }
-
+.box-menu-left .dBlock{
+	display: block;
+}
 
 /* --------------------------------------------------- Part Right --------------------------------------------------- */
 
@@ -1024,6 +1026,3 @@ ul.pagination li a.btn-arrow-right:hover{
 .box-otherfile-main{
 	margin-bottom: 30px;
 }
-
-
-

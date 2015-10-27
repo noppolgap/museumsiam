@@ -13,10 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu2,.menu-left li.menu2 .submenu1").addClass("active");
-		if ($('.menu-left li.menu2').hasClass("active")){
-			$('.menu-left li.menu2').children(".submenu-left").css("display","block");
-		}
+		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
 	});
 </script>
 
@@ -45,23 +42,29 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-newsevent.php'); ?>
-			<?php include('inc/inc-left-content-calendar.php'); ?>
+			<?php
+				$menu_newsevent = 2;
+			    include('inc/inc-left-content-newsevent.php');
+			    include('inc/inc-left-content-calendar.php');
+			?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
 				<h1>รายสัปดาห์</h1>
 			</div>
-		<?php	
+		<?php
+
+			list($start_date, $end_date) = x_week_range(date('Y-m-d'));
+
 			if ($_SESSION['LANG'] == 'TH'){
 				$LANG_SQL = 'CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC';
 			}else if ($_SESSION['LANG'] == 'EN'){
 				$LANG_SQL = 'CONTENT_CAT_DESC_ENG AS CONTENT_CAT_LOC';
-			}			
+			}
 			$sql =  "SELECT CONTENT_CAT_ID , ";
 			$sql .=  $LANG_SQL;
-			$sql .=  " FROM trn_content_category WHERE REF_MODULE_ID = ".$new_and_event." ORDER BY ORDER_DATA DESC"; 
+			$sql .=  " FROM trn_content_category WHERE REF_MODULE_ID = ".$new_and_event." ORDER BY ORDER_DATA DESC";
 			$query_CAT = mysql_query($sql, $conn);
 			while($row_CAT = mysql_fetch_array($query_CAT)) {
 			?>
@@ -101,15 +104,14 @@ require("assets/configs/function.inc.php");
 												content.LAST_UPDATE_DATE
 											FROM
 												trn_content_detail AS content
-											WHERE 
+											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.CAT_ID = ".$row_CAT['CONTENT_CAT_ID']." 
-											ORDER BY
-												content.ORDER_DATA desc
-											LIMIT 0,30 ";
+											AND content.CAT_ID = ".$row_CAT['CONTENT_CAT_ID'];
+							$sql .= " AND (EVENT_START_DATE <= '".$end_date."' AND EVENT_END_DATE >= '".$start_date."')";
+							$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
-					$query = mysql_query($sql, $conn);
+					$query = mysql_query($sql, $conn)or die($sql);
 
 					while($row = mysql_fetch_array($query)) {
 
@@ -182,7 +184,7 @@ require("assets/configs/function.inc.php");
 				</div>
 
 			</div>
-			
+
 <?  }  ?>
 
 		</div>

@@ -21,10 +21,10 @@
 				</ul>
 			</li>
 			<li class="menu2 sub"><a href="news-event-month.php">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</a>
-				<ul class="submenu-left">
-					<li class="submenu1"><a href="news-event-month.php">รายเดือน</a></li>
-					<li class="submenu2"><a href="news-event-week.php">รายสัปดาห์</a></li>
-					<li class="submenu3"><a href="news-event-day.php">รายวัน</a></li>
+				<ul class="submenu-left <?=(isset($menu_newsevent)) ? 'dBlock' : ''?>">
+					<li class="submenu1 <?=$menu_newsevent == 3 ? 'active' : ''?>"><a href="news-event-month.php">รายเดือน</a></li>
+					<li class="submenu2 <?=$menu_newsevent == 2 ? 'active' : ''?>"><a href="news-event-week.php">รายสัปดาห์</a></li>
+					<li class="submenu3 <?=$menu_newsevent == 1 ? 'active' : ''?>"><a href="news-event-day.php">รายวัน</a></li>
 				</ul>
 			</li>
 		</ul>
