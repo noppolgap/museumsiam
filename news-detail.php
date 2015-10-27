@@ -7,6 +7,12 @@ require("assets/configs/function.inc.php");
 	$CID = intval($_GET['CID']);
 	$SID = intval($_GET['SID']);
 	$CONID = intval($_GET['CONID']);
+	$date_page = $_GET['date'];
+
+	$back_link = "";
+				 
+	if($date_page == "newsall"){ $back_link = "news-event-museum.php"; }
+	else{ $back_link = "news-museum.php"; }
 
 ?>
 <!doctype html>
@@ -66,7 +72,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf news">
 				<h1>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h1>
 				<div class="box-btn">
-					<a href="news-museum.php" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
+					<a href="<? echo $back_link ?>" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
 				</div>
 			</div>
 
@@ -212,7 +218,7 @@ require("assets/configs/function.inc.php");
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a href="" class="btn black">ดูทั้งหมด</a>
+							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black">ดูทั้งหมด</a>
 						</div>
 					</div>
 					<div class="box-slide-small">
@@ -290,7 +296,7 @@ require("assets/configs/function.inc.php");
 
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="news-museum.php" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
+					<a href="<? echo $back_link ?>" class="btn red">กลับไปข่าวประชมสัมพันธ์</a>
 				</div>
 			</div>
 		</div>

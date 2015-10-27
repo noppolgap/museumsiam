@@ -8,6 +8,7 @@ require("assets/configs/function.inc.php");
 					$CID = intval($_GET['CID']);
 					$SID = intval($_GET['SID']);
 					$NID = intval($_GET['CONID']);
+					$date_page = $_GET['date'];
 
 ?>
 <!doctype html>
@@ -67,7 +68,18 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf news">
 				<h1>กิจกรรมของมิวเซียมสยาม</h1>
 				<div class="box-btn">
-					<a href="event-museum.php" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
+				 
+				 <?
+				  $back_link = "";
+				 
+				if($date_page == "date"){ $back_link = "news-event-day.php"; }
+				else if($date_page == "month"){ $back_link = "news-event-month.php"; }
+				else if($date_page == "week"){ $back_link = "news-event-week.php"; }
+				else if($date_page == "eventall"){ $back_link = "news-event-museum.php"; }
+				else if($date_page == "newsall"){ $back_link = "nnews-event-museum.php"; }
+				else{ $back_link = "event-museum.php"; }?>
+
+					<a href="<? echo $back_link ?>" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
 				</div>
 			</div>
 
@@ -216,7 +228,7 @@ require("assets/configs/function.inc.php");
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a href="" class="btn black">ดูทั้งหมด</a>
+							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black">ดูทั้งหมด</a>
 						</div>
 					</div>
 					<div class="box-slide-small">
@@ -305,7 +317,7 @@ require("assets/configs/function.inc.php");
 
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="event-museum.php" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
+					<a href="<? echo $back_link ?>" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
 				</div>
 			</div>
 		</div>

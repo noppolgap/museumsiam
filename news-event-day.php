@@ -31,7 +31,7 @@ require("assets/configs/function.inc.php");
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="index.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="news-event-month.php">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ รายเดือน</li>
+				<li class="active">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ รายวัน</li>
 			</ol>
 		</div>
 	</div>
@@ -69,7 +69,7 @@ require("assets/configs/function.inc.php");
 				<div class="box-title cf">
 					<h2><?=$row_CAT['CONTENT_CAT_LOC']?></h2>
 					<div class="box-btn">
-						<a href="event-month.php" class="btn gold">ดูทั้งหมด</a>
+						<a href="event-day.php" class="btn gold">ดูทั้งหมด</a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -106,7 +106,7 @@ require("assets/configs/function.inc.php");
 											AND content.CONTENT_STATUS_FLAG  = 0
 											AND content.CAT_ID = ".$row_CAT['CONTENT_CAT_ID'];
 							$sql .= " AND (DATEDIFF(EVENT_START_DATE, '".date('Y-m-d')."') <= 0 AND DATEDIFF(EVENT_END_DATE, '".date('Y-m-d')."') >= 0)";
-							$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
+						    $sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
 					$query = mysql_query($sql, $conn);
 
@@ -123,7 +123,7 @@ require("assets/configs/function.inc.php");
 
 
 						/*social*/
-						$path = 'event-detail.php?MID='.$MID.'%26CID='.$categoryID.'%26SID='.$row['SUB_CAT_ID'].'%26CONID='.$row['CONTENT_ID'];
+						$path = 'event-detail.php?MID='.$MID.'%26CID='.$row_CAT['CONTENT_CAT_ID'].'%26SID='.$row['SUB_CAT_ID'].'%26CONID='.$row['CONTENT_ID'].'%26date=month';
 						$fullpath = _FULL_SITE_PATH_.'/'.$path;
 						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$row['CONTENT_ID'];
 						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
@@ -134,7 +134,7 @@ require("assets/configs/function.inc.php");
 						/*social*/
 
 						echo	'<div class="box-tumb '.$gap.' ">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID'.$row['CONTENT_ID'].'">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$row_CAT['CONTENT_CAT_ID'].'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=day ">';
 					    echo	'<div class="box-pic">';
 						echo	'<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row_CAT['CONTENT_CAT_ID'], true) . '">';
 						echo    '<div class="box-tag-cate">';
@@ -147,7 +147,7 @@ require("assets/configs/function.inc.php");
 						echo 	'</div>';
 						echo 	'</a>';
 						echo 	'<div class="box-text">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$row_CAT['CONTENT_CAT_ID'].'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=day">';
 						echo	'<p class="text-title TcolorRed">';
 						echo	$title;
 						echo	'</p>';
@@ -159,7 +159,7 @@ require("assets/configs/function.inc.php");
 						echo	$detail;
 						echo	'</p>';
 						echo	'<div class="box-btn cf">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$row_CAT['CONTENT_CAT_ID'].'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=day" class="btn red">อ่านเพิ่มเติม</a>';
 						echo	'<div class="box-btn-social cf">';
 						echo  	'<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 						echo  	'<a href="'.$fullpath.'" onclick="shareTW(\''.$row_row1['CONTENT_ID'].'\',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
