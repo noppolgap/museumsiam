@@ -30,7 +30,7 @@ require ("inc-cat-id-conf.php");
 			</div>
 			<div class="box-right cf">
 				<div class="box-btn-shopping">
-					<a href="">e-SHOPPING</a>
+					<a href="e-shopping.php">e-SHOPPING</a>
 				</div>
 				<div class="box-btn-social cf">
 					<a href="#" class="btn-socila fb"></a>

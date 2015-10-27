@@ -6,23 +6,23 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/shopping.css" />
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");		
+		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body>
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -53,7 +53,7 @@ require("assets/configs/function.inc.php");
 				</div>
 			</div>
 
-			<?php 
+			<?php
 			     $sql_sumorder  = " SELECT count( o.ORDER_ID ) total_order
 										FROM trn_order_detail od
 										LEFT JOIN trn_order o ON od.ORDER_ID = o.ORDER_ID
@@ -73,53 +73,57 @@ require("assets/configs/function.inc.php");
 			<? } ?>
 
 
-		<?php 
-		        $sql_cat  = "SELECT cc.CONTENT_CAT_DESC_LOC, cc.CONTENT_CAT_ID	 
-					FROM trn_content_category cc
+		<?php
+		        $sql_cat  = "SELECT cc.CONTENT_CAT_ID , ";
+
+				if ($_SESSION['LANG'] == 'TH') {
+					$sql_cat .= "cc.CONTENT_CAT_DESC_LOC AS CONTENT_LOC ";
+					$sql_proc_lang = 'prod.PRODUCT_DESC_LOC AS PRODUCT_DESC';
+				} else if ($_SESSION['LANG'] == 'EN') {
+					$sql_cat .= "cc.CONTENT_CAT_DESC_ENG AS CONTENT_LOC ";
+					$sql_proc_lang = 'prod.PRODUCT_DESC_ENG AS PRODUCT_DESC';
+				}
+				$sql_cat  .= "FROM trn_content_category cc
 					JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
 					WHERE cc.REF_MODULE_ID = $education_cat_id
 					AND cc.FLAG = 0 ";
 
-			     $query_cat = mysql_query($sql_cat,$conn);
+			    $query_cat = mysql_query($sql_cat,$conn);
 
-				 $num_rows = mysql_num_rows($query_cat);
+				$num_rows = mysql_num_rows($query_cat);
+				while($row = mysql_fetch_array($query_cat)) {
 		?>
-
-		<?php while($row = mysql_fetch_array($query_cat)) { ?>	
 			<div class="box-category-main">
 				<div class="box-title cf">
 
-					<h2><? echo $row['CONTENT_CAT_DESC_LOC']; ?></h2>
-					
+					<h2><?=$row['CONTENT_LOC']?></h2>
+
 					<div class="box-btn">
 						<a href="e-shopping-category.php?cid=<?=$row['CONTENT_CAT_ID']?>" class="btn gold">ดูทั้งหมด</a>
 					</div>
 				</div>
 				<div class="box-item-main cf">
 
-					<?php 
-						    $sql_proc  = "SELECT prod.PRODUCT_ID, prod.PRODUCT_DESC_LOC, prod.PRICE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
+					<?php
+						    $sql_proc  = "SELECT prod.PRODUCT_ID, ".$sql_proc_lang.", prod.PRICE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
 											FROM trn_product AS prod
 											LEFT JOIN (
 												SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
 												FROM (
-													SELECT * 
+													SELECT *
 													FROM trn_content_picture
 													ORDER BY ORDER_ID ASC
 												) AS my_table_tmp
 												GROUP BY CONTENT_ID, CAT_ID
 											) AS pic ON prod.PRODUCT_ID = pic.CONTENT_ID
-											AND prod.CAT_ID = pic.CAT_ID 
-											WHERE prod.CAT_ID = ".$row['CONTENT_CAT_ID']." AND prod.FLAG = 0 ORDER BY prod.ORDER_DATA DESC";
+											AND prod.CAT_ID = pic.CAT_ID
+											WHERE prod.CAT_ID = ".$row['CONTENT_CAT_ID']." AND prod.FLAG = 0 ORDER BY prod.ORDER_DATA DESC LIMIT 0,6";
 
 						     $query_proc = mysql_query($sql_proc,$conn);
 
-							 $num_rows = mysql_num_rows($query_proc);
-					?>
+							while($row_proc = mysql_fetch_array($query_proc)) { ?>
 
-					<?php while($row_proc = mysql_fetch_array($query_proc)) { ?>	
 
-					
 					<div class="item">
 						<a href="e-shopping-detail.php">
 							<div class="box-pic">
@@ -129,7 +133,7 @@ require("assets/configs/function.inc.php");
 						<div class="box-text">
 							<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>">
 								<p class="text-title">
-									<? echo $row_proc['PRODUCT_DESC_LOC']; ?>
+									<? echo $row_proc['PRODUCT_DESC']; ?>
 								</p>
 							</a>
 							<p class="text-price">
@@ -138,24 +142,14 @@ require("assets/configs/function.inc.php");
 							</p>
 						</div>
 					</div>
-				
+
 				<? } ?>
 
 				</div>
-				<div class="box-pagination-main cf">
-					<ul class="pagination">
-						<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-						<li class="active"><a href="">1</a></li>
-						<li><a href="">2</a></li>
-						<li><a href="">3</a></li>
-						<li><a href="">...</a></li>
-						<li><a href="" class="btn-arrow-right"></a></li>
-					</ul>
-				</div>
 			</div>
 			<? } ?>
-			
-			
+
+
 		</div>
 	</div>
 </div>
@@ -164,7 +158,7 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 
 </body>
 </html>

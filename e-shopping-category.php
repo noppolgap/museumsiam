@@ -2,30 +2,42 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+$currentPage = 1;
+if (isset($_GET['PG'])){
+	$currentPage = $_GET['PG'];
+}
+
+if ($currentPage < 1)
+	$currentPage = 1;
+
+$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$_SESSION['SHOPPING_PREV_PG'] = $current_url;
+
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/shopping.css" />
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu3,.menu-left li.menu3 .submenu1").addClass("active");	
+		$(".menutop li.menu6,.menu-left li.menu3,.menu-left li.menu3 .submenu1").addClass("active");
 			if ($('.menu-left li.menu3').hasClass("active")){
 				$('.menu-left li.menu3').children(".submenu-left").css("display","block");
 			}
 	});
 </script>
-	
+
 </head>
 
 <body>
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -57,52 +69,52 @@ require("assets/configs/function.inc.php");
 				</div>
 			</div>
 
-			<?php 
-			     $sql_sumorder  = " SELECT count(ORDER_ID) total_order
-								FROM trn_order_detail
-								WHERE CUSTOMER_ID = 1  ";
-
-			     $query_sumorder = mysql_query($sql_sumorder,$conn);
-
-				 $num_rows = mysql_num_rows($query_sumorder);
-
-				 while($row_sumorder = mysql_fetch_array($query_sumorder)){
-			?>
-
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <? echo $row_sumorder['total_order']; ?></a>
+				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 0</a>
 			</div>
 
-			<? } ?>
 
-			<?php 
-			        $sql_cat  = "SELECT cc.CONTENT_CAT_DESC_LOC, cc.CONTENT_CAT_ID	 
+			<?php
+				if ($_SESSION['LANG'] == 'TH') {
+					$sql_cat_lang  = "cc.CONTENT_CAT_DESC_LOC AS CONTENT_LOC ";
+					$sql_proc_lang = 'prod.PRODUCT_DESC_LOC AS PRODUCT_DESC';
+				} else if ($_SESSION['LANG'] == 'EN') {
+					$sql_cat_lang  = "cc.CONTENT_CAT_DESC_ENG AS CONTENT_LOC ";
+					$sql_proc_lang = 'prod.PRODUCT_DESC_ENG AS PRODUCT_DESC';
+				}
+			        $sql_cat  = "SELECT ".$sql_cat_lang." , cc.CONTENT_CAT_ID
 					FROM trn_content_category cc
 					JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
-					WHERE cc.REF_MODULE_ID =7 AND cc.CONTENT_CAT_ID = ".$_GET['cid']."
+					WHERE cc.REF_MODULE_ID = 7 AND cc.CONTENT_CAT_ID = ".$_GET['cid']."
 					AND cc.FLAG = 0 ";
 
-			     $query_cat = mysql_query($sql_cat,$conn);
+			    $query_cat = mysql_query($sql_cat,$conn);
 
-				 $num_rows = mysql_num_rows($query_cat);
+				$num_rows = mysql_num_rows($query_cat);
+				$row = mysql_fetch_array($query_cat);
 			?>
 
-			
+
 			<div class="box-category-main">
 
-			<?php while($row = mysql_fetch_array($query_cat)) { ?>
-
 				<div class="box-title cf">
-					<h2><? echo $row['CONTENT_CAT_DESC_LOC']; ?></h2>
+					<h2><? echo $row['CONTENT_LOC']; ?></h2>
 				</div>
-				<?php 
-						    $sql_proc  = "SELECT * 
-								FROM trn_product
-								WHERE CAT_ID = ".$row['CONTENT_CAT_ID']." AND FLAG = 0  ";
-
-						     $query_proc = mysql_query($sql_proc,$conn);
-
-							 $num_rows = mysql_num_rows($query_proc);
+				<?php
+					$sql_proc  = "SELECT * FROM trn_product AS prod
+											LEFT JOIN (
+												SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
+												FROM (
+													SELECT *
+													FROM trn_content_picture
+													ORDER BY ORDER_ID ASC
+												) AS my_table_tmp
+												GROUP BY CONTENT_ID, CAT_ID
+											) AS pic ON prod.PRODUCT_ID = pic.CONTENT_ID
+											AND prod.CAT_ID = pic.CAT_ID
+											WHERE prod.CAT_ID = ".$row['CONTENT_CAT_ID']." AND prod.FLAG = 0 ORDER BY prod.ORDER_DATA DESC Limit 30 offset " . (30 * ($currentPage - 1));
+					$query_proc = mysql_query($sql_proc,$conn);
+					$num_rows = mysql_num_rows($query_proc);
 				?>
 
 				<div class="box-item-main cf">
@@ -110,9 +122,9 @@ require("assets/configs/function.inc.php");
 					<?php while($row_proc = mysql_fetch_array($query_proc)) { ?>
 
 					   <div class="item">
-						<a href="e-shopping-detail.php">
+						<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>">
 							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
+								<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
 							</div>
 						</a>
 						<div class="box-text">
@@ -126,23 +138,50 @@ require("assets/configs/function.inc.php");
 								<span>ราคาพิเศษ : <? echo $row_proc['SALE']; ?> บาท</span>
 							</p>
 						</div>
-						
+
 				</div>
-				<? } ?>	
 				<? } ?>
 				</div>
 				<div class="box-pagination-main cf">
 					<ul class="pagination">
-						<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-						<li class="active"><a href="">1</a></li>
-						<li><a href="">2</a></li>
-						<li><a href="">3</a></li>
-						<li><a href="">...</a></li>
-						<li><a href="" class="btn-arrow-right"></a></li>
+						<?php
+
+							$countContentSql = "SELECT count(1) as ROW_COUNT FROM trn_product WHERE CAT_ID = ".$row['CONTENT_CAT_ID']." AND FLAG = 0 ";
+
+							$queryCount = mysql_query($countContentSql, $conn);
+
+							$dataCount = mysql_fetch_assoc($queryCount);
+
+							$contentCount = $dataCount['ROW_COUNT'];
+
+							$maxPage = ceil($contentCount / 30);
+
+							$extraClass = '';
+							if ($currentPage == 1) {
+								$extraClass = 'class="deactive"';
+							}
+							echo $pageStart;
+							echo '<li ' . $extraClass . '><a href="?PG=' . ($currentPage - 1) . '" class="btn-arrow-left"></a></li>';
+
+							for ($idx = 0; $idx < 3; $idx++) {
+								if (($currentPage + $idx) > $maxPage)
+									break;
+								$activeClass = '';
+								if ($idx == 0) {
+									$activeClass = ' class="active"';
+								}
+								echo '<li ' . $activeClass . '><a href="?PG=' . ($currentPage + $idx) . '">' . ($currentPage + $idx) . '</a></li>';
+							}
+							$extraClassAtEnd = '';
+							if (($currentPage + 1) >= $maxPage) {
+								$extraClassAtEnd = 'class="deactive"';
+							}
+							echo '<li ' . $extraClassAtEnd . '><a href="?PG=' . ($currentPage + 1) . '" class="btn-arrow-right"></a></li>';
+							?>
 					</ul>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -151,7 +190,7 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 
 </body>
 </html>

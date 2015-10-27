@@ -8,27 +8,27 @@ require ("assets/configs/function.inc.php");
 <head>
 <?
 require ('inc_meta.php');
- ?>	
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/da.css" />
 
 <script>
 	$(document).ready(function() {
-		$(".menutop li.menu6).addClass("active");
+		$(".menutop li.menu6").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body id="km">
-	
+
 <?php
 include ('inc/inc-top-bar.php');
  ?>
 <?php
 include ('inc/inc-menu.php');
- ?>	
+ ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -55,8 +55,8 @@ include ('inc/inc-menu.php');
 		<div class="box-right main-content">
 
 			<div class="box-category-main news BBlack">
-				
-				
+
+
 				<?php
 				if (!isset($_GET['MID']))
 					$MID = $digial_module_id;
@@ -93,13 +93,13 @@ include ('inc/inc-menu.php');
 					<div class="box-btn">
 						<?php
 						$pageNext = '';
-						
+
 						if ($rowCat['IS_LAST_NODE'] == 'Y'){
 							$pageNext = 'da-all-black.php';
 							}
 						else{
 							$pageNext = 'da-category-black.php';
-							
+
 						}
 						?>
 						<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
@@ -121,7 +121,7 @@ include ('inc/inc-menu.php');
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -176,7 +176,7 @@ include ('inc/inc-menu.php');
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="box-category-main news BGray2">
 				<div class="box-title cf ">
 					<?php
@@ -209,23 +209,23 @@ include ('inc/inc-menu.php');
 					<div class="box-btn">
 						<?php
 						$pageNext = '';
-					
+
 						if ($rowCat['IS_LAST_NODE'] == 'Y'){
 							$pageNext = 'da-all-gray.php';
 						}
 						else{
 							$pageNext = 'da-category-gray.php';
-						
+
 						}
 						?>
-						
+
 						<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn black">ดูทั้งหมด</a>
 					</div>
 				</div>
 				<div class="box-news-main">
-					
+
 					<div class="box-tumb-main cf ">
-						
+
 						<?php
 
 						$contentSql = " SELECT
@@ -241,7 +241,7 @@ include ('inc/inc-menu.php');
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -336,7 +336,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 	}
 	else{
 		$pageNext = 'da-category-gray.php';
-		
+
 	}
 	echo '<a href="' . $pageNext . '?MID=' . $digial_module_id . '&CID=' . $rowCat['CONTENT_CAT_ID'] . '" class="btn black">ดูทั้งหมด</a>';
 	echo '</div>';
@@ -357,7 +357,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -411,9 +411,9 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 	echo '</div>';
 }
 				?>
-				
 
-			
+
+
 
 <!-- End Repeat -->
 			<div class="box-row-content cf">
@@ -456,7 +456,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 								}
 								else{
 									$pageNext = 'da-category-gray.php';
-									
+
 								}
 						?>
 								<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn black">ดูทั้งหมด</a>
@@ -464,7 +464,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 						</div>
 						<div class="box-news-main">
 							<div class="box-tumb-main cf ">
-								
+
 								<?php
 								$contentSql = " SELECT
 												cat.CONTENT_CAT_DESC_LOC,
@@ -479,7 +479,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -593,7 +593,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE 
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -637,14 +637,14 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 										</div>
 									</div>
 								</div>
-									<?php } ?>						
+									<?php } ?>
 							</div>
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -659,7 +659,7 @@ $_SESSION['DA_PREV_PG'] = $current_url;
 
 <?php
 include ('inc/inc-footer.php');
- ?>	
+ ?>
 
 </body>
 </html>
