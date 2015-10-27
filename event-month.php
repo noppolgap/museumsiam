@@ -3,30 +3,38 @@ require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
 
+$currentPage = 1;
+if (isset($_GET['PG'])){
+	$currentPage = $_GET['PG'];
+}
+
+if ($currentPage < 1)
+	$currentPage = 1;
+
+$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$_SESSION['EVENT_PREV_PG'] = $current_url;
+
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/news-event.css" />
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu2,.menu-left li.menu2 .submenu1").addClass("active");
-		if ($('.menu-left li.menu2').hasClass("active")){
-			$('.menu-left li.menu2').children(".submenu-left").css("display","block");
-		}
+		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body>
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -46,8 +54,11 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-newsevent.php'); ?>
-			<?php include('inc/inc-left-content-calendar.php'); ?>
+			<?php
+				$menu_newsevent = 6;
+			    include('inc/inc-left-content-newsevent.php');
+			    include('inc/inc-left-content-calendar.php');
+			?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
@@ -61,7 +72,7 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
-						
+
 						<?php
 
 						if (!isset($_GET['MID']))
@@ -93,7 +104,7 @@ require("assets/configs/function.inc.php");
 											AND content.CONTENT_STATUS_FLAG  = 0
 											AND content.CAT_ID = $all_event_cat_id ";
 							$sql .= " AND (EVENT_START_DATE <= '".date('Y-m-t')."' AND EVENT_END_DATE >= '".date('Y-m-1')."')";
-						    $sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
+						    $sql .= " ORDER BY content.ORDER_DATA desc Limit 30 offset " . (30 * ($currentPage - 1));
 
 					$query = mysql_query($sql, $conn);
 
@@ -163,16 +174,50 @@ require("assets/configs/function.inc.php");
 						}
 
 					?>
-						
+
 					</div>
 					<div class="box-pagination-main cf">
 						<ul class="pagination">
-							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">...</a></li>
-							<li><a href="" class="btn-arrow-right"></a></li>
+						<?php
+
+							$countContentSql = "SELECT count(1) as ROW_COUNT FROM
+												trn_content_detail AS content
+											WHERE
+											    content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0
+											AND content.CAT_ID = $all_event_cat_id ";
+							$countContentSql .= " AND (EVENT_START_DATE <= '".date('Y-m-t')."' AND EVENT_END_DATE >= '".date('Y-m-1')."')";
+
+							$queryCount = mysql_query($countContentSql, $conn);
+
+							$dataCount = mysql_fetch_assoc($queryCount);
+
+							$contentCount = $dataCount['ROW_COUNT'];
+
+							$maxPage = ceil($contentCount / 30);
+
+							$extraClass = '';
+							if ($currentPage == 1) {
+								$extraClass = 'class="deactive"';
+							}
+							echo $pageStart;
+							echo '<li ' . $extraClass . '><a href="?PG=' . ($currentPage - 1) . '" class="btn-arrow-left"></a></li>';
+
+							for ($idx = 0; $idx < 3; $idx++) {
+								if (($currentPage + $idx) > $maxPage)
+									break;
+								$activeClass = '';
+								if ($idx == 0) {
+									$activeClass = ' class="active"';
+								}
+								echo '<li ' . $activeClass . '><a href="?PG=' . ($currentPage + $idx) . '">' . ($currentPage + $idx) . '</a></li>';
+							}
+							$extraClassAtEnd = '';
+							if (($currentPage + 1) >= $maxPage) {
+								$extraClassAtEnd = 'class="deactive"';
+							}
+							echo '<li ' . $extraClassAtEnd . '><a href="?PG=' . ($currentPage + 1) . '" class="btn-arrow-right"></a></li>';
+							?>
 						</ul>
 					</div>
 				</div>
@@ -186,7 +231,7 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 
 </body>
 </html>
