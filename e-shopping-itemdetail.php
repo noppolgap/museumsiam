@@ -2,6 +2,8 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+	$PROID = intval($_GET['proid']);
 ?>
 <!doctype html>
 <html>
