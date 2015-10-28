@@ -275,7 +275,7 @@ function returnThaiShortMonth($str){
 }
 function ConvertDate($str) {
 	if($_SESSION['LANG'] == 'TH'){
-		echo ShowDateYearFull(trim($str));
+		return ShowDateYearFull(trim($str));
 	}else{
 		return date("d M Y", strtotime(trim($str)));
 	}
@@ -913,7 +913,7 @@ function callIconThumbListFrontend($iconType, $moduleId, $subModuleId, $genStyle
 		if ($genStyleTag)
 			return 'style="background-image: url(\'images/logo_thumb.jpg\');"';
 		else
-			return '';
+			return 'images/logo_thumb.jpg';
 
 	}
 
@@ -1360,4 +1360,112 @@ function admin_move_image360_upload_dir($dir, $file) {
 
 	return $path3 . $file;
 }
+
+function callHeroBannerThumbList($staus) {
+	global $conn;
+
+	$sql = "SELECT IMG_PATH FROM trn_hero_banner WHERE IMG_TYPE = 1  ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$query = mysql_query($sql, $conn);
+	$num = mysql_num_rows($query);
+	if ($num == 1) {
+		$row = mysql_fetch_array($query);
+		if ($staus) {
+			return $row['IMG_PATH'];
+		} else {
+			return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '\');"';
+		}
+
+	} else {
+		if ($staus) {
+			return '../images/logo_thumb.jpg';
+		} else {
+			return '';
+		}
+	}
+
+}
+
+function admin_upload_banner_hero_edit($name) {
+	global $conn;
+
+	$str = "";
+
+	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_'. $name .'">' . "\n\t";
+	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
+
+	$sql = "SELECT * FROM trn_hero_banner WHERE  IMG_TYPE = 1 ORDER BY ORDER_ID ASC";
+	$query = mysql_query($sql, $conn);
+
+	$num = mysql_num_rows($query); 
+	while ($row = mysql_fetch_array($query)) {
+		$str .= '<div id="img_edit_' . $row['PIC_ID'] . '" data-id="' . $row['PIC_ID'] . '" class="thumbBoxEdit floatL p-Relative">' . "\n\t";
+		$str .= '<div class="thumbBoxImage">' . "\n\t";
+		$str .= '<a onclick="popupImage(\'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '<div class="thumbBoxAction dNone p-Absolute">' . "\n\t";
+		$str .= '<a onclick="delHeroBannerEdit(\'' . $row['PIC_ID'] . '\' , \'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="../images/small-n-flat/sign-ban.svg" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+	}
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_data image_Data dNone">' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	if ($num > 0) {
+		$str .= '<div class="p-Absolute OrderImageBtn" data-name="' . $name . '"></div>' . "\n\t";
+	} else {
+		$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
+	}
+	return $str;
+}
+
+function admin_upload_hero_banner_view($name) {
+	global $conn;
+
+	$str = "";
+	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
+
+	$sql = "SELECT * FROM trn_hero_banner WHERE  IMG_TYPE = 1 ORDER BY ORDER_ID ASC";
+	$query = mysql_query($sql, $conn);
+	while ($row = mysql_fetch_array($query)) {
+		$str .= '<div class="thumbBoxEdit floatL p-Relative">' . "\n\t";
+		$str .= '<div class="thumbBoxImage">' . "\n\t";
+		$str .= '<a onclick="popupImage(\'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+	}
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_data image_Data">' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	return $str;
+}
+
+function callHeroBannerFrontEnd($picID , $picPath, $staus) {
+	 
+	if ($picPath != '') {
+		
+		if ($staus) {
+			return str_replace('../../', '', $picPath) ;
+		} else {
+			return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', str_replace('../../', '', $picPath)) . '\');"';
+		}
+
+	} else {
+		if ($staus) {
+			return 'images/logo_thumb.jpg';
+		} else {
+			return '';
+		}
+	}
+
+}
+
 ?>

@@ -810,3 +810,14 @@ function deletePreview360(name,file){
 	}
 	*/
 }
+
+function delHeroBannerEdit(id , path){
+	if (confirm("คุณแน่ใจที่จะลบรูปภาพนี้")){
+		$.post( "../master/delete_hero_banner.php", { pid: id , type: 2 , pname: path})
+			.done(function( data ) {
+			    $('#img_edit_'+id).hide("scale" , function() {
+					$(this).remove();
+				});
+		});
+	}
+}

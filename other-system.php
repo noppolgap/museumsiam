@@ -46,7 +46,62 @@ require("assets/configs/function.inc.php");
 
 <div class="box-other-system">
 	<div class="container">
-		<div class="system-row cf">
+		
+		
+		
+		
+		<?php
+					if ($_SESSION['LANG'] == 'TH')
+						$selectedColumn = " MODULE_NAME_LOC as MODULE_DESC ,";
+					else
+						$selectedColumn = " MODULE_NAME_ENG as MODULE_DESC , ";
+
+					$sqlStr = "SELECT
+										MODULE_ID, " . $selectedColumn;
+					$sqlStr .= "LINK_URL,
+										IS_LAST_NODE
+										FROM
+										sys_app_module
+										WHERE
+										ACTIVE_FLAG <> 2
+										AND RENDER_ON_FRONT = 'Y'
+										ORDER BY
+										ORDER_DATA DESC";
+					$query = mysql_query($sqlStr, $conn);
+					$countIcon = 0;
+					$needGenCloseDiv = FALSE;
+					while ($row = mysql_fetch_array($query)) {
+						
+						if ($countIcon % 5 == 0)
+						{
+							echo '<div class="system-row cf">';
+							$needGenCloseDiv = TRUE;
+						}
+						
+						echo '<div class="box-other">';
+						echo '<a href="' . $row['LINK_URL'] . '?MID=' . $row['MODULE_ID'] . '">';
+						echo '<div class="box-pic">';
+			
+						echo '<img src="'.callIconThumbListFrontend('BIG', $row['MODULE_ID'], NULL, false).'">';
+						echo '</div>';
+						echo '<div class="text-name">';
+						echo $row['MODULE_DESC'];
+						echo '</div>';
+						echo '</a>';
+						echo '</div>';
+						$countIcon ++;
+						if($countIcon % 5 ==0)
+						{
+							echo "</div>";
+							$needGenCloseDiv = FALSE;
+						}
+					}
+					if ($needGenCloseDiv)
+						echo "</div>";
+					?>
+		
+		
+		<!-- <div class="system-row cf">
 			<div class="box-other">
 				<a href="">
 					<div class="box-pic">
@@ -139,7 +194,7 @@ require("assets/configs/function.inc.php");
 					</div>
 				</a>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 

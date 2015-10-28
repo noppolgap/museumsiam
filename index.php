@@ -29,11 +29,28 @@ require ("assets/configs/function.inc.php");
 
 		<div class="part-banner" id="firstbox">
 			<div class="slide-herobanner">
+				<?php
+				$heroBannerSql = "SELECT
+pic_ID,
+IMG_PATH
+FROM
+trn_hero_banner
+WHERE
+img_type = 1
+ORDER BY
+ORDER_ID";
+
+				$rsHeroBanner = mysql_query($heroBannerSql) or die(mysql_error());
+				while ($rowHeroBanner = mysql_fetch_array($rsHeroBanner)) {
+					echo '	<div class="slide" style="max-height:500px;background-image: url(' . callHeroBannerFrontEnd($rowHeroBanner['pic_ID'], $rowHeroBanner['IMG_PATH'], true) . ');"></div> ';
+				}
+				?>
+
+				<!-- <div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
 				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
 				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
 				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
-				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
-				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
+				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div> -->
 			</div>
 		</div>
 
@@ -655,7 +672,7 @@ INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
 WHERE
 cat.REF_MODULE_ID = $MID
 AND content.CAT_ID = " . $museum_event_cat_id;
-$contentSqlStr .= " AND content.SUB_CAT_ID = " . $mesum_sub_cat_id  ;
+							$contentSqlStr .= " AND content.SUB_CAT_ID = " . $mesum_sub_cat_id;
 							$contentSqlStr .= " AND cat.flag = 0
 AND content.APPROVE_FLAG = 'Y'
 AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
@@ -775,6 +792,63 @@ ORDER BY RAND() LIMIT 0,4 ";
 				</div>
 				<div class="box-slide-network-main cf">
 					<div class="slide-network cf">
+						<?php
+
+						if ($_SESSION['LANG'] == 'TH')
+							$selectedColumn = " muse.MUSEUM_NAME_LOC as MUSEUM_NAME , muse.DESCRIPT_LOC as MUSEUM_DESCRIPT, muse.PLACE_DESC_LOC as PLACE_DESC , dist.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDist.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC , province.PROVINCE_DESC_LOC  as PROVINCE_DESC ";
+						else
+							$selectedColumn = " muse.MUSEUM_NAME_ENG as MUSEUM_NAME , muse.DESCRIPT_ENG as MUSEUM_DESCRIPT, muse.PLACE_DESC_ENG as PLACE_DESC , dist.DISTRICT_DESC_ENG as DISTRICT_DESC, subDist.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC , province.PROVINCE_DESC_ENG as PROVINCE_DESC ";
+
+						$sql = " SELECT " . $selectedColumn;
+						$sql .= " muse.MUSEUM_DETAIL_ID, ";
+						$sql .= " muse.MUSEUM_DISPLAY_NAME, ";
+						$sql .= " muse.ADDRESS1, ";
+						$sql .= " muse.DISTRICT_ID, ";
+						$sql .= " muse.SUB_DISTRICT_ID, ";
+						$sql .= " muse.PROVINCE_ID, ";
+						$sql .= " muse.POST_CODE, ";
+						$sql .= " muse.TELEPHONE, ";
+						$sql .= " muse.EMAIL, ";
+						$sql .= " muse.LAT, ";
+						$sql .= " muse.LON, ";
+						$sql .= " IFNULL( ";
+						$sql .= " 	muse.LAST_UPDATE_DATE, ";
+						$sql .= " 	muse.CREATE_DATE ";
+						$sql .= " ) AS LAST_DATE, ";
+						$sql .= " muse.MOBILE_PHONE, ";
+						$sql .= " muse.FAX ";
+						$sql .= " FROM ";
+						$sql .= " trn_museum_detail muse ";
+						$sql .= " left join mas_district dist on dist.DISTRICT_ID = muse.DISTRICT_ID ";
+						$sql .= " left join mas_sub_district subDist  on subDist.SUB_DISTRICT_ID = muse.SUB_DISTRICT_ID ";
+						$sql .= " LEFT JOIN mas_province province on province.PROVINCE_ID= muse.PROVINCE_ID ";
+						$sql .= " WHERE ";
+						$sql .= " muse.IS_GIS_MUSEUM = 'N' ";
+						$sql .= " AND muse.ACTIVE_FLAG <> 2 ";
+						$sql .= " AND muse.APPROVE_FLAG = 'Y' ";
+						$sql .= " ORDER BY RAND() LIMIT 0,5 ";
+						$rsMDN = mysql_query($sql) or die(mysql_error());
+						while ($rowMDN = mysql_fetch_array($rsMDN)) {
+							echo '<div class="box-network">';
+							echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
+							echo '<div class="box-pic">';
+							echo '<img src="http://placehold.it/274x205">';
+							echo '</div> </a>';
+							echo '<div class="box-text">';
+							echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
+							echo '<p class="text-title">';
+							echo $rowMDN['MUSEUM_DESCRIPT'];
+							echo '</p> </a>';
+							echo '<p class="text-location TcolorWhite">';
+							echo $rowMDN['PROVINCE_DESC'];
+							echo '</p>';
+							echo '<p class="text-date TcolorGray">';
+							echo $rowMDN['LAST_DATE'];
+							echo '</p>';
+							echo '</div>';
+							echo '</div>';
+						}
+						?>
 						<div class="box-network">
 							<a href="">
 							<div class="box-pic">
@@ -1106,8 +1180,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 							while ($rowContent = mysql_fetch_array($rsContent)) {
 								$categoryID = $rowContent['CONTENT_CAT_ID'];
 
-								$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
-								;
+								$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID']; ;
 								$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 								$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
 								$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
