@@ -16,6 +16,9 @@ $km_module_id = 2;
 $digial_module_id = 3;
 
 $visual_exhibition = 5;
+$style_exhibition = 20;
+$temporary_exhibition = 84;
+$permanent_exhibition = 85;
 
 $new_and_event = 12;
 $event_sub_cat_id = 130;

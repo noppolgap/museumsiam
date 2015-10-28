@@ -6,7 +6,7 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/km.css" />
@@ -16,14 +16,14 @@ require("assets/configs/function.inc.php");
 		$(".menutop li.menu6").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body id="km">
-	
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
-<?php 
+
+<?php
+include('inc/inc-top-bar.php');
+include('inc/inc-menu.php');
 $MID = $km_module_id;
 $CID = $seminar_cat_id;
 $CONID = $_GET['CONID'];
@@ -51,6 +51,12 @@ $currentParam = "?MID=" . $MID . "&CID=" . $CID;
 if (isset($_GET['SCID'])) {
 	//$backPage .= "$SCID=" . $SCID;
 	$currentParam .= "$SCID=" . $SCID;
+}
+
+if ($_SESSION['LANG'] == 'TH') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTENT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
+} else if ($_SESSION['LANG'] == 'EN') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_ENG AS CAT_DESC , content.CONTENT_DESC_ENG AS CONTENT_DESC , content.BRIEF_ENG AS BRIEF_LOC";
 }
 
 ?>
@@ -86,7 +92,11 @@ if (isset($_GET['SCID'])) {
 											from trn_content_sub_category where SUB_CONTENT_CAT_ID = $SCID ";
 	$rsCat = mysql_query($sqlCategory) or die(mysql_error());
 	while ($rowCat = mysql_fetch_array($rsCat)) {
-		$catName = $rowCat['SUB_CONTENT_CAT_DESC_LOC'];
+		if ($_SESSION['LANG'] == 'TH') {
+			$catName = $rowCat['SUB_CONTENT_CAT_DESC_LOC'];
+		} else if ($_SESSION['LANG'] == 'EN') {
+			$catName = $rowCat['SUB_CONTENT_CAT_DESC_ENG'];
+		}
 	}
 } else {
 	$sqlCategory = "select CONTENT_CAT_ID ,
@@ -94,7 +104,11 @@ if (isset($_GET['SCID'])) {
 											CONTENT_CAT_DESC_ENG from trn_content_category where CONTENT_CAT_ID	= $CID ";
 	$rsCat = mysql_query($sqlCategory) or die(mysql_error());
 	while ($rowCat = mysql_fetch_array($rsCat)) {
-		$catName = $rowCat['CONTENT_CAT_DESC_LOC'];
+		if ($_SESSION['LANG'] == 'TH') {
+			$catName = $rowCat['CONTENT_CAT_DESC_LOC'];
+		} else if ($_SESSION['LANG'] == 'EN') {
+			$catName = $rowCat['CONTENT_CAT_DESC_ENG'];
+		}
 	}
 }
 ?>
@@ -106,20 +120,13 @@ if (isset($_GET['SCID'])) {
 					<div class="box-tumb-main cf">
 						<?php
 
-						$getContentSql = "SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
-												cat.CONTENT_CAT_ID,
+						$getContentSql  = "SELECT ".$LANG_SQL;
+						$getContentSql .= "  ,	cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
 												content.LAST_UPDATE_DATE,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
@@ -130,7 +137,7 @@ if (isset($_GET['SCID'])) {
 						if (isset($_GET['SCID']))
 							$getContentSql .= " AND content.SUB_CAT_ID = $SCID ";
 						$getContentSql .= " AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0
 											ORDER BY
 												content.ORDER_DATA desc
 											Limit 9 offset  " . (9 * ($currentPage - 1));
@@ -148,6 +155,13 @@ if (isset($_GET['SCID'])) {
 							if ($i == 4 || $i == 7)
 								echo '<hr class="line-gray"/>';
 
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' .$rowContent['CONTENT_ID'];
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '"> ';
 							echo ' <div class="box-pic"> ';
@@ -157,7 +171,7 @@ if (isset($_GET['SCID'])) {
 							echo ' <div class="box-text">';
 							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '">';
 							echo ' <p class="text-title TcolorRed">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
 							echo ' <p class="text-date TcolorGray">';
 							echo ConvertDate($rowContent['LAST_DATE']);
@@ -172,8 +186,8 @@ if (isset($_GET['SCID'])) {
 							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '" class="btn red">อ่านเพิ่มเติม</a>';
 
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="#" class="btn-socila fb"></a>';
-							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
@@ -182,9 +196,9 @@ if (isset($_GET['SCID'])) {
 							$i++;
 
 						}
-						?>	
-						
-											
+						?>
+
+
 					</div>
 					<div class="box-pagination-main cf">
 						<ul class="pagination">
@@ -238,18 +252,19 @@ if (isset($_GET['SCID'])) {
 					</div>
 				</div>
 			</div>
-			
 
-			
+
+
 		</div>
 	</div>
 </div>
 
 <div class="box-freespace"></div>
 
-
-
-<?php include('inc/inc-footer.php'); ?>	
-
+<?php
+include ('inc/inc-footer.php');
+include ('inc/inc-social-network.php');
+?>
 </body>
 </html>
+<? CloseDB(); ?>

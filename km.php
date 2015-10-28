@@ -2,6 +2,14 @@
 require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
+
+
+if ($_SESSION['LANG'] == 'TH') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTENT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
+} else if ($_SESSION['LANG'] == 'EN') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_ENG AS CAT_DESC , content.CONTENT_DESC_ENG AS CONTENT_DESC , content.BRIEF_ENG AS BRIEF_LOC";
+}
+
 ?>
 <!doctype html>
 <html>
@@ -16,13 +24,6 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu6").addClass("active");
-
-
-		// var fileName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') +1 );
-		// console.log(fileName) ;
-//
-		  // $(' event.target ''').closest( "li" ).toggleClass( "hilight" );
-
 	});
 </script>
 
@@ -32,26 +33,15 @@ require ('inc_meta.php');
 
 <?php
 include ('inc/inc-top-bar.php');
- ?>
-<?php
 include ('inc/inc-menu.php');
- ?>
-<?php
-//get Module ID
-if (!isset($_GET['MID']))
-	$MID = $km_module_id;
-else
-	$MID = $_GET['MID'];
 
-// $sqlModule = "select * from sys_app_module where MODULE_ID = " . $MID;
-// $moduleName = '';
-// $rs = mysql_query($sqlModule) or die(mysql_error());
-//
-// while ($row = mysql_fetch_array($rs)) {
-	// $moduleName = $row['MODULE_NAME_LOC'];
-	// // MODULE_NAME_ENG
-// }
-		?>
+//get Module ID
+if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
+	$MID = $km_module_id;
+}else{
+	$MID = $_GET['MID'];
+}
+?>
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
@@ -89,15 +79,9 @@ else
 					<div class="box-tumb-main cf ">
 						<?php
 						$categoryID = $event_cat_id;
-						$contentSqlStr = "SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
-												cat.CONTENT_CAT_ID,
+						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -111,7 +95,7 @@ else
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0
 											ORDER BY
 												content.ORDER_DATA desc
 											LIMIT 0,3 ";
@@ -124,6 +108,14 @@ else
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
 							echo ' <div class="box-pic" > ';
@@ -132,7 +124,7 @@ else
 							echo ' <div class="box-text">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
 							echo ' <p class="text-title">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
 							echo ' <p class="text-date">';
 							echo ConvertDate($rowContent['LAST_DATE']);
@@ -143,8 +135,8 @@ else
 							echo ' <div class="box-btn cf">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="#" class="btn-socila fb"></a>';
-							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
@@ -152,7 +144,6 @@ else
 							$i++;
 							}
 						?>
-
 					</div>
 				</div>
 			</div>
@@ -169,15 +160,9 @@ else
 
 						<?php
 						$categoryID = $exhibition_cat_id;
-						$contentSqlStr = "SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
-												cat.CONTENT_CAT_ID,
+						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -191,7 +176,7 @@ else
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0
 											ORDER BY
 												content.ORDER_DATA desc
 											LIMIT 0,3 ";
@@ -204,6 +189,14 @@ else
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
 							echo ' <div class="box-pic" > ';
@@ -212,7 +205,7 @@ else
 							echo ' <div class="box-text">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
 							echo ' <p class="text-title">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
 							echo ' <p class="text-date">';
 							echo ConvertDate($rowContent['LAST_DATE']);
@@ -223,8 +216,8 @@ else
 							echo ' <div class="box-btn cf">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="#" class="btn-socila fb"></a>';
-							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
@@ -247,15 +240,9 @@ else
 					<div class="box-tumb-main cf ">
 						<?php
 						$categoryID = $reseach_cat_id;
-						$contentSqlStr = "SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
-												cat.CONTENT_CAT_ID,
+						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -269,7 +256,7 @@ else
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0
 											ORDER BY
 												content.ORDER_DATA desc
 											LIMIT 0,3 ";
@@ -282,6 +269,14 @@ else
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
 							echo ' <div class="box-pic" > ';
@@ -290,7 +285,7 @@ else
 							echo ' <div class="box-text">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
 							echo ' <p class="text-title">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
 							echo ' <p class="text-date">';
 							echo ConvertDate($rowContent['LAST_DATE']);
@@ -301,8 +296,8 @@ else
 							echo ' <div class="box-btn cf">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="#" class="btn-socila fb"></a>';
-							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
@@ -326,15 +321,9 @@ else
 
 						<?php
 						$categoryID = $education_cat_id;
-						$contentSqlStr = "SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
-												cat.CONTENT_CAT_ID,
+						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -348,7 +337,7 @@ else
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0
 											ORDER BY
 												content.ORDER_DATA desc
 											LIMIT 0,3 ";
@@ -361,6 +350,14 @@ else
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
 							echo ' <div class="box-pic" > ';
@@ -369,7 +366,7 @@ else
 							echo ' <div class="box-text">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
 							echo ' <p class="text-title">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
 							echo ' <p class="text-date">';
 							echo ConvertDate($rowContent['LAST_DATE']);
@@ -380,8 +377,8 @@ else
 							echo ' <div class="box-btn cf">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="#" class="btn-socila fb"></a>';
-							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
@@ -404,15 +401,9 @@ else
 					<div class="box-tumb-main cf ">
 						<?php
 						$categoryID = $seminar_cat_id;
-						$contentSqlStr = "SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
-												cat.CONTENT_CAT_ID,
+						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -426,7 +417,7 @@ else
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0
 											ORDER BY
 												content.ORDER_DATA desc
 											LIMIT 0,3 ";
@@ -439,6 +430,14 @@ else
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
 							echo ' <div class="box-pic" > ';
@@ -447,7 +446,7 @@ else
 							echo ' <div class="box-text">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
 							echo ' <p class="text-title">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
 							echo ' <p class="text-date">';
 							echo ConvertDate($rowContent['LAST_DATE']);
@@ -458,8 +457,8 @@ else
 							echo ' <div class="box-btn cf">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="#" class="btn-socila fb"></a>';
-							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
@@ -483,15 +482,9 @@ else
 
 						<?php
 						$categoryID = $media_cat_id;
-						$contentSqlStr = "SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
-												cat.CONTENT_CAT_ID,
+						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -505,7 +498,7 @@ else
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+											AND content.CONTENT_STATUS_FLAG  = 0
 											ORDER BY
 												content.ORDER_DATA desc
 											LIMIT 0,3 ";
@@ -518,6 +511,14 @@ else
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' .$rowContent['CONTENT_ID'];
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
 							echo ' <div class="box-pic" > ';
@@ -526,7 +527,7 @@ else
 							echo ' <div class="box-text">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
 							echo ' <p class="text-title">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
 							echo ' <p class="text-date">';
 							echo ConvertDate($rowContent['LAST_DATE']);
@@ -537,8 +538,8 @@ else
 							echo ' <div class="box-btn cf">';
 							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="#" class="btn-socila fb"></a>';
-							echo ' <a href="#" class="btn-socila tw"></a>';
+							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
@@ -637,7 +638,8 @@ $_SESSION['KM_PREV_PG'] = $current_url;
 
 <?php
 include ('inc/inc-footer.php');
- ?>
-
+include ('inc/inc-social-network.php');
+?>
 </body>
 </html>
+<? CloseDB(); ?>

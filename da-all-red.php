@@ -8,7 +8,7 @@ require ("assets/configs/function.inc.php");
 <head>
 <?
 require ('inc_meta.php');
- ?>	
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/da.css" />
@@ -21,19 +21,14 @@ require ('inc_meta.php');
 		// }
 	});
 </script>
-	
+
 </head>
 
 <body id="km">
-	
-<?php
-include ('inc/inc-top-bar.php');
- ?>
-<?php
-include ('inc/inc-menu.php');
- ?>	
 
 <?php
+include ('inc/inc-top-bar.php');
+include ('inc/inc-menu.php');
 $MID = $_GET['MID'];
 $CID = $_GET['CID'];
 $CONID = $_GET['CONID'];
@@ -72,7 +67,11 @@ if (isset($_GET['SCID'])) {
 											from trn_content_sub_category where SUB_CONTENT_CAT_ID = $SCID ";
 	$rsCat = mysql_query($sqlCategory) or die(mysql_error());
 	while ($rowCat = mysql_fetch_array($rsCat)) {
-		$catName = $rowCat['SUB_CONTENT_CAT_DESC_LOC'];
+		if ($_SESSION['LANG'] == 'TH') {
+			$catName = $rowCat['SUB_CONTENT_CAT_DESC_LOC'];
+		} else if ($_SESSION['LANG'] == 'EN') {
+			$catName = $rowCat['SUB_CONTENT_CAT_DESC_ENG'];
+		}
 	}
 } else {
 	$sqlCategory = "select CONTENT_CAT_ID ,
@@ -80,20 +79,25 @@ if (isset($_GET['SCID'])) {
 											CONTENT_CAT_DESC_ENG from trn_content_category where CONTENT_CAT_ID	= $CID ";
 	$rsCat = mysql_query($sqlCategory) or die(mysql_error());
 	while ($rowCat = mysql_fetch_array($rsCat)) {
-		$catName = $rowCat['CONTENT_CAT_DESC_LOC'];
+		if ($_SESSION['LANG'] == 'TH') {
+			$catName = $rowCat['CONTENT_CAT_DESC_LOC'];
+		} else if ($_SESSION['LANG'] == 'EN') {
+			$catName = $rowCat['CONTENT_CAT_DESC_ENG'];
+		}
 	}
+}
+
+if ($_SESSION['LANG'] == 'TH') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTENT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
+} else if ($_SESSION['LANG'] == 'EN') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_ENG AS CAT_DESC , content.CONTENT_DESC_ENG AS CONTENT_DESC , content.BRIEF_ENG AS BRIEF_LOC";
 }
 ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
-			
-					<?
-					include ('inc/inc-da-red-breadcrumbs.php');
-			?> 
-				 
-			
+			<? include ('inc/inc-da-red-breadcrumbs.php'); ?>
 		</div>
 	</div>
 </div>
@@ -115,18 +119,12 @@ if (isset($_GET['SCID'])) {
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
-						
+
 						<?php
 
-						$getContentSql = "SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
-												cat.CONTENT_CAT_ID,
+						$getContentSql  = "SELECT ".$LANG_SQL;
+						$getContentSql .= "  ,	cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -160,6 +158,13 @@ if (isset($_GET['SCID'])) {
 							if ($i == 4 || $i == 7)
 								echo '<hr class="line-gray"/>';
 
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'da-detail.php?MID=' . $MID . '%26CID=' . $CID . '%26CONID=' . $rowContent['CONTENT_ID'].str_replace("&","%26",$currentSCID);
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' .$rowContent['CONTENT_ID'];
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . $currentSCID . '">';
 							echo '<div class="box-pic">';
@@ -169,7 +174,7 @@ if (isset($_GET['SCID'])) {
 							echo '<div class="box-text">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . $currentSCID . '">';
 							echo '<p class="text-title TcolorRed">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo '</p>';
 							echo '</a>';
 							echo '<p class="text-date TcolorGray">';
@@ -181,8 +186,8 @@ if (isset($_GET['SCID'])) {
 							echo '<div class="box-btn cf">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . $currentSCID . '" class="btn red">อ่านเพิ่มเติม</a>';
 							echo '<div class="box-btn-social cf">';
-							echo '<a href="#" class="btn-socila fb"></a>';
-							echo '<a href="#" class="btn-socila tw"></a>';
+							echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo '</div>';
 							echo '</div>';
 							echo '</div>';
@@ -190,261 +195,8 @@ if (isset($_GET['SCID'])) {
 							$i++;
 
 						}
-								?>
-								
-						<!-- <div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<hr class="line-gray"/>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<hr class="line-gray"/>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf mid">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-tumb cf">
-							<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									
-								</div>
-							</a>
-							<div class="box-text">
-								<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p>
-								</a>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-								<p class="text-des TcolorBlack">
-									Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-								</p>
-								<div class="box-btn cf">
-									<a href="" class="btn red">อ่านเพิ่มเติม</a>
-									<div class="box-btn-social cf">
-										<a href="#" class="btn-socila fb"></a>
-										<a href="#" class="btn-socila tw"></a>
-									</div>
-								</div>
-							</div>
-						</div> -->						
+					?>
+
 					</div>
 					<div class="box-pagination-main cf">
 						<ul class="pagination">
@@ -504,24 +256,22 @@ if (isset($_GET['SCID'])) {
 					</div>
 				</div>
 			</div>
-			
 
-			
+
+
 		</div>
 	</div>
 </div>
 
 <div class="box-freespace"></div>
-<?php
 
+<?php
 $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION['DA_PREV_PG'] = $current_url;
-?>
 
-
-<?php
 include ('inc/inc-footer.php');
- ?>	
-
+include ('inc/inc-social-network.php');
+?>
 </body>
 </html>
+<? CloseDB(); ?>

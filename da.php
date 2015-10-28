@@ -8,7 +8,7 @@ require ("assets/configs/function.inc.php");
 <head>
 <?
 require ('inc_meta.php');
- ?>
+?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/da.css" />
@@ -25,10 +25,25 @@ require ('inc_meta.php');
 
 <?php
 include ('inc/inc-top-bar.php');
- ?>
-<?php
 include ('inc/inc-menu.php');
- ?>
+
+//get Module ID
+if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
+	$MID = $digial_module_id;
+}else{
+	$MID = $_GET['MID'];
+}
+
+
+if ($_SESSION['LANG'] == 'TH') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTENT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
+	$LANG_SQL_Category = "CONTENT_CAT_DESC_LOC AS CAT_DESC_LOG";
+} else if ($_SESSION['LANG'] == 'EN') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_ENG AS CAT_DESC , content.CONTENT_DESC_ENG AS CONTENT_DESC , content.BRIEF_ENG AS BRIEF_LOC";
+	$LANG_SQL_Category = "CONTENT_CAT_DESC_ENG AS CAT_DESC_LOG";
+}
+
+?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -48,7 +63,7 @@ include ('inc/inc-menu.php');
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php
+<?php
 			include ('inc/inc-left-content-da.php');
  ?>
 		</div>
@@ -58,15 +73,9 @@ include ('inc/inc-menu.php');
 
 
 				<?php
-				if (!isset($_GET['MID']))
-					$MID = $digial_module_id;
-				else
-					$MID = $_GET['MID'];
 
-				$sqlStr = " SELECT
+				$sqlStr = " SELECT ".$LANG_SQL_Category.",
 									CONTENT_CAT_ID,
-									CONTENT_CAT_DESC_LOC,
-									CONTENT_CAT_DESC_ENG,
 									LINK_URL,
 									IS_LAST_NODE,
 									REF_SUB_MODULE_ID
@@ -89,7 +98,7 @@ include ('inc/inc-menu.php');
 				$rowCat = mysql_fetch_array($rsCat);
 				?>
 				<div class="box-title cf">
-					<h2><?=$rowCat['CONTENT_CAT_DESC_LOC'] ?></h2>
+					<h2><?=$rowCat['CAT_DESC_LOG'] ?></h2>
 					<div class="box-btn">
 						<?php
 						$pageNext = '';
@@ -108,15 +117,9 @@ include ('inc/inc-menu.php');
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						<?php
-						$contentSql = " SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
+						$contentSql = " SELECT ".$LANG_SQL.",
 												cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -143,6 +146,14 @@ include ('inc/inc-menu.php');
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'da-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $CONID;
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo '<div class="box-pic">';
@@ -152,7 +163,7 @@ include ('inc/inc-menu.php');
 							echo '<div class="box-text">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo '<p class="text-title">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo '</p>';
 							echo '</a>';
 							echo '<p class="text-date">';
@@ -164,8 +175,8 @@ include ('inc/inc-menu.php');
 							echo '<div class="box-btn cf">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
 							echo '<div class="box-btn-social cf">';
-							echo '<a href="#" class="btn-socila fb"></a>';
-							echo '<a href="#" class="btn-socila tw"></a>';
+							echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo '</div>';
 							echo '</div>';
 							echo '</div>';
@@ -180,10 +191,8 @@ include ('inc/inc-menu.php');
 			<div class="box-category-main news BGray2">
 				<div class="box-title cf ">
 					<?php
-					$sqlStr = " SELECT
+				$sqlStr = " SELECT ".$LANG_SQL_Category.",
 									CONTENT_CAT_ID,
-									CONTENT_CAT_DESC_LOC,
-									CONTENT_CAT_DESC_ENG,
 									LINK_URL,
 									IS_LAST_NODE,
 									REF_SUB_MODULE_ID
@@ -205,7 +214,7 @@ include ('inc/inc-menu.php');
 					$rsCat = mysql_query($sqlStr) or die(mysql_error());
 					$rowCat = mysql_fetch_array($rsCat);
 				?>
-					<h2><?=$rowCat['CONTENT_CAT_DESC_LOC'] ?></h2>
+					<h2><?=$rowCat['CAT_DESC_LOG'] ?></h2>
 					<div class="box-btn">
 						<?php
 						$pageNext = '';
@@ -228,15 +237,9 @@ include ('inc/inc-menu.php');
 
 						<?php
 
-						$contentSql = " SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
+						$contentSql = " SELECT ".$LANG_SQL.",
 												cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -261,6 +264,14 @@ include ('inc/inc-menu.php');
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'da-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $CONID;
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 							echo '<div class="box-tumb cf' . $extraClass . '">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo '<div class="box-pic">';
@@ -270,7 +281,7 @@ include ('inc/inc-menu.php');
 							echo '<div class="box-text">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo '<p class="text-title TcolorRed">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo '</p>';
 							echo '</a>';
 							echo '<p class="text-date TcolorGray">';
@@ -282,8 +293,8 @@ include ('inc/inc-menu.php');
 							echo '<div class="box-btn cf">';
 							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
 							echo '<div class="box-btn-social cf">';
-							echo '<a href="#" class="btn-socila fb"></a>';
-							echo '<a href="#" class="btn-socila tw"></a>';
+							echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo '</div>';
 							echo '</div>';
 							echo '</div>';
@@ -299,10 +310,8 @@ include ('inc/inc-menu.php');
 <!-- Repeat at order > 5 -->
 
 <?php
-$sqlStr = " SELECT
+				$sqlStr = " SELECT ".$LANG_SQL_Category.",
 									CONTENT_CAT_ID,
-									CONTENT_CAT_DESC_LOC,
-									CONTENT_CAT_DESC_ENG,
 									LINK_URL,
 									IS_LAST_NODE,
 									REF_SUB_MODULE_ID
@@ -327,7 +336,7 @@ $rsCat = mysql_query($sqlStr) or die(mysql_error());
 while ($rowCat = mysql_fetch_array($rsCat)) {
 	echo '<div class="box-category-main news BGray2">';
 	echo '<div class="box-title cf ">';
-	echo '<h2>' . $rowCat['CONTENT_CAT_DESC_LOC'] . '</h2>';
+	echo '<h2>' . $rowCat['CAT_DESC_LOG'] . '</h2>';
 	echo '<div class="box-btn">';
 	$pageNext = '';
 	$extraParam = '' ;
@@ -344,15 +353,9 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 	echo '<div class="box-news-main">';
 	echo '<div class="box-tumb-main cf ">';
 
-	$contentSql = " SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
+						$contentSql = " SELECT ".$LANG_SQL.",
 												cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -377,6 +380,14 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 		if ($i == 2) {
 			$extraClass = ' mid';
 		}
+
+							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+							$path = 'da-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $CONID;
+							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+							$tw_link = $fullpath;
+
 		echo '<div class="box-tumb cf' . $extraClass . '">';
 		echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 		echo '<div class="box-pic">';
@@ -385,7 +396,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 		echo '<div class="box-text">';
 		echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 		echo '<p class="text-title TcolorRed">';
-		echo $rowContent['CONTENT_DESC_LOC'];
+		echo $rowContent['CONTENT_DESC'];
 		echo '</p>';
 		echo '</a>';
 		echo '<p class="text-date TcolorGray">';
@@ -397,8 +408,8 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 		echo '<div class="box-btn cf">';
 		echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
 		echo '<div class="box-btn-social cf">';
-		echo '<a href="#" class="btn-socila fb"></a>';
-		echo '<a href="#" class="btn-socila tw"></a>';
+		echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+		echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';
@@ -420,10 +431,8 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 				<div class="box-left">
 					<div class="box-category-main news BGray2">
 						<?php
-						$sqlStr = " SELECT
+				$sqlStr = " SELECT ".$LANG_SQL_Category.",
 									CONTENT_CAT_ID,
-									CONTENT_CAT_DESC_LOC,
-									CONTENT_CAT_DESC_ENG,
 									LINK_URL,
 									IS_LAST_NODE,
 									REF_SUB_MODULE_ID
@@ -446,7 +455,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 						$rowCat = mysql_fetch_array($rsCat);
 				?>
 						<div class="box-title cf ">
-							<h2><?=$rowCat['CONTENT_CAT_DESC_LOC'] ?></h2>
+							<h2><?=$rowCat['CAT_DESC_LOG'] ?></h2>
 							<div class="box-btn">
 								<?php
 								$pageNext = '';
@@ -466,15 +475,10 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 							<div class="box-tumb-main cf ">
 
 								<?php
-								$contentSql = " SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
+
+						$contentSql = " SELECT ".$LANG_SQL.",
 												cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -499,6 +503,13 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 									if ($i == 1) {
 										$extraClass = ' left';
 									}
+									$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+									$path = 'da-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+									$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+									$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $CONID;
+									$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+									$tw_link = $fullpath;
+
 									echo '<div class="box-tumb cf' . $extraClass . '">';
 									echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 									echo '<div class="box-pic">';
@@ -508,7 +519,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 									echo '<div class="box-text">';
 									echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 									echo '<p class="text-title TcolorRed">';
-									echo $rowContent['CONTENT_DESC_LOC'];
+									echo $rowContent['CONTENT_DESC'];
 									echo '</p>';
 									echo '</a>';
 									echo '<p class="text-date TcolorGray">';
@@ -520,8 +531,8 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 									echo '<div class="box-btn cf">';
 									echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
 									echo '<div class="box-btn-social cf">';
-									echo '<a href="#" class="btn-socila fb"></a>';
-									echo '<a href="#" class="btn-socila tw"></a>';
+									echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+									echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 									echo '</div>';
 									echo '</div>';
 									echo '</div>';
@@ -536,10 +547,8 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 				<div class="box-right">
 					<div class="box-category-main news BRed">
 						<?php
-						$sqlStr = " SELECT
+				$sqlStr = " SELECT ".$LANG_SQL_Category.",
 									CONTENT_CAT_ID,
-									CONTENT_CAT_DESC_LOC,
-									CONTENT_CAT_DESC_ENG,
 									LINK_URL,
 									IS_LAST_NODE,
 									REF_SUB_MODULE_ID
@@ -562,7 +571,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 						$rowCat = mysql_fetch_array($rsCat);
 				?>
 						<div class="box-title cf ">
-							<h2><?=$rowCat['CONTENT_CAT_DESC_LOC'] ?></h2>
+							<h2><?=$rowCat['CAT_DESC_LOG'] ?></h2>
 							<div class="box-btn">
 								<?php
 								$pageNext = '';
@@ -580,15 +589,9 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 						<div class="box-news-main">
 							<div class="box-tumb-main cf ">
 								<?php
-								$contentSql = " SELECT
-												cat.CONTENT_CAT_DESC_LOC,
-												cat.CONTENT_CAT_DESC_ENG,
+								$contentSql = " SELECT ".$LANG_SQL.",
 												cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
-												content.CONTENT_DESC_LOC,
-												content.CONTENT_DESC_ENG,
-												content.BRIEF_LOC,
-												content.BRIEF_ENG,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
@@ -609,6 +612,13 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 						$i = 1;
 						$categoryID = $rowCat['CONTENT_CAT_ID'] ;
 						while ($rowContent = mysql_fetch_array($rsContent)) {
+
+									$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+									$path = 'da-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+									$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+									$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $CONID;
+									$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+									$tw_link = $fullpath;
 							?>
 								<div class="box-tumb cf">
 									<a href="da-detail.php?MID=<?=$MID ?>&CID=<?=$categoryID ?>&CONID=<?=$rowContent['CONTENT_ID'] ?>">
@@ -619,7 +629,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 									<div class="box-text">
 										<a href="da-detail.php?MID=<?=$MID ?>&CID=<?=$categoryID ?>&CONID=<?=$rowContent['CONTENT_ID'] ?>">
 											<p class="text-title TcolorWhite">
-												<?=$rowContent['CONTENT_DESC_LOC'] ?>
+												<?=$rowContent['CONTENT_DESC'] ?>
 											</p>
 										</a>
 										<p class="text-date TcolorGray">
@@ -631,8 +641,10 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 										<div class="box-btn cf">
 											<a href="da-detail.php?MID=<?=$MID ?>&CID=<?=$categoryID ?>&CONID=<?=$rowContent['CONTENT_ID'] ?>" class="btn black">อ่านเพิ่มเติม</a>
 											<div class="box-btn-social cf">
-												<a href="#" class="btn-socila fb"></a>
-												<a href="#" class="btn-socila tw"></a>
+								<?php
+									echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+									echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+								?>
 											</div>
 										</div>
 									</div>
@@ -657,9 +669,11 @@ $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION['DA_PREV_PG'] = $current_url;
 ?>
 
+
 <?php
 include ('inc/inc-footer.php');
- ?>
-
+include ('inc/inc-social-network.php');
+?>
 </body>
 </html>
+<? CloseDB(); ?>

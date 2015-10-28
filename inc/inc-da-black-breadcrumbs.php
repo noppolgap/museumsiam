@@ -1,11 +1,11 @@
 <?php
 //echo $MID ;
-
+/*
 if (!isset($_GET['MID']))
 	$MID = $digial_module_id;
 else
 	$MID = $_GET['MID'];
-
+*/
 echo '<ol class="cf">';
 echo '<li>';
 echo '<a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp; ';
@@ -58,10 +58,10 @@ function getSubCatBread($scid, $mid, &$breadArr) {
 	$sqlStr = "select * from trn_content_sub_category where SUB_CONTENT_CAT_ID = " . $scid;
 	$rs = mysql_query($sqlStr) or die(mysql_error());
 	if ($_SESSION['LANG'] == 'TH')
-		$selectedColName = 'SUB_CONTENT_CAT_DESC_LOC'; 
-	else 
+		$selectedColName = 'SUB_CONTENT_CAT_DESC_LOC';
+	else
 		$selectedColName = 'SUB_CONTENT_CAT_DESC_ENG';
-	
+
 	while ($row = mysql_fetch_array($rs)) {
 
 		// echo count($breadArr);
@@ -84,8 +84,8 @@ function getCatBread($cid, $mid, &$breadArr) {
 	$sqlStr = "select * from trn_content_category where CONTENT_CAT_ID = " . $cid;
 	$rs = mysql_query($sqlStr) or die(mysql_error());
 	if ($_SESSION['LANG'] == 'TH')
-		$selectedColName = 'CONTENT_CAT_DESC_LOC'; 
-	else 
+		$selectedColName = 'CONTENT_CAT_DESC_LOC';
+	else
 		$selectedColName = 'CONTENT_CAT_DESC_ENG';
 	while ($row = mysql_fetch_array($rs)) {
 		//	echo count($breadArr);
@@ -106,8 +106,8 @@ function getModuleBread($mid, &$breadArr) {
 	$sqlStr = "select * from sys_app_module where MODULE_ID = " . $mid;
 	$rs = mysql_query($sqlStr) or die(mysql_error());
 	if ($_SESSION['LANG'] == 'TH')
-		$selectedColName = 'MODULE_NAME_LOC'; 
-	else 
+		$selectedColName = 'MODULE_NAME_LOC';
+	else
 		$selectedColName = 'MODULE_NAME_ENG';
 	while ($row = mysql_fetch_array($rs)) {
 		//echo count($breadArr);
@@ -123,18 +123,18 @@ function getModuleBread($mid, &$breadArr) {
 function getContentBread($conid, &$breadArr)
 {
 	$sqlStr = "select * from trn_content_detail where CONTENT_ID = " . $conid;
-	 
-	 
+
+
 	$rs = mysql_query($sqlStr) or die(mysql_error());
 	if ($_SESSION['LANG'] == 'TH')
-		$selectedColName = 'CONTENT_DESC_LOC'; 
-	else 
+		$selectedColName = 'CONTENT_DESC_LOC';
+	else
 		$selectedColName = 'CONTENT_DESC_ENG';
-		
+
 	while ($row = mysql_fetch_array($rs)) {
 			$breadArr[] = '<li class="active">' . $row[$selectedColName] . '</li>';
 	}
-	
-	
+
+
 }
 ?>
