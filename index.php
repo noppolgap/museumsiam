@@ -795,9 +795,9 @@ ORDER BY RAND() LIMIT 0,4 ";
 						<?php
 
 						if ($_SESSION['LANG'] == 'TH')
-							$selectedColumn = " muse.MUSEUM_NAME_LOC as MUSEUM_NAME , muse.DESCRIPT_LOC as MUSEUM_DESCRIPT, muse.PLACE_DESC_LOC as PLACE_DESC , dist.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDist.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC , province.PROVINCE_DESC_LOC  as PROVINCE_DESC ";
+							$selectedColumn = " muse.MUSEUM_NAME_LOC as MUSEUM_NAME , muse.DESCRIPT_LOC as MUSEUM_DESCRIPT, muse.PLACE_DESC_LOC as PLACE_DESC , dist.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDist.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC , province.PROVINCE_DESC_LOC  as PROVINCE_DESC , ";
 						else
-							$selectedColumn = " muse.MUSEUM_NAME_ENG as MUSEUM_NAME , muse.DESCRIPT_ENG as MUSEUM_DESCRIPT, muse.PLACE_DESC_ENG as PLACE_DESC , dist.DISTRICT_DESC_ENG as DISTRICT_DESC, subDist.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC , province.PROVINCE_DESC_ENG as PROVINCE_DESC ";
+							$selectedColumn = " muse.MUSEUM_NAME_ENG as MUSEUM_NAME , muse.DESCRIPT_ENG as MUSEUM_DESCRIPT, muse.PLACE_DESC_ENG as PLACE_DESC , dist.DISTRICT_DESC_ENG as DISTRICT_DESC, subDist.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC , province.PROVINCE_DESC_ENG as PROVINCE_DESC , ";
 
 						$sql = " SELECT " . $selectedColumn;
 						$sql .= " muse.MUSEUM_DETAIL_ID, ";
@@ -849,7 +849,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 							echo '</div>';
 						}
 						?>
-						<div class="box-network">
+						<!-- <div class="box-network">
 							<a href="">
 							<div class="box-pic">
 								<img src="http://placehold.it/274x205">
@@ -938,7 +938,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 									28 พ.ย. 2559
 								</p>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<a class="btn-arrow left"></a>
 					<a class="btn-arrow right"></a>
