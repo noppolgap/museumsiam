@@ -184,7 +184,7 @@ if (isset($_GET['SCID'])) {
 							echo ' <div class="box-text">';
 							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']. '&PG='.$currentPage.'">';
 							echo ' <p class="text-title TcolorRed">';
-							echo $rowContent['CONTENT_DESC_LOC'];
+							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
 
 							echo ' <p class="text-date TcolorGray">';

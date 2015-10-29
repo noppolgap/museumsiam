@@ -20,8 +20,8 @@
 					<li class="submenu2"><a href="ve-temporary.php">นิทรรศการชั่วคราว</a></li>
 				</ul>
 			</li>
-			<li class="menu3"><a href="ve-category.php">นิทรรศการเสมือนจริง</a></li>
-			<li class="menu4"><a href="ve-category.php">เยี่ยมชมพิพิธภัณฑ์</a></li>
+			<li class="menu3"><a href="ve-category.php?c=19">นิทรรศการเสมือนจริง</a></li>
+			<li class="menu4"><a href="ve-category.php?c=18">เยี่ยมชมพิพิธภัณฑ์</a></li>
 		</ul>
 	</div>
 </div>

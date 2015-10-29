@@ -6,7 +6,7 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/ve.css" />
@@ -19,13 +19,32 @@ require("assets/configs/function.inc.php");
 			}
 	});
 </script>
-	
+
 </head>
 
 <body id="km">
-	
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php
+include('inc/inc-top-bar.php');
+include('inc/inc-menu.php');
+
+//get Module ID
+if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
+	$MID = $visual_exhibition;
+}else{
+	$MID = $_GET['MID'];
+}
+
+if ($_SESSION['LANG'] == 'TH') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTENT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
+	$LANG_SQL_CAT = "CONTENT_CAT_DESC_LOC AS CAT_DESC";
+	$LANG_SQL_SUB_CAT = "SUB_CONTENT_CAT_DESC_LOC AS CAT_DESC";
+} else if ($_SESSION['LANG'] == 'EN') {
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_ENG AS CAT_DESC , content.CONTENT_DESC_ENG AS CONTENT_DESC , content.BRIEF_ENG AS BRIEF_LOC";
+	$LANG_SQL_CAT = "CONTENT_CAT_DESC_ENG AS CAT_DESC";
+	$LANG_SQL_SUB_CAT = "SUB_CONTENT_CAT_DESC_ENG AS CAT_DESC";
+}
+
+?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -49,34 +68,47 @@ require("assets/configs/function.inc.php");
 			<?php include('inc/inc-left-content-ve.php'); ?>
 		</div>
 		<div class="box-right main-content">
+<?php
+    $sqlCategory = "SELECT ".$LANG_SQL." ,
+			cat.CONTENT_CAT_ID, content.CONTENT_ID, content.EVENT_START_DATE, content.EVENT_END_DATE, content.CREATE_DATE , content.LAST_UPDATE_DATE, content.SUB_CAT_ID,
+			IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
+			FROM trn_content_category cat INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+			WHERE cat.flag = 0 AND cat.REF_MODULE_ID = ".$MID." AND cat.CONTENT_CAT_ID = ".$style_exhibition." AND content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG = 0
+			AND SUB_CAT_ID = ".$permanent_exhibition."
+			ORDER BY content.SUB_CAT_ID desc , content.ORDER_DATA desc LIMIT 0 , 1";
+	$query_Category = mysql_query($sqlCategory, $conn);
+	$row_Category = mysql_fetch_array($query_Category);
 
+			$row_Category['CONTENT_DESC'] = htmlspecialchars($row_Category['CONTENT_DESC']);
+			$path = 've-detail.php?MID=' . $MID . '%26CID=' . $row_Category['SUB_CAT_ID'] . '%26CONID=' . $row_Category['CONTENT_ID'];
+			$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+			$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $row_Category['CONTENT_ID'];
+			$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+			$tw_link = $fullpath;
+?>
 			<div class="box-category-main news BBlack w100 per">
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						<div class="box-tumb cf">
-							<a href="">
+							<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>">
 								<div class="box-pic">
-									<img src="http://placehold.it/572x394">
+									<img src="<?=callThumbListFrontEnd($row_Category['CONTENT_ID'], $row_Category['CONTENT_CAT_ID'], true)?>">
 								</div>
 							</a>
 							<div class="box-text">
 								<div class="wrap">
-									<a href="">
-										<p class="text-title">
-											Levitated Mass 340 Ton Giant Stone
-										</p>
+									<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>">
+										<p class="text-title"><?=$row_Category['CONTENT_DESC']?></p>
 									</a>
-									<p class="text-date">
-										28 พ.ย. 2559
-									</p>
-									<p class="text-des">
-										Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-									</p>
+									<p class="text-date"><?=ConvertDate($row_Category['LAST_DATE'])?></p>
+									<p class="text-des"><?=$row_Category['BRIEF_LOC']?></p>
 									<div class="box-btn cf">
-										<a href="" class="btn red">อ่านเพิ่มเติม</a>
+										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>" class="btn red">อ่านเพิ่มเติม</a>
 										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
+										<?php
+											echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+											echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+										?>
 										</div>
 									</div>
 								</div>
@@ -85,16 +117,23 @@ require("assets/configs/function.inc.php");
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
 
 <div class="box-freespace"></div>
 
+<?php
 
+$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$_SESSION['KM_PREV_PG'] = $current_url;
+?>
 
-<?php include('inc/inc-footer.php'); ?>	
-
+<?php
+include ('inc/inc-footer.php');
+include ('inc/inc-social-network.php');
+?>
 </body>
 </html>
+<? CloseDB(); ?>
