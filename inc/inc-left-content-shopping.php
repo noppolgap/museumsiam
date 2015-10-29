@@ -17,8 +17,20 @@
 			<li class="menu2"><a href="">e-BOOKING + ONLINE TICKET</a></li>
 			<li class="menu3 sub"><a href="">e-SHOPPING</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="">ของที่ระลึก</a></li>
-					<li class="submenu2"><a href="">หนังสือ</a></li>
+
+			<?php
+			     $sql  = "select CONTENT_CAT_ID,CONTENT_CAT_DESC_LOC from trn_content_category where REF_MODULE_ID= $education_cat_id 
+			     					AND FLAG = 0 ORDER BY ORDER_DATA desc  ";
+
+			     $query = mysql_query($sql,$conn);
+
+
+				 while($row = mysql_fetch_array($query)){
+
+				 	echo '<li class="submenu1"><a href="e-shopping-category.php?cid='.$row['CONTENT_CAT_ID'].'">'.$row['CONTENT_CAT_DESC_LOC'].'</a></li>';
+
+				 }
+			?>
 				</ul>
 			</li>
 		</ul>

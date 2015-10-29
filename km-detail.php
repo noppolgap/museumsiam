@@ -266,7 +266,7 @@ include ('inc/inc-menu.php');
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a href="" class="btn black">ดูทั้งหมด</a>
+							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black">ดูทั้งหมด</a>
 						</div>
 					</div>
 					<div class="box-slide-small">
