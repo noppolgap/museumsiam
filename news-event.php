@@ -6,7 +6,7 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/news-event.css" />
@@ -19,13 +19,13 @@ require("assets/configs/function.inc.php");
 		}
 	});
 </script>
-	
+
 </head>
 
 <body>
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -60,7 +60,7 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
-						
+
 						<?php
 
 						if (!isset($_GET['MID']))
@@ -162,7 +162,7 @@ require("assets/configs/function.inc.php");
 						}
 
 					?>
-						
+
 					</div>
 					<div class="box-pagination-main cf">
 						<ul class="pagination">
@@ -185,7 +185,7 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 
 </body>
 </html>

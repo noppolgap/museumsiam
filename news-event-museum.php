@@ -176,7 +176,7 @@ require("assets/configs/function.inc.php");
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="box-category-main news">
 				<div class="box-title cf">
 					<h2>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h2>
@@ -307,14 +307,14 @@ require("assets/configs/function.inc.php");
 						 LEFT JOIN (
 													SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
 													FROM (
-														SELECT * 
+														SELECT *
 														FROM trn_content_picture
 														ORDER BY ORDER_ID ASC
 													) AS my_table_tmp
 													GROUP BY CONTENT_ID, CAT_ID
 												) as p on  d.CONTENT_ID = p.CONTENT_ID
 												AND d.CAT_ID = p.CAT_ID
-						WHERE d.CAT_ID = 59 and d.CONTENT_STATUS_FLAG = 0 
+						WHERE d.CAT_ID = 59 and d.CONTENT_STATUS_FLAG = 0
 						ORDER BY d.ORDER_DATA DESC LIMIT 0 , 30";
 
 				$query = mysql_query($sql, $conn);

@@ -124,6 +124,7 @@ $_SESSION['SHOPPING_PREV_PG'] = $current_url;
 					   <div class="item">
 						<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>">
 							<div class="box-pic">
+								<span class="helper"></span>
 								<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
 							</div>
 						</a>

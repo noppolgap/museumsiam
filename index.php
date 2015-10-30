@@ -42,15 +42,9 @@ ORDER_ID";
 
 				$rsHeroBanner = mysql_query($heroBannerSql) or die(mysql_error());
 				while ($rowHeroBanner = mysql_fetch_array($rsHeroBanner)) {
-					echo '	<div class="slide" style="max-height:500px;background-image: url(' . callHeroBannerFrontEnd($rowHeroBanner['pic_ID'], $rowHeroBanner['IMG_PATH'], true) . ');"></div> ';
+					echo '	<div class="slide" style="background-image: url(' . callHeroBannerFrontEnd($rowHeroBanner['pic_ID'], $rowHeroBanner['IMG_PATH'], true) . ');"></div> ';
 				}
 				?>
-
-				<!-- <div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
-				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
-				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
-				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div>
-				<div class="slide" style="background-image: url(http://placehold.it/1920x500);"></div> -->
 			</div>
 		</div>
 

@@ -105,7 +105,7 @@ require("assets/configs/function.inc.php");
 				<div class="box-item-main cf">
 
 					<?php
-						    $sql_proc  = "SELECT prod.PRODUCT_ID, ".$sql_proc_lang.", prod.PRICE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
+						    $sql_proc  = "SELECT prod.PRODUCT_ID, ".$sql_proc_lang.", prod.PRICE, prod.SALE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
 											FROM trn_product AS prod
 											LEFT JOIN (
 												SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
@@ -127,6 +127,7 @@ require("assets/configs/function.inc.php");
 					<div class="item">
 						<a href="e-shopping-detail.php">
 							<div class="box-pic">
+								<span class="helper"></span>
 								<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
 							</div>
 						</a>
@@ -138,7 +139,11 @@ require("assets/configs/function.inc.php");
 							</a>
 							<p class="text-price">
 								ราคาปกติ : <? echo $row_proc['PRICE']; ?> บาท<br>
-								<span>ราคาพิเศษ : <? echo $row_proc['SALE']; ?> บาท</span>
+							<?php
+							if($row_proc['SALE'] != ''){
+								echo '<span>ราคาพิเศษ : '.$row_proc['SALE'].' บาท</span>';
+							}
+							?>
 							</p>
 						</div>
 					</div>
