@@ -1,20 +1,29 @@
+<?php
+	$NOW_day = date('d');
+	$NOW_month  = '';
+	$NOW_year  = '';
+if ($_SESSION['LANG'] == 'TH') {
+	$NOW_month = returnThaiShortMonth(date('m'));
+	$NOW_year = $NOW_month;
+	$NOW_year .= ' ';
+	$NOW_year .= date('Y')+543;
+
+	$LANG_SQL = 'cat.CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC , content.CONTENT_DESC_LOC AS CONTENT_LOC , content.BRIEF_LOC AS CONTENT_BRIEF ,';
+} else if ($_SESSION['LANG'] == 'EN') {
+	$NOW_month .= date('M');
+	$NOW_year .= date('M Y');
+
+	$LANG_SQL = 'cat.CONTENT_CAT_DESC_ENG AS CONTENT_CAT_LOC , content.CONTENT_DESC_ENG AS CONTENT_LOC , content.BRIEF_ENG AS CONTENT_BRIEF ,';
+}
+?>
+
 <div class="part-calendar">
 	<div class="box-calendar">
 		<div class="box-top">
 			<div  class="box-top-date">
-				<p class="date"><?=date('d')?></p>
+				<p class="date"><?=$NOW_day?></p>
 				<hr class="line"/>
-				<p class="month-year">
-<?php
-if ($_SESSION['LANG'] == 'TH') {
-	echo returnThaiShortMonth(date('m'));
-	echo ' ';
-	echo date('Y')+543;
-} else if ($_SESSION['LANG'] == 'EN') {
-	echo date('M Y');
-}
-?>
-				</p>
+				<p class="month-year"><?=$NOW_year?></p>
 			</div>
 			<? /*
 			<a class="btn-arrow pev"></a>
@@ -26,12 +35,6 @@ if ($_SESSION['LANG'] == 'TH') {
 </div>
 <?php
 	$dateTime = date('Y-m-d');
-
-	if ($_SESSION['LANG'] == 'TH'){
-		$LANG_SQL = 'cat.CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC , content.CONTENT_DESC_LOC AS CONTENT_LOC , content.BRIEF_LOC AS CONTENT_BRIEF ,';
-	}else if ($_SESSION['LANG'] == 'EN'){
-		$LANG_SQL = 'cat.CONTENT_CAT_DESC_ENG AS CONTENT_CAT_LOC , content.CONTENT_DESC_ENG AS CONTENT_LOC , content.BRIEF_ENG AS CONTENT_BRIEF ,';
-	}
 
 	$sql =  " SELECT ";
 	$sql .= $LANG_SQL;
@@ -54,115 +57,36 @@ if ($_SESSION['LANG'] == 'TH') {
 				AND (DATE(EVENT_START_DATE)  <= '".$dateTime."' AND DATE(EVENT_END_DATE) >= '".$dateTime."')
 			ORDER BY
 				content.ORDER_DATA desc
-			LIMIT 0,30 ";
-	echo $sql;
-
-
-
+			LIMIT 0,6 ";
+	$query_coming = mysql_query($sql, $conn);
+	if(mysql_num_rows($query_coming) > 0){
 ?>
+
 <div class="part-conming-event">
 	<div class="box-part-conming-event">
 		<div class="box-list-event">
+		<?php
+			while($row_coming = mysql_fetch_array($query_coming)) {
+				$link = 'event-detail.php?MID='.$new_and_event.'&CID='.$row_coming['CONTENT_CAT_ID'].'&CONID='.$row_coming['CONTENT_ID'];
+		?>
 			<div class="box-list cf">
 				<div class="box-date-tumb">
-					<p class="date">99</p>
-					<p class="month">พ.ย.</p>
+					<p class="date"><?=$NOW_day?></p>
+					<p class="month"><?=$NOW_month?></p>
 				</div>
 				<div class="box-text">
-					<a href="">
-						<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-						</p>
+					<a href="<?=$link?>">
+						<p class="text-title TcolorRed"><?=$row_coming['CONTENT_LOC']?></p>
 					</a>
-					<p class="text-date TcolorGray">
-						28 พ.ย. 2559
-					</p>
+					<p class="text-date TcolorGray"><?=ConvertDate($row_coming['CREATE_DATE'])?></p>
 				</div>
 			</div>
-			<div class="box-list cf">
-				<div class="box-date-tumb">
-					<p class="date">99</p>
-					<p class="month">พ.ย.</p>
-				</div>
-				<div class="box-text">
-					<a href="">
-						<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-						</p>
-					</a>
-					<p class="text-date TcolorGray">
-						28 พ.ย. 2559
-					</p>
-				</div>
-			</div>
-			<div class="box-list cf">
-				<div class="box-date-tumb">
-					<p class="date">99</p>
-					<p class="month">พ.ย.</p>
-				</div>
-				<div class="box-text">
-					<a href="">
-						<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-						</p>
-					</a>
-					<p class="text-date TcolorGray">
-						28 พ.ย. 2559
-					</p>
-				</div>
-			</div>
-			<div class="box-list cf">
-				<div class="box-date-tumb">
-					<p class="date">99</p>
-					<p class="month">พ.ย.</p>
-				</div>
-				<div class="box-text">
-					<a href="">
-						<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-						</p>
-					</a>
-					<p class="text-date TcolorGray">
-						28 พ.ย. 2559
-					</p>
-				</div>
-			</div>
-			<div class="box-list cf">
-				<div class="box-date-tumb">
-					<p class="date">99</p>
-					<p class="month">พ.ย.</p>
-				</div>
-				<div class="box-text">
-					<a href="">
-						<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-						</p>
-					</a>
-					<p class="text-date TcolorGray">
-						28 พ.ย. 2559
-					</p>
-				</div>
-			</div>
-			<div class="box-list cf">
-				<div class="box-date-tumb">
-					<p class="date">99</p>
-					<p class="month">พ.ย.</p>
-				</div>
-				<div class="box-text">
-					<a href="">
-						<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-						</p>
-					</a>
-					<p class="text-date TcolorGray">
-						28 พ.ย. 2559
-					</p>
-				</div>
-			</div>
+<?php   }  ?>
 		</div>
 		<div class="box-btn">
 			<a  class="btn black">กิจกรรมวันนี้</a>
 		</div>
+<?php   }  ?>
 	</div>
 </div>
 <?php
@@ -178,8 +102,9 @@ if ($_SESSION['LANG'] == 'TH') {
 
   $(function() {
     $( "#datepicker" ).datepicker({
-        dateFormat: 'dd/mm/yy',
-        beforeShowDay: highlightDays
+        dateFormat: 'yy-mm-dd',
+        beforeShowDay: highlightDays,
+        onSelect:movetopage
     });
     function highlightDays(date) {
         for (var i = 0; i < dates.length; i++) {
@@ -190,4 +115,7 @@ if ($_SESSION['LANG'] == 'TH') {
         return [true, ''];
      }
 });
+function movetopage(date){
+	window.location.href = 'news-event-day.php?date='+date;
+}
 </script>

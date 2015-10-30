@@ -618,6 +618,7 @@ div.text-title img{
 }
 .box-museum-news-main .box-museum-news{
 	padding: 0 7px;
+	min-height: 522px;
 }
 .box-museum-news-main .museum-news{
 	padding: 10px 0;

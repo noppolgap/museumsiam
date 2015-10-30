@@ -1044,6 +1044,10 @@ ul.pagination li a.btn-arrow-right:hover{
 	margin-bottom: 30px;
 }
 
+/* --------------------------------------------------- Calendar --------------------------------------------------- */
+.no-conming-event{
+
+}
 #datepicker{
 	margin: 10px auto 0px auto;
 }
