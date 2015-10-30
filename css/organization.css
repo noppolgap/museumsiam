@@ -200,6 +200,17 @@
 }
 
 
+.list-role div{
+	padding: 8px 15px;
+	position: relative;
+	color: #fff;
+}
+.list-role div:before {
+	display: block;
+	position: absolute;
+	left: 0px;
+	top: 8px;
+}
 
 
 
