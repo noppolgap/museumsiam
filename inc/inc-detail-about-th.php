@@ -24,7 +24,7 @@ if ($_SESSION['LANG'] == 'TH') {
 			$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KNOW_MUSEUM' AND ACTIVE_FLAG = 1";
 			$rsContent = mysql_query($sql) or die(mysql_error());
 			$rowContent = mysql_fetch_array($rsContent);
-			echo $rowContent['CMS_TEXT'];
+			echo  str_replace('../../', '',$rowContent['CMS_TEXT']);
 			?>
 		</p>
 	</div>
@@ -50,7 +50,7 @@ if ($_SESSION['LANG'] == 'TH') {
 		$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='MUSEUM_CONCEPT' AND ACTIVE_FLAG = 1";
 		$rsContent = mysql_query($sql) or die(mysql_error());
 		$rowContent = mysql_fetch_array($rsContent);
-		echo $rowContent['CMS_TEXT'];
+		echo str_replace('../../', '',$rowContent['CMS_TEXT']);
 		?>
 	</p>
 </div>
@@ -69,7 +69,7 @@ if ($_SESSION['LANG'] == 'TH') {
 			$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='MUSEUM_LOGO' AND ACTIVE_FLAG = 1";
 			$rsContent = mysql_query($sql) or die(mysql_error());
 			$rowContent = mysql_fetch_array($rsContent);
-			echo $rowContent['CMS_TEXT'];
+			echo str_replace('../../', '',$rowContent['CMS_TEXT']);
 			?>
 			<!--	หรือ รูปคนทำท่าเป็นกบเป็นสัญลักษณ์ของสถาบันพิพิธภัณฑ์การเรียนรู้แห่งชาติ เพราะกบถือเป็น
 			สัตว์ศักดิ์สิทธิ์ที่แสดงถึงความอุดมสมบูรณ์ เป็นที่เคารพบูชาทั่วทั้งเอเชียตะวันออกเฉียงใต้ เห็นได้จากลวดลาย

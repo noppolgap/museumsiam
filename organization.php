@@ -98,7 +98,8 @@ require ("assets/configs/function.inc.php");
 									WHERE
 									org.PARENT_ORG_ID = 0 AND org.ACTIVE_FLAG <> 2";
 						$rs = mysql_query($sqlCEO) or die(mysql_error());
-						$row = mysql_fetch_array($rs);
+						while( $row = mysql_fetch_array($rs))
+						{
 						?>
 
 						<p class="position-text">
@@ -128,6 +129,7 @@ require ("assets/configs/function.inc.php");
 								</div>
 							</div>
 						</div>
+						<?}?>
 					</div>
 					
 					
