@@ -70,7 +70,7 @@ require("assets/configs/function.inc.php");
 
 			    $sq_qa = " SELECT QA_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_qa
 						  WHERE REF_QA_ID = 0
-						  AND FLAG  <> 2 ORDER BY ORDER_DATA ";
+						  AND FLAG  = 0 ORDER BY ORDER_DATA DESC";
 
 				$query_qa = mysql_query($sq_qa, $conn);
 
@@ -86,7 +86,7 @@ require("assets/configs/function.inc.php");
 			<?php while($row = mysql_fetch_array($query_qa)) {
 					////ส่วนคำตอบ
 			       $sq_ans = " SELECT QA_ID ,CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_qa
-								WHERE REF_QA_ID = ".$row['QA_ID']." AND FLAG <> 2 ";
+								WHERE REF_QA_ID = ".$row['QA_ID']." AND FLAG = 0 ";
 
 					$query_ans = mysql_query($sq_ans, $conn);
 

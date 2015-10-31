@@ -19,7 +19,7 @@ require("../../assets/configs/function.inc.php");
 				<div class="mod-body-inner-header">
 					<div class="floatL titleBox">ชื่อเมนู</div>
 					<div class="floatR searchBox">
-						<form name="search" action="?" method="post">
+						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>

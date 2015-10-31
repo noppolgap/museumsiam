@@ -28,7 +28,7 @@ require ("../../assets/configs/function.inc.php");
 				<div class="mod-body-inner-header">
 					<div class="floatL titleBox">กรุณาเลือกระบบ</div>
 					<div class="floatR searchBox">
-						<form name="search" action="?" method="post">
+						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
@@ -49,11 +49,12 @@ require ("../../assets/configs/function.inc.php");
 						<?php
 					//active_flag 0 = disable , 1 = Enable ,  2 = Delete
 						$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 ";
-						if(isset($_POST['search'])){
-							$sql .= " AND (MODULE_NAME_LOC like '%".$_POST['str_search']."%' or MODULE_NAME_ENG like '%".$_POST['str_search']."%' ";
-						$sql .= " order by MODULE_ID asc ";
+						if(isset($_GET['search'])){
+							$sql .= " AND MODULE_NAME_LOC like '%".$_POST['str_search']."%' or MODULE_NAME_ENG like '%".$_POST['str_search']."%' ";
 
-			    }
+			    		}
+
+			    		$sql .= " order by MODULE_ID asc ";
 					$rs = mysql_query($sql) or die(mysql_error());
 
 					$i = 0 ;

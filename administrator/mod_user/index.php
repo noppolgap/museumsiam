@@ -30,8 +30,8 @@ require ("../../assets/configs/function.inc.php");
 					<div class="mod-body-inner-header">
 						<div class="floatL titleBox">ผู้ใช้งาน</div>
 						<div class="floatR searchBox">
-							<form name="search" action="?" method="post">
-								<input type="search" name="str_search" value="" />
+							<form name="search" action="?search" method="post">
+								<input type="search" name="str_search" value="<?=$_SESSION['text'] ?>" />
 								<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 							</form>
 						</div>
@@ -51,16 +51,24 @@ require ("../../assets/configs/function.inc.php");
 						<div class="clear"></div>	
 					</div>
 		 
-		 <div class="mod-body-main-content">
+		 			<div class="mod-body-main-content">
 						<!-- start loop -->
 						<?php
 							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
 							$sql = "SELECT * FROM sys_app_user where ACTIVE_FLAG <> 2 ";
-							if (isset($_POST['search'])) {
-								$sql .= " AND (NAME like '%" . $_POST['str_search'] . "%' or LAST_NAME like '%" . $_POST['str_search'] . "%' ";
-								$sql .= " order by USER_ID asc ";
+							
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
 
+								$sql .= " AND NAME like '%" .$_SESSION['text']. "%' or LAST_NAME like '%" .$_SESSION['text']. "%' ";
 							}
+							else {
+									unset($_SESSION['text']);
+								}
+
+
+							$sql .= " order by USER_ID asc ";
 							$rs = mysql_query($sql) or die(mysql_error());
 
 							$i = 0;

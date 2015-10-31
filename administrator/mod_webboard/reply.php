@@ -19,6 +19,8 @@ require("../../assets/configs/function.inc.php");
 
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionReply.php?delete">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderReply.php?web_id=<?=$_GET['web_id']?>');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
+				
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -110,6 +112,8 @@ require("../../assets/configs/function.inc.php");
 				</div>
 			</div>
 			<div class="buttonActionBox">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionReply.php?delete">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderReply.php?web_id=<?=$_GET['web_id']?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 		</div>

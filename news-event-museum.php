@@ -83,10 +83,17 @@ require("assets/configs/function.inc.php");
 											AND cat.CONTENT_CAT_ID = $museum_event_cat_id
 											AND content.SUB_CAT_ID = $event_sub_cat_id
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											ORDER BY
-												content.ORDER_DATA desc
-											LIMIT 0,30 ";
+											AND content.CONTENT_STATUS_FLAG  = 0";
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$sql .= "  AND content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' ";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+
+							$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
 					$query = mysql_query($sql, $conn);
 
@@ -219,10 +226,18 @@ require("assets/configs/function.inc.php");
 											AND cat.CONTENT_CAT_ID = $museum_event_cat_id
 											AND content.SUB_CAT_ID = $mesum_sub_cat_id
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											ORDER BY
-												content.ORDER_DATA desc ";
+											AND content.CONTENT_STATUS_FLAG  = 0";
 
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$sql .= "  AND content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' ";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+
+							$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 					$query = mysql_query($sql, $conn);
 
 					while($row = mysql_fetch_array($query))
@@ -314,8 +329,19 @@ require("assets/configs/function.inc.php");
 													GROUP BY CONTENT_ID, CAT_ID
 												) as p on  d.CONTENT_ID = p.CONTENT_ID
 												AND d.CAT_ID = p.CAT_ID
-						WHERE d.CAT_ID = 59 and d.CONTENT_STATUS_FLAG = 0
-						ORDER BY d.ORDER_DATA DESC LIMIT 0 , 30";
+						WHERE d.CAT_ID = 59 and d.CONTENT_STATUS_FLAG = 0 ";
+
+						if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$sql .= "  AND d.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' ";
+							}
+							else {
+									unset($_SESSION['text']);
+						}	
+
+						$sql .= " d.ORDER_DATA DESC LIMIT 0 , 30 ";
+
 
 				$query = mysql_query($sql, $conn);
 
