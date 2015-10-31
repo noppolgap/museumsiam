@@ -10,7 +10,7 @@ if(isset($_POST['update'])){
 		$update="";
 		$update[]= "ORDER_DATA = ".$value[1];
 					
-		echo $sql="UPDATE mas_org  SET  ".implode(",",$update)." WHERE ORG_ID =".$value[0];
+		echo $sql="UPDATE mas_section  SET  ".implode(",",$update)." WHERE SECTION_ID =".$value[0];
 		mysql_query($sql,$conn);	    
 	}	
 }else{
@@ -26,35 +26,29 @@ require ('../inc_meta.php');
 <div class="orderContent">
 	<div>
 		<h1>จัดเรียง</h1>
-		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('ceo_order.php');">
+		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('section_order.php');">
 	</div> 
 	<ul id="sortable">
 		<?php
-				 
-			     $sql = "SELECT
-					ORG_ID ,
-					NAME_LOC,
-					NAME_ENG,
-					PHONE,
-					EMAIL,
-					IMG_PATH,
-					POSITION_DESC_LOC,
-					POSITION_DESC_ENG,
-					CREATE_DATE,
-					LAST_UPDATE_DATE
-				FROM
-					mas_org
-				WHERE
-					PARENT_ORG_ID = 0
-				AND ACTIVE_FLAG <> 2  ORDER BY
-					ORDER_DATA DESC ";
+
+		 $sql = "SELECT
+	SECTION_ID,
+	SECTION_DESC_LOC,
+	SECTION_DESC_ENG,
+	ORDER_DATA,
+	CREATE_DATE , 
+	LAST_UPDATE_DATE
+FROM
+	mas_section
+WHERE
+	ACTIVE_FLAG <> 2  ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {
 			 
 		?>
 
-		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['ORG_ID'] ?>"><?=$row['NAME_LOC'] ?></li>
+		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['SECTION_ID'] ?>"><?=$row['SECTION_DESC_LOC'] ?></li>
 	<? } ?>  
 	</ul>
 </div>	

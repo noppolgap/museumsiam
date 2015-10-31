@@ -14,24 +14,30 @@ require ("../../assets/configs/function.inc.php");
 <body>
 <?
 	require ('../inc_header.php');
+	
  ?>		
 <div class="main-container">
 	<div class="main-body marginC">
 		<?
 		require ('../inc_side.php');
+		$secid = $_GET['secid'];
+		$sectionSql = "select * from mas_section where section_id = " . $secid;
+		$query = mysql_query($sectionSql, $conn);
+		$row = mysql_fetch_array($query);
+		$sectionName = $row['SECTION_DESC_LOC'];
  ?>
 		
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">แก้ไข CEO</div>					
+					<div class="floatL titleBox">แก้ไขบุคลลากรฝ่าย <?=$sectionName?></div>					
 				</div>
 				<div class="mod-body-main-content">
 					<div class="formCms">
 						<?php 
 						$ORGID = $_GET['orgid'];
 						?>
-						<form action="ceo_action.php?edit&orgid=<?=$ORGID ?>" method="post" name="formcms">
+						<form action="section_people_action.php?edit&secid=<?=$secid?>&orgid=<?=$ORGID ?>" method="post" name="formcms">
 							<?php
 		
 		$sql = "SELECT
@@ -128,7 +134,7 @@ require ("../../assets/configs/function.inc.php");
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php' ">
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'manage_people_section.php?secid=<?=$secid?>' ">
 							</div>
 						</form> 
 					</div>

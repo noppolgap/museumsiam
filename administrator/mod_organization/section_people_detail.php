@@ -2,37 +2,33 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+
 ?>
 <!doctype html>
 <html>
 <head>
 <?
 	require ('../inc_meta.php');
- ?>		
+ ?>
 </head>
 
 <body>
 <?
 	require ('../inc_header.php');
- ?>		
+ ?>
 <div class="main-container">
 	<div class="main-body marginC">
 		<?
 		require ('../inc_side.php');
  ?>
-		
 		<div class="mod-body">
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">แก้ไข CEO</div>					
+					<div class="floatL titleBox">รายละเอียด CEO</div>
 				</div>
-				<div class="mod-body-main-content">
-					<div class="formCms">
-						<?php 
+				<?php 
 						$ORGID = $_GET['orgid'];
-						?>
-						<form action="ceo_action.php?edit&orgid=<?=$ORGID ?>" method="post" name="formcms">
-							<?php
+						$secid = $_GET['secid'];					
 		
 		$sql = "SELECT
 					ORG_ID ,
@@ -50,13 +46,20 @@ require ("../../assets/configs/function.inc.php");
 				WHERE
 					ORG_ID = ".$ORGID;
 		$rs = mysql_query($sql) or die(mysql_error());
-		 
+		 while($row = mysql_fetch_array($rs)) { 
 		?>
-
+				<div class="mod-body-main-content">
+					
+					<div class="imageMain marginC"><img src="<?=$row['IMG_PATH']?>" /></div>
+							
+					<div class="formCms">
+						
+						<form action="" method="post" name="formcms">
+		
 							<div>
 
-							   <? while($row = mysql_fetch_array($rs)) {  ?>
-						
+							   
+
 								<input type="hidden" name="txtOrgID" value="<? echo $row['ORG_ID']; ?>" class="w90p" />
 								
 							</div>	
@@ -65,7 +68,7 @@ require ("../../assets/configs/function.inc.php");
 											ชื่อ TH
 										</div>
 										<div class="floatL form_input">
-											<input type="text" name="txtNameLoc" value="<?=$row['NAME_LOC']?>" class="w90p" />
+											<?=$row['NAME_LOC']?> 
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -74,7 +77,7 @@ require ("../../assets/configs/function.inc.php");
 											ชื่อ EN
 										</div>
 										<div class="floatL form_input">
-											<input type="text" name="txtNameEng" value="<?=$row['NAME_ENG']?>" class="w90p" />
+											<?=$row['NAME_ENG']?>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -84,7 +87,7 @@ require ("../../assets/configs/function.inc.php");
 											ชื่อตำแหน่ง TH
 										</div>
 										<div class="floatL form_input">
-											<input type="text" name="txtPositionLoc" value="<?=$row['POSITION_DESC_LOC']?>" class="w90p" />
+											<?=$row['POSITION_DESC_LOC'] ?>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -94,7 +97,7 @@ require ("../../assets/configs/function.inc.php");
 											ชื่อตำแหน่ง EN
 										</div>
 										<div class="floatL form_input">
-											<input type="text" name="txtPositionEng" value="<?=$row['POSITION_DESC_ENG']?>" class="w90p" />
+											<?=$row['POSITION_DESC_ENG']?>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -104,7 +107,7 @@ require ("../../assets/configs/function.inc.php");
 											โทรศัพท์
 										</div>
 										<div class="floatL form_input">
-											<input type="text" name="txtPhone" value="<?=$row['PHONE']?>" class="w90p" />
+											<?=$row['PHONE']?>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -113,34 +116,33 @@ require ("../../assets/configs/function.inc.php");
 											Email
 										</div>
 										<div class="floatL form_input">
-											<input type="text" name="txtEmail" value="<?=$row['EMAIL']?>" class="w90p" />
+											<?=$row['EMAIL']?>
 										</div>
 										<div class="clear"></div>
 									</div>
-									<div class="bigForm">
+									<!-- <div class="bigForm">
 								<div class="floatL form_name">Image</div>
-								<div class="floatL form_input"><?=admin_upload_org_image_edit('USER_IMG', $row['IMG_PATH'])   ?></div>
+								<div class="floatL form_input"><?=admin_upload_org_image_view('USER_IMG', $row['IMG_PATH'])   ?></div>
 								<div class="clear"></div>
-							</div>
-								
+							</div> -->
+
 							<?} ?>
 
 							<div class="btn_action">
-								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
-								<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
-								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php' ">
+
+								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'manage_people_section.php?secid=<?=$secid?>' ">
 							</div>
-						</form> 
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="clear"></div>	
+		<div class="clear"></div>
 	</div>
-</div>	
+</div>
 <?
 	require ('../inc_footer.php');
- ?>		
+ ?>
 <link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../../assets/plugin/colorbox/colorbox.css" media="all" >
 <link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
@@ -148,7 +150,7 @@ require ("../../assets/configs/function.inc.php");
 <script type="text/javascript" src="../../assets/plugin/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
-<script type="text/javascript" src="../master/script.js"></script>	
-<? logs_access('admin', 'hello'); ?>	
+<script type="text/javascript" src="../master/script.js"></script>
+<? logs_access('admin', 'hello'); ?>
 </body>
 </html>

@@ -1535,6 +1535,74 @@ function callOrgPicture($picPath) {
 	} else {
 		return 'images/account/user.jpg';
 	}
-
 }
+
+function callOrgPictureAdmin($picPath) {
+
+	if ($picPath != '') {
+		return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', $picPath) . '\');"';
+
+	} else {
+		return 'style="background-image: url(\'' . '../../images/account/user.jpg' . '\');"';
+	}
+}
+
+function admin_upload_org_image_edit($name, $imgName) {
+	global $conn;
+
+	$str = "";
+
+	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="../../assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_' . $name . '">' . "\n\t";
+	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
+
+	if ($imgName != '') {
+		$str .= '<div id="img_edit_1" data-id="1" class="thumbBoxEdit floatL p-Relative">' . "\n\t";
+		$str .= '<div class="thumbBoxImage">' . "\n\t";
+		$str .= '<a onclick="popupImage(\'' . $imgName . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $imgName) . '" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '<div class="thumbBoxAction dNone p-Absolute">' . "\n\t";
+		$str .= '<a onclick="delImageEdit(\'1\' , \'' . $imgName . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="../images/small-n-flat/sign-ban.svg" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+	}
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_data image_Data dNone">' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	if ($imgName != '') {
+		$str .= '<div class="p-Absolute OrderImageBtn" data-name="' . $name . '"></div>' . "\n\t";
+	} else {
+		$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
+	}
+
+	return $str;
+}
+
+function admin_upload_org_image_view($name, $imgName) {
+	global $conn;
+
+	$str = "";
+	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
+
+	if($imgName != ''){
+		$str .= '<div class="thumbBoxEdit floatL p-Relative">' . "\n\t";
+		$str .= '<div class="thumbBoxImage">' . "\n\t";
+		$str .= '<a onclick="popupImage(\'' . $imgName . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $imgName) . '" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+	}
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_data image_Data">' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	return $str;
+}
+
 ?>

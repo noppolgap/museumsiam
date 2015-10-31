@@ -10,7 +10,7 @@ if(isset($_POST['update'])){
 		$update="";
 		$update[]= "ORDER_DATA = ".$value[1];
 					
-		echo $sql="UPDATE trn_content_sub_category  SET  ".implode(",",$update)." WHERE SUB_CONTENT_CAT_ID =".$value[0];
+		echo $sql="UPDATE mas_org  SET  ".implode(",",$update)." WHERE ORG_ID =".$value[0];
 		mysql_query($sql,$conn);	    
 	}	
 }else{
@@ -26,31 +26,37 @@ require ('../inc_meta.php');
 <div class="orderContent">
 	<div>
 		<h1>จัดเรียง</h1>
-		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('sub_category_order.php');">
+		<input type="button" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="updateOreder('section_people_order.php');">
 	</div> 
 	<ul id="sortable">
 		<?php
-
-		$MID = $_GET['MID'];
-		$CID = $_GET['cid'];
-		$LV = $_GET['LV'];
-		$SCID = $_GET['SCID'];
-		
-			 $sql = "SELECT * FROM  trn_content_sub_category WHERE Flag <> 2 and CONTENT_CAT_ID  = '" . $CID . "' ";
-			
-			if (isset($SCID) && nvl($SCID, '0') != '0') {
-				$sql .= " AND REF_SUB_CONTENT_CAT_ID = " . $SCID;
-			} else {
-				$sql .= " AND REF_SUB_CONTENT_CAT_ID = 0 ";
-			}
-			$sql .= " ORDER BY ORDER_DATA DESC ";
+				 $secid = $_GET['secid'];
+			     $sql = "SELECT
+					ORG_ID ,
+					NAME_LOC,
+					NAME_ENG,
+					PHONE,
+					EMAIL,
+					IMG_PATH,
+					POSITION_DESC_LOC,
+					POSITION_DESC_ENG,
+					CREATE_DATE,
+					LAST_UPDATE_DATE
+				FROM
+					mas_org
+				WHERE
+					PARENT_ORG_ID <> 0
+				AND ACTIVE_FLAG <> 2  
+				AND SECTION_ID = ".$secid ;
+				$sql.= " AND DEPARTMENT_ID = -1  ORDER BY
+					ORDER_DATA DESC ";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {
 			 
 		?>
 
-		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['SUB_CONTENT_CAT_ID'] ?>"><?=$row['SUB_CONTENT_CAT_DESC_LOC'] ?></li>
+		<li class="ui-state-default" data-order="<?=$row['ORDER_DATA'] ?>" data-id="<?=$row['ORG_ID'] ?>"><?=$row['NAME_LOC'] ?></li>
 	<? } ?>  
 	</ul>
 </div>	

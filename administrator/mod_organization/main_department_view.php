@@ -20,18 +20,41 @@ require ('../inc_header.php');
 		<?
 		require ('../inc_side.php');
 	?>
+<?php
+$secid = $_GET['secid'];
+$sql = "SELECT
+	DEPARTMENT_ID,
+	DEPARTMENT_DESC_LOC,
+	DEPARTMENT_DESC_ENG,
+	REF_SECTION_ID ,
+	CREATE_DATE , 
+	LAST_UPDATE_DATE
+FROM
+	mas_department
+WHERE
+	ACTIVE_FLAG <> 2 ";
+if (isset($_GET['search'])) {
+	$sql .= "AND ( DEPARTMENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or DEPARTMENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )";
+}
+$sql .= " AND REF_SECTION_ID = " . $secid;
+$sql .= " ORDER BY ORDER_DATA DESC";
 
+//echo $sql ;
+$query = mysql_query($sql, $conn);
+
+$num_rows = mysql_num_rows($query);
+		?>
 	
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'section_add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="section_action.php?delete" >
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('section_order.php');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'department_add.php?secid=<?=$secid ?>'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="department_action.php?delete" >
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('department_order.php?secid=<?=$secid ?>');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'manage_people_section.php?secid=<?=$secid ?>'">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
-					<div class="floatL titleBox">ข้อมูลฝ่าย</div>
+					<div class="floatL titleBox">ข้อมูลแผนก</div>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
 							<input type="search" name="str_search" value="" />
@@ -49,38 +72,18 @@ require ('../inc_header.php');
 				</div>
 				<div class="mod-body-main-content">
 
-		    <?php
-
-			$sql = "SELECT
-	SECTION_ID,
-	SECTION_DESC_LOC,
-	SECTION_DESC_ENG,
-	CREATE_DATE , 
-	LAST_UPDATE_DATE
-FROM
-	mas_section
-WHERE
-	ACTIVE_FLAG <> 2 ";
-			if (isset($_GET['search'])) {
-				$sql .= "AND ( SECTION_DESC_LOC like '%" . $_POST['str_search'] . "%' or SECTION_DESC_ENG like '%". $_POST['str_search']."%' )";
-			}
-			$sql .= " ORDER BY ORDER_DATA DESC";
-
-			$query = mysql_query($sql, $conn);
-
-			$num_rows = mysql_num_rows($query);
-		?>
+		    
 					<!-- start loop -->
 				<?php
 while ($row = mysql_fetch_array($query)) {
 ?>
-					<div class="Main_Content" data-id="<?= $row['SECTION_ID'] ?>" >
-						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?= $row['SECTION_ID'] ?>"></div>
+					<div class="Main_Content" data-id="<?= $row['DEPARTMENT_ID'] ?>" >
+						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?= $row['DEPARTMENT_ID'] ?>"></div>
 						 
 						<div class="floatL nameContent">
 							 
 							<div><?
-							echo '<a href="manage_people_section.php?secid='.$row['SECTION_ID'].'">' . $row['SECTION_DESC_LOC'] . '</a>';
+							echo '<a href="manage_people_department.php?secid=' . $row['REF_SECTION_ID'] . '&did=' . $row['DEPARTMENT_ID'] . '">' . $row['DEPARTMENT_DESC_LOC'] . '</a>';
 						?></div>
 							<div>วันที่สร้าง <?
 							echo ConvertDate($row['CREATE_DATE']);
@@ -92,8 +95,8 @@ while ($row = mysql_fetch_array($query)) {
 
 					</div>
 						<div class="floatL EditContent">
-							<a href="section_edit.php?secid=<?= $row['SECTION_ID'] ?>" class="EditContentBtn">Edit</a>
-							<a href="#" data-id=<?= $row['SECTION_ID'] ?> class="DeleteContentBtn">Delete</a>
+							<a href="department_edit.php?secid=<?= $row['REF_SECTION_ID'] ?>&did=<?=$row['DEPARTMENT_ID'] ?>" class="EditContentBtn">Edit</a>
+							<a href="#" data-id=<?= $row['DEPARTMENT_ID'] ?> class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>
 				</div>
@@ -122,10 +125,10 @@ while ($row = mysql_fetch_array($query)) {
 				</div>
 			</div>
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'section_add.php'">
-				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="section_action.php?delete" >
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('section_order.php');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'department_add.php?secid=<?=$secid ?>'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="department_action.php?delete" >
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('department_order.php?secid=<?=$secid ?>');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'manage_people_section.php?secid=<?=$secid ?>'">
 			</div>
 		</div>
 		<div class="clear"></div>
