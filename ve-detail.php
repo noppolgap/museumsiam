@@ -147,7 +147,7 @@ unset($thumb_meta);
 						$audioPlayer = false;
 						$thumbRender = "\n\n\t";
 						$extraStyle = "";
-						$getPicSql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND CAT_ID = ".$CID." AND ( DIV_NAME !=  'Other' OR DIV_NAME IS NULL ) ORDER BY DIV_NAME ASC , ORDER_ID ASC";
+						$getPicSql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND ( DIV_NAME !=  'Other' OR DIV_NAME IS NULL ) ORDER BY DIV_NAME ASC , ORDER_ID ASC";
 
 						$rsPic = mysql_query($getPicSql) or die(mysql_error());
 						$rowPicturecount = mysql_num_rows($rsPic);

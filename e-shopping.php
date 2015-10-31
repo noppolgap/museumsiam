@@ -54,6 +54,7 @@ require("assets/configs/function.inc.php");
 			</div>
 
 			<?php
+			/*
 			     $sql_sumorder  = " SELECT count( o.ORDER_ID ) total_order
 										FROM trn_order_detail od
 										LEFT JOIN trn_order o ON od.ORDER_ID = o.ORDER_ID
@@ -64,13 +65,17 @@ require("assets/configs/function.inc.php");
 				 $num_rows = mysql_num_rows($query_sumorder);
 
 				 while($row_sumorder = mysql_fetch_array($query_sumorder)){
+			*/
+			$sql = "SELECT SUM(trn_shopping_cart_Quantity)  FROM `trn_shopping_cart` WHERE `trn_shopping_cart_SSID` = '".session_id()."'";
+			$query = mysql_query($sql, $conn) or die($sql);
+			$row = mysql_fetch_row($query);
 			?>
 
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <? echo $row_sumorder['total_order']; ?></a>
+				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <span><?=$row[0]?></span></a>
 			</div>
 
-			<? } ?>
+			<? //} ?>
 
 
 		<?php
@@ -125,7 +130,7 @@ require("assets/configs/function.inc.php");
 
 
 					<div class="item">
-						<a href="e-shopping-detail.php">
+						<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>">
 							<div class="box-pic">
 								<span class="helper"></span>
 								<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
@@ -164,6 +169,8 @@ require("assets/configs/function.inc.php");
 
 
 <?php include('inc/inc-footer.php'); ?>
+<script src="js/cart.js"></script>
 
 </body>
 </html>
+<? CloseDB(); ?>

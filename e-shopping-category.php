@@ -68,9 +68,13 @@ $_SESSION['SHOPPING_PREV_PG'] = $current_url;
 					<a href="e-shopping.php" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
-
+			<?php
+			$sql = "SELECT SUM(trn_shopping_cart_Quantity)  FROM `trn_shopping_cart` WHERE `trn_shopping_cart_SSID` = '".session_id()."'";
+			$query = mysql_query($sql, $conn) or die($sql);
+			$row = mysql_fetch_row($query);
+			?>
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 0</a>
+				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <span><?=$row[0]?></span></a>
 			</div>
 
 

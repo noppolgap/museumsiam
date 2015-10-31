@@ -573,9 +573,10 @@ header{
     font-size: 0.8em;
     font-weight: 400;
     height: 1em;
-    line-height: 1.2em;
+    line-height: 1.28em;
     margin: 0 5px 5px;
     padding: 5px;
+    overflow: hidden;
 }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; color: #f0f0f0; }
 .DatetimePicker , .DatePicker{

@@ -25,4 +25,7 @@ $event_sub_cat_id = 130;
 $mesum_sub_cat_id = 131;
 
 // End Module ID
+
+//shipping_config
+$shipping_cost = 100;
 ?>

@@ -67,9 +67,13 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 					<a href="e-shopping-category.php?cid=<?=$row_detail['CAT_ID']?>" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
-
+			<?php
+			$sql = "SELECT SUM(trn_shopping_cart_Quantity)  FROM `trn_shopping_cart` WHERE `trn_shopping_cart_SSID` = '".session_id()."'";
+			$query = mysql_query($sql, $conn) or die($sql);
+			$row = mysql_fetch_row($query);
+			?>
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 0</a>
+				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <span><?=$row[0]?></span></a>
 			</div>
 
 			<form action="product_action.php?add'" method="post" name="formcms">
@@ -92,7 +96,7 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 						$query_pic = mysql_query($getPicSql,$conn);
 						while($row_pic = mysql_fetch_array($query_pic)){
 							$path = str_replace('../../','',$row_pic['IMG_PATH']);
-							echo $show = '<div class="slide-content"> <img src="'.$path.'"> </div>';
+							echo $show = '<div class="slide-content slideProductImage" style="background-image: url(\''.$path.'\');"> <img src="'.$path.'"> </div>';
 							$thumb .= $show;
 						}
 						?>
@@ -105,7 +109,7 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 									<?=$thumb?>
 								</div>
 							</div>
-							<div class="text-id">รหัสสินค้า : <? echo $row_detail['PRODUCT_ID']; ?></div>
+							<div class="text-id">รหัสสินค้า : <?=str_pad($row_detail['PRODUCT_ID'], 5, 0, STR_PAD_LEFT);?></div>
 						</div>
 					</div>
 					<div class="box-right">
@@ -126,7 +130,7 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 								Free Shipping
 							</div>
 							<div class="box-btn">
-								<a href="e-shopping-action.php?add&proid=<?=$row_detail['PRODUCT_ID']?>" class="btn red">หยิบสินค้าลงตะกร้า</a>
+								<a href="#" onclick="addtocart(<?=$row_detail['PRODUCT_ID']?>);" class="btn red">หยิบสินค้าลงตะกร้า</a>
 							</div>
 						</div>
 					</div>
@@ -143,6 +147,8 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 
 
 <?php include('inc/inc-footer.php'); ?>
+<script src="js/cart.js"></script>
 
 </body>
 </html>
+<? CloseDB(); ?>

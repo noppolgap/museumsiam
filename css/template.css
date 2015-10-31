@@ -193,6 +193,9 @@ hr.line-red{
 	background-color: #6e0904;
 	color: #fff;
 }
+.box-btn-cart .btn-cart span{
+	display: inline;
+}
 .box-right.main-content .box-title{
 	width: 100%;
 	margin-bottom: 20px;
