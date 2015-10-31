@@ -13,10 +13,7 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu2,.menu-left li.menu2 .submenu1").addClass("active");
-		if ($('.menu-left li.menu2').hasClass("active")){
-			$('.menu-left li.menu2').children(".submenu-left").css("display","block");
-		}
+		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
 	});
 </script>
 
@@ -34,7 +31,7 @@ require("assets/configs/function.inc.php");
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="index.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="news-event-month.php">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ รายสัปดาห์</li>
+				<li class="active">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</li>
 			</ol>
 		</div>
 	</div>
@@ -45,18 +42,46 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-newsevent.php'); ?>
-			<?php include('inc/inc-left-content-calendar.php'); ?>
+			<?php
+				$menu_newsevent = 2;
+			    include('inc/inc-left-content-newsevent.php');
+			    include('inc/inc-left-content-calendar.php');
+			?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
-				<h1>รายสัปดาห์</h1>
+				<h1>กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</h1>
 			</div>
+		<?php
 
+			list($start_date, $end_date) = x_week_range(date('Y-m-d'));
+
+			if ($_SESSION['LANG'] == 'TH'){
+				$LANG_SQL = 'CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC';
+			}else if ($_SESSION['LANG'] == 'EN'){
+				$LANG_SQL = 'CONTENT_CAT_DESC_ENG AS CONTENT_CAT_LOC';
+			}
+			$sql =  "SELECT CONTENT_CAT_ID , ";
+			$sql .=  $LANG_SQL;
+			$sql .=  " FROM trn_content_category WHERE REF_MODULE_ID = ".$new_and_event." ORDER BY ORDER_DATA DESC";
+			$query_CAT = mysql_query($sql, $conn);
+			while($row_CAT = mysql_fetch_array($query_CAT)) {
+			?>
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>กิจกรรมของทุกระบบ </h2>
+					<h2><?=$row_CAT['CONTENT_CAT_LOC']?></h2>
+					<div class="box-btn">
+						<?  $link_page = "";
+							$catId = $row_CAT['CONTENT_CAT_ID'];
+
+							if($row_CAT['CONTENT_CAT_ID'] == $all_event_cat_id ){ $link_page = "news_event_all.php?CID=$catId";}
+							else{ $link_page = "news_event_all.php?CID=$catId";}
+						 ?>
+
+
+						<a href="news-event-all.php?CID=<? echo $catId ?>" class="btn gold">ดูทั้งหมด</a>
+					</div>
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
@@ -90,11 +115,11 @@ require("assets/configs/function.inc.php");
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.CAT_ID = $museum_event_cat_id ";
-							$sql .= " AND (EVENT_START_DATE <= '".date('Y-m-t')."' AND EVENT_END_DATE >= '".date('Y-m-1')."')";
-						    $sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
+											AND content.CAT_ID = ".$row_CAT['CONTENT_CAT_ID'];
+							
+							$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
-					$query = mysql_query($sql, $conn);
+					$query = mysql_query($sql, $conn)or die($sql);
 
 					while($row = mysql_fetch_array($query)) {
 
@@ -109,7 +134,7 @@ require("assets/configs/function.inc.php");
 
 
 						/*social*/
-						$path = 'event-detail.php?MID='.$MID.'%26CID='.$museum_event_cat_id.'%26SID='.$row['SUB_CAT_ID'].'%26CONID='.$row['CONTENT_ID'].'%26date=month';
+						$path = 'event-detail.php?MID='.$MID.'%26CID='.$row_CAT['CONTENT_CAT_ID'].'%26SID='.$row['SUB_CAT_ID'].'%26CONID='.$row['CONTENT_ID'].'';
 						$fullpath = _FULL_SITE_PATH_.'/'.$path;
 						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$row['CONTENT_ID'];
 						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
@@ -120,9 +145,9 @@ require("assets/configs/function.inc.php");
 						/*social*/
 
 						echo	'<div class="box-tumb '.$gap.' ">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$museum_event_cat_id.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$row_CAT['CONTENT_CAT_ID'].'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'">';
 					    echo	'<div class="box-pic">';
-						echo	'<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $museum_event_cat_id, true) . '">';
+						echo	'<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row_CAT['CONTENT_CAT_ID'], true) . '">';
 						echo    '<div class="box-tag-cate">';
 						echo  	$title;
 						echo 	'</div>';
@@ -133,7 +158,7 @@ require("assets/configs/function.inc.php");
 						echo 	'</div>';
 						echo 	'</a>';
 						echo 	'<div class="box-text">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$museum_event_cat_id.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month">';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$row_CAT['CONTENT_CAT_ID'].'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'">';
 						echo	'<p class="text-title TcolorRed">';
 						echo	$title;
 						echo	'</p>';
@@ -145,7 +170,7 @@ require("assets/configs/function.inc.php");
 						echo	$detail;
 						echo	'</p>';
 						echo	'<div class="box-btn cf">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$museum_event_cat_id.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=month" class="btn red">อ่านเพิ่มเติม</a>';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$row_CAT['CONTENT_CAT_ID'].'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
 						echo	'<div class="box-btn-social cf">';
 						echo  	'<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 						echo  	'<a href="'.$fullpath.'" onclick="shareTW(\''.$row_row1['CONTENT_ID'].'\',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -164,19 +189,12 @@ require("assets/configs/function.inc.php");
 					?>
 
 					</div>
-					<div class="box-pagination-main cf">
-						<ul class="pagination">
-							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">...</a></li>
-							<li><a href="" class="btn-arrow-right"></a></li>
-						</ul>
-					</div>
 				</div>
 
 			</div>
+
+<?  }  ?>
+
 		</div>
 	</div>
 </div>
@@ -186,6 +204,8 @@ require("assets/configs/function.inc.php");
 
 
 <?php include('inc/inc-footer.php'); ?>
+<?php include('inc/inc-social-network.php'); ?>
 
 </body>
 </html>
+<? CloseDB(); ?>
