@@ -65,7 +65,7 @@ require("assets/configs/function.inc.php");
 								$MID = $_GET['MID'];
 
 						   $index = 1;
-						   $categoryID = $museum_event_cat_id;
+						   $categoryID = $_GET['CID'];
 
 							if ($_SESSION['LANG'] == 'TH'){
 								$LANG_SQL = 'cat.CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC , content.CONTENT_DESC_LOC AS CONTENT_LOC , content.BRIEF_LOC AS CONTENT_BRIEF ,';
@@ -89,7 +89,7 @@ require("assets/configs/function.inc.php");
 											WHERE
 												cat.REF_MODULE_ID = $new_and_event
 											AND cat.flag = 0
-											AND cat.CONTENT_CAT_ID = ".$_GET['CID']."
+											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
 											ORDER BY

@@ -52,13 +52,23 @@ $sql .= " Limit 10 offset  " . (10 * ($currentPage - 1));
 $query = mysql_query($sql, $conn);
 
 $num_rows = mysql_num_rows($query);
-			 ?>
+
+
+?>
 			 
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addAnswer.php?qa_id=<?=$_GET['qa_id'] ?>'">
+
+				<?  if ($num_rows > 0){
+					$display_hide = "style = 'display:none'";
+
+				} ?>
+
+				
+				<input type="button" <?=$display_hide ?> value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addAnswer.php?qa_id=<?=$_GET['qa_id'] ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionAnswer.php?delete">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderAnswer.php?qa_id=<?=$_GET['qa_id'] ?>');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -170,6 +180,9 @@ $num_rows = mysql_num_rows($query);
 				</div>
 			</div>	
 			<div class="buttonActionBox">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'addAnswer.php?qa_id=<?=$_GET['qa_id'] ?>'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionAnswer.php?delete">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderAnswer.php?qa_id=<?=$_GET['qa_id'] ?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 		</div>

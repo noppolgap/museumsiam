@@ -302,6 +302,8 @@ require ("assets/configs/function.inc.php");
 			   
 				$index = 0;
 
+				$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+
 		?>
 
 		<div class="part-news cf">
@@ -322,7 +324,7 @@ require ("assets/configs/function.inc.php");
 						<div class="box-left">
 							<div class="text-title"><img src="images/<?=$picFolderName ?>/index/part3-pic2.png" />
 							</div>
-							<a class="btn black" href="">ดูทั้งหมด</a>
+							<a class="btn black" href="news-event.php">ดูทั้งหมด</a>
 						</div>
 						<div class="box-right">
 							<div class="box-news-bold cf">
@@ -380,7 +382,7 @@ require ("assets/configs/function.inc.php");
 									<div class="box-btn cf">
 										<a href="event-detail.php?MID=<? echo $new_and_event ?>&CID=<? echo $categoryID ?>&SID=<? echo $row_all_exh['SUB_CAT_ID'] ?>&CONID=<? echo  $row_all_exh['CONTENT_ID'] ?>" class="btn red">อ่านเพิ่มเติม</a>
 										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
+											<a href="<? echo $fb_link ?>" class="btn-socila fb"></a>
 											<a href="#" class="btn-socila tw"></a>
 										</div>
 									</div>
