@@ -348,8 +348,13 @@ require ("assets/configs/function.inc.php");
 									</p>
 									<div class="box-btn cf">
 										<a href="event-detail.php?MID=<? echo $new_and_event ?>&CID=<? echo $categoryID ?>&SID=<? echo $row_all_exh['SUB_CAT_ID'] ?>&CONID=<? echo  $row_all_exh['CONTENT_ID'] ?>" class="btn red">อ่านเพิ่มเติม</a>
+										
+										<? 
+											$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+
+										?>
 										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
+											<a href="<?=$fb_link ?>" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>
 											<a href="#" class="btn-socila tw"></a>
 										</div>
 									</div>

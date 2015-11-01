@@ -51,6 +51,8 @@ require("assets/configs/function.inc.php");
 					<span>ติดต่อเรา</span>
 				</h1>
 			</div>
+
+		<form action="contact_action?add" method="post" name="formcms" id = "frmcms" >
 			<div class="box-contact-main cf">
 				<div class="box-left">
 					<div class="box-contact-from">
@@ -63,11 +65,22 @@ require("assets/configs/function.inc.php");
 									<div>
 										<div class="SearchMenu-item province_box box-select">
 											<span>เลือกตำแหน่ง</span>
-											<select class="p-Absolute" name="province">
-												<option value="0">ตำแหน่ง</option>
-												<option value="1">ตำแหน่ง1</option>
-												<option value="2">ตำแหน่ง2</option>
-												<option value="3">ตำแหน่ง3</option>
+
+											<?php
+
+												$sql = " SELECT * FROM  mas_position";
+												$rs = mysql_query($sql) or die(mysql_error());
+
+											?>
+
+											<select class="p-Absolute" name="txtPosition">
+
+												<? while ($row = mysql_fetch_array($rs)) {  ?>
+
+													<option value="<?=$row["POSITION_ID"] ?>" name="txtPosition"><? echo $row["POSITION_DESC_LOC"] ?></option>
+
+												<?	}  ?>
+												
 											</select>
 										</div>
 									</div>
@@ -80,7 +93,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="txtName"></div>
 								</div>
 							</div>
 						</div>
@@ -90,7 +103,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="txtAddress"></div>
 								</div>
 							</div>
 						</div>
@@ -100,7 +113,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="txtMail"></div>
 								</div>
 							</div>
 						</div>
@@ -110,7 +123,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="txtTel"></div>
 								</div>
 							</div>
 						</div>
@@ -120,7 +133,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><textarea name="address"></textarea></div>
+									<div><textarea name="txtText" ></textarea></div>
 								</div>
 							</div>
 						</div>
@@ -152,8 +165,8 @@ require("assets/configs/function.inc.php");
 								<div class="box-input-text">
 									<div>
 										<div class="box-btn submit">
-											<a href="#" class="btnSubmit btn red">ส่ง</a>
-											<a href="#" class="btnReset btn red">ล้างข้อมูล</a>
+											<input type="submit" value="ส่ง"class="btnSubmit btn red">
+											<input type="submit" value="ล้างข้อมูล" class="btnReset btn red">
 										</div>					
 									</div>
 								</div>
@@ -161,6 +174,9 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
+			</form>
+
+
 				<div class="box-right">
 					<div class="box-top"></div>
 					<div class="box-bottom">
