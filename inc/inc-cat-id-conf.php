@@ -6,6 +6,7 @@ $reseach_cat_id = 6;
 $education_cat_id = 7;
 $seminar_cat_id = 8;
 $media_cat_id = 9 ;
+$contact_us = 17;
 
 $museum_event_cat_id = 60;
 $all_event_cat_id = 61;

@@ -52,7 +52,7 @@ require("assets/configs/function.inc.php");
 				</h1>
 			</div>
 
-		<form action="contact_action?add" method="post" name="formcms" id = "frmcms" >
+		<form action="contact_action.php?add" method="post" name="formcms" id = "frmcms" >
 			<div class="box-contact-main cf">
 				<div class="box-left">
 					<div class="box-contact-from">
@@ -68,16 +68,17 @@ require("assets/configs/function.inc.php");
 
 											<?php
 
-												$sql = " SELECT * FROM  mas_position";
+												$sql = " SELECT * FROM  trn_content_category Where REF_MODULE_ID = ".$contact_us." AND 
+															FLAG = 0 ";
 												$rs = mysql_query($sql) or die(mysql_error());
 
 											?>
 
-											<select class="p-Absolute" name="txtPosition">
+											<select class="p-Absolute" name="position">
 
 												<? while ($row = mysql_fetch_array($rs)) {  ?>
 
-													<option value="<?=$row["POSITION_ID"] ?>" name="txtPosition"><? echo $row["POSITION_DESC_LOC"] ?></option>
+													<option value="<?=$row["CONTENT_CAT_ID"] ?>" ><? echo $row["CONTENT_CAT_DESC_LOC"] ?></option>
 
 												<?	}  ?>
 												

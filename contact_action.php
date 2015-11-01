@@ -1,24 +1,36 @@
 <?php
-require ("../../assets/configs/config.inc.php");
-require ("../../assets/configs/connectdb.inc.php");
-require ("../../assets/configs/function.inc.php");
+	require ("assets/configs/config.inc.php");
+	require ("assets/configs/connectdb.inc.php");
+	require ("assets/configs/function.inc.php");
 
 if (isset($_GET['add'])) {
 
+	$sql_max = "SELECT MAX( ORDER_DATA ) AS MAX_ORDER FROM trn_content_detail WHERE FLAG <>2 AND REF_WEBBOARD_ID= 0 AND cat_id = 17 ";
+	$query_max = mysql_query($sql_max, $conn);
+	$row_max = mysql_fetch_array($query_max);
+	$max = $row_max['MAX_ORDER'];
+	$max++;
+
 	unset($insert);
-	$insert['POSITION'] = "'" . $_POST['product_name_th'] . "'";
-	$insert['NAME_SUR'] = "'" . $_POST['product_name_en'] . "'";
-	$insert['ADDRESS'] = "'" . $_POST['price'] . "'";
-	$insert['EMAIL'] = "'" . $_POST['sale'] . "'";
-	$insert['TEL'] = "'" . $_POST['detail'] . "'";
-	$insert['DETAIL'] = "'" . ConvertDateToDB($_POST['start']) . "'";
+	$insert['CAT_ID'] =  "'" . $_POST['position'] . "'"; 
+	$insert['CONTENT_DESC_LOC'] = "'" . $_POST['txtName'] . "'";
+	$insert['PLACE_DESC_LOC'] = "'" . $_POST['txtAddress'] . "'";
+	$insert['PLACE_DESC_ENG'] = "'" . $_POST['txtMail'] . "'";
+	$insert['BRIEF_LOC'] = "'" . $_POST['txtTel'] . "'";
+	$insert['CONTENT_DETAIL_LOC'] = "'" . $_POST['txtText'] . "'";
+	$insert['ORDER_DATA'] = "'" . $max . "'";
+	$insert['CONTENT_STATUS_FLAG'] = 2;
 	$insert['USER_CREATE'] = "'".$_SESSION['user_name'] ."'";
 	$insert['CREATE_DATE'] = "NOW()";
 	$insert['LAST_UPDATE_USER'] = "'".$_SESSION['user_name'] ."'";
 	$insert['LAST_UPDATE_DATE'] = "NOW()";
 
-    $sql = "INSERT INTO trn_contact_us (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 	
+
+    echo $sql = "INSERT INTO trn_content_detail (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+	
+	mysql_query($sql, $conn) or die($sql);
+
 
 	header('Location: contact.php');
 

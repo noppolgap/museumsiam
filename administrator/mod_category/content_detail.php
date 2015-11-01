@@ -2,6 +2,8 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+require ("../../inc/inc-cat-id-conf.php");
+
 ?>
 <!doctype html>
 <html>
@@ -44,9 +46,14 @@ require ("../../assets/configs/function.inc.php");
 										,sc.SUB_CONTENT_CAT_DESC_LOC
 									FROM trn_content_detail cd
 									LEFT JOIN trn_content_category cc ON cc.CONTENT_CAT_ID = cd.CAT_ID
-									LEFT OUTER JOIN trn_content_sub_category sc ON sc.SUB_CONTENT_CAT_ID = cd.SUB_CAT_ID
-									WHERE cd.CONTENT_STATUS_FLAG <> 2
-										AND cd.CONTENT_ID = $id ";
+									LEFT OUTER JOIN trn_content_sub_category sc ON sc.SUB_CONTENT_CAT_ID = cd.SUB_CAT_ID";
+									
+									if($MID == $contact_us){
+										$sql .= " where cd.CONTENT_STATUS_FLAG =  2 " ;
+									}else{
+										$sql .= " where cd.CONTENT_STATUS_FLAG <>  2 " ;
+									}
+										$sql .= "AND cd.CONTENT_ID = $id ";
 				$query = mysql_query($sql, $conn);
 				//echo $sql;
 				?>

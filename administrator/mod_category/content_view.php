@@ -2,12 +2,19 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+require ("../../inc/inc-cat-id-conf.php");
 
 
 		$MID = intval($_GET['MID']);
 		$CID = intval($_GET['cid']);
 		$LV = intval($_GET['LV']);
 		$SCID = $_GET['SCID'];
+
+
+	     if ($MID == $contact_us){
+			$display_hide = "style = 'display:none'";
+
+		 } 
 
 ?>
 <!doctype html>
@@ -69,9 +76,9 @@ require ('../inc_header.php');
 		?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = '<?=$link?>'">
+				<input type="button" <?=$display_hide?> value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = '<?=$link?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="content_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>');">
+				<input type="button" <?=$display_hide?> value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$navigateBackPage ?>'">
 			</div>
 			<div class="mod-body-inner">
@@ -127,13 +134,19 @@ require ('../inc_header.php');
 			$sql .= "			ORDER BY cc.ORDER_DATA DESC
 								,sb.order_data DESC
 							) a
-						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID
-						where cd.CONTENT_STATUS_FLAG <>  2 " ;
+						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID ";
+
+						if($MID == $contact_us){
+							$sql .= " where cd.CONTENT_STATUS_FLAG =  2 " ;
+						}else{
+							$sql .= " where cd.CONTENT_STATUS_FLAG <>  2 " ;
+						}
+						
 						if (isset($SCID) && nvl($SCID, '0') != '0') {
 				$sql .= "	AND cd.SUB_CAT_ID =  $SCID ";
 			}
 						
-					$sql .= "	ORDER BY cd.ORDER_DATA desc ";
+			$sql .= "	ORDER BY cd.ORDER_DATA desc ";
 
 			$query = mysql_query($sql, $conn);
 
@@ -154,7 +167,7 @@ require ('../inc_header.php');
 							<div><? echo '<a href="content_detail.php?conid='.$row['CONTENT_ID'].'&MID='.$MID.'&cid='.$CID . $subfixAddAndEdit.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>
-						<div class="floatL stausContent">
+						<div class="floatL stausContent" <?=$display_hide?>>
 
 						<? if($row['CONTENT_STATUS_FLAG'] == 0){ ?>
 							<span class="staus1"></span> <a href="content_action.php?enable&conid=<?=$row['CONTENT_ID'] ?>&vis=<?=$row['CONTENT_STATUS_FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>">
@@ -169,7 +182,7 @@ require ('../inc_header.php');
 				</div>
 					<?php $num_rows++;
 					} //end if
- ?>
+ 				?>
 							<?php } ?>
 					<!-- end loop -->
 				</div>
@@ -191,9 +204,9 @@ require ('../inc_header.php');
 				</div>
 			</div>
 			<div class="buttonActionBox">
-			<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'content_add.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>'">
+			<input type="button" <?=$display_hide?> value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'content_add.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="content_action.php?delete">
-				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>');">
+				<input type="button" <?=$display_hide?> value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$navigateBackPage ?>'">
 			</div>
 		</div>
