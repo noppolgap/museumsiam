@@ -124,8 +124,8 @@ require("assets/configs/function.inc.php");
 							}
 							else {
 									unset($_SESSION['text']);
-							}	
-							
+							}
+
 							$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
 					$query = mysql_query($sql, $conn)or die($sql);

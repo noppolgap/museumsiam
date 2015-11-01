@@ -17,6 +17,7 @@ require ("assets/configs/function.inc.php");
 		<script>
 			$(document).ready(function() {
 				$("li.menu1").addClass("active");
+				loadEvent('<?=date('Y-m-d')?>');
 			});
 		</script>
 	</head>
@@ -30,15 +31,7 @@ require ("assets/configs/function.inc.php");
 		<div class="part-banner" id="firstbox">
 			<div class="slide-herobanner">
 				<?php
-				$heroBannerSql = "SELECT
-								pic_ID,
-								IMG_PATH
-								FROM
-								trn_hero_banner
-								WHERE
-								img_type = 1
-								ORDER BY
-								ORDER_ID";
+				$heroBannerSql = "SELECT pic_ID, IMG_PATH FROM trn_hero_banner WHERE img_type = 1 ORDER BY ORDER_ID";
 
 				$rsHeroBanner = mysql_query($heroBannerSql) or die(mysql_error());
 				while ($rowHeroBanner = mysql_fetch_array($rsHeroBanner)) {
@@ -63,6 +56,7 @@ require ("assets/configs/function.inc.php");
 			$picFolderName = 'th';
 		else
 			$picFolderName = 'en';
+
 		?>
 		<div class="part-event cf">
 			<div class="container">
@@ -71,77 +65,48 @@ require ("assets/configs/function.inc.php");
 						<div class="text-title">
 							<img src="images/<?=$picFolderName ?>/index/part2-pic1.png" />
 						</div>
-						<a>
-						<div class="box-tumb-date  sun  today">
-							<div class="text-date">
-								อาทิตย์
-								<span>30</span>
-							</div>
-							<div class="text-month">
-								พฤศจิกายน
-							</div>
-						</div> </a>
-						<a>
-						<div class="box-tumb-date mon">
-							<div class="text-date">
-								จันทร์
-								<span>30</span>
-							</div>
-							<div class="text-month">
-								พฤศจิกายน
-							</div>
-						</div> </a>
-						<a>
-						<div class="box-tumb-date tue">
-							<div class="text-date">
-								อังคาร
-								<span>30</span>
-							</div>
-							<div class="text-month">
-								พฤศจิกายน
-							</div>
-						</div> </a>
-						<a>
-						<div class="box-tumb-date wed">
-							<div class="text-date">
-								พุธ
-								<span>30</span>
-							</div>
-							<div class="text-month">
-								พฤศจิกายน
-							</div>
-						</div> </a>
-						<a>
-						<div class="box-tumb-date thu">
-							<div class="text-date">
-								พฤหัสบดี
-								<span>30</span>
-							</div>
-							<div class="text-month">
-								พฤศจิกายน
-							</div>
-						</div> </a>
-						<a>
-						<div class="box-tumb-date fri">
-							<div class="text-date">
-								ศุกร์
-								<span>30</span>
-							</div>
-							<div class="text-month">
-								พฤศจิกายน
-							</div>
-						</div> </a>
-						<a>
-						<div class="box-tumb-date sat">
-							<div class="text-date">
-								เสาร์
-								<span>30</span>
-							</div>
-							<div class="text-month">
-								พฤศจิกายน
-							</div>
-						</div> </a>
-						<a>
+<?php
+		$Now = date('d');
+		list($start_date, $end_date) = x_week_range(date('Y-m-d'));
+
+		$begin = new DateTime( $start_date );
+		$end = new DateTime( $end_date );
+		$end = $end->modify( '+1 day' );
+
+		$interval = DateInterval::createFromDateString('1 day');
+		$period = new DatePeriod($begin, $interval, $end);
+
+		foreach ( $period as $dt ){
+			if ($_SESSION['LANG'] == 'TH'){
+				$Month = returnThaiMonth($dt->format( "m" ));
+				$DayOfWeek = returnThaiDayOfWeek($dt->format( "l" ));
+			}else if ($_SESSION['LANG'] == 'EN'){
+				$Month = $dt->format( "F" );
+				$DayOfWeek = $dt->format( "l" );
+			}
+			$dayNow = $dt->format( "d" );
+			$class  = 'box-tumb-date ';
+			$class .= strtolower($dt->format( "D" ));
+			if(($dayNow == $Now)){
+				$class .= ' today';
+			}
+
+		?>
+			<a href="#" onclick="loadEvent('<?=$dt->format('Y-m-d')?>'); return false;">
+				<div class="<?=$class?>">
+					<div class="text-date">
+						<?=$DayOfWeek?>
+						<span><?=$dayNow?></span>
+					</div>
+					<div class="text-month">
+						<?=$Month?>
+					</div>
+				</div>
+			</a>
+		<?
+		}
+?>
+
 						<div class="box-tumb-date btn-all">
 							<div class="box-text">
 								<p>
@@ -153,94 +118,10 @@ require ("assets/configs/function.inc.php");
 					</div>
 				</div>
 
-				<?  
-				if (!isset($_GET['MID']))
-							$MID = $new_and_event;
-						else
-							$MID = $_GET['MID'];
-
-						$index = 1;
-						$categoryID = $all_event_cat_id;
-
-							if ($_SESSION['LANG'] == 'TH'){
-								$LANG_SQL = 'content.CONTENT_DESC_LOC AS CONTENT_LOC , content.BRIEF_LOC AS CONTENT_BRIEF ,';
-							}else if ($_SESSION['LANG'] == 'EN'){
-								$LANG_SQL = 'content.CONTENT_DESC_ENG AS CONTENT_LOC , content.BRIEF_ENG AS CONTENT_BRIEF ,';
-							}
-
-							$sql =  " SELECT ";
-							$sql .= " 			content.SUB_CAT_ID,
-												content.CONTENT_ID,
-												content.EVENT_START_DATE,
-												content.EVENT_END_DATE,
-												content.CREATE_DATE ,
-												content.LAST_UPDATE_DATE
-											FROM
-												trn_content_detail AS content
-											WHERE
-											    content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.CAT_ID = ".$row_CAT['CONTENT_CAT_ID'];
-							$sql .= " AND (EVENT_START_DATE <= '".$end_date."' AND EVENT_END_DATE >= '".$start_date."')";
-					echo		$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
-
-					$query = mysql_query($sql, $conn);
-					//$num_rows = mysql_num_rows($query);
-
-				?>
-
 				<div class="box-right">
 					<div class="box-slideevent-main cf">
-						<div class="slide-event cf">
-
-							<div class="box-content-slide cf">
-								<div class="box-left">
-									<div class="box-date cf sun">
-										<div class="box-left">
-											<p>
-												30
-											</p>
-										</div>
-										<div class="box-right">
-											<p>
-												ศุกร์
-												<br>
-												<span>พ.ย. 2559</span>
-											</p>
-										</div>
-									</div>
-									<div class="box-text">
-										<a href="">
-										<p class="text-title TcolorRed">
-											Levitated Mass 340 Ton Giant Stone
-										</p> </a>
-										<p class="text-date TcolorGray">
-											28 พ.ย. 2559
-										</p>
-										<p class="text-des TcolorBlack">
-											Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-										</p>
-										<div class="box-btn cf">
-											<a href="" class="btn red">อ่านเพิ่มเติม</a>
-											<div class="box-btn-social cf">
-												<a href="#" class="btn-socila fb"></a>
-												<a href="#" class="btn-socila tw"></a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="box-right">
-									<a href="">
-									<div class="box-pic">
-										<img src="http://placehold.it/287x405">
-									</div>
-									<div class="box-tag-cate">
-										มิวเซี่ยม สยาม
-									</div> </a>
-								</div>
-							</div>
-							
-
+						<div class="slide-event cf" id="eventBox">
+							<? include('index-ajax.php'); ?>
 						</div>
 						<div class="box-float">
 							<div class="box-btn-left">
@@ -266,23 +147,24 @@ require ("assets/configs/function.inc.php");
 				</div>
 			</div>
 		</div>
-
-		<?  
+		<?
 			$categoryID = $all_event_cat_id;
 
 			$index = 0;
 
 
 			$sql_all_exh =  " SELECT ";
-            $sql_all_exh .= " cat.CONTENT_CAT_ID,
+			if ($_SESSION['LANG'] == 'TH')
+				$sql_all_exh .= " content.CONTENT_DESC_LOC as CONTENT_DESC ,content.BRIEF_LOC as CONTENT_BRIEF ,";
+			else
+				$sql_all_exh .= " content.CONTENT_DESC_ENG as CONTENT_DESC ,content.BRIEF_ENG as CONTENT_BRIEF ,";
+                $sql_all_exh .= " cat.CONTENT_CAT_ID,
 					content.SUB_CAT_ID,
 					content.CONTENT_ID,
 					content.EVENT_START_DATE,
 					content.EVENT_END_DATE,
 					content.CREATE_DATE ,
-					content.BRIEF_LOC,
 					content.LAST_UPDATE_DATE ,
-					content.CONTENT_DESC_LOC,
 					IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 				FROM
 					trn_content_category cat
@@ -299,166 +181,103 @@ require ("assets/configs/function.inc.php");
 
 			    $query_all_exh = mysql_query($sql_all_exh, $conn);
 			    $num_rows = mysql_num_rows($query_all_exh);
-			   
-				$index = 0;
 
-				$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
+			    $index = 0;
+				while($row_all_exh = mysql_fetch_array($query_all_exh)) {
+					$path = 'event-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $row_all_exh['CONTENT_ID'] . $extraSCID;
+					$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+					$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $row_all_exh['CONTENT_ID'];
+					$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+
+					$exh_title[$index] = htmlspecialchars(trim($row_all_exh['CONTENT_DESC']));
+					$exh_detail[$index] = strip_tags(trim($row_all_exh['CONTENT_BRIEF']));
+					$exh_path[$index] = $path = 'event-detail.php?MID=' . $MID . '&amp;CID=' . $categoryID . '&amp;CONID=' . $row_all_exh['CONTENT_ID'] . $extraSCID;
+					$exhimg_path[$index] = callThumbListFrontEnd($row_all_exh['CONTENT_ID'], $categoryID, true);
+					$exhimg_date[$index] = ConvertDate($row_all_exh['CREATE_DATE']);
+
+					$social_link[$index] = '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+					$social_link[$index] .= '<a href="' . $fullpath . '" onclick="shareTW(' . $row_all_exh['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+					$index++;
+				}
 
 		?>
-
 		<div class="part-news cf">
 			<div class="container">
 				<div class="box-title"><img src="images/<?=$picFolderName ?>/index/part3-pic1.png" />
 				</div>
 				<div class="box-left">
-					<? while($row_all_exh = mysql_fetch_array($query_all_exh)) { 
-						
-			    		$img_path = callThumbListFrontEnd($row_all_exh['CONTENT_ID'], $categoryID, true);
-			    
-					    $gap = "";
-							if($index == 2){
-								$gap = "mid";
-					}
-					if( $index == 0) {	?>
 					<div class="box-top cf">
 						<div class="box-left">
 							<div class="text-title"><img src="images/<?=$picFolderName ?>/index/part3-pic2.png" />
 							</div>
-							<a class="btn black" href="news-event.php">ดูทั้งหมด</a>
+							<a class="btn black" href="">ดูทั้งหมด</a>
 						</div>
 						<div class="box-right">
 							<div class="box-news-bold cf">
-								<a href="event-detail.php?MID=<? echo $new_and_event ?>&CID=<? echo $categoryID ?>&SID=<? echo $row_all_exh['SUB_CAT_ID'] ?>&CONID=<? echo  $row_all_exh['CONTENT_ID'] ?>">
+								<a href="<?=$exh_path[0]?>">
 								<div class="box-pic">
-									<img src="<? echo $img_path ; ?>">
-									<div class="box-tag-cate">
-										<? echo $row_all_exh['CONTENT_DESC_LOC']; ?>
-									</div>
+									<img src="<?=$exhimg_path[0]?>" width="274" height="205">
+									<div class="box-tag-cate"><?=$exh_title[0]?></div>
 								</div> </a>
 								<div class="box-text">
-									<a href="event-detail.php?MID=<? echo $new_and_event ?>&CID=<? echo $categoryID ?>&SID=<? echo $row_all_exh['SUB_CAT_ID'] ?>&CONID=<? echo  $row_all_exh['CONTENT_ID'] ?>">
-									<p class="text-title TcolorRed">
-										<? echo $row_all_exh['CONTENT_DESC_LOC']; ?>
-									</p> </a>
-									<p class="text-date TcolorGray">
-										<?  echo ConvertDate($row_all_exh['CREATE_DATE']); ?>
-									</p>
-									<p class="text-des TcolorBlack">
-										<? echo $row_all_exh['BRIEF_LOC']; ?>
-									</p>
+									<a href="<?=$exh_path[0]?>">
+									<p class="text-title TcolorRed"><?=$exh_title[0]?></p>
+									</a>
+									<p class="text-date TcolorGray"><?=$exhimg_date[0]?></p>
+									<p class="text-des TcolorBlack"><?=$exh_detail[0]?></p>
 									<div class="box-btn cf">
-										<a href="event-detail.php?MID=<? echo $new_and_event ?>&CID=<? echo $categoryID ?>&SID=<? echo $row_all_exh['SUB_CAT_ID'] ?>&CONID=<? echo  $row_all_exh['CONTENT_ID'] ?>" class="btn red">อ่านเพิ่มเติม</a>
-										
-										<? 
-											$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
-
-										?>
+										<a href="<?=$exh_path[0]?>" class="btn red">อ่านเพิ่มเติม</a>
 										<div class="box-btn-social cf">
-											<a href="<?=$fb_link ?>" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
+											<?=$social_link[0]?>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				  <? } else { ?>
 					<div class="box-bottom">
 						<div class="box-news-main cf">
+						<?
+						$max = count($exh_title);
+							for($i = 1;$i < $max;$i++){
+							if($i == 2){
+								echo '<div class="box-news cf mid">';
+							}else{
+								echo '<div class="box-news cf">';
+							}
+						?>
 
-							<div class="box-news cf  <? echo $gap ?>">
-								<a href="event-detail.php?MID=<? echo $new_and_event ?>&CID=<? echo $categoryID ?>&SID=<? echo $row_all_exh['SUB_CAT_ID'] ?>&CONID=<? echo  $row_all_exh['CONTENT_ID'] ?>">
+								<a href="<?=$exh_path[$i]?>">
 								<div class="box-pic">
-									<img src="<? echo $img_path ; ?>">
+									<img src="<?=$exhimg_path[0]?>" width="274" height="205">
 									<div class="box-tag-cate">
-										<? echo $row_all_exh['CONTENT_DESC_LOC']; ?>
+										<?=$exh_title[$i]?>
 									</div>
 								</div> </a>
 								<div class="box-text">
-									<a href="event-detail.php?MID=<? echo $new_and_event ?>&CID=<? echo $categoryID ?>&SID=<? echo $row_all_exh['SUB_CAT_ID'] ?>&CONID=<? echo  $row_all_exh['CONTENT_ID'] ?>">
+									<a href="<?=$exh_path[$i]?>">
 									<p class="text-title TcolorRed">
-										<? echo $row_all_exh['CONTENT_DESC_LOC']; ?>
+										<?=$exh_detail[$i]?>
 									</p> </a>
 									<p class="text-date TcolorGray">
-										<?  echo ConvertDate($row_all_exh['CREATE_DATE']); ?>
+										<?=$exhimg_date[$i]?>
 									</p>
 									<p class="text-des TcolorBlack">
-										<? echo $row_all_exh['BRIEF_LOC']; ?>
+										<?=$exh_detail[$i]?>
+									</p>
 									<div class="box-btn cf">
-										<a href="event-detail.php?MID=<? echo $new_and_event ?>&CID=<? echo $categoryID ?>&SID=<? echo $row_all_exh['SUB_CAT_ID'] ?>&CONID=<? echo  $row_all_exh['CONTENT_ID'] ?>" class="btn red">อ่านเพิ่มเติม</a>
+										<a href="<?=$exh_path[$i]?>" class="btn red">อ่านเพิ่มเติม</a>
 										<div class="box-btn-social cf">
-											<a href="<? echo $fb_link ?>" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
+											<?=$social_link[$i]?>
 										</div>
 									</div>
 								</div>
 							</div>
-
-						<?    } $index++;} ?>
-
-							<!-- <div class="box-news cf mid">
-								<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										
-									</div>
-								</div> </a>
-								<div class="box-text">
-									<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p> </a>
-									<p class="text-date TcolorGray">
-										28 พ.ย. 2559
-									</p>
-									<p class="text-des TcolorBlack">
-										Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-									</p>
-									<div class="box-btn cf">
-										<a href="" class="btn red">อ่านเพิ่มเติม</a>
-										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							
-							<div class="box-news cf">
-								<a href="">
-								<div class="box-pic">
-									<img src="http://placehold.it/274x205">
-									<div class="box-tag-cate">
-										มิวเซี่ยม สยาม
-									</div>
-								</div> </a>
-								<div class="box-text">
-									<a href="">
-									<p class="text-title TcolorRed">
-										Levitated Mass 340 Ton Giant Stone
-									</p> </a>
-									<p class="text-date TcolorGray">
-										28 พ.ย. 2559
-									</p>
-									<p class="text-des TcolorBlack">
-										Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-									</p>
-									<div class="box-btn cf">
-										<a href="" class="btn red">อ่านเพิ่มเติม</a>
-										<div class="box-btn-social cf">
-											<a href="#" class="btn-socila fb"></a>
-											<a href="#" class="btn-socila tw"></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						-->
+						<? } ?>
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="box-right">
 					<div class="box-museum-news-main">
 						<div class="box-title">
@@ -476,24 +295,24 @@ require ("assets/configs/function.inc.php");
 								$contentSqlStr .= " cat.CONTENT_CAT_DESC_ENG as CAT_DESC ,content.CONTENT_DESC_ENG as CONTENT_DESC ,content.BRIEF_ENG as CONTENT_BRIEF ,";
 
 							$contentSqlStr .= " cat.CONTENT_CAT_ID,
-												content.CONTENT_ID,
-												content.EVENT_START_DATE,
-												content.EVENT_END_DATE,
-												content.CREATE_DATE ,
-												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE ,
-												content.SUB_CAT_ID
-												FROM
-												trn_content_category cat
-												INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
-												WHERE
-												cat.REF_MODULE_ID = $MID
-												AND content.CAT_ID = " . $museum_event_cat_id;
-																			$contentSqlStr .= " AND content.SUB_CAT_ID = " . $mesum_sub_cat_id;
-																			$contentSqlStr .= " AND cat.flag = 0
-												AND content.APPROVE_FLAG = 'Y'
-												AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY RAND() LIMIT 0,4 ";
+content.CONTENT_ID,
+content.EVENT_START_DATE,
+content.EVENT_END_DATE,
+content.CREATE_DATE ,
+content.LAST_UPDATE_DATE ,
+IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE ,
+content.SUB_CAT_ID
+FROM
+trn_content_category cat
+INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+WHERE
+cat.REF_MODULE_ID = $MID
+AND content.CAT_ID = " . $museum_event_cat_id;
+							$contentSqlStr .= " AND content.SUB_CAT_ID = " . $mesum_sub_cat_id;
+							$contentSqlStr .= " AND cat.flag = 0
+AND content.APPROVE_FLAG = 'Y'
+AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+ORDER BY RAND() LIMIT 0,4 ";
 
 							// start Loop Activity
 							$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
@@ -594,7 +413,7 @@ require ("assets/configs/function.inc.php");
 							</div>
 							</div> -->
 							<div class="box-btn cf">
-								<a href="news-museum.php" class="btn black">ดูทั้งหมด</a>
+								<a href="event-museum.php" class="btn black">ดูทั้งหมด</a>
 							</div>
 						</div>
 					</div>
@@ -666,96 +485,7 @@ require ("assets/configs/function.inc.php");
 							echo '</div>';
 						}
 						?>
-						<!-- <div class="box-network">
-							<a href="">
-							<div class="box-pic">
-								<img src="http://placehold.it/274x205">
-							</div> </a>
-							<div class="box-text">
-								<a href="">
-								<p class="text-title">
-									Levitated Mass 340 Ton Giant Stone
-								</p> </a>
-								<p class="text-location TcolorWhite">
-									กรุงเทพมหานคร
-								</p>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-							</div>
-						</div>
-						<div class="box-network">
-							<a href="">
-							<div class="box-pic">
-								<img src="http://placehold.it/274x205">
-							</div> </a>
-							<div class="box-text">
-								<a href="">
-								<p class="text-title">
-									Levitated Mass 340 Ton Giant Stone
-								</p> </a>
-								<p class="text-location TcolorWhite">
-									กรุงเทพมหานคร
-								</p>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-							</div>
-						</div>
-						<div class="box-network">
-							<a href="">
-							<div class="box-pic">
-								<img src="http://placehold.it/274x205">
-							</div> </a>
-							<div class="box-text">
-								<a href="">
-								<p class="text-title">
-									Levitated Mass 340 Ton Giant Stone
-								</p> </a>
-								<p class="text-location TcolorWhite">
-									กรุงเทพมหานคร
-								</p>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-							</div>
-						</div>
-						<div class="box-network">
-							<a href="">
-							<div class="box-pic">
-								<img src="http://placehold.it/274x205">
-							</div> </a>
-							<div class="box-text">
-								<a href="">
-								<p class="text-title">
-									Levitated Mass 340 Ton Giant Stone
-								</p> </a>
-								<p class="text-location TcolorWhite">
-									กรุงเทพมหานคร
-								</p>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-							</div>
-						</div>
-						<div class="box-network">
-							<a href="">
-							<div class="box-pic">
-								<img src="http://placehold.it/274x205">
-							</div> </a>
-							<div class="box-text">
-								<a href="">
-								<p class="text-title">
-									Levitated Mass 340 Ton Giant Stone
-								</p> </a>
-								<p class="text-location TcolorWhite">
-									กรุงเทพมหานคร
-								</p>
-								<p class="text-date TcolorGray">
-									28 พ.ย. 2559
-								</p>
-							</div>
-						</div> -->
+
 					</div>
 					<a class="btn-arrow left"></a>
 					<a class="btn-arrow right"></a>
@@ -789,22 +519,22 @@ require ("assets/configs/function.inc.php");
 								$contentSqlStr .= " cat.CONTENT_CAT_DESC_ENG as CAT_DESC ,content.CONTENT_DESC_ENG as CONTENT_DESC ,content.BRIEF_ENG as CONTENT_BRIEF ,";
 
 							$contentSqlStr .= " cat.CONTENT_CAT_ID,
-												content.CONTENT_ID,
-												content.EVENT_START_DATE,
-												content.EVENT_END_DATE,
-												content.CREATE_DATE ,
-												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE ,
-												content.SUB_CAT_ID
-												FROM
-												trn_content_category cat
-												INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
-												WHERE
-												cat.REF_MODULE_ID = $MID
-												AND cat.flag = 0
-												AND content.APPROVE_FLAG = 'Y'
-												AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY RAND() LIMIT 0,5 ";
+content.CONTENT_ID,
+content.EVENT_START_DATE,
+content.EVENT_END_DATE,
+content.CREATE_DATE ,
+content.LAST_UPDATE_DATE ,
+IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE ,
+content.SUB_CAT_ID
+FROM
+trn_content_category cat
+INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+WHERE
+cat.REF_MODULE_ID = $MID
+AND cat.flag = 0
+AND content.APPROVE_FLAG = 'Y'
+AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+ORDER BY RAND() LIMIT 0,5 ";
 
 							// start Loop Activity
 							$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
@@ -883,22 +613,22 @@ require ("assets/configs/function.inc.php");
 								$contentSqlStr .= " cat.CONTENT_CAT_DESC_ENG as CAT_DESC ,content.CONTENT_DESC_ENG as CONTENT_DESC ,content.BRIEF_ENG as CONTENT_BRIEF ,";
 
 							$contentSqlStr .= " cat.CONTENT_CAT_ID,
-												content.CONTENT_ID,
-												content.EVENT_START_DATE,
-												content.EVENT_END_DATE,
-												content.CREATE_DATE ,
-												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE ,
-												content.SUB_CAT_ID
-												FROM
-												trn_content_category cat
-												INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
-												WHERE
-												cat.REF_MODULE_ID = $MID
-												AND cat.flag = 0
-												AND content.APPROVE_FLAG = 'Y'
-												AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY RAND() LIMIT 0,5 ";
+content.CONTENT_ID,
+content.EVENT_START_DATE,
+content.EVENT_END_DATE,
+content.CREATE_DATE ,
+content.LAST_UPDATE_DATE ,
+IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE ,
+content.SUB_CAT_ID
+FROM
+trn_content_category cat
+INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+WHERE
+cat.REF_MODULE_ID = $MID
+AND cat.flag = 0
+AND content.APPROVE_FLAG = 'Y'
+AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+ORDER BY RAND() LIMIT 0,5 ";
 
 							// start Loop Activity
 							$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
@@ -976,21 +706,21 @@ require ("assets/configs/function.inc.php");
 								$contentSqlStr .= " cat.CONTENT_CAT_DESC_ENG as CAT_DESC ,content.CONTENT_DESC_ENG as CONTENT_DESC ,content.BRIEF_ENG as CONTENT_BRIEF ,";
 
 							$contentSqlStr .= " cat.CONTENT_CAT_ID,
-												content.CONTENT_ID,
-												content.EVENT_START_DATE,
-												content.EVENT_END_DATE,
-												content.CREATE_DATE ,
-												content.LAST_UPDATE_DATE ,
-												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
-												FROM
-												trn_content_category cat
-												INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
-												WHERE
-												cat.REF_MODULE_ID = $MID
-												AND cat.flag = 0
-												AND content.APPROVE_FLAG = 'Y'
-												AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY RAND() LIMIT 0,4 ";
+content.CONTENT_ID,
+content.EVENT_START_DATE,
+content.EVENT_END_DATE,
+content.CREATE_DATE ,
+content.LAST_UPDATE_DATE ,
+IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
+FROM
+trn_content_category cat
+INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+WHERE
+cat.REF_MODULE_ID = $MID
+AND cat.flag = 0
+AND content.APPROVE_FLAG = 'Y'
+AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
+ORDER BY RAND() LIMIT 0,4 ";
 
 							// start Loop Activity
 							$rsContent = mysql_query($contentSqlStr) or die(mysql_error());

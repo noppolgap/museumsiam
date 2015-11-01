@@ -84,7 +84,7 @@ if ($_SESSION['LANG'] == 'TH') {
 <?php   }  ?>
 		</div>
 		<div class="box-btn">
-			<a  class="btn black">กิจกรรมวันนี้</a>
+			<a href="news-event-day.php" class="btn black">กิจกรรมวันนี้</a>
 		</div>
 <?php   }  ?>
 	</div>
@@ -94,28 +94,4 @@ if ($_SESSION['LANG'] == 'TH') {
 	echo '<script src="assets/plugin/jqueryui_datepicker_thai.js"></script>';
 }
 ?>
-<script>
-
-    var dates = ['10/22/2015', '10/23/2015', '10/13/2015']; //
-            //tips are optional but good to have
-    var tips  = ['some description','some other description','some other description'];
-
-  $(function() {
-    $( "#datepicker" ).datepicker({
-        dateFormat: 'yy-mm-dd',
-        beforeShowDay: highlightDays,
-        onSelect:movetopage
-    });
-    function highlightDays(date) {
-        for (var i = 0; i < dates.length; i++) {
-            if (new Date(dates[i]).toString() == date.toString()) {
-                return [true, 'highlight', tips[i]];
-            }
-        }
-        return [true, ''];
-     }
-});
-function movetopage(date){
-	window.location.href = 'news-event-day.php?date='+date;
-}
-</script>
+<script src="js/event-calendar.js"></script>

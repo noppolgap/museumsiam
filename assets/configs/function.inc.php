@@ -267,6 +267,33 @@ function returnThaiShortMonth($str) {
 	}
 	return $myMonth;
 }
+function returnThaiDayOfWeek($str) {
+	switch($str) {
+		case "Sunday" :
+			$myDay = "อาทิตย์";
+			break;
+		case "Monday" :
+			$myDay = "จันทร์";
+			break;
+		case "Tuesday" :
+			$myDay = "อังคาร";
+			break;
+		case "Wednesday" :
+			$myDay = "พุธ";
+			break;
+		case "Thursday" :
+			$myDay = "พฤหัสบดี";
+			break;
+		case "Friday" :
+			$myDay = "ศุกร์";
+			break;
+		case "Saturday" :
+			$myDay = "เสาร์";
+			break;
+	}
+	return $myDay;
+}
+
 
 function ConvertDate($str) {
 	if ($_SESSION['LANG'] == 'TH') {
