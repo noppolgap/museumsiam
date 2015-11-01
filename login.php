@@ -99,7 +99,7 @@ require ("assets/configs/function.inc.php");
 								ต้องการสมัครสมาชิก?
 							</p>
 							<div class="box-btn">
-								<a href="register-step1.php" class="btn black">สมัครสมาชิก</a>
+								<a href="terms-conditions.php" class="btn black">สมัครสมาชิก</a>
 							</div>
 						</div>
 					</div>

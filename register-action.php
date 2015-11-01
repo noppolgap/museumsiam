@@ -66,7 +66,7 @@ if ($_GET["type"] == "province") {
 	mysql_query($sql, $conn) or die($sql);
 	$retrunID = mysql_insert_id();
 
-	header('Location: ' . 'complete-regis.php');
+	header('Location: ' . 'check-email.php');
 
 }
 

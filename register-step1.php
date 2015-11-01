@@ -46,8 +46,8 @@ require("assets/configs/function.inc.php");
 		<form name="myform" id="myform" method="post" action="register-action.php">
 		<div class="box-content-main">
 			<div class="box-select-type">
-				<div><input type="radio" name="radio1" value="type1" checked>สมาชิกทั่วไป</div>
-				<div><input type="radio" name="radio1" value="type2">สมาชิกพิพิธภัณฑ์</div>
+				<div><input type="radio" name="radio1" value="2" checked>สมาชิกทั่วไป</div>
+				<div><input type="radio" name="radio1" value="3">สมาชิกพิพิธภัณฑ์</div>
 			</div>
 			<div  class="box-login-fb">
 				<a href="f#" class="btn-login-fb"><img src="images/form/btn-login-fb.png"/></a>

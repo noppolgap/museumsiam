@@ -32,7 +32,7 @@
 
 	<a href="../mod_network_museum/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการพิพิธภัณฑ์เครือข่าย</span></a>
 	<a href="../mod_hero_banner/hero_banner_view.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการ Hero Banner</span></a>
-
+	<a href="../mod_organization/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการโครงสร้างองค์กร</span></a>
 
 	<a href="#"><span class="menutab dBlock signoutTab">ออกจากระบบ</span></a>
 </div>
