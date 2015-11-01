@@ -23,7 +23,7 @@ $catName = "";
 if (isset($_SESSION['DA_PREV_PG'])) {
 	$backPage = $_SESSION['DA_PREV_PG'];
 } else {
-	$backPage = "da.php?MID=" . $digial_module_id;
+	$backPage = "km-event.php?MID=" . $digial_module_id;
 }
 $sqlCategory = "";
 if (isset($_GET['SCID'])) {

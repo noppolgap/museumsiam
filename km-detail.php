@@ -20,7 +20,32 @@ if ($currentPage < 1)
 
 $catName = "";
 
-if (isset($_SESSION['KM_PREV_PG'])) {
+
+$backPage = "";
+$link_back = $_GET['link'];
+
+   switch ($link_back) {
+    case "event":
+        $backPage = "km-event.php";
+        break;
+    case "exh":
+        $backPage = "km-exhibition.php";
+        break;
+    case "reseach":
+        $backPage = "km-reseach.php";
+        break;
+    case "edu":
+    	$backPage = "km-education.php";
+        break;
+    case "media":
+		$backPage = "km-media.php";
+    break;
+    case "":
+		$backPage = "km.php";
+    break;
+
+
+/*if (isset($_SESSION['KM_PREV_PG'])) {
 	$backPage = $_SESSION['KM_PREV_PG'];
 } else {
 	$backPage = "km.php?MID=" . $km_module_id;
@@ -57,7 +82,7 @@ if ($_SESSION['LANG'] == 'TH') {
 	$LANG_SQL = "CONTENT_DESC_ENG AS CONTENT_LOC ,CONTENT_DETAIL_ENG AS CONTENT_DETAIL,BRIEF_ENG AS CONTENT_BRIEF,PLACE_DESC_ENG as PLACE_DESC , ";
 }
 
-$contentSql = "SELECT
+ $contentSql = "SELECT
 				CONTENT_ID,
 				CAT_ID,
 				" . $LANG_SQL . "

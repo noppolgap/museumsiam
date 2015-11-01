@@ -10,7 +10,7 @@ if($id == 0){
 }else{
 
 	if(!isset($_SESSION["VISIT_COUNT"])){
-		$_SESSION["VISIT_COUNT"] = null;
+		$_SESSION["VISIT_COUNT"] = array();
 	}
 	if (!in_array($id ,$_SESSION["VISIT_COUNT"])){
 		mysql_query("UPDATE trn_webboard SET VISIT_COUNT = VISIT_COUNT+1 WHERE WEBBOARD_ID =".$id, $conn);
@@ -174,7 +174,7 @@ if($id == 0){
 			</div>
 */
 
-$sql = "SELECT USER_ID , CITIZEN_ID FROM sys_app_user WHERE ID = ".$_SESSION['UID'];
+$sql = "SELECT USER_ID , CITIZEN_ID FROM sys_app_user WHERE ID = ".intval($_SESSION['UID']);
 $query = mysql_query($sql, $conn);
 if(mysql_num_rows($query) > 0){
 	$row = mysql_fetch_array($query);

@@ -169,20 +169,20 @@ if (isset($_GET['SCID'])) {
 
 
 							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
-							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'].'&link=reseach';
 							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' .$rowContent['CONTENT_ID'];
 							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '"> ';
+							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '&link=reseach"> ';
 							echo ' <div class="box-pic"> ';
 							echo '	<img style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 
 							echo ' <div class="box-text">';
-							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '">';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '&link=reseach">';
 							echo ' <p class="text-title TcolorRed">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -194,7 +194,7 @@ if (isset($_GET['SCID'])) {
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG=' . $currentPage . '&link=reseach" class="btn red">อ่านเพิ่มเติม</a>';
 
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
