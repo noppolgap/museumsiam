@@ -168,8 +168,19 @@ if ($_SESSION['LANG'] == 'TH') {
 											AND cat.CONTENT_CAT_ID = $CID
 											and content.SUB_CAT_ID = ".$rowCat['SUB_CONTENT_CAT_ID'];
 						   $sqlContent .= " AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY content.ORDER_DATA desc LIMIT 0,3 " ;
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
+
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search'])){
+									$_SESSION['text'] = $_POST['str_search'];
+									$sqlContent .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+								}
+							}
+							else {
+								unset($_SESSION['text']);
+							}
+						
+						$sqlContent .= " ORDER BY content.ORDER_DATA desc LIMIT 0,3 " ;
 
 						$rsContent = mysql_query($sqlContent) or die(mysql_error());
 						$i = 1;

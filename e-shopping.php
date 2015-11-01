@@ -122,7 +122,19 @@ require("assets/configs/function.inc.php");
 												GROUP BY CONTENT_ID, CAT_ID
 											) AS pic ON prod.PRODUCT_ID = pic.CONTENT_ID
 											AND prod.CAT_ID = pic.CAT_ID
-											WHERE prod.CAT_ID = ".$row['CONTENT_CAT_ID']." AND prod.FLAG = 0 ORDER BY prod.ORDER_DATA DESC LIMIT 0,6";
+							
+											WHERE prod.CAT_ID = ".$row['CONTENT_CAT_ID']." AND prod.FLAG = 0 ";
+
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$sql_proc .= " AND (prod.PRODUCT_DESC_LOC like '%" .$_SESSION['text']. "%' or  prod.PRODUCT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}
+
+							$sql_proc  .= "	ORDER BY prod.ORDER_DATA DESC LIMIT 0,6";
 
 						     $query_proc = mysql_query($sql_proc,$conn);
 

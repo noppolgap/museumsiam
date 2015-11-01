@@ -95,10 +95,18 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											ORDER BY
-												content.ORDER_DATA desc
-											LIMIT 0,3 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 ";
+
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+
+						$contentSqlStr .= "	ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
@@ -176,10 +184,16 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											ORDER BY
-												content.ORDER_DATA desc
-											LIMIT 0,3 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 ";
+											if (isset($_GET['search'])) {
+							if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+							$contentSqlStr .= "		ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
@@ -256,10 +270,18 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											ORDER BY
-												content.ORDER_DATA desc
-											LIMIT 0,3 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 ";
+
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+							
+							$contentSqlStr .=	"ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
@@ -337,10 +359,18 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											ORDER BY
-												content.ORDER_DATA desc
-											LIMIT 0,3 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 ";
+
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+
+							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
@@ -417,10 +447,19 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											ORDER BY
-												content.ORDER_DATA desc
-											LIMIT 0,3 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 ";
+							
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+
+							
+							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
@@ -498,10 +537,19 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0
-											ORDER BY
-												content.ORDER_DATA desc
-											LIMIT 0,3 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 ";
+							
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+
+							
+							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
@@ -573,8 +621,21 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 
 				//// ส่วนคำถาม
 				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE , VISIT_COUNT FROM trn_webboard
-						WHERE REF_WEBBOARD_ID = 0
-						AND FLAG = 0 ORDER BY ORDER_DATA DESC Limit 0,15";
+						WHERE REF_WEBBOARD_ID = 0 AND FLAG = 0 ";
+				
+				if (isset($_GET['search'])) {
+					if (isset($_POST['str_search']))
+						$_SESSION['text'] = $_POST['str_search'];
+						$sq_qa .= " AND CONTENT like '%" .$_SESSION['text']. "%' ";
+				}
+				else {
+						unset($_SESSION['text']);
+				}	
+
+							
+				$sq_qa .= "ORDER BY ORDER_DATA DESC Limit 0,15 ";
+
+						
 
 				$query_qa = mysql_query($sq_qa, $conn);
 				?>

@@ -113,7 +113,17 @@ require("assets/configs/function.inc.php");
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
 											AND content.CAT_ID = ".$row_CAT['CONTENT_CAT_ID'];
-							$sql .= " AND (DATEDIFF(EVENT_START_DATE, '".date('Y-m-d')."') <= 0 AND DATEDIFF(EVENT_END_DATE, '".date('Y-m-d')."') >= 0)";
+							$sql .= " AND (EVENT_START_DATE <= '".date('Y-m-t')."' AND EVENT_END_DATE >= '".date('Y-m-1')."')";
+						    
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}
+								
 						    $sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
 					$query = mysql_query($sql, $conn);

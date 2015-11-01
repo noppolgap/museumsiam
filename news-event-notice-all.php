@@ -62,8 +62,19 @@ require("assets/configs/function.inc.php");
 													GROUP BY CONTENT_ID, CAT_ID
 												) as p on  d.CONTENT_ID = p.CONTENT_ID
 												AND d.CAT_ID = p.CAT_ID
-						WHERE d.CAT_ID = 59 and d.CONTENT_STATUS_FLAG = 0 
-						ORDER BY d.ORDER_DATA DESC LIMIT 0 , 30";
+						WHERE d.CAT_ID = 59 and d.CONTENT_STATUS_FLAG = 0 ";
+
+				if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$sql .= "  AND (d.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%'or  d.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%') ";
+				}
+				else {
+						unset($_SESSION['text']);
+
+				}	
+
+			    $sql .=	"ORDER BY d.ORDER_DATA DESC LIMIT 0 , 30";
 
 				$query = mysql_query($sql, $conn);
 

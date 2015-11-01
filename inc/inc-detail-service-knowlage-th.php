@@ -31,7 +31,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</p>
 				<!-- KM_INFOR_MGR -->
 				<?php
-						$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KM_INFOR_MGR' AND ACTIVE_FLAG = 1";
+				    	$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KM_INFOR_MGR' AND ACTIVE_FLAG = 1";
 						$rsContent = mysql_query($sql) or die(mysql_error());
 						$rowContent = mysql_fetch_array($rsContent);
 						echo str_replace('../../', '',$rowContent['CMS_TEXT']);

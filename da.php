@@ -133,8 +133,20 @@ if ($_SESSION['LANG'] == 'TH') {
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = " . $rowCat['CONTENT_CAT_ID'];
 						$contentSql .= "		AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
+
+
+						if (isset($_GET['search'])) {
+								if (isset($_POST['str_search'])){
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+								}
+						}
+						else {
+								unset($_SESSION['text']);
+						}
+
+						$contentSql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						$rsContent = mysql_query($contentSql) or die(mysql_error());
 						$i = 1;
@@ -253,8 +265,19 @@ if ($_SESSION['LANG'] == 'TH') {
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = " . $rowCat['CONTENT_CAT_ID'];
 						$contentSql .= "		AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
+
+						if (isset($_GET['search'])) {
+								if (isset($_POST['str_search'])){
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+								}
+						}
+						else {
+								unset($_SESSION['text']);
+						}
+						
+						$contentSql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						$rsContent = mysql_query($contentSql) or die(mysql_error());
 						$i = 1;
@@ -368,9 +391,20 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 												cat.REF_MODULE_ID = $digial_module_id
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = " . $rowCat['CONTENT_CAT_ID'];
-	$contentSql .= "		AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+						$contentSql .= "		AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
+							
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search'])){
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+								}
+						}
+						else {
+								unset($_SESSION['text']);
+						}
+						
+						$contentSql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 	$rsContent = mysql_query($contentSql) or die(mysql_error());
 	$i = 1;
@@ -492,8 +526,19 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = " . $rowCat['CONTENT_CAT_ID'];
 								$contentSql .= "		AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY content.ORDER_DATA desc LIMIT 0,2 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
+								
+								if (isset($_GET['search'])) {
+									if (isset($_POST['str_search'])){
+										$_SESSION['text'] = $_POST['str_search'];
+										$contentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+									}
+								}
+								else {
+										unset($_SESSION['text']);
+								}
+								
+								$contentSql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,2 ";
 
 								$categoryID = $rowCat['CONTENT_CAT_ID'];
 								$rsContent = mysql_query($contentSql) or die(mysql_error());
@@ -605,8 +650,19 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = " . $rowCat['CONTENT_CAT_ID'];
 						$contentSql .= "		AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-												ORDER BY content.ORDER_DATA desc LIMIT 0,1 ";
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
+						
+						if (isset($_GET['search'])) {
+								if (isset($_POST['str_search'])){
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+								}
+						}
+						else {
+								unset($_SESSION['text']);
+						}
+						
+						$contentSql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,1 ";
 
 						$rsContent = mysql_query($contentSql) or die(mysql_error());
 						$i = 1;

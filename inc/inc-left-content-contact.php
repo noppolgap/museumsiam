@@ -4,11 +4,13 @@
 	</div>
 </div>
 
-<div class="part-left-search">
-	<div class="box-search">
-		<input type="text" placeholder="ค้นหา">
+<form name="search" action="?search" method="post">
+	<div class="part-left-search">
+		<div class="box-search">
+			<input type="text" name="str_search" value="<?=$_SESSION['text'] ?>"  placeholder="ค้นหา">
+		</div>
 	</div>
-</div>
+</form>
 
 <div class="part-menu-left">
 	<div class="box-menu-left">

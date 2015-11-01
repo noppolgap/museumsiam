@@ -316,7 +316,7 @@ require("assets/configs/function.inc.php");
 					<h2>ประกาศจัดซื้อจัดจ้าง</h2>
 				</div>
 
-				<?php
+			<?php
 
 			    $sql = " SELECT d.CONTENT_DESC_LOC, p.IMG_PATH from trn_content_detail d
 						 LEFT JOIN (
@@ -334,19 +334,18 @@ require("assets/configs/function.inc.php");
 						if (isset($_GET['search'])) {
 								if (isset($_POST['str_search']))
 									$_SESSION['text'] = $_POST['str_search'];
-									$sql .= "  AND d.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' ";
+									$sql .= "  AND (d.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%'or  d.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%') ";
 							}
 							else {
 									unset($_SESSION['text']);
 						}	
 
-						$sql .= " d.ORDER_DATA DESC LIMIT 0 , 30 ";
+					$sql .= " order by d.ORDER_DATA DESC LIMIT 0 , 30 ";
 
 
 				$query = mysql_query($sql, $conn);
 
-				$num = mysql_num_rows($query);
-
+				//$num_rows = mysql_num_rows($query);
 			?>
 
 				<div class="box-news-main gray">

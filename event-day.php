@@ -188,6 +188,15 @@ $_SESSION['EVENT_PREV_PG'] = $current_url;
 											AND content.CAT_ID = $all_event_cat_id ";
 							$countContentSql .= " AND (EVENT_START_DATE <= '".date('Y-m-t')."' AND EVENT_END_DATE >= '".date('Y-m-1')."')";
 
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$countContentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
+
 							$queryCount = mysql_query($countContentSql, $conn);
 
 							$dataCount = mysql_fetch_assoc($queryCount);

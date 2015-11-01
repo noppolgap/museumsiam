@@ -143,8 +143,19 @@ if ($_SESSION['LANG'] == 'TH') {
 						if (isset($_GET['SCID']))
 							$getContentSql .= " AND content.SUB_CAT_ID = $SCID ";
 						$getContentSql .= " AND content.APPROVE_FLAG = 'Y'
-											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
-											ORDER BY
+											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
+						
+						if (isset($_GET['search'])) {
+								if (isset($_POST['str_search'])){
+									$_SESSION['text'] = $_POST['str_search'];
+									$getContentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+								}
+						}
+						else {
+							unset($_SESSION['text']);
+						}
+
+						$getContentSql .= "		ORDER BY
 												content.ORDER_DATA desc
 											Limit 9 offset  " . (9 * ($currentPage - 1));
 

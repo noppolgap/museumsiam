@@ -77,7 +77,18 @@ $_SESSION['WB_PREV_PG'] = $current_url;
 
 			$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
 						   WHERE REF_WEBBOARD_ID = 0
-						   AND FLAG = 0 ORDER BY ORDER_DATA DESC Limit 30 offset " . (30 * ($currentPage - 1));
+						   AND FLAG = 0 ";
+
+				if (isset($_GET['search'])) {
+					if (isset($_POST['str_search']))
+						$_SESSION['text'] = $_POST['str_search'];
+						$sq_qa .= " AND CONTENT like '%" .$_SESSION['text']. "%' ";
+				}
+				else {
+						unset($_SESSION['text']);
+				}	
+				
+				$sq_qa .= "  ORDER BY ORDER_DATA DESC Limit 30 offset " . (30 * ($currentPage - 1));
 
 			$query_qa = mysql_query($sq_qa, $conn);
 
