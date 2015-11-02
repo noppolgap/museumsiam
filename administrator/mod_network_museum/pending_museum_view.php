@@ -32,11 +32,7 @@ require ('../inc_header.php');
 				</div>
 				<div class="mod-body-main-content">
 				
-						 
-						
-						<form action="" method="post" name="formcms">
-							<div>
-							   <? while($row = mysql_fetch_array($rs)) {  ?>
+						  <? while($row = mysql_fetch_array($rs)) {  ?>
 							
 							
 							<div class="Main_Content" data-id="<?=$row['MUSEUM_DETAIL_ID'] ?>" >
@@ -55,7 +51,7 @@ require ('../inc_header.php');
 							<!--<a href="#" data-id="<?=$row['CONTENT_ID'] ?>" class="DeleteContentBtn">Delete</a>-->
 						</div> 
 						<div class="clear"></div>	
-				</div>	
+				</div>
 								
 							<?} ?>
 
@@ -64,7 +60,7 @@ require ('../inc_header.php');
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php' ">
 							</div>
 							</div>
-						</form> 
+					 
 						
 						
 						
@@ -74,7 +70,7 @@ require ('../inc_header.php');
 		</div>
 		<div class="clear"></div>	
 	</div>
-</div>	
+ 
 <?
 require ('../inc_footer.php');
  ?>		
