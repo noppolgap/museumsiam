@@ -639,7 +639,7 @@ function admin_upload_icon_edit($name, $iconType, $moduleId, $subModuleId) {
 
 	if (isset($moduleId))
 		$sql = "SELECT * FROM trn_banner_pic_setting WHERE APP_MODULE_ID = " . $moduleId . " order by LAST_UPDATE_DATE desc Limit 0,1 ";
-	else if (isset($subModuleId) )
+	else if (isset($subModuleId))
 		$sql = "SELECT * FROM trn_banner_pic_setting WHERE APP_SUB_MODULE_ID = " . $subModuleId . " order by LAST_UPDATE_DATE desc Limit 0,1 ";
 	//echo $sql;
 	$query = mysql_query($sql, $conn);
@@ -1643,12 +1643,10 @@ function ShowYear($myDate) {
 	return ($myYear);
 }
 
-
-
 function front_upload_file($name) {
-	 
+
 	$type = 'all';
-	  
+
 	$str = array();
 
 	$str[0];
@@ -1656,17 +1654,15 @@ function front_upload_file($name) {
 	$str[0] .= '<div class="tabs">' . "\n\t";
 	$str[0] .= '<ul>' . "\n\t";
 	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>' . "\n\t";
-	 
+
 	$str[0] .= '</ul>' . "\n\t";
 	$str[0] .= '<div id="tabs_' . $name . '_1">' . "\n\t";
 	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" data-name="' . $name . '">' . "\n\t";
 	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="administrator/images/ajax-loader.gif" alt="loading" />' . "\n\t";
 	$str[0] .= '<div class="DataBlock dNone"></div>' . "\n\t";
 	$str[0] .= '</div>' . "\n\t";
-	
-	 
-	 
-$str[0] .= '</div>' . "\n\t";
+
+	$str[0] .= '</div>' . "\n\t";
 	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>' . "\n\t";
 
 	switch ($type) {
@@ -1694,5 +1690,27 @@ $str[0] .= '</div>' . "\n\t";
 
 	return $str;
 
+}
+
+function displaydateformatlong($source) {
+	if ($_SESSION['LANG'] == 'TH') {
+		$myDateTime = explode(" ", $source);
+		$myDateArray = explode("-", $myDateTime[0]);
+		$myYear = sprintf("%d", $myDateArray[0]) + 543;
+		$myMonth = returnThaiMonth($myDateArray[1]);
+		$myDate = $myDateArray[2];
+		return $myDate . ' ' . $myMonth . ' ' . $myYear ;// . ' ' . $myDateTime[1];
+
+	} else {
+		$date = new DateTime($source);
+		return $date -> format('j F Y');
+	}
+	// 1 December 2012 13:30
+
+}
+function displayTime ($source)
+{
+	$date = new DateTime($source);
+		return $date -> format('H:i:s');
 }
 ?>

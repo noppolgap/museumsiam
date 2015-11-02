@@ -52,7 +52,8 @@ $sqlUser .= "	FROM
 					INNER JOIN mas_district district ON district.DISTRICT_ID = u.DISTRICT_ID
 					INNER JOIN mas_sub_district subDistrict ON subDistrict.SUB_DISTRICT_ID = u.SUB_DISTRICT_ID
 					INNER JOIN mas_province province ON province.PROVINCE_ID = u.PROVINCE_ID
-					LEFT JOIN MAS_TITLE_NAME t on t.TITLE_ID = u.TITLE 
+					LEFT JOIN mas_title_name t on t.TITLE_ID = u.TITLE 
+					LEFT JOIN mas_sex s on s.SEX_ID = u.SEX
 					WHERE
 						u.USER_ID = '" . $_SESSION['user_name'] . "'
 					AND ACTIVE_FLAG = '1' ";
@@ -165,7 +166,7 @@ $row = mysql_fetch_array($rs);
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
-							<div><input type="text" name = "birthday" value="<?=$row['BIRTHDAY'] ?>"></div>
+							<div><input type="text" name = "birthday" value="<?=displaydateformatlong($row['BIRTHDAY']) ?>" class="DatePicker" ></div>
 						</div>
 					</div>
 				</div>
@@ -334,7 +335,7 @@ $row = mysql_fetch_array($rs);
 			<div class="box-right">
 				<div class="box-user">
 					<div class="box-pic">
-						<img src="images/account/user.jpg"/>
+						<img id="imgAvatar" src="images/account/user.jpg"/>
 					</div>
 					<div class="box-detail cf">
 						<div class="box-name">
@@ -351,7 +352,7 @@ $row = mysql_fetch_array($rs);
 								วันที่
 							</div>
 							<div class="box-right">
-								<?=$rowLog['LOGIN_DATE'] ?>
+								<?=displaydateformatlong($rowLog['LOGIN_DATE'] )?>
 							</div>
 						</div>
 						<div class="row cf">
@@ -359,14 +360,15 @@ $row = mysql_fetch_array($rs);
 								เวลา
 							</div>
 							<div class="box-right">
-								<?=$rowLog['LOGIN_DATE'] ?>
+								<?=displayTime($rowLog['LOGIN_DATE']) ?>
 							</div>
 						</div>
 					</div>
 					<div class="box-btn cf">
 						<div class="row cf">
 <!-- 							<div class="box-left"> -->
-								<a href="#" class="ac fl">แก้ไขรูปประจำตัว</a>
+								<a onclick="$('#browseAvarta').click();" href="#" class="ac fl">แก้ไขรูปประจำตัว</a>
+								<input type='file' name ="browseAvarta" id ="browseAvarta" style="display:none" accept="image/*" />
 <!-- 							</div> -->
 						</div>
 					</div>
@@ -391,6 +393,6 @@ $row = mysql_fetch_array($rs);
 <?php
 include ('inc/inc-footer.php');
  ?>	
-
+<script src="js/account-edit.js"></script>
 </body>
 </html>

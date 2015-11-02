@@ -80,13 +80,13 @@ require ('inc/inc-require-userlogin.php');
 					INNER JOIN mas_district district ON district.DISTRICT_ID = u.DISTRICT_ID
 					INNER JOIN mas_sub_district subDistrict ON subDistrict.SUB_DISTRICT_ID = u.SUB_DISTRICT_ID
 					INNER JOIN mas_province province ON province.PROVINCE_ID = u.PROVINCE_ID
-					LEFT JOIN MAS_TITLE_NAME t on t.TITLE_ID = u.TITLE
-					LEFT JOIN MAS_SEX s on s.SEX_ID = u.SEX
+					LEFT JOIN mas_title_name t on t.TITLE_ID = u.TITLE
+					LEFT JOIN mas_sex s on s.SEX_ID = u.SEX
 					WHERE
 						u.USER_ID = '" . $_SESSION['user_name'] . "'
 					AND ACTIVE_FLAG = '1' ";
 
-					//echo $sqlUser ;
+			//		echo $sqlUser ;
 		$rs = mysql_query($sqlUser) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
 		?>
@@ -121,7 +121,7 @@ require ('inc/inc-require-userlogin.php');
 						<p>วันเกิด</p>
 					</div>
 					<div class="box-right">
-						<p><?=$row['BIRTHDAY'] ?></p>
+						<p><?=displaydateformatlong($row['BIRTHDAY']) ?></p>
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -217,7 +217,7 @@ require ('inc/inc-require-userlogin.php');
 								วันที่
 							</div>
 							<div class="box-right">
-								<?=$rowLog['LOGIN_DATE'] ?>
+								<?=displaydateformatlong($rowLog['LOGIN_DATE'] )?>
 							</div>
 						</div>
 						<div class="row cf">
@@ -225,7 +225,7 @@ require ('inc/inc-require-userlogin.php');
 								เวลา
 							</div>
 							<div class="box-right">
-								<?=$rowLog['LOGIN_DATE'] ?>
+								<?=displayTime($rowLog['LOGIN_DATE']) ?>
 							</div>
 						</div>
 					</div>

@@ -14,7 +14,7 @@ $getUserSql = "SELECT ID,
 						sys_app_user
 					WHERE
 						USER_ID = '" . $_POST['txtEmail'] . "'
-					and ACTIVE_FLAG == 1 ";
+					and ACTIVE_FLAG = 1 ";
 $query = mysql_query($getUserSql, $conn);
 $validatePass = FALSE;
 while ($row = mysql_fetch_array($query)) {
