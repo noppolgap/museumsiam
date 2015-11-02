@@ -44,7 +44,7 @@ require("assets/configs/function.inc.php");
 
 <div class="part-content-main">
 	<div class="container">
-		<form name="myform" id="myform" method="post" action="register-museum-action.php">
+		<form name="myform" id="myform" method="post" action="register-museum-action.php" enctype="multipart/form-data">
 		<div class="box-content-main">
 			<div class="box-group-form cf">
 				<div class="box-row cf">
@@ -293,12 +293,8 @@ require("assets/configs/function.inc.php");
 					<div class="box-left w600">
 						<div class="box-input-text">
 							<p>กรุณาแนบเอกสารยืนยัน*</p>
-							<div><input type="text">
-								
-								<? $uploadvideo = admin_upload_video('other', 'all');
-									echo $uploadvideo[0];
-									$formUploadVideo .= $uploadvideo[1];
-  ?>
+							<div>
+								  <input type="file" name="fileToUpload" id="fileToUpload">
 							</div>
 						</div>
 					</div>
@@ -306,7 +302,7 @@ require("assets/configs/function.inc.php");
 						<div class="box-input-text">
 							<p></p>
 							<div class="box-btn">
-								<a  class="btn black">ตรวจสอบ</a>
+								<a style="display: none" class="btn black">ตรวจสอบ</a>
 							</div>
 						</div>
 					</div>
@@ -340,8 +336,10 @@ require("assets/configs/function.inc.php");
 
 
 <?php include('inc/inc-footer.php'); ?>	
+ 
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="js/registerMuseum.js"></script>
+ 
  
 </body>
 </html>

@@ -1642,4 +1642,57 @@ function ShowYear($myDate) {
 		$myYear = sprintf("%d", $myDateArray[0]);
 	return ($myYear);
 }
+
+
+
+function front_upload_file($name) {
+	 
+	$type = 'all';
+	  
+	$str = array();
+
+	$str[0];
+
+	$str[0] .= '<div class="tabs">' . "\n\t";
+	$str[0] .= '<ul>' . "\n\t";
+	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>' . "\n\t";
+	 
+	$str[0] .= '</ul>' . "\n\t";
+	$str[0] .= '<div id="tabs_' . $name . '_1">' . "\n\t";
+	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" data-name="' . $name . '">' . "\n\t";
+	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="administrator/images/ajax-loader.gif" alt="loading" />' . "\n\t";
+	$str[0] .= '<div class="DataBlock dNone"></div>' . "\n\t";
+	$str[0] .= '</div>' . "\n\t";
+	
+	 
+	 
+$str[0] .= '</div>' . "\n\t";
+	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>' . "\n\t";
+
+	switch ($type) {
+		case "video" :
+			$accept = 'video/*';
+			break;
+		case "sound" :
+			$accept = 'audio/*';
+			break;
+		case "flash" :
+			$accept = '.swf';
+			break;
+		case "doc" :
+			$accept = '.doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.txt,';
+			break;
+		case "all" :
+			$accept = '*.*';
+			break;
+	}
+
+	$str[1] = '<form action="administrator/master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
+	$str[1] .= '<input type="hidden" name="my_name" value="' . $name . '" >' . "\n\t";
+	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="' . $accept . '" >' . "\n\t";
+	$str[1] .= '</form>' . "\n\t";
+
+	return $str;
+
+}
 ?>

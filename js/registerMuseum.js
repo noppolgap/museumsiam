@@ -135,6 +135,7 @@ $(function() {
 		var postcode	= $('input[name="postcode"]').val();
 		var autoWorkingDay = $('input[name="auto_open[]"]:checked').length > 0;
 		var manualWorkingDay  = $('input[name="date[]"]:checked').length > 0;
+		var attachFile = $('#fileToUpload').val();
 		if(meseumDescLoc == ''){
 			msg += "\n - "+mytext['warning1']+" "+mytext['museumDescLoc'];
 			error = true;
@@ -153,7 +154,11 @@ $(function() {
 			msg += "\n - "+mytext['warning1']+" "+mytext['workingDay'];
 			error = true;
 		}
-		
+		if (attachFile == '')
+		{
+			msg += "\n - "+mytext['warning1']+" "+mytext['attachFile'];
+			error = true;
+		}
 			
 		if(grecaptcha.getResponse() == '') {
 			msg += "\n - "+mytext['warning1']+" "+mytext['captcha'];

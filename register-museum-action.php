@@ -39,6 +39,48 @@ if ($_GET["type"] == "province") {
 } else {
 	//insert
 
+	//Upload
+	//var_dump($_FILES['fileToUpload']);
+
+	/*
+	 // Check if image file is a actual image or fake image
+	 if(isset($_POST["submit"])) {
+	 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+	 if($check !== false) {
+	 echo "File is an image - " . $check["mime"] . ".";
+	 $uploadOk = 1;
+	 } else {
+	 echo "File is not an image.";
+	 $uploadOk = 0;
+	 }
+	 }
+
+	 // Check if file already exists
+	 if (file_exists($target_file)) {
+	 echo "Sorry, file already exists.";
+	 $uploadOk = 0;
+	 }
+	 // Check file size
+	 if ($_FILES["fileToUpload"]["size"] > 500000) {
+	 echo "Sorry, your file is too large.";
+	 $uploadOk = 0;
+	 }
+
+	 // Allow certain file formats
+	 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	 && $imageFileType != "gif" ) {
+	 echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	 $uploadOk = 0;
+	 }
+	 // Check if $uploadOk is set to 0 by an error
+	 if ($uploadOk == 0) {
+	 echo "Sorry, your file was not uploaded.";
+	 // if everything is ok, try to upload file
+	 } else {*/
+
+	//}
+
+	//End Upload
 	unset($insert);
 
 	$insert['MUSEUM_NAME_LOC'] = "'" . $_POST['txtMuseumDescLoc'] . "'";
@@ -70,16 +112,16 @@ if ($_GET["type"] == "province") {
 			//echo $selected . "</br>";
 			//echo $_POST['startdate1'];
 			//	echo $_POST['enddate1'];
-				unset($insert);
-				$insert['MUSEUM_ID'] = $retrunID;
-				$insert['OPENNING_DAY'] = $selected;
-				$keyStart = 'startdate'.$selected ;
-				$keyEnd =  'enddate'.$selected ;
-				$insert['OPENNING_START_HOUR'] = "'" . $_POST[$keyStart] . "'";
-				$insert['OPENNING_END_HOUR'] = "'" . $_POST[$keyEnd] . "'";
+			unset($insert);
+			$insert['MUSEUM_ID'] = $retrunID;
+			$insert['OPENNING_DAY'] = $selected;
+			$keyStart = 'startdate' . $selected;
+			$keyEnd = 'enddate' . $selected;
+			$insert['OPENNING_START_HOUR'] = "'" . $_POST[$keyStart] . "'";
+			$insert['OPENNING_END_HOUR'] = "'" . $_POST[$keyEnd] . "'";
 
-				$sql = "INSERT INTO trn_museum_openning (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
-				mysql_query($sql, $conn) or die($sql);
+			$sql = "INSERT INTO trn_museum_openning (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
 		}
 	} else {
 		if (!empty($_POST['auto_open'])) {
@@ -98,6 +140,42 @@ if ($_GET["type"] == "province") {
 			}
 
 		}
+	}
+	//echo $target_file .'<br>';
+	//echo $target_save_file.'<br>';
+	//echo $_FILES["fileToUpload"]["tmp_name"].'<br>';
+	//insert Attachment
+
+	$target_dir = "upload/ATTACH_FILE/";
+	$target_dir_museum = $target_dir . '/' . 'MUSEUM_ID_' . $retrunID . '/';
+
+	$target_file = $target_dir_museum . basename($_FILES["fileToUpload"]["name"]);
+
+	$uploadOk = 1;
+	$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+	$target_save_file = $target_dir_museum . date("YmdGis") . '.' . $imageFileType;
+
+	if (!is_dir($target_dir)) { mkdir($target_dir, 0777);
+	} else { chmod($target_dir, 0777);
+	}
+
+	if (!is_dir($target_dir_museum)) { mkdir($target_dir_museum, 0777);
+	} else { chmod($target_dir_museum, 0777);
+	}
+
+	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_save_file)) {
+		// echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+
+		unset($insert);
+
+		$insert['MUSEUM_ID'] = $retrunID;
+		$insert['IMG_PATH'] = "'" . $target_save_file . "'";
+
+		$sql = "INSERT INTO  trn_museum_attach_file (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+		mysql_query($sql, $conn) or die($sql);
+		//echo "Move Complete";
+	} else {
+		//echo "Sorry, there was an error uploading your file.";
 	}
 
 	header('Location: ' . 'complete-regis.php');
