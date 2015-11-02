@@ -122,6 +122,7 @@ require ("assets/configs/function.inc.php");
 						<div class="slide-event cf">
 							<? include('index-ajax.php'); ?>
 						</div>
+
 						<div class="box-float">
 							<div class="box-btn-left">
 								<a class="btn black" href="">กิจกรรมวันนี้</a>
@@ -142,6 +143,7 @@ require ("assets/configs/function.inc.php");
 								<a class="btn-arrow right"></a>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>

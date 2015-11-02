@@ -56,7 +56,7 @@ if ($_GET["type"] == "province") {
 	$insert['PWD'] = "'" . createPasswordHash($_POST['password1']) . "'";
 	$insert['USER_CREATE'] = "'" . $_POST['email'] . "'";
 	$insert['CREATE_DATE'] = "NOW()";
-	$insert['ACTIVE_FLAG'] = "'1'";
+	$insert['ACTIVE_FLAG'] = "'0'";
 	$insert['TELEPHONE'] = "'" . $_POST['telephone'] . "'";
 	$insert['MOBILE_PHONE'] = "'" . $_POST['mobile'] . "'";
 	$insert['FAX'] = "'" . $_POST['fax'] . "'";

@@ -81,18 +81,18 @@ require ("assets/configs/function.inc.php");
 									<div class="box-btn">
 										<a id="btnLogin" name = "btnLogin" class="btn black" >เข้าสู่ระบบ</a>
 									</div>
-									
+
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="box-or">
 							<p>
 								<span>OR</span>
 							</p>
 						</div>
 						<div  class="box-login-fb">
-							<a href="f#" class="btn-login-fb"><img src="images/form/btn-login-fb.png"/></a>
+							<a href="f#" class="btn-login-fb" onclick="FBLogin(); return false;"><img src="images/form/btn-login-fb.png"/></a>
 						</div>
 						<div class="box-createacc cf">
 							<p>
@@ -112,5 +112,20 @@ require ("assets/configs/function.inc.php");
 		<?php
 		include ('inc/inc-footer.php');
 		?>
+<script type="text/javascript">
+var appId = '<?=_FACEBOOK_ID_?>';
+<?php
+if($_GET['p'] == 'shopping'){
+	echo "var back_link = 'e-shopping.php';";
+}else if($_GET['p'] == 'bbs'){
+	echo "var back_link = 'km-webboard.php';";
+}else{
+	echo "var back_link = 'index.php';";
+}
+
+?>
+</script>
+<script type="text/javascript" src="js/fb-login.js"></script>
 	</body>
 </html>
+

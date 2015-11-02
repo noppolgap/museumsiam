@@ -1,16 +1,16 @@
 <?php
 
+if(isset($_POST['connect'])){
+	include ("assets/configs/config.inc.php");
+	include ("assets/configs/connectdb.inc.php");
+	include ("assets/configs/function.inc.php");
+	include ("inc/inc-cat-id-conf.php");
+}
 
-	include_once ("assets/configs/config.inc.php");
-	include_once ("assets/configs/connectdb.inc.php");
-	include_once ("assets/configs/function.inc.php");
-	include_once ("inc/inc-cat-id-conf.php");
-
-
-$whereDate = " AND (EVENT_START_DATE = '" . date('Y-m-d') . "' AND EVENT_END_DATE >= '" . date('Y-m-d') . "')";
+$whereDate = " AND (EVENT_START_DATE <= '" . date('Y-m-d') . "' AND EVENT_END_DATE >= '" . date('Y-m-d') . "')";
 $sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE(NOW()) ";
 if (isset($_POST['date'])) {
-	$whereDate = " AND (EVENT_START_DATE = '" . $_POST['date'] . "' AND EVENT_END_DATE >= '" . $_POST['date'] . "')";
+	$whereDate = " AND (EVENT_START_DATE <= '" . $_POST['date'] . "' AND EVENT_END_DATE >= '" . $_POST['date'] . "')";
 	$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE('" . $_POST['date'] . "') ";
 }
 //echo $conn  ;
@@ -31,6 +31,7 @@ if ($hasManualOrder) {
 	$sql = " SELECT ";
 	$sql .= $LANG_SQL;
 	$sql .= " 			content.SUB_CAT_ID,
+												content.CAT_ID,
 												content.CONTENT_ID,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
@@ -38,14 +39,14 @@ if ($hasManualOrder) {
 												content.LAST_UPDATE_DATE ,
 												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 											FROM
-												trn_content_detail AS content 
-											LEFT JOIN trn_manual_event_order manualOrder 
-												on manualOrder.CONTENT_ID = content.CONTENT_ID	
+												trn_content_detail AS content
+											LEFT JOIN trn_manual_event_order manualOrder
+												on manualOrder.CONTENT_ID = content.CONTENT_ID
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category 
-where 
+											AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
+where
 REF_MODULE_ID = " . $new_and_event . " )";
 	$sql .= $whereDate;
 	$sql .= " ORDER BY manualOrder.ORDER_DATA desc Limit 20 offset 0";
@@ -54,6 +55,7 @@ REF_MODULE_ID = " . $new_and_event . " )";
 	$sql = " SELECT ";
 	$sql .= $LANG_SQL;
 	$sql .= " 			content.SUB_CAT_ID,
+												content.CAT_ID,
 												content.CONTENT_ID,
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
@@ -65,8 +67,8 @@ REF_MODULE_ID = " . $new_and_event . " )";
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category 
-where 
+											AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
+where
 REF_MODULE_ID = " . $new_and_event . " )";
 	$sql .= $whereDate;
 	$sql .= " ORDER BY content.MUSUEM_ID asc , content.ORDER_DATA desc Limit 20 offset 0";
@@ -78,7 +80,7 @@ while ($row = mysql_fetch_array($query_event)) {
 
 	$date = ConvertBoxDate($row['EVENT_START_DATE']);
 	/*social*/
-	$path = 'event-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26SID=' . $row['SUB_CAT_ID'] . '%26CONID=' . $row['CONTENT_ID'];
+	$path = 'event-detail.php?MID=' . $MID . '%26CID=' . $row['CAT_ID'] . '%26SID=' . $row['SUB_CAT_ID'] . '%26CONID=' . $row['CONTENT_ID'];
 	$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 	$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $row['CONTENT_ID'];
 	$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
@@ -180,8 +182,10 @@ while ($row = mysql_fetch_array($query_event)) {
 			<div class="box-btn cf">
 				<a href="" class="btn red">อ่านเพิ่มเติม</a>
 				<div class="box-btn-social cf">
-					<a href="#" class="btn-socila fb"></a>
-					<a href="#" class="btn-socila tw"></a>
+<?php
+					echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+					echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+?>
 				</div>
 			</div>
 		</div>
@@ -189,7 +193,7 @@ while ($row = mysql_fetch_array($query_event)) {
 	<div class="box-right">
 		<a href="">
 		<div class="box-pic">
-			<img src="<?=callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true)?>">
+			<img src="<?=callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true)?>">
 		</div>
 		<div class="box-tag-cate">
 			<?=$row['PLACE_DESC']?>
@@ -197,6 +201,6 @@ while ($row = mysql_fetch_array($query_event)) {
 	</div>
 </div>
 
- 
+
 
 <?}?>
