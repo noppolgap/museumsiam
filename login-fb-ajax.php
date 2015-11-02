@@ -44,13 +44,13 @@ if(isset($_POST['id']) && !empty($_POST['id']))
 	}
 
 
-	$sql = "SELECT ID , USER_ID FROM sys_app_user WHERE FB_ID = '".$id."'";
+	$sql = "SELECT ID , USER_ID , FB_ID FROM sys_app_user WHERE FB_ID = '".$id."'";
 	$query = mysql_query($sql, $conn);
 	$row = mysql_fetch_array($query);
 
 		$_SESSION['user_name'] = $name;
 		$_SESSION['UID'] = $row['ID'];
-		//$_SESSION['FB'] = true;
+		$_SESSION['FB'] = $id;
 
 } else {
 	$arr = array('error' => 1);

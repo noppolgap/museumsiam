@@ -2,11 +2,33 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+//find address
+$sql_address = "SELECT UID FROM sys_app_address WHERE UID = ".$_SESSION['UID'];
+$query_address = mysql_query($sql, $conn) or die($sql);
+if(mysql_num_rows($query_address) == 0){
+	$sql = "SELECT * FROM sys_app_user WHERE USER_ID  = ".$_SESSION['UID'];
+	$query = mysql_query($sql, $conn) or die($sql);
+	$row = mysql_fetch_array($query);
+	if($row['PROVINCE_ID'] != 0){
+		unset($insert);
+		$insert['ADDRESS1'] 	= "'" . $row['ADDRESS1']  . "'";
+		$insert['ADDRESS2'] 	= "'" . $row['ADDRESS2']  . "'";
+		$insert['DISTRICT_ID'] 	= "'" . $row['DISTRICT_ID']  . "'";
+		$insert['SUB_DISTRICT_ID'] = "'" . $row['SUB_DISTRICT_ID']  . "'";
+		$insert['PROVINCE_ID'] 	= "'" . $row['PROVINCE_ID']  . "'";
+		$insert['POST_CODE'] 	= "'" . $row['POST_CODE']  . "'";
+		$insert['USER_ID'] 		= "'" . $_SESSION['UID']  . "'";
+		$sql = "INSERT INTO sys_app_address (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+		mysql_query($sql, $conn) or die($sql);
+	}
+}
+
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/form.css" />
@@ -14,16 +36,16 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");		
+		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body id="cart">
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -52,14 +74,14 @@ require("assets/configs/function.inc.php");
 				<div class="box-btn">
 					<a href="e-shopping.php" class="btn red">ย้อนกลับ</a>
 				</div>
-			</div>		
+			</div>
 			<div class="box-address-main">
 				<div class="box-title">
 					ยืนยันการสั่งซื้อ
 				</div>
 				<div class="box-form-address-main">
 					<div class="text-title">ที่อยู่ในการจัดส่งสินค้า</div>
-					
+
 					<div class="box-group group1">
 						<input type="radio" name="address" value="address1" checked>
 						<p class="">
@@ -83,7 +105,7 @@ require("assets/configs/function.inc.php");
 					<div class="box-group form">
 						<input type="radio" name="address" value="address_new" >
 						<div class="box-form">
-							
+
 							<div class="box-row cf">
 								<div class="box-left">
 									<div class="box-input-text">
@@ -189,20 +211,20 @@ require("assets/configs/function.inc.php");
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="box-btn submit">
 								<a  href="#" class="btnReset btn red">ยกเลิก</a>
 								<a  href="#" class="btnSubmit btn red">ดำเนินการต่อ</a>
 							</div>
-							
+
 						</div>
 					</div>
-					
-					
+
+
 				</div>
 			</div>
 
-			
+
 		</div>
 	</div>
 </div>
@@ -211,7 +233,7 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 
 </body>
 </html>

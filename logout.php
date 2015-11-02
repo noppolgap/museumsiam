@@ -4,6 +4,7 @@ require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
 unset($_SESSION['user_name']);
 unset($_SESSION['UID']);
+unset($_SESSION['FB']);
 
 //if(!isset($_SESSION['FB'])){
 	$last_url = $_SESSION['last_url'];
