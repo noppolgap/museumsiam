@@ -136,11 +136,9 @@ require ('../inc_header.php');
 							) a
 						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID ";
 
-						if($MID == $contact_us){
-							$sql .= " where cd.CONTENT_STATUS_FLAG =  2 " ;
-						}else{
-							$sql .= " where cd.CONTENT_STATUS_FLAG <>  2 " ;
-						}
+						
+						$sql .= " where cd.CONTENT_STATUS_FLAG <>  2 " ;
+						
 						
 						if (isset($SCID) && nvl($SCID, '0') != '0') {
 				$sql .= "	AND cd.SUB_CAT_ID =  $SCID ";
@@ -164,7 +162,21 @@ require ('../inc_header.php');
 							<a href="content_detail.php?conid=<?=$row['CONTENT_ID'] ?>&MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], false) ?> ></a>
 						</div>
 						<div class="floatL nameContent">
-							<div><? echo '<a href="content_detail.php?conid='.$row['CONTENT_ID'].'&MID='.$MID.'&cid='.$CID . $subfixAddAndEdit.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
+
+							<?
+
+							if($MID == $contact_us){
+
+								$link_detail = "contact_detail.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID .$subfixAddAndEdit." ";
+							}
+							else{
+
+								$link_detail = "content_detail.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID .$subfixAddAndEdit." ";
+							}
+
+							?>
+
+							<div><? echo '<a href="'.$link_detail.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>
 						<div class="floatL stausContent" <?=$display_hide?>>
@@ -175,7 +187,20 @@ require ('../inc_header.php');
 						</a> <?}  else { ?> <span class="staus2"></span>
 						<a href="content_action.php?enable&conid=<?=$row['CONTENT_ID'] ?>&vis=<?=$row['CONTENT_STATUS_FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>"> Disable </a> <? } ?></div>
 						<div class="floatL EditContent">
-							<a href="content_edit.php?conid=<?=$row['CONTENT_ID'] ?>&MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>" class="EditContentBtn">Edit</a>
+
+						<?
+							if($MID == $contact_us){
+
+								$link_edit = "contact_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
+							}
+							else{
+
+								$link_edit = "content_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
+							}
+
+						?>
+
+							<a href="<?=$link_edit?>" class="EditContentBtn">Edit</a>
 							<a href="#" data-id="<?=$row['CONTENT_ID'] ?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>

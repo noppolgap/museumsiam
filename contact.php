@@ -6,7 +6,7 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/template.css" />
@@ -17,13 +17,13 @@ require("assets/configs/function.inc.php");
 		$(".menutop li.menu8,.menu-left li.menu1").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body id="contact">
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -52,7 +52,7 @@ require("assets/configs/function.inc.php");
 				</h1>
 			</div>
 
-		<form action="contact_action.php?add" method="post" name="formcms" id = "frmcms" >
+		<form action="contact_action.php?add" method="post" name="formcms" id = "myform" >
 			<div class="box-contact-main cf">
 				<div class="box-left">
 					<div class="box-contact-from">
@@ -68,20 +68,20 @@ require("assets/configs/function.inc.php");
 
 											<?php
 
-												$sql = " SELECT * FROM  trn_content_category Where REF_MODULE_ID = ".$contact_us." AND 
-															FLAG = 0 ";
+												$sql = " SELECT * FROM  trn_content_category Where REF_MODULE_ID = ".$contact_us." AND FLAG = 0 ";
 												$rs = mysql_query($sql) or die(mysql_error());
 
 											?>
 
-											<select class="p-Absolute" name="position">
+											<select class="p-Absolute" name="position" id="positionTxt">
 
+													<option value="0" >กรุณาเลือกตำแหน่ง</option>
 												<? while ($row = mysql_fetch_array($rs)) {  ?>
 
 													<option value="<?=$row["CONTENT_CAT_ID"] ?>" ><? echo $row["CONTENT_CAT_DESC_LOC"] ?></option>
 
 												<?	}  ?>
-												
+
 											</select>
 										</div>
 									</div>
@@ -94,7 +94,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="txtName"></div>
+									<div><input type="text" name="txtName" id="txtName"></div>
 								</div>
 							</div>
 						</div>
@@ -104,7 +104,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="txtAddress"></div>
+									<div><input type="text" name="txtAddress" id="txtAddress"></div>
 								</div>
 							</div>
 						</div>
@@ -114,7 +114,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="txtMail"></div>
+									<div><input type="text" name="txtMail" id="txtMail"></div>
 								</div>
 							</div>
 						</div>
@@ -124,7 +124,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="txtTel"></div>
+									<div><input type="text" name="txtTel" id="txtTel"></div>
 								</div>
 							</div>
 						</div>
@@ -144,7 +144,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div class="g-recaptcha" data-sitekey="6Ld2VgwTAAAAAEmFQsLXE8zem5b7CCg3Jxbjds6p">Plugin</div>
+									<div class="g-recaptcha" data-sitekey="6Ld2VgwTAAAAAEmFQsLXE8zem5b7CCg3Jxbjds6p"></div>
 								</div>
 							</div>
 						</div>
@@ -166,9 +166,10 @@ require("assets/configs/function.inc.php");
 								<div class="box-input-text">
 									<div>
 										<div class="box-btn submit">
-											<input type="submit" value="ส่ง"class="btnSubmit btn red">
-											<input type="submit" value="ล้างข้อมูล" class="btnReset btn red">
-										</div>					
+											<input type="submit" value="save" style="display:none">
+											<input type="button" value="ส่ง"class="btnSubmit btn red">
+											<input type="button" value="ล้างข้อมูล" class="btnReset btn red">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -183,8 +184,8 @@ require("assets/configs/function.inc.php");
 					<div class="box-bottom">
 						<p class="text-pin">เลขที่ 4 ถนนสนามไชย แขวงบรมมหาราชวัง เขตพระนคร กรุงเทพฯ<br><br>
 							ละติจูด   : 13.767397<br>
-							ลองติจูด : 100.498604 
-							
+							ลองติจูด : 100.498604
+
 						</p>
 						<p class="text-tel">โทรศัพท์  : <a href="tel:022552777">02 255 2777</a><br>
 						โทรสาร   : <a href="tel:022552777">02 255 2775</a></p>
@@ -216,7 +217,8 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
-
+<?php include('inc/inc-footer.php'); ?>
+<script type="text/javascript" src="//www.google.com/recaptcha/api.js"></script>
+<script type="text/javascript" src="js/contact.js"></script>
 </body>
 </html>

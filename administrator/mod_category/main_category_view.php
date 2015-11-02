@@ -79,7 +79,7 @@ require ("../../assets/configs/function.inc.php");
 							<? $nextPage = '';
 							if (nvl($row['IS_LAST_NODE'], 'Y') == 'Y') {
 								//content no LV use current LV
-								if($MID == 7){
+								if($MID == $education_cat_id){
 									$nextPage = '../mod_shopping/product_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0'   ;
 								}
 								else{
