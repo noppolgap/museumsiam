@@ -75,7 +75,6 @@ $(document).ready(function(){
 	});
 
 // 		Slide Event
-
 	owl = $(".slide-event"),
 	status = $(".box-number");
 	owl.owlCarousel({
@@ -86,7 +85,6 @@ $(document).ready(function(){
 		stopOnHover : true,
 		afterAction : afterAction
 	});
-
 	function updateResult(pos,value){
 		status.find(pos).find(".result").text(value);
 	}
@@ -94,7 +92,6 @@ $(document).ready(function(){
 		updateResult(".owlItems", this.owl.owlItems.length);
 		updateResult(".currentItem", this.owl.currentItem+1);
 	}
-
 	$(".box-slideevent-main .btn-arrow.left").click(function(){
 		$(".slide-event").data('owlCarousel').prev()
 	});
@@ -110,12 +107,13 @@ $(document).ready(function(){
 
 
 });
+
 function loadEvent(date){
 	$.post( "index-ajax.php", { date: date })
 	  .done(function( data ) {
-	  	/*
+
 	  	$('#eventBox').html(data);
     	owl.owlCarousel();
-		*/
+
 	  });
 }

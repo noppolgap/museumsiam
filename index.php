@@ -17,7 +17,6 @@ require ("assets/configs/function.inc.php");
 		<script>
 			$(document).ready(function() {
 				$("li.menu1").addClass("active");
-				loadEvent('<?=date('Y-m-d')?>');
 			});
 		</script>
 	</head>
@@ -106,7 +105,7 @@ require ("assets/configs/function.inc.php");
 		<?
 		}
 ?>
-
+<a href="#">
 						<div class="box-tumb-date btn-all">
 							<div class="box-text">
 								<p>
@@ -120,7 +119,7 @@ require ("assets/configs/function.inc.php");
 
 				<div class="box-right">
 					<div class="box-slideevent-main cf">
-						<div class="slide-event cf" id="eventBox">
+						<div class="slide-event cf">
 							<? include('index-ajax.php'); ?>
 						</div>
 						<div class="box-float">
