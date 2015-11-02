@@ -217,7 +217,7 @@ function returnThaiMonth($str) {
 			$myMonth = "ตุลาคม";
 			break;
 		case "11" :
-			$myMonth = "พฤษจิกายน";
+			$myMonth = "พฤศจิกายน";
 			break;
 		case "12" :
 			$myMonth = "ธันวาคม";
@@ -267,6 +267,7 @@ function returnThaiShortMonth($str) {
 	}
 	return $myMonth;
 }
+
 function returnThaiDayOfWeek($str) {
 	switch($str) {
 		case "Sunday" :
@@ -293,7 +294,6 @@ function returnThaiDayOfWeek($str) {
 	}
 	return $myDay;
 }
-
 
 function ConvertDate($str) {
 	if ($_SESSION['LANG'] == 'TH') {
@@ -1617,7 +1617,7 @@ function admin_upload_org_image_view($name, $imgName) {
 	$str = "";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
 
-	if($imgName != ''){
+	if ($imgName != '') {
 		$str .= '<div class="thumbBoxEdit floatL p-Relative">' . "\n\t";
 		$str .= '<div class="thumbBoxImage">' . "\n\t";
 		$str .= '<a onclick="popupImage(\'' . $imgName . '\'); return false;" href="#">' . "\n\t";
@@ -1632,4 +1632,14 @@ function admin_upload_org_image_view($name, $imgName) {
 	return $str;
 }
 
+function ShowYear($myDate) {
+	$myDateArray = explode("-", $myDate);
+
+	//$myMonth = returnThaiMonth($myDateArray[1]);
+	if ($_SESSION['LANG'] == 'TH')
+		$myYear = sprintf("%d", $myDateArray[0]) + 543;
+	else
+		$myYear = sprintf("%d", $myDateArray[0]);
+	return ($myYear);
+}
 ?>

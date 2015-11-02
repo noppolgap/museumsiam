@@ -112,7 +112,8 @@ function loadEvent(date){
 	$.post( "index-ajax.php", { date: date })
 	  .done(function( data ) {
 
-	  	$('#eventBox').html(data);
+		$('.slide-event').html(data);
+	  	//$('#eventBox').html(data);
     	owl.owlCarousel();
 
 	  });
