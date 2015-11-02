@@ -474,7 +474,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 							echo '<div class="box-text">';
 							echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
 							echo '<p class="text-title">';
-							echo $rowMDN['MUSEUM_DESCRIPT'];
+							echo $rowMDN['MUSEUM_NAME'];
 							echo '</p> </a>';
 							echo '<p class="text-location TcolorWhite">';
 							echo $rowMDN['PROVINCE_DESC'];
