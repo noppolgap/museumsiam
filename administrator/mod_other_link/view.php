@@ -41,7 +41,7 @@ require ("../../assets/configs/function.inc.php");
 					<div class="mod-body-inner">
 						<div class="mod-body-inner-header">
 							<div class="floatL titleBox">
-								รายละเอียดระบบ
+								รายละเอียดลิ้งค์อื่นๆที่เกี่ยวข้อง
 							</div>
 						</div>
 						<div class="mod-body-main-content">

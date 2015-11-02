@@ -2,16 +2,15 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
-$indexPage = "/administrator/mod_sub_module/index.php";
+$indexPage = "/administrator/mod_other_link/index.php";
 ?>
 <!doctype html>
 <html>
 	<head>
 		<?
 		require ('../inc_meta.php');
- ?>
+		?>
 
-		
 		<script type="text/javascript">
 			$(document).ready(function() {
 
@@ -49,16 +48,16 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 	<body>
 		<?
 		require ('../inc_header.php');
- ?>
+		?>
 
 		<?php
-		$subModuleID = $_GET['SMID'];
+		$moduleID = $_GET['MID'];
 
-		$sql = "SELECT * FROM sys_app_sub_module where SUB_MODULE_ID = '" . $subModuleID . "' ";
+		$sql = "SELECT * FROM sys_app_module where MODULE_ID = '" . $moduleID . "' ";
 		$rs = mysql_query($sql) or die(mysql_error());
-		$rowSubModule = mysql_fetch_array($rs);
+		$rowModule = mysql_fetch_array($rs);
 
-		$sql = "SELECT * FROM trn_banner_pic_setting where APP_SUB_MODULE_ID = '" . $subModuleID . "' order by LAST_UPDATE_DATE desc Limit 0,1 ";
+		$sql = "SELECT * FROM trn_banner_pic_setting where APP_MODULE_ID = '" . $moduleID . "' order by LAST_UPDATE_DATE desc Limit 0,1 ";
 		$rs = mysql_query($sql) or die(mysql_error());
 		$rowBanner = mysql_fetch_array($rs);
 
@@ -68,13 +67,13 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 			<div class="main-body marginC">
 				<?
 				require ('../inc_side.php');
- ?>
+				?>
 
 				<div class="mod-body">
 					<div class="mod-body-inner">
 						<div class="mod-body-inner-header">
 							<div class="floatL titleBox">
-								แก้ไขรายการระบบย่อย
+								แก้ไขลิ้งค์อื่นๆที่เกี่ยวข้อง
 							</div>
 						</div>
 						<div class="mod-body-main-content">
@@ -83,33 +82,10 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 								<form action="?" method="post" name="formcms" id = "frmcms" >
 									<div >
 										<div class="floatL form_name">
-											ระบบหลัก
-										</div>
-										<div class="floatL form_input">
-											<?php
-											$sql = "SELECT MODULE_ID  , MODULE_NAME_LOC , MODULE_NAME_ENG FROM sys_app_module where ACTIVE_FLAG <> 2 AND IS_LAST_NODE = 'N' AND IS_FOR_OTHER_LINK = 'N' ";
-											$rs = mysql_query($sql) or die(mysql_error());
-											echo "<select id='cmbModule' name = 'cmbModule'>";
-											echo "<option value='-1'>กรุณาเลือกระบบ</option>";
-											while ($row = mysql_fetch_array($rs)) {
-												if ($row["MODULE_ID"] == $rowSubModule["MODULE_ID"])
-													echo "<option value='" . $row["MODULE_ID"] . "' selected>" . $row["MODULE_NAME_LOC"] . "</option>";
-												else
-													echo "<option value='" . $row["MODULE_ID"] . "'>" . $row["MODULE_NAME_LOC"] . "</option>";
-											}mysql_free_result($rs);
-											echo "</select>";
-											?>
-											<span class="error" >* <span id = "moduleError" style="display:none">กรุณาระบุระบบหลัก </span> </span>
-										</div>
-										<div class="clear"></div>
-									</div>
-
-									<div >
-										<div class="floatL form_name">
 											ชื่อภาษาไทย
 										</div>
 										<div class="floatL form_input">
-											<input id = "txtNameLoc" type="text" name="txtNameLoc"   class="w90p"  value="<?php echo $rowSubModule["SUB_MODULE_NAME_LOC"] ?>" />
+											<input id = "txtNameLoc" type="text" name="txtNameLoc"   class="w90p"  value="<?php echo $rowModule["MODULE_NAME_LOC"] ?>" />
 											<span class="error" >* <span id = "nameLocError" style="display:none">กรุณาระบุชื่อภาษาไทย </span> </span>
 										</div>
 										<div class="clear"></div>
@@ -119,7 +95,7 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 											ชื่อภาษาอังกฤษ
 										</div>
 										<div class="floatL form_input">
-											<input  id = "txtNameEng" type="text" name="txtNameEng" value="<?php echo $rowSubModule["SUB_MODULE_NAME_ENG"] ?>" class="w90p" />
+											<input  id = "txtNameEng" type="text" name="txtNameEng" value="<?php echo $rowModule["MODULE_NAME_ENG"] ?>" class="w90p" />
 											<span class="error" >* <span id = "nameEngError" style="display:none">กรุณาระบุชื่อภาษาอังกฤษ </span> </span>
 										</div>
 										<div class="clear"></div>
@@ -130,7 +106,7 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 											URL
 										</div>
 										<div class="floatL form_input">
-											<input  id = "txtUrlLink" type="text" name="txtUrlLink" value="<?php echo $rowBanner["ICON_LINK"] ?>" class="w90p" />
+											<input  id = "txtUrlLink" type="text" name="txtUrlLink" value="<?php echo $rowBanner['ICON_LINK'] ?>" class="w90p" />
 											<span class="error" >* <span id = "urlError" style="display:none">กรุณาระบุ URL</span> </span>
 										</div>
 										<div class="clear"></div>
@@ -139,16 +115,26 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 									<div class="bigForm">
 										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่ (ขนาด 209 x 218)</div>
 										<div class="floatL form_input">
-											<?=admin_upload_icon_edit('BigIcon', 'BIG', NULL, $subModuleID) ?>
+											<?=admin_upload_icon_edit('BigIcon', 'BIG', $moduleID, NULL) ?>
 											</div>
 										<div class="clear"></div>
 									</div>	
 									
 									<!-- <div class="bigForm">
 										<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
-										<div class="floatL form_input"><?=admin_upload_icon_edit('SmallIcon', 'SMALL', NULL, $subModuleID) ?></div>
+										<div class="floatL form_input"><?=admin_upload_icon_edit('SmallIcon', 'SMALL', $moduleID, NULL) ?></div>
 										<div class="clear"></div>
 									</div>	 -->
+
+									<div>
+										<div class="floatL form_name">
+											&nbsp;&nbsp;
+										</div>
+										<div class="floatL form_input">
+											 
+										</div>
+										<div class="clear"></div>
+									</div>
 							</div>
 
 							<div class="btn_action">
@@ -157,7 +143,7 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 							</div>
 							<input type="hidden" name="action" value="submit" />
-							<input type="hidden" name="SMID" value="<?php echo $subModuleID?>"/>
+							<input type="hidden" name="MID" value="<?php echo $moduleID?>"/>
 							<input type="hidden" name="bannerID" value="<?php echo $bannerID?>"/>
 							<input type="hidden" name="lastestBigIcon" value="<?php echo $rowBanner["DESKTOP_ICON_PATH"]; ?>"/>
 							<input type="hidden" name="lastestSmallIcon" value="<?php echo $rowBanner["MOBILE_ICON_PATH"]; ?>"/>
@@ -172,16 +158,12 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 
 		<?
 		require ('../inc_footer.php');
- ?>
+		?>
 
 		<link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 		<link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
-
-
-		<script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
 		<script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
-	
-	
 		<script type="text/javascript" src="../master/script.js"></script>
 
 		<? logs_access('admin', 'hello'); ?>
@@ -189,24 +171,28 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 		<?php
 
 		if (isset($_POST["action"]) && $_POST["action"] == "submit") {
-			$smid = $_POST['SMID'];
+			$mid = $_POST['MID'];
 			$bannerID = $_POST['bannerID'];
 			$txtNameLoc = $_POST['txtNameLoc'];
 			$txtNameEng = $_POST['txtNameEng'];
-			$cmbModule = $_POST['cmbModule'];
+
 			$txtUrlLink = $_POST['txtUrlLink'];
 			$txtImg = $_POST['txtImg'];
+			
+
+	
+				$isLastNode = "Y";
 
 			mysql_query("BEGIN");
 
-			$strSQL = "update sys_app_sub_module ";
-			$strSQL .= "set SUB_MODULE_NAME_LOC = '" . $txtNameLoc . "'";
-			$strSQL .= " ,SUB_MODULE_NAME_ENG = '" . $txtNameEng . "'";
-			$strSQL .= " ,MODULE_ID = '" . $cmbModule . "'";
+			$strSQL = "update sys_app_module ";
+			$strSQL .= "set MODULE_NAME_LOC = '" . $txtNameLoc . "'";
+			$strSQL .= " ,MODULE_NAME_ENG = '" . $txtNameEng . "'";
 			$strSQL .= " ,LAST_UPDATE_DATE = now() ";
-			$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
+			$strSQL .= " ,LAST_UPDATE_USER = '".$_SESSION['user_name']."'";
 			$strSQL .= " ,LAST_FUNCTION = 'U'";
-			$strSQL .= " where SUB_MODULE_ID = '" . $smid . "'";
+			$strSQL .= " ,IS_LAST_NODE = '" . $isLastNode . "'";
+			$strSQL .= " where MODULE_ID = '" . $mid . "'";
 			$objQueryAppModule = mysql_query($strSQL);
 
 			$bigIconName = $_POST['lastestBigIcon'];
@@ -217,26 +203,26 @@ $indexPage = "/administrator/mod_sub_module/index.php";
 					$bigIconName = admin_move_image_upload_dir('icon_files', end(explode('/', $file)), 1000, '', false, 150, 150);
 				}
 			}
-			if (count($_POST['SmallIcon_file']) > 0) {
+			/*if (count($_POST['SmallIcon_file']) > 0) {
 				foreach ($_POST['SmallIcon_file'] as $k => $file) {
 					$smallIconName = admin_move_image_upload_dir('icon_files', end(explode('/', $file)), 1000, '', false, 150, 150);
 				}
 			}
-
+*/
 			if ($bannerID == '') {
 				$strSQL = "INSERT INTO trn_banner_pic_setting ";
-				$strSQL .= "(APP_SUB_MODULE_ID,DESKTOP_ICON_PATH, MOBILE_ICON_PATH ,ICON_LINK ,USER_CREATE , CREATE_DATE , LAST_FUNCTION) ";
+				$strSQL .= "(APP_MODULE_ID,DESKTOP_ICON_PATH , MOBILE_ICON_PATH,ICON_LINK ,USER_CREATE , CREATE_DATE , LAST_FUNCTION) ";
 				$strSQL .= " values ";
-				$strSQL .= "('" . $smid . "','" . $bigIconName . "','" . $smallIconName . "','" . $txtUrlLink . "' , 'Test' , now() , 'A')";
+				$strSQL .= "('" . $mid . "','" . $bigIconName . "','" . $smallIconName . "','" . $txtUrlLink . "' , '".$_SESSION['user_name']."' , now() , 'A')";
 
 			} else {
 				$strSQL = "update trn_banner_pic_setting ";
 				$strSQL .= "set DESKTOP_ICON_PATH = '" . $bigIconName . "'";
-				$strSQL .= " , APP_SUB_MODULE_ID = '" . $smid . "'";
 				$strSQL .= " , MOBILE_ICON_PATH = '" . $smallIconName . "'";
+				$strSQL .= " , APP_MODULE_ID = '" . $mid . "'";
 				$strSQL .= " ,ICON_LINK = '" . $txtUrlLink . "'";
 				$strSQL .= " ,LAST_UPDATE_DATE = now() ";
-				$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
+				$strSQL .= " ,LAST_UPDATE_USER = '".$_SESSION['user_name']."'";
 				$strSQL .= " ,LAST_FUNCTION = 'U'";
 				$strSQL .= " where BANNER_ID = '" . $bannerID . "'";
 			}

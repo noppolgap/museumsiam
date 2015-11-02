@@ -639,7 +639,7 @@ function admin_upload_icon_edit($name, $iconType, $moduleId, $subModuleId) {
 
 	if (isset($moduleId))
 		$sql = "SELECT * FROM trn_banner_pic_setting WHERE APP_MODULE_ID = " . $moduleId . " order by LAST_UPDATE_DATE desc Limit 0,1 ";
-	else if (isset($subModuleId))
+	else if (isset($subModuleId) )
 		$sql = "SELECT * FROM trn_banner_pic_setting WHERE APP_SUB_MODULE_ID = " . $subModuleId . " order by LAST_UPDATE_DATE desc Limit 0,1 ";
 	//echo $sql;
 	$query = mysql_query($sql, $conn);

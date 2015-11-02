@@ -81,6 +81,7 @@
 										WHERE
 										ACTIVE_FLAG <> 2
 										AND RENDER_ON_FRONT = 'Y'
+										AND IS_FOR_OTHER_LINK = 'N'
 										ORDER BY
 										ORDER_DATA DESC";
 							$query = mysql_query($sqlStr, $conn);

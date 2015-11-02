@@ -31,7 +31,7 @@ if(isset($_POST['update'])){
 	<ul id="sortable">
 	<?php
 				
-			     $sql= "SELECT * FROM sys_app_module  WHERE ACTIVE_FLAG <> 2 AND IS_FOR_OTHER_LINK = 'N'  ORDER BY ORDER_DATA DESC";
+			     $sql= "SELECT * FROM sys_app_module  WHERE ACTIVE_FLAG <> 2  AND IS_FOR_OTHER_LINK = 'Y'   ORDER BY ORDER_DATA DESC";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {

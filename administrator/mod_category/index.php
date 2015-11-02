@@ -48,7 +48,7 @@ require ("../../assets/configs/function.inc.php");
 						<!-- start loop -->
 						<?php
 					//active_flag 0 = disable , 1 = Enable ,  2 = Delete
-						$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 ";
+						$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 AND IS_FOR_OTHER_LINK = 'N' ";
 						if(isset($_GET['search'])){
 							$sql .= " AND MODULE_NAME_LOC like '%".$_POST['str_search']."%' or MODULE_NAME_ENG like '%".$_POST['str_search']."%' ";
 
