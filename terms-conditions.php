@@ -56,7 +56,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-btn-condition">
 			<div class="box-btn">
 				<a  href="login.php" class="btn black">ยกเลิก</a>
-				<a  href="createacc.php" class="btn black">ยอมรับเงื่อนไข</a>
+				<a  href="register-step1.php" class="btn black">ยอมรับเงื่อนไข</a>
 			</div>
 		</div>
 	</div>

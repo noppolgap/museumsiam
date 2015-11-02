@@ -49,7 +49,7 @@ require ("../../assets/configs/function.inc.php");
 						<!-- start loop -->
 						<?php
 							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
-						    $sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 ";
+						    $sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 AND IS_FOR_OTHER_LINK = 'N' ";
 
 							if (isset($_GET['search'])) {
 

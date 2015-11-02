@@ -26,6 +26,7 @@ if ($_SESSION['LANG'] == 'TH') {
 										WHERE
 										ACTIVE_FLAG <> 2
 										AND RENDER_ON_FRONT = 'Y'
+										AND IS_FOR_OTHER_LINK = 'N'
 										ORDER BY
 										ORDER_DATA DESC";
 					$query = mysql_query($sqlStr, $conn);
@@ -34,9 +35,8 @@ if ($_SESSION['LANG'] == 'TH') {
 						echo '<div class="box-other">';
 						echo '<a href="' . $row['LINK_URL'] . '?MID=' . $row['MODULE_ID'] . '">';
 						echo '<div class="box-pic">';
-						
-						
-						echo '<img src="'.callIconThumbListFrontend('BIG', $row['MODULE_ID'], NULL, false).'">';
+
+						echo '<img src="' . callIconThumbListFrontend('BIG', $row['MODULE_ID'], NULL, false) . '">';
 						echo '</div>';
 						echo '<div class="text-name">';
 						echo $row['MODULE_DESC'];
@@ -45,61 +45,6 @@ if ($_SESSION['LANG'] == 'TH') {
 						echo '</div>';
 					}
 					?>
-
-					<!-- <div class="box-other">
-						<a href="">
-						<div class="box-pic">
-							<img src="http://placehold.it/209x218">
-						</div>
-						<div class="text-name">
-							NAME SYSTEM
-						</div> </a>
-					</div>
-					<div class="box-other">
-						<a href="">
-						<div class="box-pic">
-							<img src="http://placehold.it/209x218">
-						</div>
-						<div class="text-name">
-							NAME SYSTEM
-						</div> </a>
-					</div>
-					<div class="box-other">
-						<a href="">
-						<div class="box-pic">
-							<img src="http://placehold.it/209x218">
-						</div>
-						<div class="text-name">
-							NAME SYSTEM
-						</div> </a>
-					</div>
-					<div class="box-other">
-						<a href="">
-						<div class="box-pic">
-							<img src="http://placehold.it/209x218">
-						</div>
-						<div class="text-name">
-							NAME SYSTEM
-						</div> </a>
-					</div>
-					<div class="box-other">
-						<a href="">
-						<div class="box-pic">
-							<img src="http://placehold.it/209x218">
-						</div>
-						<div class="text-name">
-							NAME SYSTEM
-						</div> </a>
-					</div>
-					<div class="box-other">
-						<a href="">
-						<div class="box-pic">
-							<img src="http://placehold.it/209x218">
-						</div>
-						<div class="text-name">
-							NAME SYSTEM
-						</div> </a>
-					</div> -->
 				</div>
 				<a class="btn-arrow left"></a>
 				<a class="btn-arrow right"></a>
@@ -113,12 +58,38 @@ if ($_SESSION['LANG'] == 'TH') {
 	<div class="part-icon">
 		<div class="container">
 			<div class="box-icon-main cf">
-				<a href=""><img src="http://placehold.it/90x90"></a>
-				<a href=""><img src="http://placehold.it/90x90"></a>
-				<a href=""><img src="http://placehold.it/90x90"></a>
-				<a href=""><img src="http://placehold.it/90x90"></a>
-				<a href=""><img src="http://placehold.it/90x90"></a>
-				<a href=""><img src="http://placehold.it/90x90"></a>
+				<?php
+				if ($_SESSION['LANG'] == 'TH')
+					$selectedColumn = " modul.MODULE_NAME_LOC as MODULE_DESC ,";
+				else
+					$selectedColumn = " modul.MODULE_NAME_ENG as MODULE_DESC , ";
+
+				$sqlStr = "SELECT
+modul.MODULE_ID, " . $selectedColumn;
+				$sqlStr .= " banner.ICON_LINK as  LINK_URL,
+modul.IS_LAST_NODE
+FROM
+sys_app_module modul
+left join trn_banner_pic_setting banner
+on banner.APP_MODULE_ID = modul.MODULE_ID
+WHERE
+modul.ACTIVE_FLAG <> 2
+AND modul.IS_FOR_OTHER_LINK = 'Y'
+ORDER BY
+modul.ORDER_DATA DESC";
+				$query = mysql_query($sqlStr, $conn);
+				//echo $sqlStr ;
+				$classIdx = 1;
+				while ($row = mysql_fetch_array($query)) {
+
+					echo '<a target = "_blank" href="' . $row['LINK_URL'] . '">';
+
+					echo '<img style="width:90px;height:90px;" src="' . callIconThumbListFrontend('BIG', $row['MODULE_ID'], NULL, false) . '">';
+
+					echo '</a>';
+
+				}
+				?>
 			</div>
 		</div>
 	</div>
@@ -151,8 +122,8 @@ if ($_SESSION['LANG'] == 'TH') {
 </div>
 <a class="btn-top"></a>
 <script type="text/javascript">
-	var please_fill_email = '<?=$please_fill_email?>' ;
-	var email_invalid = '<?=$email_invalid?>';
-	var regis_complete = '<?=$reg_musemag_complete?>';
-</script>
+	var please_fill_email =  '<?=$please_fill_email ?>' ;
+	var email_invalid = '<?=$email_invalid ?>';
+	var regis_complete = '<?=$reg_musemag_complete ?>';
+	</script>
 <script type="text/javascript" src="js/musemag.js"></script>

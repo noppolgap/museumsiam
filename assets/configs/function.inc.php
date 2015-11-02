@@ -217,7 +217,7 @@ function returnThaiMonth($str) {
 			$myMonth = "ตุลาคม";
 			break;
 		case "11" :
-			$myMonth = "พฤษจิกายน";
+			$myMonth = "พฤศจิกายน";
 			break;
 		case "12" :
 			$myMonth = "ธันวาคม";
@@ -266,6 +266,33 @@ function returnThaiShortMonth($str) {
 			break;
 	}
 	return $myMonth;
+}
+
+function returnThaiDayOfWeek($str) {
+	switch($str) {
+		case "Sunday" :
+			$myDay = "อาทิตย์";
+			break;
+		case "Monday" :
+			$myDay = "จันทร์";
+			break;
+		case "Tuesday" :
+			$myDay = "อังคาร";
+			break;
+		case "Wednesday" :
+			$myDay = "พุธ";
+			break;
+		case "Thursday" :
+			$myDay = "พฤหัสบดี";
+			break;
+		case "Friday" :
+			$myDay = "ศุกร์";
+			break;
+		case "Saturday" :
+			$myDay = "เสาร์";
+			break;
+	}
+	return $myDay;
 }
 
 function ConvertDate($str) {
@@ -612,7 +639,7 @@ function admin_upload_icon_edit($name, $iconType, $moduleId, $subModuleId) {
 
 	if (isset($moduleId))
 		$sql = "SELECT * FROM trn_banner_pic_setting WHERE APP_MODULE_ID = " . $moduleId . " order by LAST_UPDATE_DATE desc Limit 0,1 ";
-	else if (isset($subModuleId))
+	else if (isset($subModuleId) )
 		$sql = "SELECT * FROM trn_banner_pic_setting WHERE APP_SUB_MODULE_ID = " . $subModuleId . " order by LAST_UPDATE_DATE desc Limit 0,1 ";
 	//echo $sql;
 	$query = mysql_query($sql, $conn);
@@ -1590,7 +1617,7 @@ function admin_upload_org_image_view($name, $imgName) {
 	$str = "";
 	$str .= '<div class="image_' . $name . '_Box image_Box">' . "\n\t";
 
-	if($imgName != ''){
+	if ($imgName != '') {
 		$str .= '<div class="thumbBoxEdit floatL p-Relative">' . "\n\t";
 		$str .= '<div class="thumbBoxImage">' . "\n\t";
 		$str .= '<a onclick="popupImage(\'' . $imgName . '\'); return false;" href="#">' . "\n\t";
@@ -1605,4 +1632,67 @@ function admin_upload_org_image_view($name, $imgName) {
 	return $str;
 }
 
+function ShowYear($myDate) {
+	$myDateArray = explode("-", $myDate);
+
+	//$myMonth = returnThaiMonth($myDateArray[1]);
+	if ($_SESSION['LANG'] == 'TH')
+		$myYear = sprintf("%d", $myDateArray[0]) + 543;
+	else
+		$myYear = sprintf("%d", $myDateArray[0]);
+	return ($myYear);
+}
+
+
+
+function front_upload_file($name) {
+	 
+	$type = 'all';
+	  
+	$str = array();
+
+	$str[0];
+
+	$str[0] .= '<div class="tabs">' . "\n\t";
+	$str[0] .= '<ul>' . "\n\t";
+	$str[0] .= '<li><a href="#tabs_' . $name . '_1">Upload</a></li>' . "\n\t";
+	 
+	$str[0] .= '</ul>' . "\n\t";
+	$str[0] .= '<div id="tabs_' . $name . '_1">' . "\n\t";
+	$str[0] .= '<input class="buttonAction silver-flat-button VideoUpload" type="button" value="แนบ" data-name="' . $name . '">' . "\n\t";
+	$str[0] .= '<img class="VideoUpload_loading" id="VideoUpload_loading_' . $name . '" src="administrator/images/ajax-loader.gif" alt="loading" />' . "\n\t";
+	$str[0] .= '<div class="DataBlock dNone"></div>' . "\n\t";
+	$str[0] .= '</div>' . "\n\t";
+	
+	 
+	 
+$str[0] .= '</div>' . "\n\t";
+	$str[0] .= '<div class="dNone" id="DataBlock_' . $name . '"></div>' . "\n\t";
+
+	switch ($type) {
+		case "video" :
+			$accept = 'video/*';
+			break;
+		case "sound" :
+			$accept = 'audio/*';
+			break;
+		case "flash" :
+			$accept = '.swf';
+			break;
+		case "doc" :
+			$accept = '.doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.txt,';
+			break;
+		case "all" :
+			$accept = '*.*';
+			break;
+	}
+
+	$str[1] = '<form action="administrator/master/videoUpload.php" target="iframeTarget" method="post" name="form_' . $name . '" enctype="multipart/form-data">' . "\n\t";
+	$str[1] .= '<input type="hidden" name="my_name" value="' . $name . '" >' . "\n\t";
+	$str[1] .= '<input class="inputUploadVideo" type="file" name="my_files" data-name="' . $name . '" accept="' . $accept . '" >' . "\n\t";
+	$str[1] .= '</form>' . "\n\t";
+
+	return $str;
+
+}
 ?>

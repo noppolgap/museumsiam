@@ -16,7 +16,7 @@ require ("assets/configs/function.inc.php");
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu6").addClass("active");
-	}); 
+	});
 </script>
 
 </head>
@@ -32,7 +32,7 @@ require ("assets/configs/function.inc.php");
 <?php
 $currentPage = 1;
 if (isset($_GET['PG'])){
-	$currentPage = $_GET['PG'];	
+	$currentPage = $_GET['PG'];
 }
 
 if ($currentPage < 1)
@@ -69,13 +69,27 @@ $_SESSION['WB_PREV_PG'] = $current_url;
 			<div class="box-title-system cf">
 				<h1>เว็บบอร์ด</h1>
 				<div class="box-btn">
-					<a href="km-webboard-newtopic.php" class="btn red Atopic">ตั้งกระทู้</a>
+<?php
+$sql = "SELECT USER_ID , CITIZEN_ID FROM sys_app_user WHERE ID = ".intval($_SESSION['UID']);
+$query = mysql_query($sql, $conn);
+if(mysql_num_rows($query) > 0){
+	$row = mysql_fetch_array($query);
+
+	if($row['CITIZEN_ID'] == ''){
+		echo '<a href="km-webboard-newtopic.php" class="btn red Atopic">ตั้งกระทู้</a>';
+	}else{
+		echo'<a href="#" onclick="editAccout();" class="btn red Atopic">ตั้งกระทู้</a>';
+	}
+}else{
+	echo'<a href="login.php?p=bbs" class="btn red Atopic">ตั้งกระทู้</a>';
+}
+?>
 				</div>
 			</div>
 
 			<?php
 
-			$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE FROM trn_webboard
+			$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE ,VISIT_COUNT FROM trn_webboard
 						   WHERE REF_WEBBOARD_ID = 0
 						   AND FLAG = 0 ";
 
@@ -86,8 +100,8 @@ $_SESSION['WB_PREV_PG'] = $current_url;
 				}
 				else {
 						unset($_SESSION['text']);
-				}	
-				
+				}
+
 				$sq_qa .= "  ORDER BY ORDER_DATA DESC Limit 30 offset " . (30 * ($currentPage - 1));
 
 			$query_qa = mysql_query($sq_qa, $conn);
@@ -110,8 +124,8 @@ $_SESSION['WB_PREV_PG'] = $current_url;
 
 				<?php while($row = mysql_fetch_array($query_qa)) {
 					////ส่วนคำตอบ
-				   $sq_ans = " SELECT COUNT( WEBBOARD_ID ) ans, COUNT( VISIT_COUNT ) re FROM trn_webboard
-								WHERE REF_WEBBOARD_ID = ".$row['WEBBOARD_ID']." AND FLAG = 2 ";
+				    $sq_ans = " SELECT COUNT( WEBBOARD_ID ) ans FROM trn_webboard
+								WHERE REF_WEBBOARD_ID = ".$row['WEBBOARD_ID']." AND FLAG = 0 ";
 
 					$query_ans = mysql_query($sq_ans, $conn);
 
@@ -126,11 +140,11 @@ $_SESSION['WB_PREV_PG'] = $current_url;
 					<? while($row_ans = mysql_fetch_array($query_ans)) {?>
 
 						<div class="column reply"><? echo $row_ans['ans'] ?></div>
-						<div class="column view"><? echo $row_ans['re'] ?></div>
+						<div class="column view"><? echo $row['VISIT_COUNT'] ?></div>
 
 					<? } ?>
 
-					<div class="column date"><? echo ConvertDate($row['LAST_UPDATE_DATE	']) ?></div>
+					<div class="column date"><? echo ConvertDate($row['LAST_UPDATE_DATE']) ?></div>
 				</div>
 
 
@@ -190,6 +204,8 @@ $_SESSION['WB_PREV_PG'] = $current_url;
 <?php
 	include ('inc/inc-footer.php');
  ?>
-
+<script type="text/javascript">
+	card = 'ยังไม่สามารถใช้ความสามารถนี้ได้ ต้องลงทะเบียนบัตรประชาชนก่อน';
+</script>
 </body>
 </html>

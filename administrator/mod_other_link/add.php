@@ -2,7 +2,7 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
-$indexPage = "/administrator/mod_module/index.php";
+$indexPage = "/administrator/mod_other_link/index.php";
 ?>
 <!doctype html>
 <html>
@@ -59,7 +59,7 @@ $indexPage = "/administrator/mod_module/index.php";
         <div class="mod-body">
           <div class="mod-body-inner">
             <div class="mod-body-inner-header">
-              <div class="floatL titleBox">เพิ่มระบบ</div>
+              <div class="floatL titleBox">เพิ่มลิ้งค์อื่นๆที่เกี่ยวข้อง</div>
             </div>
             <div class="mod-body-main-content">
               <!--<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>-->
@@ -107,7 +107,7 @@ $indexPage = "/administrator/mod_module/index.php";
 				    <div>
                     <div class="floatL form_name">&nbsp;&nbsp;</div>
                     <div class="floatL form_input">
-                      <input  id = "chkHasSubModule" type="checkbox" name="chkHasSubModule" >&nbsp;มีระบบย่อย</input>
+                      
 
                     </div>
                     <div class="clear"></div>
@@ -153,13 +153,8 @@ if (isset($_POST["action"]) && $_POST["action"] == "submit") {
 
 	$txtUrlLink = $_POST['txtUrlLink'];
 	$txtImg = $_POST['txtImg'];
-	$chkHasSubModule = $_POST['chkHasSubModule'];
 
-	$isLastNode = "";
-	if ($chkHasSubModule)
-		$isLastNode = "N";
-	else
-		$isLastNode = "Y";
+	$isLastNode = "Y";
 
 	$bigIconName = "";
 	$smallIconName = "";
@@ -175,26 +170,26 @@ if (isset($_POST["action"]) && $_POST["action"] == "submit") {
 		}
 	}
 
+$userLogin = $_SESSION['user_name'];
 	mysql_query("BEGIN");
 
-	$sql_max = "SELECT MAX( ORDER_DATA ) AS MAX_ORDER FROM sys_app_module where ACTIVE_FLAG <> 2 AND IS_FOR_OTHER_LINK = 'N' ";
+	$sql_max = "SELECT MAX( ORDER_DATA ) AS MAX_ORDER FROM sys_app_module where ACTIVE_FLAG <> 2 AND IS_FOR_OTHER_LINK = 'Y' ";
 	$query_max = mysql_query($sql_max, $conn);
 	$row_max = mysql_fetch_array($query_max);
 	$max = $row_max['MAX_ORDER'];
 	$max++;
-	
-	 
+
 	$strSQL = "INSERT INTO sys_app_module ";
-	$strSQL .= "(MODULE_NAME_LOC,MODULE_NAME_ENG , USER_CREATE , CREATE_DATE , LAST_FUNCTION , IS_LAST_NODE , ORDER_DATA ) ";
+	$strSQL .= "(MODULE_NAME_LOC,MODULE_NAME_ENG , USER_CREATE , CREATE_DATE , LAST_FUNCTION , IS_LAST_NODE , ORDER_DATA , IS_FOR_OTHER_LINK  ) ";
 	$strSQL .= "VALUES ";
-	$strSQL .= "('" . $txtNameLoc . "','" . $txtNameEng . "','Test' , now() , 'A' , '" . $isLastNode . "' , ".$max.") ";
+	$strSQL .= "('" . $txtNameLoc . "','" . $txtNameEng . "','".$userLogin."' , now() , 'A' , '" . $isLastNode . "' , " . $max . " , 'Y') ";
 	$objQueryAppModule = mysql_query($strSQL);
 	$last_id = mysql_insert_id($conn);
 
 	$strSQL = "INSERT INTO trn_banner_pic_setting ";
 	$strSQL .= "(APP_MODULE_ID , DESKTOP_ICON_PATH , MOBILE_ICON_PATH ,ICON_LINK ,USER_CREATE , CREATE_DATE , LAST_FUNCTION) ";
 	$strSQL .= " values ";
-	$strSQL .= "('" . $last_id . "','" . $bigIconName . "','" . $smallIconName . "','" . $txtUrlLink . "' , 'Test' , now() , 'A')";
+	$strSQL .= "('" . $last_id . "','" . $bigIconName . "','" . $smallIconName . "','" . $txtUrlLink . "' , '".$userLogin."' , now() , 'A')";
 	$objQueryBannerSetting = mysql_query($strSQL);
 	if (($objQueryAppModule) and ($objQueryBannerSetting)) {
 		mysql_query("COMMIT");

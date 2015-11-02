@@ -275,8 +275,10 @@ if (isset($_GET['SCID'])) {
 <div class="box-freespace"></div>
 
 
-
-<?php include('inc/inc-footer.php'); ?>
-
+<?php
+include ('inc/inc-footer.php');
+include ('inc/inc-social-network.php');
+?>
 </body>
 </html>
+<? CloseDB(); ?>

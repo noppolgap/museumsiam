@@ -48,7 +48,7 @@ require ("../../assets/configs/function.inc.php");
 						<!-- start loop -->
 						<?php
 							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
-							$sql = "SELECT am.MODULE_ID  , am.MODULE_NAME_LOC ,  cc.* FROM sys_app_module am left join trn_content_category cc on cc.REF_MODULE_ID = am.MODULE_ID  where am.ACTIVE_FLAG <> 2 and cc.FLAG <>2 and cc.IS_LAST_NODE = 'N' ";
+							$sql = "SELECT am.MODULE_ID  , am.MODULE_NAME_LOC ,  cc.* FROM sys_app_module am left join trn_content_category cc on cc.REF_MODULE_ID = am.MODULE_ID  where am.ACTIVE_FLAG <> 2 AND am.IS_FOR_OTHER_LINK = 'N' and cc.FLAG <>2 and cc.IS_LAST_NODE = 'N' ";
 							if (isset($_POST['search'])) {
 								$sql .= " AND (cc.CONTENT_CAT_DESC_LOC like '%" . $_POST['str_search'] . "%' or cc.CONTENT_CAT_DESC_ENG like '%" . $_POST['str_search'] . "%' ";
 								$sql .= " order by cc.CONTENT_CAT_ID asc ";

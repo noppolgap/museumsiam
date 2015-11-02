@@ -31,15 +31,12 @@ require ('../inc_header.php');
 					<div class="floatL titleBox">พิพิธภัฑณ์เครือข่ายรอการอนุมัติ</div>					
 				</div>
 				<div class="mod-body-main-content">
-					<div class="formCms">
-						 
-						<form action="" method="post" name="formcms">
-							<div>
-							   <? while($row = mysql_fetch_array($rs)) {  ?>
+				
+						  <? while($row = mysql_fetch_array($rs)) {  ?>
 							
 							
 							<div class="Main_Content" data-id="<?=$row['MUSEUM_DETAIL_ID'] ?>" >
-						<div class="floatL checkboxContent"></div>
+								<div class="floatL checkboxContent"></div>
 						
 						<div class="floatL nameContent">
 							<div><? echo '<a href="pending_museum_approve.php?MUID='.$row['MUSEUM_DETAIL_ID'].'">'. $row['MUSEUM_NAME_LOC'].'</a>' ?></div>
@@ -54,7 +51,7 @@ require ('../inc_header.php');
 							<!--<a href="#" data-id="<?=$row['CONTENT_ID'] ?>" class="DeleteContentBtn">Delete</a>-->
 						</div> 
 						<div class="clear"></div>	
-				</div>	
+				</div>
 								
 							<?} ?>
 
@@ -62,14 +59,18 @@ require ('../inc_header.php');
 								
 								<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php' ">
 							</div>
-						</form> 
-					</div>
+							</div>
+					 
+						
+						
+						
+					
 				</div>
 			</div>
 		</div>
 		<div class="clear"></div>	
 	</div>
-</div>	
+ 
 <?
 require ('../inc_footer.php');
  ?>		

@@ -204,7 +204,13 @@ if ($_SESSION['LANG'] == 'TH') {
 					</div>
 					<div class="box-right">
 						<div class="box-btn box1 cf">
-							<a class="btn red" href="e-shopping-address.php">ดำเนินการต่อ</a>
+						<?php
+						if(isset($_SESSION['UID'])){
+							echo '<a class="btn red" href="e-shopping-address.php">ดำเนินการต่อ</a>';
+						}else{
+							echo '<a class="btn red" href="login.php?p=shopping">ดำเนินการต่อ</a>';
+						}
+						?>
 						</div>
 					</div>
 				</div>
