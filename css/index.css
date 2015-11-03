@@ -21,7 +21,7 @@ body{
 	background-color: #f0f0f0;
 }
 .part-banner .owl-theme .owl-controls .owl-page span{
-	margin: 5px;
+	margin: 10px;
 }
 .part-banner .owl-theme .owl-controls{
 	text-align: center;
@@ -516,6 +516,7 @@ div.text-title img{
 }
 .part-news .box-top .box-news-bold .box-pic{
 	float: left;
+	width: 274px;
 }
 .part-news .box-top .box-news-bold .box-tag-cate{
 	position: absolute;
@@ -551,6 +552,7 @@ div.text-title img{
 	display: table;
 	border-bottom: 1px solid #dbdbdb;
 	padding-bottom: 15px;
+	width: 100%;
 }
 .part-news .box-bottom .box-news {
 	float: left;
@@ -899,18 +901,17 @@ div.text-title img{
 }
 
 .box-pic-thumb img{
-    height: 180px;
-    width: 240px;
+	height: 180px;
+	width: 240px;
 }
 
-.ve-text-des
-{
+.ve-text-des{
 	height:60px;
 	max-height:60px;
+	overflow: hidden;
 }
 
-.ve-box-text
-{
+.ve-box-text{
 	max-height:180px;
 	height:180px;
 }

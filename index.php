@@ -65,6 +65,7 @@ require ("assets/configs/function.inc.php");
 							<img src="images/<?=$picFolderName ?>/index/part2-pic1.png" />
 						</div>
 <?php
+		/*
 		$Now = date('d');
 		list($start_date, $end_date) = x_week_range(date('Y-m-d'));
 
@@ -89,9 +90,39 @@ require ("assets/configs/function.inc.php");
 			if(($dayNow == $Now)){
 				$class .= ' today';
 			}
+		*/
+		$first_date = '';
+		$first_action = true;
 
+		$Now = date('d');
+		$sql_event = "SELECT DISTINCT (content.EVENT_START_DATE) AS START_DATE  FROM trn_content_detail AS content WHERE
+				content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG  = 0 AND
+				content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category where REF_MODULE_ID = ".$new_and_event." )
+				ORDER BY EVENT_START_DATE LIMIT 0 , 7";
+			    $query_event = mysql_query($sql_event, $conn);
+				while($row_event = mysql_fetch_array($query_event)) {
+					if($first_action){
+						$first_action = false;
+						$first_date = $row_event['START_DATE'];
+					}
+
+					$time_string = strtotime($row_event['START_DATE']);
+
+					if ($_SESSION['LANG'] == 'TH'){
+						$Month = returnThaiMonth(date( "m" , $time_string ));
+						$DayOfWeek = returnThaiDayOfWeek(date( "l" , $time_string ));
+					}else if ($_SESSION['LANG'] == 'EN'){
+						$Month = date( "F" , $time_string );
+						$DayOfWeek = date( "l" , $time_string );
+					}
+					$dayNow = date( "d" , $time_string);
+					$class  = 'box-tumb-date ';
+					$class .= strtolower(date( "D" , $time_string));
+					if(($dayNow == $Now)){
+						$class .= ' today';
+					}
 		?>
-			<a href="#" onclick="loadEvent('<?=$dt->format('Y-m-d')?>'); return false;">
+			<a href="#" onclick="loadEvent('<?=date('Y-m-d', $time_string)?>'); return false;">
 				<div class="<?=$class?>">
 					<div class="text-date">
 						<?=$DayOfWeek?>
@@ -103,7 +134,7 @@ require ("assets/configs/function.inc.php");
 				</div>
 			</a>
 		<?
-		}
+		 }
 ?>
 <a href="#">
 						<div class="box-tumb-date btn-all">
@@ -250,7 +281,7 @@ require ("assets/configs/function.inc.php");
 
 								<a href="<?=$exh_path[$i]?>">
 								<div class="box-pic">
-									<img src="<?=$exhimg_path[0]?>" width="274" height="205">
+									<img src="<?=$exhimg_path[$i]?>" width="274" height="205">
 									<div class="box-tag-cate">
 										<?=$exh_title[$i]?>
 									</div>

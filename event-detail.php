@@ -68,7 +68,7 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf news">
 				<h1>กิจกรรมของมิวเซียมสยาม</h1>
 				<div class="box-btn">
-				 
+
 				 <?
 				  $back_link = "";
 
@@ -110,7 +110,7 @@ require("assets/configs/function.inc.php");
 				    	$back_link = "event-museum.php";
 				    break;
 				}
-				 
+
 				?>
 
 					<a href="<? echo $back_link ?>" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>

@@ -7,8 +7,10 @@ if(isset($_POST['connect'])){
 	include ("inc/inc-cat-id-conf.php");
 }
 
-$whereDate = " AND (EVENT_START_DATE <= '" . date('Y-m-d') . "' AND EVENT_END_DATE >= '" . date('Y-m-d') . "')";
-$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE(NOW()) ";
+//$whereDate = " AND (EVENT_START_DATE <= '" . date('Y-m-d') . "' AND EVENT_END_DATE >= '" . date('Y-m-d') . "')";
+//$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE(NOW()) ";
+$whereDate = " AND (EVENT_START_DATE <= '" . $first_date . "' AND EVENT_END_DATE >= '" . $first_date . "')";
+$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE('".$first_date."') ";
 if (isset($_POST['date'])) {
 	$whereDate = " AND (EVENT_START_DATE <= '" . $_POST['date'] . "' AND EVENT_END_DATE >= '" . $_POST['date'] . "')";
 	$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE('" . $_POST['date'] . "') ";

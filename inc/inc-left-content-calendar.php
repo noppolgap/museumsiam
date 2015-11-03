@@ -59,11 +59,13 @@ if ($_SESSION['LANG'] == 'TH') {
 				content.ORDER_DATA desc
 			LIMIT 0,6 ";
 	$query_coming = mysql_query($sql, $conn);
-	if(mysql_num_rows($query_coming) > 0){
 ?>
 
 <div class="part-conming-event">
 	<div class="box-part-conming-event">
+	<?
+		if(mysql_num_rows($query_coming) > 0){
+	?>
 		<div class="box-list-event">
 		<?php
 			while($row_coming = mysql_fetch_array($query_coming)) {
@@ -81,7 +83,7 @@ if ($_SESSION['LANG'] == 'TH') {
 					<p class="text-date TcolorGray"><?=ConvertDate($row_coming['CREATE_DATE'])?></p>
 				</div>
 			</div>
-<?php   }  ?>
+		<?php   }  ?>
 		</div>
 		<div class="box-btn">
 			<a href="news-event-day.php" class="btn black">กิจกรรมวันนี้</a>
