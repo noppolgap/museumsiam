@@ -37,7 +37,7 @@ require ("../../assets/configs/function.inc.php");
 
 									<div class="bigForm">
 										<div class="floatL form_name">
-											Image (1263 x 500)
+											Image (1920 x 500)
 										</div>
 										<div class="floatL form_input">
 											<?=admin_upload_hero_banner_view('hero_banner') ?>

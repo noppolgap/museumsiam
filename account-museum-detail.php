@@ -26,8 +26,23 @@ require("assets/configs/function.inc.php");
 <body id="account">
 	
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); 
+if ($_SESSION['LANG'] == 'TH') {
+	$picFolder = 'th';
+} else {
+	$picFolder = 'en';
+}	
 
+/*SELECT
+	tmd.*
+FROM
+	mapping_museum_admin mma
+LEFT JOIN trn_museum_detail tmd ON tmd.MUSEUM_DETAIL_ID = mma.MUSEUM_DETAIL_ID
+WHERE
+	mma.ADMIN_USER_ID = 'noppol_vong@hotmail.com'
+AND tmd.ACTIVE_FLAG = 1
+AND tmd.IS_GIS_MUSEUM = 'N'*/
+?>
 <div class="part-nav-main">
 	<div class="container">
 		<div class="box-nav">
@@ -45,7 +60,7 @@ require("assets/configs/function.inc.php");
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				<img src="images/th/title-accout.png" alt="ACCOUNT SETTINGS"/>
+				<img src="images/<?=$picFolder?>/title-accout.png" alt="ACCOUNT SETTINGS"/>
 			</p>	
 		</div>
 	</div>

@@ -63,7 +63,7 @@ $rs = mysql_query($sqlUser) or die(mysql_error());
 $row = mysql_fetch_array($rs);
 		?>
 		
-		<form id = 'frmMain' action="account-edit-action.php?edit" method="post">
+		<form id = "frmMain" action="account-edit-action.php?edit" method="post"  enctype="multipart/form-data">
 <div class="part-nav-main">
 	<div class="container">
 		<div class="box-nav">
@@ -335,7 +335,7 @@ $row = mysql_fetch_array($rs);
 			<div class="box-right">
 				<div class="box-user">
 					<div class="box-pic">
-						<img id="imgAvatar" src="images/account/user.jpg"/>
+						<img id="imgAvatar" src="<?=nvl( $row['IMAGE_PATH'] , 'images/account/user.jpg')?>"/>
 					</div>
 					<div class="box-detail cf">
 						<div class="box-name">

@@ -200,7 +200,7 @@ require ('inc/inc-require-userlogin.php');
 			<div class="box-right">
 				<div class="box-user">
 					<div class="box-pic">
-						<img src="images/account/user.jpg"/>
+						<img src="<?=nvl( $row['IMAGE_PATH'] , 'images/account/user.jpg')?>"/>
 					</div>
 					<div class="box-detail cf">
 						<div class="box-name">

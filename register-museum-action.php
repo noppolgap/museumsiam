@@ -147,7 +147,7 @@ if ($_GET["type"] == "province") {
 	//insert Attachment
 
 	$target_dir = "upload/ATTACH_FILE/";
-	$target_dir_museum = $target_dir . '/' . 'MUSEUM_ID_' . $retrunID . '/';
+	$target_dir_museum = $target_dir .  'MUSEUM_ID_' . $retrunID . '/';
 
 	$target_file = $target_dir_museum . basename($_FILES["fileToUpload"]["name"]);
 

@@ -39,7 +39,7 @@ require ('../inc_header.php');
 							
 
 							<div class="bigForm">
-								<div class="floatL form_name">Image (1263 x 500)</div>
+								<div class="floatL form_name">Image (1920 x 500)</div>
 								<div class="floatL form_input"><?=admin_upload_banner_hero_edit('hero_banner') ?></div>
 								<div class="clear"></div>
 							</div>

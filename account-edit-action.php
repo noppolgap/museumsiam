@@ -27,12 +27,15 @@ if (isset($_GET['edit'])) {
 	$update[] = "LAST_UPDATE_USER = '" . $_SESSION['user_name'] . "'";
 	 
 	// echo $_POST['browseAvarta'];
-	if (isset($_POST['browseAvarta'])){
+	// var_dump($_POST['browseAvarta']);
+	
+	//echo $_FILES["browseAvarta"]["tmp_name"] ; 
+	if (isset($_FILES['browseAvarta'])){
 	$target_dir = "upload/USER_IMG/";
-	$target_dir_museum = $target_dir . '/' . 'USER_ID_' . $_SESSION['UID'] . '/';
+	$target_dir_museum = $target_dir  . 'USER_ID_' . $_SESSION['UID'] . '/';
 
 	$target_file = $target_dir_museum . basename($_FILES["browseAvarta"]["name"]);
-
+//	echo $target_save_file ; 
 	$uploadOk = 1;
 	$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
 	$target_save_file = $target_dir_museum . date("YmdGis") . '.' . $imageFileType;
@@ -45,19 +48,20 @@ if (isset($_GET['edit'])) {
 	} else { chmod($target_dir_museum, 0777);
 	}
 
+	
 	if (move_uploaded_file($_FILES["browseAvarta"]["tmp_name"], $target_save_file)) {
 		$update[] = "IMAGE_PATH = '".$target_save_file. "'";
-		echo "Upload Complete";
+	//echo "Upload Complete";
 	}
 	else 
 		{
-			echo "Fail";
+	//		echo "Fail";
 		}
 	}
 	
 	$sql = "UPDATE sys_app_user SET  " . implode(",", $update) . " WHERE ID = " . $_SESSION['UID'];
 	mysql_query($sql, $conn);
 
-	//header('Location: ' . 'account.php');
+	header('Location: ' . 'account.php');
 }
 ?>

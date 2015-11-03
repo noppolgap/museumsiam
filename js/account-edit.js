@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 			reader.onload = imageIsLoaded;
 			reader.readAsDataURL(this.files[0]);
-		}
+		} 
 	});
 
 });
