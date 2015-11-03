@@ -1,47 +1,66 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<?
+require ('inc_meta.php');
+ ?>	
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/account.css" />
 <link rel="stylesheet" type="text/css" href="css/account-detail.css" />
 <link rel="stylesheet" type="text/css" href="css/account-museum.css" />
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$(".menu-left li.menu5,.menu-left li.menu5 li.submenu1").addClass("active");
-			if ($('.menu-left li.menu5').hasClass("active")){
-				$('.menu-left li.menu5').children(".submenu-left").css("display","block");
-			}
-	});
+		if ($('.menu-left li.menu5').hasClass("active")) {
+			$('.menu-left li.menu5').children(".submenu-left").css("display", "block");
+		}
+	}); 
 </script>
 	
 </head>
 
 <body id="account">
 	
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); 
+<?php
+include ('inc/inc-top-bar.php');
+ ?>
+<?php
+include ('inc/inc-menu.php');
 if ($_SESSION['LANG'] == 'TH') {
 	$picFolder = 'th';
+	$selectedColumn = "province.PROVINCE_DESC_LOC as PROVINCE_DESC , district.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDis.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ";
+	$provinceColumn = " PROVINCE_DESC_LOC as PROVINCE_DESC ";
+	$districtColumn = " DISTRICT_DESC_LOC as DISTRICT_DESC ";
+	$subDistrictColumn = " SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ";
 } else {
 	$picFolder = 'en';
-}	
+	$selectedColumn = "province.PROVINCE_DESC_ENG as PROVINCE_DESC , district.DISTRICT_DESC_ENG as DISTRICT_DESC ,subDis.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC ";
+	$provinceColumn = " PROVINCE_DESC_ENG as PROVINCE_DESC ";
+	$districtColumn = " DISTRICT_DESC_ENG as DISTRICT_DESC ";
+	$subDistrictColumn = " SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC ";
+}
 
-/*SELECT
-	tmd.*
-FROM
-	mapping_museum_admin mma
-LEFT JOIN trn_museum_detail tmd ON tmd.MUSEUM_DETAIL_ID = mma.MUSEUM_DETAIL_ID
-WHERE
-	mma.ADMIN_USER_ID = 'noppol_vong@hotmail.com'
-AND tmd.ACTIVE_FLAG = 1
-AND tmd.IS_GIS_MUSEUM = 'N'*/
+$mdnSql = "SELECT
+					tmd.*, " . $selectedColumn;
+$mdnSql .= "	FROM
+					mapping_museum_admin mma
+				LEFT JOIN trn_museum_detail tmd ON tmd.MUSEUM_DETAIL_ID = mma.MUSEUM_DETAIL_ID
+				LEFT JOIN mas_province province ON province.PROVINCE_ID = tmd.PROVINCE_ID
+				LEFT JOIN mas_district district ON district.DISTRICT_ID = tmd.DISTRICT_ID
+				LEFT JOIN mas_sub_district subDis ON subDis.SUB_DISTRICT_ID = tmd.SUB_DISTRICT_ID
+				WHERE
+					mma.ADMIN_USER_ID = '" . $_SESSION['user_name'] . "' ";
+$mdnSql .= "	AND tmd.ACTIVE_FLAG = 1
+				AND tmd.IS_GIS_MUSEUM = 'N' AND APPROVE_FLAG = 'Y'";
+
+$rs = mysql_query($mdnSql) or die(mysql_error());
+$row = mysql_fetch_array($rs);
 ?>
 <div class="part-nav-main">
 	<div class="container">
@@ -60,7 +79,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				<img src="images/<?=$picFolder?>/title-accout.png" alt="ACCOUNT SETTINGS"/>
+				<img src="images/<?=$picFolder ?>/title-accout.png" alt="ACCOUNT SETTINGS"/>
 			</p>	
 		</div>
 	</div>
@@ -69,7 +88,9 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 <div class="part-account-main">
 	<div class="container cf">
 		<div class="box-account-left">
-			<?php include('inc/inc-account-menu.php'); ?>
+			<?php
+			include ('inc/inc-account-menu.php');
+ ?>
 		</div>
 		<div class="box-account-right cf">
 			<div class="box-title">
@@ -84,7 +105,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name = "txtNameLoc" value="<?=$row['MUSEUM_NAME_LOC'] ?>"></div>
 							</div>
 						</div>
 					</div>
@@ -96,7 +117,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name="txtNameEng" value="<?=$row['MUSEUM_NAME_ENG'] ?>"></div>
 							</div>
 						</div>
 					</div>
@@ -115,7 +136,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="addressLoc"><?=$row['ADDRESS1'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -127,7 +148,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="addressEng"><?=$row['ADDRESS2'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -143,15 +164,20 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 							<div class="box-input-text">
 								<div>
 									<div class="SearchMenu-item province_box box-select">
-										<span title="- เลือกจังหวัด -">แขวงลาดยาว</span>
-										<select class="p-Absolute" name="province">
-											<option value="0">แขวงลาดยาว</option>
+										<span title="- เลือกจังหวัด -"><?=$row['SUB_DISTRICT_DESC'] ?></span>
+										<select class="p-Absolute" name="subDistrict">
+											<option value="0"><?=$row['SUB_DISTRICT_DESC'] ?></option>
 										<?php
-											$sql = "SELECT * FROM mas_province ORDER BY PROVINCE_DESC_LOC";
+											$sql = "SELECT SUB_DISTRICT_ID , ".$subDistrictColumn." FROM mas_sub_district where DISTRICT_ID = '".$row["DISTRICT_ID"]."' ORDER BY SUB_DISTRICT_ID ";
 											$query = mysql_query($sql,$conn);	
-											while($row = mysql_fetch_array($query)){
-										?>		
-											<option value="<?=$row['PROVINCE_ID']?>"><?=$row['PROVINCE_DESC_LOC']?></option>									
+											while($rowSubDis = mysql_fetch_array($query)){
+												$selectedOption = "";
+												if($rowSubDis['SUB_DISTRICT_ID'] == $row['SUB_DISTRICT_ID'])
+													$selectedOption = "selected";
+										?>	
+									 
+										<option value="<?=$rowSubDis['SUB_DISTRICT_ID'] ?>" <?=$selectedOption ?>><?=$rowSubDis['SUB_DISTRICT_DESC'] ?></option>
+																			
 										<? } ?>	
 										</select>
 									</div>
@@ -171,15 +197,18 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 							<div class="box-input-text">
 								<div>
 									<div class="SearchMenu-item province_box box-select">
-										<span title="- เลือกจังหวัด -">เขตจตุจักร</span>
-										<select class="p-Absolute" name="province">
-											<option value="0">เขตจตุจักร</option>
+										<span title="- เลือกจังหวัด -"><?=$row['DISTRICT_DESC'] ?></span>
+										<select class="p-Absolute" name="district">
+											<option value="0"><?=$row['DISTRICT_DESC'] ?></option>
 										<?php
-											$sql = "SELECT * FROM mas_province ORDER BY PROVINCE_DESC_LOC";
+											$sql = "SELECT DISTRICT_ID  , ".$districtColumn." FROM mas_district where province_id = '".$row['PROVINCE_ID']."' ORDER BY DISTRICT_ID Asc";
 											$query = mysql_query($sql,$conn);	
-											while($row = mysql_fetch_array($query)){
+											while($rowDistrict = mysql_fetch_array($query)){
+													$selectedOption = "" ; 
+													if($row['DISTRICT_ID'] == $rowDistrict['DISTRICT_ID'])
+														$selectedOption = "selected";
 										?>		
-											<option value="<?=$row['PROVINCE_ID']?>"><?=$row['PROVINCE_DESC_LOC']?></option>									
+											<option value="<?=$rowDistrict['DISTRICT_ID'] ?>" <?=$selectedOption?> ><?=$rowDistrict['DISTRICT_DESC'] ?></option>									
 										<? } ?>	
 										</select>
 									</div>
@@ -199,15 +228,18 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 							<div class="box-input-text">
 								<div>
 									<div class="SearchMenu-item province_box box-select">
-										<span title="- เลือกจังหวัด -">กรุงเทพมหานคร</span>
+										<span title="- เลือกจังหวัด -"><?=$row['PROVINCE_DESC'] ?></span>
 										<select class="p-Absolute" name="province">
-											<option value="0">กรุงเทพมหานคร</option>
+											<option value="0"><?=$row['PROVINCE_DESC'] ?></option>
 										<?php
-											$sql = "SELECT * FROM mas_province ORDER BY PROVINCE_DESC_LOC";
+											$sql = "SELECT PROVINCE_ID , ".$provinceColumn." FROM mas_province ORDER BY PROVINCE_DESC_LOC";
 											$query = mysql_query($sql,$conn);	
-											while($row = mysql_fetch_array($query)){
+											while($rowProvince = mysql_fetch_array($query)){
+												$selectedOption = "" ;
+												if($rowProvince['PROVINCE_ID'] == $row['PROVINCE_ID'])
+													$selectedOption = "selected" ; 
 										?>		
-											<option value="<?=$row['PROVINCE_ID']?>"><?=$row['PROVINCE_DESC_LOC']?></option>									
+											<option value="<?=$rowProvince['PROVINCE_ID'] ?>" <?=$selectedOption?> ><?=$rowProvince['PROVINCE_DESC_LOC'] ?></option>									
 										<? } ?>	
 										</select>
 									</div>
@@ -225,7 +257,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name = "txtPostCode" value="<?=$row['POST_CODE']?>"></div>
 							</div>
 						</div>
 					</div>
@@ -240,7 +272,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name="txtPhone" value="<?=$row['TELEPHONE']?>"></div>
 							</div>
 						</div>
 					</div>
@@ -255,7 +287,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name = "txtFax" value="<?=$row['FAX']?>"></div>
 							</div>
 						</div>
 					</div>
@@ -270,7 +302,7 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name = "txtWebSite" value="<?=$row['WEBSITE_URL']?>" ></div>
 							</div>
 						</div>
 					</div>
@@ -329,10 +361,10 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text" placeholder="Latitude"></div>
+								<div><input type="text" placeholder="Latitude" name="txtLat" value="<?=$row['LAT']?>"></div>
 							</div>
 							<div class="box-input-text mT">
-								<div><input type="text" placeholder="Longitude"></div>
+								<div><input type="text" placeholder="Longitude" name = "txtLon" value="<?=$row['LON']?>"></div>
 							</div>
 						</div>
 					</div>
@@ -1243,7 +1275,9 @@ AND tmd.IS_GIS_MUSEUM = 'N'*/
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php
+include ('inc/inc-footer.php');
+ ?>	
 
 </body>
 </html>
