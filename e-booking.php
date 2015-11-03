@@ -55,9 +55,41 @@ require("assets/configs/function.inc.php");
 				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 999</a>
 			</div>
 
+			<?php
+						    $sql_proc  = "SELECT prod.PRODUCT_ID, prod.PRICE, prod.SALE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
+											FROM trn_product AS prod
+											LEFT JOIN (
+												SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
+												FROM (
+													SELECT *
+													FROM trn_content_picture
+													ORDER BY ORDER_ID ASC
+												) AS my_table_tmp
+												GROUP BY CONTENT_ID, CAT_ID
+											) AS pic ON prod.PRODUCT_ID = pic.CONTENT_ID
+											AND prod.CAT_ID = pic.CAT_ID
+							
+											WHERE prod.CAT_ID = ".$ebook_sub_cat ." AND prod.FLAG = 0 ";
+
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$sql_proc .= " AND (prod.PRODUCT_DESC_LOC like '%" .$_SESSION['text']. "%' or  prod.PRODUCT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}
+
+							$sql_proc  .= "	ORDER BY prod.ORDER_DATA DESC LIMIT 0,6";
+
+						    $query_proc = mysql_query($sql_proc,$conn);
+
+							while($row_proc = mysql_fetch_array($query_proc)) { ?>
+
+
 			<div class="box-booking-main">
 				<div class="box-pic">
-					<img src="http://placehold.it/880x565">
+					<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
 				</div>
 				<div class="box-content-booking">
 					<div class="box-top cf TcolorGold">
@@ -66,7 +98,7 @@ require("assets/configs/function.inc.php");
 								อัตราค่าเข้าชม
 							</div>
 							<div class="box-right">
-								<span>300</span> บาท/ท่าน
+								<span><? echo $row_proc['PRICE']; ?></span> บาท/ท่าน
 							</div>
 						</div>
 						<div class="box-row">
@@ -107,76 +139,17 @@ require("assets/configs/function.inc.php");
 					</div>
 					<div class="box-detail">
 						<p class="text-title">
-							นิทรรศการ
-							<span>“เรียงความประเทศไทย”</span>
+							<?=$row['CONTENT_LOC']?>
 						</p>
 						<p class="text-des">
-							เป็นการบอกเล่าถึงพัฒนาการด้านต่างๆ ของภูมิภาคอุษาคเนย์ นับตั้งแต่สมัยแผ่นดิน “สุวรรณภูมิ” (3,000 ปีก่อน)อันประกอบด้วยอารยธรรมต่างๆ
+							<? echo $row_proc['PRODUCT_DESC']; ?>
 						</p>
 					</div>
 				</div>
-			</div>		
-			<div class="box-booking-main">
-				<div class="box-pic">
-					<img src="http://placehold.it/880x565">
-				</div>
-				<div class="box-content-booking">
-					<div class="box-top cf TcolorGold">
-						<div class="box-text cf">
-							<div class="box-left">
-								อัตราค่าเข้าชม
-							</div>
-							<div class="box-right">
-								<span>300</span> บาท/ท่าน
-							</div>
-						</div>
-						<div class="box-row">
-							<div class="box-input-text">
-								<p>จำนวนผู้เข้าชม</p>
-								<div><input type="number" name="number" value="1"></div>
-							</div>
-						</div>
-						<div class="box-row">
-							<div class="box-input-text">
-								<p>รอบการเข้าชม</p>
-								<div>
-									<div class="SearchMenu-item">
-										- เลือกรอบการเข้าชม -
-										<select class="p-Absolute">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="box-text cf">
-							<div class="box-left">
-								ยอดสุทธิ
-							</div>
-							<div class="box-right">
-								<span>-</span> บาท
-							</div>
-						</div>
-						<div class="box-btn cf">
-							<a href="e-booking-cart.php" class="btn red">ดำเนินการต่อ</a>
-						</div>
-						<hr class="line-gray"/>
-					</div>
-					<div class="box-detail">
-						<p class="text-title">
-							นิทรรศการ
-							<span>“เรียงความประเทศไทย”</span>
-						</p>
-						<p class="text-des">
-							เป็นการบอกเล่าถึงพัฒนาการด้านต่างๆ ของภูมิภาคอุษาคเนย์ นับตั้งแต่สมัยแผ่นดิน “สุวรรณภูมิ” (3,000 ปีก่อน)อันประกอบด้วยอารยธรรมต่างๆ
-						</p>
-					</div>
-				</div>
-			</div>			
+			</div>	
+
+
+	   <? } ?>		
 
 		</div>
 	</div>

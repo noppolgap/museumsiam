@@ -2,6 +2,7 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+require ("../../inc/inc-cat-id-conf.php");
 ?>
 <!doctype html>
 <html>
@@ -76,10 +77,10 @@ require ("../../assets/configs/function.inc.php");
 						<div class="floatL nameContent"> 
 							
 							
-							<? $nextPage = '';
+							<? 
 							if (nvl($row['IS_LAST_NODE'], 'Y') == 'Y') {
 								//content no LV use current LV
-								if($MID == $education_cat_id){
+								if($MID == $education_cat_id || $MID == $ebooking_cat_id){
 									$nextPage = '../mod_shopping/product_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0'   ;
 								}
 								else{
@@ -88,7 +89,7 @@ require ("../../assets/configs/function.inc.php");
 								}
 							} else {
 								//recursive to self page
-								$nextPage = 'main_sub_category_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0' ;
+									$nextPage = 'main_sub_category_view.php?cid=' . $row['CONTENT_CAT_ID'] . '&MID=' . $MID . '&LV=0' ;
 							}
 							 ?>
 							

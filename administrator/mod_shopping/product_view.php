@@ -25,6 +25,7 @@ require ("../../assets/configs/function.inc.php");
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete&proid=<?=$_GET['proid'] ?>">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('product_order.php?cid=<?=$_GET['cid'] ?>');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '../mod_category/main_category_view.php?MID=<?=$_GET['MID']?>'">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -120,7 +121,10 @@ require ("../../assets/configs/function.inc.php");
 				</div>
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '../mod_category/main_category_view.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>'">
+				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'product_add.php?MID=<?=$_GET['MID']?>&cid=<?=$_GET['cid']?>&LV=<?=$_GET['LV']?>'">
+				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="product_action.php?delete&proid=<?=$_GET['proid'] ?>">
+				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('product_order.php?cid=<?=$_GET['cid'] ?>');">
+				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '../mod_category/main_category_view.php?MID=<?=$_GET['MID']?>'">
 			</div>
 		</div>
 		<div class="clear"></div>	

@@ -1,6 +1,10 @@
+<?
+	require("inc/inc-cat-id-conf.php");
+?>
+
 <div class="part-left-title-page">
 	<div class="box-title-page">
-		<a href=""><img src="images/th/title-online-system.png" alt="title-online-system" width="" height="" /></a>
+		<a href="online-system.php?MID=<?=$education_cat_id?>"><img src="images/th/title-online-system.png" alt="title-online-system" width="" height="" /></a>
 	</div>
 </div>
 
@@ -15,9 +19,9 @@
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
-			<li class="menu1"><a href="">หน้าหลัก</a>
-			<li class="menu2"><a href="">e-BOOKING + ONLINE TICKET</a></li>
-			<li class="menu3 sub"><a href="">e-SHOPPING</a>
+			<li class="menu1"><a href="online-system.php?MID=<?=$education_cat_id?>">หน้าหลัก</a>
+			<li class="menu2"><a href="e-booking.php">e-BOOKING + ONLINE TICKET</a></li>
+			<li class="menu3 sub"><a href="e-shopping.php?MID=<?='.$education_cat_id.'?>">e-SHOPPING</a>
 				<ul class="submenu-left">
 
 			<?php

@@ -25,6 +25,7 @@ $permanent_exhibition = 85;
 $new_and_event = 12;
 $event_sub_cat_id = 130;
 $mesum_sub_cat_id = 131;
+$ebook_sub_cat = 74;
 
 // End Module ID
 

@@ -74,9 +74,9 @@ if (isset($_GET['add'])) {
 	$insert['BRIEF_ENG'] = "'" . $_POST['txtBriefDescEng'] . "'";
 	$insert['MUSUEM_ID'] = "'-1'";
 	$insert['APPROVE_FLAG'] = "'Y'";
-	$insert['USER_CREATE'] = "'admin'";
+	$insert['USER_CREATE'] = "'". $_SESSION['UID'];
 	$insert['CREATE_DATE'] = "NOW()";
-	$insert['LAST_UPDATE_USER'] = "'admin'";
+	$insert['LAST_UPDATE_USER'] = "'". $_SESSION['UID'];
 	$insert['LAST_UPDATE_DATE'] = "NOW()";
 
 	$sql = "INSERT INTO  trn_content_detail (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
@@ -122,7 +122,7 @@ if (isset($_GET['edit'])) {
 	$update[] = "CONTENT_DETAIL_ENG= '" . $_POST['txtDetailEng'] . "'";
 	$update[] = "BRIEF_LOC= '" . $_POST['txtBriefDescLoc'] . "'";
 	$update[] = "BRIEF_ENG= '" . $_POST['txtBriefDescEng'] . "'";
-	$update[] = "LAST_UPDATE_USER = 'admin'";
+	$update[] = "LAST_UPDATE_USER ='". $_SESSION['UID'];
 	$update[] = "LAST_UPDATE_DATE = NOW()";
 
 	$update[] = "CAT_ID = '" . $_POST['cmbCategory'] . "'";
