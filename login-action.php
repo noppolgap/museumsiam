@@ -9,7 +9,8 @@ $getUserSql = "SELECT ID,
 						USER_ID,
 						`NAME`,
 						LAST_NAME,
-						PWD
+						PWD,
+						IMAGE_PATH
 					FROM
 						sys_app_user
 					WHERE
@@ -23,6 +24,7 @@ while ($row = mysql_fetch_array($query)) {
 		$validatePass = TRUE;
 		$_SESSION['user_name'] = $row['USER_ID'];
 		$_SESSION['UID'] = $row['ID'];
+		$_SESSION['IMAGE_PATH'] = $row['IMAGE_PATH'];
 	} else {
 		$_SESSION['LOGIN_FAIL_MSG'] = "รหัสผ่านไม่ถูกต้อง";
 	}

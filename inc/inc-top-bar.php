@@ -58,9 +58,11 @@ require ("inc-cat-id-conf.php");
 					<div class="box-pic">
 					<?
 						if(isset($_SESSION['FB'])){
-							echo '<img src="http://graph.facebook.com/'.$_SESSION['FB'].'/picture" alt="icon-humen" width="23" height="23" />';
+							echo '<img src="http://graph.facebook.com/'.$_SESSION['FB'].'/picture" alt="" />';
+						}else if(isset($_SESSION['IMAGE_PATH'])){
+							echo '<img src="'.$_SESSION['IMAGE_PATH'].'" />';
 						}else{
-							echo '<img src="images/icon-humen.png" alt="icon-humen" width="23" height="23" />';
+							echo '<img src="images/icon-humen.png" alt="icon-humen" />';
 						}
 					?>
 					</div>

@@ -6,17 +6,17 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/login.css" />
-<link rel="stylesheet" type="text/css" href="css/register.css" />	
+<link rel="stylesheet" type="text/css" href="css/register.css" />
 </head>
 
 <body id="register">
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main">
 	<div class="container">
@@ -36,7 +36,7 @@ require("assets/configs/function.inc.php");
 			<p>
 				Registration Form<br>
 				<span>สมัครสมาชิก</span>
-			</p>	
+			</p>
 		</div>
 	</div>
 </div>
@@ -127,7 +127,7 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
-			</div>	
+			</div>
 			<div class="box-group-form Bred cf">
 				<div class="box-row cf">
 					<div class="box-left w600">
@@ -206,11 +206,11 @@ require("assets/configs/function.inc.php");
 										<option value="0">- เลือกจังหวัด -</option>
 									<?php
 										$sql = "SELECT * FROM mas_province ORDER BY PROVINCE_DESC_LOC";
-										$query = mysql_query($sql,$conn);	
+										$query = mysql_query($sql,$conn);
 										while($row = mysql_fetch_array($query)){
-									?>		
-										<option value="<?=$row['PROVINCE_ID']?>"><?=$row['PROVINCE_DESC_LOC']?></option>									
-									<? } ?>	
+									?>
+										<option value="<?=$row['PROVINCE_ID']?>"><?=$row['PROVINCE_DESC_LOC']?></option>
+									<? } ?>
 									</select>
 								</div>
 							</div>
@@ -225,6 +225,7 @@ require("assets/configs/function.inc.php");
 								<div class="SearchMenu-item district_box box-select">
 									<span title="- เลือกอำเภอ/เขต -">- เลือกอำเภอ/เขต -</span>
 									<select class="p-Absolute" name="district">
+										<option value="0">- เลือกอำเภอ/เขต -</option>
 									</select>
 								</div>
 							</div>
@@ -239,6 +240,7 @@ require("assets/configs/function.inc.php");
 								<div class="SearchMenu-item sub_district_box box-select">
 									<span title="- เลือกตำบล/แขวง -">- เลือกตำบล/แขวง -</span>
 									<select class="p-Absolute" name="sub_district">
+										<option value="0">- เลือกตำบล/แขวง -</option>
 									</select>
 								</div>
 							</div>
@@ -281,22 +283,22 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script src="assets/plugin/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="js/register.js"></script>
 <script>
 	var mytext = {
-		name:"ชื่อ", 
+		name:"ชื่อ",
 		surname:"นามสกุล",
-		sex:"เพศ", 
+		sex:"เพศ",
 		birthday:"วันเกิด",
 		email:"อีเมล์",
-		password1:"รหัสผ่าน", 
+		password1:"รหัสผ่าน",
 		password2:"ยืนยันรหัสผ่าน",
-		idcard:"รหัสประจำตัวประชาชน", 
+		idcard:"รหัสประจำตัวประชาชน",
 		telephone:"โทรศัพท์",
-		mobile:"โทรศัพท์มือถือ", 
+		mobile:"โทรศัพท์มือถือ",
 		fax:"โทรสาร",
 		postcode:"รหัสไปรษณีย์",
 		captcha:"รหัสยืนยัน",

@@ -22,6 +22,7 @@ if($_POST['action'] == 'DelAll'){
 		$sql = "DELETE FROM trn_shopping_cart WHERE trn_shopping_cart_SSID = '".session_id()."' AND  trn_shopping_cart_pID = ".intval($key);
 		mysql_query($sql, $conn) or die($sql);
 	}
+	header('Location: e-shopping.php');
 }
 ?>
 <!doctype html>
@@ -107,6 +108,7 @@ if ($_SESSION['LANG'] == 'TH') {
 
 			if(mysql_num_rows($query) == 0){
 				echo '<div Class="box-table-main box-no-item">No item</div>';
+				$zeroItem = true;
 			}else{
 			?>
 
@@ -205,7 +207,9 @@ if ($_SESSION['LANG'] == 'TH') {
 					<div class="box-right">
 						<div class="box-btn box1 cf">
 						<?php
-						if(isset($_SESSION['UID'])){
+						if(isset($zeroItem)){
+							echo '<a class="btn red zeroItem" href="#">ดำเนินการต่อ</a>';
+						}else if(isset($_SESSION['UID'])){
 							echo '<a class="btn red" href="e-shopping-address.php">ดำเนินการต่อ</a>';
 						}else{
 							echo '<a class="btn red" href="login.php?p=shopping">ดำเนินการต่อ</a>';

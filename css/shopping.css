@@ -526,7 +526,13 @@
     padding: 150px 0;
     text-align: center;
 }
-
+.zeroItem{
+	opacity: 0.5;
+	cursor: default;
+}
+.zeroItem:hover{
+    background-color: #6e0904 !important;
+}
 
 
 
