@@ -2,6 +2,18 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+			if (isset($_POST['str_search'])){
+				$_SESSION['text'] = $_POST['str_search'];
+				$search_sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+			}
+	}
+
+
 ?>
 <!doctype html>
 <html>
@@ -51,14 +63,14 @@ else
 		$backPage = "km.php?MID=".$km_module_id;
 	}
 //$backPage = "km.php?MID=" . $MID . "&CID=" . $CID;
-$currentParam = "?MID=" . $MID . "&CID=" . $CID;
+$currentParam = "?MID=" .$MID . "&CID=" . $CID;
 if (isset($_GET['SCID'])) {
 	//$backPage .= "$SCID=" . $SCID;
-	$currentParam .= "$SCID=" . $SCID;
+	$currentParam .= "&SCID=" . $SCID;
 }
 
 if ($_SESSION['LANG'] == 'TH') {
-	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTEvjkNT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
+	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTENT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
 } else if ($_SESSION['LANG'] == 'EN') {
 	$LANG_SQL = "cat.CONTENT_CAT_DESC_ENG AS CAT_DESC , content.CONTENT_DESC_ENG AS CONTENT_DESC , content.BRIEF_ENG AS BRIEF_LOC";
 }
@@ -150,16 +162,9 @@ if (isset($_GET['SCID'])) {
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 						
 
-						if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$getContentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-						}
-						else {
-								unset($_SESSION['text']);
-						}	
+						
 
-
+$getContentSql .= $search_sql;
 
 						$getContentSql .= " ORDER BY
 												content.ORDER_DATA desc

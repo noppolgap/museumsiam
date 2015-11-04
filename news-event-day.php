@@ -7,6 +7,18 @@ $MyDate = date('Y-m-d');
 if(isset($_GET['date'])){
 	$MyDate  = $_GET['date'];
 }
+	
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search']))
+		{
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+		}
+	}
+
 
 ?>
 <!doctype html>
@@ -121,16 +133,9 @@ if(isset($_GET['date'])){
 											AND content.CAT_ID = ".$row_CAT['CONTENT_CAT_ID'];
 							$sql .= " AND (EVENT_START_DATE <= '".$MyDate."' AND EVENT_END_DATE >= '".$MyDate."')";
 
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}
+							
 
-						    $sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
+						    $sql .= $search_sql." ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
 					$query = mysql_query($sql, $conn);
 
