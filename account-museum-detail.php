@@ -20,7 +20,7 @@ require ('inc_meta.php');
 		if ($('.menu-left li.menu5').hasClass("active")) {
 			$('.menu-left li.menu5').children(".submenu-left").css("display", "block");
 		}
-	}); 
+	});
 </script>
 	
 </head>
@@ -32,6 +32,8 @@ include ('inc/inc-top-bar.php');
  ?>
 <?php
 include ('inc/inc-menu.php');
+require ('inc/inc-require-museum-admin-login.php');
+
 if ($_SESSION['LANG'] == 'TH') {
 	$picFolder = 'th';
 	$selectedColumn = "province.PROVINCE_DESC_LOC as PROVINCE_DESC , district.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDis.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ";
@@ -86,6 +88,7 @@ $row = mysql_fetch_array($rs);
 </div>
 
 <div class="part-account-main">
+	<form name="myform" id="myform" method="post" action="account-museum-detail-action.php?edit" enctype="multipart/form-data">
 	<div class="container cf">
 		<div class="box-account-left">
 			<?php
@@ -96,7 +99,7 @@ $row = mysql_fetch_array($rs);
 			<div class="box-title">
 				<h1>จัดการพิพิธภัณฑ์ - รายละเอียดพิพิธภัณฑ์</h1>
 			</div>
-			
+			<input type="hidden" name = "museumId" value="<?=$row['MUSEUM_DETAIL_ID'] ?>" />
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -163,8 +166,8 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right">
 							<div class="box-input-text">
 								<div>
-									<div class="SearchMenu-item province_box box-select">
-										<span title="- เลือกจังหวัด -"><?=$row['SUB_DISTRICT_DESC'] ?></span>
+									<div class="SearchMenu-item sub_district_box box-select">
+										<span title="- เลือกตำบล -"><?=$row['SUB_DISTRICT_DESC'] ?></span>
 										<select class="p-Absolute" name="subDistrict">
 											<option value="0"><?=$row['SUB_DISTRICT_DESC'] ?></option>
 										<?php
@@ -196,8 +199,8 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right">
 							<div class="box-input-text">
 								<div>
-									<div class="SearchMenu-item province_box box-select">
-										<span title="- เลือกจังหวัด -"><?=$row['DISTRICT_DESC'] ?></span>
+									<div class="SearchMenu-item district_box box-select">
+										<span title="- เลือกอำเภอ-"><?=$row['DISTRICT_DESC'] ?></span>
 										<select class="p-Absolute" name="district">
 											<option value="0"><?=$row['DISTRICT_DESC'] ?></option>
 										<?php
@@ -239,7 +242,7 @@ $row = mysql_fetch_array($rs);
 												if($rowProvince['PROVINCE_ID'] == $row['PROVINCE_ID'])
 													$selectedOption = "selected" ; 
 										?>		
-											<option value="<?=$rowProvince['PROVINCE_ID'] ?>" <?=$selectedOption ?> ><?=$rowProvince['PROVINCE_DESC_LOC'] ?></option>									
+											<option value="<?=$rowProvince['PROVINCE_ID'] ?>" <?=$selectedOption ?> ><?=$rowProvince['PROVINCE_DESC'] ?></option>									
 										<? } ?>	
 										</select>
 									</div>
@@ -283,6 +286,22 @@ $row = mysql_fetch_array($rs);
 				<div class="box-left">
 					<div class="box-row cf">
 						<div class="box-left">
+							<p>โทรศัพท์มือถือ*</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div><input type="text" name = "txtMobile" value="<?=$row['MOBILE_PHONE'] ?>"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+			<div class="row-main cf">
+				<div class="box-left">
+					<div class="box-row cf">
+						<div class="box-left">
 							<p>โทรสาร*</p>
 						</div>
 						<div class="box-right">
@@ -313,6 +332,21 @@ $row = mysql_fetch_array($rs);
 				<div class="box-left">
 					<div class="box-row cf">
 						<div class="box-left">
+							<p>Email</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text">
+								<div><input type="text" name = "txtEmail" value="<?=$row['EMAIL'] ?>" ></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row-main cf">
+				<div class="box-left">
+					<div class="box-row cf">
+						<div class="box-left">
 							<p>Map(ภาษาไทย)</p>
 						</div>
 						<div class="box-right">
@@ -324,7 +358,7 @@ $row = mysql_fetch_array($rs);
 							</div>
 							<div class="box-input-text cf ">
 								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<div class="box-pic"><img id="imgMapLoc" src="<?=$row['MAP_IMG_PATH_LOC']?>"></div>
 									<a class="btn-delete"></a>
 								</div>
 							</div>
@@ -339,13 +373,13 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf ">
 								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
+									<div class="box-pic"><img id="imgMapEng" src="<?=$row['MAP_IMG_PATH_LOC']?>"></div>
 									<a class="btn-delete"></a>
 								</div>
 							</div>
@@ -517,77 +551,6 @@ $row = mysql_fetch_array($rs);
 
 				}
 				?>
-				
-					<!-- <div class="box-max fixDateBox">
-						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="1"></div>
-						<div class="fixDateBoxDate">วันจันทร์ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-mon">08:00 - 20:00</div>
-						<div class="fixDateBoxWorking workingtime" data-box="mon">
-							<input type="hidden" name="startdate1" class="startdate" value="08:00" />
-							<input type="hidden" name="enddate1" class="enddate" value="20:00" />
-						</div> 
-						<div class="clear"></div>
-					</div>
-					<div class="box-max fixDateBox">
-						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="2"></div>
-						<div class="fixDateBoxDate">วันอังคาร เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-tue">08:00 - 20:00</div>
-						<div class="fixDateBoxWorking workingtime" data-box="tue">
-							<input type="hidden" name="startdate2" class="startdate" value="08:00" />
-							<input type="hidden" name="enddate2" class="enddate" value="20:00" />
-						</div> 
-						<div class="clear"></div>
-					</div>
-					<div class="box-max fixDateBox">
-						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="3"></div>
-						<div class="fixDateBoxDate">วันพุธ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-wed">08:00 - 20:00</div>
-						<div class="fixDateBoxWorking workingtime" data-box="wed">
-							<input type="hidden" name="startdate3" class="startdate" value="08:00" />
-							<input type="hidden" name="enddate3" class="enddate" value="20:00" />
-						</div> 
-						<div class="clear"></div>
-					</div>
-					<div class="box-max fixDateBox">
-						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="4"></div>
-						<div class="fixDateBoxDate">วันพฤหัสบดี เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-thu">08:00 - 20:00</div>
-						<div class="fixDateBoxWorking workingtime" data-box="thu">
-							<input type="hidden" name="startdate4" class="startdate" value="08:00" />
-							<input type="hidden" name="enddate4" class="enddate" value="20:00" />
-						</div> 
-						<div class="clear"></div>
-					</div>
-					<div class="box-max fixDateBox">
-						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="5"></div>
-						<div class="fixDateBoxDate">วันศุกร์ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-fri">08:00 - 20:00</div>
-						<div class="fixDateBoxWorking workingtime" data-box="fri">
-							<input type="hidden" name="startdate5" class="startdate" value="08:00" />
-							<input type="hidden" name="enddate5" class="enddate" value="20:00" />
-						</div> 
-						<div class="clear"></div>
-					</div>
-					<div class="box-max fixDateBox">
-						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="6"></div>
-						<div class="fixDateBoxDate">วันเสาร์ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-sat">08:00 - 20:00</div>
-						<div class="fixDateBoxWorking workingtime" data-box="sat">
-							<input type="hidden" name="startdate6" class="startdate" value="08:00" />
-							<input type="hidden" name="enddate6" class="enddate" value="20:00" />
-						</div> 
-						<div class="clear"></div>
-					</div>
-					<div class="box-max fixDateBox">
-						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="7"></div>
-						<div class="fixDateBoxDate">วันอาทิตย์ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-sun">08:00 - 20:00</div>
-						<div class="fixDateBoxWorking workingtime" data-box="sun">
-							<input type="hidden" name="startdate7" class="startdate" value="08:00" />
-							<input type="hidden" name="enddate7" class="enddate" value="20:00" />
-						</div> 
-						<div class="clear"></div>
-					</div> -->
 				</div>
 				
 			<div class="row-main cf">
@@ -598,7 +561,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtRateLoc"><?=$row['PRICE_RATE_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -610,7 +573,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtRateEng"><?=$row['PRICE_RATE_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -624,7 +587,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtTransportLoc"><?=$row['TRANSPORTATION_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -636,7 +599,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtTransportEng"><?=$row['TRANSPORTATION_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -655,7 +618,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtStoryLoc"><?=$row['STORY_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -667,7 +630,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtStoryEng"><?=$row['STORY_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -722,7 +685,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtPhysicalLoc"><?=$row['PHYSICAL_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -730,11 +693,11 @@ $row = mysql_fetch_array($rs);
 				<div class="box-right">
 					<div class="box-row cf">
 						<div class="box-left">
-							<p>ลักษณะทางกายภาพ<br>ของพิพิธภัณฑ์/<br>แหล่งเรียนรู้<br>(ภาษาไทย)</p>
+							<p>ลักษณะทางกายภาพ<br>ของพิพิธภัณฑ์/<br>แหล่งเรียนรู้<br>(ภาษาอังกฤษ)</p>
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtPhysicalEng"><?=$row['PHYSICAL_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -789,7 +752,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtLandscapeLoc"><?=$row['LANDSCAPE_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -797,11 +760,11 @@ $row = mysql_fetch_array($rs);
 				<div class="box-right">
 					<div class="box-row cf">
 						<div class="box-left">
-							<p>ภูมิทัศน์โดยรอบ<br>(ภาษาไทย)</p>
+							<p>ภูมิทัศน์โดยรอบ<br>(ภาษาอังกฤษ)</p>
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtLandscapeEng"><?=$row['LANDSCAPE_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -856,7 +819,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtExhibitionLoc"><?=$row['EXHIBITION_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -864,11 +827,11 @@ $row = mysql_fetch_array($rs);
 				<div class="box-right">
 					<div class="box-row cf">
 						<div class="box-left">
-							<p>ภาพถ่ายห้องจัดแสดง<br>(ภาษาไทย)</p>
+							<p>ภาพถ่ายห้องจัดแสดง<br>(ภาษาอังกฤษ)</p>
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtExhibitionEng"><?=$row['EXHIBITION_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -923,7 +886,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtArchiveLoc"><?=$row['ARCHIVE_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -931,11 +894,11 @@ $row = mysql_fetch_array($rs);
 				<div class="box-right">
 					<div class="box-row cf">
 						<div class="box-left">
-							<p>วัตถุจัดแสดง<br>(ภาษาไทย)</p>
+							<p>วัตถุจัดแสดง<br>(ภาษาอังกฤษ)</p>
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtArchiveEng"><?=$row['ARCHIVE_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1023,7 +986,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtTopArchiveLoc"><?=$row['TOP_ARCHIVE_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1031,11 +994,11 @@ $row = mysql_fetch_array($rs);
 				<div class="box-right">
 					<div class="box-row cf">
 						<div class="box-left">
-							<p>วัตถุจัดแสดง<br>ที่มีความสำคัญ<br>(ภาษาไทย)</p>
+							<p>วัตถุจัดแสดง<br>ที่มีความสำคัญ<br>(ภาษาอังกฤษ)</p>
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtTopArchiveEng"><?=$row['TOP_ARCHIVE_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1119,7 +1082,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtStorageLoc"><?=$row['STORAGE_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1131,7 +1094,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtStorageEng"><?=$row['STORAGE_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1186,7 +1149,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtTargetLoc"><?=$row['TARGET_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1198,7 +1161,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtTargetEng"><?=$row['TARGET_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1214,7 +1177,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtPublicInforLoc"><?=$row['PUBLIC_INFOR_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1226,7 +1189,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtPublicInforEng"><?=$row['PUBLIC_INFOR_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1281,7 +1244,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtResponsibleLoc"><?=$row['RESPONSIBLE_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1293,7 +1256,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtResponsibleEng"><?=$row['RESPONSIBLE_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1309,7 +1272,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtNearbyLoc"><?=$row['NEARBY_LOC'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1321,7 +1284,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div style="height: 120px;"><textarea name="address"></textarea></div>
+								<div style="height: 120px;"><textarea name="txtNearbyEng"><?=$row['NEARBY_ENG'] ?></textarea></div>
 							</div>
 						</div>
 					</div>
@@ -1380,7 +1343,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name= "txtFacebookURL" value="<?=$row['FACEBOX_URL'] ?>"></div>
 							</div>
 						</div>
 					</div>
@@ -1394,7 +1357,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name= "txtTwitterURL" value="<?=$row['TWITTER_URL'] ?>"></div>
 							</div>
 						</div>
 					</div>
@@ -1408,7 +1371,8 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text"></div>
+								<div><input type="text" name= "txtYoutubeURL" value = "<?=$row['YOUTUBE_URL'] ?>"></div>
+								
 							</div>
 						</div>
 					</div>
@@ -1418,12 +1382,13 @@ $row = mysql_fetch_array($rs);
 
 			<div class="box-btn-main cf">
 				<div class="box-btn">
-					<a class="btn black">ยกเลิก</a>
-					<a class="btn black">ตกลง</a>
+					<a class="btn black btnReset">ยกเลิก</a>
+					<a class="btn black btnSubmit">ตกลง</a>
 				</div>
 			</div>
 		</div>
 	</div>
+</form>
 </div>
 
 
@@ -1435,59 +1400,8 @@ $row = mysql_fetch_array($rs);
 <?php
 include ('inc/inc-footer.php');
  ?>	
-<script type="text/javascript">
-	$(function() {
-		$(".workingtime").slider({
-			range : true,
-			min : 0,
-			max : 1440,
-			step : 5,
-			values : [480, 1080],
-			slide : function(event, ui) {
-				var hours1 = Math.floor(ui.values[0] / 60);
-				var minutes1 = ui.values[0] - (hours1 * 60);
-
-				if (hours1 < 10)
-					hours1 = '0' + hours1;
-				if (minutes1 < 10)
-					minutes1 = '0' + minutes1;
-
-				if (minutes1 == 0)
-					minutes1 = '00';
-
-				var hours2 = Math.floor(ui.values[1] / 60);
-				var minutes2 = ui.values[1] - (hours2 * 60);
-
-				if (hours2 < 10)
-					hours2 = '0' + hours2;
-				if (minutes2 < 10)
-					minutes2 = '0' + minutes2;
-
-				if (minutes2 == 0)
-					minutes2 = '00';
-
-				var id = $(this).attr("data-box");
-				$('#amount-time-' + id).text(hours1 + ':' + minutes1 + ' - ' + hours2 + ':' + minutes2);
-				$(this).find('.startdate').val(hours1 + ':' + minutes1);
-				$(this).find('.enddate').val(hours2 + ':' + minutes2);
-			}
-		});
-
-		$('.toogleworkingtimeBlock').on("click", function(e) {
-			$('.fixDateBox').toggle('blind');
-			e.preventDefault();
-			e.stopPropagation();
-		});
-
-		$('input[name="date[]"]').bind('change', function() {
-			$('input[name="auto_open[]"]').prop("checked", false);
-		});
-
-		$('input[name="auto_open[]"]').bind('change', function() {
-			$('input[name="date[]"]').prop("checked", false);
-		});
-
-	}); 
+<script type="text/javascript" src="js/account-museum-detail.js">
+	
 </script>
 </body>
 </html>
