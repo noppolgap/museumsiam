@@ -2,14 +2,22 @@
 require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
+require ('inc_meta.php');
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+			if (isset($_POST['str_search'])){
+				$_SESSION['text'] = $_POST['str_search'];
+				$search_sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+			}
+	}
+
 ?>
 <!doctype html>
 <html>
 <head>
-<?
-require ('inc_meta.php');
-?>
-
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/da.css" />
 
@@ -135,18 +143,7 @@ if ($_SESSION['LANG'] == 'TH') {
 						$contentSql .= "		AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
 
-
-						if (isset($_GET['search'])) {
-								if (isset($_POST['str_search'])){
-									$_SESSION['text'] = $_POST['str_search'];
-									$contentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-								}
-						}
-						else {
-								unset($_SESSION['text']);
-						}
-
-						$contentSql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+						$contentSql .= $search_sql." ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						$rsContent = mysql_query($contentSql) or die(mysql_error());
 						$i = 1;

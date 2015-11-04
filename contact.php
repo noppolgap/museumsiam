@@ -31,7 +31,7 @@ require("assets/configs/function.inc.php");
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li>ติดต่อเรา&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">E-MAIL SUBMIT FORM ADDRESS & MAP</li>
+				<li class="active">E-MAIL FORM & ADDRESS & MAP</li>
 			</ol>
 		</div>
 	</div>
@@ -47,8 +47,8 @@ require("assets/configs/function.inc.php");
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
-				<h1>E-MAIL SUBMIT FORM ADDRESS & MAP
-					<span>ติดต่อเรา</span>
+				<h1>
+					<img src="images/th/contact/title1.png" alt="E-MAIL SUBMIT FORM ADDRESS & MAP"/>
 				</h1>
 			</div>
 
@@ -195,15 +195,15 @@ require("assets/configs/function.inc.php");
 			</div>
 			<div class="box-map2d-main">
 				<div class="box-map">
-					<a href="images/2dmap.jpg" class="lightbox"><img src="images/contact/2dmap-small.jpg"></a>
+					<a href="images/th/map.jpg" class="lightbox"><img src="images/contact/2dmap-small.jpg"></a>
 				</div>
 				<div class="box-btn cf">
-					<a href="" class="btn black">ดูทั้งหมด</a>
+					<a href="images/th/map.jpg" class="btn black lightbox">ดูทั้งหมด</a>
 				</div>
 			</div>
 			<div class="box-mapgoogle-main">
-				<div class="box-map">
-					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15502.300962222918!2d100.48538226819628!3d13.744146990352395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29904e60c66bb%3A0x2d5ff22f7bc5bea0!2z4Lih4Li04Lin4LmA4LiL4Li14Lii4Lih4Liq4Lii4Liy4LihIChNdXNldW0gU2lhbSk!5e0!3m2!1sth!2s!4v1444907893150" width="878" height="277" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<div class="box-map contact-map">
+					<iframe class="scrolloff" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15502.300962222918!2d100.48538226819628!3d13.744146990352395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29904e60c66bb%3A0x2d5ff22f7bc5bea0!2z4Lih4Li04Lin4LmA4LiL4Li14Lii4Lih4Liq4Lii4Liy4LihIChNdXNldW0gU2lhbSk!5e0!3m2!1sth!2s!4v1444907893150" width="878" height="277" frameborder="0" style="border:0" allowfullscreen></iframe>
 				</div>
 				<div class="box-btn cf">
 					<a href="https://www.google.com/maps?ll=13.725471,100.506497&z=14&t=m&hl=en-US&gl=US&mapclient=embed&cid=3269598140248211104" class="btn black" target="_blank">ดูทั้งหมด</a>

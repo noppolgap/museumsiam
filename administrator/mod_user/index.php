@@ -2,6 +2,18 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+
+$search_sql = "";
+unset($_SESSION['text']);
+
+if (isset($_GET['search'])) {
+	if (isset($_POST['str_search']))
+		$_SESSION['text'] = $_POST['str_search'];
+
+	$search_sql .= " AND NAME like '%" .$_SESSION['text']. "%' or LAST_NAME like '%" .$_SESSION['text']. "%' ";
+}
+
+
 ?>
 <!doctype html>
 <html>
@@ -57,18 +69,7 @@ require ("../../assets/configs/function.inc.php");
 							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
 							$sql = "SELECT * FROM sys_app_user where ACTIVE_FLAG <> 2 ";
 							
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-
-								$sql .= " AND NAME like '%" .$_SESSION['text']. "%' or LAST_NAME like '%" .$_SESSION['text']. "%' ";
-							}
-							else {
-									unset($_SESSION['text']);
-								}
-
-
-							$sql .= " order by USER_ID asc ";
+							$sql .= $search_sql." order by USER_ID asc ";
 							$rs = mysql_query($sql) or die(mysql_error());
 
 							$i = 0;

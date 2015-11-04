@@ -8,7 +8,17 @@
 	</div>
 </div>
 
-<form name="search" action="?search&cid=<?=$_GET['cid']?>" method="post">
+<?
+	$CID_S = "";
+
+	$CID = $_GET['cid'];
+
+	if($CID != ""){
+		$CID_S = "&cid=$CID";
+    }
+?>
+
+<form name="search" action="?search<?=$CID_S?>" method="post">
 	<div class="part-left-search">
 		<div class="box-search">
 			<input type="text" name="str_search" value="<?=$_SESSION['text'] ?>"  placeholder="ค้นหา">
@@ -21,7 +31,7 @@
 		<ul class="menu-left">
 			<li class="menu1"><a href="online-system.php?MID=<?=$education_cat_id?>">หน้าหลัก</a>
 			<li class="menu2"><a href="e-booking.php">e-BOOKING + ONLINE TICKET</a></li>
-			<li class="menu3 sub"><a href="e-shopping.php?MID=<?='.$education_cat_id.'?>">e-SHOPPING</a>
+			<li class="menu3 sub"><a href="e-shopping.php?MID=<?=$education_cat_id?>">e-SHOPPING</a>
 				<ul class="submenu-left">
 
 			<?php

@@ -2,6 +2,17 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search'])){
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql = " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%'or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')  ";
+		}
+	}
+
 ?>
 <!doctype html>
 <html>
@@ -74,8 +85,8 @@ if ($_SESSION['LANG'] == 'TH') {
 			IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 			FROM trn_content_category cat INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
 			WHERE cat.flag = 0 AND cat.REF_MODULE_ID = ".$MID." AND cat.CONTENT_CAT_ID = ".$style_exhibition." AND content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG = 0
-			AND SUB_CAT_ID = ".$permanent_exhibition."
-			ORDER BY content.SUB_CAT_ID desc , content.ORDER_DATA desc LIMIT 0 , 1";
+			AND SUB_CAT_ID = ".$permanent_exhibition." ";
+	$sqlCategory .=	$search_sql."ORDER BY content.SUB_CAT_ID desc , content.ORDER_DATA desc LIMIT 0 , 1";
 	$query_Category = mysql_query($sqlCategory, $conn);
 	$row_Category = mysql_fetch_array($query_Category);
 

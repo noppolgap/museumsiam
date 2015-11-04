@@ -2,6 +2,18 @@
 require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search'])){
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql = " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%'or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')  ";
+		}
+	}
+
+
 ?>
 <!doctype html>
 <html>
@@ -138,7 +150,7 @@ if ($_SESSION['LANG'] == 'TH') {
 											AND cat.flag  = 0
 											AND cat.CONTENT_CAT_ID = $CID ";
 						if (isset($_GET['SCID']))
-							$getContentSql .= " AND content.SUB_CAT_ID = $SCID ";
+							$getContentSql .= $search_sql." AND content.SUB_CAT_ID = $SCID ";
 						$getContentSql .= " AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/
 											ORDER BY

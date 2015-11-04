@@ -3,8 +3,25 @@
 		<a href="da.php"><img src="images/th/title-da.png"/></a>
 	</div>
 </div>
+<?
 
-<form name="search" action="?MID=<?=$_GET['MID']?>&CID=<?=$_GET['CID']?>&search" method="post">
+	$CID_S = "";
+	$CID = $_GET['CID'];
+	$MID = $_GET['MID'];
+    $SCID = $_GET['SCID'];
+
+	if($CID != ""){
+		$CID_S = "&CID=$CID";
+	}
+	if($MID != ""){
+		$CID_S .="&MID=$MID";
+	}
+	if($SCID != ""){
+		$CID_S .="&SCID=$SCID";
+	}
+ ?>
+
+<form name="search" action="?search<?=$CID_S?>" method="post">
 	<div class="part-left-search">
 		<div class="box-search">
 			<input type="text" name="str_search" value="<?=$_SESSION['text'] ?>"  placeholder="ค้นหา">

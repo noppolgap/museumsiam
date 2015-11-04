@@ -2,6 +2,17 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search'])){
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql = " AND (MODULE_NAME_LOC like '%".$_POST['str_search']."%' or MODULE_NAME_ENG like '%".$_POST['str_search']."%') ";
+		}
+	}
+
 ?>
 <!doctype html>
 <html>
@@ -29,7 +40,7 @@ require ("../../assets/configs/function.inc.php");
 					<div class="floatL titleBox">กรุณาเลือกระบบ</div>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
-							<input type="search" name="str_search" value="" />
+							<input type="search" name="str_search" value="<?=$_SESSION['text'] ?>" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
 					</div>
@@ -47,15 +58,14 @@ require ("../../assets/configs/function.inc.php");
 
 						<!-- start loop -->
 						<?php
+
+							
 					//active_flag 0 = disable , 1 = Enable ,  2 = Delete
 						$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 AND IS_FOR_OTHER_LINK = 'N' ";
-						if(isset($_GET['search'])){
-							$sql .= " AND MODULE_NAME_LOC like '%".$_POST['str_search']."%' or MODULE_NAME_ENG like '%".$_POST['str_search']."%' ";
+						
 
-			    		}
-
-			    		$sql .= " order by MODULE_ID asc ";
-					$rs = mysql_query($sql) or die(mysql_error());
+			    		$sql .= $search_sql." order by MODULE_ID asc ";
+						$rs = mysql_query($sql) or die(mysql_error());
 
 					$i = 0 ;
 					while($row = mysql_fetch_array($rs)){

@@ -2,6 +2,18 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+			if (isset($_POST['str_search'])){
+				$_SESSION['text'] = $_POST['str_search'];
+				$search_sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+			}
+	}
+
 ?>
 <!doctype html>
 <html>
@@ -146,18 +158,10 @@ if (isset($_GET['SCID'])) {
 											AND content.CONTENT_STATUS_FLAG  = 0";
 
 
-						if (isset($_GET['search'])) {
-								if (isset($_POST['str_search'])){
-									$_SESSION['text'] = $_POST['str_search'];
-									$getContentSql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-								}
-						}
-						else {
-								unset($_SESSION['text']);
-						}	
+							
 
 						
-						$getContentSql .= "	ORDER BY
+						$getContentSql .= $search_sql."	ORDER BY
 											content.ORDER_DATA desc
 											Limit 9 offset  " . (9 * ($currentPage - 1));
 

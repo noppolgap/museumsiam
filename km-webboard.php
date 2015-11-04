@@ -8,11 +8,28 @@ require ("assets/configs/function.inc.php");
 <head>
 <?
 	require ('inc_meta.php');
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search']))
+		{
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql .= " AND CONTENT like '%" .$_SESSION['text']. "%' ";
+		}
+	}			
+
  ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/km.css" />
-
+<style>
+	.box-right.main-content .box-title-system{
+		line-height: 31px;
+	}
+	
+</style>
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu6").addClass("active");
@@ -93,16 +110,9 @@ if(mysql_num_rows($query) > 0){
 						   WHERE REF_WEBBOARD_ID = 0
 						   AND FLAG = 0 ";
 
-				if (isset($_GET['search'])) {
-					if (isset($_POST['str_search']))
-						$_SESSION['text'] = $_POST['str_search'];
-						$sq_qa .= " AND CONTENT like '%" .$_SESSION['text']. "%' ";
-				}
-				else {
-						unset($_SESSION['text']);
-				}
+				
 
-				$sq_qa .= "  ORDER BY ORDER_DATA DESC Limit 30 offset " . (30 * ($currentPage - 1));
+				$sq_qa .= $search_sql."  ORDER BY ORDER_DATA DESC Limit 30 offset " . (30 * ($currentPage - 1));
 
 			$query_qa = mysql_query($sq_qa, $conn);
 
@@ -135,7 +145,7 @@ if(mysql_num_rows($query) > 0){
 				<div class="table-row list cf">
 					<div class="column list"><? echo $num ?></div>
 					<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID'] ?>"><? echo $row['CONTENT'] ?></a></div>
-					<div class="column name"><? echo $row['USER_CREATE'] ?></div>
+					<div class="column name"><span><? echo $row['USER_CREATE'] ?></span></div>
 
 					<? while($row_ans = mysql_fetch_array($query_ans)) {?>
 

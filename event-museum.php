@@ -2,6 +2,16 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+
+	unset($_SESSION['text']);
+
+	$search_sql = "";
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search']))
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+	}
+
 ?>
 <!doctype html>
 <html>
@@ -94,16 +104,9 @@ require("assets/configs/function.inc.php");
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}	
+							
 
-							$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
+							$sql .= $search_sql. " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
 					$query = mysql_query($sql, $conn);
 
