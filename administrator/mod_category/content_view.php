@@ -16,6 +16,17 @@ require ("../../inc/inc-cat-id-conf.php");
 
 		 } 
 
+
+		 $search_sql = "";
+		unset($_SESSION['text']);
+
+		if (isset($_GET['search'])) {
+			if (isset($_POST['str_search'])){
+				$_SESSION['text'] = $_POST['str_search'];
+				$search_sql = "AND ( cd.CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or cd.CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )"; 
+			}
+		}
+
 ?>
 <!doctype html>
 <html>
@@ -85,8 +96,27 @@ require ('../inc_header.php');
 				<div class="mod-body-inner-header">
 					<div class="floatL titleBox">เนื้อหา</div>
 					<div class="floatR searchBox">
-						<form name="search" action="?search" method="post">
-							<input type="search" name="str_search" value="" />
+						<?
+
+							$CID_S = "";
+				
+							if($CID != ""){
+								$CID_S = "&cid=$CID";
+							}
+							if($MID != ""){
+								$CID_S .="&MID=$MID";
+							}
+							if($LV != ""){
+								$CID_S .="&LV=$LV";
+							}
+							if($SCID != ""){
+								$CID_S .="&SCID=$SCID";
+							}
+						 ?>
+
+
+						<form name="search" action="?search<?=$CID_S?>" method="post">
+							<input type="search" name="str_search" value="<?=$_SESSION['text'] ?>" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
 					</div>
@@ -128,10 +158,10 @@ require ('../inc_header.php');
 							}
 			
 
-			if (isset($_GET['search'])) {
+			/*if (isset($_GET['search'])) {
 				$sql .= " AND ( CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )";
-			}
-			$sql .= "			ORDER BY cc.ORDER_DATA DESC
+			}*/
+			$sql .=  "ORDER BY cc.ORDER_DATA DESC
 								,sb.order_data DESC
 							) a
 						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID ";
@@ -144,7 +174,7 @@ require ('../inc_header.php');
 				$sql .= "	AND cd.SUB_CAT_ID =  $SCID ";
 			}
 						
-			$sql .= "	ORDER BY cd.ORDER_DATA desc ";
+			 $sql .= $search_sql."	ORDER BY cd.ORDER_DATA desc ";
 
 			$query = mysql_query($sql, $conn);
 

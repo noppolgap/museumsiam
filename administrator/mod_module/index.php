@@ -2,6 +2,19 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+
+		if (isset($_POST['str_search']))
+			$_SESSION['text'] = $_POST['str_search'];
+
+		    $search_sql .= " AND MODULE_NAME_LOC like '%" .$_SESSION['text']. "%' or MODULE_NAME_ENG like '%" .$_SESSION['text']. "%' ";
+	}
+	
+
 ?>
 <!doctype html>
 <html>
@@ -49,20 +62,9 @@ require ("../../assets/configs/function.inc.php");
 						<!-- start loop -->
 						<?php
 							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
-						    $sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 AND IS_FOR_OTHER_LINK = 'N' ";
-
-							if (isset($_GET['search'])) {
-
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-
-								    $sql .= " AND MODULE_NAME_LOC like '%" .$_SESSION['text']. "%' or MODULE_NAME_ENG like '%" .$_SESSION['text']. "%' ";
-							}
-							else {
-								unset($_SESSION['text']);
-							}
-
-						    $sql .= "order by ORDER_DATA DESC ";
+						    
+							$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 ";
+						    $sql .= $search_sql."order by ORDER_DATA DESC ";
 							$rs = mysql_query($sql) or die(mysql_error());
 
 							$i = 0;

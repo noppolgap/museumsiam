@@ -3,6 +3,17 @@ require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
 require ("../../inc/inc-cat-id-conf.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search'])){
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql = " AND (CONTENT_CAT_DESC_LOC like '%".$_POST['str_search']."%' or CONTENT_CAT_DESC_ENG like '%".$_POST['str_search']."%') ";
+		}
+	}
+
 ?>
 <!doctype html>
 <html>
@@ -39,8 +50,15 @@ require ("../../inc/inc-cat-id-conf.php");
 				<div class="mod-body-inner-header">
 					<div class="floatL titleBox">หมวดหมู่ <?=$row['MODULE_NAME_LOC']; ?></div>
 					<div class="floatR searchBox">
-						<form name="search" action="?search" method="post">
-							<input type="search" name="str_search" value="" />
+						<?  
+							$MID = $_GET['MID'];
+							if($MID != ""){
+								$MID_S ="&MID=$MID";
+							}
+						?>
+
+						<form name="search" action="?search<?=$MID_S?>" method="post">
+							<input type="search" name="str_search" value="<?=$_SESSION['text'] ?>" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
 					</div>
@@ -58,10 +76,8 @@ require ("../../inc/inc-cat-id-conf.php");
 		    <?php
 
 			$sql = "SELECT * FROM  trn_content_category WHERE Flag <> 2 and REF_MODULE_ID  = '" . $MID . "' ";
-			if (isset($_GET['search'])) {
-				$sql .= "AND CONTENT_CAT_DESC_LOC like '%" . $_POST['str_search'] . "%' ";
-			}
-			$sql .= " ORDER BY ORDER_DATA DESC ";
+			
+		    $sql .= $search_sql." ORDER BY ORDER_DATA DESC ";
 
 			$query = mysql_query($sql, $conn);
 
