@@ -31,6 +31,14 @@ $( document ).ready(function() {
 			$( ".sub_district_box strong" ).text( $( 'select[name="sub_district"] option:selected' ).text() );
 		});
 	}
+
+	if($('select[name="round"]').length > 0 ){
+		$(document).on('change', 'select[name="round"]', function() {
+			var dataID  = $(this).attr('data-id');
+			var dataVal = $('#SelectBox'+dataID+' select option:selected' ).text();
+			$( "#SelectBox"+dataID+" span" ).text( dataVal );
+		});
+	}
 });
 function addtocart(id,type){
 	if(checkMouse){

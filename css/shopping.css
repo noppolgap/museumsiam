@@ -535,7 +535,10 @@
 .zeroItem:hover{
     background-color: #6e0904 !important;
 }
-
+.booking-pic{
+	width: 100px;
+	max-height: 76px;
+}
 
 
 

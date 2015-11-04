@@ -794,6 +794,21 @@ ul.pagination li a.btn-arrow-right:hover{
 	line-height: 25px;
 	color: #666;
 }
+.box-newsdetail-main > .box-news-text h1 ,
+.box-newsdetail-main > .box-news-text h2 ,
+.box-newsdetail-main > .box-news-text h3 ,
+.box-newsdetail-main > .box-news-text h4 ,
+.box-newsdetail-main > .box-news-text h5 ,
+.box-newsdetail-main > .box-news-text h6 ,
+.box-newsdetail-main > .box-news-text strong{
+	font-weight: bold;
+}
+.box-newsdetail-main > .box-news-text h1{ font-size: 22px;}
+.box-newsdetail-main > .box-news-text h2{ font-size: 20px;}
+.box-newsdetail-main > .box-news-text h3{ font-size: 19px;}
+.box-newsdetail-main > .box-news-text h4{ font-size: 18px;}
+.box-newsdetail-main > .box-news-text h5{ font-size: 17px;}
+.box-newsdetail-main > .box-news-text h6{ font-size: 16px;}
 .box-footer-content{
 	margin-bottom: 30px;
 }

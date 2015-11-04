@@ -6,23 +6,23 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/shopping.css" />
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu2").addClass("active");		
+		$(".menutop li.menu6,.menu-left li.menu2").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body id="cart">
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -43,7 +43,7 @@ require("assets/configs/function.inc.php");
 	<div class="container cf">
 		<div class="box-left main-content">
 			<?php include('inc/inc-left-content-shopping.php'); ?>
-			<?php include('inc/inc-left-content-calendar.php'); ?>			
+			<?php include('inc/inc-left-content-calendar.php'); ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
@@ -52,7 +52,7 @@ require("assets/configs/function.inc.php");
 				<div class="box-btn">
 					<a href="e-booking.php" class="btn red">ย้อนกลับ</a>
 				</div>
-			</div>		
+			</div>
 
 			<div class="box-table-main">
 				<div class="table-row head">
@@ -61,30 +61,52 @@ require("assets/configs/function.inc.php");
 					<div class="column number">จำนวน</div>
 					<div class="column total">มูลค่ารวม</div>
 				</div>
+			<?php
+				$Quantity = $_POST['person'];
+
+				if ($_SESSION['LANG'] == 'TH') {
+					$LANG_SQL = "prod.PRODUCT_DESC_LOC AS CONTENT_DESC";
+				} else if ($_SESSION['LANG'] == 'EN') {
+					$LANG_SQL = "prod.PRODUCT_DESC_ENG AS CONTENT_DESC";
+				}
+				$sql_proc  = "SELECT ".$LANG_SQL.", prod.PRODUCT_ID, IF(prod.SALE > 0, prod.SALE, prod.PRICE) AS pro_PRICE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID , prod.DETAIL
+								FROM trn_product AS prod
+								LEFT JOIN (
+									SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
+										FROM (
+												SELECT *
+												FROM trn_content_picture
+												ORDER BY ORDER_ID ASC
+											) AS my_table_tmp
+										GROUP BY CONTENT_ID, CAT_ID
+									) AS pic ON prod.PRODUCT_ID = pic.CONTENT_ID
+								AND prod.CAT_ID = pic.CAT_ID
+							WHERE prod.CAT_ID = ".$ebook_sub_cat ." AND prod.FLAG = 0 AND PRODUCT_ID = ".intval($_POST['id']);
+
+				$query_proc = mysql_query($sql_proc,$conn);
+				$row_proc = mysql_fetch_array($query_proc);
+
+				$total = ($row_proc['pro_PRICE'] * $Quantity);
+			?>
 				<div class="table-row list">
 					<div class="column list cf">
 						<div class="box-left">
-							<div class="box-pic">
-								<img src="http://placehold.it/194x147">
+							<div class="box-pic booking-pic">
+								<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
 							</div>
 						</div>
 						<div class="box-right">
-							<p class="text-title">New Look Embroidered Cami Top - Size M</p>
-							<p class="text-detail">
-								Top by New Look<br>
-								- Lightweight wool-mix fabric<br>
-								- Soft-touch finish<br>
-								- All-over check design
-							</p>
+							<p class="text-title"><?=$row_proc['CONTENT_DESC']?></p>
+							<p class="text-detail"><?=strip_tags($row_proc['prod'])?></p>
 						</div>
 					</div>
-					<div class="column price">999,999</div>
-					<div class="column number"><input type="number" name="number" value="1"></div>
-					<div class="column total">999,999</div>
+					<div class="column price"><?=number_format($row_proc['pro_PRICE'],2)?></div>
+					<div class="column number"><input min="0" type="number" name="person" value="<?=$Quantity?>"></div>
+					<div class="column total"><?=number_format($total,2)?></div>
 					<a href="#" class="btn-delete"><span class="bin"></span>ลบรายการสินค้า</a>
 				</div>
 			</div>
-			
+
 			<div class="box-total-main cf">
 				<div class="box-btn box1 cf">
 					<a class="btn red">คำนวณราคาใหม่</a>
@@ -95,20 +117,20 @@ require("assets/configs/function.inc.php");
 						มูลค่า
 					</div>
 					<div class="box-right">
-						999,999 <span>บาท</span>
+						<?=number_format($total,2)?> <span>บาท</span>
 					</div>
 				</div>
 				<hr class="line-gray"/>
-				
+
 				<div class="box-row cf total">
 					<div class="box-left">
 						ยอดสุทธิ
 					</div>
 					<div class="box-right">
-						999,999 <span>บาท</span>
+						<?=number_format($total,2)?> <span>บาท</span>
 					</div>
 				</div>
-				
+
 				<div class="box-row cf box2">
 					<div class="box-left">
 						<div class="box-btn box1 cf">
@@ -121,14 +143,14 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="box-btn-back">
 				<div class="box-btn cf">
 					<a href="e-shopping.php" class="btn red">ดูสินค้าเพิ่มเติม</a>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 </div>
@@ -137,7 +159,7 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 
 </body>
 </html>

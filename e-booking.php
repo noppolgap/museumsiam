@@ -6,7 +6,7 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/form.css" />
@@ -14,16 +14,16 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");		
+		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
 	});
 </script>
-	
+
 </head>
 
 <body>
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -51,12 +51,13 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf">
 				<h1>e-BOOKING</h1>
 			</div>
+			<? /*
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า 999</a>
+				<a href="e-booking-cart.php" class="btn-cart">ตะกร้าสินค้า 999</a>
 			</div>
-
+			*/ ?>
 			<?php
-						    $sql_proc  = "SELECT prod.PRODUCT_ID, prod.PRICE, prod.SALE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
+						    $sql_proc  = "SELECT prod.PRODUCT_ID, IF(prod.SALE > 0, prod.SALE, prod.PRICE) AS pro_PRICE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
 											FROM trn_product AS prod
 											LEFT JOIN (
 												SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
@@ -68,7 +69,7 @@ require("assets/configs/function.inc.php");
 												GROUP BY CONTENT_ID, CAT_ID
 											) AS pic ON prod.PRODUCT_ID = pic.CONTENT_ID
 											AND prod.CAT_ID = pic.CAT_ID
-							
+
 											WHERE prod.CAT_ID = ".$ebook_sub_cat ." AND prod.FLAG = 0 ";
 
 							if (isset($_GET['search'])) {
@@ -86,7 +87,7 @@ require("assets/configs/function.inc.php");
 
 							while($row_proc = mysql_fetch_array($query_proc)) { ?>
 
-
+		<form name="bookingForm<?=$row_proc['PRODUCT_ID']?>" action="e-booking-cart.php" method="post">
 			<div class="box-booking-main">
 				<div class="box-pic">
 					<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
@@ -98,22 +99,22 @@ require("assets/configs/function.inc.php");
 								อัตราค่าเข้าชม
 							</div>
 							<div class="box-right">
-								<span><? echo $row_proc['PRICE']; ?></span> บาท/ท่าน
+								<span><? echo $row_proc['pro_PRICE']; ?></span> บาท/ท่าน
 							</div>
 						</div>
 						<div class="box-row">
 							<div class="box-input-text">
 								<p>จำนวนผู้เข้าชม</p>
-								<div><input type="number" name="number" value="1"></div>
+								<div><input type="number" min="0" name="person" value="1"></div>
 							</div>
 						</div>
 						<div class="box-row">
 							<div class="box-input-text">
 								<p>รอบการเข้าชม</p>
 								<div>
-									<div class="SearchMenu-item">
-										- เลือกรอบการเข้าชม -
-										<select class="p-Absolute">
+									<div class="SearchMenu-item" id="SelectBox<? echo $row_proc['PRODUCT_ID']; ?>">
+										<span title="- เลือกรอบการเข้าชม -">- เลือกรอบการเข้าชม -</span>
+										<select class="p-Absolute" name="round" data-id="<? echo $row_proc['PRODUCT_ID']; ?>">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -133,7 +134,7 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 						<div class="box-btn cf">
-							<a href="e-booking-cart.php" class="btn red">ดำเนินการต่อ</a>
+							<a href="#" onclick="$('form[name=bookingForm<?=$row_proc['PRODUCT_ID']?>]').submit();" class="btn red">ดำเนินการต่อ</a>
 						</div>
 						<hr class="line-gray"/>
 					</div>
@@ -146,10 +147,12 @@ require("assets/configs/function.inc.php");
 						</p>
 					</div>
 				</div>
-			</div>	
+			</div>
+			<input type="hidden" name="price" value="<? echo $row_proc['PRICE']; ?>" />
+			<input type="hidden" name="id" value="<? echo $row_proc['PRODUCT_ID']; ?>" />
+		</form>
 
-
-	   <? } ?>		
+	   <? } ?>
 
 		</div>
 	</div>
@@ -159,7 +162,9 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
+<script src="js/cart.js"></script>
 
 </body>
 </html>
+<? CloseDB(); ?>
