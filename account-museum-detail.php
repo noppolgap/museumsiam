@@ -208,7 +208,7 @@ $row = mysql_fetch_array($rs);
 													if($row['DISTRICT_ID'] == $rowDistrict['DISTRICT_ID'])
 														$selectedOption = "selected";
 										?>		
-											<option value="<?=$rowDistrict['DISTRICT_ID'] ?>" <?=$selectedOption?> ><?=$rowDistrict['DISTRICT_DESC'] ?></option>									
+											<option value="<?=$rowDistrict['DISTRICT_ID'] ?>" <?=$selectedOption ?> ><?=$rowDistrict['DISTRICT_DESC'] ?></option>									
 										<? } ?>	
 										</select>
 									</div>
@@ -239,7 +239,7 @@ $row = mysql_fetch_array($rs);
 												if($rowProvince['PROVINCE_ID'] == $row['PROVINCE_ID'])
 													$selectedOption = "selected" ; 
 										?>		
-											<option value="<?=$rowProvince['PROVINCE_ID'] ?>" <?=$selectedOption?> ><?=$rowProvince['PROVINCE_DESC_LOC'] ?></option>									
+											<option value="<?=$rowProvince['PROVINCE_ID'] ?>" <?=$selectedOption ?> ><?=$rowProvince['PROVINCE_DESC_LOC'] ?></option>									
 										<? } ?>	
 										</select>
 									</div>
@@ -257,7 +257,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text" name = "txtPostCode" value="<?=$row['POST_CODE']?>"></div>
+								<div><input type="text" name = "txtPostCode" value="<?=$row['POST_CODE'] ?>"></div>
 							</div>
 						</div>
 					</div>
@@ -272,7 +272,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text" name="txtPhone" value="<?=$row['TELEPHONE']?>"></div>
+								<div><input type="text" name="txtPhone" value="<?=$row['TELEPHONE'] ?>"></div>
 							</div>
 						</div>
 					</div>
@@ -287,7 +287,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text" name = "txtFax" value="<?=$row['FAX']?>"></div>
+								<div><input type="text" name = "txtFax" value="<?=$row['FAX'] ?>"></div>
 							</div>
 						</div>
 					</div>
@@ -302,7 +302,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text" name = "txtWebSite" value="<?=$row['WEBSITE_URL']?>" ></div>
+								<div><input type="text" name = "txtWebSite" value="<?=$row['WEBSITE_URL'] ?>" ></div>
 							</div>
 						</div>
 					</div>
@@ -318,7 +318,7 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
@@ -361,10 +361,10 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text">
-								<div><input type="text" placeholder="Latitude" name="txtLat" value="<?=$row['LAT']?>"></div>
+								<div><input type="text" placeholder="Latitude" name="txtLat" value="<?=$row['LAT'] ?>"></div>
 							</div>
 							<div class="box-input-text mT">
-								<div><input type="text" placeholder="Longitude" name = "txtLon" value="<?=$row['LON']?>"></div>
+								<div><input type="text" placeholder="Longitude" name = "txtLon" value="<?=$row['LON'] ?>"></div>
 							</div>
 						</div>
 					</div>
@@ -376,28 +376,81 @@ $row = mysql_fetch_array($rs);
 						<div class="box-left">
 							<p>วันและเวลาทำการ*</p>
 						</div>
+						<?php
+						$openningSql = "select * from  trn_museum_openning where MUSEUM_ID = '" . $row['MUSEUM_DETAIL_ID'] . "' order by OPENNING_DAY asc";
+						$openningQuery = mysql_query($openningSql, $conn);
+						$monSelected = "";
+						$tueSelected = "";
+						$wedSelected = "";
+						$thuSelected = "";
+						$friSelected = "";
+						$satSelected = "";
+						$sunSelected = "";
+						$startDate = "08:00";
+						$endDate = "20:00";
+
+						unset($dayOpen);
+						unset($timeOpen);
+						unset($timeClose);
+
+						while ($rowOpenning = mysql_fetch_array($openningQuery)) {
+
+							if ($rowOpenning['IS_CUSTOM_OPENNING'] == 'N') {
+								$startDate = $rowOpenning['OPENNING_START_HOUR'];
+								$endDate = $rowOpenning['OPENNING_END_HOUR'];
+								switch ($rowOpenning['OPENNING_DAY']) {
+									case 1 :
+										$monSelected = " checked ";
+										break;
+									case 2 :
+										$tueSelected = " checked ";
+										break;
+									case 3 :
+										$wedSelected = " checked ";
+										break;
+									case 4 :
+										$thuSelected = " checked ";
+										break;
+									case 5 :
+										$friSelected = " checked ";
+										break;
+									case 6 :
+										$satSelected = " checked ";
+										break;
+									case 7 :
+										$sunSelected = " checked ";
+										break;
+								}
+							} else {
+								$dayOpen[$rowOpenning['OPENNING_DAY']] = " checked ";
+								$timeOpen[$rowOpenning['OPENNING_DAY']] = $rowOpenning['OPENNING_START_HOUR'];
+								$timeClose[$rowOpenning['OPENNING_DAY']] = $rowOpenning['OPENNING_END_HOUR'];
+							}
+						}
+						?>
 						<div class="box-right">
 							<div class="box-input-text checkbox">
+								
 								<div>
-									<input type="checkbox"><span>จ</span>
+									<input type="checkbox" name = "auto_open[]" value="1" <?=$monSelected ?>><span>จ</span>
 								</div>
 								<div>
-									<input type="checkbox"><span>อ</span>
+									<input type="checkbox" name = "auto_open[]" value="2" <?=$tueSelected ?>><span>อ</span>
 								</div>
 								<div>
-									<input type="checkbox"><span>พ</span>
+									<input type="checkbox" name = "auto_open[]" value="3" <?=$wedSelected ?>><span>พ</span>
 								</div>
 								<div>
-									<input type="checkbox"><span>พฤ</span>
+									<input type="checkbox" name = "auto_open[]" value="4" <?=$thuSelected ?>><span>พฤ</span>
 								</div>
 								<div>
-									<input type="checkbox"><span>ศ</span>
+									<input type="checkbox" name = "auto_open[]" value="5" <?=$friSelected ?>><span>ศ</span>
 								</div>
 								<div>
-									<input type="checkbox"><span>ส</span>
+									<input type="checkbox" name = "auto_open[]" value="6" <?=$satSelected ?>><span>ส</span>
 								</div>
 								<div>
-									<input type="checkbox"><span>อา</span>
+									<input type="checkbox" name = "auto_open[]" value="7" <?=$sunSelected ?>><span>อา</span>
 								</div>							
 							</div>
 						</div>
@@ -412,10 +465,10 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="box-right">
 							<div class="box-input-text time">
-								<p>Plugin</p>
+								<p>เวลาทำการ <span class="amount-time" id="amount-time-all"><?=$startDate ?> - <?=$endDate ?></span></p>
 								<div class="workingtime" data-box="all">
-									<input type="hidden" name="startdate" class="startdate" value="" />
-									<input type="hidden" name="enddate" class="enddate" value="" />
+									<input type="hidden" name="startdate" class="startdate" value="<?=$startDate ?>" />
+									<input type="hidden" name="enddate" class="enddate" value="<?=$endDate ?>" />
 								</div>
 							</div>
 						</div>
@@ -426,13 +479,117 @@ $row = mysql_fetch_array($rs);
 						<div class="box-left">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">กำหนดเอง</a>
+									<a class="btn black toogleworkingtimeBlock">กำหนดเอง</a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="row-main cf">
+				<?
+				$arrayDay = array("", "วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัสบดี", "วันศุกร์", "วันเสาร์", "วันอาทิตย์");
+				$arrayShortDay = array("", "mon", "tue", "wed", "thu", "fri", "sat", "sun");
+				for ($idx = 1; $idx <= 7; $idx++) {
+
+					echo '<div class="box-max fixDateBox">';
+					if (isset($dayOpen[$idx]))
+						echo '<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="' . $idx . '" checked></div>';
+					else
+						echo '<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="' . $idx . '"></div>';
+					echo '<div class="fixDateBoxDate">' . $arrayDay[$idx] . ' เวลาทำการ</div>';
+
+					$timeStart = "08:00";
+					$timeEnd = "20:00";
+					if (isset($timeOpen[$idx]))
+						$timeStart = $timeOpen[$idx];
+					if (isset($timeClose[$idx]))
+						$timeEnd = $timeClose[$idx];
+
+					echo '<div class="fixDateBoxTime" id="amount-time-' . $arrayShortDay[$idx] . '">' . $timeStart . ' - ' . $timeEnd . '</div>';
+					echo '<div class="fixDateBoxWorking workingtime" data-box="' . $arrayShortDay[$idx] . '">';
+
+					echo '<input type="hidden" name="startdate' . $idx . '" class="startdate" value="' . $timeStart . '" />';
+					echo '<input type="hidden" name="enddate' . $idx . '" class="enddate" value="' . $timeEnd . '" /> ';
+					echo '</div> ';
+					echo '<div class="clear"></div>';
+					echo '</div>';
+
+				}
+				?>
+				
+					<!-- <div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="1"></div>
+						<div class="fixDateBoxDate">วันจันทร์ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-mon">08:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="mon">
+							<input type="hidden" name="startdate1" class="startdate" value="08:00" />
+							<input type="hidden" name="enddate1" class="enddate" value="20:00" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="2"></div>
+						<div class="fixDateBoxDate">วันอังคาร เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-tue">08:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="tue">
+							<input type="hidden" name="startdate2" class="startdate" value="08:00" />
+							<input type="hidden" name="enddate2" class="enddate" value="20:00" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="3"></div>
+						<div class="fixDateBoxDate">วันพุธ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-wed">08:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="wed">
+							<input type="hidden" name="startdate3" class="startdate" value="08:00" />
+							<input type="hidden" name="enddate3" class="enddate" value="20:00" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="4"></div>
+						<div class="fixDateBoxDate">วันพฤหัสบดี เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-thu">08:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="thu">
+							<input type="hidden" name="startdate4" class="startdate" value="08:00" />
+							<input type="hidden" name="enddate4" class="enddate" value="20:00" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="5"></div>
+						<div class="fixDateBoxDate">วันศุกร์ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-fri">08:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="fri">
+							<input type="hidden" name="startdate5" class="startdate" value="08:00" />
+							<input type="hidden" name="enddate5" class="enddate" value="20:00" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="6"></div>
+						<div class="fixDateBoxDate">วันเสาร์ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-sat">08:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="sat">
+							<input type="hidden" name="startdate6" class="startdate" value="08:00" />
+							<input type="hidden" name="enddate6" class="enddate" value="20:00" />
+						</div> 
+						<div class="clear"></div>
+					</div>
+					<div class="box-max fixDateBox">
+						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="7"></div>
+						<div class="fixDateBoxDate">วันอาทิตย์ เวลาทำการ</div>
+						<div class="fixDateBoxTime" id="amount-time-sun">08:00 - 20:00</div>
+						<div class="fixDateBoxWorking workingtime" data-box="sun">
+							<input type="hidden" name="startdate7" class="startdate" value="08:00" />
+							<input type="hidden" name="enddate7" class="enddate" value="20:00" />
+						</div> 
+						<div class="clear"></div>
+					</div> -->
+				</div>
+				
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -1278,6 +1435,59 @@ $row = mysql_fetch_array($rs);
 <?php
 include ('inc/inc-footer.php');
  ?>	
+<script type="text/javascript">
+	$(function() {
+		$(".workingtime").slider({
+			range : true,
+			min : 0,
+			max : 1440,
+			step : 5,
+			values : [480, 1080],
+			slide : function(event, ui) {
+				var hours1 = Math.floor(ui.values[0] / 60);
+				var minutes1 = ui.values[0] - (hours1 * 60);
 
+				if (hours1 < 10)
+					hours1 = '0' + hours1;
+				if (minutes1 < 10)
+					minutes1 = '0' + minutes1;
+
+				if (minutes1 == 0)
+					minutes1 = '00';
+
+				var hours2 = Math.floor(ui.values[1] / 60);
+				var minutes2 = ui.values[1] - (hours2 * 60);
+
+				if (hours2 < 10)
+					hours2 = '0' + hours2;
+				if (minutes2 < 10)
+					minutes2 = '0' + minutes2;
+
+				if (minutes2 == 0)
+					minutes2 = '00';
+
+				var id = $(this).attr("data-box");
+				$('#amount-time-' + id).text(hours1 + ':' + minutes1 + ' - ' + hours2 + ':' + minutes2);
+				$(this).find('.startdate').val(hours1 + ':' + minutes1);
+				$(this).find('.enddate').val(hours2 + ':' + minutes2);
+			}
+		});
+
+		$('.toogleworkingtimeBlock').on("click", function(e) {
+			$('.fixDateBox').toggle('blind');
+			e.preventDefault();
+			e.stopPropagation();
+		});
+
+		$('input[name="date[]"]').bind('change', function() {
+			$('input[name="auto_open[]"]').prop("checked", false);
+		});
+
+		$('input[name="auto_open[]"]').bind('change', function() {
+			$('input[name="date[]"]').prop("checked", false);
+		});
+
+	}); 
+</script>
 </body>
 </html>

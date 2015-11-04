@@ -119,7 +119,7 @@ if ($_GET["type"] == "province") {
 			$keyEnd = 'enddate' . $selected;
 			$insert['OPENNING_START_HOUR'] = "'" . $_POST[$keyStart] . "'";
 			$insert['OPENNING_END_HOUR'] = "'" . $_POST[$keyEnd] . "'";
-
+			$insert['IS_CUSTOM_OPENNING'] = "'Y'";
 			$sql = "INSERT INTO trn_museum_openning (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 			mysql_query($sql, $conn) or die($sql);
 		}
@@ -133,7 +133,7 @@ if ($_GET["type"] == "province") {
 				$insert['OPENNING_DAY'] = $selected;
 				$insert['OPENNING_START_HOUR'] = "'" . $_POST['startdate'] . "'";
 				$insert['OPENNING_END_HOUR'] = "'" . $_POST['enddate'] . "'";
-
+$insert['IS_CUSTOM_OPENNING'] = "'N'";
 				$sql = "INSERT INTO trn_museum_openning (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 				mysql_query($sql, $conn) or die($sql);
 

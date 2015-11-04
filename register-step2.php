@@ -158,9 +158,9 @@ require("assets/configs/function.inc.php");
 				<div class="box-row cf">
 					<div class="box-left">
 						<div class="box-input-text time">
-							<p id="timeText">เวลาทำการ <span class="amount-time" id="amount-time-all">8:00 - 20:00</span></p>
+							<p id="timeText">เวลาทำการ <span class="amount-time" id="amount-time-all">08:00 - 20:00</span></p>
 							<div class="workingtime" data-box="all">
-								<input type="hidden" name="startdate" class="startdate" value="8:00" />
+								<input type="hidden" name="startdate" class="startdate" value="08:00" />
 								<input type="hidden" name="enddate" class="enddate" value="20:00" />
 							</div>
 						</div>
@@ -177,9 +177,9 @@ require("assets/configs/function.inc.php");
 					<div class="box-max fixDateBox">
 						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="1"></div>
 						<div class="fixDateBoxDate">วันจันทร์ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-mon">8:00 - 20:00</div>
+						<div class="fixDateBoxTime" id="amount-time-mon">08:00 - 20:00</div>
 						<div class="fixDateBoxWorking workingtime" data-box="mon">
-							<input type="hidden" name="startdate1" class="startdate" value="8:00" />
+							<input type="hidden" name="startdate1" class="startdate" value="08:00" />
 							<input type="hidden" name="enddate1" class="enddate" value="20:00" />
 						</div> 
 						<div class="clear"></div>
@@ -187,9 +187,9 @@ require("assets/configs/function.inc.php");
 					<div class="box-max fixDateBox">
 						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="2"></div>
 						<div class="fixDateBoxDate">วันอังคาร เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-tue">8:00 - 20:00</div>
+						<div class="fixDateBoxTime" id="amount-time-tue">08:00 - 20:00</div>
 						<div class="fixDateBoxWorking workingtime" data-box="tue">
-							<input type="hidden" name="startdate2" class="startdate" value="8:00" />
+							<input type="hidden" name="startdate2" class="startdate" value="08:00" />
 							<input type="hidden" name="enddate2" class="enddate" value="20:00" />
 						</div> 
 						<div class="clear"></div>
@@ -197,9 +197,9 @@ require("assets/configs/function.inc.php");
 					<div class="box-max fixDateBox">
 						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="3"></div>
 						<div class="fixDateBoxDate">วันพุธ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-wed">8:00 - 20:00</div>
+						<div class="fixDateBoxTime" id="amount-time-wed">08:00 - 20:00</div>
 						<div class="fixDateBoxWorking workingtime" data-box="wed">
-							<input type="hidden" name="startdate3" class="startdate" value="8:00" />
+							<input type="hidden" name="startdate3" class="startdate" value="08:00" />
 							<input type="hidden" name="enddate3" class="enddate" value="20:00" />
 						</div> 
 						<div class="clear"></div>
@@ -207,9 +207,9 @@ require("assets/configs/function.inc.php");
 					<div class="box-max fixDateBox">
 						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="4"></div>
 						<div class="fixDateBoxDate">วันพฤหัสบดี เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-thu">8:00 - 20:00</div>
+						<div class="fixDateBoxTime" id="amount-time-thu">08:00 - 20:00</div>
 						<div class="fixDateBoxWorking workingtime" data-box="thu">
-							<input type="hidden" name="startdate4" class="startdate" value="8:00" />
+							<input type="hidden" name="startdate4" class="startdate" value="08:00" />
 							<input type="hidden" name="enddate4" class="enddate" value="20:00" />
 						</div> 
 						<div class="clear"></div>
@@ -217,9 +217,9 @@ require("assets/configs/function.inc.php");
 					<div class="box-max fixDateBox">
 						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="5"></div>
 						<div class="fixDateBoxDate">วันศุกร์ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-fri">8:00 - 20:00</div>
+						<div class="fixDateBoxTime" id="amount-time-fri">08:00 - 20:00</div>
 						<div class="fixDateBoxWorking workingtime" data-box="fri">
-							<input type="hidden" name="startdate5" class="startdate" value="8:00" />
+							<input type="hidden" name="startdate5" class="startdate" value="08:00" />
 							<input type="hidden" name="enddate5" class="enddate" value="20:00" />
 						</div> 
 						<div class="clear"></div>
@@ -227,9 +227,9 @@ require("assets/configs/function.inc.php");
 					<div class="box-max fixDateBox">
 						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="6"></div>
 						<div class="fixDateBoxDate">วันเสาร์ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-sat">8:00 - 20:00</div>
+						<div class="fixDateBoxTime" id="amount-time-sat">08:00 - 20:00</div>
 						<div class="fixDateBoxWorking workingtime" data-box="sat">
-							<input type="hidden" name="startdate6" class="startdate" value="8:00" />
+							<input type="hidden" name="startdate6" class="startdate" value="08:00" />
 							<input type="hidden" name="enddate6" class="enddate" value="20:00" />
 						</div> 
 						<div class="clear"></div>
@@ -237,9 +237,9 @@ require("assets/configs/function.inc.php");
 					<div class="box-max fixDateBox">
 						<div class="fixDateBoxInput"><input type="checkbox" name="date[]" value="7"></div>
 						<div class="fixDateBoxDate">วันอาทิตย์ เวลาทำการ</div>
-						<div class="fixDateBoxTime" id="amount-time-sun">8:00 - 20:00</div>
+						<div class="fixDateBoxTime" id="amount-time-sun">08:00 - 20:00</div>
 						<div class="fixDateBoxWorking workingtime" data-box="sun">
-							<input type="hidden" name="startdate7" class="startdate" value="8:00" />
+							<input type="hidden" name="startdate7" class="startdate" value="08:00" />
 							<input type="hidden" name="enddate7" class="enddate" value="20:00" />
 						</div> 
 						<div class="clear"></div>

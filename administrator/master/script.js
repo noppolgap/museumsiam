@@ -6,6 +6,7 @@ $( document ).ready(function() {
 	if($('.mytextarea').length > 0){
         tinymce.init({
             selector: ".mytextarea",
+            height : 400,
 		    theme: "modern",
 		    plugins: [
 		        "advlist autolink lists link image charmap print preview hr anchor pagebreak",

@@ -13,20 +13,20 @@ if ($_SESSION['LANG'] == 'TH') {
 	<img src="images/<?=$picFolder ?>/about/pic-about1.jpg" alt="pic-about1" width="" height="" />
 </div>
 <div class="box-text1-main cf">
-	
-			<!-- KNOW_MUSEUM -->
-			<!-- มิวเซียมสยาม พิพิธภัณฑ์การเรียนรู้ (Museum Siam: Discovery Museum) ภายใต้ สถาบันพิพิธภัณฑ์การเรียนรู้แห่งชาติ (สพร.) เป็นพิพิธภัณฑ์การเรียนรู้แห่งแรกที่เน้น การสร้างประสบการณ์สดใหม่ในการชมพิพิธภัณฑ์ ซึ่งจัดตั้งขึ้นเพื่อเป็นต้นแบบของ แหล่งเรียนรู้ที่น่ารื่นรมย์ และช่วยยกระดับมาตรฐานการจัดการเรียนรู้ในรูปแบบใหม่ ให้กับประชาชน โดยเฉพาะเด็กและเยาวชนไทยเกี่ยวกับการสร้างสำนึกในการรู้จัก ตนเอง รู้จักเพื่อนบ้าน และรู้จักโลก รวมถึงการสร้าง “แนวคิดและภาพลักษณ์ใหม่” ของพิพิธภัณฑ์ในสังคมแห่งการเรียนรู้ ผ่านเทคโนโลยีสมัยใหม่ และกิจกรรมสร้าง สรรค์ เพื่อให้การเรียนรู้ประวัติศาสตร์และเรื่องราวต่างๆ เป็นไปอย่างสนุกสนานยิ่งขึ้น ซึ่งประกอบด้วย -->
-			<?php
-			$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KNOW_MUSEUM' AND ACTIVE_FLAG = 1";
-			$rsContent = mysql_query($sql) or die(mysql_error());
-			$rowContent = mysql_fetch_array($rsContent);
-			echo  str_replace('../../', '',$rowContent['CMS_TEXT']);
-			?>
-		<!-- </p>
+	<div class="box-left">
+		<p class="title"><img src="images/<?=$picFolder ?>/about/title1.png" alt="" />
+		</p>
+		<!-- KNOW_MUSEUM -->
+		<!-- มิวเซียมสยาม พิพิธภัณฑ์การเรียนรู้ (Museum Siam: Discovery Museum) ภายใต้ สถาบันพิพิธภัณฑ์การเรียนรู้แห่งชาติ (สพร.) เป็นพิพิธภัณฑ์การเรียนรู้แห่งแรกที่เน้น การสร้างประสบการณ์สดใหม่ในการชมพิพิธภัณฑ์ ซึ่งจัดตั้งขึ้นเพื่อเป็นต้นแบบของ แหล่งเรียนรู้ที่น่ารื่นรมย์ และช่วยยกระดับมาตรฐานการจัดการเรียนรู้ในรูปแบบใหม่ ให้กับประชาชน โดยเฉพาะเด็กและเยาวชนไทยเกี่ยวกับการสร้างสำนึกในการรู้จัก ตนเอง รู้จักเพื่อนบ้าน และรู้จักโลก รวมถึงการสร้าง “แนวคิดและภาพลักษณ์ใหม่” ของพิพิธภัณฑ์ในสังคมแห่งการเรียนรู้ ผ่านเทคโนโลยีสมัยใหม่ และกิจกรรมสร้าง สรรค์ เพื่อให้การเรียนรู้ประวัติศาสตร์และเรื่องราวต่างๆ เป็นไปอย่างสนุกสนานยิ่งขึ้น ซึ่งประกอบด้วย -->
+		<?php
+		$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KNOW_MUSEUM' AND ACTIVE_FLAG = 1";
+		$rsContent = mysql_query($sql) or die(mysql_error());
+		$rowContent = mysql_fetch_array($rsContent);
+		echo str_replace('../../', '', $rowContent['CMS_TEXT']);
+		?>
 	</div>
-	<div class="box-right">
-		<img src="images/<?=$picFolder ?>/about/pic-about2.jpg" alt="pic-about2" width="" height="" />
-	</div> -->
+	<div class="box-right"><img src="images/<?=$picFolder ?>/about/pic-about2.jpg" alt="pic-about2" width="" height="" />
+	</div>
 </div>
 <div class="box-text2-main cf">
 	<p class="text"><img src="images/<?=$picFolder ?>/about/title2.png"/>
@@ -46,7 +46,7 @@ if ($_SESSION['LANG'] == 'TH') {
 		$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='MUSEUM_CONCEPT' AND ACTIVE_FLAG = 1";
 		$rsContent = mysql_query($sql) or die(mysql_error());
 		$rowContent = mysql_fetch_array($rsContent);
-		echo str_replace('../../', '',$rowContent['CMS_TEXT']);
+		echo str_replace('../../', '', $rowContent['CMS_TEXT']);
 		?>
 	</p>
 </div>
@@ -65,7 +65,7 @@ if ($_SESSION['LANG'] == 'TH') {
 			$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='MUSEUM_LOGO' AND ACTIVE_FLAG = 1";
 			$rsContent = mysql_query($sql) or die(mysql_error());
 			$rowContent = mysql_fetch_array($rsContent);
-			echo str_replace('../../', '',$rowContent['CMS_TEXT']);
+			echo str_replace('../../', '', $rowContent['CMS_TEXT']);
 			?>
 			<!--	หรือ รูปคนทำท่าเป็นกบเป็นสัญลักษณ์ของสถาบันพิพิธภัณฑ์การเรียนรู้แห่งชาติ เพราะกบถือเป็น
 			สัตว์ศักดิ์สิทธิ์ที่แสดงถึงความอุดมสมบูรณ์ เป็นที่เคารพบูชาทั่วทั้งเอเชียตะวันออกเฉียงใต้ เห็นได้จากลวดลาย

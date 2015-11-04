@@ -270,7 +270,7 @@ include ('inc/inc-menu.php');
 					</div>
 				</div>
 				<div class="box-news-text">
-					<?=nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br><img>')); ?>
+					<?=nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br><img><a>')); ?>
 				</div>
 
 <?php
