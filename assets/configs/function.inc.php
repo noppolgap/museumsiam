@@ -1693,20 +1693,21 @@ function front_upload_file($name) {
 }
 
 function displaydateformatlong($source) {
-	if ($_SESSION['LANG'] == 'TH') {
-		$myDateTime = explode(" ", $source);
-		$myDateArray = explode("-", $myDateTime[0]);
-		$myYear = sprintf("%d", $myDateArray[0]) + 543;
-		$myMonth = returnThaiMonth($myDateArray[1]);
-		$myDate = $myDateArray[2];
-		return $myDate . ' ' . $myMonth . ' ' . $myYear ;// . ' ' . $myDateTime[1];
+	if($source != ''){
+		if ($_SESSION['LANG'] == 'TH') {
+			$myDateTime = explode(" ", $source);
+			$myDateArray = explode("-", $myDateTime[0]);
+			$myYear = sprintf("%d", $myDateArray[0]) + 543;
+			$myMonth = returnThaiMonth($myDateArray[1]);
+			$myDate = $myDateArray[2];
+			return $myDate . ' ' . $myMonth . ' ' . $myYear ;// . ' ' . $myDateTime[1];
 
-	} else {
-		$date = new DateTime($source);
-		return $date -> format('j F Y');
-	}
+		} else {
+			$date = new DateTime($source);
+			return $date -> format('j F Y');
+		}
 	// 1 December 2012 13:30
-
+	}
 }
 function displayTime ($source)
 {

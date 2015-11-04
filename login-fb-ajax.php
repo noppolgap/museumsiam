@@ -27,6 +27,8 @@ if(isset($_POST['id']) && !empty($_POST['id']))
 		$insert['LAST_NAME'] = "'" . end($fb_name) . "'";
 		$insert['USER_CREATE'] = "'" . $id . "'";
 		$insert['CREATE_DATE'] = "NOW()";
+		$insert['LAST_UPDATE_USER'] = "'" . $id . "'";
+		$insert['LAST_UPDATE_DATE'] = "NOW()";
 		$insert['ACTIVE_FLAG'] = "'1'";
 
 		$sql = "INSERT INTO  sys_app_user (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";

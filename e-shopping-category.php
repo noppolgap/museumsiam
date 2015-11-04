@@ -151,8 +151,12 @@ $_SESSION['SHOPPING_PREV_PG'] = $current_url;
 								</p>
 							</a>
 							<p class="text-price">
-								ราคาปกติ : <? echo $row_proc['PRICE']; ?> บาท<br>
-								<span>ราคาพิเศษ : <? echo $row_proc['SALE']; ?> บาท</span>
+								ราคา : <? echo $row_proc['PRICE']; ?> บาท<br>
+								<?php
+								if($row_proc['SALE'] > 0){
+									echo '<span>ราคาพิเศษ : '.$row_proc['SALE'].' บาท</span>';
+								}
+								?>
 							</p>
 						</div>
 

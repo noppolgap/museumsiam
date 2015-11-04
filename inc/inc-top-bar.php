@@ -36,10 +36,10 @@ require ("inc-cat-id-conf.php");
 					<a href="e-shopping.php">e-SHOPPING</a>
 				</div>
 				<div class="box-btn-social cf">
-					<a href="#" class="btn-socila fb"></a>
-					<a href="#" class="btn-socila tw"></a>
-					<a href="#" class="btn-socila yt"></a>
-					<a href="#" class="btn-socila ig"></a>
+					<a target="_blank" href="https://www.facebook.com/museumsiamfan" class="btn-socila fb"></a>
+					<a target="_blank" href="https://twitter.com/museumsiam" class="btn-socila tw"></a>
+					<a target="_blank" href="https://www.youtube.com/museumsiam" class="btn-socila yt"></a>
+					<a target="_blank" href="https://instagram.com/museumsiam" class="btn-socila ig"></a>
 				</div>
 				<div class="box-search">
 					<form name="search_form" method="post" action="system-search.php">

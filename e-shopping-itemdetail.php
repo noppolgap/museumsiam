@@ -122,15 +122,21 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 							</div>
 							<div class="text-price">
 								<p>
-									<span>ราคาปกติ : <? echo $row_detail['PRICE']; ?> บาท</span>
-									ราคาพิเศษ : <? echo $row_detail['SALE']; ?> บาท
+									<?php
+									if($row_detail['SALE'] > 0){
+										echo '<span>ราคาปกติ : '.$row_detail['PRICE'].' บาท</span>';
+										echo 'ราคาพิเศษ : '.$row_detail['SALE'].' บาท';
+									}else{
+										echo '<strong>ราคา : '.$row_detail['PRICE'].' บาท</strong>';
+									}
+									?>
 								</p>
 							</div>
 							<div class="text-ship">
 								Free Shipping
 							</div>
 							<div class="box-btn">
-								<a href="#" onclick="addtocart(<?=$row_detail['PRODUCT_ID']?>);" class="btn red">หยิบสินค้าลงตะกร้า</a>
+								<a href="#" onclick="addtocart(<?=$row_detail['PRODUCT_ID']?>,'shopping');" class="btn red">หยิบสินค้าลงตะกร้า</a>
 							</div>
 						</div>
 					</div>

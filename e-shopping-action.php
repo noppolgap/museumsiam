@@ -15,34 +15,54 @@ if($address == 0){
 		$insert['UID'] 		= "'" . $_SESSION['UID']  . "'";
 		$sql = "INSERT INTO sys_app_address (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 		mysql_query($sql, $conn) or die($sql);
-
-		$retrunAddress = mysql_insert_id();
+		$address = mysql_insert_id();
 }
 
+$sql_address = "SELECT * FROM sys_app_address WHERE ID = ".$address;
+$query_address = mysql_query($sql_address, $conn) or die($sql_address);
+
+
+		unset($insert);
+		$insert['QUATITY'] = "'" .$row['QUATITY'] ;
+		$insert['PRODUCT_ID'] = "'" .$_POST['PRODUCT_ID']. "'";
+		$insert['SUMPRICE'] = "'" .$price. "'";
+		$insert['EMS'] = "'" .$price. "'";
+		$insert['ADDRESS'] = "'" .$retrunAddress. "'";
+		$insert['CUSTOMER_ID'] = "'" .$_SESSION['UID']. "'";
+		$insert['USER_CREATE'] = "'". $_SESSION['UID'];
+		$insert['CREATE_DATE'] = "NOW()";
+
+		$sql = "INSERT INTO trn_order (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+
+/*
 	unset($insert);
 
 
 	$insert_d['PRODUCT_ID'] = "'" .$_POST['proid']. "'";
-
+	/*
 	$sql_temp = "select cart.QUATITY, pro.PRICE , pro.CAT_ID, pro.PRICE, pro.PRODUCT_ID
-				from trn_shopping_cart cart 
+				from trn_shopping_cart cart
 				left join trn_product pro on cart.trn_shopping_cart_pID = pro.PRODUCT_ID
 				where cart.trn_shopping_cart_id = '" .session_id(). "'";
+
+	$sql_temp = "SELECT cart.trn_shopping_cart_Quantity AS QUATITY , pro.PRODUCT_ID AS PRODUCT_ID , IF(pro.SALE > 0, pro.SALE, pro.PRICE) AS PRODUCT_PRICE
+				FROM trn_shopping_cart AS cart  left join trn_product AS pro on cart.trn_shopping_cart_pID = pro.PRODUCT_ID
+				WHERE trn_shopping_cart_SSID = '" .session_id(). "'";
 	$query_temp= mysql_query($sql_temp,$conn);
 
-	while($row = mysql_fetch_array($query_temp)) { 
+	while($row = mysql_fetch_array($query_temp)) {
 
-		$price = ($row['QUATITY'] *  $row['PRICE']);
+		//$price = ($row['QUATITY'] *  $row['PRICE']);
 
 	//$sql = "INSERT INTO  trn_order (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 
 	//mysql_query($sql, $conn) or die($sql);
 	//$retrunID = mysql_insert_id();
 
-	unset($insert_o);
+		unset($insert_o);
 		//$insert_o['ORDER_ID'] = $retrunID;
 		$insert_o['QUATITY'] = "'" .$row['QUATITY'] ;
-		$insert_o['PRODUCT_ID'] = "'" .$_POST['proid']. "'";
+		$insert_o['PRODUCT_ID'] = "'" .$_POST['PRODUCT_ID']. "'";
 		$insert_o['SUMPRICE'] = "'" .$price. "'";
 		$insert_o['EMS'] = "'" .$price. "'";
 		$insert_o['ADDRESS'] = "'" .$retrunAddress. "'";
@@ -51,7 +71,7 @@ if($address == 0){
 		$insert_o['CREATE_DATE'] = "NOW()";
 
 	$sql_o = "INSERT INTO trn_order (" . implode(",", array_keys($insert_o)) . ") VALUES (" . implode(",", array_values($insert_o)) . ")";
-    mysql_query($sql_o, $conn) or die($sql_o);
+    //mysql_query($sql_o, $conn) or die($sql_o);
 
     $retrunID = mysql_insert_id();
 
@@ -68,19 +88,10 @@ if($address == 0){
 
 
 	$sql_d = "INSERT INTO trn_order_detail (" . implode(",", array_keys($insert_d)) . ") VALUES (" . implode(",", array_values($insert_d)) . ")";
-    mysql_query($sql_d, $conn) or die($sql_d);
-
-	
-
-
-
-
-
-
-
+    //mysql_query($sql_d, $conn) or die($sql_d);
 
 	//header('Location: e-shopping-cart.php');
-
+*/
 
 
 ?>

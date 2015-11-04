@@ -8,7 +8,7 @@ require ("assets/configs/function.inc.php");
 <head>
 <?
 require ('inc_meta.php');
- ?>	
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/account.css" />
@@ -16,24 +16,29 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menu-left li.menu1").addClass("active");
-	}); 
+	});
 </script>
-	
+
 </head>
 
 <body id="account">
-	
+
 
 <?php
 	include ('inc/inc-top-bar.php');
  ?>
 <?php
 	include ('inc/inc-menu.php');
- ?>	
+ ?>
 <?php
 require ('inc/inc-require-userlogin.php');
+if ($_SESSION['LANG'] == 'TH') {
+ $picFolder = 'th';
+} else {
+ $picFolder = 'en';
+}
 ?>
- 
+
 <div class="part-nav-main">
 	<div class="container">
 		<div class="box-nav">
@@ -50,8 +55,8 @@ require ('inc/inc-require-userlogin.php');
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				<img src="images/th/title-accout.png" alt="ACCOUNT SETTINGS"/>
-			</p>	
+				<img src="images/<?=$picFolder?>/title-accout.png" alt="ACCOUNT SETTINGS"/>
+			</p>
 		</div>
 	</div>
 </div>
@@ -64,7 +69,7 @@ require ('inc/inc-require-userlogin.php');
  ?>
 		</div>
 
-		
+
 		<?php
 		//$sqlUser = "select * from sys_app_user where USER_ID = '".$_SESSION['user_name'] ."'";
 		$selectedColumn = "";
@@ -90,7 +95,7 @@ require ('inc/inc-require-userlogin.php');
 		$rs = mysql_query($sqlUser) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
 		?>
- 
+
 		<div class="box-account-right cf">
 			<div class="box-title">
 				<h1>ข้อมูลส่วนตัว</h1>
@@ -101,9 +106,9 @@ require ('inc/inc-require-userlogin.php');
 						<p>ชื่อ - นามสกุล</p>
 					</div>
 					<div class="box-right">
- 
+
 						<p><?=$row['TITLE_DESC']." ". $row['NAME'] . " " . $row['LAST_NAME'] ?></p>
- 
+
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -111,9 +116,9 @@ require ('inc/inc-require-userlogin.php');
 						<p>เพศ</p>
 					</div>
 					<div class="box-right">
- 
+
 						<p><?=$row['SEX_DESC'] ?></p>
- 
+
 					</div>
 				</div>
 				<div class="box-row cf">
@@ -200,7 +205,14 @@ require ('inc/inc-require-userlogin.php');
 			<div class="box-right">
 				<div class="box-user">
 					<div class="box-pic">
-						<img src="<?=nvl( $row['IMAGE_PATH'] , 'images/account/user.jpg')?>"/>
+					<?php
+						if((isset($_SESSION['FB'])) AND ($avatarPath == '')){
+							$avatarPath = 'http://graph.facebook.com/'.$_SESSION['FB'].'/picture?type=normal';
+						}else{
+							$avatarPath = nvl( $row['IMAGE_PATH'] , 'images/account/user.jpg');
+						}
+					?>
+						<img src="<?=$avatarPath?>"/>
 					</div>
 					<div class="box-detail cf">
 						<div class="box-name">
@@ -209,7 +221,13 @@ require ('inc/inc-require-userlogin.php');
 						<p>LOG IN ล่าสุด</p>
 						<div class="row cf">
 							<?php
-							$logSql = "select max(LOGIN_DATE) as LOGIN_DATE from log_user_login where USER_ID = '" . $_SESSION['user_name']  . "'";
+							if(!isset($_SESSION['FB'])){
+								$USER_ID = $_SESSION['user_name'];
+							}else{
+								$USER_ID = $_SESSION['FB'];
+							}
+
+							$logSql = "select max(LOGIN_DATE) as LOGIN_DATE from log_user_login where USER_ID = '" . $USER_ID  . "'";
 							$rsLog = mysql_query($logSql) or die(mysql_error());
 							$rowLog = mysql_fetch_array($rsLog);
 							?>
@@ -253,7 +271,7 @@ require ('inc/inc-require-userlogin.php');
 
 <?php
 include ('inc/inc-footer.php');
- ?>	
+ ?>
 
 </body>
 </html>

@@ -122,7 +122,7 @@ require("assets/configs/function.inc.php");
 												GROUP BY CONTENT_ID, CAT_ID
 											) AS pic ON prod.PRODUCT_ID = pic.CONTENT_ID
 											AND prod.CAT_ID = pic.CAT_ID
-							
+
 											WHERE prod.CAT_ID = ".$row['CONTENT_CAT_ID']." AND prod.FLAG = 0 ";
 
 							if (isset($_GET['search'])) {
@@ -155,9 +155,9 @@ require("assets/configs/function.inc.php");
 								</p>
 							</a>
 							<p class="text-price">
-								ราคาปกติ : <? echo $row_proc['PRICE']; ?> บาท<br>
+								ราคา : <? echo $row_proc['PRICE']; ?> บาท<br>
 							<?php
-							if($row_proc['SALE'] != ''){
+							if($row_proc['SALE'] > 0){
 								echo '<span>ราคาพิเศษ : '.$row_proc['SALE'].' บาท</span>';
 							}
 							?>

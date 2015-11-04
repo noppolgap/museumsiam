@@ -200,6 +200,7 @@ ul.menu-left li.lu.active:before{
 	width: 329px;
 	height: 249px;
 	overflow: hidden;
+	background-color: #fff;
 }
 .box-user .box-pic:after {
 	content: '';
@@ -215,10 +216,12 @@ ul.menu-left li.lu.active:before{
 .box-user .box-pic img{
 	width: auto;
 	height: 249px;
+	display: block;
+	margin:0px auto;
 }
 .box-user .box-detail{
 	color: #b28f50;
-	background-color: #8e070b; 
+	background-color: #8e070b;
 }
 .box-user .box-detail h2{
 	color: #fff;
@@ -254,7 +257,7 @@ ul.menu-left li.lu.active:before{
 }
 .box-user .box-btn{
 	width: 100%;
-	background-color: #8e070b; 
+	background-color: #8e070b;
 	height: 40px;
 	padding-top: 30px;
 }

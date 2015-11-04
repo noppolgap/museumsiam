@@ -32,10 +32,10 @@ $( document ).ready(function() {
 		});
 	}
 });
-function addtocart(id){
+function addtocart(id,type){
 	if(checkMouse){
 		checkMouse = false;
-		$.post( "shopping-cart-ajax.php", { id: id })
+		$.post( "shopping-cart-ajax.php", { id: id,type: type })
 		  .done(function( data ) {
 		  	$('.btn-cart span').text(data);
 			checkMouse = true;

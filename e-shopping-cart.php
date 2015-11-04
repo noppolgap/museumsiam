@@ -10,16 +10,16 @@ if($_POST['action'] == 'reCal'){
 			$update[] = "trn_shopping_cart_Quantity = ".$value;
 			$update[] = "trn_shopping_cart_CreateDate = NOW()";
 
-			$sql = "UPDATE trn_shopping_cart SET  " . implode(",", $update) . " WHERE trn_shopping_cart_SSID = '".session_id()."' AND trn_shopping_cart_pID = ".intval($key);
+			$sql = "UPDATE trn_shopping_cart SET  " . implode(",", $update) . " WHERE trn_shopping_cart_SSID = '".session_id()."' AND trn_shopping_cart_Type = 'shopping' AND trn_shopping_cart_pID = ".intval($key);
 		}else{
-			$sql = "DELETE FROM trn_shopping_cart WHERE trn_shopping_cart_SSID = '".session_id()."' AND  trn_shopping_cart_pID = ".intval($key);
+			$sql = "DELETE FROM trn_shopping_cart WHERE trn_shopping_cart_SSID = '".session_id()."' AND trn_shopping_cart_Type = 'shopping' AND  trn_shopping_cart_pID = ".intval($key);
 		}
 		mysql_query($sql, $conn) or die($sql);
 	}
 }
 if($_POST['action'] == 'DelAll'){
 	foreach ($_POST['Quantity'] as $key => $value) {
-		$sql = "DELETE FROM trn_shopping_cart WHERE trn_shopping_cart_SSID = '".session_id()."' AND  trn_shopping_cart_pID = ".intval($key);
+		$sql = "DELETE FROM trn_shopping_cart WHERE trn_shopping_cart_SSID = '".session_id()."' AND trn_shopping_cart_Type = 'shopping' AND  trn_shopping_cart_pID = ".intval($key);
 		mysql_query($sql, $conn) or die($sql);
 	}
 	header('Location: e-shopping.php');
@@ -103,7 +103,7 @@ if ($_SESSION['LANG'] == 'TH') {
 						 ,trn_product.CAT_ID AS MY_CAT
 						 ,(SELECT ".$LANG_SQL_CAT." FROM trn_content_category WHERE CONTENT_CAT_ID = CAT_ID) AS CAT_DESC_LOC
 						 ,(SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = PRODUCT_ID AND IMG_TYPE = 1 AND CAT_ID = MY_CAT ORDER BY ORDER_ID ASC LIMIT 0 , 1) AS IMG_PATH
-				FROM trn_shopping_cart LEFT JOIN trn_product ON trn_shopping_cart_pID = PRODUCT_ID WHERE `trn_shopping_cart_SSID` = '" . session_id() . "'";
+				FROM trn_shopping_cart LEFT JOIN trn_product ON trn_shopping_cart_pID = PRODUCT_ID WHERE trn_shopping_cart_Type = 'shopping' AND `trn_shopping_cart_SSID` = '" . session_id() . "'";
 				$query = mysql_query($sql,$conn);
 
 			if(mysql_num_rows($query) == 0){
@@ -148,9 +148,9 @@ if ($_SESSION['LANG'] == 'TH') {
 						</div>
 					</div>
 					<div class="column price"><?=number_format($price,2)?></div>
-					<div class="column number"><input min="0" type="number" name="Quantity[<?=$row['PRODUCT_ID']?>]" value="<? echo $row['Total']; ?>"></div>
+					<div class="column number"><input id="Num_pro_ID<?=$row['PRODUCT_ID']?>" min="0" type="number" name="Quantity[<?=$row['PRODUCT_ID']?>]" value="<? echo $row['Total']; ?>"></div>
 					<div class="column total"><?=number_format($sum_price,2)?></div>
-					<a href="#" class="btn-delete"><span class="bin"></span>ลบรายการสินค้า</a>
+					<a href="#" class="btn-delete" onclick="$('#Num_pro_ID<?=$row['PRODUCT_ID']?>').val(0); saveFormCart('reCal'); return false;"><span class="bin"></span>ลบรายการสินค้า</a>
 				</div>
 
 
@@ -160,7 +160,7 @@ if ($_SESSION['LANG'] == 'TH') {
 
 			<div class="box-total-main cf">
 				<div class="box-btn box1 cf">
-					<a class="btn red" href="#" onclick="saveFormCart('reCal')">คำนวณราคาใหม่</a>
+					<a class="btn red" href="#" onclick="saveFormCart('reCal'); return false;">คำนวณราคาใหม่</a>
 				</div>
 				<hr class="line-gray"/>
 				<div class="box-row cf">
