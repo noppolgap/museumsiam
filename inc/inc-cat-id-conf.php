@@ -31,4 +31,11 @@ $ebook_sub_cat = 74;
 
 //shipping_config
 $shipping_cost = 100;
+
+
+//DataMuseumNetwork
+//use $all_event_cat_id as CAT_ID
+//user $new_and_event as ModuleID
+$museumDataNetworkEventSubCat = 141;
+$museumDataNetworkNewsSubCat = 142;
 ?>
