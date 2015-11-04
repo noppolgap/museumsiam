@@ -76,7 +76,7 @@ $rsContent = mysql_query($contentSql) or die(mysql_error());
 $rowContent = mysql_fetch_array($rsContent);
 
 $title = trim(htmlspecialchars($rowContent['CONTENT_LOC']));
-$detail = trim($rowContent['CONTENT_DETAIL']);
+$detail = str_replace("../../","",trim($rowContent['CONTENT_DETAIL'])); 
 $brief = trim(preg_replace('/\s\s+/', ' ', strip_tags(htmlspecialchars($rowContent['CONTENT_BRIEF']))));
 
 //meta site
@@ -215,7 +215,7 @@ unset($thumb_meta);
 					<div class="box-title-main">
 						<div class="box-text">
 							<p class="text-title"><?=$title ?></p>
-							<p class="text-des"><?=nvl($rowContent['PLACE_DESC'], "");?></p>
+							<p class="text-des pin"><?=nvl($rowContent['PLACE_DESC'], "");?></p>
 						</div>
 					</div>
 				</div>

@@ -84,7 +84,7 @@ modul.ORDER_DATA DESC";
 
 					echo '<a target = "_blank" href="' . $row['LINK_URL'] . '">';
 
-					echo '<img style="width:90px;height:90px;" src="' . callIconThumbListFrontend('BIG', $row['MODULE_ID'], NULL, false) . '">';
+					echo '<img   src="' . callIconThumbListFrontend('BIG', $row['MODULE_ID'], NULL, false) . '">';
 
 					echo '</a>';
 
