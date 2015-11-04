@@ -2,6 +2,17 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+require("inc/inc-cat-id-conf.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search']))
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql .= " AND (prod.PRODUCT_DESC_LOC like '%" .$_SESSION['text']. "%' or  prod.PRODUCT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+	}
+
 ?>
 <!doctype html>
 <html>
@@ -90,7 +101,7 @@ require("assets/configs/function.inc.php");
 				}
 				$sql_cat  .= "FROM trn_content_category cc
 					JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
-					WHERE cc.REF_MODULE_ID = $education_cat_id
+					WHERE cc.REF_MODULE_ID = ".$education_cat_id."
 					AND cc.FLAG = 0 ";
 
 			    $query_cat = mysql_query($sql_cat,$conn);
@@ -125,16 +136,9 @@ require("assets/configs/function.inc.php");
 
 											WHERE prod.CAT_ID = ".$row['CONTENT_CAT_ID']." AND prod.FLAG = 0 ";
 
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$sql_proc .= " AND (prod.PRODUCT_DESC_LOC like '%" .$_SESSION['text']. "%' or  prod.PRODUCT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}
+							
 
-							$sql_proc  .= "	ORDER BY prod.ORDER_DATA DESC LIMIT 0,6";
+							$sql_proc  .= $search_sql."	ORDER BY prod.ORDER_DATA DESC LIMIT 0,6";
 
 						     $query_proc = mysql_query($sql_proc,$conn);
 

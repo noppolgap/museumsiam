@@ -4,11 +4,11 @@
 	</div>
 </div>
 
-<div class="part-left-search">
+<!--<div class="part-left-search">
 	<div class="box-search">
 		<input type="text" placeholder="ค้นหา">
 	</div>
-</div>
+</div>-->
 
 <div class="part-menu-left">
 	<div class="box-menu-left">

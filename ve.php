@@ -2,6 +2,18 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+require("inc/inc-cat-id-conf.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search'])){
+			$_SESSION['text'] = $_POST['str_search'];
+			$search_sql = " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%'or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')  ";
+		}
+	}
+
 ?>
 <!doctype html>
 <html>
@@ -27,9 +39,9 @@ include('inc/inc-menu.php');
 
 //get Module ID
 if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
-	$MID = $visual_exhibition;
+    $MID = $visual_exhibition;
 }else{
-	$MID = $_GET['MID'];
+    $MID = $_GET['MID'];
 }
 
 if ($_SESSION['LANG'] == 'TH') {
@@ -80,8 +92,9 @@ $cat_name[$row['SUB_CONTENT_CAT_ID']] = $row['CAT_DESC'];
 			cat.CONTENT_CAT_ID, content.CONTENT_ID, content.EVENT_START_DATE, content.EVENT_END_DATE, content.CREATE_DATE , content.LAST_UPDATE_DATE, content.SUB_CAT_ID,
 			IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 			FROM trn_content_category cat INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
-			WHERE cat.flag = 0 AND cat.REF_MODULE_ID = ".$MID." AND cat.CONTENT_CAT_ID = ".$style_exhibition." AND content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG = 0
-			ORDER BY content.SUB_CAT_ID desc , content.ORDER_DATA desc";
+			WHERE cat.flag = 0 AND cat.REF_MODULE_ID = ".$MID." AND cat.CONTENT_CAT_ID = ".$style_exhibition." AND content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG = 0";
+    $sqlCategory .= $search_sql." ORDER BY content.SUB_CAT_ID desc , content.ORDER_DATA desc";
+	
 	$query_Category = mysql_query($sqlCategory, $conn);
 	while ($row_Category = mysql_fetch_array($query_Category)) {
 
@@ -222,10 +235,10 @@ foreach ($temporary_exhibition_log as $key => $value) {
 													AND cat.flag = 0
 													AND cat.CONTENT_CAT_ID = ".$rowCategory['CONTENT_CAT_ID']."
 													AND content.APPROVE_FLAG = 'Y'
-													AND content.CONTENT_STATUS_FLAG  = 0
-												ORDER BY
-													content.ORDER_DATA desc
-												LIMIT 0,3 ";
+													AND content.CONTENT_STATUS_FLAG  = 0 ";
+						    $contentSql  .= $search_sql." ORDER BY
+										content.ORDER_DATA desc
+									LIMIT 0,3 ";
 
 							$queryContent = mysql_query($contentSql, $conn);
 							while ($rowContent = mysql_fetch_array($queryContent)) {
