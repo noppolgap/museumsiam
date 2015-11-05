@@ -800,9 +800,30 @@ ul.pagination li a.btn-arrow-right:hover{
 .box-newsdetail-main > .box-news-text h4 ,
 .box-newsdetail-main > .box-news-text h5 ,
 .box-newsdetail-main > .box-news-text h6 ,
-.box-newsdetail-main > .box-news-text strong{
+.box-newsdetail-main > .box-news-text strong ,
+.box-newsdetail-main > .box-news-text b ,
+.box-newsdetail-main > .box-news-text i{
 	font-weight: bold;
 }
+.box-newsdetail-main > .box-news-text h1 ,
+.box-newsdetail-main > .box-news-text h2 ,
+.box-newsdetail-main > .box-news-text h3 ,
+.box-newsdetail-main > .box-news-text h4 ,
+.box-newsdetail-main > .box-news-text h5 ,
+.box-newsdetail-main > .box-news-text h6 ,
+.box-newsdetail-main > .box-news-text strong ,
+.box-newsdetail-main > .box-news-text b ,
+.box-newsdetail-main > .box-news-text i{
+	display: inline;
+}
+.box-newsdetail-main > .box-news-text a{
+	display: inline !important;
+	color: #B28F50;
+}
+.box-newsdetail-main > .box-news-text a:hover{
+	text-decoration: underline;
+}
+
 .box-newsdetail-main > .box-news-text h1{ font-size: 22px;}
 .box-newsdetail-main > .box-news-text h2{ font-size: 20px;}
 .box-newsdetail-main > .box-news-text h3{ font-size: 19px;}

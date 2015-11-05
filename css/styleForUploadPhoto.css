@@ -1,0 +1,88 @@
+
+.dBlock{
+	display: block;
+}
+.dNone{
+	display: none;
+}
+.upload_bar{
+	width: 0px;
+    height: 12px;
+    background-image: url("../assets/plugin/upload/progressbar.gif");
+}
+.image_Box{
+	margin-top: 15px;
+}
+.thumbBoxEdit{
+	margin-right: 10px;
+	height: 117px;
+	overflow: hidden;
+	width: 150px;
+}
+.thumbBoxImage img{
+	max-width: 150px;
+}
+.thumbBoxEdit:hover .thumbBoxAction{
+	display: block;
+}
+.thumbBoxAction{
+	width: 20px;
+	height: 20px;
+	top: 5px;
+	right: 5px;
+	padding: 2px;
+	border-radius: 5px;
+	background-color: rgba(200,200,200,0.8);
+}
+.thumbBoxAction img{
+	width: 20px;
+	height: 20px;
+}
+.orderContent h1{
+    display: inline-block;
+    font-size: 1.1em;
+    font-weight: 600;
+    height: 28px;
+    padding: 5px;
+    width: 400px;
+}
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#sortable li {
+    font-size: 0.8em;
+    font-weight: 400;
+    height: 1em;
+    line-height: 1.28em;
+    margin: 0 5px 5px;
+    padding: 5px;
+    overflow: hidden;
+}
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; color: #f0f0f0; }
+
+.OrderImageBtn , .OrderVideoBtn{
+	background-image: url('../administrator/images/order.svg');
+	background-size: 100% 100%;
+	width: 40px;
+	height: 40px;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+}
+.sortableBox { width: 630px !important; }
+.sortableBox li {
+	margin: 3px 3px 3px 0  !important;
+	padding: 1px  !important;
+	float: left;
+	width: 150px  !important;
+	height: 117px  !important;
+	font-size: 4em  !important;
+	text-align: center;
+    background-size: cover;
+}
+.uploadImageZone{
+	position: relative;
+}
+.OrderImageBtn{
+	position: absolute;
+	top: -5px;
+	left: 300px;
+}

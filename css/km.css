@@ -57,10 +57,11 @@
 .table-row.head .column.list,
 .table-row .column.list{
 	width: 90px;
+	display: none;
 }
 .table-row.head .column.topic,
 .table-row .column.topic{
-	width: 300px;
+	width: 350px;
 	text-align: left;
 }
 .table-row.head .column.topic{
@@ -72,24 +73,30 @@
 
 .table-row.head .column.name,
 .table-row .column.name{
-	width: 95px;
+	width: 200px;
+	padding: 0 20px;
 }
 .table-row.head .column.reply,
 .table-row .column.reply{
-	width: 95px;
+	width: 70px;
 }
 .table-row.head .column.view,
 .table-row .column.view{
-	width: 95px;
+	width: 70px;
 }
 .table-row.head .column.date,
 .table-row .column.date{
-	width: 150px;
+	width: 125px;
 }
 .table-row.list .column.topic a:hover{
 	color: #6e0904;
 }
-
+.table-row .column.name span{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 159px;
+}
 
 /* --------------------------------------------------- Webboard All --------------------------------------------------- */
 
@@ -97,7 +104,7 @@
 	margin: 30px 0 0;
 }
 .box-table-webboard.all .table-row.head .column.topic, .box-table-webboard.all .table-row .column.topic{
-	width: 355px;
+	width: 415px;
 }
 .box-table-webboard.all .table-row.head>div{
 	background-color: #000;

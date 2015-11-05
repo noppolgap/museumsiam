@@ -140,5 +140,10 @@
 	vertical-align: bottom;
 }
 
-
-
+.view_vr{
+	margin: 30px auto 0;
+	display: table;
+}
+.view_vr a.btn.b360{
+	width: auto;
+}
