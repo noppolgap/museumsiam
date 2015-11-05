@@ -1768,4 +1768,47 @@ function displayShortMonth($source) {
 	}
 	return $myMonth;
 }
+
+
+function frontend_mdn_upload_image_edit($name, $picTypeId, $museumId) {
+	global $conn;
+
+	$str = "";
+
+	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_' . $name . '">' . "\n\t";
+	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_Box image_Box box-input-text cf mT">' . "\n\t";
+
+	$sql = "SELECT * FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $museumId . " AND IMG_TYPE =" . $picTypeId . "   ORDER BY ORDER_DATA ASC";
+	 
+	$query = mysql_query($sql, $conn);
+
+	$num = mysql_num_rows($query);
+	while ($row = mysql_fetch_array($query)) {
+		$str .= '<div id="img_edit_' . $row['PIC_ID'] . '" data-id="' . $row['PIC_ID'] . '" class="box-tumb">' . "\n\t";
+
+		$str .= '<div class="box-pic">' . "\n\t";
+		$str .= '<a onclick="popupImage(\'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '<div class="btn-delete">' . "\n\t";
+		$str .= '<a onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="images/small-n-flat/sign-ban.svg" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+	}
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_data image_Data dNone">' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	if ($num > 0) {
+		$str .= '<div class="p-Absolute OrderImageBtn" data-name="' . $name . '"></div>' . "\n\t";
+	} else {
+		$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
+	}
+	return $str;
+}
 ?>

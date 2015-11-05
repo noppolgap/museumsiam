@@ -78,6 +78,7 @@
 	text-align: center;
     background-size: cover;
 }
+<<<<<<< HEAD
 .uploadImageZone{
 	position: relative;
 }
@@ -86,3 +87,5 @@
 	top: -5px;
 	left: 300px;
 }
+=======
+>>>>>>> origin/master
