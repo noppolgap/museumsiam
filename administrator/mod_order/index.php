@@ -2,6 +2,19 @@
 require("../../assets/configs/config.inc.php");
 require("../../assets/configs/connectdb.inc.php");
 require("../../assets/configs/function.inc.php");
+
+	$search_sql = "";
+	unset($_SESSION['text']);
+
+	if (isset($_GET['search'])) {
+			if (isset($_POST['str_search'])){
+				$_SESSION['text'] = $_POST['str_search'];
+				$search_sql .= " AND u.NAME like '%".$_POST['str_search']."%' ";
+		}
+	}
+
+
+					
 ?>
 <!doctype html>
 <html>
@@ -20,7 +33,7 @@ require("../../assets/configs/function.inc.php");
 					<div class="floatL titleBox">ชื่อเมนู</div>
 					<div class="floatR searchBox">
 						<form name="search" action="?search" method="post">
-							<input type="search" name="str_search" value="" />
+							<input type="search" name="str_search" value="<?=$_SESSION['text'] ?>" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
 					</div>
@@ -43,20 +56,19 @@ require("../../assets/configs/function.inc.php");
 					<!-- start loop -->
 				<?php 
 
-				    $sql= "SELECT o.ORDER_ID, CONCAT( u.NAME,'  ', u.LAST_NAME ) AS name, u.EMAIL, u.MOBILE_PHONE, u.TELEPHONE, o.FLAG, o.EMS
-					FROM trn_order o
+				    $sql= " SELECT o.ORDER_ID, CONCAT( u.NAME,'  ', u.LAST_NAME ) AS name, u.EMAIL, u.MOBILE_PHONE, u.TELEPHONE, o.FLAG, o.EMS, os.STATUS_NAME_LOC
+							FROM trn_order o
 				
 					INNER JOIN sys_app_user u ON o.CUSTOMER_ID = u.id
 					LEFT JOIN mas_sub_district s ON u.SUB_DISTRICT_ID = s.SUB_DISTRICT_ID
-					LEFT JOIN mas_province p ON p.PROVINCE_ID = u.PROVINCE_ID ";
+					LEFT JOIN mas_province p ON p.PROVINCE_ID = u.PROVINCE_ID
+					LEFT JOIN trn_order_status os ON os.STATUS_ID = o.flag ";
 
-				    if(isset($_GET['search'])){
-				      $sql .= "AND name like '%".$_POST['str_search']."%' ";
-				    }
+				    $sql .= $search_sql."order by o.ORDER_ID desc";
 
-				     $query = mysql_query($sql,$conn);
+				    $query = mysql_query($sql,$conn);
 
-					 $num_rows = mysql_num_rows($query);
+					$num_rows = mysql_num_rows($query);
 
  				?>
 
@@ -72,20 +84,33 @@ require("../../assets/configs/function.inc.php");
 							<div>อีเมล์ : <? echo  $row['EMAIL']; ?></div>
 							<div>เบอร์โทรศัพท์ : <? $row['TELEPHONE']; ?> </div>
 							<div>เบอร์มือถือ : <? echo $row['MOBILE_PHONE']; ?></div>
-						</div>	
+						</div>
+
+						<? 
+							$sql_or_status = " SELECT * FROM trn_order_status ";
+
+						    $query_or_status = mysql_query($sql_or_status,$conn);
+							$num_rows = mysql_num_rows($query_or_status);
+
+						?>
+
+					
 						<div class="floatL orderContent">
 							<select name="newgroup">
-				            	  <option value="0">-- สถานะการสั่งซื้อสินค้า --</option>
-					              <option value="1">รอการโอนเงิน</option>
-					              <option value="2">รอการบัญชีเช็คยอดเงิน</option>
-					              <option value="3">รอลูกค้าติดต่อกลับมา</option>
-					              <option value="4" selected="selected">บัญชีเครียแล้ว</option>
-					              <option value="5">กำลังดำเนินการจัดส่ง</option>
-					              <option value="6">จัดส่งเรียบร้อยแล้ว</option>
-					              <option value="7">ยกเลิกออเดอร์</option>
-					              <option value="8">คืนเงินให้ลูกค้า</option>
+								<?php while($row_or_status = mysql_fetch_array($query_or_status)) { 
+
+										$selected = "";
+										if($row_or_status['STATUS_ID'] == $row['FLAG']){
+
+											$selected = "selected";
+										}
+									?>
+				            	  <option <?=$selected?> value="<?=$row_or_status['STATUS_ID'];?>"><?=$row_or_status['STATUS_NAME_LOC'];?></option>
+	                        	<? } ?>
 	                        </select> 
-						</div>	
+						</div>
+					
+
 						<div class="floatL orderEmsContent">
 							<span> EMS CODE </span>
 							<strong><? echo  $row['EMS'];  ?></strong>

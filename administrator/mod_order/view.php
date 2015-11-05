@@ -27,16 +27,17 @@ require("../../assets/configs/function.inc.php");
 				<?php 
 
 					$id = intval($_GET['order_id']);
-				    $sql= " SELECT o.ORDER_ID, CONCAT( u.NAME,'  ', u.LAST_NAME ) AS name, u.EMAIL, u.MOBILE_PHONE
+			        $sql= " SELECT o.ORDER_ID, CONCAT( u.NAME,'  ', u.LAST_NAME ) AS name, u.EMAIL, u.MOBILE_PHONE, os.STATUS_NAME_LOC
 							, u.TELEPHONE, o.FLAG, o.EMS, concat(u.ADDRESS1,' ', t.DISTRICT_DESC_LOC,' ', s.SUB_DISTRICT_DESC_LOC,' ',p.PROVINCE_DESC_LOC) as address
 							, o.CREATE_DATE , o.ADDRESS as addr
 							FROM trn_order o
-							INNER JOIN trn_order_detail d ON o.ORDER_ID = d.ORDER_ID
+							
 							INNER JOIN sys_app_user u ON o.CUSTOMER_ID = u.id
 							left join mas_district t on t.DISTRICT_ID = u.DISTRICT_ID
 							LEFT JOIN mas_sub_district s ON u.SUB_DISTRICT_ID = s.SUB_DISTRICT_ID
 							LEFT JOIN mas_province p ON p.PROVINCE_ID = u.PROVINCE_ID
-							where d.order_id = '".$id."'  ";
+							LEFT JOIN trn_order_status os ON os.STATUS_ID = o.flag
+							where o.order_id = '".$id."'  ";
 
 				   	$query = mysql_query($sql,$conn);
 
@@ -54,14 +55,12 @@ require("../../assets/configs/function.inc.php");
 						<div class="orderDetailBox floatL orderDetailBox1">
 							<div class="floatL orderDetailBoxTitle">ถึง</div>
 							<div class="floatL orderDetailBoxText"><? echo $row['name']; ?></div>
-							<div class="floatL orderDetailBoxTitle">ที่อยู่</div>
-							<div class="floatL orderDetailBoxText"><? echo $row['address']; ?></div>
 							<div class="floatL orderDetailBoxTitle">เบอร์โทรศัพท์</div>
 							<div class="floatL orderDetailBoxText"><? echo $row['TELEPHONE']; ?></div>
 							<div class="floatL orderDetailBoxTitle">เบอร์มือถือ</div>
 							<div class="floatL orderDetailBoxText"><? echo $row['MOBILE_PHONE']; ?></div>
-							<div class="floatL orderDetailBoxTitle">อีเมล์</div>
-							<div class="floatL orderDetailBoxText"><? echo $row['EMAIL']; ?></div>
+							<div class="floatL orderDetailBoxTitle">สถานที่ส่ง</div>
+							<div class="floatL orderDetailBoxText"><? echo $row['addr']; ?></div>
 							<span class="clear"></span>
 						</div>
 						<div class="orderDetailBox floatL orderDetailBox2">
@@ -70,7 +69,7 @@ require("../../assets/configs/function.inc.php");
 							<div class="floatL orderDetailBoxTitle">วันที่</div>
 							<div class="floatL orderDetailBoxText"><? echo  ConvertDate($row['CREATE_DATE']); ?></div>
 							<div class="floatL orderDetailBoxTitle">ส่งสินค้า</div>
-							<div class="floatL orderDetailBoxText"><? echo $row['addr']; ?></div>
+							<div class="floatL orderDetailBoxText"><? echo $row['STATUS_NAME_LOC']; ?></div>
 							<div class="clear"></div>
 						</div>
 						<? } ?>
@@ -80,8 +79,8 @@ require("../../assets/configs/function.inc.php");
 					<?php 
 
 					$order_id = intval($_GET['order_id']);
-					$sql_order = " select prod.PRODUCT_ID, prod.PRODUCT_DESC_LOC,  prod.PRICE, orderd.QUATITY,
-							(prod.PRICE * orderd.QUATITY ) total, od.ORDER_ID 
+					$sql_order = " select prod.PRODUCT_ID, prod.PRODUCT_DESC_LOC,  prod.PRICE, orderd.QUANTITY,
+							(prod.PRICE * orderd.QUANTITY ) total, od.ORDER_ID 
 							from trn_product prod
 							inner join trn_order_detail  orderd on prod.PRODUCT_ID = orderd.PRODUCT_ID
 							left join trn_order od on   od.ORDER_ID = orderd .ORDER_ID
@@ -117,7 +116,7 @@ require("../../assets/configs/function.inc.php");
 								<div><? echo $row_order['PRODUCT_DESC_LOC']; ?></div>
 							</div>
 							<div class="floatL productColumn3" ><? echo $row_order['PRICE']; ?></div>
-							<div class="floatL productColumn4" ><? echo $row_order['QUATITY']; ?></div>
+							<div class="floatL productColumn4" ><? echo $row_order['QUANTITY']; ?></div>
 							<div class="floatL productColumn5" ><? echo $row_order['total']; ?></div>
 							<div class="clear"></div>
 						</div>
@@ -129,7 +128,7 @@ require("../../assets/configs/function.inc.php");
 					<?php 
 
 						$price_id = intval($_GET['order_id']);
-						$sql_price = " select  sum(prod.PRICE * orderd.QUATITY ) total
+						$sql_price = " select  sum(prod.PRICE * orderd.QUANTITY ) total
 									    from trn_product prod
 										inner join trn_order_detail  orderd on prod.PRODUCT_ID = orderd.PRODUCT_ID
 										left join trn_order od on   od.ORDER_ID = orderd .ORDER_ID
