@@ -976,7 +976,7 @@ function callThumbListFrontEndByID($id, $type, $staus) {
 		if ($staus) {
 			return 'images/logo_thumb.jpg';
 		} else {
-			return '';
+			return 'style="background-image: url(\'images/logo_thumb.jpg\');"';
 		}
 	}
 
@@ -1693,25 +1693,79 @@ function front_upload_file($name) {
 }
 
 function displaydateformatlong($source) {
-	if($source != ''){
+	if ($source != '') {
 		if ($_SESSION['LANG'] == 'TH') {
 			$myDateTime = explode(" ", $source);
 			$myDateArray = explode("-", $myDateTime[0]);
 			$myYear = sprintf("%d", $myDateArray[0]) + 543;
 			$myMonth = returnThaiMonth($myDateArray[1]);
 			$myDate = $myDateArray[2];
-			return $myDate . ' ' . $myMonth . ' ' . $myYear ;// . ' ' . $myDateTime[1];
+			return $myDate . ' ' . $myMonth . ' ' . $myYear;
+			// . ' ' . $myDateTime[1];
 
 		} else {
 			$date = new DateTime($source);
 			return $date -> format('j F Y');
 		}
-	// 1 December 2012 13:30
+		// 1 December 2012 13:30
 	}
 }
-function displayTime ($source)
-{
+
+function displayTime($source) {
 	$date = new DateTime($source);
-		return $date -> format('H:i:s');
+	return $date -> format('H:i:s');
+}
+
+function displayDate($source) {
+	$myDateArray = explode("-", $source);
+	$myDate = sprintf("%d", $myDateArray[2]);
+	return $myDate;
+}
+
+function displayShortMonth($source) {
+	$myDateArray = explode("-", $source);
+	if ($_SESSION['LANG'] == 'TH') {
+		$myMonth = returnThaiShortMonth($myDateArray[1]);
+	} else {
+		switch($myDateArray[1]) {
+			case "01" :
+				$myMonth = "Jan";
+				break;
+			case "02" :
+				$myMonth = "Feb";
+				break;
+			case "03" :
+				$myMonth = "Mar";
+				break;
+			case "04" :
+				$myMonth = "Apr";
+				break;
+			case "05" :
+				$myMonth = "May";
+				break;
+			case "06" :
+				$myMonth = "Jun";
+				break;
+			case "07" :
+				$myMonth = "Jul";
+				break;
+			case "08" :
+				$myMonth = "Aug";
+				break;
+			case "09" :
+				$myMonth = "Sep";
+				break;
+			case "10" :
+				$myMonth = "Oct";
+				break;
+			case "11" :
+				$myMonth = "Nov";
+				break;
+			case "12" :
+				$myMonth = "Dec";
+				break;
+		}
+	}
+	return $myMonth;
 }
 ?>

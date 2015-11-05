@@ -66,7 +66,39 @@ if ($_GET["type"] == "province") {
 	mysql_query($sql, $conn) or die($sql);
 	$retrunID = mysql_insert_id();
 
+	$body = "";
+	if ($_SESSION['LANG'] == 'TH') {
+		$filePath = 'mail/register_th.html';
+	} else if ($_SESSION['LANG'] == 'EN') {
+		$filePath = 'mail/register_en.html';
+
+	}
+
+	$objFopen = fopen($filePath,"r");
+	if ($objFopen) {
+		while (!feof($objFopen)) {
+			$file = fgets($objFopen, 4096);
+			$body .= $file;
+		}
+		fclose($objFopen);
+	}
+
+		$to = 	$_POST['email'];
+		$to_name = $_POST['name'].' '.$_POST['surname'];
+		$send = _MAIL_USER_;
+		$send_name = 'System Museumsiam';
+		$subject = 'ยินดีต้อนรับสู่ Museumsiam.org';
+		$body = str_replace('|@|Path|@|', _FULL_SITE_PATH_, $body);
+		$body = str_replace('|@|Email|@|', $_POST['email'], $body);
+		$body = str_replace('|@|parameter|@|', 'p='.base64_encode(md5(substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 12)).'0l0'.$retrunID), $body);
+
+	if(!mysendMail($to, $to_name, $send, $send_name, $subject, $body)){
+		mysendMail($to, $to_name, $send, $send_name, $subject, $body);
+	}
+
 	header('Location: ' . 'check-email.php');
+
+
 
 }
 
