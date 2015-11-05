@@ -529,7 +529,7 @@ require ("assets/configs/function.inc.php");
 									$eventRs = mysql_query($eventSql) or die(mysql_error());
 
 									while ($eventRow = mysql_fetch_array($eventRs)) {
-										$linkTo = "mdn-event-detail.php?CID=" . $eventRow["CAT_ID"] . "&SCID=" . $eventRow["SUB_CAT_ID"] . "&CONID=" . $eventRow["CONTENT_ID"];
+										$linkTo = "mdn-event-detail.php?CID=" . $eventRow["CAT_ID"] . "&SCID=" . $eventRow["SUB_CAT_ID"] . "&CONID=" . $eventRow["CONTENT_ID"]."&MDNID=".$MDNID;
 										echo '<div class="museum-news cf">';
 										echo '<div class="box-pic">';
 										echo '<a href="' . $linkTo . '"><img src="http://placehold.it/274x205"></a>';
@@ -581,7 +581,7 @@ require ("assets/configs/function.inc.php");
 									$newsRs = mysql_query($newsSql) or die(mysql_error());
 
 									while ($newsRow = mysql_fetch_array($newsRs)) {
-										$linkTo = "mdn-news-detail.php?CID=" . $newsRow["CAT_ID"] . "&SCID=" . $newsRow["SUB_CAT_ID"] . "&CONID=" . $newsRow["CONTENT_ID"];
+										$linkTo = "mdn-news-detail.php?CID=" . $newsRow["CAT_ID"] . "&SCID=" . $newsRow["SUB_CAT_ID"] . "&CONID=" . $newsRow["CONTENT_ID"]."&MDNID=".$MDNID;
 										echo '<div class="museum-news cf">';
 										echo '<div class="box-pic">';
 										echo '<a href="' . $linkTo . '"><img src="http://placehold.it/274x205"></a>';

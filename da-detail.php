@@ -65,7 +65,6 @@ $contentSql .= " CREATE_DATE,
 				trn_content_detail
 				WHERE
 				CONTENT_ID =  " . $CONID;
-
 ?>
 <!doctype html>
 <html>
@@ -160,9 +159,9 @@ include ('inc/inc-menu.php');
 										$path = str_replace("../../","",$path);
 									}
 								?>
-									<div id="jquery_jplayer_<?=$rowPic['PIC_ID']?>" class="cp-jplayer" data-type="sound"></div>
+									<div id="jquery_jplayer_<?=$rowPic['PIC_ID'] ?>" class="cp-jplayer" data-type="sound"></div>
 
-									<div id="cp_container_<?=$rowPic['PIC_ID']?>" class="cp-container">
+									<div id="cp_container_<?=$rowPic['PIC_ID'] ?>" class="cp-container">
 										<div class="cp-buffer-holder">
 											<div class="cp-buffer-1"></div>
 											<div class="cp-buffer-2"></div>
@@ -173,37 +172,37 @@ include ('inc/inc-menu.php');
 										</div>
 										<div class="cp-circle-control"></div>
 										<ul class="cp-controls">
-											<li><a class="cp-play" tabindex="<?=$rowPic['PIC_ID']?>">play</a></li>
-											<li><a class="cp-pause" style="display:none;" tabindex="<?=$rowPic['PIC_ID']?>">pause</a></li>
+											<li><a class="cp-play" tabindex="<?=$rowPic['PIC_ID'] ?>">play</a></li>
+											<li><a class="cp-pause" style="display:none;" tabindex="<?=$rowPic['PIC_ID'] ?>">pause</a></li>
 										</ul>
 									</div>
 								<?
-									$thumbRender .= '<img src="images/tumb-sound.jpg">'."\n\t";
+								$thumbRender .= '<img src="images/tumb-sound.jpg">' . "\n\t";
 								}else if($rowPic['DIV_NAME'] == 'video'){
 
-									if($rowPic['IMG_TYPE'] == 3){
-										echo '<iframe data-type="embed" width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
-										$thumbRender .= '<img src="http://img.youtube.com/vi/'.$rowPic['IMG_PATH'].'/maxresdefault.jpg">'."\n\t";
-									}else{
-										$ext = getEXT($rowPic['IMG_PATH']);
-										$path = $rowPic['IMG_PATH'];
-										if($rowPic['IMG_TYPE'] == 2){
-											$path = str_replace("../../","",$path);
-										}
-										echo '<video width="754" height="460" controls data-type="video">'."\n\t";
-										echo '<source src="'.$path.'" type="video/'.$ext.'">'."\n\t";
-										echo '</video>'."\n\t";
-										$thumbRender .= '<img src="images/tumb-vdo.jpg">'."\n\t";
-									}
+								if($rowPic['IMG_TYPE'] == 3){
+								echo '<iframe data-type="embed" width="754" height="460" src="https://www.youtube.com/embed/'.$rowPic['IMG_PATH'].'?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'."\n\t";
+								$thumbRender .= '<img src="http://img.youtube.com/vi/'.$rowPic['IMG_PATH'].'/maxresdefault.jpg">'."\n\t";
+								}else{
+								$ext = getEXT($rowPic['IMG_PATH']);
+								$path = $rowPic['IMG_PATH'];
+								if($rowPic['IMG_TYPE'] == 2){
+								$path = str_replace("../../","",$path);
+								}
+								echo '<video width="754" height="460" controls data-type="video">'."\n\t";
+								echo '<source src="'.$path.'" type="video/'.$ext.'">'."\n\t";
+								echo '</video>'."\n\t";
+								$thumbRender .= '<img src="images/tumb-vdo.jpg">'."\n\t";
+								}
 
 								}else{
-									echo '<img class="img-slide-show" data-type="image" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
-									$thumbRender .= '<img src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								echo '<img class="img-slide-show" data-type="image" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								$thumbRender .= '<img src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
 								}
 								echo '</div>'."\n\t";
 								$thumbRender .= '</div>'."\n\t";
-							}
-						}
+								}
+								}
 					?>
 					</div>
 					<a class="btn-arrow-slide pev"></a>
@@ -212,24 +211,24 @@ include ('inc/inc-menu.php');
 						<div class="box-text">
 							<p class="text-title"><?=$rowContent['CONTENT_DESC'] ?></p>
 							<?php
-							$placeStyle = 'style="display:block"';
+							$placeClass = ' class="text-des pin" ';
 							if (nvl($rowContent['PLACE_DESC'], '') == '')
-								$placeStyle = 'style="display:none"';
+								$placeClass = ' class="text-des"  style="height: 15px;" ';
 							$hasLinkToMap = FALSE;
-							if ((nvl($rowContent['LAT'], '') != '') && (nvl($rowContent['LON'], '')!= '')) {
-								echo '<a href="http://maps.google.com/?q='.$rowContent['LAT'].','.$rowContent['LON'].'" target="_blank">';
+							if ((nvl($rowContent['LAT'], '') != '') && (nvl($rowContent['LON'], '') != '')) {
+								echo '<a href="http://maps.google.com/?q=' . $rowContent['LAT'] . ',' . $rowContent['LON'] . '" target="_blank">';
 								$hasLinkToMap = TRUE;
 							}
-								?>
-							<p class="text-des pin" <?=$placeStyle ?>>
+								?>								
+							<p <?=$placeClass ?>>
 								<?php
 								echo $rowContent['PLACE_DESC'];
 							?>
 							</p>
 							<?
-								if ($hasLinkToMap) {
-									echo '</a>';
-								}
+							if ($hasLinkToMap) {
+								echo '</a>';
+							}
  							?>
 						</div>
 					</div>
@@ -237,18 +236,18 @@ include ('inc/inc-menu.php');
 				<div class="box-social-main cf">
 				<?php
 
-						$path = 'da-detail.php?MID='.$MID.'%26CID='.$CID.'%26CONID='.$CONID;
-						$fullpath = _FULL_SITE_PATH_.'/'.$path;
-						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$CONID;
-						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
-						$gp_link = 'https://plus.google.com/share?url='.$fullpath;
-						$tw_link = $fullpath;
-						$line = 'http://line.me/R/msg/text/?'.$title.'%0D%0A'.$fullpath;
+				$path = 'da-detail.php?MID=' . $MID . '%26CID=' . $CID . '%26CONID=' . $CONID;
+				$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+				$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $CONID;
+				$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+				$gp_link = 'https://plus.google.com/share?url=' . $fullpath;
+				$tw_link = $fullpath;
+				$line = 'http://line.me/R/msg/text/?' . $title . '%0D%0A' . $fullpath;
 				?>
-					<a href="<?=$fb_link?>" onclick="shareFB('<?=$title?>',$(this).attr('href')); return false;" class="btn fb"></a>
-					<a href="<?=str_replace("%26","&amp;",$fullpath)?>" onclick="shareTW(<?=$CONID?>,'<?=$title?>',$(this).attr('href')); return false;" class="btn tw"></a>
-					<a href="<?=$gp_link?>" onclick="sharegp('<?=$title?>',$(this).attr('href')); return false;" class="btn g"></a>
-					<a href="<?=$line?>" target="_blank" class="btn line"></a>
+					<a href="<?=$fb_link ?>" onclick="shareFB('<?=$title ?>',$(this).attr('href')); return false;" class="btn fb"></a>
+					<a href="<?=str_replace("%26", "&amp;", $fullpath) ?>" onclick="shareTW(<?=$CONID ?>,'<?=$title ?>',$(this).attr('href')); return false;" class="btn tw"></a>
+					<a href="<?=$gp_link ?>" onclick="sharegp('<?=$title ?>',$(this).attr('href')); return false;" class="btn g"></a>
+					<a href="<?=$line ?>" target="_blank" class="btn line"></a>
 				</div>
 
 				<div class="part-tumb-main" >
@@ -256,22 +255,22 @@ include ('inc/inc-menu.php');
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
 						<?php
-							if($preview360 > 0){
-								echo '<a href="view-360.php?CID='.$CID.'&amp;CONID='.$CONID.'" target="_blank" class="btn black b360">ดู</a>';
-							}
+						if ($preview360 > 0) {
+							echo '<a href="view-360.php?CID=' . $CID . '&amp;CONID=' . $CONID . '" target="_blank" class="btn black b360">ดู</a>';
+						}
 						?>
-							<a href="all-media.php?CID=<?=$CID?>&amp;CONID=<?=$CONID?>" target="_blank" class="btn black">ดูทั้งหมด</a>
+							<a href="all-media.php?CID=<?=$CID ?>&amp;CONID=<?=$CONID ?>" target="_blank" class="btn black">ดูทั้งหมด</a>
 						</div>
 					</div>
 					<div class="box-slide-small">
 						<div id="sync2" class="owl-carousel">
-							<?=$thumbRender?>
+							<?=$thumbRender ?>
 						</div>
 					</div>
 				</div>
 				<div class="box-news-text">
 					<?=
-					nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br><img><a><b><span><strong>')); 
+					nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br><img><a><b><span><strong>'));
 						?>
 				</div>
 
@@ -300,16 +299,16 @@ include ('inc/inc-menu.php');
 									$link = $rowFile['IMG_PATH'];
 								}
 					?>
-						<div class="box-notice iconFile <?=returnFileType($ext)?>">
+						<div class="box-notice iconFile <?=returnFileType($ext) ?>">
 							<div class="box-text">
-								<p class="text-title"><?=$rowFile['IMG_NAME']?></p>
+								<p class="text-title"><?=$rowFile['IMG_NAME'] ?></p>
 								<p class="text-detail">
-									<span>ประเภท: .<?=$ext?></span>
-									<span>ขนาด: <?=$size?></span>
+									<span>ประเภท: .<?=$ext ?></span>
+									<span>ขนาด: <?=$size ?></span>
 								</p>
 							</div>
 							<div class="box-btn cf">
-								<a href="<?=$link?>" target="_blank" class="btn red">ดาวน์โหลด</a>
+								<a href="<?=$link ?>" target="_blank" class="btn red">ดาวน์โหลด</a>
 							</div>
 						</div>
 					<?php } } ?>
@@ -321,13 +320,14 @@ include ('inc/inc-menu.php');
 						วันที่แก้ไขล่าสุด :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
-						<div class="fb-share-button" data-href="<?=$path?>" data-layout="button_count"></div>
-						<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?=$fullpath?>">Tweet</a>
-						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="<?=$fullpath?>"></div>
+						<div class="fb-share-button" data-href="<?=$path ?>" data-layout="button_count"></div>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?=$fullpath ?>">Tweet</a>
+						<div class="g-plus" data-action="share" data-annotation="bubble" data-href="<?=$fullpath ?>"></div>
 						<span>
 						<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
 						<script type="text/javascript">
-						new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path?>","withUrl":true});
+													new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>
+							","withUrl":true});
 						</script>
 						</span>
 					</div>
@@ -349,7 +349,7 @@ include ('inc/inc-menu.php');
 
 <?php
 include ('inc/inc-footer.php');
-include('inc/inc-social-network.php');
+include ('inc/inc-social-network.php');
 ?>
 <? if($audioPlayer){ ?>
 <link rel="stylesheet" href="assets/plugin/circle-player/skin/circle.player.css">
@@ -358,7 +358,7 @@ include('inc/inc-social-network.php');
 <script type="text/javascript" src="assets/plugin/circle-player/js/jquery.grab.js"></script>
 <script type="text/javascript" src="assets/plugin/circle-player/js/mod.csstransforms.min.js"></script>
 <script type="text/javascript" src="assets/plugin/circle-player/js/circle.player.js"></script>
-<script type="text/javascript" src="audiolist.php?NAME=voice&amp;CID=<?=$CID?>&amp;CONID=<?=$CONID?>"></script>
+<script type="text/javascript" src="audiolist.php?NAME=voice&amp;CID=<?=$CID ?>&amp;CONID=<?=$CONID ?>"></script>
 <? } ?>
 
 </body>
