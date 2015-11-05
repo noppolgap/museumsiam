@@ -14,6 +14,8 @@ require ('inc_meta.php');
 <link rel="stylesheet" type="text/css" href="css/account.css" />
 <link rel="stylesheet" type="text/css" href="css/account-detail.css" />
 <link rel="stylesheet" type="text/css" href="css/account-museum.css" />
+<link rel="stylesheet" type="text/css" href="css/styleForUploadPhoto.css" />
+<script type="text/javascript" src="js/scriptForUploadPhoto.js"></script>
 <script>
 	$(document).ready(function() {
 		$(".menu-left li.menu5,.menu-left li.menu5 li.submenu1").addClass("active");
@@ -645,11 +647,24 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowseStoryPic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
+							<!-- 
+									ความเป็นมา Type = 1 
+									กายภาพ  =2 
+									ภูมิทัศน์โดยรอบ = 3
+									ห้องจัดแสดง =4
+									วัตถุจัดแสดง =5
+									วัตถุสำคัญ =6 
+									การจัดเก็บ = 7 
+									การเผยแพร่ ประชาสัมพันธ์ = 8
+									แหล่งเรียนรู้ใกล้เคียง = 9
+									-->
+								<? echo frontend_mdn_upload_image_edit('HIS', '1', $row['MUSEUM_DETAIL_ID']); ?>
+							
+							<!-- <div class="box-input-text cf mT">
 								<div class="box-tumb">
 									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
 									<a class="btn-delete"></a>
@@ -670,7 +685,7 @@ $row = mysql_fetch_array($rs);
 									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
 									<a class="btn-delete"></a>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -1401,7 +1416,13 @@ $row = mysql_fetch_array($rs);
 include ('inc/inc-footer.php');
  ?>	
 <script type="text/javascript" src="js/account-museum-detail.js">
-	
+
 </script>
+<script type="text/javascript" src="assets/plugin/upload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="assets/plugin//upload/jquery.fileupload.js"></script>
+
+<link rel="stylesheet" type="text/css" href="assets/plugin/colorbox/colorbox.css" media="all" >
+<script type="text/javascript" src="assets/plugin/colorbox/jquery.colorbox-min.js"></script>
+
 </body>
 </html>

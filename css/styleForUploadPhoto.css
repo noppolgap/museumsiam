@@ -78,3 +78,15 @@
 	text-align: center;
     background-size: cover;
 }
+.uploadImageZone{
+	position: relative;
+}
+.OrderImageBtn{
+	position: absolute;
+	top: -50px;
+}
+
+.museumbox-thumb{
+	margin: 0 9px 10px 9px !important;
+}
+}

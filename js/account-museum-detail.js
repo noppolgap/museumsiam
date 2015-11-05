@@ -102,4 +102,10 @@ $(function() {
 			e.stopPropagation();
 		});
 
+
+		$('#btnBrowseStoryPic').bind ('click' , function(e){
+			$('input[data-name="HIS"]').click();
+			e.preventDefault();
+			e.stopPropagation();
+		});
 	});

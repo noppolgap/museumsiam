@@ -1774,8 +1774,10 @@ function frontend_mdn_upload_image_edit($name, $picTypeId, $museumId) {
 	global $conn;
 
 	$str = "";
-
-	$str .= '<input class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
+	
+	
+$str .= "<div class='uploadImageZone'>";
+	$str .= '<input  style="display:none" class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
 	$str .= '<div id="progress_' . $name . '">' . "\n\t";
 	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
 	$str .= '</div>' . "\n\t";
@@ -1787,18 +1789,18 @@ function frontend_mdn_upload_image_edit($name, $picTypeId, $museumId) {
 
 	$num = mysql_num_rows($query);
 	while ($row = mysql_fetch_array($query)) {
-		$str .= '<div id="img_edit_' . $row['PIC_ID'] . '" data-id="' . $row['PIC_ID'] . '" class="box-tumb">' . "\n\t";
+		$str .= '<div id="img_edit_' . $row['PIC_ID'] . '" data-id="' . $row['PIC_ID'] . '" class="box-tumb museumbox-thumb">' . "\n\t";
 
 		$str .= '<div class="box-pic">' . "\n\t";
 		$str .= '<a onclick="popupImage(\'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
 		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '" alt="">' . "\n\t";
 		$str .= '</a>' . "\n\t";
 		$str .= '</div>' . "\n\t";
-		$str .= '<div class="btn-delete">' . "\n\t";
-		$str .= '<a onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
-		$str .= '<img src="images/small-n-flat/sign-ban.svg" alt="">' . "\n\t";
+		 
+		$str .= '<a class="btn-delete" onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		
 		$str .= '</a>' . "\n\t";
-		$str .= '</div>' . "\n\t";
+		 
 		$str .= '</div>' . "\n\t";
 	}
 	$str .= '</div>' . "\n\t";
@@ -1809,6 +1811,45 @@ function frontend_mdn_upload_image_edit($name, $picTypeId, $museumId) {
 	} else {
 		$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
 	}
+$str .= "</div>";
 	return $str;
+}
+
+function frontend_move_image_upload_dir($dir, $file, $width, $height, $crop, $thumbwidth, $thumbheight) {
+	$path1 = 'upload';
+	$path2 = $path1 . '/' . $dir;
+	$path3 = $path2 . '/' . date("Y_m") . '/';
+	$path4 = $path3 . '/thumbnail/';
+	$old_path1 = 'assets/plugin/upload/php/files/';
+
+	if (!is_dir($path1)) { mkdir($path1, 0777);
+	} else { chmod($path1, 0777);
+	}
+	if (!is_dir($path2)) { mkdir($path2, 0777);
+	} else { chmod($path2, 0777);
+	}
+	if (!is_dir($path3)) { mkdir($path3, 0777);
+	} else { chmod($path3, 0777);
+	}
+	if (!is_dir($path4)) { mkdir($path4, 0777);
+	} else { chmod($path4, 0777);
+	}
+
+	$output = time() . '_' . rand(111, 999) . '.' . getEXT($file);
+	$original_path = $old_path1 . $file;
+	$thumb_path = $old_path1 . 'thumbnail/' . $file;
+
+	copy($original_path, $path3 . $output);
+	copy($original_path, $path4 . $output);
+	unlink($original_path);
+	unlink($thumb_path);
+
+
+	chmod($path1, 0755);
+	chmod($path2, 0755);
+	chmod($path3, 0755);
+	chmod($path4, 0755);
+
+	return $path3 . $output;
 }
 ?>

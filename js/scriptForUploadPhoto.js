@@ -135,7 +135,7 @@ function thumbBox(path,file){
 	var index = $('.box-tumb').length;
 		index++;
 
-	var box  = '<div class="box-tumb" id="img_'+res+'" data-id="'+index+'">';
+	var box  = '<div class="box-tumb museumbox-thumb" id="img_'+res+'" data-id="'+index+'">';
 		box += '<div class="box-pic">';
 		box += '<a href="#" onclick="popupImage(\''+(file.replace("/thumbnail/", "/"))+'\'); return false;">';
 		box += '<img alt="" src="'+file+'">';
@@ -153,7 +153,7 @@ function thumbBox(path,file){
     return res;
 }
 function delImage(id){
-	$.post( "administrator/master/delete_image.php", { pid: id , type: 1})
+	$.post( "mdn_delete_image.php", { pid: id , type: 1})
 		.done(function( data ) {
 			var res = id.split(".");
 				res = res[0];
@@ -166,7 +166,7 @@ function delImage(id){
 }
 function delImageEdit(id , path){
 	if (confirm("คุณแน่ใจที่จะลบรูปภาพนี้")){
-		$.post( "administrator/master/delete_image.php", { pid: id , type: 2 , pname: path})
+		$.post( "mdn_delete_image.php", { pid: id , type: 2 , pname: path})
 			.done(function( data ) {
 			    $('#img_edit_'+id).hide("scale" , function() {
 					$(this).remove();
@@ -259,12 +259,12 @@ function orderImagePage(name){
 				transition: 'fade',
 				height:"85%",
 				width:700,
-				href: '../master/thumb_order.php?box='+name,
+				href: 'mdn_thumb_order.php?box='+name,
 				iframe:true,
 				onClosed:function(){ }
 			});
 		} catch(err) {
-			popup('../master/thumb_order.php?pop&box='+name,'orderImagePage',720,600);
+			popup('mdn_thumb_order.php?pop&box='+name,'orderImagePage',720,600);
 		}
 	}
 
@@ -281,15 +281,15 @@ function CallParentImage(name){
 		MyImage[0] = new Array();
 		MyImage[1] = new Array();
 	var i = 0;
-	$.each( $('.image_'+name+'_Box .thumbBoxEdit'), function( key, value ) {
-		MyImage[0][i] = $(this).find('.thumbBoxImage > a > img').attr('src');
+	$.each( $('.image_'+name+'_Box .box-tumb'), function( key, value ) {
+		MyImage[0][i] = $(this).find('.box-pic > a > img').attr('src');
 		MyImage[1][i] = $(this).attr('data-id');
 		i++;
 	});
 	return MyImage;
 }
 function SwapParentImage(name,start,stop){
-	swapElements($('.image_'+name+'_Box .thumbBoxEdit'),start,stop);
+	swapElements($('.image_'+name+'_Box .box-tumb'),start,stop);
 	if(temp1 > 0){
 		swapElements($('.image_'+name+'_data input[type="hidden"]'),start,stop);
 	}
@@ -306,25 +306,16 @@ function swapElements(siblings, subjectIndex, objectIndex) {
 }
 function updateOrderImageFile(name,id,position){
 	if(temp1 == 0){
-		var Count_input = $('.image_'+name+'_data input[name="order_position['+id+']"]').length;
+		var Count_input = $('.image_'+name+'_data input[name="'+name+'order_position['+id+']"]').length;
 		if(Count_input == 0){
-			$('.image_'+name+'_data').append('<input type="hidden" name="order_position['+id+']" value="'+position+'">');
+			$('.image_'+name+'_data').append('<input type="hidden" name="'+name+'order_position['+id+']" value="'+position+'">');
 		}else{
-			$('.image_'+name+'_data input[name="order_position['+id+']"]').val(position);
+			$('.image_'+name+'_data input[name="'+name+'order_position['+id+']"]').val(position);
 		}
 	}
 }
 
-function delIconImageEdit(id  , iconT , path){
-	if (confirm("คุณแน่ใจที่จะลบรูปภาพนี้")){
-		$.post( "../master/delete_icon_image.php", { bannerid: id , iconType: iconT ,  pname: path})
-			.done(function( data ) {
-			    $('#img_edit_'+iconT+'_'+id).hide("scale" , function() {
-					$(this).remove();
-				});
-		});
-	}
-}
+ 
 
 
 function popupUpload(file){
