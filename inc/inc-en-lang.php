@@ -127,4 +127,6 @@ $octCap = 'Oct';
 $novCap = 'Nov';
 $decCap = 'Dec';
 
+$dayArr = array( "" , "Monday" ,"Tuesday" , "Wednesday" , "Thursday" , "Friday" ,"Saturday" , "Sunday");
+
 ?>

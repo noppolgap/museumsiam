@@ -65,7 +65,8 @@ $contentSql = "SELECT
 				LAST_UPDATE_DATE,
 				IFNULL(LAST_UPDATE_DATE , CREATE_DATE) as LAST_DATE ,
 				EVENT_START_DATE,
-				EVENT_END_DATE
+				EVENT_END_DATE ,
+				LAT , LON
 				FROM
 				trn_content_detail
 				WHERE
@@ -215,7 +216,23 @@ unset($thumb_meta);
 					<div class="box-title-main">
 						<div class="box-text">
 							<p class="text-title"><?=$title ?></p>
-							<p class="text-des pin"><?=nvl($rowContent['PLACE_DESC'], "");?></p>
+							<!-- <p class="text-des pin"><?=nvl($rowContent['PLACE_DESC'], "");?></p> -->
+							
+							<?php
+							$placeClass = ' class="text-des pin" ';
+							if (nvl($rowContent['PLACE_DESC'], '') == '')
+								$placeClass = ' class="text-des"  style="height: 15px;" ';
+							$hasLinkToMap = FALSE;
+							if ((nvl($rowContent['LAT'], '') != '') && (nvl($rowContent['LON'], '')!= '')) {
+								echo '<a href="http://maps.google.com/?q='.$rowContent['LAT'].','.$rowContent['LON'].'" target="_blank">';
+								$hasLinkToMap = TRUE;
+							}
+								?>
+							<p <?=$placeClass ?>>
+								<?php
+								echo $rowContent['PLACE_DESC'];
+							?>
+							</p>
 						</div>
 					</div>
 				</div>
@@ -247,6 +264,11 @@ unset($thumb_meta);
 						</div>
 					</div>
 				</div>
+				
+				<div class="box-btn view_vr">
+					<a href="#" target="_blank" class="btn red b360">เข้าชมนิทรรศการเสมือนจริง</a>
+				</div>
+				
 				<div class="box-news-text">
 					<?=$detail ?>
 				</div>
