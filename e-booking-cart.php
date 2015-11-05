@@ -55,6 +55,7 @@ require("assets/configs/function.inc.php");
 			</div>
 
 			<div class="box-table-main">
+				<form name="bookingForm" action="?" method="post">
 				<div class="table-row head">
 					<div class="column list">นิทรรศการ</div>
 					<div class="column price">ราคา</div>
@@ -105,11 +106,15 @@ require("assets/configs/function.inc.php");
 					<div class="column total"><?=number_format($total,2)?></div>
 					<a href="#" class="btn-delete"><span class="bin"></span>ลบรายการสินค้า</a>
 				</div>
+				<input type="hidden" name="round" value="<?=$_POST['round']?>" />
+				<input type="hidden" name="price" value="<?=$row_proc['pro_PRICE']?>" />
+				<input type="hidden" name="id" value="<?=$row_proc['PRODUCT_ID']?>" />
+				</form>
 			</div>
 
 			<div class="box-total-main cf">
 				<div class="box-btn box1 cf">
-					<a class="btn red">คำนวณราคาใหม่</a>
+					<a class="btn red" href="#" onclick="$('form[name=bookingForm]').submit();">คำนวณราคาใหม่</a>
 				</div>
 				<hr class="line-gray"/>
 				<div class="box-row cf">
@@ -130,16 +135,31 @@ require("assets/configs/function.inc.php");
 						<?=number_format($total,2)?> <span>บาท</span>
 					</div>
 				</div>
-
+				<form name="bookingSave" action="e-booking-action.php" method="post">
+				<input type="hidden" name="round" value="<?=$_POST['round']?>" />
+				<input type="hidden" name="price" value="<?=$row_proc['pro_PRICE']?>" />
+				<input type="hidden" name="id" value="<?=$row_proc['PRODUCT_ID']?>" />
+				<input type="hidden" name="person" value="<?=$Quantity?>" />
+				<input type="hidden" name="type" value="" id="booking_type" />
+				</form>
+<?php
+if(isset($_SESSION['UID'])){
+	$ticket = "#\" onclick=\"$('#booking_type').val('ticket'); $('form[name=bookingSave]').submit(); return false;";
+	$booking = "#\" onclick=\"$('#booking_type').val('booking'); $('form[name=bookingSave]').submit(); return false;";
+}else{
+	$ticket = "login.php";
+	$booking = "login.php";
+}
+?>
 				<div class="box-row cf box2">
 					<div class="box-left">
 						<div class="box-btn box1 cf">
-							<a class="btn red">จองตั๋ว</a>
+							<a class="btn red" href="<?=$ticket?>">จองตั๋ว</a>
 						</div>
 					</div>
 					<div class="box-right">
 						<div class="box-btn box1 cf">
-							<a class="btn red">ซื้อตั๋ว</a>
+							<a class="btn red" href="<?=$booking?>" >ซื้อตั๋ว</a>
 						</div>
 					</div>
 				</div>
@@ -150,7 +170,6 @@ require("assets/configs/function.inc.php");
 					<a href="e-shopping.php" class="btn red">ดูสินค้าเพิ่มเติม</a>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>

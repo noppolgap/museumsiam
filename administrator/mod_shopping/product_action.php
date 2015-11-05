@@ -61,7 +61,7 @@ if (isset($_GET['add'])) {
 	$insert['BRIEF_LOC'] = "'" . $_POST['brief_name_th'] . "'";
 	$insert['BRIEF_ENG'] = "'" . $_POST['brief_name_en'] . "'";
 	$insert['ORDER_DATA'] = $max;
-	$insert['USER_CREATE'] = "'". $_SESSION['UID'];
+	$insert['USER_CREATE'] = "'". $_SESSION['user_name']."'";
 	$insert['CREATE_DATE'] = "NOW()";
 
     $sql = "INSERT INTO trn_product (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
@@ -104,7 +104,7 @@ if (isset($_GET['edit'])) {
 	$update[] = "PRICE = '" . $_POST['price'] . "'";
 	$update[] = "SALE='" . $_POST['sale'] . "'";
 	$update[] = "DETAIL= '" . $_POST['detail'] . "'";
-	$update[] = "LAST_UPDATE_USER = '". $_SESSION['UID'];
+	$update[] = "LAST_UPDATE_USER = '". $_SESSION['user_name']."'";
 	$update[] = "LAST_UPDATE_DATE = NOW()";
 
 	$sql = "UPDATE trn_product SET  " . implode(",", $update) . " WHERE PRODUCT_ID = " . $_POST['pro_id'];
