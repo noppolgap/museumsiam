@@ -7,6 +7,9 @@ body{
 	padding-top: 119px;
 /* 	padding-top: 35px; */
 }
+.scrolloff {
+	pointer-events: none;
+}
 a.btn-top{
 	width: 123px;
 	height: 31px;

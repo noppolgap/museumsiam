@@ -281,7 +281,7 @@ div.text-title img{
 
 .box-slideevent-main{
 	width: 545px;
-/* 	height: 430px; */
+	height: 430px;
 	border-bottom: 4px solid #000;
 	background-color: #fff;
 	margin-top: 10px;
@@ -620,7 +620,7 @@ div.text-title img{
 }
 .box-museum-news-main .box-museum-news{
 	padding: 0 7px;
-	min-height: 522px;
+	min-height: 471px;
 }
 .box-museum-news-main .museum-news{
 	padding: 10px 0;
@@ -645,7 +645,7 @@ div.text-title img{
 .box-museum-news-main .museum-news .text-title:hover{
 	color: #000;
 }
-.box-museum-news .box-btn{
+.box-museum-news-main .box-btn{
 	display: table;
 	margin: 19px auto;
 }

@@ -57,6 +57,8 @@ require("assets/configs/function.inc.php");
 			</div>
 			<hr class="line-gray"/>
 				
+
+				<form action="e-application-action.php?add" method="post" name="formcms" id = "myform" >
 					<div class="box-contact-from">
 						<div class="box-row cf">
 							<div class="box-left">
@@ -64,7 +66,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="jobname"></div>
 								</div>
 							</div>
 						</div>
@@ -74,7 +76,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="name_th"></div>
 								</div>
 							</div>
 						</div>
@@ -84,7 +86,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="name_eng"></div>
 								</div>
 							</div>
 						</div>
@@ -105,27 +107,18 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="birthdate"></div>
 								</div>
 							</div>
 						</div>
-						<div class="box-row cf">
-							<div class="box-left">
-								<p class="con">e-mail</p>
-							</div>
-							<div class="box-right">
-								<div class="box-input-text">
-									<div><input type="text"></div>
-								</div>
-							</div>
-						</div>
+						
 						<div class="box-row cf">
 							<div class="box-left">
 								<p>Nataionlity (สัญชาติ)</p>
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="nationality"></div>
 								</div>
 							</div>
 						</div>
@@ -135,7 +128,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="telephone"></div>
 								</div>
 							</div>
 						</div>
@@ -145,7 +138,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="email"></div>
 								</div>
 							</div>
 						</div>
@@ -155,7 +148,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="mobile"></div>
 								</div>
 							</div>
 						</div>
@@ -217,7 +210,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text"></div>
+									<div><input type="text" name="salary"></div>
 								</div>
 							</div>
 						</div>
@@ -238,8 +231,10 @@ require("assets/configs/function.inc.php");
 								<div class="box-input-text">
 									<div>
 										<div class="box-btn submit">
-											<a href="#" class="btnSubmit btn red">ตกลง</a>
-											<a href="#" class="btnReset btn red">ยกเลิก</a>
+											<input type="submit" value="save" style="display:none">
+											<input type="button" value="ยกเลิก" class="btnReset btn red">
+											<!--<a href="#" class="btnSubmit btn red">ตกลง</a>
+											<a href="#" class="btnReset btn red">ยกเลิก</a> -->
 										</div>					
 									</div>
 								</div>
@@ -248,6 +243,8 @@ require("assets/configs/function.inc.php");
 							</div>
 						</div>
 					</div>
+
+				</form>	
 		</div>
 	</div>
 </div>
