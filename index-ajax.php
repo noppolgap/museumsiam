@@ -47,7 +47,8 @@ if ($hasManualOrder) {
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
+											AND content.SUB_CAT_ID  <> " . $procurementSubCat . 
+											" AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
 where
 REF_MODULE_ID = " . $new_and_event . " )";
 	$sql .= $whereDate;
@@ -69,7 +70,8 @@ REF_MODULE_ID = " . $new_and_event . " )";
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
+											and content.SUB_CAT_ID  <> " . $procurementSubCat . 
+											" AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
 where
 REF_MODULE_ID = " . $new_and_event . " )";
 	$sql .= $whereDate;

@@ -189,8 +189,8 @@ require("assets/configs/function.inc.php");
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
 						<div class="box-date-tumb">
-							<p class="date"><?=$date[0]?></p>
-							<p class="month"><?=$date[1]?></p>
+							<p class="date"><?=displayDate($row['EVENT_START_DATE'])?></p>
+							<p class="month"><?=displayShortMonth($row['EVENT_START_DATE'])?></p>
 						</div>
 						<div class="box-text">
 							<p class="text-title"><? echo $row['CONTENT_LOC'] ?></p>
@@ -214,7 +214,7 @@ require("assets/configs/function.inc.php");
 					<a href="<?=$gp_link?>" onclick="sharegp('<?=$title?>',$(this).attr('href')); return false;" class="btn g"></a>
 					<a href="<?=$line?>" target="_blank" class="btn line"></a>
 				</div>
-				<div class="part-tumb-main">
+				<div class="part-tumb-main" <?=$extraStyle?>>
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">

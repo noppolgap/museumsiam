@@ -1769,14 +1769,12 @@ function displayShortMonth($source) {
 	return $myMonth;
 }
 
-
 function frontend_mdn_upload_image_edit($name, $picTypeId, $museumId) {
 	global $conn;
 
 	$str = "";
-	
-	
-$str .= "<div class='uploadImageZone'>";
+
+	$str .= "<div class='uploadImageZone'>";
 	$str .= '<input  style="display:none" class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
 	$str .= '<div id="progress_' . $name . '">' . "\n\t";
 	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
@@ -1784,7 +1782,7 @@ $str .= "<div class='uploadImageZone'>";
 	$str .= '<div class="image_' . $name . '_Box image_Box box-input-text cf mT">' . "\n\t";
 
 	$sql = "SELECT * FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $museumId . " AND IMG_TYPE =" . $picTypeId . "   ORDER BY ORDER_DATA ASC";
-	 
+
 	$query = mysql_query($sql, $conn);
 
 	$num = mysql_num_rows($query);
@@ -1796,11 +1794,11 @@ $str .= "<div class='uploadImageZone'>";
 		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '" alt="">' . "\n\t";
 		$str .= '</a>' . "\n\t";
 		$str .= '</div>' . "\n\t";
-		 
+
 		$str .= '<a class="btn-delete" onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
-		
+
 		$str .= '</a>' . "\n\t";
-		 
+
 		$str .= '</div>' . "\n\t";
 	}
 	$str .= '</div>' . "\n\t";
@@ -1811,7 +1809,7 @@ $str .= "<div class='uploadImageZone'>";
 	} else {
 		$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
 	}
-$str .= "</div>";
+	$str .= "</div>";
 	return $str;
 }
 
@@ -1844,12 +1842,85 @@ function frontend_move_image_upload_dir($dir, $file, $width, $height, $crop, $th
 	unlink($original_path);
 	unlink($thumb_path);
 
-
 	chmod($path1, 0755);
 	chmod($path2, 0755);
 	chmod($path3, 0755);
 	chmod($path4, 0755);
 
 	return $path3 . $output;
+}
+
+function frontend_move_single_image_upload_dir($dir, $file) {
+	$path1 = 'upload';
+	$path2 = $path1 . '/' . $dir;
+	$path3 = $path2 . '/' . date("Y_m") . '/';
+
+	if (!is_dir($path1)) { mkdir($path1, 0777);
+	} else { chmod($path1, 0777);
+	}
+	if (!is_dir($path2)) { mkdir($path2, 0777);
+	} else { chmod($path2, 0777);
+	}
+	if (!is_dir($path3)) { mkdir($path3, 0777);
+	} else { chmod($path3, 0777);
+	}
+
+	chmod($path1, 0755);
+	chmod($path2, 0755);
+	chmod($path3, 0755);
+
+	$target_file = $target_dir_museum . basename($file["name"]);
+	$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+	$target_save_file = $path3 . time() . '_' . rand(111, 999) . '.' . $imageFileType;
+
+	if (move_uploaded_file($file["tmp_name"], $target_save_file))
+		return $target_save_file;
+	else
+		return "";
+
+}
+
+function frontend_mdn_content_upload_image_edit($name, $conId, $catId) {
+	global $conn;
+
+	$str = "";
+
+	$str .= "<div class='uploadImageZone'>";
+	$str .= '<input  style="display:none" class="fileupload" type="file" data-name="' . $name . '" name="files[]" data-url="assets/plugin/upload/php/" accept="image/*" multiple>' . "\n\t";
+	$str .= '<div id="progress_' . $name . '">' . "\n\t";
+	$str .= '<div class="upload_bar dNone"></div>' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_Box image_Box box-input-text cf mT">' . "\n\t";
+
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $conId . " AND IMG_TYPE = 1 AND CAT_ID = " . $catId . "   ORDER BY ORDER_ID ASC";
+
+	$query = mysql_query($sql, $conn);
+
+	$num = mysql_num_rows($query);
+	while ($row = mysql_fetch_array($query)) {
+		$str .= '<div id="img_edit_' . $row['PIC_ID'] . '" data-id="' . $row['PIC_ID'] . '" class="box-tumb museumbox-thumb">' . "\n\t";
+
+		$str .= '<div class="box-pic">' . "\n\t";
+		$str .= '<a onclick="popupImage(\'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '" alt="">' . "\n\t";
+		$str .= '</a>' . "\n\t";
+		$str .= '</div>' . "\n\t";
+
+		$str .= '<a class="btn-delete" onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+
+		$str .= '</a>' . "\n\t";
+
+		$str .= '</div>' . "\n\t";
+	}
+	$str .= '</div>' . "\n\t";
+	$str .= '<div class="image_' . $name . '_data image_Data dNone">' . "\n\t";
+	$str .= '</div>' . "\n\t";
+	if ($num > 0) {
+		$str .= '<div class="p-Absolute OrderImageBtn" data-name="' . $name . '"></div>' . "\n\t";
+	} else {
+		$str .= '<div class="p-Absolute OrderImageBtn dNone" data-name="' . $name . '"></div>' . "\n\t";
+	}
+	$str .= "</div>";
+	return $str;
 }
 ?>

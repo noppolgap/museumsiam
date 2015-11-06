@@ -14,6 +14,8 @@ require ("assets/configs/function.inc.php");
 		<link rel="stylesheet" type="text/css" href="css/account.css" />
 		<link rel="stylesheet" type="text/css" href="css/account-detail.css" />
 		<link rel="stylesheet" type="text/css" href="css/account-museum.css" />
+		<link rel="stylesheet" type="text/css" href="css/styleForUploadPhoto.css" />
+		<script type="text/javascript" src="js/scriptForUploadPhoto.js"></script>
 		<script>
 			$(document).ready(function() {
 				$(".menu-left li.menu5,.menu-left li.menu5 li.submenu3").addClass("active");
@@ -32,7 +34,7 @@ require ("assets/configs/function.inc.php");
 		?>
 		<?php
 		include ('inc/inc-menu.php');
-		require('inc/inc-require-museum-admin-login.php' );
+		require ('inc/inc-require-museum-admin-login.php');
 		if ($_SESSION['LANG'] == 'TH') {
 			$picFolder = 'th';
 		} else {
@@ -226,37 +228,11 @@ require ("assets/configs/function.inc.php");
 									<div class="box-right ">
 										<div class="box-input-text cf">
 											<div class="box-btn">
-												<a class="btn black">BROWSE</a>
+												<a class="btn black" id = "btnBrowseNewPic">BROWSE</a>
 											</div>
 											<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 										</div>
-										<div class="box-input-text cf mT">
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-										</div>
+										<?echo frontend_mdn_content_upload_image_edit('NEWS_PIC', -1, $all_event_cat_id); ?>
 									</div>
 								</div>
 							</div>
@@ -276,7 +252,7 @@ require ("assets/configs/function.inc.php");
 									<div class="box-right">
 										<div class="box-input-text">
 											<div>
-												<input type="text" name="txtYoutubeLink">
+												<input type="text" name="txtYoutubeLink" id="txtYouTubeAdd">
 											</div>
 										</div>
 									</div>
@@ -287,7 +263,7 @@ require ("assets/configs/function.inc.php");
 									<div class="box-left">
 										<div class="box-input-text cf">
 											<div class="box-btn">
-												<a class="btn black" >เพิ่ม</a>
+												<a class="btn black" id = "btnYoutubeAdd" >เพิ่ม</a>
 											</div>
 										</div>
 									</div>
@@ -301,32 +277,11 @@ require ("assets/configs/function.inc.php");
 
 									</div>
 									<div class="box-right ">
-										<div class="box-input-text cf mT">
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
-											<div class="box-tumb">
-												<div class="box-pic"><img src="http://placehold.it/274x205">
-												</div>
-												<a class="btn-delete"></a>
-											</div>
+										<div class="box-input-text cf mT youtubePreview">
+											
+										</div>
+										<div id="divHidYoutube" style="display: none">
+											
 										</div>
 									</div>
 								</div>
@@ -336,7 +291,7 @@ require ("assets/configs/function.inc.php");
 							<hr>
 						</div>
 
-						<div class="row-main cf">
+						<!-- <div class="row-main cf">
 							<div class="box-left addW">
 								<div class="box-row cf ">
 									<div class="box-left">
@@ -351,7 +306,7 @@ require ("assets/configs/function.inc.php");
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="box-btn-main cf">
 							<div class="box-btn">
@@ -375,6 +330,10 @@ require ("assets/configs/function.inc.php");
 		</style>
 		<script type="text/javascript" src="assets/plugin/tinymce/tinymce.min.js"></script>
 		<script type="text/javascript" src="js/account-museum-news.js"></script>
-		
+		<script type="text/javascript" src="assets/plugin/upload/jquery.iframe-transport.js"></script>
+		<script type="text/javascript" src="assets/plugin//upload/jquery.fileupload.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="assets/plugin/colorbox/colorbox.css" media="all" >
+		<script type="text/javascript" src="assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 	</body>
 </html>

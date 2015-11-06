@@ -98,7 +98,8 @@ require ("assets/configs/function.inc.php");
 		$sql_event = "SELECT DISTINCT (content.EVENT_START_DATE) AS START_DATE  FROM trn_content_detail AS content WHERE
 				content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG  = 0 AND DATE(content.EVENT_START_DATE) >= DATE(NOW()) AND
 				content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category where REF_MODULE_ID = ".$new_and_event." )
-				ORDER BY EVENT_START_DATE LIMIT 0 , 7";
+				and content.SUB_CAT_ID  <> " . $procurementSubCat . 
+				" ORDER BY EVENT_START_DATE LIMIT 0 , 7";
 			    $query_event = mysql_query($sql_event, $conn);
 				while($row_event = mysql_fetch_array($query_event)) {
 					if($first_action){

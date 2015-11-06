@@ -16,100 +16,7 @@ require ("assets/configs/function.inc.php");
 		<link rel="stylesheet" type="text/css" href="css/template.css" />
 		<link rel="stylesheet" type="text/css" href="css/mdn.css" />
 
-		<script>
-			$(document).ready(function() {
-				$(".menutop li.menu6,.menu-left li.menu3,.menu-left li.menu3 .submenu1").addClass("active");
-				if ($('.menu-left li.menu3').hasClass("active")) {
-					$('.menu-left li.menu3').children(".submenu-left").css("display", "block");
-				}
-				$.scrollIt({
-					topOffset : -130 // offste (in px) for fixed top navigation
-				});
-
-				var sync1 = $("#sync1");
-				var sync2 = $("#sync2");
-
-				sync1.owlCarousel({
-					singleItem : true,
-					paginationSpeed : 500,
-					rewindSpeed : 1000,
-					navigation : false,
-					pagination : false,
-					afterAction : syncPosition,
-					responsiveRefreshRate : 200,
-					mouseDrag : false,
-					rewindNav : true
-				});
-
-				sync2.owlCarousel({
-					paginationSpeed : 500,
-					rewindSpeed : 1000,
-					items : 5,
-					itemsMobile : [320, 5],
-					itemsTablet : [768, 5],
-					itemsDesktop : [1024, 5],
-					navigation : false,
-					pagination : true,
-					responsiveRefreshRate : 100,
-					mouseDrag : false,
-					afterInit : function(el) {
-						el.find(".owl-item").eq(0).addClass("synced");
-					},
-					rewindNav : false
-				});
-
-				function syncPosition(el) {
-					var current = this.currentItem;
-					$("#sync2").find(".owl-item").removeClass("synced").eq(current).addClass("synced")
-					if ($("#sync2").data("owlCarousel") !== undefined) {
-						center(current)
-					}
-				}
-
-
-				$("#sync2").on("click", ".owl-item", function(e) {
-					e.preventDefault();
-					var number = $(this).data("owlItem");
-					sync1.trigger("owl.goTo", number);
-				});
-
-				function center(number) {
-					var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-
-					var num = number;
-					var found = false;
-					for (var i in sync2visible) {
-						if (num === sync2visible[i]) {
-							var found = true;
-						}
-					}
-
-					if (found === false) {
-						if (num > sync2visible[sync2visible.length - 1]) {
-							sync2.trigger("owl.goTo", num - sync2visible.length + 2)
-						} else {
-							if (num - 1 === -1) {
-								num = 0;
-							}
-							sync2.trigger("owl.goTo", num);
-						}
-					} else if (num === sync2visible[sync2visible.length - 1]) {
-						sync2.trigger("owl.goTo", sync2visible[1])
-					} else if (num === sync2visible[0]) {
-						sync2.trigger("owl.goTo", num - 1)
-					}
-				}
-
-
-				$(".box-slide-big a.pev").click(function() {
-					$("#sync1").data('owlCarousel').prev();
-				});
-				$(".box-slide-big a.next").click(function() {
-					$("#sync1").data('owlCarousel').next();
-				});
-
-			});
-		</script>
+		<script type="text/javascript" src="js/mdn-detail.js"></script>
 
 	</head>
 
@@ -197,6 +104,7 @@ require ("assets/configs/function.inc.php");
 					MUSEUM_DETAIL_ID = " . $MDNID;
 					$rs = mysql_query($museSql) or die(mysql_error());
 					$row = mysql_fetch_array($rs);
+					unset($imgArr);
 					?>
 				</div>
 				<div class="box-right main-content">
@@ -209,24 +117,31 @@ require ("assets/configs/function.inc.php");
 					<div class="box-newsdetail-main">
 						<div class="box-slide-big">
 							<div id="sync1" class="owl-carousel">
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562/ccc">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562/ccc">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562">
-								</div>
-								<div class="slide-content">
-									<img src="http://placehold.it/754x562/ccc">
-								</div>
+								<?php
+								$preview360 = 0;
+								$audioPlayer = false;
+								$thumbRender = "\n\n\t";
+								$extraStyle = "";
+								$getPicSql = "SELECT * FROM trn_museum_profile_picture  WHERE MUSEUM_ID = " . $MDNID . " ORDER BY IMG_TYPE ASC , ORDER_DATA ASC";
+
+								$rsPic = mysql_query($getPicSql) or die(mysql_error());
+								$rowPicturecount = mysql_num_rows($rsPic);
+								if ($rowPicturecount == 1) {
+									$extraStyle = " style='display:none;'";
+								}
+								while ($rowPic = mysql_fetch_array($rsPic)) {
+									$imgArr[$rowPic['IMG_TYPE']][] = $rowPic['IMG_PATH'];
+									echo '	<div class="slide-content"> ' . "\n\t\t";
+									$thumbRender .= '<div class="slide-content">' . "\n\t\t";
+
+									echo '<img class="img-slide-show" data-type="image" style="max-width:754px;max-height: 562px" src="' . str_replace('../../', '', $rowPic['IMG_PATH']) . '">' . "\n\t";
+									$thumbRender .= '<img src="' . str_replace('../../', '', $rowPic['IMG_PATH']) . '">' . "\n\t";
+
+									echo '</div>' . "\n\t";
+									$thumbRender .= '</div>' . "\n\t";
+
+								}
+					?>
 							</div>
 							<a class="btn-arrow-slide pev"></a>
 							<a class="btn-arrow-slide next"></a>
@@ -247,7 +162,7 @@ require ("assets/configs/function.inc.php");
 							<a href="#" class="btn g"></a>
 							<a href="#" class="btn line"></a>
 						</div>
-						<div class="part-tumb-main">
+						<div class="part-tumb-main" <?=$extraStyle ?>>
 							<div  class="text-title cf">
 								<p>
 									แกลเลอรี
@@ -258,24 +173,7 @@ require ("assets/configs/function.inc.php");
 							</div>
 							<div class="box-slide-small">
 								<div id="sync2" class="owl-carousel">
-									<div class="slide-content">
-										<img src="http://placehold.it/125x94">
-									</div>
-									<div class="slide-content">
-										<img src="images/tumb-sound.jpg">
-									</div>
-									<div class="slide-content">
-										<img src="http://placehold.it/125x94">
-									</div>
-									<div class="slide-content">
-										<img src="images/tumb-vdo.jpg">
-									</div>
-									<div class="slide-content">
-										<img src="http://placehold.it/125x94">
-									</div>
-									<div class="slide-content">
-										<img src="http://placehold.it/125x94/ccc">
-									</div>
+									<?=$thumbRender ?>
 								</div>
 							</div>
 						</div>
@@ -382,9 +280,17 @@ require ("assets/configs/function.inc.php");
 								<?=$row['STORY_DESC'] ?>
 							</p>
 							<div class="box-img cf">
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+								<?
+
+								//	var_dump( $imgArr[1]);
+								foreach ($imgArr[1] as $imgVal) {
+									$imgPath = str_replace('../../', '', $imgVal);
+									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								}
+ ?>
+								<!-- <a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
 								<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a> -->
 							</div>
 						</div>
 						<div class="box-white">
@@ -393,9 +299,12 @@ require ("assets/configs/function.inc.php");
 								<?=$row['PHYSICAL_DESC'] ?>
 							</p>
 							<div class="box-img cf">
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+								<?
+								foreach ($imgArr[2] as $imgVal) {
+									$imgPath = str_replace('../../', '', $imgVal);
+									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								}
+ ?>
 							</div>
 						</div>
 
@@ -405,9 +314,12 @@ require ("assets/configs/function.inc.php");
 								<?=$row['LANDSCAPE_DESC'] ?>
 							</p>
 							<div class="box-img cf">
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+								<?
+								foreach ($imgArr[3] as $imgVal) {
+									$imgPath = str_replace('../../', '', $imgVal);
+									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								}
+ ?>
 							</div>
 						</div>
 						<div class="box-white">
@@ -416,9 +328,12 @@ require ("assets/configs/function.inc.php");
 								<?=$row['EXHIBITION_DESC'] ?>
 							</p>
 							<div class="box-img cf">
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+								<?
+								foreach ($imgArr[4] as $imgVal) {
+									$imgPath = str_replace('../../', '', $imgVal);
+									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								}
+ ?>
 							</div>
 						</div>
 						<div class="box-white">
@@ -427,9 +342,12 @@ require ("assets/configs/function.inc.php");
 								<?=$row['ARCHIVE_DESC'] ?>
 							</p>
 							<div class="box-img cf">
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+								<?
+								foreach ($imgArr[5] as $imgVal) {
+									$imgPath = str_replace('../../', '', $imgVal);
+									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								}
+ ?>
 							</div>
 						</div>
 						<div class="box-white">
@@ -438,9 +356,12 @@ require ("assets/configs/function.inc.php");
 								<?=$row['TOP_ARCHIVE_DESC'] ?>
 							</p>
 							<div class="box-img cf">
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+								<?
+								foreach ($imgArr[6] as $imgVal) {
+									$imgPath = str_replace('../../', '', $imgVal);
+									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								}
+ ?>
 							</div>
 						</div>
 						<div class="box-white">
@@ -449,9 +370,12 @@ require ("assets/configs/function.inc.php");
 								<?=$row['STORAGE_DESC'] ?>
 							</p>
 							<div class="box-img cf">
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+							<?
+							foreach ($imgArr[7] as $imgVal) {
+								$imgPath = str_replace('../../', '', $imgVal);
+								echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+							}
+ ?>
 							</div>
 						</div>
 						<div class="box-white">
@@ -460,9 +384,12 @@ require ("assets/configs/function.inc.php");
 								<?=$row['NEARBY_DESC'] ?>
 							</p>
 							<div class="box-img cf">
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img class="right"  src="http://placehold.it/754x562"></a>
-								<a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
+						<?
+						foreach ($imgArr[8] as $imgVal) {
+							$imgPath = str_replace('../../', '', $imgVal);
+							echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+						}
+ ?>
 							</div>
 						</div>
 						<div class="box-white">
@@ -529,7 +456,7 @@ require ("assets/configs/function.inc.php");
 									$eventRs = mysql_query($eventSql) or die(mysql_error());
 
 									while ($eventRow = mysql_fetch_array($eventRs)) {
-										$linkTo = "mdn-event-detail.php?CID=" . $eventRow["CAT_ID"] . "&SCID=" . $eventRow["SUB_CAT_ID"] . "&CONID=" . $eventRow["CONTENT_ID"]."&MDNID=".$MDNID;
+										$linkTo = "mdn-event-detail.php?CID=" . $eventRow["CAT_ID"] . "&SCID=" . $eventRow["SUB_CAT_ID"] . "&CONID=" . $eventRow["CONTENT_ID"] . "&MDNID=" . $MDNID;
 										echo '<div class="museum-news cf">';
 										echo '<div class="box-pic">';
 										echo '<a href="' . $linkTo . '"><img src="http://placehold.it/274x205"></a>';
@@ -581,7 +508,7 @@ require ("assets/configs/function.inc.php");
 									$newsRs = mysql_query($newsSql) or die(mysql_error());
 
 									while ($newsRow = mysql_fetch_array($newsRs)) {
-										$linkTo = "mdn-news-detail.php?CID=" . $newsRow["CAT_ID"] . "&SCID=" . $newsRow["SUB_CAT_ID"] . "&CONID=" . $newsRow["CONTENT_ID"]."&MDNID=".$MDNID;
+										$linkTo = "mdn-news-detail.php?CID=" . $newsRow["CAT_ID"] . "&SCID=" . $newsRow["SUB_CAT_ID"] . "&CONID=" . $newsRow["CONTENT_ID"] . "&MDNID=" . $MDNID;
 										echo '<div class="museum-news cf">';
 										echo '<div class="box-pic">';
 										echo '<a href="' . $linkTo . '"><img src="http://placehold.it/274x205"></a>';

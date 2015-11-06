@@ -188,12 +188,14 @@
 .box-white .box-img{
 	margin-top: 10px;
 }
-.box-white .box-img img{
-	width: 342px;
-	height: auto;
-	float: left;
-	margin-right: 20px;
-	margin-bottom: 20px;
+.box-white .box-img img {
+    float: left;
+    height: auto;
+    margin-bottom: 20px;
+    margin-left: 6px;
+    margin-right: 6px;
+    width: 340px;
+    max-height: 255px;
 }
 .box-white .box-img img.right{
 	margin-right: 0px;

@@ -251,7 +251,7 @@ unset($thumb_meta);
 					<a href="<?=$gp_link ?>" onclick="sharegp('<?=$title ?>',$(this).attr('href')); return false;" class="btn g"></a>
 					<a href="<?=$line ?>" target="_blank" class="btn line"></a>
 				</div>
-				<div class="part-tumb-main">
+				<div class="part-tumb-main" <?=$extraStyle?>>
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">

@@ -250,7 +250,7 @@ include ('inc/inc-menu.php');
 					<a href="<?=$line ?>" target="_blank" class="btn line"></a>
 				</div>
 
-				<div class="part-tumb-main" >
+				<div class="part-tumb-main" <?=$extraStyle?>>
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
@@ -270,7 +270,7 @@ include ('inc/inc-menu.php');
 				</div>
 				<div class="box-news-text">
 					<?=
-					nl2br(strip_tags($rowContent['DETAIL_DESC'], '<p><br><img><a><b><span><strong>'));
+					nl2br(strip_tags(str_replace("../../","",$rowContent['DETAIL_DESC']), '<p><br><img><a><b><span><strong>'));
 						?>
 				</div>
 

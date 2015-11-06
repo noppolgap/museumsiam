@@ -22,7 +22,7 @@ require ('inc_meta.php');
 		if ($('.menu-left li.menu5').hasClass("active")) {
 			$('.menu-left li.menu5').children(".submenu-left").css("display", "block");
 		}
-	});
+	}); 
 </script>
 	
 </head>
@@ -354,14 +354,16 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWSE</a>
+									<a class="btn black" onclick="$('#browseMapLoc').click();">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf ">
 								<div class="box-tumb">
-									<div class="box-pic"><img id="imgMapLoc" src="<?=$row['MAP_IMG_PATH_LOC']?>"></div>
-									<a class="btn-delete"></a>
+									<div class="box-pic"><img id="imgMapLoc"  src="<?=$row['MAP_IMG_PATH_LOC'] ?>"></div>
+									<a class="btn-delete deleteMap" data-id="MapLoc" ></a>
+									<input type='file' name ="browseMapLoc" id ="browseMapLoc" style="display:none" accept="image/*" />
+									<input type="hidden" id = "hidMapLoc" name = "hidMapLoc"  value=""/>									
 								</div>
 							</div>
 						</div>
@@ -375,14 +377,16 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWSE</a>
+									<a class="btn black" onclick="$('#browseMapEng').click();">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
 							<div class="box-input-text cf ">
 								<div class="box-tumb">
-									<div class="box-pic"><img id="imgMapEng" src="<?=$row['MAP_IMG_PATH_LOC']?>"></div>
-									<a class="btn-delete"></a>
+									<div class="box-pic"><img id="imgMapEng" src="<?=$row['MAP_IMG_PATH_ENG'] ?>"></div>
+									<a class="btn-delete deleteMap" data-id="MapEng"></a>
+									<input type='file' name ="browseMapEng" id ="browseMapEng" style="display:none" accept="image/*" />
+									<input type="hidden" id = "hidMapEng"  name = "hidMapEng" value="" />	
 								</div>
 							</div>
 						</div>
@@ -663,29 +667,6 @@ $row = mysql_fetch_array($rs);
 									แหล่งเรียนรู้ใกล้เคียง = 9
 									-->
 								<? echo frontend_mdn_upload_image_edit('HIS', '1', $row['MUSEUM_DETAIL_ID']); ?>
-							
-							<!-- <div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div> -->
 						</div>
 					</div>
 				</div>
@@ -727,32 +708,11 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowsePhysicalPic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
+							<? echo frontend_mdn_upload_image_edit('PHY', '2', $row['MUSEUM_DETAIL_ID']); ?>
 						</div>
 					</div>
 				</div>
@@ -794,32 +754,11 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowseLandScapePic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
+							<? echo frontend_mdn_upload_image_edit('LAND', '3', $row['MUSEUM_DETAIL_ID']); ?>
 						</div>
 					</div>
 				</div>
@@ -861,32 +800,11 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowseExhibitionPic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
+							<? echo frontend_mdn_upload_image_edit('EXH', '4', $row['MUSEUM_DETAIL_ID']); ?>
 						</div>
 					</div>
 				</div>
@@ -928,37 +846,16 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowseArchivePic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
+							<? echo frontend_mdn_upload_image_edit('ARC', '5', $row['MUSEUM_DETAIL_ID']); ?>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row-main cf">
+			<!-- <div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
@@ -990,7 +887,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<div class="box-line cf"><hr></div>		
 			
 			<div class="row-main cf">
@@ -1028,37 +925,16 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowseTopArchivePic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
+							<? echo frontend_mdn_upload_image_edit('TOP_ARC', '6', $row['MUSEUM_DETAIL_ID']); ?>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row-main cf">
+			<!-- <div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
@@ -1086,7 +962,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<div class="box-line cf"><hr></div>		
 			
 			<div class="row-main cf">
@@ -1124,32 +1000,11 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowseStoragePic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
+							<? echo frontend_mdn_upload_image_edit('STORAGE', '7', $row['MUSEUM_DETAIL_ID']); ?>
 						</div>
 					</div>
 				</div>
@@ -1219,32 +1074,11 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowsePublicInfoPic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
+							<? echo frontend_mdn_upload_image_edit('PUBLIC_INFO', '8', $row['MUSEUM_DETAIL_ID']); ?>
 						</div>
 					</div>
 				</div>
@@ -1314,32 +1148,11 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right ">
 							<div class="box-input-text cf">
 								<div class="box-btn">
-									<a class="btn black">BROWES</a>
+									<a class="btn black" id="btnBrowseNearbyPic">BROWSE</a>
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<div class="box-input-text cf mT">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
+							<? echo frontend_mdn_upload_image_edit('NEARBY', '9', $row['MUSEUM_DETAIL_ID']); ?>
 						</div>
 					</div>
 				</div>
@@ -1415,9 +1228,7 @@ $row = mysql_fetch_array($rs);
 <?php
 include ('inc/inc-footer.php');
  ?>	
-<script type="text/javascript" src="js/account-museum-detail.js">
-
-</script>
+<script type="text/javascript" src="js/account-museum-detail.js"></script>
 <script type="text/javascript" src="assets/plugin/upload/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="assets/plugin//upload/jquery.fileupload.js"></script>
 

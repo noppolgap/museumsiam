@@ -39,4 +39,9 @@ $shipping_cost = 100;
 //user $new_and_event as ModuleID
 $museumDataNetworkEventSubCat = 141;
 $museumDataNetworkNewsSubCat = 142;
+
+
+//Procurement SubCat
+$procurementSubCat = 132;
+
 ?>

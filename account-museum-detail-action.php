@@ -90,33 +90,32 @@ if ($_GET["type"] == "province") {
 	$update[] = "TWITTER_URL = '" . $_POST['txtTwitterURL'] . "'";
 	$update[] = "YOUTUBE_URL = '" . $_POST['txtYoutubeURL'] . "'";
 
-	//	$update[] = "MAP_IMG_PATH_LOC = '" . $_POST[''] . "'";
-	//$update[] = "MAP_IMG_PATH_ENG = '" . $_POST[''] . "'";
-	if (isset($_FILES['browseAvarta'])) {
-		$target_dir = "upload/USER_IMG/";
-		$target_dir_museum = $target_dir . 'USER_ID_' . $_SESSION['UID'] . '/';
-
-		$target_file = $target_dir_museum . basename($_FILES["browseAvarta"]["name"]);
-		//	echo $target_save_file ;
-		$uploadOk = 1;
-		$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-		$target_save_file = $target_dir_museum . date("YmdGis") . '.' . $imageFileType;
-
-		if (!is_dir($target_dir)) { mkdir($target_dir, 0777);
-		} else { chmod($target_dir, 0777);
+	if (isset($_POST['hidMapEng'])) {
+		if ($_POST['hidMapEng'] == 'DEL')
+			$update[] = "MAP_IMG_PATH_ENG = ''";
+	}
+	if (isset($_POST['hidMapLoc'])) {
+		if ($_POST['hidMapLoc'] == 'DEL')
+			$update[] = "MAP_IMG_PATH_LOC = ''";
+	}
+ 
+	//echo 'count : ' . count($_FILES['browseMapLoc']) . ' ' . count($_FILES['browseMapEng']);
+	if (isset($_FILES['browseMapLoc'])) {
+		if ($_FILES['browseMapLoc']["name"] != '') {
+			$filename = frontend_move_single_image_upload_dir('MUSEUM_' . $_POST['museumId'], $_FILES['browseMapLoc']);
+			$update[] = "MAP_IMG_PATH_LOC = '" . $filename . "'";
 		}
+	}
 
-		if (!is_dir($target_dir_museum)) { mkdir($target_dir_museum, 0777);
-		} else { chmod($target_dir_museum, 0777);
-		}
-
-		if (move_uploaded_file($_FILES["browseAvarta"]["tmp_name"], $target_save_file)) {
-			$update[] = "IMAGE_PATH = '" . $target_save_file . "'";
-			//echo "Upload Complete";
+	if (isset($_FILES['browseMapEng'])) {
+		if ($_FILES['browseMapEng']["name"] != '' ) {
+			$filename = frontend_move_single_image_upload_dir('MUSEUM_' . $_POST['museumId'], $_FILES['browseMapEng']);
+			$update[] = "MAP_IMG_PATH_ENG = '" . $filename . "'";
 		}
 	}
 
 	$sql = "UPDATE trn_museum_detail SET  " . implode(",", $update) . " WHERE MUSEUM_DETAIL_ID = " . $_POST['museumId'];
+	//echo $sql;
 	mysql_query($sql, $conn);
 
 	$deleteOpenningSql = "delete from trn_museum_openning where MUSEUM_ID = " . $_POST['museumId'];
@@ -156,17 +155,17 @@ if ($_GET["type"] == "province") {
 		}
 	}
 	/*
-	 ความเป็นมา Type = 1
-	 กายภาพ  =2
-	 ภูมิทัศน์โดยรอบ = 3
-	 ห้องจัดแสดง =4
-	 วัตถุจัดแสดง =5
-	 วัตถุสำคัญ =6
-	 การจัดเก็บ = 7
-	 การเผยแพร่ ประชาสัมพันธ์ = 8
-	 แหล่งเรียนรู้ใกล้เคียง = 9
+	 ความเป็นมา Type = 1 HIS
+	 กายภาพ  =2 PHY
+	 ภูมิทัศน์โดยรอบ = 3 LAND
+	 ห้องจัดแสดง =4 EXH
+	 วัตถุจัดแสดง =5 ARC
+	 วัตถุสำคัญ =6 TOP_ARC
+	 การจัดเก็บ = 7 STORAGE
+	 การเผยแพร่ ประชาสัมพันธ์ = 8 PUBLIC_INFO
+	 แหล่งเรียนรู้ใกล้เคียง = 9 NEARBY
 	 */
-	//HIS_file
+	//ความเป็นมา Type = 1 HIS
 	if (count($_POST['HIS_file']) > 0) {
 		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 1";
 		//$_POST['cmbCategory'];
@@ -189,7 +188,6 @@ if ($_GET["type"] == "province") {
 		}
 	}
 
-	//HISorder_position
 	if (count($_POST['HISorder_position']) > 0) {
 
 		foreach ($_POST['HISorder_position'] as $k => $val) {
@@ -200,6 +198,272 @@ if ($_GET["type"] == "province") {
 			mysql_query($sql, $conn) or die($sql);
 		}
 	}
+
+	//กายภาพ  =2 PHY
+	if (count($_POST['PHY_file']) > 0) {
+		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 2";
+		//$_POST['cmbCategory'];
+		$query_max = mysql_query($sql_max, $conn) or die($sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;
+
+		foreach ($_POST['PHY_file'] as $k => $file) {
+			$filename = frontend_move_image_upload_dir('MUSEUM_' . $_POST['museumId'], end(explode('/', $file)), 1000, '', false, 150, 150);
+
+			unset($insert);
+			$insert['MUSEUM_ID'] = $_POST['museumId'];
+			$insert['IMG_TYPE'] = 2;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['ORDER_DATA'] = $max++;
+
+			$sql = "INSERT INTO trn_museum_profile_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (count($_POST['PHYorder_position']) > 0) {
+
+		foreach ($_POST['PHYorder_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_DATA = " . $val;
+
+			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	// ภูมิทัศน์โดยรอบ = 3 LAND
+	if (count($_POST['LAND_file']) > 0) {
+		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 3";
+		$query_max = mysql_query($sql_max, $conn) or die($sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;
+
+		foreach ($_POST['LAND_file'] as $k => $file) {
+			$filename = frontend_move_image_upload_dir('MUSEUM_' . $_POST['museumId'], end(explode('/', $file)), 1000, '', false, 150, 150);
+
+			unset($insert);
+			$insert['MUSEUM_ID'] = $_POST['museumId'];
+			$insert['IMG_TYPE'] = 3;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['ORDER_DATA'] = $max++;
+
+			$sql = "INSERT INTO trn_museum_profile_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (count($_POST['LANDorder_position']) > 0) {
+
+		foreach ($_POST['LANDorder_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_DATA = " . $val;
+
+			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	//ห้องจัดแสดง =4 EXH
+	if (count($_POST['EXH_file']) > 0) {
+		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 4";
+		$query_max = mysql_query($sql_max, $conn) or die($sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;
+
+		foreach ($_POST['EXH_file'] as $k => $file) {
+			$filename = frontend_move_image_upload_dir('MUSEUM_' . $_POST['museumId'], end(explode('/', $file)), 1000, '', false, 150, 150);
+
+			unset($insert);
+			$insert['MUSEUM_ID'] = $_POST['museumId'];
+			$insert['IMG_TYPE'] = 4;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['ORDER_DATA'] = $max++;
+
+			$sql = "INSERT INTO trn_museum_profile_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (count($_POST['EXHorder_position']) > 0) {
+
+		foreach ($_POST['EXHorder_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_DATA = " . $val;
+
+			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	//วัตถุจัดแสดง =5 ARC
+	if (count($_POST['ARC_file']) > 0) {
+		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 5";
+		$query_max = mysql_query($sql_max, $conn) or die($sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;
+
+		foreach ($_POST['ARC_file'] as $k => $file) {
+			$filename = frontend_move_image_upload_dir('MUSEUM_' . $_POST['museumId'], end(explode('/', $file)), 1000, '', false, 150, 150);
+
+			unset($insert);
+			$insert['MUSEUM_ID'] = $_POST['museumId'];
+			$insert['IMG_TYPE'] = 5;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['ORDER_DATA'] = $max++;
+
+			$sql = "INSERT INTO trn_museum_profile_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (count($_POST['ARCorder_position']) > 0) {
+
+		foreach ($_POST['ARCorder_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_DATA = " . $val;
+
+			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	// วัตถุสำคัญ =6 TOP_ARC
+	if (count($_POST['TOP_ARC_file']) > 0) {
+		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 6";
+		$query_max = mysql_query($sql_max, $conn) or die($sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;
+
+		foreach ($_POST['TOP_ARC_file'] as $k => $file) {
+			$filename = frontend_move_image_upload_dir('MUSEUM_' . $_POST['museumId'], end(explode('/', $file)), 1000, '', false, 150, 150);
+
+			unset($insert);
+			$insert['MUSEUM_ID'] = $_POST['museumId'];
+			$insert['IMG_TYPE'] = 6;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['ORDER_DATA'] = $max++;
+
+			$sql = "INSERT INTO trn_museum_profile_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (count($_POST['TOP_ARCorder_position']) > 0) {
+
+		foreach ($_POST['TOP_ARCorder_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_DATA = " . $val;
+
+			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	// การจัดเก็บ = 7 STORAGE
+	if (count($_POST['STORAGE_file']) > 0) {
+		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 7";
+		$query_max = mysql_query($sql_max, $conn) or die($sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;
+
+		foreach ($_POST['STORAGE_file'] as $k => $file) {
+			$filename = frontend_move_image_upload_dir('MUSEUM_' . $_POST['museumId'], end(explode('/', $file)), 1000, '', false, 150, 150);
+
+			unset($insert);
+			$insert['MUSEUM_ID'] = $_POST['museumId'];
+			$insert['IMG_TYPE'] = 7;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['ORDER_DATA'] = $max++;
+
+			$sql = "INSERT INTO trn_museum_profile_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (count($_POST['STORAGEorder_position']) > 0) {
+
+		foreach ($_POST['STORAGEorder_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_DATA = " . $val;
+
+			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	// การเผยแพร่ ประชาสัมพันธ์ = 8 PUBLIC_INFO
+	if (count($_POST['PUBLIC_INFO_file']) > 0) {
+		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 8";
+		$query_max = mysql_query($sql_max, $conn) or die($sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;
+
+		foreach ($_POST['PUBLIC_INFO_file'] as $k => $file) {
+			$filename = frontend_move_image_upload_dir('MUSEUM_' . $_POST['museumId'], end(explode('/', $file)), 1000, '', false, 150, 150);
+
+			unset($insert);
+			$insert['MUSEUM_ID'] = $_POST['museumId'];
+			$insert['IMG_TYPE'] = 8;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['ORDER_DATA'] = $max++;
+
+			$sql = "INSERT INTO trn_museum_profile_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (count($_POST['PUBLIC_INFOorder_position']) > 0) {
+
+		foreach ($_POST['PUBLIC_INFOorder_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_DATA = " . $val;
+
+			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	// แหล่งเรียนรู้ใกล้เคียง = 9 NEARBY
+	if (count($_POST['NEARBY_file']) > 0) {
+		$sql_max = "SELECT MAX(ORDER_DATA) AS MAX_ORDER FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $_POST['museumId'] . " AND IMG_TYPE = 9";
+		$query_max = mysql_query($sql_max, $conn) or die($sql_max);
+		$row_max = mysql_fetch_array($query_max);
+		$max = $row_max['MAX_ORDER'];
+		$max++;
+
+		foreach ($_POST['NEARBY_file'] as $k => $file) {
+			$filename = frontend_move_image_upload_dir('MUSEUM_' . $_POST['museumId'], end(explode('/', $file)), 1000, '', false, 150, 150);
+
+			unset($insert);
+			$insert['MUSEUM_ID'] = $_POST['museumId'];
+			$insert['IMG_TYPE'] = 9;
+			$insert['IMG_PATH'] = "'" . $filename . "'";
+			$insert['ORDER_DATA'] = $max++;
+
+			$sql = "INSERT INTO trn_museum_profile_picture (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (count($_POST['NEARBYorder_position']) > 0) {
+
+		foreach ($_POST['NEARBYorder_position'] as $k => $val) {
+			$update = "";
+			$update[] = "ORDER_DATA = " . $val;
+
+			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
 	header('Location: ' . 'account-museum-detail.php');
 }
 ?>
