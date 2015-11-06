@@ -6,7 +6,7 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/template.css" />
@@ -20,13 +20,13 @@ require("assets/configs/function.inc.php");
 			}
 	});
 </script>
-	
+
 </head>
 
 <body id="register">
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -56,7 +56,7 @@ require("assets/configs/function.inc.php");
 				</h1>
 			</div>
 			<hr class="line-gray"/>
-				
+
 
 				<form action="e-application-action.php?add" method="post" name="formcms" id = "myform" >
 					<div class="box-contact-from">
@@ -66,7 +66,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="jobname"></div>
+									<div><input type="text" name="jobname" id="jobname"></div>
 								</div>
 							</div>
 						</div>
@@ -76,7 +76,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="name_th"></div>
+									<div><input type="text" name="name_th" id="name_th"></div>
 								</div>
 							</div>
 						</div>
@@ -86,7 +86,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="name_eng"></div>
+									<div><input type="text" name="name_eng" id="name_eng"></div>
 								</div>
 							</div>
 						</div>
@@ -107,11 +107,11 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="birthdate"></div>
+									<div><input type="text" name="birthdate" id="birthdate" class="DatePicker"></div>
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="box-row cf">
 							<div class="box-left">
 								<p>Nataionlity (สัญชาติ)</p>
@@ -128,7 +128,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="telephone"></div>
+									<div><input type="text" name="telephone" id="telephone"></div>
 								</div>
 							</div>
 						</div>
@@ -138,7 +138,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="email"></div>
+									<div><input type="text" name="email" id="email"></div>
 								</div>
 							</div>
 						</div>
@@ -148,7 +148,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="mobile"></div>
+									<div><input type="text" name="mobile" id="mobile"></div>
 								</div>
 							</div>
 						</div>
@@ -158,7 +158,7 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><textarea name="address"></textarea></div>
+									<div><textarea name="address" id="address"></textarea></div>
 								</div>
 							</div>
 						</div>
@@ -170,8 +170,9 @@ require("assets/configs/function.inc.php");
 								<div class="box-input-text">
 									<div>
 										<div class="box-btn submit">
-											<a href="#" class="btn red">browse</a>
-										</div>					
+											<a href="#" class="btn red" onclick="$('#MyPhotograph').click(); return false;">browse</a>
+											<input type="file" name="MyPhotograph" id="MyPhotograph" accept="image/*" style="display:none">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -184,8 +185,9 @@ require("assets/configs/function.inc.php");
 								<div class="box-input-text">
 									<div>
 										<div class="box-btn submit">
-											<a href="#" class="btn red">browse</a>
-										</div>					
+											<a href="#" class="btn red" onclick="$('#MyResume').click(); return false;">browse</a>
+											<input type="file" name="MyResume" id="MyResume" accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.txt" style="display:none">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -198,8 +200,9 @@ require("assets/configs/function.inc.php");
 								<div class="box-input-text">
 									<div>
 										<div class="box-btn submit">
-											<a href="#" class="btn red">browse</a>
-										</div>					
+											<a href="#" class="btn red" onclick="$('#MyApplication').click(); return false;">browse</a>
+											<input type="file" name="MyApplication" id="MyApplication" accept=".doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.txt" style="display:none">
+										</div>
 									</div>
 								</div>
 							</div>
@@ -210,18 +213,18 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="salary"></div>
+									<div><input type="text" name="salary" id="salary"></div>
 								</div>
 							</div>
 						</div>
 						<div class="box-row cf">
 							<div class="box-left">
 								<div class="box-input-text">
-									<div class="g-recaptcha" data-sitekey="6Ld2VgwTAAAAAEmFQsLXE8zem5b7CCg3Jxbjds6p">Plugin</div>
 								</div>
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
+									<div class="g-recaptcha" data-sitekey="6Ld2VgwTAAAAAEmFQsLXE8zem5b7CCg3Jxbjds6p"></div>
 									<div><span>*กรุณกดเพื่อยืนยันตัวตนว่าคุณไม่ใช่โปรแกรมอัตโนมัติ</span></div>
 								</div>
 							</div>
@@ -231,11 +234,9 @@ require("assets/configs/function.inc.php");
 								<div class="box-input-text">
 									<div>
 										<div class="box-btn submit">
-											<input type="submit" value="save" style="display:none">
-											<input type="button" value="ยกเลิก" class="btnReset btn red">
-											<!--<a href="#" class="btnSubmit btn red">ตกลง</a>
-											<a href="#" class="btnReset btn red">ยกเลิก</a> -->
-										</div>					
+											<a href="#" onclick="checkForm(); return false;" class="btnSubmit btn red">ตกลง</a>
+											<a href="#myform" onclick="$('#myform')[0].reset();" class="btnReset btn red">ยกเลิก</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -244,7 +245,7 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 
-				</form>	
+				</form>
 		</div>
 	</div>
 </div>
@@ -253,7 +254,10 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
+<script type="text/javascript" src="//www.google.com/recaptcha/api.js"></script>
+<script type="text/javascript" src="js/contact_eapp.js"></script>
 
 </body>
 </html>
+<? CloseDB(); ?>
