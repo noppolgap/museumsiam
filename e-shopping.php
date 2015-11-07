@@ -41,7 +41,7 @@ require("inc/inc-cat-id-conf.php");
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="#">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="online-system.php?MID=<?=$_GET['MID']?>">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">e-SHOPPING</li>
 			</ol>
 		</div>
@@ -60,7 +60,7 @@ require("inc/inc-cat-id-conf.php");
 			<div class="box-title-system cf">
 				<h1>e-SHOPPING</h1>
 				<div class="box-btn">
-					<a href="" class="btn red">ย้อนกลับ</a>
+					<a href="online-system.php?MID=<?=$_GET['MID']?>" class="btn red">ย้อนกลับ</a>
 				</div>
 			</div>
 
