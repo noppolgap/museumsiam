@@ -58,7 +58,7 @@ require("assets/configs/function.inc.php");
 			<hr class="line-gray"/>
 
 
-				<form action="e-application-action.php?add" method="post" name="formcms" id = "myform" >
+				<form action="e-application-action.php?add" method="post" name="formcms" id = "myform" enctype="multipart/form-data" >
 					<div class="box-contact-from">
 						<div class="box-row cf">
 							<div class="box-left">

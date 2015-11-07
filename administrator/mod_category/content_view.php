@@ -4,7 +4,6 @@ require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
 require ("../../inc/inc-cat-id-conf.php");
 
-
 		$MID = intval($_GET['MID']);
 		$CID = intval($_GET['cid']);
 		$LV = intval($_GET['LV']);
@@ -25,6 +24,10 @@ require ("../../inc/inc-cat-id-conf.php");
 				$_SESSION['text'] = $_POST['str_search'];
 				$search_sql = "AND ( cd.CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or cd.CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )"; 
 			}
+		}
+
+		if($MID == $e_aaplication){
+			$hide_edit = "style='display:none' ";  //"contact_eapp_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";-->
 		}
 
 ?>
@@ -187,9 +190,20 @@ require ('../inc_header.php');
 					<div class="Main_Content" data-id="<?=$row['CONTENT_ID'] ?>" >
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_ID'] ?>"></div>
 
+						<?
+							$link_detail = "";
+
+							if($CID == $eapp_sub_cat){
+								$link_detail = "contact-eapp-detail.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
+							}
+							else{
+								$link_detail = "";
+							}
+
+						?>
 
 						<div class="floatL thumbContent">
-							<a href="content_detail.php?conid=<?=$row['CONTENT_ID'] ?>&MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], false) ?> ></a>
+							<a href="content_detail.php?conid=<?=$row['CONTENT_ID']?>&MID=<?=$MID?>&cid=<?=$CID.$subfixAddAndEdit ?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], false) ?> ></a>
 						</div>
 						<div class="floatL nameContent">
 
@@ -198,6 +212,9 @@ require ('../inc_header.php');
 							if($MID == $contact_us){
 
 								$link_detail = "contact_detail.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID .$subfixAddAndEdit." ";
+							}
+							else if($MID == $e_aaplication ){
+								$link_detail = "contact_eapp_view.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
 							}
 							else{
 
@@ -209,7 +226,7 @@ require ('../inc_header.php');
 							<div><? echo '<a href="'.$link_detail.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>
-						<div class="floatL stausContent" <?=$display_hide?>>
+						<div class="floatL stausContent" <?=$hide_edit?> <?=$display_hide?>>
 
 						<? if($row['CONTENT_STATUS_FLAG'] == 0){ ?>
 							<span class="staus1"></span> <a href="content_action.php?enable&conid=<?=$row['CONTENT_ID'] ?>&vis=<?=$row['CONTENT_STATUS_FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>">
@@ -223,6 +240,7 @@ require ('../inc_header.php');
 
 								$link_edit = "contact_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
 							}
+							
 							else{
 
 								$link_edit = "content_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
@@ -230,7 +248,7 @@ require ('../inc_header.php');
 
 						?>
 
-							<a href="<?=$link_edit?>" class="EditContentBtn">Edit</a>
+							<a href="<?=$link_edit?>" <?=$hide_edit?> class="EditContentBtn">Edit</a>
 							<a href="#" data-id="<?=$row['CONTENT_ID'] ?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>
