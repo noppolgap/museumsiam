@@ -2,7 +2,16 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+require ("../../inc/inc-cat-id-conf.php");
+
+		$MID = $_GET['MID'];
+		$CID = $_GET['cid'];
+		$LV = $_GET['LV'];
+		$SCID = $_GET['SCID'];
+		
 ?>
+
+ 
 <!doctype html>
 <html>
 <head>
@@ -21,11 +30,7 @@ require ('../inc_header.php');
 		require ('../inc_side.php');
  ?>
 		<?
-		$MID = $_GET['MID'];
-		$CID = $_GET['cid'];
-		$LV = $_GET['LV'];
-		$SCID = $_GET['SCID'];
-
+		
 		$subfixAddAndEdit = '&cid=' . $CID . '&LV=' . $LV;
 		if (isset($SCID) && nvl($SCID, '0') != '0') {
 			$subfixAddAndEdit .= '&SCID=' . $SCID;
@@ -37,6 +42,7 @@ require ('../inc_header.php');
 
 		if (nvl($SCID, '0') != '0')
 			$navigateBackPage .= '&SCID=' . $SCID;
+
 		?>
 		<div class="mod-body">
 			<div class="mod-body-inner">
@@ -90,18 +96,29 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 
-							<div>
-								<div class="floatL form_name">วันที่เริ่ม</div>
-								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="" class="DatePicker" /></div>
-								<div class="clear"></div>
-							</div>
-							<div>
-								<div class="floatL form_name">วันที่สิ้นสุด</div>
-								<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="" class="DatePicker" /></div>
-								<div class="clear"></div>
-							</div>
+							<? if($MID == $new_and_event ) { ?>
 
-<div>
+								<div>
+									<div class="floatL form_name">วันที่</div>
+									<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="" class="DatePicker" /></div>
+									<div class="clear"></div>
+								</div>
+								
+							<? } else { ?>
+
+								<div>
+									<div class="floatL form_name">วันที่เริ่ม</div>
+									<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="" class="DatePicker" /></div>
+									<div class="clear"></div>
+								</div>
+								<div>
+									<div class="floatL form_name">วันที่สิ้นสุด</div>
+									<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="" class="DatePicker" /></div>
+									<div class="clear"></div>
+								</div>
+						   <? } ?>
+
+							<div>
 								<div class="floatL form_name">เวลาเริ่ม</div>
 								<div class="floatL form_input">
 									<select name="cmbHourStart">

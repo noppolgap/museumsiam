@@ -114,6 +114,16 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 
+							<? if($MID == $new_and_event ) { ?>
+
+							<div>
+								<div class="floatL form_name">วันที่</div>
+								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="<?=ConvertDate($row['EVENT_START_DATE']) ?>" class="DatePicker" /></div>
+								<div class="clear"></div>
+							</div>
+							
+							<? }else{ ?>
+
 							<div>
 								<div class="floatL form_name">วันที่เริ่ม</div>
 								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="<?=ConvertDate($row['EVENT_START_DATE']) ?>" class="DatePicker" /></div>
@@ -125,7 +135,9 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 
-<div>
+							<? } ?>
+
+							<div>
 								<div class="floatL form_name">เวลาเริ่ม</div>
 								<div class="floatL form_input">
 									<select name="cmbHourStart">
