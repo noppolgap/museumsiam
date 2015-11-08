@@ -82,9 +82,9 @@ if ($_SESSION['LANG'] == 'TH') {
 	<div class="box-bottom">
 		<div class="container cf">
 			<div class="box-btn cf">
-				<a href="images/<?=$picFolder ?>/map.jpg" class="btn black lightbox">แผนที่</a>
-				<a href="images/<?=$picFolder ?>/park.jpg" class="btn black lightbox">ที่จอดรถ</a>
-				<a href="images/<?=$picFolder ?>/transport.jpg" class="btn black lightbox">การเดินทาง</a>
+				<a href="images/<?=$picFolder ?>/map.jpg" class="btn black lightbox"><?=$mapCap?></a>
+				<a href="images/<?=$picFolder ?>/park.jpg" class="btn black lightbox"><?=$parkingCap?></a>
+				<a href="images/<?=$picFolder ?>/transport.jpg" class="btn black lightbox"><?=$travelCap?></a>
 			</div>
 		</div>
 	</div>

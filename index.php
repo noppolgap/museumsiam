@@ -141,7 +141,7 @@ require ("assets/configs/function.inc.php");
 						<div class="box-tumb-date btn-all">
 							<div class="box-text">
 								<p>
-									ดูทั้งหมด
+									<?=$seeAllCap?>
 									<span></span>
 								</p>
 							</div>
@@ -157,7 +157,7 @@ require ("assets/configs/function.inc.php");
 
 						<div class="box-float">
 							<div class="box-btn-left">
-								<a class="btn black" href="">กิจกรรมวันนี้</a>
+								<a class="btn black" href=""><?=$todayEventCap?></a>
 							</div>
 							<div class="box-btn-right">
 								<a class="btn-arrow left"></a>
@@ -243,7 +243,7 @@ require ("assets/configs/function.inc.php");
 						<div class="box-left">
 							<div class="text-title"><img src="images/<?=$picFolderName ?>/index/part3-pic2.png" />
 							</div>
-							<a class="btn black" href="">ดูทั้งหมด</a>
+							<a class="btn black" href=""><?=$seeAllCap?></a>
 						</div>
 						<div class="box-right">
 							<div class="box-news-bold cf">
@@ -259,7 +259,7 @@ require ("assets/configs/function.inc.php");
 									<p class="text-date TcolorGray"><?=$exhimg_date[0]?></p>
 									<p class="text-des TcolorBlack"><?=$exh_detail[0]?></p>
 									<div class="box-btn cf">
-										<a href="<?=$exh_path[0]?>" class="btn red">อ่านเพิ่มเติม</a>
+										<a href="<?=$exh_path[0]?>" class="btn red"><?=$txt_more?></a>
 										<div class="box-btn-social cf">
 											<?=$social_link[0]?>
 										</div>
@@ -299,7 +299,7 @@ require ("assets/configs/function.inc.php");
 										<?=$exh_detail[$i]?>
 									</p>
 									<div class="box-btn cf">
-										<a href="<?=$exh_path[$i]?>" class="btn red">อ่านเพิ่มเติม</a>
+										<a href="<?=$exh_path[$i]?>" class="btn red"><?=$txt_more?></a>
 										<div class="box-btn-social cf">
 											<?=$social_link[$i]?>
 										</div>
@@ -446,7 +446,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 							</div>
 							</div> -->
 							<div class="box-btn cf">
-								<a href="event-museum.php" class="btn black">ดูทั้งหมด</a>
+								<a href="event-museum.php" class="btn black"><?=$seeAllCap?></a>
 							</div>
 						</div>
 					</div>
@@ -523,7 +523,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 					<a class="btn-arrow left"></a>
 					<a class="btn-arrow right"></a>
 					<div class="box-btn cf">
-						<a href="" class="btn gold">ดูทั้งหมด</a>
+						<a href="" class="btn gold"><?=$seeAllCap?></a>
 					</div>
 				</div>
 			</div>
@@ -537,7 +537,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 						<div class="box-title"><img src="images/<?=$picFolderName ?>/index/part5-pic1.png" />
 						</div>
 						<div class="box-btn cf">
-							<a href="ve.php" class="btn black">ดูทั้งหมด</a>
+							<a href="ve.php" class="btn black"><?=$seeAllCap?></a>
 						</div>
 					</div>
 					<div class="box-slide-exhibition-main">
@@ -600,7 +600,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo $rowContent['CONTENT_BRIEF'];
 								echo '</p>';
 								echo '<div class="box-btn cf">';
-								echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">อ่านเพิ่มเติม</a>';
+								echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">$txt_more</a>';
 								echo '<div class="box-btn-social cf">';
 								echo '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 								echo '<a href="' . $fullpath . '" onclick="shareTW(' . $rowContent['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -631,7 +631,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 						<div class="box-title"><img src="images/<?=$picFolderName ?>/index/part5-pic2.png" />
 						</div>
 						<div class="box-btn cf">
-							<a href="da.php" class="btn black">ดูทั้งหมด</a>
+							<a href="da.php" class="btn black"><?=$seeAllCap?></a>
 						</div>
 					</div>
 					<div class="box-slide-archive-main">
@@ -693,7 +693,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo $rowContent['CONTENT_BRIEF'];
 								echo '</p>';
 								echo '<div class="box-btn cf">';
-								echo ' <a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">อ่านเพิ่มเติม</a>';
+								echo ' <a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">$txt_more</a>';
 								echo '<div class="box-btn-social cf">';
 								echo '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 								echo '<a href="' . $fullpath . '" onclick="shareTW(' . $rowContent['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -724,7 +724,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 						<div class="box-title"><img src="images/<?=$picFolderName ?>/index/part5-pic3.png" />
 						</div>
 						<div class="box-btn cf">
-							<a href="km.php" class="btn gold">ดูทั้งหมด</a>
+							<a href="km.php" class="btn gold"><?=$seeAllCap?></a>
 						</div>
 					</div>
 					<div class="box-right">
@@ -787,7 +787,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 								echo $rowContent['CONTENT_BRIEF'];
 								echo '</p>';
 								echo '<div class="box-btn cf">';
-								echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
+								echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">$txt_more</a>';
 								echo '<div class="box-btn-social cf">';
 								echo '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 								echo '<a href="' . $fullpath . '" onclick="shareTW(' . $rowContent['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
