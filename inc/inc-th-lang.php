@@ -164,5 +164,6 @@ $sum_price = "มูลค่ารวม";
 $product_code = "รหัสสินค้า";
 $product_category = "หมวดหมู่สินค้า";
 $delete_product = "ลบรายการสินค้า";
+$bath = "บาท";
 
 ?>
