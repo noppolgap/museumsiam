@@ -129,7 +129,7 @@ require("assets/configs/function.inc.php");
 
 							
 
-							$sql .= $search_sql." ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
+					    	$sql .= $search_sql." ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
 					$query = mysql_query($sql, $conn)or die($sql);
 

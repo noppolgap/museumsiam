@@ -15,6 +15,7 @@ require("assets/configs/function.inc.php");
 		}
 	}
 
+
 ?>
 <!doctype html>
 <html>

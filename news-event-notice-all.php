@@ -60,7 +60,13 @@ require("assets/configs/function.inc.php");
 
 			<?php
 
-			    $sql = " SELECT d.CONTENT_DESC_LOC, p.IMG_PATH from trn_content_detail d
+				if ($_SESSION['LANG'] == 'TH') {
+					$LANG_SQL = " d.CONTENT_DESC_LOC AS CONTENT_DESC , d.BRIEF_LOC AS BRIEF_LOC";
+				} else if ($_SESSION['LANG'] == 'EN') {
+					$LANG_SQL = " d.CONTENT_DESC_ENG AS CONTENT_DESC , d.BRIEF_ENG AS BRIEF_LOC";
+				}
+
+			    $sql = " SELECT ".$LANG_SQL.", p.IMG_PATH from trn_content_detail d
 						 LEFT JOIN (
 													SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
 													FROM (
@@ -97,7 +103,7 @@ require("assets/configs/function.inc.php");
 
 					<div class="box-notice pdf">
 						<div class="box-text">
-							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>
+							<p class="text-title"><? echo $row['CONTENT_DESC'] ?></p>
 							<p class="text-detail">
 								<span>ประเภท: <? echo getEXT($IMG_PATH) ?></span>
 								<span>ขนาด: <?=formatSizeUnits(filesize($IMG_PATH))?></span>

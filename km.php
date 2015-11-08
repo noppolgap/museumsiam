@@ -10,17 +10,6 @@ if ($_SESSION['LANG'] == 'TH') {
 	$LANG_SQL = "cat.CONTENT_CAT_DESC_ENG AS CAT_DESC , content.CONTENT_DESC_ENG AS CONTENT_DESC , content.BRIEF_ENG AS BRIEF_LOC";
 }
 
-	$search_sql = "";
-	unset($_SESSION['text']);
-
-	if (isset($_GET['search'])) {
-		if (isset($_POST['str_search']))
-		{
-			$_SESSION['text'] = $_POST['str_search'];
-			$search_sql .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-		}
-	}
-
 ?>
 <!doctype html>
 <html>
@@ -108,9 +97,16 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 
-							
+							if (isset($_GET['search'])) {
+								if (isset($_POST['str_search']))
+									$_SESSION['text'] = $_POST['str_search'];
+									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
+							}
+							else {
+									unset($_SESSION['text']);
+							}	
 
-						$contentSqlStr .= $search_sql."	ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+						$contentSqlStr .= "	ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
@@ -676,7 +672,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="table-row list cf">
 					<div class="column list"><?=str_pad($row['WEBBOARD_ID'], 5, 0, STR_PAD_LEFT)?></div>
 					<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID'] ?>"><?=$content?></a></div>
-					<div class="column name"><? echo $row['USER_CREATE'] ?></div>
+					<div class="column name"><span><? echo $row['USER_CREATE'] ?></span></div>
 					<div class="column reply"><? echo $row_ans['ans'] ?></div>
 					<div class="column view"><? echo $row['VISIT_COUNT'] ?></div>
 					<div class="column date"><? echo ConvertDate($row['LAST_UPDATE_DATE']) ?></div>

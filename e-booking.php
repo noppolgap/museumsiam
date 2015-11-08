@@ -11,7 +11,7 @@ require("assets/configs/function.inc.php");
 			$_SESSION['text'] = $_POST['str_search'];
 			$search_sql .= " AND (prod.PRODUCT_DESC_LOC like '%" .$_SESSION['text']. "%' or  prod.PRODUCT_DESC_ENG like '%" .$_SESSION['text']. "%')";
 	}
-	
+
 ?>
 <!doctype html>
 <html>
@@ -67,7 +67,13 @@ require("assets/configs/function.inc.php");
 			</div>
 			*/ ?>
 			<?php
-						    $sql_proc  = "SELECT prod.PRODUCT_ID, IF(prod.SALE > 0, prod.SALE, prod.PRICE) AS pro_PRICE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
+							if ($_SESSION['LANG'] == 'TH') {
+								$sql_proc_lang = 'prod.PRODUCT_DESC_LOC AS PRODUCT_DESC, prod.BRIEF_LOC AS CONTENT_DESC';
+							} else if ($_SESSION['LANG'] == 'EN') {
+								$sql_proc_lang = 'prod.PRODUCT_DESC_ENG AS PRODUCT_DESC, prod.BRIEF_ENG AS  CONTENT_DESC';
+							}
+
+						    $sql_proc  = "SELECT ".$sql_proc_lang." ,prod.PRODUCT_ID, IF(prod.SALE > 0, prod.SALE, prod.PRICE) AS pro_PRICE, pic.CONTENT_ID, pic.IMG_PATH, pic.ORDER_ID
 											FROM trn_product AS prod
 											LEFT JOIN (
 												SELECT CONTENT_ID, IMG_PATH, ORDER_ID, CAT_ID
@@ -143,7 +149,7 @@ require("assets/configs/function.inc.php");
 					</div>
 					<div class="box-detail">
 						<p class="text-title">
-							<?=$row['CONTENT_LOC']?>
+							<?=$row['CONTENT_DESC']?>
 						</p>
 						<p class="text-des">
 							<? echo $row_proc['PRODUCT_DESC']; ?>

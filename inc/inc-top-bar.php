@@ -16,6 +16,7 @@ if ($_SESSION['LANG'] == 'TH')
 else if ($_SESSION['LANG'] == 'EN')
 	require ("inc-en-lang.php");
 
+
 require ("inc-cat-id-conf.php");
 ?>
 <div class="part-top-bar">
@@ -23,9 +24,15 @@ require ("inc-cat-id-conf.php");
 		<div class="container cf">
 			<div class="box-left">
 				<div class="box-lang cf">
-					<a>TH</a>
+				<?php if ($_SESSION['LANG'] == 'TH'){ ?>
+					<a href="#">TH</a>
+					<img src="images/th/icon-th.png" alt="icon-th" width="21" height="12" />
+					<a href="#" onclick="swapLANG('EN'); return false;">EN</a>
+				<?php }else if ($_SESSION['LANG'] == 'EN'){ ?>
+					<a href="#" onclick="swapLANG('TH'); return false;">TH</a>
 					<img src="images/en/icon-en.png" alt="icon-en" width="21" height="12" />
-					<a>EN</a>
+					<a href="#">EN</a>
+				<?php } ?>
 				</div>
 				<div class="box-sitemap cf">
 					<a href="sitemap.php">SITEMAP</a>
@@ -71,4 +78,11 @@ require ("inc-cat-id-conf.php");
 		</div>
 	</div>
 </div>
-
+<script type="text/javascript">
+function swapLANG(lang){
+$.post( "swap.php", { lang: lang })
+  .done(function( data ) {
+    window.location.reload();
+  });
+}
+</script>

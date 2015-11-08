@@ -119,7 +119,6 @@ require("assets/configs/function.inc.php");
 
 		<?
 
-
 				$sql = " SELECT ";
 				if ($_SESSION['LANG'] == 'TH'){
 					$sql .= 'cat.CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC , content.CONTENT_DESC_LOC AS CONTENT_LOC , content.CONTENT_DETAIL_LOC AS CONTENT_DETAIL , content.BRIEF_LOC AS CONTENT_BRIEF';
