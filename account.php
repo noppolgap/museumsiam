@@ -44,8 +44,8 @@ if ($_SESSION['LANG'] == 'TH') {
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li>การตั้งค่าบัญชีผู้ใช้&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ข้อมูลส่วนตัว</li>
+				<li><?=$account_setting?>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=$profile ?></li>
 			</ol>
 		</div>
 	</div>
@@ -98,12 +98,12 @@ if ($_SESSION['LANG'] == 'TH') {
 
 		<div class="box-account-right cf">
 			<div class="box-title">
-				<h1>ข้อมูลส่วนตัว</h1>
+				<h1><?=$profile?></h1>
 			</div>
 			<div class="box-left">
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>ชื่อ - นามสกุล</p>
+						<p><?=$nameCap?> - <?=$sureName?></p>
 					</div>
 					<div class="box-right">
 
@@ -113,7 +113,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>เพศ</p>
+						<p><?=$gender?></p>
 					</div>
 					<div class="box-right">
 
@@ -123,7 +123,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>วันเกิด</p>
+						<p><?=$birthDate?></p>
 					</div>
 					<div class="box-right">
 						<p><?=displaydateformatlong($row['BIRTHDAY']) ?></p>
@@ -131,7 +131,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>โทรศัพท์</p>
+						<p><?=$tel?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['TELEPHONE'] ?></p>
@@ -139,7 +139,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>โทรศัพท์มือถือ</p>
+						<p><?=$mobile?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['MOBILE_PHONE'] ?></p>
@@ -147,7 +147,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>โทรสาร</p>
+						<p><?=$fax?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['FAX'] ?></p>
@@ -155,7 +155,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>รหัสประจำตัวประชาชน</p>
+						<p><?=$idCard?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['CITIZEN_ID'] ?></p>
@@ -163,7 +163,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>ที่อยู่</p>
+						<p><?=$address?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['ADDRESS1'] ?></p>
@@ -171,7 +171,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>ตำบล/แขวง</p>
+						<p><?=$sub_district?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['SUB_DISTRICT_DESC'] ?></p>
@@ -179,7 +179,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>อำเภอ/เขต</p>
+						<p><?=$district?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['DISTRICT_DESC'] ?></p>
@@ -187,7 +187,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>จังหวัด</p>
+						<p><?=$province?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['PROVINCE_DESC'] ?></p>
@@ -195,7 +195,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>รหัสไปรษณีย์</p>
+						<p><?=$postcode?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['POST_CODE'] ?></p>
@@ -218,7 +218,7 @@ if ($_SESSION['LANG'] == 'TH') {
 						<div class="box-name">
 							<h2><?=$row['TITLE_DESC']." ".$row['NAME'] . " " . $row['LAST_NAME'] ?></h2>
 						</div>
-						<p>LOG IN ล่าสุด</p>
+						<p>LOG IN <?=$last?></p>
 						<div class="row cf">
 							<?php
 							if(!isset($_SESSION['FB'])){
@@ -232,7 +232,7 @@ if ($_SESSION['LANG'] == 'TH') {
 							$rowLog = mysql_fetch_array($rsLog);
 							?>
 							<div class="box-left">
-								วันที่
+								<?=$date?>
 							</div>
 							<div class="box-right">
 								<?=displaydateformatlong($rowLog['LOGIN_DATE'] )?>
@@ -240,7 +240,7 @@ if ($_SESSION['LANG'] == 'TH') {
 						</div>
 						<div class="row cf">
 							<div class="box-left">
-								เวลา
+								<?=$time?>
 							</div>
 							<div class="box-right">
 								<?=displayTime($rowLog['LOGIN_DATE']) ?>
@@ -250,10 +250,10 @@ if ($_SESSION['LANG'] == 'TH') {
 					<div class="box-btn cf">
 						<div class="row cf">
 							<div class="box-left">
-								<a href="account-edit.php" class="ed">แก้ไขข้อมูล</a>
+								<a href="account-edit.php" class="ed"><?=$edit?></a>
 							</div>
 							<div class="box-right">
-								<a href="logout.php" class="lu">ออกจากระบบ</a>
+								<a href="logout.php" class="lu"><?=$exit?></a>
 							</div>
 						</div>
 					</div>

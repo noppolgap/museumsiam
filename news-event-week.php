@@ -91,7 +91,7 @@ require("assets/configs/function.inc.php");
 						 ?>
 
 
-						<a href="<? echo $link_page ?>" class="btn gold">ดูทั้งหมด</a>
+						<a href="<? echo $link_page ?>" class="btn gold"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">

@@ -3,6 +3,7 @@ require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
 ?>
+
 <!doctype html>
 <html>
 <head>
@@ -63,9 +64,9 @@ $_SESSION['WB_PREV_PG'] = $current_url;
 		<div class="box-nav">
 			<ol class="cf">
 		<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="km.php"><?=getModuleDescription($km_module_id); ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">เว็บบอร์ด</li>
+				<li class="active"><?=$webboardCap?></li>
 				</ol>
 		</div>
 	</div>
@@ -84,7 +85,7 @@ $_SESSION['WB_PREV_PG'] = $current_url;
 
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
-				<h1>เว็บบอร์ด</h1>
+				<h1><?=$webboardCap?></h1>
 				<div class="box-btn">
 <?php
 $sql = "SELECT USER_ID , CITIZEN_ID FROM sys_app_user WHERE ID = ".intval($_SESSION['UID']);
@@ -93,12 +94,12 @@ if(mysql_num_rows($query) > 0){
 	$row = mysql_fetch_array($query);
 
 	if($row['CITIZEN_ID'] == ''){
-		echo '<a href="km-webboard-newtopic.php" class="btn red Atopic">ตั้งกระทู้</a>';
+		echo '<a href="km-webboard-newtopic.php" class="btn red Atopic">'.$createTopicCap.'</a>';
 	}else{
-		echo'<a href="#" onclick="editAccout();" class="btn red Atopic">ตั้งกระทู้</a>';
+		echo'<a href="#" onclick="editAccout();" class="btn red Atopic">'.$createTopicCap.'</a>';
 	}
 }else{
-	echo'<a href="login.php?p=bbs" class="btn red Atopic">ตั้งกระทู้</a>';
+	echo'<a href="login.php?p=bbs" class="btn red Atopic">'.$createTopicCap.'</a>';
 }
 ?>
 				</div>
@@ -124,12 +125,12 @@ if(mysql_num_rows($query) > 0){
 			<div class="box-table-webboard cf all">
 
 				<div class="table-row head cf">
-					<div class="column list">ลำดับ</div>
-					<div class="column topic">เรื่อง</div>
-					<div class="column name">ชื่อ</div>
-					<div class="column reply">ตอบ</div>
-					<div class="column view">อ่าน</div>
-					<div class="column date">ปรับปรุงล่าสุด</div>
+					<div class="column list"><?=$seqCap?></div>
+					<div class="column topic"><?=$subjectCap?></div>
+					<div class="column name"><?=$nameCap?></div>
+					<div class="column reply"><?=$answerCap?></div>
+					<div class="column view"><?=อ่าน?></div>
+					<div class="column date"><?=$lastUpdateCap?></div>
 				</div>
 
 				<?php while($row = mysql_fetch_array($query_qa)) {
@@ -214,6 +215,7 @@ if(mysql_num_rows($query) > 0){
 <?php
 	include ('inc/inc-footer.php');
  ?>
+<script type="text/javascript" src="js/webboard.js"></script>
 <script type="text/javascript">
 	card = 'ยังไม่สามารถใช้ความสามารถนี้ได้ ต้องลงทะเบียนบัตรประชาชนก่อน';
 </script>

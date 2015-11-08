@@ -47,7 +47,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active"><?=getModuleDescription($km_module_id);?></li>
 			</ol>
 		</div>
@@ -70,9 +70,9 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 
 			 <div class="box-category-main news BBlack">
 				<div class="box-title cf">
-					<h2>กิจกรรม</h2>
+					<h2><?=$activityCap?></h2>
 					<div class="box-btn">
-						<a href="km-event.php" class="btn gold">ดูทั้งหมด</a>
+						<a href="km-event.php" class="btn gold"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -141,7 +141,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -160,7 +160,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>นิทรรศการ</h2>
 					<div class="box-btn">
-						<a href="km-exhibition.php" class="btn black">ดูทั้งหมด</a>
+						<a href="km-exhibition.php" class="btn black"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -228,7 +228,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -247,7 +247,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>การค้นคว้าและอ้างอิง</h2>
 					<div class="box-btn">
-						<a href="km-reseach.php" class="btn black">ดูทั้งหมด</a>
+						<a href="km-reseach.php" class="btn black"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -316,7 +316,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -335,7 +335,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>ระบบการศึกษา</h2>
 					<div class="box-btn">
-						<a href="km-education.php" class="btn black">ดูทั้งหมด</a>
+						<a href="km-education.php" class="btn black"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -405,7 +405,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -424,7 +424,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>สัมมนาและอบรม</h2>
 					<div class="box-btn">
-						<a href="km-seminar.php" class="btn black">ดูทั้งหมด</a>
+						<a href="km-seminar.php" class="btn black"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -494,7 +494,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -513,7 +513,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>สื่อการเรียนรู้</h2>
 					<div class="box-btn">
-						<a href="km-media.php" class="btn black">ดูทั้งหมด</a>
+						<a href="km-media.php" class="btn black"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -584,7 +584,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -601,9 +601,9 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>เว็บบอร์ด</h2>
+					<h2><?=$webboardCap?></h2>
 					<div class="box-btn">
-						<a href="km-webboard.php" class="btn gold">ดูทั้งหมด</a>
+						<a href="km-webboard.php" class="btn gold"><?=$seeAllCap?></a>
 					</div>
 				</div>
 
@@ -645,11 +645,11 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 
 						<div class="table-row head cf">
 							<div class="column list">เลขที่กระทู้</div>
-							<div class="column topic">เรื่อง</div>
-							<div class="column name">ชื่อ</div>
-							<div class="column reply">ตอบ</div>
-							<div class="column view">อ่าน</div>
-							<div class="column date">ปรับปรุงล่าสุด</div>
+							<div class="column topic"><?=$subjectC?></div>
+							<div class="column name"><?=$nameCap?></div>
+							<div class="column reply"><?=$answerCap?></div>
+							<div class="column view"><?=$readCap?></div>
+							<div class="column date"><?=$lastUpdateCap?></div>
 						</div>
 
 

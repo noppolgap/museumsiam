@@ -69,8 +69,8 @@ $row = mysql_fetch_array($rs);
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li>การตั้งค่าบัญชีผู้ใช้&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">แก้ไขข้อมูล</li>
+				<li><?=$account_setting?>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=$edit?></li>
 			</ol>
 		</div>
 	</div>
@@ -95,12 +95,12 @@ $row = mysql_fetch_array($rs);
 		</div>
 		<div class="box-account-right cf">
 			<div class="box-title">
-				<h1>แก้ไขข้อมูล</h1>
+				<h1><?=$edit?></h1>
 			</div>
 			<div class="box-left">
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>คำนำหน้าชื่อ</p>
+						<p><?=$Title?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text radio">
@@ -123,7 +123,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>ชื่อ</p>
+						<p><?=$nameCap?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -133,7 +133,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>นามสกุล</p>
+						<p><?=$sureName?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -143,7 +143,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>เพศ</p>
+						<p><?=$gender?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text radio">
@@ -162,7 +162,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>วันเกิด</p>
+						<p><?=$birthDate?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -172,7 +172,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>โทรศัพท์</p>
+						<p><?=$tel?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -182,7 +182,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>โทรศัพท์มือถือ</p>
+						<p><?=$mobile?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -192,7 +192,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>โทรสาร</p>
+						<p><?=$fax?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -202,7 +202,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>รหัสประจำตัวประชาชน</p>
+						<p><?=$idCard?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -217,14 +217,14 @@ $row = mysql_fetch_array($rs);
 					<div class="box-right">
 						<div class="box-input-text cf">
 							<div class="box-btn fl">
-								<a class="btn black checkEmail">ตรวจสอบ</a>
+								<a class="btn black checkEmail"><?=$checked?></a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>ที่อยู่</p>
+						<p><?=$address?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -235,7 +235,7 @@ $row = mysql_fetch_array($rs);
 				
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>จังหวัด</p>
+						<p><?=$province?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -264,7 +264,7 @@ $row = mysql_fetch_array($rs);
 				
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>อำเภอ/เขต</p>
+						<p><?=$district?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -293,7 +293,7 @@ $row = mysql_fetch_array($rs);
 				
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>ตำบล/แขวง</p>
+						<p><?=$sub_district?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -323,7 +323,7 @@ $row = mysql_fetch_array($rs);
 				
 				<div class="box-row cf">
 					<div class="box-left">
-						<p>รหัสไปรษณีย์</p>
+						<p><?=$postcode?></p>
 					</div>
 					<div class="box-right">
 						<div class="box-input-text">
@@ -341,7 +341,7 @@ $row = mysql_fetch_array($rs);
 						<div class="box-name">
 							<h2><?=$row['TITLE_DESC'] . " " . $row['NAME'] . " " . $row['LAST_NAME'] ?></h2>
 						</div>
-						<p>LOG IN ล่าสุด</p>
+						<p>LOG IN <?=$last?></p>
 						<div class="row cf">
 							<?php
 							$logSql = "select max(LOGIN_DATE) as LOGIN_DATE from log_user_login where USER_ID = '" . $_SESSION['user_name'] . "'";
@@ -349,7 +349,7 @@ $row = mysql_fetch_array($rs);
 							$rowLog = mysql_fetch_array($rsLog);
 							?>
 							<div class="box-left">
-								วันที่
+								<?=$date?>
 							</div>
 							<div class="box-right">
 								<?=displaydateformatlong($rowLog['LOGIN_DATE'] )?>
@@ -357,7 +357,7 @@ $row = mysql_fetch_array($rs);
 						</div>
 						<div class="row cf">
 							<div class="box-left">
-								เวลา
+								<?=$time?>
 							</div>
 							<div class="box-right">
 								<?=displayTime($rowLog['LOGIN_DATE']) ?>
@@ -367,7 +367,7 @@ $row = mysql_fetch_array($rs);
 					<div class="box-btn cf">
 						<div class="row cf">
 <!-- 							<div class="box-left"> -->
-								<a onclick="$('#browseAvarta').click();" href="#" class="ac fl">แก้ไขรูปประจำตัว</a>
+								<a onclick="$('#browseAvarta').click();" href="#" class="ac fl"><?=$edit_profile_pic?></a>
 								<input type='file' name ="browseAvarta" id ="browseAvarta" style="display:none" accept="image/*" />
 <!-- 							</div> -->
 						</div>
@@ -376,8 +376,8 @@ $row = mysql_fetch_array($rs);
 			</div>
 			<div class="box-btn-main cf">
 				<div class="box-btn">
-					<a class="btn black" href="account-edit.php">ยกเลิก</a>
-					<a class="btn black btnSubmit" >ตกลง</a>
+					 <a class="btn black" href="account-edit.php"><?=$cancel?></a>
+					<a class="btn black btnSubmit" ><?=$Submit?></a>
 				</div>
 			</div>
 		</div>
