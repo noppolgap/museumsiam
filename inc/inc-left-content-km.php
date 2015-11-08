@@ -20,9 +20,9 @@
 			<?php 
 			$currentPageName = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 			if ($currentPageName == "km.php")
-				echo '<li class="menu1 active"><a href="km.php">หน้าหลัก</a></li>';
+				echo '<li class="menu1 active"><a href="km.php">'.$mainPageCap.'</a></li>';
 			else 
-				echo '<li class="menu1" ><a href="km.php">หน้าหลัก</a></li>';
+				echo '<li class="menu1" ><a href="km.php">'.$mainPageCap.'</a></li>';
 			
 			if ($currentPageName == "km-webboard.php")
 			echo '<li class="menu2 active"><a href="km-webboard.php" >เว็บบอร์ด</a></li>';

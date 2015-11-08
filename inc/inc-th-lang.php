@@ -65,6 +65,7 @@ $viewMapCap = 'ดูแผนที่';
 $viewGoogleMapCap = 'ดูแผนที่ Google';
 $mapCap = 'แผนที่';
 $parkingCap = 'ที่จอดรถ';
+$other_file = "ไฟล์อื่นๆที่เกี่ยวข้อง";
 $travelCap = 'การเดินทาง';
 $activityNewsMuseumCap = 'กิจกรรมและข่าวสารของมิวเซียมสยาม';
 $activityCap = 'กิจกรรม';
@@ -152,5 +153,16 @@ $submit = "ตกลง";
 $account_setting = "การตั้งค่าบัญชีผู้ใช้";
 $profile = "ข้อมูลส่วนตัว";
 $exit = "ออกจากระบบ";
+$create_by = "ตั้งโดย";
+$comment = "ความคิดเห็น";
+$commnet_by = "ตอบโดย";
+$virtual_exh = "ระบบพิพิธภัณฑ์เสมือนจริง";
+$product = "สินค้า";
+$price = "ราคา";
+$quantity = "จำนวน";
+$sum_price = "มูลค่ารวม";
+$product_code = "รหัสสินค้า";
+$product_category = "หมวดหมู่สินค้า";
+$delete_product = "ลบรายการสินค้า";
 
 ?>

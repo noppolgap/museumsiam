@@ -54,9 +54,9 @@ if($id == 0){
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="km.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="km.php"><?=getModuleDescription($km_module_id);?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">เว็บบอร์ด</li>
+				<li class="active"><?=$webboardCap?></li>
 			</ol>
 		</div>
 	</div>
@@ -85,9 +85,9 @@ if($id == 0){
 
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
-				<h1>เว็บบอร์ด</h1>
+				<h1><?=$webboardCap?></h1>
 				<div class="box-btn">
-					<a href="km-webboard.php" class="btn red">ย้อนกลับ</a>
+					<a href="km-webboard.php" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 
@@ -114,7 +114,7 @@ if($id == 0){
 					<hr/>
 					<div class="box-footer-topic cf">
 						<div class="box-left">
-							<p>ตั้งโดย : <? echo $row['USER_CREATE'] ?></p>
+							<p><?=$create_by?> : <? echo $row['USER_CREATE'] ?></p>
 						</div>
 						<div class="box-right">
 							<p><? echo ConvertDate($row['LAST_UPDATE_DATE']) ?></p>
@@ -144,14 +144,14 @@ if($id == 0){
 
 				<div class="box-top">
 					<p>
-						ความคิดเห็น <?=$row_ans['ORDER_DATA']?> :
+						<?=$comment?> <?=$row_ans['ORDER_DATA']?> :
 					</p>
 				</div>
 				<div class="box-bottom">
 					<div class="box-replay-detail"><? echo $detail ?></div>
 					<div class="box-footer-replay cf">
 						<div class="box-left">
-							<p>ตอบโดย : <? echo $row_ans['USER_CREATE'] ?></p>
+							<p><?=$commnet_by?> : <? echo $row_ans['USER_CREATE'] ?></p>
 						</div>
 					</div>
 					<hr/>
@@ -188,7 +188,7 @@ if(mysql_num_rows($query) > 0){
 		<form action="webboard_action.php?answer&web_id=<?=$id?> " method="post" name="formcms" id="replyTopic">
 			<div class="box-form-reply">
 				<div class="text-title">
-					ตอบกระทู้
+					<?=$comment?>
 				</div>
 				<textarea name="content" class="mytextarea" id="input_content"></textarea>
 				<div class="condition">
@@ -204,7 +204,7 @@ if(mysql_num_rows($query) > 0){
 <?php } ?>
 			<div class="box-pagination-main cf">
 				<div class="box-btn topic">
-					<a href="km-webboard.php" class="btn red">ย้อนกลับ</a>
+					<a href="km-webboard.php" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 

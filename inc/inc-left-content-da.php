@@ -35,9 +35,9 @@
 			<?php
 			$currentPageName = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 			if ($currentPageName == "da.php")
-				echo '<li class="menu1 active"><a href="da.php">หน้าหลัก</a></li>';
+				echo '<li class="menu1 active"><a href="da.php">'.$mainPageCap.'</a></li>';
 			else
-				echo '<li class="menu1"><a href="da.php">หน้าหลัก</a></li>';
+				echo '<li class="menu1"><a href="da.php">'.$mainPageCap.'</a></li>';
 
 			$sqlMaxOrder = "select max(ORDER_DATA) as MAX_ORDER from trn_content_category
 							WHERE

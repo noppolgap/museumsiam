@@ -120,7 +120,7 @@ unset($thumb_meta);
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve.php">ระบบจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve-category.php">หมวดหมู่นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">ชื่อนิทรรศการ</li>
@@ -255,7 +255,7 @@ unset($thumb_meta);
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black">ดูทั้งหมด</a>
+							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black"><?=$seeAllCap?></a>
 						</div>
 					</div>
 					<div class="box-slide-small">
@@ -280,7 +280,7 @@ unset($thumb_meta);
 ?>
 				<div class="box-otherfile-main">
 					<div class="box-title cf">
-						<h2>ไฟล์อื่นๆที่เกี่ยวข้อง</h2>
+						<h2><?=$other_file?></h2>
 					</div>
 					<div class="box-news-main gray">
 					<?php
@@ -306,7 +306,7 @@ unset($thumb_meta);
 								</p>
 							</div>
 							<div class="box-btn cf">
-								<a href="<?=$link ?>" target="_blank" class="btn red">ดาวน์โหลด</a>
+								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap?></a>
 							</div>
 						</div>
 					<?php } } ?>
@@ -315,7 +315,7 @@ unset($thumb_meta);
 <?php } ?>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						วันที่แก้ไขล่าสุด :  <?= ConvertDate($rowContent['LAST_DATE']) ?>
+						<?=$lastEditCap?> :  <?= ConvertDate($rowContent['LAST_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						<div class="fb-share-button" data-href="<?=$path ?>" data-layout="button_count"></div>

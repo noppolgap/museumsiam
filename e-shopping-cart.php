@@ -51,7 +51,7 @@ if($_POST['action'] == 'DelAll'){
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="#"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="#">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">e-SHOPPING</li>
 			</ol>
@@ -71,7 +71,7 @@ if($_POST['action'] == 'DelAll'){
 			<div class="box-title-system cf">
 				<h1>e-SHOPPING</h1>
 				<div class="box-btn">
-					<a href="e-shopping.php" class="btn red">ย้อนกลับ</a>
+					<a href="e-shopping.php" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 <form action="?" name="cart" id="cart_form" method="post">
@@ -114,10 +114,10 @@ if ($_SESSION['LANG'] == 'TH') {
 
 			<div class="box-table-main">
 				<div class="table-row head">
-					<div class="column list">สินค้า</div>
-					<div class="column price">ราคา</div>
-					<div class="column number">จำนวน</div>
-					<div class="column total">มูลค่ารวม</div>
+					<div class="column list"><?=$product?></div>
+					<div class="column price"><?=$price?></div>
+					<div class="column number"><?=$quantity?></div>
+					<div class="column total"><?=$sum_price?></div>
 				</div>
 
 			<?php
@@ -142,15 +142,15 @@ if ($_SESSION['LANG'] == 'TH') {
 						</div>
 						<div class="box-right">
 							<p class="text-title"><a href="e-shopping-itemdetail.php?proid=<?=$row['PRODUCT_ID']?>"><? echo $row['CAT_DESC']; ?></a></p>
-							<p class="text-id">รหัสสินค้า : <span><?=str_pad($row['PRODUCT_ID'], 5, 0, STR_PAD_LEFT);?></span></p>
-							<p class="text-cate">หมวดหมู่สินค้า : <span><? echo $row['CAT_DESC_LOC']; ?></span></p>
+							<p class="text-id"><?=$product_code?> : <span><?=str_pad($row['PRODUCT_ID'], 5, 0, STR_PAD_LEFT);?></span></p>
+							<p class="text-cate"><?=$product_category?> : <span><? echo $row['CAT_DESC_LOC']; ?></span></p>
 							<p class="text-detail"><? echo $row['DETAIL']; ?></p>
 						</div>
 					</div>
 					<div class="column price"><?=number_format($price,2)?></div>
 					<div class="column number"><input id="Num_pro_ID<?=$row['PRODUCT_ID']?>" min="0" type="number" name="Quantity[<?=$row['PRODUCT_ID']?>]" value="<? echo $row['Total']; ?>"></div>
 					<div class="column total"><?=number_format($sum_price,2)?></div>
-					<a href="#" class="btn-delete" onclick="$('#Num_pro_ID<?=$row['PRODUCT_ID']?>').val(0); saveFormCart('reCal'); return false;"><span class="bin"></span>ลบรายการสินค้า</a>
+					<a href="#" class="btn-delete" onclick="$('#Num_pro_ID<?=$row['PRODUCT_ID']?>').val(0); saveFormCart('reCal'); return false;"><span class="bin"></span><?=$delete_product?></a>
 				</div>
 
 
@@ -184,7 +184,7 @@ if ($_SESSION['LANG'] == 'TH') {
 						ค่าจัดส่งสินค้า
 					</div>
 					<div class="box-right">
-						<?=number_format($shipping_cost,2)?> <span>บาท</span>
+						<?=number_format($shipping_cost,2)?> <span><?=$bath?></span>
 					</div>
 				</div>
 				<hr class="line-gray"/>
@@ -194,7 +194,7 @@ if ($_SESSION['LANG'] == 'TH') {
 						ยอดสุทธิ
 					</div>
 					<div class="box-right">
-						<?=number_format(($totalCost+$shipping_cost),2)?> <span>บาท</span>
+						<?=number_format(($totalCost+$shipping_cost),2)?> <span><?=$bath?></span>
 					</div>
 				</div>
 

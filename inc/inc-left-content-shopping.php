@@ -29,7 +29,7 @@
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
-			<li class="menu1"><a href="online-system.php?MID=<?=$education_cat_id?>">หน้าหลัก</a>
+			<li class="menu1"><a href="online-system.php?MID=<?=$education_cat_id?>"><?=$mainPageCap?></a>
 			<li class="menu2"><a href="e-booking.php">e-BOOKING + ONLINE TICKET</a></li>
 			<li class="menu3 sub"><a href="e-shopping.php?MID=<?=$education_cat_id?>">e-SHOPPING</a>
 				<ul class="submenu-left">

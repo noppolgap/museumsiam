@@ -61,8 +61,8 @@ if ($_SESSION['LANG'] == 'TH') {
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ระบบพิพิธภัณฑ์เสมือนจริง</li>
+				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=$virtual_exh?></li>
 			</ol>
 		</div>
 	</div>
@@ -113,7 +113,7 @@ $cat_name[$row['SUB_CONTENT_CAT_ID']] = $row['CAT_DESC'];
 				<div class="box-title cf">
 					<h2><?=$cat_name[$row_Category['SUB_CAT_ID']]?></h2>
 					<div class="box-btn">
-						<a href="ve-permanent.php" class="btn gold">ดูทั้งหมด</a>
+						<a href="ve-permanent.php" class="btn gold"><?=$seeAllCap ?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -132,7 +132,7 @@ $cat_name[$row['SUB_CONTENT_CAT_ID']] = $row['CAT_DESC'];
 									<p class="text-date"><?=ConvertDate($row_Category['LAST_DATE'])?></p>
 									<p class="text-des"><?=$row_Category['BRIEF_LOC']?></p>
 									<div class="box-btn cf">
-										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>" class="btn red">อ่านเพิ่มเติม</a>
+										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>" class="btn red"><?=$txt_more?></a>
 										<div class="box-btn-social cf">
 										<?php
 										echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$row_Category['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
@@ -176,7 +176,7 @@ $cat_name[$row['SUB_CONTENT_CAT_ID']] = $row['CAT_DESC'];
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '</p>';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<div class="box-btn cf">';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<a class="btn red" href="ve-detail.php?MID='.$MID.'&amp;CID='.$row_Category['SUB_CAT_ID'].'&amp;CONID='.$row_Category['CONTENT_ID'].'">';
-			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= 'อ่านเพิ่มเติม</a>';
+			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= ''.$txt_more.'</a>';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<div class="box-btn-social cf">';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= ' <a href="'.$fb_link.'" onclick="shareFB(\''.$row_Category['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= ' <a href="'.$fullpath.'" onclick="shareTW(\''.$row_Category['CONTENT_ID'].'\',\''.$row_Category['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -194,7 +194,7 @@ foreach ($temporary_exhibition_log as $key => $value) {
 				<div class="box-title cf ">
 					<h2><?=$cat_name[$key]?></h2>
 					<div class="box-btn">
-						<a href="ve-temporary.php?c=<?=$key?>" class="btn black">ดูทั้งหมด </a>
+						<a href="ve-temporary.php?c=<?=$key?>" class="btn black"><?=$seeAllCap?> </a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -212,7 +212,7 @@ foreach ($temporary_exhibition_log as $key => $value) {
 				<div class="box-title cf ">
 					<h2><?=$rowCategory['CAT_DESC']?></h2>
 					<div class="box-btn">
-						<a href="ve-category.php?c=<?=$rowCategory['CONTENT_CAT_ID']?>" class="btn black">ดูทั้งหมด</a>
+						<a href="ve-category.php?c=<?=$rowCategory['CONTENT_CAT_ID']?>" class="btn black"><?=$seeAllCap?></a>
 					</div>
 				</div>
 
@@ -273,7 +273,7 @@ foreach ($temporary_exhibition_log as $key => $value) {
 										<p class="text-date TcolorGray"><?=ConvertDate($rowContent['LAST_DATE'])?></p>
 										<p class="text-des TcolorBlack"><?=$rowContent['BRIEF_LOC']?></p>
 										<div class="box-btn cf">
-											<a href="<?=$pageline?>" class="btn red">อ่านเพิ่มเติม</a>
+											<a href="<?=$pageline?>" class="btn red"><?=$txt_more?></a>
 											<div class="box-btn-social cf">
 											<?php
 											echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';

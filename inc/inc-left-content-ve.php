@@ -27,7 +27,7 @@
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
-			<li class="menu1"><a href="ve.php?MID=<?=$MID?>">หน้าหลัก</a></li>
+			<li class="menu1"><a href="ve.php?MID=<?=$MID?>"><?=$mainPageCap?></a></li>
 			<li class="menu2 sub"><a href="ve-exhibition.php?MID=<?=$MID?>">นิทรรศการ</a>
 				<ul class="submenu-left">
 					<li class="submenu1"><a href="ve-permanent.php?MID=<?=$MID?>">นิทรรศการถาวร</a></li>

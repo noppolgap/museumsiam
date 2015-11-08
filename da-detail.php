@@ -127,7 +127,7 @@ include ('inc/inc-menu.php');
 			<div class="box-title-system cf news">
 				<h1><?=$catName ?></h1>
 				<div class="box-btn">
-					<a href="<?=$backPage ?>" class="btn red">ย้อนกลับ</a>
+					<a href="<?=$backPage ?>" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 			<div class="box-newsdetail-main">
@@ -252,14 +252,14 @@ include ('inc/inc-menu.php');
 
 				<div class="part-tumb-main" <?=$extraStyle?>>
 					<div  class="text-title cf">
-						<p>แกลเลอรี</p>
+						<p><?=$galleryCap?></p>
 						<div class="box-btn">
 						<?php
 						if ($preview360 > 0) {
 							echo '<a href="view-360.php?CID=' . $CID . '&amp;CONID=' . $CONID . '" target="_blank" class="btn black b360">ดู</a>';
 						}
 						?>
-							<a href="all-media.php?CID=<?=$CID ?>&amp;CONID=<?=$CONID ?>" target="_blank" class="btn black">ดูทั้งหมด</a>
+							<a href="all-media.php?CID=<?=$CID ?>&amp;CONID=<?=$CONID ?>" target="_blank" class="btn black"><?=$seeAllCap?></a>
 						</div>
 					</div>
 					<div class="box-slide-small">
@@ -282,7 +282,7 @@ include ('inc/inc-menu.php');
 ?>
 				<div class="box-otherfile-main">
 					<div class="box-title cf">
-						<h2>ไฟล์อื่นๆที่เกี่ยวข้อง</h2>
+						<h2><?=$other_file?></h2>
 					</div>
 					<div class="box-news-main gray">
 					<?php
@@ -303,12 +303,12 @@ include ('inc/inc-menu.php');
 							<div class="box-text">
 								<p class="text-title"><?=$rowFile['IMG_NAME'] ?></p>
 								<p class="text-detail">
-									<span>ประเภท: .<?=$ext ?></span>
-									<span>ขนาด: <?=$size ?></span>
+									<span><?=$typeCap?> : .<?=$ext ?></span>
+									<span><?=$sizeCap?>: <?=$size ?></span>
 								</p>
 							</div>
 							<div class="box-btn cf">
-								<a href="<?=$link ?>" target="_blank" class="btn red">ดาวน์โหลด</a>
+								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap?></a>
 							</div>
 						</div>
 					<?php } } ?>
@@ -317,7 +317,7 @@ include ('inc/inc-menu.php');
 <?php } ?>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						วันที่แก้ไขล่าสุด :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
+						<?=$lastEditCap?> :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						<div class="fb-share-button" data-href="<?=$path ?>" data-layout="button_count"></div>
@@ -335,7 +335,7 @@ include ('inc/inc-menu.php');
 			</div>
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="<?=$backPage ?>" class="btn red">ย้อนกลับ</a>
+					<a href="<?=$backPage ?>" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 		</div>

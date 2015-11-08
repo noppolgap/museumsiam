@@ -62,7 +62,7 @@ if ($_SESSION['LANG'] == 'TH') {
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve.php">ระบบจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve-exhibition.php.php">นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">นิทรรศการถาวร</li>
@@ -114,7 +114,7 @@ if ($_SESSION['LANG'] == 'TH') {
 									<p class="text-date"><?=ConvertDate($row_Category['LAST_DATE'])?></p>
 									<p class="text-des"><?=$row_Category['BRIEF_LOC']?></p>
 									<div class="box-btn cf">
-										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>" class="btn red">อ่านเพิ่มเติม</a>
+										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>" class="btn red"><?=$readMoreCap?></a>
 										<div class="box-btn-social cf">
 										<?php
 											echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';

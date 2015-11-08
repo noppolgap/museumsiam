@@ -152,5 +152,18 @@ $Submit= "Submit";
 $account_setting = "Account Settings";
 $profile  = "Profile";
 $exit = "Exit";
+$create_by = "Create By";
+$comment = "Comment";
+$commnet_by = "Comment By";
+$other_file = "Other File";
+$virtual_exh = "Virtual Exhibition";
+$product = "Product";
+$price = "Price";
+$quantity = "Quantity";
+$sum_price = "Sum Price";
+$product_code = "Product Code";
+$product_category = "Product Category";
+$delete_product= "Delete";
+$bath = "Bath";
 
 ?>

@@ -119,7 +119,7 @@ if ($_SESSION['LANG'] == 'TH') {
 
 						}
 						?>
-						<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
+						<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn gold"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -182,7 +182,7 @@ if ($_SESSION['LANG'] == 'TH') {
 							echo $rowContent['BRIEF_LOC'];
 							echo '</p>';
 							echo '<div class="box-btn cf">';
-							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
+							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">'.$txt_more.'</a>';
 							echo '<div class="box-btn-social cf">';
 							echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -237,7 +237,7 @@ if ($_SESSION['LANG'] == 'TH') {
 						}
 						?>
 
-						<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn black">ดูทั้งหมด</a>
+						<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn black"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -311,7 +311,7 @@ if ($_SESSION['LANG'] == 'TH') {
 							echo $rowContent['BRIEF_LOC'];
 							echo '</p>';
 							echo '<div class="box-btn cf">';
-							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
+							echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">'.$txt_more.'</a>';
 							echo '<div class="box-btn-social cf">';
 							echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -367,7 +367,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 		$pageNext = 'da-category-gray.php';
 
 	}
-	echo '<a href="' . $pageNext . '?MID=' . $digial_module_id . '&CID=' . $rowCat['CONTENT_CAT_ID'] . '" class="btn black">ดูทั้งหมด</a>';
+	echo '<a href="' . $pageNext . '?MID=' . $digial_module_id . '&CID=' . $rowCat['CONTENT_CAT_ID'] . '" class="btn black">'.$seeAllCap.'</a>';
 	echo '</div>';
 	echo '</div>';
 	echo '<div class="box-news-main">';
@@ -437,7 +437,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 		echo $rowContent['BRIEF_LOC'];
 		echo '</p>';
 		echo '<div class="box-btn cf">';
-		echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
+		echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">'.$txt_more.'</a>';
 		echo '<div class="box-btn-social cf">';
 		echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 		echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -499,7 +499,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 
 								}
 						?>
-								<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn black">ดูทั้งหมด</a>
+								<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn black"><?=$seeAllCap?></a>
 							</div>
 						</div>
 						<div class="box-news-main">
@@ -571,7 +571,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 									echo $rowContent['BRIEF_LOC'];
 									echo '</p>';
 									echo '<div class="box-btn cf">';
-									echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
+									echo '<a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">'.$txt_more.'</a>';
 									echo '<div class="box-btn-social cf">';
 									echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 									echo '<a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -625,7 +625,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 									$pageNext = 'da-category-red.php';
 									}
 						?>
-								<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn gold">ดูทั้งหมด</a>
+								<a href="<?=$pageNext ?>?MID=<?=$digial_module_id ?>&CID=<?=$rowCat['CONTENT_CAT_ID'] ?>" class="btn gold"><?=$seeAllCap?></a>
 							</div>
 						</div>
 						<div class="box-news-main">
@@ -692,7 +692,7 @@ while ($rowCat = mysql_fetch_array($rsCat)) {
 											<?=$rowContent['BRIEF_LOC'] ?>
 										</p>
 										<div class="box-btn cf">
-											<a href="da-detail.php?MID=<?=$MID ?>&CID=<?=$categoryID ?>&CONID=<?=$rowContent['CONTENT_ID'] ?>" class="btn black">อ่านเพิ่มเติม</a>
+											<a href="da-detail.php?MID=<?=$MID ?>&CID=<?=$categoryID ?>&CONID=<?=$rowContent['CONTENT_ID'] ?>" class="btn black"><?=$txt_more?></a>
 											<div class="box-btn-social cf">
 								<?php
 									echo '<a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';

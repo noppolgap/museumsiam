@@ -86,7 +86,7 @@ if ($_SESSION['LANG'] == 'TH') {
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php"><?=$otherSystemCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve.php">ระบบจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">หมวดหมู่นิทรรศการ</li>
 			</ol>
@@ -209,7 +209,7 @@ if (isset($_GET['SCID'])) {
 							echo ' </p>';
 
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']  . '&PG='.$currentPage.'" class="btn red">อ่านเพิ่มเติม</a>';
+							echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']  . '&PG='.$currentPage.'" class="btn red">'.$readMoreCap.'</a>';
 
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
