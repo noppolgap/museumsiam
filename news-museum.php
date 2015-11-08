@@ -43,9 +43,9 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</li>
+				<li><a href="news-event-museum.php"><?=$newsAndEventCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="news-event-museum.php"><?=$activityNewsMuseumCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=$newsMuseumCap?></li>
 			</ol>
 		</div>
 	</div>
@@ -63,7 +63,7 @@ require("assets/configs/function.inc.php");
 
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h2>
+					<h2><?=$newsMuseumCap?></h2>
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
@@ -151,7 +151,7 @@ require("assets/configs/function.inc.php");
 						echo  $detail;
 						echo  '</p>';
 						echo  '<div class="box-btn cf">';
-						echo  '<a href="news-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+						echo  '<a href="news-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
 						echo  '<div class="box-btn-social cf">';
 						echo  '<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 						echo  '<a href="'.$fullpath.'" onclick="shareTW(\''.$row_row1['CONTENT_ID'].'\',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';

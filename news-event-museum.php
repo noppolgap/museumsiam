@@ -54,7 +54,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-right main-content">
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>กิจกรรมของมิวเซียมสยาม</h2>
+					<h2><?=$activityMuseumCap?></h2>
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
@@ -153,7 +153,7 @@ require("assets/configs/function.inc.php");
 						echo	$detail;
 						echo	'</p>';
 						echo	'<div class="box-btn cf">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=eventall" class="btn red">อ่านเพิ่มเติม</a>';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=eventall" class="btn red">'.$txt_more.'</a>';
 						echo	'<div class="box-btn-social cf">';
 						echo  '<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 						echo  '<a href="'.$fullpath.'" onclick="shareTW(\''.$row_row1['CONTENT_ID'].'\',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -191,7 +191,7 @@ require("assets/configs/function.inc.php");
 
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>ข่าวประชาสัมพันธ์ของมิวเซียมสยาม</h2>
+					<h2><?=$newsMuseumCap?></h2>
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf">
@@ -284,7 +284,7 @@ require("assets/configs/function.inc.php");
 						echo  $detail;
 						echo  '</p>';
 						echo  '<div class="box-btn cf">';
-						echo  '<a href="news-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=newsall" class="btn red">อ่านเพิ่มเติม</a>';
+						echo  '<a href="news-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'&date=newsall" class="btn red">'.$txt_more.'</a>';
 						echo  '<div class="box-btn-social cf">';
 						echo  '<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 						echo  '<a href="'.$fullpath.'" onclick="shareTW(\''.$row_row1['CONTENT_ID'].'\',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -318,7 +318,7 @@ require("assets/configs/function.inc.php");
 
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>ประกาศจัดซื้อจัดจ้าง</h2>
+					<h2><?=$procurementCap?></h2>
 				</div>
 
 			<?php
@@ -368,7 +368,7 @@ require("assets/configs/function.inc.php");
 							</p>
 						</div>
 						<div class="box-btn cf">
-							<a href="<?=$IMG_PATH?>" target="_blank" class="btn red">ดาวน์โหลด</a>
+							<a href="<?=$IMG_PATH?>" target="_blank" class="btn red"><?=$downloadCap?></a>
 						</div>
 					</div>
 

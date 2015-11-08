@@ -39,9 +39,9 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="index.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-month.php">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</li>
+				<li><a href="index.php"><?=$newsAndEventCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="news-event-month.php"><?=$allEventAndNewsAllSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=$allEventAndNewsAllSystemCap?></li>
 			</ol>
 		</div>
 	</div>
@@ -61,7 +61,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
-				<h1>กิจกรรมและข่าวสารทั้งหมดของทุกระบบ</h1>
+				<h1><?=$allEventAndNewsAllSystemCap?></h1>
 			</div>
 		<?php
 
@@ -90,7 +90,7 @@ require("assets/configs/function.inc.php");
 						 ?>
 
 
-						<a href="news-event-all.php?CID=<? echo $catId ?>" class="btn gold">ดูทั้งหมด</a>
+						<a href="news-event-all.php?CID=<? echo $catId ?>" class="btn gold"><?=$seeAllCap?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -182,7 +182,7 @@ require("assets/configs/function.inc.php");
 						echo	$detail;
 						echo	'</p>';
 						echo	'<div class="box-btn cf">';
-						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$row_CAT['CONTENT_CAT_ID'].'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'" class="btn red">อ่านเพิ่มเติม</a>';
+						echo	'<a href="event-detail.php?MID='.$MID.'&CID='.$row_CAT['CONTENT_CAT_ID'].'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
 						echo	'<div class="box-btn-social cf">';
 						echo  	'<a href="'.$fb_link.'" onclick="shareFB(\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 						echo  	'<a href="'.$fullpath.'" onclick="shareTW(\''.$row_row1['CONTENT_ID'].'\',\''.$title.'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';

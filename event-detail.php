@@ -34,9 +34,9 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสารของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-museum.php">กิจกรรมของมิวเซียมสยาม</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="news-event-museum.php"><?=$newsAndEventCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="news-event-museum.php"><?=$activityNewsMuseumCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="news-museum.php"><?=$activityMuseumCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 
 				<?
 				    $sql_title = " select CONTENT_DESC_LOC from trn_content_detail where CONTENT_ID = $NID";
@@ -66,7 +66,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
-				<h1>กิจกรรมของมิวเซียมสยาม</h1>
+				<h1><?=$activityMuseumCap?></h1>
 				<div class="box-btn">
 
 				 <?
@@ -113,7 +113,7 @@ require("assets/configs/function.inc.php");
 
 				?>
 
-					<a href="<? echo $back_link ?>" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
+					<a href="<? echo $back_link ?>" class="btn red"><?=$backToActivityCap?></a>
 				</div>
 			</div>
 
@@ -261,7 +261,7 @@ require("assets/configs/function.inc.php");
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black">ดูทั้งหมด</a>
+							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black"><?=$seeAllCap?></a>
 						</div>
 					</div>
 					<div class="box-slide-small">
@@ -315,12 +315,12 @@ require("assets/configs/function.inc.php");
 							<div class="box-text">
 								<p class="text-title"><?=$rowFile['IMG_NAME'] ?></p>
 								<p class="text-detail">
-									<span>ประเภท: .<?=$ext ?></span>
-									<span>ขนาด: <?=$size ?></span>
+									<span><?=$typeCap?>: .<?=$ext ?></span>
+									<span><?=$sizeCap?>: <?=$size ?></span>
 								</p>
 							</div>
 							<div class="box-btn cf">
-								<a href="<?=$link ?>" target="_blank" class="btn red">ดาวน์โหลด</a>
+								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap?></a>
 							</div>
 						</div>
 					<?php } } ?>
@@ -331,7 +331,7 @@ require("assets/configs/function.inc.php");
 
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						วันที่แก้ไขล่าสุด :  <? echo ConvertDate($row['LAST_UPDATE_DATE']) ?>
+						<?=$lastEditCap?> :  <? echo ConvertDate($row['LAST_UPDATE_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						<div class="fb-share-button" data-href="<?=$path ?>" data-layout="button_count"></div>
@@ -350,7 +350,7 @@ require("assets/configs/function.inc.php");
 
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="<? echo $back_link ?>" class="btn red">กลับไปกิจกรรมของมิวเซียมสยาม</a>
+					<a href="<? echo $back_link ?>" class="btn red"><?=$backToActivityCap?></a>
 				</div>
 			</div>
 		</div>

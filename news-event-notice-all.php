@@ -41,8 +41,8 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ประกาศจัดซื้อจัดจ้าง</li>
+				<li><a href="news-event-museum.php"><?=$newsAndEventCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=$procurementCap?></li>
 			</ol>
 		</div>
 	</div>
@@ -92,7 +92,7 @@ require("assets/configs/function.inc.php");
  
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2>ประกาศจัดซื้อจัดจ้าง</h2>
+					<h2><?=$procurementCap?></h2>
 				</div>
 
 				<div class="box-news-main gray">
@@ -105,12 +105,12 @@ require("assets/configs/function.inc.php");
 						<div class="box-text">
 							<p class="text-title"><? echo $row['CONTENT_DESC'] ?></p>
 							<p class="text-detail">
-								<span>ประเภท: <? echo getEXT($IMG_PATH) ?></span>
-								<span>ขนาด: <?=formatSizeUnits(filesize($IMG_PATH))?></span>
+								<span><?=$typeCap?>: <? echo getEXT($IMG_PATH) ?></span>
+								<span><?=$sizeCap?>: <?=formatSizeUnits(filesize($IMG_PATH))?></span>
 							</p>
 						</div>
 						<div class="box-btn cf">
-							<a href="<?=$IMG_PATH?>" target="_blank" class="btn red">ดาวน์โหลด</a>
+							<a href="<?=$IMG_PATH?>" target="_blank" class="btn red"><?=$downloadCap?></a>
 						</div>
 					</div>
 
