@@ -22,9 +22,22 @@ require ('inc_meta.php');
 		if ($('.menu-left li.menu5').hasClass("active")) {
 			$('.menu-left li.menu5').children(".submenu-left").css("display", "block");
 		}
-	}); 
+	});
 </script>
 	
+	<style>
+		ul.catItems {
+			text-align: center;
+			list-style-type: none;
+		}
+		ul.catItems li {
+			float: left;
+		}
+		ul.catItems li:nth-child(3n+4) {
+			clear: left;
+			float: left;
+		}
+	</style>
 </head>
 
 <body id="account">
@@ -1157,6 +1170,43 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
+			
+			<!-- Loop Museum Category-->
+			
+			<div class="box-line cf"><hr></div>		
+ 
+			
+			<div class="row-main cf">
+				<div class="box-left">
+					<div class="box-row cf">
+						<div class="box-left">
+							<p>Cat 1</p>
+						</div>
+						<div class="box-right">
+							<div class="box-input-text checkbox">
+								<div>
+									<ul class="catItems">
+										<li>
+									 <label >
+									<input type="checkbox" name= "cat1[]" value="Cat11">
+									อันที่ 1</label></li>
+				
+				<li><label >
+									<input type="checkbox" name= "cat1[]" value="Cat12">อันที่ 2</label></li>
+									<li><label >
+									<input type="checkbox" name= "cat1[]" value="Cat13">อันที่ 3</label></li>
+								<li>	<label >
+									<input type="checkbox" name= "cat1[]" value="Cat14">อันที่ 4</label></li>
+									</ul>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- End Loop-->
 			<div class="box-line cf"><hr></div>		
 
 			<div class="box-title">
