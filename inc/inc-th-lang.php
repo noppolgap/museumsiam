@@ -192,5 +192,9 @@ $news = "ข่าวสาร";
 $perspective_muse = "รายงานภาพรวมพิพิธภัณฑ์";
 $career = "สมัครรับ";
 $term_and_condition = "เงื่อนไขข้อกำหนด";
+$booking_no = "เลขที่จอง";
+$booking_date = "วันที่จอง";
+$sum = "รวม";
+$status = "สถานะ";
 
 ?>

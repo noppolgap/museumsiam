@@ -192,5 +192,9 @@ $news = "News";
 $perspective_muse = "Perspective Museam";
 $career = "Career";
 $term_and_condition = "Term And Condition";
+$booking_no = "Booking No.";
+$booking_date = "Booking Date";
+$sum = "Sum";
+$status = "Status";
 
 ?>
