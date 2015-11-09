@@ -49,7 +49,7 @@ include ('inc/inc-top-bar.php');
 <?php
 include ('inc/inc-menu.php');
 require ('inc/inc-require-museum-admin-login.php');
-$_SESSION['user_name'] = 'noppol.vong@hotmail.com';
+$_SESSION['user_name'] = 'noppol_vong@hotmail.com';
 $_SESSION['LANG'] = 'TH';
 if ($_SESSION['LANG'] == 'TH') {
 	$picFolder = 'th';
