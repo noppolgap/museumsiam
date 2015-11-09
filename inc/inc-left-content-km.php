@@ -7,7 +7,7 @@
 <form name="search" action="?search" method="post">
 	<div class="part-left-search">
 		<div class="box-search">
-			<input type="text" name="str_search" value="<?=$_SESSION['text'] ?>" placeholder="ค้นหา">
+			<input type="text" name="str_search" value="<?=$_SESSION['text'] ?>" placeholder="<?=$searchCap?>">
 		</div>
 	</div>
 </form>
@@ -25,9 +25,9 @@
 				echo '<li class="menu1" ><a href="km.php">'.$mainPageCap.'</a></li>';
 			
 			if ($currentPageName == "km-webboard.php")
-			echo '<li class="menu2 active"><a href="km-webboard.php" >เว็บบอร์ด</a></li>';
+			echo '<li class="menu2 active"><a href="km-webboard.php" >'.$webboardCap.'</a></li>';
 			else 
-				echo '<li class="menu2"><a href="km-webboard.php" >เว็บบอร์ด</a></li>';
+				echo '<li class="menu2"><a href="km-webboard.php" >'.$webboardCap.'</a></li>';
 			
 			
 		

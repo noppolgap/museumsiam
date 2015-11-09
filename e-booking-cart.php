@@ -29,7 +29,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="#"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="#">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">e-BOOKING</li>
 			</ol>
@@ -50,17 +50,17 @@ require("assets/configs/function.inc.php");
 			<div class="box-title-system cf">
 				<h1>e-BOOKING</h1>
 				<div class="box-btn">
-					<a href="e-booking.php" class="btn red">ย้อนกลับ</a>
+					<a href="e-booking.php" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 
 			<div class="box-table-main">
 				<form name="bookingForm" action="?" method="post">
 				<div class="table-row head">
-					<div class="column list">นิทรรศการ</div>
-					<div class="column price">ราคา</div>
-					<div class="column number">จำนวน</div>
-					<div class="column total">มูลค่ารวม</div>
+					<div class="column list"><?=$exhibition?></div>
+					<div class="column price"><?=$price?></div>
+					<div class="column number"><?=$quantity?></div>
+					<div class="column total"><?=$sum_price?></div>
 				</div>
 			<?php
 				$Quantity = $_POST['person'];
@@ -114,25 +114,25 @@ require("assets/configs/function.inc.php");
 
 			<div class="box-total-main cf">
 				<div class="box-btn box1 cf">
-					<a class="btn red" href="#" onclick="$('form[name=bookingForm]').submit();">คำนวณราคาใหม่</a>
+					<a class="btn red" href="#" onclick="$('form[name=bookingForm]').submit();"><?=$re_calculate?></a>
 				</div>
 				<hr class="line-gray"/>
 				<div class="box-row cf">
 					<div class="box-left">
-						มูลค่า
+						<?=$cost?>
 					</div>
 					<div class="box-right">
-						<?=number_format($total,2)?> <span>บาท</span>
+						<?=number_format($total,2)?> <span><?=$bath?></span>
 					</div>
 				</div>
 				<hr class="line-gray"/>
 
 				<div class="box-row cf total">
 					<div class="box-left">
-						ยอดสุทธิ
+						<?=$total?>
 					</div>
 					<div class="box-right">
-						<?=number_format($total,2)?> <span>บาท</span>
+						<?=number_format($total,2)?> <span><?=$bath?></span>
 					</div>
 				</div>
 				<form name="bookingSave" action="e-booking-action.php" method="post">
@@ -154,12 +154,12 @@ if(isset($_SESSION['UID'])){
 				<div class="box-row cf box2">
 					<div class="box-left">
 						<div class="box-btn box1 cf">
-							<a class="btn red" href="<?=$ticket?>">จองตั๋ว</a>
+							<a class="btn red" href="<?=$ticket?>"><?=$e_booking?></a>
 						</div>
 					</div>
 					<div class="box-right">
 						<div class="box-btn box1 cf">
-							<a class="btn red" href="<?=$booking?>" >ซื้อตั๋ว</a>
+							<a class="btn red" href="<?=$booking?>" ><?=$buy_ticket?></a>
 						</div>
 					</div>
 				</div>
@@ -167,7 +167,7 @@ if(isset($_SESSION['UID'])){
 			</div>
 			<div class="box-btn-back">
 				<div class="box-btn cf">
-					<a href="e-shopping.php" class="btn red">ดูสินค้าเพิ่มเติม</a>
+					<a href="e-shopping.php" class="btn red"><?=$view_more_product?></a>
 				</div>
 			</div>
 		</div>

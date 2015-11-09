@@ -160,12 +160,12 @@ if ($_SESSION['LANG'] == 'TH') {
 
 			<div class="box-total-main cf">
 				<div class="box-btn box1 cf">
-					<a class="btn red" href="#" onclick="saveFormCart('reCal'); return false;">คำนวณราคาใหม่</a>
+					<a class="btn red" href="#" onclick="saveFormCart('reCal'); return false;"><?=$re_calculate?></a>
 				</div>
 				<hr class="line-gray"/>
 				<div class="box-row cf">
 					<div class="box-left">
-						มูลค่า
+						<?=$cost?>
 					</div>
 					<div class="box-right">
 						<?=number_format($totalCost,2)?> <span>บาท</span>
@@ -173,15 +173,15 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						รูปแบบการจัดส่ง
+						<?=$delivery?>
 					</div>
 					<div class="box-right">
-						จัดส่งแบบลงทะเบียน
+						<?=$register_mail?>
 					</div>
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						ค่าจัดส่งสินค้า
+						<?=$shipping_free?>
 					</div>
 					<div class="box-right">
 						<?=number_format($shipping_cost,2)?> <span><?=$bath?></span>
@@ -191,7 +191,7 @@ if ($_SESSION['LANG'] == 'TH') {
 
 				<div class="box-row cf total">
 					<div class="box-left">
-						ยอดสุทธิ
+						<?=$total?>
 					</div>
 					<div class="box-right">
 						<?=number_format(($totalCost+$shipping_cost),2)?> <span><?=$bath?></span>
@@ -201,18 +201,18 @@ if ($_SESSION['LANG'] == 'TH') {
 				<div class="box-row cf box2">
 					<div class="box-left">
 						<div class="box-btn box1 cf">
-							<a class="btn red" href="#" onclick="saveFormCart('DelAll')">ยกเลิกรายการ</a>
+							<a class="btn red" href="#" onclick="saveFormCart('DelAll')"><?=$cancel_list?></a>
 						</div>
 					</div>
 					<div class="box-right">
 						<div class="box-btn box1 cf">
 						<?php
 						if(isset($zeroItem)){
-							echo '<a class="btn red zeroItem" href="#">ดำเนินการต่อ</a>';
+							echo '<a class="btn red zeroItem" href="#">'.$continue.'</a>';
 						}else if(isset($_SESSION['UID'])){
-							echo '<a class="btn red" href="e-shopping-address.php">ดำเนินการต่อ</a>';
+							echo '<a class="btn red" href="e-shopping-address.php">'.$continue.'</a>';
 						}else{
-							echo '<a class="btn red" href="login.php?p=shopping">ดำเนินการต่อ</a>';
+							echo '<a class="btn red" href="login.php?p=shopping">'.$continue.'</a>';
 						}
 						?>
 						</div>
@@ -226,7 +226,7 @@ if ($_SESSION['LANG'] == 'TH') {
 			</div>
 			<div class="box-btn-back">
 				<div class="box-btn cf">
-					<a href="e-shopping.php" class="btn red">ดูสินค้าเพิ่มเติม</a>
+					<a href="e-shopping.php" class="btn red"><?=$view_more_product?></a>
 				</div>
 			</div>
 

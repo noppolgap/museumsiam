@@ -24,7 +24,7 @@
 <form name="search" action="?search<?=$CID_S?>" method="post">
 	<div class="part-left-search">
 		<div class="box-search">
-			<input type="text" name="str_search" value="<?=$_SESSION['text'] ?>"  placeholder="ค้นหา">
+			<input type="text" name="str_search" value="<?=$_SESSION['text'] ?>"  placeholder="<?=$searchCap?>">
 		</div>
 	</div>
 </form>

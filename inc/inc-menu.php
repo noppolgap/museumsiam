@@ -13,35 +13,35 @@ else
 			<div class="menu">
 				<ul class="menutop cf">
 					<li class="menu1">
-						<a href="index.php">หน้าแรก</a>
+						<a href="index.php"><?=$homeCap?></a>
 					</li>
 					<li class="menu2 sub">
-						<a href="about.php">รู้จักเรา</a>
+						<a href="about.php"><?=$aboutUsCap?></a>
 						<ul class="submenu-top">
 							<a href="about.php">
 							<li class="sub1">
-								ความเป็นมาของเรา
+								<?=$storyCap?>
 							</li></a>
 							<a href="organization.php">
 							<li class="sub2">
-								โครงสร้างของเรา
+								<?=$orgCap?>
 							</li></a>
 						</ul>
 					</li>
 					<li class="menu3 sub">
-						<a href="service-knowledge.php">บริการของเรา</a>
+						<a href="service-knowledge.php"><?=$serviceCap?></a>
 						<ul class="submenu-top">
 							<a href="service-knowledge.php">
 							<li class="sub1">
-								ห้องคลังความรู้
+								<?=$knowledgeCap?>
 							</li></a>
 							<a href="service-archive.php">
 							<li class="sub2">
-								ห้องคลังโบราณวัตถุ
+								<?=$digitalArcCap?>
 							</li></a>
 							<a href="service-restaurant.php">
 							<li class="sub3">
-								ร้านอาหาร
+								<?=$resturantCap?>
 							</li></a>
 							<a href="#">
 							<li class="sub4">
@@ -49,28 +49,28 @@ else
 							</li></a>
 							<a href="service-spaceforrent.php">
 							<li class="sub5">
-								พื้นที่ให้เช่า
+								<?=$rentSpaceCap?>
 							</li></a>
 						</ul>
 					</li>
 					<li class="menu4">
-						<a href="">สิทธิพิเศษ</a>
+						<a href=""><?=$privilegeCap?></a>
 					</li>
 					<li class="menu5 sub">
-						<a href="news-event-museum.php">กิจกรรมและข่าวสาร</a>
+						<a href="news-event-museum.php"><?=$newsAndEventCap?></a>
 						<ul class="submenu-top">
 							<a href="news-event-museum.php">
 							<li class="sub1">
-								กิจกรรมและข่าวสารของมิวเซียมสยาม
+								<?=$activityNewsMuseumCap?>
 							</li></a>
 							<a href="news-event.php">
 							<li class="sub2">
-								กิจกรรมและข่าวสารทั้งหมดของทุกระบบ
+								<?=$allEventAndNewsAllSystemCap?>
 							</li></a>
 						</ul>
 					</li>
 					<li class="menu6 sub">
-						<a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>
+						<a href="other-system.php"><?=$otherSystemCap?></a>
 						<ul class="submenu-top">
 							<?
 							if ($_SESSION['LANG'] == 'TH')
@@ -122,10 +122,10 @@ ORDER_DATA DESC";
 						</ul>
 					</li>
 					<li class="menu7 sub">
-						<a href="faqs.php">คำถามที่พบบ่อย</a>
+						<a href="faqs.php"><?=$qaCap?></a>
 					</li>
 					<li class="menu8 sub">
-						<a href="contact.php">ติดต่อเรา</a>
+						<a href="contact.php"><?=$contactUsCap?></a>
 						<ul class="submenu-top">
 							<a href="contact.php">
 							<li class="sub1">

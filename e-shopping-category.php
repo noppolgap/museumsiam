@@ -53,10 +53,10 @@ $_SESSION['SHOPPING_PREV_PG'] = $current_url;
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="#"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="#">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="#">e-SHOPPING</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ของที่ระลึก</li>
+				<li class="active"><?=$souvenir?></li>
 			</ol>
 		</div>
 	</div>
@@ -74,7 +74,7 @@ $_SESSION['SHOPPING_PREV_PG'] = $current_url;
 			<div class="box-title-system cf">
 				<h1>e-SHOPPING</h1>
 				<div class="box-btn">
-					<a href="e-shopping.php" class="btn red">ย้อนกลับ</a>
+					<a href="e-shopping.php" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 			<?php
@@ -83,7 +83,7 @@ $_SESSION['SHOPPING_PREV_PG'] = $current_url;
 			$row = mysql_fetch_row($query);
 			?>
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <span><?=$row[0]?></span></a>
+				<a href="e-shopping-cart.php" class="btn-cart"><?=$cart?> <span><?=$row[0]?></span></a>
 			</div>
 
 
@@ -151,10 +151,10 @@ $_SESSION['SHOPPING_PREV_PG'] = $current_url;
 								</p>
 							</a>
 							<p class="text-price">
-								ราคา : <? echo $row_proc['PRICE']; ?> บาท<br>
+								<?=$price?> : <? echo $row_proc['PRICE']; ?> <?=$bath?><br>
 								<?php
 								if($row_proc['SALE'] > 0){
-									echo '<span>ราคาพิเศษ : '.$row_proc['SALE'].' บาท</span>';
+									echo '<span>'.$sale.' : '.$row_proc['SALE'].' '.$bath.'</span>';
 								}
 								?>
 							</p>
