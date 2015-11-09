@@ -107,9 +107,9 @@ require("assets/configs/function.inc.php");
 						$categoryID = $all_event_cat_id;
 
 							if ($_SESSION['LANG'] == 'TH'){
-								$LANG_SQL = 'content.CONTENT_DESC_LOC AS CONTENT_LOC , content.BRIEF_LOC AS CONTENT_BRIEF ,';
+								$LANG_SQL = 'content.CONTENT_DESC_LOC AS CONTENT_LOC , content.BRIEF_LOC AS CONTENT_BRIEF , tmd.MUSEUM_NAME_LOC as MUSEUM_DESC ,';
 							}else if ($_SESSION['LANG'] == 'EN'){
-								$LANG_SQL = 'content.CONTENT_DESC_ENG AS CONTENT_LOC , content.BRIEF_ENG AS CONTENT_BRIEF ,';
+								$LANG_SQL = 'content.CONTENT_DESC_ENG AS CONTENT_LOC , content.BRIEF_ENG AS CONTENT_BRIEF , tmd.MUSEUM_NAME_ENG as MUSEUM_DESC , ';
 							}
 
 						    $sql =  " SELECT ";
@@ -119,9 +119,11 @@ require("assets/configs/function.inc.php");
 												content.EVENT_START_DATE,
 												content.EVENT_END_DATE,
 												content.CREATE_DATE ,
-												content.LAST_UPDATE_DATE
+												content.LAST_UPDATE_DATE , 
+												content.MUSUEM_ID 
 											FROM
-												trn_content_detail AS content
+												trn_content_detail AS content  
+												left join  trn_museum_detail tmd on tmd.MUSEUM_DETAIL_ID = content.MUSUEM_ID 
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
@@ -161,7 +163,7 @@ require("assets/configs/function.inc.php");
 					    echo	'<div class="box-pic">';
 						echo	'<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row_CAT['CONTENT_CAT_ID'], true) . '">';
 						echo    '<div class="box-tag-cate">';
-						echo  	$title;
+						echo  	$row['MUSEUM_DESC'] ;
 						echo 	'</div>';
 						echo 	'<div class="box-date-tumb">';
 						echo	'<p class="date">'.$date[0].'</p>';

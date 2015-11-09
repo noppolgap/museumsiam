@@ -98,9 +98,9 @@ if (isset($_GET['add'])) {
 	$insert['BRIEF_ENG'] = "'" . $_POST['txtBriefDescEng'] . "'";
 	$insert['MUSUEM_ID'] = "'-1'";
 	$insert['APPROVE_FLAG'] = "'Y'";
-	$insert['USER_CREATE'] ="'". $_SESSION['user_name'] . "'";
+	$insert['USER_CREATE'] = "'" . $_SESSION['user_name'] . "'";
 	$insert['CREATE_DATE'] = "NOW()";
-	$insert['LAST_UPDATE_USER'] = "'". $_SESSION['user_name'] . "'";
+	$insert['LAST_UPDATE_USER'] = "'" . $_SESSION['user_name'] . "'";
 	$insert['LAST_UPDATE_DATE'] = "NOW()";
 	$insert['EVENT_START_DATE'] = "'" . ConvertDateToDB($_POST['txtStartDate']) . "'";
 	$insert['EVENT_END_DATE'] = "'" . ConvertDateToDB($_POST['txtEndDate']) . "'";
@@ -111,6 +111,9 @@ if (isset($_GET['add'])) {
 	$insert['LON'] = "'" . nvl($_POST['txtLon'], "") . "'";
 	$insert['EVENT_START_TIME'] = "'" . nvl($_POST['cmbHourStart'], '') . ':' . nvl($_POST['cmbMinuteStart'], '') . "'";
 	$insert['EVENT_END_TIME'] = "'" . nvl($_POST['cmbHourEnd'], '') . ':' . nvl($_POST['cmbMinuteEnd'], '') . "'";
+
+	$insert['PRICE_RATE_LOC'] = "'" . $_POST['txtPriceLoc'] . "'";
+	$insert['PRICE_RATE_ENG'] = "'" . $_POST['txtPriceEng'] . "'";
 	$sql = "INSERT INTO  trn_content_detail (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 
 	mysql_query($sql, $conn) or die($sql);
@@ -251,7 +254,7 @@ if (isset($_GET['edit'])) {
 	$update[] = "CONTENT_DETAIL_ENG= '" . $_POST['txtDetailEng'] . "'";
 	$update[] = "BRIEF_LOC= '" . $_POST['txtBriefDescLoc'] . "'";
 	$update[] = "BRIEF_ENG= '" . $_POST['txtBriefDescEng'] . "'";
-	$update[] = "LAST_UPDATE_USER = '". $_SESSION['user_name'] . "'";
+	$update[] = "LAST_UPDATE_USER = '" . $_SESSION['user_name'] . "'";
 	$update[] = "LAST_UPDATE_DATE = NOW()";
 
 	$update[] = "CAT_ID = '" . $CID . "'";
@@ -268,6 +271,9 @@ if (isset($_GET['edit'])) {
 
 	$update[] = "EVENT_START_TIME = '" . nvl($_POST['cmbHourStart'], '') . ':' . nvl($_POST['cmbMinuteStart'], '') . "'";
 	$update[] = "EVENT_END_TIME = '" . nvl($_POST['cmbHourEnd'], '') . ':' . nvl($_POST['cmbMinuteEnd'], '') . "'";
+
+	$update[] = "PRICE_RATE_LOC = '" . $_POST['txtPriceLoc'] . "'";
+	$update[] = "PRICE_RATE_ENG = '" . $_POST['txtPriceEng'] . "'";
 
 	$sql = "UPDATE trn_content_detail SET  " . implode(",", $update) . " WHERE CONTENT_ID = " . $conid;
 	mysql_query($sql, $conn);

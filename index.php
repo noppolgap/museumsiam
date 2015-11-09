@@ -55,7 +55,6 @@ require ("assets/configs/function.inc.php");
 			$picFolderName = 'th';
 		else
 			$picFolderName = 'en';
-
 		?>
 		<div class="part-event cf">
 			<div class="container">
@@ -123,25 +122,25 @@ require ("assets/configs/function.inc.php");
 						$class .= ' today';
 					}
 		?>
-			<a href="#" onclick="loadEvent('<?=date('Y-m-d', $time_string)?>'); return false;">
-				<div class="<?=$class?>">
+			<a href="#" onclick="loadEvent('<?=date('Y-m-d', $time_string) ?>'); return false;">
+				<div class="<?=$class ?>">
 					<div class="text-date">
-						<?=$DayOfWeek?>
-						<span><?=$dayNow?></span>
+						<?=$DayOfWeek ?>
+						<span><?=$dayNow ?></span>
 					</div>
 					<div class="text-month">
-						<?=$Month?>
+						<?=$Month ?>
 					</div>
 				</div>
 			</a>
 		<?
-		 }
-?>
+		}
+	?>
 <a href="#">
 						<div class="box-tumb-date btn-all">
 							<div class="box-text">
 								<p>
-									<?=$seeAllCap?>
+									<?=$seeAllCap ?>
 									<span></span>
 								</p>
 							</div>
@@ -152,12 +151,14 @@ require ("assets/configs/function.inc.php");
 				<div class="box-right">
 					<div class="box-slideevent-main cf">
 						<div class="slide-event cf">
-							<? include('index-ajax.php'); ?>
+							<?
+							include ('index-ajax.php');
+ ?>
 						</div>
 
 						<div class="box-float">
 							<div class="box-btn-left">
-								<a class="btn black" href=""><?=$todayEventCap?></a>
+								<a class="btn black" href=""><?=$todayEventCap ?></a>
 							</div>
 							<div class="box-btn-right">
 								<a class="btn-arrow left"></a>
@@ -181,17 +182,16 @@ require ("assets/configs/function.inc.php");
 			</div>
 		</div>
 		<?
-			$categoryID = $all_event_cat_id;
+		$categoryID = $all_event_cat_id;
 
-			$index = 0;
+		$index = 0;
 
-
-			$sql_all_exh =  " SELECT ";
-			if ($_SESSION['LANG'] == 'TH')
-				$sql_all_exh .= " content.CONTENT_DESC_LOC as CONTENT_DESC ,content.BRIEF_LOC as CONTENT_BRIEF ,";
-			else
-				$sql_all_exh .= " content.CONTENT_DESC_ENG as CONTENT_DESC ,content.BRIEF_ENG as CONTENT_BRIEF ,";
-                $sql_all_exh .= " cat.CONTENT_CAT_ID,
+		$sql_all_exh = " SELECT ";
+		if ($_SESSION['LANG'] == 'TH')
+			$sql_all_exh .= " content.CONTENT_DESC_LOC as CONTENT_DESC ,content.BRIEF_LOC as CONTENT_BRIEF ,";
+		else
+			$sql_all_exh .= " content.CONTENT_DESC_ENG as CONTENT_DESC ,content.BRIEF_ENG as CONTENT_BRIEF ,";
+		$sql_all_exh .= " cat.CONTENT_CAT_ID,
 					content.SUB_CAT_ID,
 					content.CONTENT_ID,
 					content.EVENT_START_DATE,
@@ -212,27 +212,31 @@ require ("assets/configs/function.inc.php");
 					content.ORDER_DATA desc
 				LIMIT 0,4 ";
 
-			    $query_all_exh = mysql_query($sql_all_exh, $conn);
-			    $num_rows = mysql_num_rows($query_all_exh);
+		$query_all_exh = mysql_query($sql_all_exh, $conn);
+		$num_rows = mysql_num_rows($query_all_exh);
 
-			    $index = 0;
-				while($row_all_exh = mysql_fetch_array($query_all_exh)) {
-					$path = 'event-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $row_all_exh['CONTENT_ID'] . $extraSCID;
-					$fullpath = _FULL_SITE_PATH_ . '/' . $path;
-					$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $row_all_exh['CONTENT_ID'];
-					$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+		$index = 0;
+		while ($row_all_exh = mysql_fetch_array($query_all_exh)) {
+			$extraSCID = '';
+								if ($row_all_exh['SUB_CAT_ID'] > 0) {
+									$extraSCID = '&SID=' . $row_all_exh['SUB_CAT_ID'];
+								}
+								
+			$path = 'event-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $row_all_exh['CONTENT_ID'] . $extraSCID;
+			$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+			$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $row_all_exh['CONTENT_ID'];
+			$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
 
-					$exh_title[$index] = htmlspecialchars(trim($row_all_exh['CONTENT_DESC']));
-					$exh_detail[$index] = strip_tags(trim($row_all_exh['CONTENT_BRIEF']));
-					$exh_path[$index] = $path = 'event-detail.php?MID=' . $MID . '&amp;CID=' . $categoryID . '&amp;CONID=' . $row_all_exh['CONTENT_ID'] . $extraSCID;
-					$exhimg_path[$index] = callThumbListFrontEnd($row_all_exh['CONTENT_ID'], $categoryID, true);
-					$exhimg_date[$index] = ConvertDate($row_all_exh['CREATE_DATE']);
+			$exh_title[$index] = htmlspecialchars(trim($row_all_exh['CONTENT_DESC']));
+			$exh_detail[$index] = strip_tags(trim($row_all_exh['CONTENT_BRIEF']));
+			$exh_path[$index] = $path = 'news-detail.php?MID=' . $MID . '&amp;CID=' . $categoryID . '&amp;CONID=' . $row_all_exh['CONTENT_ID'] . $extraSCID;
+			$exhimg_path[$index] = callThumbListFrontEnd($row_all_exh['CONTENT_ID'], $categoryID, true);
+			$exhimg_date[$index] = ConvertDate($row_all_exh['CREATE_DATE']);
 
-					$social_link[$index] = '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
-					$social_link[$index] .= '<a href="' . $fullpath . '" onclick="shareTW(' . $row_all_exh['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
-					$index++;
-				}
-
+			$social_link[$index] = '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+			$social_link[$index] .= '<a href="' . $fullpath . '" onclick="shareTW(' . $row_all_exh['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+			$index++;
+		}
 		?>
 		<div class="part-news cf">
 			<div class="container">
@@ -243,25 +247,25 @@ require ("assets/configs/function.inc.php");
 						<div class="box-left">
 							<div class="text-title"><img src="images/<?=$picFolderName ?>/index/part3-pic2.png" />
 							</div>
-							<a class="btn black" href=""><?=$seeAllCap?></a>
+							<a class="btn black" href="news-event.php"><?=$seeAllCap ?></a>
 						</div>
 						<div class="box-right">
 							<div class="box-news-bold cf">
-								<a href="<?=$exh_path[0]?>">
+								<a href="<?=$exh_path[0] ?>">
 								<div class="box-pic">
-									<img src="<?=$exhimg_path[0]?>" width="274" height="205">
-									<div class="box-tag-cate"><?=$exh_title[0]?></div>
+									<img src="<?=$exhimg_path[0] ?>" width="274" height="205">
+									<div class="box-tag-cate"><?=$exh_title[0] ?></div>
 								</div> </a>
 								<div class="box-text">
-									<a href="<?=$exh_path[0]?>">
-									<p class="text-title TcolorRed"><?=$exh_title[0]?></p>
+									<a href="<?=$exh_path[0] ?>">
+									<p class="text-title TcolorRed"><?=$exh_title[0] ?></p>
 									</a>
-									<p class="text-date TcolorGray"><?=$exhimg_date[0]?></p>
-									<p class="text-des TcolorBlack"><?=$exh_detail[0]?></p>
+									<p class="text-date TcolorGray"><?=$exhimg_date[0] ?></p>
+									<p class="text-des TcolorBlack"><?=$exh_detail[0] ?></p>
 									<div class="box-btn cf">
-										<a href="<?=$exh_path[0]?>" class="btn red"><?=$txt_more?></a>
+										<a href="<?=$exh_path[0] ?>" class="btn red"><?=$txt_more ?></a>
 										<div class="box-btn-social cf">
-											<?=$social_link[0]?>
+											<?=$social_link[0] ?>
 										</div>
 									</div>
 								</div>
@@ -280,28 +284,28 @@ require ("assets/configs/function.inc.php");
 							}
 						?>
 
-								<a href="<?=$exh_path[$i]?>">
+								<a href="<?=$exh_path[$i] ?>">
 								<div class="box-pic">
-									<img src="<?=$exhimg_path[$i]?>" width="274" height="205">
+									<img src="<?=$exhimg_path[$i] ?>" width="274" height="205">
 									<div class="box-tag-cate">
-										<?=$exh_title[$i]?>
+										<?=$exh_title[$i] ?>
 									</div>
 								</div> </a>
 								<div class="box-text">
-									<a href="<?=$exh_path[$i]?>">
+									<a href="<?=$exh_path[$i] ?>">
 									<p class="text-title TcolorRed">
-										<?=$exh_detail[$i]?>
+										<?=$exh_detail[$i] ?>
 									</p> </a>
 									<p class="text-date TcolorGray">
-										<?=$exhimg_date[$i]?>
+										<?=$exhimg_date[$i] ?>
 									</p>
 									<p class="text-des TcolorBlack">
-										<?=$exh_detail[$i]?>
+										<?=$exh_detail[$i] ?>
 									</p>
 									<div class="box-btn cf">
-										<a href="<?=$exh_path[$i]?>" class="btn red"><?=$txt_more?></a>
+										<a href="<?=$exh_path[$i] ?>" class="btn red"><?=$txt_more ?></a>
 										<div class="box-btn-social cf">
-											<?=$social_link[$i]?>
+											<?=$social_link[$i] ?>
 										</div>
 									</div>
 								</div>
@@ -353,10 +357,10 @@ ORDER BY RAND() LIMIT 0,4 ";
 								$categoryID = $rowContent['CONTENT_CAT_ID'];
 								$extraSCID = '';
 								if ($rowContent['SUB_CAT_ID'] > 0) {
-									$extraSCID = '&SCID=' . $rowContent['SUB_CAT_ID'];
+									$extraSCID = '&SID=' . $rowContent['SUB_CAT_ID'];
 								}
 
-								$path = 'event-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'] . $extraSCID;
+								$path = 'news-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'] . $extraSCID;
 								$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 								$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
 								$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
@@ -367,12 +371,12 @@ ORDER BY RAND() LIMIT 0,4 ";
 								echo '<div class="museum-news cf">';
 
 								echo '<div class="box-pic">';
-								echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '">';
+								echo '<a href="news-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '">';
 								echo '<img src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"></a>';
 								echo '</div>';
 
 								echo '<div class="box-text">';
-								echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '"> ';
+								echo '<a href="news-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '"> ';
 								echo '<p class="text-title TcolorRed">';
 								echo $rowContent['CONTENT_DESC'];
 								echo '</p> </a>';
@@ -389,64 +393,9 @@ ORDER BY RAND() LIMIT 0,4 ";
 							$_SESSION['MU_EVENT_PREV_PG'] = $current_url;
 							?>
 
-							<!-- <div class="museum-news cf">
-							<div class="box-pic">
-							<a href=""><img src="http://placehold.it/274x205"></a>
-							</div>
-							<div class="box-text">
-							<a href="">
-							<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-							</p></a>
-							<p class="text-date TcolorGray">
-							28 พ.ย. 2559
-							</p>
-							</div>
-							</div>
-							<div class="museum-news cf">
-							<div class="box-pic">
-							<a href=""><img src="http://placehold.it/274x205"></a>
-							</div>
-							<div class="box-text">
-							<a href="">
-							<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-							</p></a>
-							<p class="text-date TcolorGray">
-							28 พ.ย. 2559
-							</p>
-							</div>
-							</div>
-							<div class="museum-news cf">
-							<div class="box-pic">
-							<a href=""><img src="http://placehold.it/274x205"></a>
-							</div>
-							<div class="box-text">
-							<a href="">
-							<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-							</p></a>
-							<p class="text-date TcolorGray">
-							28 พ.ย. 2559
-							</p>
-							</div>
-							</div>
-							<div class="museum-news cf">
-							<div class="box-pic">
-							<a href=""><img src="http://placehold.it/274x205"></a>
-							</div>
-							<div class="box-text">
-							<a href="">
-							<p class="text-title TcolorRed">
-							Levitated Mass 340 Ton Giant Stone
-							</p></a>
-							<p class="text-date TcolorGray">
-							28 พ.ย. 2559
-							</p>
-							</div>
-							</div> -->
+							
 							<div class="box-btn cf">
-								<a href="event-museum.php" class="btn black"><?=$seeAllCap?></a>
+								<a href="news-museum.php" class="btn black"><?=$seeAllCap ?></a>
 							</div>
 						</div>
 					</div>
@@ -501,7 +450,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 							echo '<div class="box-network">';
 							echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
 							echo '<div class="box-pic">';
-							echo '<img src="http://placehold.it/274x205">';
+							echo '<img src="' . callMDNThumbListFrontEnd($rowMDN['MUSEUM_DETAIL_ID'], true) . '">';
 							echo '</div> </a>';
 							echo '<div class="box-text">';
 							echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
@@ -523,7 +472,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 					<a class="btn-arrow left"></a>
 					<a class="btn-arrow right"></a>
 					<div class="box-btn cf">
-						<a href="" class="btn gold"><?=$seeAllCap?></a>
+						<a href="mdn.php" class="btn gold"><?=$seeAllCap ?></a>
 					</div>
 				</div>
 			</div>
@@ -537,7 +486,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 						<div class="box-title"><img src="images/<?=$picFolderName ?>/index/part5-pic1.png" />
 						</div>
 						<div class="box-btn cf">
-							<a href="ve.php" class="btn black"><?=$seeAllCap?></a>
+							<a href="ve.php" class="btn black"><?=$seeAllCap ?></a>
 						</div>
 					</div>
 					<div class="box-slide-exhibition-main">
@@ -600,7 +549,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo $rowContent['CONTENT_BRIEF'];
 								echo '</p>';
 								echo '<div class="box-btn cf">';
-								echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">'.$txt_more.'</a>';
+								echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">' . $txt_more . '</a>';
 								echo '<div class="box-btn-social cf">';
 								echo '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 								echo '<a href="' . $fullpath . '" onclick="shareTW(' . $rowContent['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -631,7 +580,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 						<div class="box-title"><img src="images/<?=$picFolderName ?>/index/part5-pic2.png" />
 						</div>
 						<div class="box-btn cf">
-							<a href="da.php" class="btn black"><?=$seeAllCap?></a>
+							<a href="da.php" class="btn black"><?=$seeAllCap ?></a>
 						</div>
 					</div>
 					<div class="box-slide-archive-main">
@@ -693,7 +642,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 								echo $rowContent['CONTENT_BRIEF'];
 								echo '</p>';
 								echo '<div class="box-btn cf">';
-								echo ' <a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">'.$txt_more.'</a>';
+								echo ' <a href="da-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . $extraSCID . '" class="btn red">' . $txt_more . '</a>';
 								echo '<div class="box-btn-social cf">';
 								echo '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 								echo '<a href="' . $fullpath . '" onclick="shareTW(' . $rowContent['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -724,7 +673,7 @@ ORDER BY RAND() LIMIT 0,5 ";
 						<div class="box-title"><img src="images/<?=$picFolderName ?>/index/part5-pic3.png" />
 						</div>
 						<div class="box-btn cf">
-							<a href="km.php" class="btn gold"><?=$seeAllCap?></a>
+							<a href="km.php" class="btn gold"><?=$seeAllCap ?></a>
 						</div>
 					</div>
 					<div class="box-right">
@@ -760,7 +709,8 @@ ORDER BY RAND() LIMIT 0,4 ";
 							while ($rowContent = mysql_fetch_array($rsContent)) {
 								$categoryID = $rowContent['CONTENT_CAT_ID'];
 
-								$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID']; ;
+								$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+								;
 								$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 								$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
 								$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
@@ -787,7 +737,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 								echo $rowContent['CONTENT_BRIEF'];
 								echo '</p>';
 								echo '<div class="box-btn cf">';
-								echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">'.$txt_more.'</a>';
+								echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">' . $txt_more . '</a>';
 								echo '<div class="box-btn-social cf">';
 								echo '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 								echo '<a href="' . $fullpath . '" onclick="shareTW(' . $rowContent['CONTENT_ID'] . ',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';

@@ -1923,4 +1923,28 @@ function frontend_mdn_content_upload_image_edit($name, $conId, $catId) {
 	$str .= "</div>";
 	return $str;
 }
+
+function callMDNThumbListFrontEnd($mid, $genBgStyle) {
+	global $conn;
+
+	$sql = "SELECT IMG_PATH FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $mid . " AND IMG_TYPE = 9 ORDER BY ORDER_DATA ASC LIMIT 0 , 1";
+	$query = mysql_query($sql, $conn);
+	$num = mysql_num_rows($query);
+	if ($num == 1) {
+		$row = mysql_fetch_array($query);
+		if ($genBgStyle) {
+			return str_replace('../../', '', $row['IMG_PATH']);
+		} else {
+			return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', str_replace('../../', '', $row['IMG_PATH'])) . '\');"';
+		}
+
+	} else {
+		if ($genBgStyle) {
+			return 'images/logo_thumb.jpg';
+		} else {
+			return 'style="background-image: url(\'images/logo_thumb.jpg\');"';
+		}
+	}
+
+}
 ?>

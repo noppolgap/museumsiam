@@ -20,36 +20,33 @@ if ($currentPage < 1)
 
 $catName = "";
 
-
 $backPage = "";
 $link_back = $_GET['link'];
 
-   switch ($link_back) {
-    case "event":
-        $backPage = "km-event.php";
-        break;
-    case "exh":
-        $backPage = "km-exhibition.php";
-        break;
-    case "reseach":
-        $backPage = "km-reseach.php";
-        break;
-    case "edu":
-    	$backPage = "km-education.php";
-        break;
-    case "media":
+switch ($link_back) {
+	case "event" :
+		$backPage = "km-event.php";
+		break;
+	case "exh" :
+		$backPage = "km-exhibition.php";
+		break;
+	case "reseach" :
+		$backPage = "km-reseach.php";
+		break;
+	case "edu" :
+		$backPage = "km-education.php";
+		break;
+	case "media" :
 		$backPage = "km-media.php";
-    break;
-    case "":
+		break;
+	case "" :
 		$backPage = "km.php";
-    break;
-
-
-/*if (isset($_SESSION['KM_PREV_PG'])) {
-	$backPage = $_SESSION['KM_PREV_PG'];
-} else {
-	$backPage = "km.php?MID=" . $km_module_id;
-	/*$backPage = "all-content.php?MID=".$MID."&CID=".$CID;
+		break;
+	/*if (isset($_SESSION['KM_PREV_PG'])) {
+	 $backPage = $_SESSION['KM_PREV_PG'];
+	 } else {
+	 $backPage = "km.php?MID=" . $km_module_id;
+	 /*$backPage = "all-content.php?MID=".$MID."&CID=".$CID;
 	 if (isset($_GET['SCID'])) {
 	 $backPage.= "$SCID=".$SCID ;
 	 }
@@ -77,12 +74,12 @@ if (isset($_GET['SCID'])) {
 }
 
 if ($_SESSION['LANG'] == 'TH') {
-	$LANG_SQL = "CONTENT_DESC_LOC AS CONTENT_LOC ,CONTENT_DETAIL_LOC AS CONTENT_DETAIL,BRIEF_LOC AS CONTENT_BRIEF,PLACE_DESC_LOC as PLACE_DESC , ";
+	$LANG_SQL = "CONTENT_DESC_LOC AS CONTENT_LOC ,CONTENT_DETAIL_LOC AS CONTENT_DETAIL,BRIEF_LOC AS CONTENT_BRIEF,PLACE_DESC_LOC as PLACE_DESC ,PRICE_RATE_LOC as PRICE_RATE , ";
 } else if ($_SESSION['LANG'] == 'EN') {
-	$LANG_SQL = "CONTENT_DESC_ENG AS CONTENT_LOC ,CONTENT_DETAIL_ENG AS CONTENT_DETAIL,BRIEF_ENG AS CONTENT_BRIEF,PLACE_DESC_ENG as PLACE_DESC , ";
+	$LANG_SQL = "CONTENT_DESC_ENG AS CONTENT_LOC ,CONTENT_DETAIL_ENG AS CONTENT_DETAIL,BRIEF_ENG AS CONTENT_BRIEF,PLACE_DESC_ENG as PLACE_DESC ,PRICE_RATE_ENG as PRICE_RATE , ";
 }
 
- $contentSql = "SELECT
+$contentSql = "SELECT
 				CONTENT_ID,
 				CAT_ID,
 				" . $LANG_SQL . "
@@ -301,13 +298,32 @@ include ('inc/inc-menu.php');
 					</div>
 				</div>
 
-				<div class="box-when">
+<?
+$whenStyle = "style='display:none'";
+if ($CID == $event_cat_id)
+	$whenStyle = "";
+
+$textLocation = ' class="text-location" ';
+if (nvl($rowContent['PLACE_DESC'], '') == '')
+	$textLocation = ' class="text-des"  style="height: 15px;" ';
+
+$textTicket = ' class="text-ticket" ';
+if (nvl($rowContent['PRICE_RATE'], '') == '')
+	$textTicket = ' class="text-des"  style="height: 15px;" ';
+?>
+				<div class="box-when" <?=$whenStyle ?>>
 					<h3>WHEN</h3>
 					<p class="text-date"><? echo ConvertDate($row['EVENT_START_DATE']) ?> - <? echo ConvertDate($row['EVENT_END_DATE']) ?></p>
 					<p class="text-time"><? echo $row['EVENT_START_TIME'] ?> - <? echo $row['EVENT_END_TIME'] ?></p>
-					<p class="text-location"><? echo $row['PLACE_DESC_LOC'] ?></p>
+					<p <?=$textLocation ?>><? echo nvl($rowContent['PLACE_DESC'], '')  ?></p>
 				</div>
 
+
+				<div class="box-ticket" <?=$whenStyle ?>>
+					<h3>TICKET</h3>
+					<p <?=$textTicket?>><?= nvl($rowContent['PRICE_RATE'], '') ?></p>
+				</div>
+				
 				<div class="box-news-text">
 					<?=$detail ?>
 				</div>
@@ -365,7 +381,8 @@ include ('inc/inc-menu.php');
 						<span>
 						<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
 						<script type="text/javascript">
-													new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>","withUrl":true});
+																											new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>
+																					","withUrl":true});
 						</script>
 						</span>
 					</div>

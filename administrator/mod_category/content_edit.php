@@ -47,14 +47,14 @@ require ('../inc_header.php');
 									FROM trn_content_detail cd
 									LEFT JOIN trn_content_category cc ON cc.CONTENT_CAT_ID = cd.CAT_ID
 									LEFT OUTER JOIN trn_content_sub_category sc ON sc.SUB_CONTENT_CAT_ID = cd.SUB_CAT_ID";
-									
-									if($MID == $contact_us){
-										$sql .= " where cd.CONTENT_STATUS_FLAG =  2 " ;
-									}else{
-										$sql .= " where cd.CONTENT_STATUS_FLAG <>  2 " ;
-									}
-									
-									$sql .= "	AND cd.CONTENT_ID = $id ";
+
+		if ($MID == $contact_us) {
+			$sql .= " where cd.CONTENT_STATUS_FLAG =  2 ";
+		} else {
+			$sql .= " where cd.CONTENT_STATUS_FLAG <>  2 ";
+		}
+
+		$sql .= "	AND cd.CONTENT_ID = $id ";
 		$query = mysql_query($sql, $conn);
 						?>
 
@@ -210,6 +210,18 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 							
+								<div>
+									<div class="floatL form_name">ราคาเข้าชม (ไทย)</div>
+									<div class="floatL form_input"><input type="text" name="txtPriceLoc" id = "txtPriceLoc" value="<?=$row["PRICE_RATE_LOC"] ?>"  /></div>
+									<div class="clear"></div>
+								</div>
+								
+								<div>
+									<div class="floatL form_name">ราคาเข้าชม (อังกฤษ)</div>
+									<div class="floatL form_input"><input type="text" name="txtPriceEng" id = "txtPriceEng" value="<?=$row["PRICE_RATE_ENG"] ?>"   /></div>
+									<div class="clear"></div>
+								</div>
+								
 							<div>
 								<div class="floatL form_name">สถานที่ TH</div>
 								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="<?=$row["PLACE_DESC_LOC"] ?>" class="w90p" /></div>

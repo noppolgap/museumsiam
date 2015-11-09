@@ -57,7 +57,7 @@
 							<li class="sub1">
 								กิจกรรมและข่าวสารของมิวเซียมสยาม
 							</li></a>
-							<a href="news-event-month.php">
+							<a href="news-event.php">
 							<li class="sub2">
 								กิจกรรมและข่าวสารทั้งหมดของทุกระบบ
 							</li></a>

@@ -4,11 +4,10 @@ require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
 require ("../../inc/inc-cat-id-conf.php");
 
-		$MID = $_GET['MID'];
-		$CID = $_GET['cid'];
-		$LV = $_GET['LV'];
-		$SCID = $_GET['SCID'];
-		
+$MID = $_GET['MID'];
+$CID = $_GET['cid'];
+$LV = $_GET['LV'];
+$SCID = $_GET['SCID'];
 ?>
 
  
@@ -30,7 +29,7 @@ require ('../inc_header.php');
 		require ('../inc_side.php');
  ?>
 		<?
-		
+
 		$subfixAddAndEdit = '&cid=' . $CID . '&LV=' . $LV;
 		if (isset($SCID) && nvl($SCID, '0') != '0') {
 			$subfixAddAndEdit .= '&SCID=' . $SCID;
@@ -42,7 +41,6 @@ require ('../inc_header.php');
 
 		if (nvl($SCID, '0') != '0')
 			$navigateBackPage .= '&SCID=' . $SCID;
-
 		?>
 		<div class="mod-body">
 			<div class="mod-body-inner">
@@ -172,6 +170,18 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 							
+							<div>
+									<div class="floatL form_name">ราคาเข้าชม (ไทย)</div>
+									<div class="floatL form_input"><input type="text" name="txtPriceLoc" id = "txtPriceLoc" value=""  /></div>
+									<div class="clear"></div>
+								</div>
+								
+								<div>
+									<div class="floatL form_name">ราคาเข้าชม (อังกฤษ)</div>
+									<div class="floatL form_input"><input type="text" name="txtPriceEng" id = "txtPriceEng" value=""   /></div>
+									<div class="clear"></div>
+								</div>
+								
 							<div>
 								<div class="floatL form_name">สถานที่ TH</div>
 								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="" class="w90p" /></div>

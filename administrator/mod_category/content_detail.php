@@ -180,6 +180,19 @@ require ("../../inc/inc-cat-id-conf.php");
 								</div>
 								<div class="clear"></div>
 							</div>
+							
+							<div>
+									<div class="floatL form_name">ราคาเข้าชม (ไทย)</div>
+									<div class="floatL form_input"><?=$row["PRICE_RATE_LOC"] ?></div>
+									<div class="clear"></div>
+								</div>
+								
+								<div>
+									<div class="floatL form_name">ราคาเข้าชม (อังกฤษ)</div>
+									<div class="floatL form_input"><?=$row["PRICE_RATE_ENG"] ?></div>
+									<div class="clear"></div>
+								</div>
+								
 							<div>
 								<div class="floatL form_name">สถานที่ TH</div>
 								<div class="floatL form_input"><?=$row["PLACE_DESC_LOC"] ?></div>

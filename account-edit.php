@@ -49,9 +49,9 @@ $sqlUser = "SELECT
 						u.*, " . $selectedColumn;
 $sqlUser .= "	FROM
 						sys_app_user u
-					INNER JOIN mas_district district ON district.DISTRICT_ID = u.DISTRICT_ID
-					INNER JOIN mas_sub_district subDistrict ON subDistrict.SUB_DISTRICT_ID = u.SUB_DISTRICT_ID
-					INNER JOIN mas_province province ON province.PROVINCE_ID = u.PROVINCE_ID
+					left JOIN mas_district district ON district.DISTRICT_ID = u.DISTRICT_ID
+					left JOIN mas_sub_district subDistrict ON subDistrict.SUB_DISTRICT_ID = u.SUB_DISTRICT_ID
+					left JOIN mas_province province ON province.PROVINCE_ID = u.PROVINCE_ID
 					LEFT JOIN mas_title_name t on t.TITLE_ID = u.TITLE 
 					LEFT JOIN mas_sex s on s.SEX_ID = u.SEX
 					WHERE
