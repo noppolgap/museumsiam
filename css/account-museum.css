@@ -59,7 +59,7 @@
 	display: block;
 	position: absolute;
 	top: 0px;
-	right: 0px;	
+	right: 0px;
 }
 .box-input-text .box-tumb .btn-delete:hover{
 	background-color: rgba(0, 0, 0, 1);
@@ -103,5 +103,21 @@
 	margin: 0 13px;
 	font-style: normal;
 }
-
-
+.row-main > div.box-left-full{
+	width: 100%;
+}
+.box-row div.box-right-full{
+	width: calc(100% - 176px);;
+}
+.box-row div.box-right-full ul.catItems{
+	width: 100%;
+	text-align: left;
+}
+.box-row div.box-right-full ul.catItems li{
+	float: none;
+	height: 40px;
+}
+.box-row div.box-right-full .box-input-text.checkbox div{
+	height: auto;
+	width: 100%;
+}

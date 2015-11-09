@@ -8,7 +8,7 @@ require ("assets/configs/function.inc.php");
 <head>
 <?
 require ('inc_meta.php');
- ?>	
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/account.css" />
@@ -24,7 +24,7 @@ require ('inc_meta.php');
 		}
 	});
 </script>
-	
+
 	<style>
 		ul.catItems {
 			text-align: center;
@@ -42,7 +42,7 @@ require ('inc_meta.php');
 </head>
 
 <body id="account">
-	
+
 <?php
 include ('inc/inc-top-bar.php');
  ?>
@@ -99,7 +99,7 @@ $row = mysql_fetch_array($rs);
 		<div class="box-titlepage">
 			<p>
 				<img src="images/<?=$picFolder ?>/title-accout.png" alt="ACCOUNT SETTINGS"/>
-			</p>	
+			</p>
 		</div>
 	</div>
 </div>
@@ -143,7 +143,7 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="box-title">
 				<h2>ที่อยู่และเบอร์ติดต่อ</h2>
 			</div>
@@ -189,16 +189,16 @@ $row = mysql_fetch_array($rs);
 											<option value="0"><?=$row['SUB_DISTRICT_DESC'] ?></option>
 										<?php
 											$sql = "SELECT SUB_DISTRICT_ID , ".$subDistrictColumn." FROM mas_sub_district where DISTRICT_ID = '".$row["DISTRICT_ID"]."' ORDER BY SUB_DISTRICT_ID ";
-											$query = mysql_query($sql,$conn);	
+											$query = mysql_query($sql,$conn);
 											while($rowSubDis = mysql_fetch_array($query)){
 												$selectedOption = "";
 												if($rowSubDis['SUB_DISTRICT_ID'] == $row['SUB_DISTRICT_ID'])
 													$selectedOption = "selected";
-										?>	
-									 
+										?>
+
 										<option value="<?=$rowSubDis['SUB_DISTRICT_ID'] ?>" <?=$selectedOption ?>><?=$rowSubDis['SUB_DISTRICT_DESC'] ?></option>
-																			
-										<? } ?>	
+
+										<? } ?>
 										</select>
 									</div>
 								</div>
@@ -222,14 +222,14 @@ $row = mysql_fetch_array($rs);
 											<option value="0"><?=$row['DISTRICT_DESC'] ?></option>
 										<?php
 											$sql = "SELECT DISTRICT_ID  , ".$districtColumn." FROM mas_district where province_id = '".$row['PROVINCE_ID']."' ORDER BY DISTRICT_ID Asc";
-											$query = mysql_query($sql,$conn);	
+											$query = mysql_query($sql,$conn);
 											while($rowDistrict = mysql_fetch_array($query)){
-													$selectedOption = "" ; 
+													$selectedOption = "" ;
 													if($row['DISTRICT_ID'] == $rowDistrict['DISTRICT_ID'])
 														$selectedOption = "selected";
-										?>		
-											<option value="<?=$rowDistrict['DISTRICT_ID'] ?>" <?=$selectedOption ?> ><?=$rowDistrict['DISTRICT_DESC'] ?></option>									
-										<? } ?>	
+										?>
+											<option value="<?=$rowDistrict['DISTRICT_ID'] ?>" <?=$selectedOption ?> ><?=$rowDistrict['DISTRICT_DESC'] ?></option>
+										<? } ?>
 										</select>
 									</div>
 								</div>
@@ -253,14 +253,14 @@ $row = mysql_fetch_array($rs);
 											<option value="0"><?=$row['PROVINCE_DESC'] ?></option>
 										<?php
 											$sql = "SELECT PROVINCE_ID , ".$provinceColumn." FROM mas_province ORDER BY PROVINCE_DESC_LOC";
-											$query = mysql_query($sql,$conn);	
+											$query = mysql_query($sql,$conn);
 											while($rowProvince = mysql_fetch_array($query)){
 												$selectedOption = "" ;
 												if($rowProvince['PROVINCE_ID'] == $row['PROVINCE_ID'])
-													$selectedOption = "selected" ; 
-										?>		
-											<option value="<?=$rowProvince['PROVINCE_ID'] ?>" <?=$selectedOption ?> ><?=$rowProvince['PROVINCE_DESC'] ?></option>									
-										<? } ?>	
+													$selectedOption = "selected" ;
+										?>
+											<option value="<?=$rowProvince['PROVINCE_ID'] ?>" <?=$selectedOption ?> ><?=$rowProvince['PROVINCE_DESC'] ?></option>
+										<? } ?>
 										</select>
 									</div>
 								</div>
@@ -314,7 +314,7 @@ $row = mysql_fetch_array($rs);
 				</div>
 
 			</div>
-			
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -378,7 +378,7 @@ $row = mysql_fetch_array($rs);
 									<div class="box-pic"><img id="imgMapLoc"  src="<?=$row['MAP_IMG_PATH_LOC'] ?>"></div>
 									<a class="btn-delete deleteMap" data-id="MapLoc" ></a>
 									<input type='file' name ="browseMapLoc" id ="browseMapLoc" style="display:none" accept="image/*" />
-									<input type="hidden" id = "hidMapLoc" name = "hidMapLoc"  value=""/>									
+									<input type="hidden" id = "hidMapLoc" name = "hidMapLoc"  value=""/>
 								</div>
 							</div>
 						</div>
@@ -401,7 +401,7 @@ $row = mysql_fetch_array($rs);
 									<div class="box-pic"><img id="imgMapEng" src="<?=$row['MAP_IMG_PATH_ENG'] ?>"></div>
 									<a class="btn-delete deleteMap" data-id="MapEng"></a>
 									<input type='file' name ="browseMapEng" id ="browseMapEng" style="display:none" accept="image/*" />
-									<input type="hidden" id = "hidMapEng"  name = "hidMapEng" value="" />	
+									<input type="hidden" id = "hidMapEng"  name = "hidMapEng" value="" />
 								</div>
 							</div>
 						</div>
@@ -485,7 +485,7 @@ $row = mysql_fetch_array($rs);
 						?>
 						<div class="box-right">
 							<div class="box-input-text checkbox">
-								
+
 								<div>
 									<input type="checkbox" name = "auto_open[]" value="1" <?=$monSelected ?>><span>จ</span>
 								</div>
@@ -506,7 +506,7 @@ $row = mysql_fetch_array($rs);
 								</div>
 								<div>
 									<input type="checkbox" name = "auto_open[]" value="7" <?=$sunSelected ?>><span>อา</span>
-								</div>							
+								</div>
 							</div>
 						</div>
 					</div>
@@ -573,7 +573,7 @@ $row = mysql_fetch_array($rs);
 				}
 				?>
 				</div>
-				
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -630,7 +630,7 @@ $row = mysql_fetch_array($rs);
 			<div class="box-title">
 				<h2>พิพิธภัณฑ์</h2>
 			</div>
-			
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -656,12 +656,12 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -670,14 +670,14 @@ $row = mysql_fetch_array($rs);
 								</div>
 								<span class="con">*ไฟล์ภาพที่รองรับ : .jpg / .png ขนาดไฟล์ไม่เกิน : 200 Kb</span>
 							</div>
-							<!-- 
-									ความเป็นมา Type = 1 
-									กายภาพ  =2 
+							<!--
+									ความเป็นมา Type = 1
+									กายภาพ  =2
 									ภูมิทัศน์โดยรอบ = 3
 									ห้องจัดแสดง =4
 									วัตถุจัดแสดง =5
-									วัตถุสำคัญ =6 
-									การจัดเก็บ = 7 
+									วัตถุสำคัญ =6
+									การจัดเก็บ = 7
 									การเผยแพร่ ประชาสัมพันธ์ = 8
 									แหล่งเรียนรู้ใกล้เคียง = 9
 									-->
@@ -686,8 +686,8 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<div class="box-line cf"><hr></div>		
-			
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -713,12 +713,12 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -732,8 +732,8 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<div class="box-line cf"><hr></div>		
-			
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -759,12 +759,12 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -778,8 +778,8 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<div class="box-line cf"><hr></div>		
-			
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -805,12 +805,12 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -824,8 +824,8 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<div class="box-line cf"><hr></div>		
-			
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -851,12 +851,12 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -874,7 +874,7 @@ $row = mysql_fetch_array($rs);
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -903,8 +903,8 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div> -->
-			<div class="box-line cf"><hr></div>		
-			
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -930,12 +930,12 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -953,7 +953,7 @@ $row = mysql_fetch_array($rs);
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -978,8 +978,8 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div> -->
-			<div class="box-line cf"><hr></div>		
-			
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -1005,12 +1005,12 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -1024,8 +1024,8 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<div class="box-line cf"><hr></div>		
-			
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -1051,8 +1051,8 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
-			<div class="box-line cf"><hr></div>		
+			</div>
+			<div class="box-line cf"><hr></div>
 
 			<div class="row-main cf">
 				<div class="box-left">
@@ -1079,12 +1079,12 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 			<div class="row-main cf">
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -1098,8 +1098,8 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<div class="box-line cf"><hr></div>		
-			
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -1125,8 +1125,8 @@ $row = mysql_fetch_array($rs);
 						</div>
 					</div>
 				</div>
-			</div>			
-			<div class="box-line cf"><hr></div>		
+			</div>
+			<div class="box-line cf"><hr></div>
 
 			<div class="row-main cf">
 				<div class="box-left">
@@ -1158,7 +1158,7 @@ $row = mysql_fetch_array($rs);
 				<div class="box-left addW">
 					<div class="box-row cf ">
 						<div class="box-left">
-							
+
 						</div>
 						<div class="box-right ">
 							<div class="box-input-text cf">
@@ -1172,27 +1172,27 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- Loop Museum Category-->
 			<?
 			if($_SESSION['LANG'] == 'TH'){
 				$catSelectedColumn = " CONTENT_CAT_DESC_LOC as CAT_DESC , ";
-				$subCatSelectedColumn = " SUB_CONTENT_CAT_DESC_LOC as SUB_CAT_DESC " ; 
+				$subCatSelectedColumn = " SUB_CONTENT_CAT_DESC_LOC as SUB_CAT_DESC " ;
 			}
 			else{
-				$catSelectedColumn = " CONTENT_CAT_DESC_ENG as CAT_DESC , "; 
-				$subCatSelectedColumn = " SUB_CONTENT_CAT_DESC_ENG as SUB_CAT_DESC " ; 
+				$catSelectedColumn = " CONTENT_CAT_DESC_ENG as CAT_DESC , ";
+				$subCatSelectedColumn = " SUB_CONTENT_CAT_DESC_ENG as SUB_CAT_DESC " ;
 				}
 			unset($currentCatSubCatArr);
-			
-			$currentCatSubCatSql = "select * from trn_mapping_museum_category where MUSEUM_DETAIL_ID  = " .$row['MUSEUM_DETAIL_ID'] ; 
-		
+
+			$currentCatSubCatSql = "select * from trn_mapping_museum_category where MUSEUM_DETAIL_ID  = " .$row['MUSEUM_DETAIL_ID'] ;
+
 			$rsCurrentCatSubCat = mysql_query($currentCatSubCatSql) or die(mysql_error());
 						while ($rowCurrentCatSubCat = mysql_fetch_array($rsCurrentCatSubCat)) {
-							$currentCatSubCatArr[$rowCurrentCatSubCat['CONTENT_CAT_ID']][$rowCurrentCatSubCat['CONTENT_SUB_CAT_ID']] = '1' ; 
-							}	
-			
-			
+							$currentCatSubCatArr[$rowCurrentCatSubCat['CONTENT_CAT_ID']][$rowCurrentCatSubCat['CONTENT_SUB_CAT_ID']] = '1' ;
+							}
+
+
 			//var_dump($currentCatSubCatArr);
 			$catMuseumSql = "SELECT
 								CONTENT_CAT_ID, " . $catSelectedColumn .
@@ -1201,21 +1201,21 @@ $row = mysql_fetch_array($rs);
 								trn_content_category
 							WHERE
 								REF_MODULE_ID = ".$museum_data_network_module_id.
-							" AND flag = 0 
+							" AND flag = 0
 							 AND CONTENT_CAT_ID <> ".$regionCategory.
-							" AND IS_LAST_NODE = 'N' order by ORDER_DATA desc ";		
+							" AND IS_LAST_NODE = 'N' order by ORDER_DATA desc ";
 						$rsCat = mysql_query($catMuseumSql) or die(mysql_error());
-						while ($rowCat = mysql_fetch_array($rsCat)) {			
+						while ($rowCat = mysql_fetch_array($rsCat)) {
 			?>
-			<div class="box-line cf"><hr></div>		
- 
+			<div class="box-line cf"><hr></div>
+
 			<div class="row-main cf">
-				<div class="box-left">
+				<div class="box-left box-left-full">
 					<div class="box-row cf">
 						<div class="box-left">
 							<p><?=$rowCat['CAT_DESC'] ?></p>
 						</div>
-						<div class="box-right">
+						<div class="box-right box-right-full">
 							<?
 							$subCatMuseumSql = "SELECT
 													SUB_CONTENT_CAT_ID, " . $subCatSelectedColumn . " FROM
@@ -1239,9 +1239,9 @@ $row = mysql_fetch_array($rs);
 											$isChecked = "checked";
 										?>
 											 <input type="checkbox" name= "catMuseum[]" value="<?=$rowCat['CONTENT_CAT_ID'] . '|' . $rowSubCat['SUB_CONTENT_CAT_ID'] ?>" <?=$isChecked ?>>
-									<?=$rowSubCat['SUB_CAT_DESC'] ?></label></li> 
+									<?=$rowSubCat['SUB_CAT_DESC'] ?></label></li>
 				<?} ?>
-				
+
 													</ul>
 													</div>
 						</div>
@@ -1250,14 +1250,14 @@ $row = mysql_fetch_array($rs);
 				</div>
 			</div>
 			<?} ?>
-			
+
 			<!-- End Loop-->
-			<div class="box-line cf"><hr></div>		
+			<div class="box-line cf"><hr></div>
 
 			<div class="box-title">
 				<h2>Social Network</h2>
 			</div>
-			
+
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
@@ -1295,13 +1295,13 @@ $row = mysql_fetch_array($rs);
 						<div class="box-right">
 							<div class="box-input-text">
 								<div><input type="text" name= "txtYoutubeURL" value = "<?=$row['YOUTUBE_URL'] ?>"></div>
-								
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 
 			<div class="box-btn-main cf">
 				<div class="box-btn">
@@ -1322,7 +1322,7 @@ $row = mysql_fetch_array($rs);
 
 <?php
 include ('inc/inc-footer.php');
- ?>	
+ ?>
 <script type="text/javascript" src="js/account-museum-detail.js"></script>
 <script type="text/javascript" src="assets/plugin/upload/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="assets/plugin//upload/jquery.fileupload.js"></script>
