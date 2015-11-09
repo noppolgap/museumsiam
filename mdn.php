@@ -201,7 +201,7 @@ LIMIT 0,
 								$sql .= " LEFT JOIN mas_province province on province.PROVINCE_ID= muse.PROVINCE_ID ";
 								$sql .= " WHERE ";
 								$sql .= " muse.IS_GIS_MUSEUM = 'N' ";
-								$sql .= " AND muse.ACTIVE_FLAG <> 2 ";
+								$sql .= " AND muse.ACTIVE_FLAG = 1 ";
 								$sql .= " AND muse.APPROVE_FLAG = 'Y' ";
 								$sql .= " ORDER BY VISIT_COUNT desc ,  RAND() LIMIT 0,6 ";
 								$rsMDN = mysql_query($sql) or die(mysql_error());

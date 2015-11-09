@@ -80,7 +80,7 @@ require ("assets/configs/function.inc.php");
 					<div class="box-title-system cf news">
 						<h1><img src="images/th/about/title6.png" alt="โครงสร้างองค์กร"/></h1>
 					</div>
-					<div class="box-ceo">
+					
 
 						<?php
 						if ($_SESSION['LANG'] == 'TH') {
@@ -101,13 +101,13 @@ require ("assets/configs/function.inc.php");
 						while( $row = mysql_fetch_array($rs))
 						{
 						?>
-
+<div class="box-ceo">
 						<p class="position-text">
 							<?=$row['POSITION_DESC'] ?>
 						</p>
 						<div class="name-text">
 							<div class="box-pic">
-								<img src="<?=callOrgPicture($row['IMG_PATH'] )?>" alt="user"/>
+								<img src="<?=callOrgPicture($row['IMG_PATH']) ?>" alt="user"/>
 							</div>
 							<p class="name">
 								<?=$row['EMP_NAME'] ?>  
@@ -129,8 +129,9 @@ require ("assets/configs/function.inc.php");
 								</div>
 							</div>
 						</div>
-						<?}?>
-					</div>
+						</div>
+						<?} ?>
+					
 					
 					
 					<div class="box-acco-main">
@@ -189,7 +190,7 @@ require ("assets/configs/function.inc.php");
 										<li class="cf">
 											<div class="box-left">
 												<div class="box-pic">
-													<img src="<?=callOrgPicture($row['IMG_PATH'] )?>" alt="user"/>
+													<img src="<?=callOrgPicture($row['IMG_PATH']) ?>" alt="user"/>
 												</div>
 											</div>
 											<div class="box-right">
@@ -252,21 +253,23 @@ require ("assets/configs/function.inc.php");
 									<ul class="list-position">	
 										<?php
 										if ($_SESSION['LANG'] == 'TH')
-											$peopleDepartmentSelectedColumn = "NAME_LOC as EMP_NAME, POSITION_DESC_LOC as POSITION_DESC , ";
+											$peopleDepartmentSelectedColumn = "mOrg.NAME_LOC as EMP_NAME, mOrg.POSITION_DESC_LOC as POSITION_DESC , ";
 										else
-											$peopleDepartmentSelectedColumn = "NAME_ENG as EMP_NAME, POSITION_DESC_ENG as POSITION_DESC ,";
+											$peopleDepartmentSelectedColumn = "mOrg.NAME_ENG as EMP_NAME, mOrg.POSITION_DESC_ENG as POSITION_DESC ,";
 										$peopleDepartment = " SELECT ".$peopleDepartmentSelectedColumn ;
-										$peopleDepartment .= "	    PHONE,
-																	EMAIL,
-																	IMG_PATH
+										$peopleDepartment .= "	    mOrg.PHONE,
+																	mOrg.EMAIL,
+																	mOrg.IMG_PATH
 																FROM
-																	mas_org
+																	mas_org mOrg
 																WHERE
-																	SECTION_ID = ".$rowSection['SECTION_ID'];
-										$peopleDepartment .= "		AND DEPARTMENT_ID = ".$rowDepartment['DEPARTMENT_ID'];
+																	mOrg.SECTION_ID = ".$rowSection['SECTION_ID'];
+										$peopleDepartment .= "		AND mOrg.DEPARTMENT_ID = ".$rowDepartment['DEPARTMENT_ID'];
+										$peopleDepartment .= "		AND mOrg.ACTIVE_FLAG <> 2 ";
 										$peopleDepartment .= "	ORDER BY
 																	ORDER_DATA DESC ";
 										$rsPeopleDepartment = mysql_query($peopleDepartment) or die(mysql_error());
+									//	echo $peopleDepartment; 
 										while ($rowPeopleDepartment = mysql_fetch_array($rsPeopleDepartment))
 										{		
 	?>
@@ -274,7 +277,7 @@ require ("assets/configs/function.inc.php");
 										<li class="cf">
 											<div class="box-left">
 												<div class="box-pic">
-													<img src="<?=callOrgPicture($row['IMG_PATH'] )?>" alt="user"/>
+													<img src="<?=callOrgPicture($row['IMG_PATH']) ?>" alt="user"/>
 												</div>
 											</div>
 											<div class="box-right">

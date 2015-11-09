@@ -47,6 +47,8 @@ $museumDataNetworkNewsSubCat = 142;
 
 //forFilterOutCategory for museumDataNetworj
 $regionCategory =  41;
+$bkkSubCatID = 62 ; 
+$bkkProvinceID = 102 ; 
 
 
 //Procurement SubCat

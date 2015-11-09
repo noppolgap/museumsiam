@@ -1,8 +1,14 @@
+<?
+if ($_SESSION['LANG'] == 'TH')
+	$picFolder = 'th';
+else
+	$picFolder = 'en';
+?>
 <div class="part-menu"  id="menu">
 	<div class="container cf">
 		<div class="box-menu cf">
 			<div class="box-logo">
-				<a href="index.php"><img src="images/th/logo-header.svg" width="202"/></a>
+				<a href="index.php"><img src="images/<?=$picFolder?>/logo-header.svg" width="202"/></a>
 			</div>
 			<div class="menu">
 				<ul class="menutop cf">
@@ -69,47 +75,47 @@
 							<?
 							if ($_SESSION['LANG'] == 'TH')
 								$selectedColumn = " MODULE_NAME_LOC as MODULE_DESC ,";
-							else 
+							else
 								$selectedColumn = " MODULE_NAME_ENG as MODULE_DESC , ";
-							
+
 							$sqlStr = "SELECT
-										MODULE_ID, ".$selectedColumn ;
+MODULE_ID, " . $selectedColumn;
 							$sqlStr .= "LINK_URL,
-										IS_LAST_NODE
-										FROM
-										sys_app_module
-										WHERE
-										ACTIVE_FLAG <> 2
-										AND RENDER_ON_FRONT = 'Y'
-										AND IS_FOR_OTHER_LINK = 'N'
-										ORDER BY
-										ORDER_DATA DESC";
+IS_LAST_NODE
+FROM
+sys_app_module
+WHERE
+ACTIVE_FLAG <> 2
+AND RENDER_ON_FRONT = 'Y'
+AND IS_FOR_OTHER_LINK = 'N'
+ORDER BY
+ORDER_DATA DESC";
 							$query = mysql_query($sqlStr, $conn);
 							$classIdx = 1;
 							while ($row = mysql_fetch_array($query)) {
 								//if ($row['IS_LAST_NODE'] == 'Y') {
-									echo '<a href="' . $row['LINK_URL'] . '?MID=' . $row['MODULE_ID'] . '"><li class="sub' . $classIdx++ . '">' . $row['MODULE_DESC'] . '</li></a>';
+								echo '<a href="' . $row['LINK_URL'] . '?MID=' . $row['MODULE_ID'] . '"><li class="sub' . $classIdx++ . '">' . $row['MODULE_DESC'] . '</li></a>';
 								// } else {
-									// if ($_SESSION['LANG'] == 'TH')
-										// $subModuleSelectedColumn = " SUB_MODULE_NAME_LOC as SUB_MODULE_DESC , ";
-									// else
-										// $subModuleSelectedColumn = " SUB_MODULE_NAME_ENG as SUB_MODULE_DESC , ";
-									// $subCatSql = "SELECT
-													// SUB_MODULE_ID, ".$subModuleSelectedColumn;
-									// $subCatSql .="	LINK_URL
-													// FROM
-													// sys_app_sub_module
-													// WHERE
-													// MODULE_ID = " . $row['MODULE_ID'];
-									// $subCatSql .= " AND ACTIVE_FLAG <> 2
-													// AND RENDER_ON_FRONT = 'Y'";
-									// $querySubCat = mysql_query($subCatSql, $conn);
-									// //echo '<li class="sub' . $classIdx++ . '"><span>' .  $row['MODULE_NAME_LOC'] .'</span>';
-									// echo "<ul>";
-									// while ($row = mysql_fetch_array($querySubCat)) {
-										// echo '<a href="' . $row['LINK_URL'].'"><li class="sub">' . $row['SUB_MODULE_DESC'] . '</li></a>';
-									// }
-									// echo "</ul> "; //</li>
+								// if ($_SESSION['LANG'] == 'TH')
+								// $subModuleSelectedColumn = " SUB_MODULE_NAME_LOC as SUB_MODULE_DESC , ";
+								// else
+								// $subModuleSelectedColumn = " SUB_MODULE_NAME_ENG as SUB_MODULE_DESC , ";
+								// $subCatSql = "SELECT
+								// SUB_MODULE_ID, ".$subModuleSelectedColumn;
+								// $subCatSql .="	LINK_URL
+								// FROM
+								// sys_app_sub_module
+								// WHERE
+								// MODULE_ID = " . $row['MODULE_ID'];
+								// $subCatSql .= " AND ACTIVE_FLAG <> 2
+								// AND RENDER_ON_FRONT = 'Y'";
+								// $querySubCat = mysql_query($subCatSql, $conn);
+								// //echo '<li class="sub' . $classIdx++ . '"><span>' .  $row['MODULE_NAME_LOC'] .'</span>';
+								// echo "<ul>";
+								// while ($row = mysql_fetch_array($querySubCat)) {
+								// echo '<a href="' . $row['LINK_URL'].'"><li class="sub">' . $row['SUB_MODULE_DESC'] . '</li></a>';
+								// }
+								// echo "</ul> "; //</li>
 								// }
 							}
 							?>

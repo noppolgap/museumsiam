@@ -49,8 +49,8 @@ include ('inc/inc-top-bar.php');
 <?php
 include ('inc/inc-menu.php');
 require ('inc/inc-require-museum-admin-login.php');
-$_SESSION['user_name'] = 'noppol_vong@hotmail.com';
-$_SESSION['LANG'] = 'TH';
+// $_SESSION['user_name'] = 'noppol_vong@hotmail.com';
+// $_SESSION['LANG'] = 'TH';
 if ($_SESSION['LANG'] == 'TH') {
 	$picFolder = 'th';
 	$selectedColumn = "province.PROVINCE_DESC_LOC as PROVINCE_DESC , district.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDis.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ";
