@@ -109,7 +109,7 @@ require ("assets/configs/function.inc.php");
 						<div class="box-title cf ">
 							<h2><?=$row['SUB_CONTENT_CAT'] ?></h2>
 							<div class="box-btn">
-								<a href="mdn-category2.php" class="btn gold">ดูทั้งหมด</a>
+								<a href="mdn-category2.php?MID=<?=$MID?>&CID=<?=$CID?>&SCID=<?=$row['SUB_CONTENT_CAT_ID']?>" class="btn gold">ดูทั้งหมด</a>
 							</div>
 						</div>
 						<div class="box-news-main">
@@ -117,7 +117,10 @@ require ("assets/configs/function.inc.php");
 
 <?
 
-if ($CID == $regionCategory) {
+if ($_SESSION['LANG'] == 'TH')
+		$selectedColumn = " muse.MUSEUM_NAME_LOC as MUSEUM_NAME , muse.DESCRIPT_LOC as MUSEUM_DESCRIPT, muse.PLACE_DESC_LOC as PLACE_DESC , dist.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDist.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC , province.PROVINCE_DESC_LOC  as PROVINCE_DESC , ";
+	else
+		$selectedColumn = " muse.MUSEUM_NAME_ENG as MUSEUM_NAME , muse.DESCRIPT_ENG as MUSEUM_DESCRIPT, muse.PLACE_DESC_ENG as PLACE_DESC , dist.DISTRICT_DESC_ENG as DISTRICT_DESC, subDist.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC , province.PROVINCE_DESC_ENG as PROVINCE_DESC , ";
 
 	$sql = " SELECT " . $selectedColumn;
 	$sql .= " muse.MUSEUM_DETAIL_ID, ";
@@ -145,52 +148,80 @@ if ($CID == $regionCategory) {
 	$sql .= " WHERE ";
 	$sql .= " IS_GIS_MUSEUM = 'N' ";
 	$sql .= " and ACTIVE_FLAG = 1 ";
+	
+if ($CID == $regionCategory) {
+	
 	if ($row['SUB_CONTENT_CAT_ID'] == $bkkSubCatID) {
 		// Bkk where with Province
 		$whereSql = " and muse.PROVINCE_ID = '" . $bkkProvinceID . "' ";
 
 	} else {
-		// join with trn_mapping_museum_category
+		
 		$whereSql = " and muse.PROVINCE_ID in ( SELECT
-	PROVINCE_ID
-FROM
-	mapping_region_museum_network_sub_cat map
-LEFT JOIN mas_province p ON p.REGION_ID = map.REGION_ID
-WHERE
-	map.cat_id = 41
-AND map.SUB_CAT_ID = 65 ) ";
+													PROVINCE_ID
+												FROM
+													mapping_region_museum_network_sub_cat map
+												LEFT JOIN mas_province p ON p.REGION_ID = map.REGION_ID
+												WHERE
+													map.cat_id = " . $CID . " AND map.SUB_CAT_ID = " . $row['SUB_CONTENT_CAT_ID'] . " ) ";
 	}
-}
 
-<div class="box-tumb cf">
-<a href="">
-<div class="box-pic">
-<img src="http://placehold.it/274x205">
-</div> </a>
-<div class="box-text">
-<a href="">
-<p class="text-title TcolorRed">
-Levitated Mass 340 Ton Giant Stone
-</p> </a>
-<p class="text-date TcolorGray">
-28 พ.ย. 2559
-</p>
-<p class="text-des TcolorBlack">
-Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-</p>
-<div class="box-btn cf">
-<a href="" class="btn red">อ่านเพิ่มเติม</a>
-<div class="box-btn-social cf">
-<a href="#" class="btn-socila fb"></a>
-<a href="#" class="btn-socila tw"></a>
-</div>
-</div>
-</div>
-</div>
+	
+
+} else {
+	// join with trn_mapping_museum_category
+	$whereSql = " and muse.MUSEUM_DETAIL_ID in ( SELECT
+													MUSEUM_DETAIL_ID
+												FROM
+													trn_mapping_museum_category  map
+												LEFT JOIN mas_province p ON p.REGION_ID = map.REGION_ID
+												WHERE
+													map.CONTENT_CAT_ID = " . $CID . " AND map.CONTENT_SUB_CAT_ID	 = " . $row['SUB_CONTENT_CAT_ID'] . " ) ";
+}
+$sql .= $whereSql;
+//$sql .= " order by ";
+$rsMDN = mysql_query($sql) or die(mysql_error());
+$idx = 1;
+
+while ($rowMDN = mysql_fetch_array($rsMDN)) {
+	$isMid = "";
+	if ($idx == 4)
+		echo '<hr class="line-gray"/>';
+	if ($idx == 2 || $idx == 5)
+		$isMid = " mid ";
+	echo '<div class="box-tumb cf' . $isMid . '">';
+
+	echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
+	echo '<div class="box-pic">';
+	echo '<img src="' . callMDNThumbListFrontEnd($rowMDN['MUSEUM_DETAIL_ID'], true) . '">';
+	echo '</div> </a>';
+	echo '<div class="box-text">';
+	echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
+	echo '<p class="text-title TcolorRed">';
+	echo $rowMDN['MUSEUM_NAME'];
+	echo '</p> </a>';
+	echo '<p class="text-date TcolorGray">';
+	echo $rowMDN['LAST_DATE'];
+	echo '</p>';
+	echo '<p class="text-des TcolorBlack">';
+	echo $rowMDN['MUSEUM_DESCRIPT'];
+	echo '</p>';
+	echo '<div class="box-btn cf">';
+	echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
+	echo '<div class="box-btn-social cf">';
+	echo '<a href="#" class="btn-socila fb"></a>';
+	echo '<a href="#" class="btn-socila tw"></a>';
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
+
+	$idx++;
+}
 			?>					
 								
 								
-								<div class="box-tumb cf mid">
+								<!-- <div class="box-tumb cf mid">
 									<a href="">
 									<div class="box-pic">
 										<img src="http://placehold.it/274x205">
@@ -318,7 +349,7 @@ Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus o
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 
 							</div>
 						</div>

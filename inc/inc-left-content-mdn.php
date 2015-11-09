@@ -1,6 +1,24 @@
+<?php
+if ($_SESSION['LANG'] == 'TH') {
+	$picFolder = 'th';
+} else {
+	$picFolder = 'en';
+}
+
+if (!isset($_GET['MID']))
+	$MID = $museum_data_network_module_id;
+else
+	$MID = $_GET['MID'];
+
+if (!isset($_GET['CID'])) {
+	$CID = $regionCategory;
+} else {
+	$CID = $_GET['CID'];
+}
+?>
 <div class="part-left-title-page">
 	<div class="box-title-page">
-		<a href="mdn.php"><img src="images/th/title-mdn.png"/></a>
+		<a href="mdn.php"><img src="images/<?=$picFolder ?>/title-mdn.png"/></a>
 	</div>
 </div>
 
@@ -13,32 +31,104 @@
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
-			<li class="menu1"><a href="mdn.php">หน้าหลัก</a></li>
-			<li class="menu2 sub"><a href="mdn-news-event.php">กิจกรรมและข่าวประชาสัมพันธ์</a>
+			<li class="menu1">
+				<a href="mdn.php">หน้าหลัก</a>
+			</li>
+			<li class="menu2 sub">
+				<a href="mdn-news-event.php">กิจกรรมและข่าวประชาสัมพันธ์</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="mdn-event.php">กิจกรรม</a></li>
-					<li class="submenu2"><a href="mdn-news.php">ข่าวประชาสัมพันธ์</a></li>
+					<li class="submenu1">
+						<a href="mdn-event.php">กิจกรรม</a>
+					</li>
+					<li class="submenu2">
+						<a href="mdn-news.php">ข่าวประชาสัมพันธ์</a>
+					</li>
 				</ul>
 			</li>
-			<li class="menu3 sub"><a href="mdn-category.php">ภูมิภาค</a>
+
+			<?
+
+			if ($_SESSION['LANG'] == 'TH') {
+				$selectedColumn = " CONTENT_CAT_DESC_LOC as CONTENT_CAT_DESC , ";
+				$subCatSelectedColumn = "SUB_CONTENT_CAT_DESC_LOC as SUB_CONTENT_CAT ";
+			} else {
+				$selectedColumn = " CONTENT_CAT_DESC_ENG as CONTENT_CAT_DESC , ";
+				$subCatSelectedColumn = "SUB_CONTENT_CAT_DESC_ENG as SUB_CONTENT_CAT ";
+			}
+			$categorySql = "SELECT
+CONTENT_CAT_ID, " . $selectedColumn . " IS_LAST_NODE
+FROM
+trn_content_category
+WHERE
+REF_MODULE_ID = " . $MID . " AND flag = 0
+ORDER BY
+ORDER_DATA DESC";
+			$menuIdx = 3;
+
+			$query = mysql_query($eventSql, $conn) or die($eventSql);
+			while ($row = mysql_fetch_array($query)) {
+				echo '<li class="menu' . $menuIdx . ' sub">';
+				echo '<a href="mdn-category.php?MID=' . $MID . '&CID=' . $row['CONTENT_CAT_ID'] . '">' . $row['CONTENT_CAT_DESC'] . '</a>';
+
+				echo '<ul class="submenu-left">';
+
+				$subCatSql = "SELECT
+					SUB_CONTENT_CAT_ID," . $subCatSelectedColumn . " FROM
+					trn_content_sub_category
+					WHERE
+					CONTENT_CAT_ID = " . $CID . " AND flag = 0
+					ORDER BY
+					ORDER_DATA DESC";
+
+				$querySubCat = mysql_query($subCatSql, $conn) or die($subCatSql);
+				$subCatMenuIdx = 1;
+				while ($rowSubCat = mysql_fetch_array($querySubCat)) {
+					echo '<li class="submenu' . $subCatMenuIdx . '">';
+					echo '<a href="mdn-category.php?MID=' . $MID . '&CID=' . $row['CONTENT_CAT_ID'] . '&SCID=' . $rowSubCat['SUB_CONTENT_CAT_ID'] . '">' . $rowSubCat['SUB_CONTENT_CAT'] . '</a>';
+					echo '</li>';
+					$subCatMenuIdx++;
+				}
+				echo '</ul>';
+				echo '</li>';
+				$menuIdx++;
+			}
+			?>
+			<!-- <li class="menu3 sub">
+				<a href="mdn-category.php">ภูมิภาค</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="mdn-category.php">ภาคเหนือ</a></li>
-					<li class="submenu2"><a href="mdn-category.php">ภาคใต้</a></li>
-					<li class="submenu2"><a href="mdn-category.php">ภาคตะวันออกเฉียงเหนือ</a></li>
+					<li class="submenu1">
+						<a href="mdn-category.php">ภาคเหนือ</a>
+					</li>
+					<li class="submenu2">
+						<a href="mdn-category.php">ภาคใต้</a>
+					</li>
+					<li class="submenu2">
+						<a href="mdn-category.php">ภาคตะวันออกเฉียงเหนือ</a>
+					</li>
 				</ul>
 			</li>
-			<li class="menu4 sub"><a href="mdn-category.php">การบริหารจัดการพิพิธภัณฑ์</a>
+			<li class="menu4 sub">
+				<a href="mdn-category.php">การบริหารจัดการพิพิธภัณฑ์</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="mdn-category.php">หมวดหมู่ย่อย</a></li>
-					<li class="submenu2"><a href="mdn-category.php">หมวดหมู่ย่อย</a></li>
+					<li class="submenu1">
+						<a href="mdn-category.php">หมวดหมู่ย่อย</a>
+					</li>
+					<li class="submenu2">
+						<a href="mdn-category.php">หมวดหมู่ย่อย</a>
+					</li>
 				</ul>
 			</li>
-			<li class="menu5 sub"><a href="mdn-category-red.php">ประเภทพิพิธภัณฑ์</a>
+			<li class="menu5 sub">
+				<a href="mdn-category-red.php">ประเภทพิพิธภัณฑ์</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="mdn-category.php">หมวดหมู่ย่อย</a></li>
-					<li class="submenu2"><a href="mdn-category.php">หมวดหมู่ย่อย</a></li>
+					<li class="submenu1">
+						<a href="mdn-category.php">หมวดหมู่ย่อย</a>
+					</li>
+					<li class="submenu2">
+						<a href="mdn-category.php">หมวดหมู่ย่อย</a>
+					</li>
 				</ul>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </div>
