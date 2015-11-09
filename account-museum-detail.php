@@ -29,6 +29,7 @@ require ('inc_meta.php');
 		ul.catItems {
 			text-align: center;
 			list-style-type: none;
+			color: #d9c3c3;
 		}
 		ul.catItems li {
 			float: left;
@@ -48,7 +49,8 @@ include ('inc/inc-top-bar.php');
 <?php
 include ('inc/inc-menu.php');
 require ('inc/inc-require-museum-admin-login.php');
-
+$_SESSION['user_name'] = 'noppol.vong@hotmail.com';
+$_SESSION['LANG'] = 'TH';
 if ($_SESSION['LANG'] == 'TH') {
 	$picFolder = 'th';
 	$selectedColumn = "province.PROVINCE_DESC_LOC as PROVINCE_DESC , district.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDis.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ";
@@ -1172,39 +1174,82 @@ $row = mysql_fetch_array($rs);
 			</div>
 			
 			<!-- Loop Museum Category-->
+			<?
+			if($_SESSION['LANG'] == 'TH'){
+				$catSelectedColumn = " CONTENT_CAT_DESC_LOC as CAT_DESC , ";
+				$subCatSelectedColumn = " SUB_CONTENT_CAT_DESC_LOC as SUB_CAT_DESC " ; 
+			}
+			else{
+				$catSelectedColumn = " CONTENT_CAT_DESC_ENG as CAT_DESC , "; 
+				$subCatSelectedColumn = " SUB_CONTENT_CAT_DESC_ENG as SUB_CAT_DESC " ; 
+				}
+			unset($currentCatSubCatArr);
 			
+			$currentCatSubCatSql = "select * from trn_mapping_museum_category where MUSEUM_DETAIL_ID  = " .$row['MUSEUM_DETAIL_ID'] ; 
+		
+			$rsCurrentCatSubCat = mysql_query($currentCatSubCatSql) or die(mysql_error());
+						while ($rowCurrentCatSubCat = mysql_fetch_array($rsCurrentCatSubCat)) {
+							$currentCatSubCatArr[$rowCurrentCatSubCat['CONTENT_CAT_ID']][$rowCurrentCatSubCat['CONTENT_SUB_CAT_ID']] = '1' ; 
+							}	
+			
+			
+			//var_dump($currentCatSubCatArr);
+			$catMuseumSql = "SELECT
+								CONTENT_CAT_ID, " . $catSelectedColumn .
+								" IS_LAST_NODE
+							FROM
+								trn_content_category
+							WHERE
+								REF_MODULE_ID = ".$museum_data_network_module_id.
+							" AND flag = 0 
+							 AND CONTENT_CAT_ID <> ".$regionCategory.
+							" AND IS_LAST_NODE = 'N' order by ORDER_DATA desc ";		
+						$rsCat = mysql_query($catMuseumSql) or die(mysql_error());
+						while ($rowCat = mysql_fetch_array($rsCat)) {			
+			?>
 			<div class="box-line cf"><hr></div>		
  
-			
 			<div class="row-main cf">
 				<div class="box-left">
 					<div class="box-row cf">
 						<div class="box-left">
-							<p>Cat 1</p>
+							<p><?=$rowCat['CAT_DESC'] ?></p>
 						</div>
 						<div class="box-right">
+							<?
+							$subCatMuseumSql = "SELECT
+													SUB_CONTENT_CAT_ID, " . $subCatSelectedColumn . " FROM
+													trn_content_sub_category
+												WHERE
+													CONTENT_CAT_ID = " . $rowCat['CONTENT_CAT_ID'] . " AND flag = 0
+												ORDER BY
+													ORDER_DATA DESC";
+
+							$rsSubCat = mysql_query($subCatMuseumSql) or die(mysql_error());
+							 ?>
 							<div class="box-input-text checkbox">
 								<div>
 									<ul class="catItems">
+										<?while ($rowSubCat = mysql_fetch_array($rsSubCat)) {	?>
 										<li>
-									 <label >
-									<input type="checkbox" name= "cat1[]" value="Cat11">
-									อันที่ 1</label></li>
+									 <label>
+									 	<?
+										$isChecked = "";
+										if ($currentCatSubCatArr[$rowCat['CONTENT_CAT_ID']][$rowSubCat['SUB_CONTENT_CAT_ID']] == '1')
+											$isChecked = "checked";
+										?>
+											 <input type="checkbox" name= "catMuseum[]" value="<?=$rowCat['CONTENT_CAT_ID'] . '|' . $rowSubCat['SUB_CONTENT_CAT_ID'] ?>" <?=$isChecked ?>>
+									<?=$rowSubCat['SUB_CAT_DESC'] ?></label></li> 
+				<?} ?>
 				
-				<li><label >
-									<input type="checkbox" name= "cat1[]" value="Cat12">อันที่ 2</label></li>
-									<li><label >
-									<input type="checkbox" name= "cat1[]" value="Cat13">อันที่ 3</label></li>
-								<li>	<label >
-									<input type="checkbox" name= "cat1[]" value="Cat14">อันที่ 4</label></li>
-									</ul>
-									</div>
-							</div>
+													</ul>
+													</div>
+						</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+			<?} ?>
 			
 			<!-- End Loop-->
 			<div class="box-line cf"><hr></div>		

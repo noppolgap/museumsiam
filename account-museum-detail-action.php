@@ -98,7 +98,7 @@ if ($_GET["type"] == "province") {
 		if ($_POST['hidMapLoc'] == 'DEL')
 			$update[] = "MAP_IMG_PATH_LOC = ''";
 	}
- 
+
 	//echo 'count : ' . count($_FILES['browseMapLoc']) . ' ' . count($_FILES['browseMapEng']);
 	if (isset($_FILES['browseMapLoc'])) {
 		if ($_FILES['browseMapLoc']["name"] != '') {
@@ -108,7 +108,7 @@ if ($_GET["type"] == "province") {
 	}
 
 	if (isset($_FILES['browseMapEng'])) {
-		if ($_FILES['browseMapEng']["name"] != '' ) {
+		if ($_FILES['browseMapEng']["name"] != '') {
 			$filename = frontend_move_single_image_upload_dir('MUSEUM_' . $_POST['museumId'], $_FILES['browseMapEng']);
 			$update[] = "MAP_IMG_PATH_ENG = '" . $filename . "'";
 		}
@@ -460,6 +460,26 @@ if ($_GET["type"] == "province") {
 			$update[] = "ORDER_DATA = " . $val;
 
 			$sql = "UPDATE trn_museum_profile_picture SET  " . implode(",", $update) . " WHERE PIC_ID =" . $k;
+			mysql_query($sql, $conn) or die($sql);
+		}
+	}
+
+	if (isset($_POST['catMuseum'])) {
+		$sql = "delete from trn_mapping_museum_category where MUSEUM_DETAIL_ID = " . $_POST['museumId'];
+
+		mysql_query($sql, $conn) or die($sql);
+
+		foreach ($_POST['catMuseum'] as $k => $val) {
+			unset($insert);
+
+			$arrVal = explode("|", $val);
+			//echo 'val : ' . $val;
+			//echo 'Arr : ' . $arrVal ;
+			$insert['MUSEUM_DETAIL_ID'] = $_POST['museumId'];
+			$insert['CONTENT_CAT_ID'] = nvl($arrVal[0], 0);
+			$insert['CONTENT_SUB_CAT_ID'] = nvl($arrVal[1], 0);
+
+			$sql = "INSERT INTO trn_mapping_museum_category (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
 			mysql_query($sql, $conn) or die($sql);
 		}
 	}

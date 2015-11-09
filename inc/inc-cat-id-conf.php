@@ -1,4 +1,7 @@
 <?
+//allow tag in strip_tags
+$allowTag = "<p><br><img><a><b><span><strong>";
+
 // Category ID
 $event_cat_id = 4;
 $exhibition_cat_id = 5;
@@ -17,6 +20,7 @@ $all_event_cat_id = 61;
 // Module ID
 $km_module_id = 2;
 $digial_module_id = 3;
+$museum_data_network_module_id = 4 ; 
 
 $visual_exhibition = 5;
 $style_exhibition = 20;
@@ -41,8 +45,13 @@ $shipping_cost = 100;
 $museumDataNetworkEventSubCat = 141;
 $museumDataNetworkNewsSubCat = 142;
 
+//forFilterOutCategory for museumDataNetworj
+$regionCategory =  41;
+
 
 //Procurement SubCat
 $procurementSubCat = 132;
+
+
 
 ?>

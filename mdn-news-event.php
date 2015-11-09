@@ -95,8 +95,7 @@ ifnull(content.LAST_UPDATE_DATE , content.CREATE_DATE ) as LAST_DATE
 FROM
 trn_content_detail AS content
 WHERE
-content.APPROVE_FLAG = 'N'
-AND MUSUEM_ID <> - 1
+MUSUEM_ID <> - 1
 AND content.CONTENT_STATUS_FLAG = 0
 AND content.SUB_CAT_ID = " . $museumDataNetworkEventSubCat . " ORDER BY
 EVENT_START_DATE ASC
@@ -194,8 +193,7 @@ ifnull(content.LAST_UPDATE_DATE , content.CREATE_DATE ) as LAST_DATE
 FROM
 trn_content_detail AS content
 WHERE
-content.APPROVE_FLAG = 'N'
-AND MUSUEM_ID <> - 1
+MUSUEM_ID <> - 1
 AND content.CONTENT_STATUS_FLAG = 0
 AND content.SUB_CAT_ID = " . $museumDataNetworkNewsSubCat . " ORDER BY
 EVENT_START_DATE ASC

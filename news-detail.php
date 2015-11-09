@@ -229,7 +229,7 @@ require("assets/configs/function.inc.php");
 				</div>
 				<div class="box-news-text">
 					<p>
-						<?=nl2br(strip_tags($row['CONTENT_DETAIL'], '<p><br>')); ?>
+						<?=nl2br(strip_tags($row['CONTENT_DETAIL'], $allowTag)); ?>
 					</p>
 				</div>
 
