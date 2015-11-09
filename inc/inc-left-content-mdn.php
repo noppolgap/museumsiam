@@ -65,7 +65,7 @@ ORDER BY
 ORDER_DATA DESC";
 			$menuIdx = 3;
 
-			$query = mysql_query($eventSql, $conn) or die($eventSql);
+			$query = mysql_query($categorySql, $conn) or die($categorySql);
 			while ($row = mysql_fetch_array($query)) {
 				echo '<li class="menu' . $menuIdx . ' sub">';
 				echo '<a href="mdn-category.php?MID=' . $MID . '&CID=' . $row['CONTENT_CAT_ID'] . '">' . $row['CONTENT_CAT_DESC'] . '</a>';
@@ -76,7 +76,7 @@ ORDER_DATA DESC";
 					SUB_CONTENT_CAT_ID," . $subCatSelectedColumn . " FROM
 					trn_content_sub_category
 					WHERE
-					CONTENT_CAT_ID = " . $CID . " AND flag = 0
+					CONTENT_CAT_ID = " . $row['CONTENT_CAT_ID'] . " AND flag = 0
 					ORDER BY
 					ORDER_DATA DESC";
 
@@ -84,7 +84,7 @@ ORDER_DATA DESC";
 				$subCatMenuIdx = 1;
 				while ($rowSubCat = mysql_fetch_array($querySubCat)) {
 					echo '<li class="submenu' . $subCatMenuIdx . '">';
-					echo '<a href="mdn-category.php?MID=' . $MID . '&CID=' . $row['CONTENT_CAT_ID'] . '&SCID=' . $rowSubCat['SUB_CONTENT_CAT_ID'] . '">' . $rowSubCat['SUB_CONTENT_CAT'] . '</a>';
+					echo '<a href="mdn-category2.php?MID=' . $MID . '&CID=' . $row['CONTENT_CAT_ID'] . '&SCID=' . $rowSubCat['SUB_CONTENT_CAT_ID'] . '">' . $rowSubCat['SUB_CONTENT_CAT'] . '</a>';
 					echo '</li>';
 					$subCatMenuIdx++;
 				}

@@ -174,7 +174,6 @@ if ($CID == $regionCategory) {
 													MUSEUM_DETAIL_ID
 												FROM
 													trn_mapping_museum_category  map
-												LEFT JOIN mas_province p ON p.REGION_ID = map.REGION_ID
 												WHERE
 													map.CONTENT_CAT_ID = " . $CID . " AND map.CONTENT_SUB_CAT_ID	 = " . $row['SUB_CONTENT_CAT_ID'] . " ) ";
 }
