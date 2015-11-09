@@ -51,7 +51,7 @@ if ($_SESSION['LANG'] == 'TH') {
 					<img src="images/<?=$picFolder?>/service/archive/title5.png"/>
 				</p>
 				<div class="box-btn cf">
-					<a href="#" class="btn black">ดูแผนที่</a>
+					<a href="#" class="btn black"><?=$viewMapCap?></a>
 				</div>
 			</div>
 

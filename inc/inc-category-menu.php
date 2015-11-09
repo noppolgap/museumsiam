@@ -34,7 +34,7 @@ $query = mysql_query($sqlStr, $conn);
 	<div class="box-menu-left">
 		<ul class="menu-left">
 			<li class="menu1">
-				<a href="category.php?MID=<?=$row['MODULE_ID']?>">หน้าหลัก</a>
+				<a href="category.php?MID=<?=$row['MODULE_ID']?>"><?=$mainPageCap?></a>
 			</li>
 			
 			

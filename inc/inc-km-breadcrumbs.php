@@ -11,7 +11,7 @@ echo '<li>';
 echo '<a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp; ';
 echo '</li>';
 echo '<li>';
-echo '<a href="other-system.php">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;';
+echo '<a href="other-system.php">'.$otherSystemCap.'</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;';
 echo '</li>';
 /*
 echo '<li class="active">';

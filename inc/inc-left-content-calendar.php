@@ -86,7 +86,7 @@ if ($_SESSION['LANG'] == 'TH') {
 		<?php   }  ?>
 		</div>
 		<div class="box-btn">
-			<a href="news-event-day.php" class="btn black">กิจกรรมวันนี้</a>
+			<a href="news-event-day.php" class="btn black"><?=$todayEventCap?></a>
 		</div>
 <?php   }  ?>
 	</div>

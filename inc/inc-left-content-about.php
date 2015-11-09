@@ -13,8 +13,8 @@
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
-			<li class="menu1"><a href="about.php">ความเป็นมาของเรา</a></li>
-			<li class="menu2"><a href="organization.php">โครงสร้างของเรา</a></li>
+			<li class="menu1"><a href="about.php"><?=$storyCap?></a></li>
+			<li class="menu2"><a href="organization.php"><?=$orgCap?></a></li>
 		</ul>
 	</div>
 </div>

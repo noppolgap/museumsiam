@@ -49,7 +49,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				<a class="btn-arrow left"></a>
 				<a class="btn-arrow right"></a>
 				<div class="box-btn cf">
-					<a href="other-system.php" class="btn black">ดูทั้งหมด</a>
+					<a href="other-system.php" class="btn black"><?=$seeAllCap?></a>
 				</div>
 			</div>
 
@@ -101,7 +101,7 @@ modul.ORDER_DATA DESC";
 				</div>
 				<div class="box-right">
 					<div class="box-btn cf">
-						<a id="btnMuseMag" class="btn gold">สมัครรับ MUSE MAG</a>
+						<a id="btnMuseMag" class="btn gold"><?=$career?> MUSE MAG</a>
 					</div>
 				</div>
 			</div>
@@ -109,13 +109,11 @@ modul.ORDER_DATA DESC";
 	</div>
 	<div class="part-copy">
 		<div class="container cf">
-			<div class="box-left">
-				<a href="index.php"><img src="images/th/logo-footer.png"/></a>
+			<div class="box-text">
+				<p>Ⓒ Copyright 2015 National Discovery Museum Institute, All right Reserved.</p>
 			</div>
-			<div class="box-right">
-				<p>
-					Ⓒ Copyright 2015 National Discovery Museum Institute, All right Reserved.
-				</p>
+			<div class="box-logo">
+				<a href="index.php"><img src="images/th/logo-footer.png"/></a>
 			</div>
 		</div>
 	</div>
