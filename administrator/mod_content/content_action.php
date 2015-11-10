@@ -25,6 +25,8 @@ if (isset($_GET['enable'])) {
 
 	mysql_query($sql, $conn);
 
+	logs_access($_SESSION['user_name'], 'Enable Content ID.'.$id);
+
 	header('Location: ' . $returnPage);
 
 }
@@ -40,6 +42,7 @@ if (isset($_GET['delete'])) {
 
 	mysql_query($sql, $conn);
 
+	logs_access($_SESSION['user_name'], 'Delete Content ID.'.$id);
 }
 
 if (isset($_GET['add'])) {
@@ -100,6 +103,7 @@ if (isset($_GET['add'])) {
 			mysql_query($sql, $conn) or die($sql);
 		}
 	}
+	logs_access($_SESSION['user_name'], 'ADD Content ID.'.$retrunID);
 
 	header('Location: ' . $returnPage);
 	//echo $scriptReturnPath ;
@@ -161,12 +165,13 @@ if (isset($_GET['edit'])) {
 			mysql_query($sql, $conn) or die($sql);
 		}
 	}
+	logs_access($_SESSION['user_name'], 'EDIT Content ID.'.$conid);
 
 	header('Location: ' . $returnPage);
 }
 
 if (isset($_POST['catID'])) {
-	$subCatSql = "select sc.SUB_CONTENT_CAT_ID , sc.SUB_CONTENT_CAT_DESC_LOC , sc.SUB_CONTENT_CAT_DESC_ENG 
+	$subCatSql = "select sc.SUB_CONTENT_CAT_ID , sc.SUB_CONTENT_CAT_DESC_LOC , sc.SUB_CONTENT_CAT_DESC_ENG
 											   from trn_content_sub_category sc
 											where sc.CONTENT_CAT_ID = '$catID' and sc.flag <> 2
 											ORDER BY sc.ORDER_DATA  desc  ";

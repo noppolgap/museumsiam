@@ -19,7 +19,7 @@ require ("assets/configs/function.inc.php");
 			$_SESSION['text'] = $_POST['str_search'];
 			$search_sql .= " AND CONTENT like '%" .$_SESSION['text']. "%' ";
 		}
-	}			
+	}
 
  ?>
 
@@ -29,7 +29,7 @@ require ("assets/configs/function.inc.php");
 	.box-right.main-content .box-title-system{
 		line-height: 31px;
 	}
-	
+
 </style>
 <script>
 	$(document).ready(function() {
@@ -93,7 +93,7 @@ $query = mysql_query($sql, $conn);
 if(mysql_num_rows($query) > 0){
 	$row = mysql_fetch_array($query);
 
-	if($row['CITIZEN_ID'] == ''){
+	if($row['CITIZEN_ID'] != ''){
 		echo '<a href="km-webboard-newtopic.php" class="btn red Atopic">'.$createTopicCap.'</a>';
 	}else{
 		echo'<a href="#" onclick="editAccout();" class="btn red Atopic">'.$createTopicCap.'</a>';
@@ -111,7 +111,7 @@ if(mysql_num_rows($query) > 0){
 						   WHERE REF_WEBBOARD_ID = 0
 						   AND FLAG = 0 ";
 
-				
+
 
 				$sq_qa .= $search_sql."  ORDER BY ORDER_DATA DESC Limit 30 offset " . (30 * ($currentPage - 1));
 

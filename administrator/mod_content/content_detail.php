@@ -162,7 +162,6 @@ require ("../../assets/configs/function.inc.php");
 		<script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
 		<script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 		<script type="text/javascript" src="../master/script.js"></script>
-		<? logs_access('admin', 'hello'); ?>
 
 		<style  >
 			.error, .error span {

@@ -141,9 +141,6 @@ $indexPage = "/administrator/mod_module/index.php";
 	  <script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 
-
-      <? logs_access('admin', 'hello'); ?>
-
 <?php
 
 if (isset($_POST["action"]) && $_POST["action"] == "submit") {
@@ -182,8 +179,8 @@ if (isset($_POST["action"]) && $_POST["action"] == "submit") {
 	$row_max = mysql_fetch_array($query_max);
 	$max = $row_max['MAX_ORDER'];
 	$max++;
-	
-	 
+
+
 	$strSQL = "INSERT INTO sys_app_module ";
 	$strSQL .= "(MODULE_NAME_LOC,MODULE_NAME_ENG , USER_CREATE , CREATE_DATE , LAST_FUNCTION , IS_LAST_NODE , ORDER_DATA ) ";
 	$strSQL .= "VALUES ";
@@ -204,7 +201,7 @@ if (isset($_POST["action"]) && $_POST["action"] == "submit") {
 		mysql_query("ROLLBACK");
 		echo "Error Save [" . $strSQL . "]";
 	}
-
+	logs_access($_SESSION['user_name'], 'Add Module');
 }
 ?>
   </body>

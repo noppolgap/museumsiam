@@ -157,7 +157,7 @@ require ('../inc_footer.php');
 <script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 <script type="text/javascript" src="../../assets/plugin/timepicker/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="../master/script.js"></script>
-<? logs_access('admin', 'hello'); ?>
+
 
 
 <script type="text/javascript">

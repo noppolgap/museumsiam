@@ -118,8 +118,8 @@ $indexPage = "/administrator/mod_module/index.php";
 											<?=admin_upload_icon_edit('BigIcon', 'BIG', $moduleID, NULL) ?>
 											</div>
 										<div class="clear"></div>
-									</div>	
-									
+									</div>
+
 									<!-- <div class="bigForm">
 										<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
 										<div class="floatL form_input"><?=admin_upload_icon_edit('SmallIcon', 'SMALL', $moduleID, NULL) ?></div>
@@ -242,6 +242,8 @@ $indexPage = "/administrator/mod_module/index.php";
 				mysql_query("ROLLBACK");
 				echo "Error Save [" . $strSQL . "]";
 			}
+
+			logs_access($_SESSION['user_name'], 'Edit Module ID.' . $mid);
 
 		}
 		?>
