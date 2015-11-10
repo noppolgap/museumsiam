@@ -84,8 +84,10 @@ require ("assets/configs/function.inc.php");
 
 					if ($_SESSION['LANG'] == 'TH') {
 						$selectedColumn = " SUB_CONTENT_CAT_DESC_LOC as CONTENT_SUB_CAT_DESC , ";
+						$provinceSelectedColumn = " PROVINCE_DESC_LOC as CONTENT_SUB_CAT_DESC ";
 					} else {
 						$selectedColumn = " SUB_CONTENT_CAT_DESC_ENG as CONTENT_SUB_CAT_DESC , ";
+						$provinceSelectedColumn = " PROVINCE_DESC_ENG as CONTENT_SUB_CAT_DESC ";
 					}
 					$subCategorySql = "SELECT
 										SUB_CONTENT_CAT_ID, " . $selectedColumn . " IS_LAST_NODE
@@ -108,43 +110,130 @@ require ("assets/configs/function.inc.php");
 					<div class="box-title-system cf news" <?=$hideTitle ?>>
 						<h1><?=$rowCat['CONTENT_SUB_CAT_DESC'] ?></h1>
 					</div>
+<?
+$subCatName = $rowCat['CONTENT_SUB_CAT_DESC'];
+if ($CID == $regionCategory) {
+	//SCID = provinceID
+	$provinceSql = "select PROVINCE_ID as SUB_CONTENT_CAT_ID , " . $provinceSelectedColumn . " from mas_province " . " where PROVINCE_ID = '" . $SCID . "' ";
+	$queryProvince = mysql_query($provinceSql, $conn) or die($provinceSql);
 
+	$rowProvince = mysql_fetch_array($queryProvince);
+	$subCatName = $rowProvince['CONTENT_SUB_CAT_DESC'];
+
+}
+
+if ($CID == $regionCategory) {
+	$whereStatement = " and muse.PROVINCE_ID = '" . $SCID . "' ";
+} else {
+	$whereStatement = " and muse.MUSEUM_DETAIL_ID in ( SELECT
+																	 MUSEUM_DETAIL_ID
+																 FROM
+																	 trn_mapping_museum_category  map
+																 WHERE
+																	 map.CONTENT_CAT_ID = " . $CID . " AND map.CONTENT_SUB_CAT_ID	 = " . $SCID . " ) ";
+}
+?>
 					<div class="box-category-main news BGray">
 						<div class="box-title cf">
-							<h2>เชียงใหม่</h2>
+							<h2><?=$subCatName ?></h2>
 							<p>
-								จำนวน <span>999,999</span> แห่ง
+								<?
+								$sql .= "select * from  trn_museum_detail muse ";
+								$sql .= " left join mas_district dist on dist.DISTRICT_ID = muse.DISTRICT_ID ";
+								$sql .= " left join mas_sub_district subDist  on subDist.SUB_DISTRICT_ID = muse.SUB_DISTRICT_ID ";
+								$sql .= " LEFT JOIN mas_province province on province.PROVINCE_ID= muse.PROVINCE_ID ";
+								$sql .= " WHERE ";
+								$sql .= " IS_GIS_MUSEUM = 'N' ";
+								$sql .= " and ACTIVE_FLAG = 1 ";
+								$sql .= $whereStatement;
+
+								$queryCount = mysql_query($sql, $conn) or die($sql);
+								$dataCount = mysql_num_rows($queryCount);
+								?>
+								จำนวน <span><?=$dataCount ?></span> แห่ง
 							</p>
 						</div>
 						<div class="box-news-main">
 							<div class="box-tumb-main cf">
 
-								<div class="box-tumb cf">
-									<a href="">
-									<div class="box-pic">
-										<img src="http://placehold.it/274x205">
-									</div> </a>
-									<div class="box-text">
-										<a href="">
-										<p class="text-title TcolorRed">
-											Levitated Mass 340 Ton Giant Stone
-										</p> </a>
-										<p class="text-date TcolorGray">
-											28 พ.ย. 2559
-										</p>
-										<p class="text-des TcolorBlack">
-											Levitated Mass is a 2012 large scale sculpture by Michael Heizer on the campus of the Los Angeles County Museum of Art ..
-										</p>
-										<div class="box-btn cf">
-											<a href="" class="btn red">อ่านเพิ่มเติม</a>
-											<div class="box-btn-social cf">
-												<a href="#" class="btn-socila fb"></a>
-												<a href="#" class="btn-socila tw"></a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="box-tumb cf mid">
+
+<?
+if ($_SESSION['LANG'] == 'TH')
+	$museumSelectedColumn = " muse.MUSEUM_NAME_LOC as MUSEUM_NAME , muse.DESCRIPT_LOC as MUSEUM_DESCRIPT, muse.PLACE_DESC_LOC as PLACE_DESC , dist.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDist.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC , province.PROVINCE_DESC_LOC  as PROVINCE_DESC , ";
+else
+	$museumSelectedColumn = " muse.MUSEUM_NAME_ENG as MUSEUM_NAME , muse.DESCRIPT_ENG as MUSEUM_DESCRIPT, muse.PLACE_DESC_ENG as PLACE_DESC , dist.DISTRICT_DESC_ENG as DISTRICT_DESC, subDist.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC , province.PROVINCE_DESC_ENG as PROVINCE_DESC , ";
+
+$sql = " SELECT " . $museumSelectedColumn;
+$sql .= " muse.MUSEUM_DETAIL_ID, ";
+$sql .= " muse.MUSEUM_DISPLAY_NAME, ";
+$sql .= " muse.ADDRESS1, ";
+$sql .= " muse.DISTRICT_ID, ";
+$sql .= " muse.SUB_DISTRICT_ID, ";
+$sql .= " muse.PROVINCE_ID, ";
+$sql .= " muse.POST_CODE, ";
+$sql .= " muse.TELEPHONE, ";
+$sql .= " muse.EMAIL, ";
+$sql .= " muse.LAT, ";
+$sql .= " muse.LON, ";
+$sql .= " IFNULL( ";
+$sql .= " 	muse.LAST_UPDATE_DATE, ";
+$sql .= " 	muse.CREATE_DATE ";
+$sql .= " ) AS LAST_DATE, ";
+$sql .= " muse.MOBILE_PHONE, ";
+$sql .= " muse.FAX ";
+$sql .= " FROM ";
+$sql .= " trn_museum_detail muse ";
+$sql .= " left join mas_district dist on dist.DISTRICT_ID = muse.DISTRICT_ID ";
+$sql .= " left join mas_sub_district subDist  on subDist.SUB_DISTRICT_ID = muse.SUB_DISTRICT_ID ";
+$sql .= " LEFT JOIN mas_province province on province.PROVINCE_ID= muse.PROVINCE_ID ";
+$sql .= " WHERE ";
+$sql .= " IS_GIS_MUSEUM = 'N' ";
+$sql .= " and ACTIVE_FLAG = 1 ";
+
+$sql .= $whereStatement;
+
+$sql .= " LIMIT 0,9 ";
+$rsMDN = mysql_query($sql) or die(mysql_error());
+$idx = 1;
+
+while ($rowMDN = mysql_fetch_array($rsMDN)) {
+	$isMid = "";
+	if ($idx == 4 || $idx == 7)
+		echo '<hr class="line-gray"/>';
+	if ($idx == 2 || $idx == 5 || $idx == 8)
+		$isMid = " mid ";
+
+	echo '<div class="box-tumb cf' . $isMid . '">';
+	echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
+	echo '<div class="box-pic">';
+	echo '<img src="' . callMDNThumbListFrontEnd($rowMDN['MUSEUM_DETAIL_ID'], true) . '">';
+	echo '</div> </a>';
+	echo '<div class="box-text">';
+	echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '">';
+	echo '<p class="text-title TcolorRed">';
+	echo $rowMDN['MUSEUM_NAME'];
+	echo '</p> </a>';
+	echo '<p class="text-date TcolorGray">';
+	echo $rowMDN['LAST_DATE'];
+	echo '</p>';
+
+	echo '<p class="text-des TcolorBlack">';
+	echo $rowMDN['MUSEUM_DESCRIPT'];
+	echo '</p>';
+	echo '<div class="box-btn cf">';
+	echo '<a href="mdn-detail.php?MDNID=' . $rowMDN['MUSEUM_DETAIL_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
+	echo '<div class="box-btn-social cf">';
+	echo '<a href="#" class="btn-socila fb"></a>';
+	echo '<a href="#" class="btn-socila tw"></a>';
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
+
+	$idx++;
+}
+							?>
+								<!-- <div class="box-tumb cf mid">
 									<a href="">
 									<div class="box-pic">
 										<img src="http://placehold.it/274x205">
@@ -353,7 +442,7 @@ require ("assets/configs/function.inc.php");
 											</div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 							<div class="box-pagination-main cf">
 								<ul class="pagination">

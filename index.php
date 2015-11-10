@@ -395,7 +395,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 
 							
 							<div class="box-btn cf">
-								<a href="news-museum.php" class="btn black"><?=$seeAllCap ?></a>
+								<a href="news-event-museum.php" class="btn black"><?=$seeAllCap ?></a>
 							</div>
 						</div>
 					</div>

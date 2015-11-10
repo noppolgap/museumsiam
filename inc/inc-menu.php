@@ -8,40 +8,40 @@ else
 	<div class="container cf">
 		<div class="box-menu cf">
 			<div class="box-logo">
-				<a href="index.php"><img src="images/<?=$picFolder?>/logo-header.svg" width="202"/></a>
+				<a href="index.php"><img src="images/<?=$picFolder ?>/logo-header.svg" width="202"/></a>
 			</div>
 			<div class="menu">
 				<ul class="menutop cf">
 					<li class="menu1">
-						<a href="index.php"><?=$homeCap?></a>
+						<a href="index.php"><?=$homeCap ?></a>
 					</li>
 					<li class="menu2 sub">
-						<a href="about.php"><?=$aboutUsCap?></a>
+						<a href="about.php"><?=$aboutUsCap ?></a>
 						<ul class="submenu-top">
 							<a href="about.php">
 							<li class="sub1">
-								<?=$storyCap?>
+								<?=$storyCap ?>
 							</li></a>
 							<a href="organization.php">
 							<li class="sub2">
-								<?=$orgCap?>
+								<?=$orgCap ?>
 							</li></a>
 						</ul>
 					</li>
 					<li class="menu3 sub">
-						<a href="service-knowledge.php"><?=$serviceCap?></a>
+						<a href="service-knowledge.php"><?=$serviceCap ?></a>
 						<ul class="submenu-top">
 							<a href="service-knowledge.php">
 							<li class="sub1">
-								<?=$knowledgeCap?>
+								<?=$knowledgeCap ?>
 							</li></a>
 							<a href="service-archive.php">
 							<li class="sub2">
-								<?=$digitalArcCap?>
+								<?=$digitalArcCap ?>
 							</li></a>
 							<a href="service-restaurant.php">
 							<li class="sub3">
-								<?=$resturantCap?>
+								<?=$resturantCap ?>
 							</li></a>
 							<a href="#">
 							<li class="sub4">
@@ -49,28 +49,40 @@ else
 							</li></a>
 							<a href="service-spaceforrent.php">
 							<li class="sub5">
-								<?=$rentSpaceCap?>
+								<?=$rentSpaceCap ?>
 							</li></a>
 						</ul>
 					</li>
 					<li class="menu4">
-						<a href=""><?=$privilegeCap?></a>
+						<?
+						if ($_SESSION['LANG'] == 'TH') {
+							$selectedColumn = 'CMS_TEXT_LOC';
+						} else {
+							$selectedColumn = 'CMS_TEXT_ENG';
+						}
+						$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='PRIVILEGE' AND ACTIVE_FLAG = 1";
+						$rsContent = mysql_query($sql) or die(mysql_error());
+						$rowContent = mysql_fetch_array($rsContent);
+						$privilegeUrl = str_replace('../../', '', $rowContent['CMS_TEXT']);
+						?>
+						
+						<a href="<?=$privilegeUrl ?>" target="_blank"><?=$privilegeCap ?></a>
 					</li>
 					<li class="menu5 sub">
-						<a href="news-event-museum.php"><?=$newsAndEventCap?></a>
+						<a href="news-event-museum.php"><?=$newsAndEventCap ?></a>
 						<ul class="submenu-top">
 							<a href="news-event-museum.php">
 							<li class="sub1">
-								<?=$activityNewsMuseumCap?>
+								<?=$activityNewsMuseumCap ?>
 							</li></a>
 							<a href="news-event.php">
 							<li class="sub2">
-								<?=$allEventAndNewsAllSystemCap?>
+								<?=$allEventAndNewsAllSystemCap ?>
 							</li></a>
 						</ul>
 					</li>
 					<li class="menu6 sub">
-						<a href="other-system.php"><?=$otherSystemCap?></a>
+						<a href="other-system.php"><?=$otherSystemCap ?></a>
 						<ul class="submenu-top">
 							<?
 							if ($_SESSION['LANG'] == 'TH')
@@ -122,10 +134,10 @@ ORDER_DATA DESC";
 						</ul>
 					</li>
 					<li class="menu7 sub">
-						<a href="faqs.php"><?=$qaCap?></a>
+						<a href="faqs.php"><?=$qaCap ?></a>
 					</li>
 					<li class="menu8 sub">
-						<a href="contact.php"><?=$contactUsCap?></a>
+						<a href="contact.php"><?=$contactUsCap ?></a>
 						<ul class="submenu-top">
 							<a href="contact.php">
 							<li class="sub1">

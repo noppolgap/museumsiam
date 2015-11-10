@@ -143,7 +143,7 @@ ORDER_DATA DESC";
 					echo '<div class="box-title cf ">';
 					echo '<h2>' . $rowOuterLoop['CONTENT_SUB_CAT_DESC'] . '</h2>';
 					echo '<div class="box-btn">';
-					echo '<a href="mdn-all.php?MID='.$MID.'&CID='.$CID.'&SCID='.$row['SUB_CONTENT_CAT_ID'].'&TID='.$SCID.'" class="btn black">ดูทั้งหมด</a>';
+					echo '<a href="mdn-all.php?MID='.$MID.'&CID='.$CID.'&SCID='.$rowOuterLoop['SUB_CONTENT_CAT_ID'].'&TID='.$SCID.'" class="btn black">ดูทั้งหมด</a>';
 					echo '</div>';
 					echo '</div>';
 					echo '<div class="box-news-main">';

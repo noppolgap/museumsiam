@@ -283,9 +283,11 @@ require ("assets/configs/function.inc.php");
 								<?
 
 								//	var_dump( $imgArr[1]);
-								foreach ($imgArr[1] as $imgVal) {
-									$imgPath = str_replace('../../', '', $imgVal);
-									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								if (count($imgArr[1]) > 0) {
+									foreach ($imgArr[1] as $imgVal) {
+										$imgPath = str_replace('../../', '', $imgVal);
+										echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+									}
 								}
  ?>
 								<!-- <a href="images/mog-pic.png" class="lightbox"><img src="http://placehold.it/754x562"></a>
@@ -300,9 +302,11 @@ require ("assets/configs/function.inc.php");
 							</p>
 							<div class="box-img cf">
 								<?
-								foreach ($imgArr[2] as $imgVal) {
-									$imgPath = str_replace('../../', '', $imgVal);
-									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								if (count($imgArr[2]) > 0) {
+									foreach ($imgArr[2] as $imgVal) {
+										$imgPath = str_replace('../../', '', $imgVal);
+										echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+									}
 								}
  ?>
 							</div>
@@ -315,9 +319,11 @@ require ("assets/configs/function.inc.php");
 							</p>
 							<div class="box-img cf">
 								<?
-								foreach ($imgArr[3] as $imgVal) {
-									$imgPath = str_replace('../../', '', $imgVal);
-									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								if (count($imgArr[3]) > 0) {
+									foreach ($imgArr[3] as $imgVal) {
+										$imgPath = str_replace('../../', '', $imgVal);
+										echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+									}
 								}
  ?>
 							</div>
@@ -329,9 +335,11 @@ require ("assets/configs/function.inc.php");
 							</p>
 							<div class="box-img cf">
 								<?
-								foreach ($imgArr[4] as $imgVal) {
-									$imgPath = str_replace('../../', '', $imgVal);
-									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								if (count($imgArr[4]) > 0) {
+									foreach ($imgArr[4] as $imgVal) {
+										$imgPath = str_replace('../../', '', $imgVal);
+										echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+									}
 								}
  ?>
 							</div>
@@ -343,9 +351,11 @@ require ("assets/configs/function.inc.php");
 							</p>
 							<div class="box-img cf">
 								<?
-								foreach ($imgArr[5] as $imgVal) {
-									$imgPath = str_replace('../../', '', $imgVal);
-									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								if (count($imgArr[5]) > 0) {
+									foreach ($imgArr[5] as $imgVal) {
+										$imgPath = str_replace('../../', '', $imgVal);
+										echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+									}
 								}
  ?>
 							</div>
@@ -357,9 +367,11 @@ require ("assets/configs/function.inc.php");
 							</p>
 							<div class="box-img cf">
 								<?
-								foreach ($imgArr[6] as $imgVal) {
-									$imgPath = str_replace('../../', '', $imgVal);
-									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								if (count($imgArr[6]) > 0) {
+									foreach ($imgArr[6] as $imgVal) {
+										$imgPath = str_replace('../../', '', $imgVal);
+										echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+									}
 								}
  ?>
 							</div>
@@ -371,9 +383,11 @@ require ("assets/configs/function.inc.php");
 							</p>
 							<div class="box-img cf">
 							<?
-							foreach ($imgArr[7] as $imgVal) {
-								$imgPath = str_replace('../../', '', $imgVal);
-								echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+							if (count($imgArr[7]) > 0) {
+								foreach ($imgArr[7] as $imgVal) {
+									$imgPath = str_replace('../../', '', $imgVal);
+									echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+								}
 							}
  ?>
 							</div>
@@ -385,9 +399,11 @@ require ("assets/configs/function.inc.php");
 							</p>
 							<div class="box-img cf">
 						<?
-						foreach ($imgArr[8] as $imgVal) {
-							$imgPath = str_replace('../../', '', $imgVal);
-							echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+						if (count($imgArr[8]) > 0) {
+							foreach ($imgArr[8] as $imgVal) {
+								$imgPath = str_replace('../../', '', $imgVal);
+								echo '<a href="' . $imgPath . '" class="lightbox"><img src="' . $imgPath . '"></a>';
+							}
 						}
  ?>
 							</div>
@@ -459,7 +475,7 @@ require ("assets/configs/function.inc.php");
 										$linkTo = "mdn-event-detail.php?CID=" . $eventRow["CAT_ID"] . "&SCID=" . $eventRow["SUB_CAT_ID"] . "&CONID=" . $eventRow["CONTENT_ID"] . "&MDNID=" . $MDNID;
 										echo '<div class="museum-news cf">';
 										echo '<div class="box-pic">';
-										echo '<a href="' . $linkTo . '"><img src="'.callThumbListFrontEnd($eventRow['CONTENT_ID'], $eventRow['CAT_ID'], true).'"></a>';
+										echo '<a href="' . $linkTo . '"><img src="' . callThumbListFrontEnd($eventRow['CONTENT_ID'], $eventRow['CAT_ID'], true) . '"></a>';
 										echo '</div>';
 										echo '<div class="box-text">';
 										echo '<a href="' . $linkTo . '">';
@@ -511,7 +527,7 @@ require ("assets/configs/function.inc.php");
 										$linkTo = "mdn-news-detail.php?CID=" . $newsRow["CAT_ID"] . "&SCID=" . $newsRow["SUB_CAT_ID"] . "&CONID=" . $newsRow["CONTENT_ID"] . "&MDNID=" . $MDNID;
 										echo '<div class="museum-news cf">';
 										echo '<div class="box-pic">';
-										echo '<a href="' . $linkTo . '"><img src="'.callThumbListFrontEnd($newsRow['CONTENT_ID'], $newsRow['CAT_ID'], true).'"></a>';
+										echo '<a href="' . $linkTo . '"><img src="' . callThumbListFrontEnd($newsRow['CONTENT_ID'], $newsRow['CAT_ID'], true) . '"></a>';
 										echo '</div>';
 										echo '<div class="box-text">';
 										echo '<a href="' . $linkTo . '">';
