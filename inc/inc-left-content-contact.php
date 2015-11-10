@@ -18,9 +18,9 @@
 			<li class="menu1"><a href="contact.php">E-MAIL SUBMIT <br>FORM ADDRESS & MAP</a></li>
 			<li class="menu2 sub"><a href="contact-career.php">E-APPLICATION</a>
 				<ul class="submenu-left">
-					<li class="submenu1"><a href="contact-career.php"><?=$positionCap?></a></li>
-					<li class="submenu2"><a href="contact-career-condition.php"><?=$term_and_condition?></a></li>
-					<li class="submenu3"><a href="contact-career-register.php"><?=$fillInfoCap?></a></li>
+					<li class="submenu1"><a href="contact-eapp.php"><?=$positionCap?></a></li>
+					<li class="submenu2"><a href="contact-eapp-condition.php"><?=$term_and_condition?></a></li>
+					<li class="submenu3"><a href="contact-eapp-register.php"><?=$fillInfoCap?></a></li>
 				</ul>
 			</li>
 		</ul>

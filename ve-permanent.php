@@ -101,20 +101,20 @@ if ($_SESSION['LANG'] == 'TH') {
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						<div class="box-tumb cf">
-							<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>">
+							<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>&link=perm">
 								<div class="box-pic">
 									<img src="<?=callThumbListFrontEnd($row_Category['CONTENT_ID'], $row_Category['CONTENT_CAT_ID'], true)?>">
 								</div>
 							</a>
 							<div class="box-text">
 								<div class="wrap">
-									<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>">
+									<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>&link=perm">
 										<p class="text-title"><?=$row_Category['CONTENT_DESC']?></p>
 									</a>
 									<p class="text-date"><?=ConvertDate($row_Category['LAST_DATE'])?></p>
 									<p class="text-des"><?=$row_Category['BRIEF_LOC']?></p>
 									<div class="box-btn cf">
-										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>" class="btn red"><?=$readMoreCap?></a>
+										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>&link=perm" class="btn red"><?=$readMoreCap?></a>
 										<div class="box-btn-social cf">
 										<?php
 											echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';

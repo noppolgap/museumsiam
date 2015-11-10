@@ -170,10 +170,10 @@ include ('inc/inc-menu.php');
 								$gap = "mid";
 							}
 
-							if ($rowSUB_CAT['SUB_CONTENT_CAT_ID'] == $museumDataNetworkEventSubCat)
+							//if ($rowSUB_CAT['SUB_CONTENT_CAT_ID'] == $museumDataNetworkEventSubCat)
 								$date = ConvertBoxDate($row['EVENT_START_DATE']);
-							else
-								$date = ConvertBoxDate($row['LAST_DATE']);
+							//else
+							//	$date = ConvertBoxDate($row['LAST_DATE']);
 
 							/*social*/
 							$path = $detailPage.'?MID=' . $MID . '%26CID=' . $row['CAT_ID'] . '%26SID=' . $row['SUB_CAT_ID'] . '%26CONID=' . $row['CONTENT_ID'] . '%26date=week';

@@ -122,20 +122,20 @@ $cat_name[$row['SUB_CONTENT_CAT_ID']] = $row['CAT_DESC'];
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						<div class="box-tumb cf">
-							<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>">
+							<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>&link=exh">
 								<div class="box-pic">
 									<img src="<?=callThumbListFrontEnd($row_Category['CONTENT_ID'], $row_Category['CONTENT_CAT_ID'], true)?>">
 								</div>
 							</a>
 							<div class="box-text">
 								<div class="wrap">
-									<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>">
+									<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>&link=exh">
 										<p class="text-title"><?=$row_Category['CONTENT_DESC']?></p>
 									</a>
 									<p class="text-date"><?=ConvertDate($row_Category['LAST_DATE'])?></p>
 									<p class="text-des"><?=$row_Category['BRIEF_LOC']?></p>
 									<div class="box-btn cf">
-										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>" class="btn red">อ่านเพิ่มเติม</a>
+										<a href="ve-detail.php?MID=<?=$MID?>&amp;CID=<?=$row_Category['SUB_CAT_ID']?>&amp;CONID=<?=$row_Category['CONTENT_ID']?>&link=exh" class="btn red">อ่านเพิ่มเติม</a>
 										<div class="box-btn-social cf">
 										<?php
 										echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$row_Category['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
@@ -160,14 +160,14 @@ $cat_name[$row['SUB_CONTENT_CAT_ID']] = $row['CAT_DESC'];
 			}
 
 
-			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<a href="ve-detail.php?MID='.$MID.'&amp;CID='.$row_Category['SUB_CAT_ID'].'&amp;CONID='.$row_Category['CONTENT_ID'].'">';
+			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<a href="ve-detail.php?MID='.$MID.'&amp;CID='.$row_Category['SUB_CAT_ID'].'&amp;CONID='.$row_Category['CONTENT_ID'].'&link=exh">';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<div class="box-pic">';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<img src="';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= callThumbListFrontEnd($row_Category['CONTENT_ID'], $row_Category['CONTENT_CAT_ID'], true);
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '" /></div>';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '</a>';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<div class="box-text">';
-			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<a href="ve-detail.php?MID='.$MID.'&amp;CID='.$row_Category['SUB_CAT_ID'].'&amp;CONID='.$row_Category['CONTENT_ID'].'">';
+			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<a href="ve-detail.php?MID='.$MID.'&amp;CID='.$row_Category['SUB_CAT_ID'].'&amp;CONID='.$row_Category['CONTENT_ID'].'&link=exh">';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<p class="text-title TcolorRed">';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= $row_Category['CONTENT_DESC'];
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '</p>';
@@ -179,7 +179,7 @@ $cat_name[$row['SUB_CONTENT_CAT_ID']] = $row['CAT_DESC'];
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= $row_Category['BRIEF_LOC'];
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '</p>';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<div class="box-btn cf">';
-			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<a class="btn red" href="ve-detail.php?MID='.$MID.'&amp;CID='.$row_Category['SUB_CAT_ID'].'&amp;CONID='.$row_Category['CONTENT_ID'].'">';
+			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<a class="btn red" href="ve-detail.php?MID='.$MID.'&amp;CID='.$row_Category['SUB_CAT_ID'].'&amp;CONID='.$row_Category['CONTENT_ID'].'&link=exh">';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= 'อ่านเพิ่มเติม</a>';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= '<div class="box-btn-social cf">';
 			$temporary_exhibition_log[$row_Category['SUB_CAT_ID']] .= ' <a href="'.$fb_link.'" onclick="shareFB(\''.$row_Category['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';

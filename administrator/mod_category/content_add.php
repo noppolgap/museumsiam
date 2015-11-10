@@ -93,8 +93,9 @@ require ('../inc_header.php');
 								<span class="error" >* <span id = "detailEnError" style="display:none">กรุณาระบุรายละเอียด EN</span> </span>
 								<div class="clear"></div>
 							</div>
-
-							<? if($MID == $new_and_event ) { ?>
+ 
+ 
+							<? if($SCID == $museumDataNetworkNewsSubCat || $SCID == $mesum_sub_cat_id ) { ?>
 
 								<div>
 									<div class="floatL form_name">วันที่</div>

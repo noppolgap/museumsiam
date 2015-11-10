@@ -20,16 +20,27 @@ if ($currentPage < 1)
 
 $catName = "";
 
-if (isset($_SESSION['KM_PREV_PG'])) {
-	$backPage = $_SESSION['KM_PREV_PG'];
-} else {
-	$backPage = "km.php?MID=" . $km_module_id;
-	/*$backPage = "all-content.php?MID=".$MID."&CID=".$CID;
-	 if (isset($_GET['SCID'])) {
-	 $backPage.= "$SCID=".$SCID ;
-	 }
-	 $backPage.'&PG='.$currentPage ; */
+$backPage = "";
+$link_back = $_GET['link'];
+
+switch ($link_back) {
+	case "category" :
+		$backPage = "ve-category.php";
+		break;
+	case "exh" :
+		$backPage = "ve-exhibition.php";
+		break;
+	case "perm" :
+		$backPage = "ve-permanent.php";
+		break;
+	case "temp" :
+		$backPage = "ve-temporary.php";
+		break;
+	case "" :
+		$backPage = "ve.php";
+		break;
 }
+
 $sqlCategory = "";
 if (isset($_GET['SCID'])) {
 	$sqlCategory = "select SUB_CONTENT_CAT_ID ,
@@ -77,7 +88,7 @@ $rsContent = mysql_query($contentSql) or die(mysql_error());
 $rowContent = mysql_fetch_array($rsContent);
 
 $title = trim(htmlspecialchars($rowContent['CONTENT_LOC']));
-$detail = str_replace("../../","",trim($rowContent['CONTENT_DETAIL'])); 
+$detail = str_replace("../../", "", trim($rowContent['CONTENT_DETAIL']));
 $brief = trim(preg_replace('/\s\s+/', ' ', strip_tags(htmlspecialchars($rowContent['CONTENT_BRIEF']))));
 
 //meta site
@@ -85,7 +96,7 @@ $sql_thumb_meta = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = " . $CON
 $query_thumb_meta = mysql_query($sql_thumb_meta, $conn);
 $row_thumb_meta = mysql_fetch_array($query_thumb_meta);
 $thumb_meta = trim(str_replace("../../", "", $row_thumb_meta['IMG_PATH']));
-
+$lastDate = $rowContent['LAST_DATE'];
 /* not work
  $page_title = $title;
  $page_description = $brief;
@@ -100,7 +111,9 @@ unset($thumb_meta);
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>
+<?
+require ('inc_meta.php');
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/ve.css" />
@@ -112,15 +125,19 @@ unset($thumb_meta);
 
 <body id="km">
 
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>
+<?php
+include ('inc/inc-top-bar.php');
+ ?>
+<?php
+include ('inc/inc-menu.php');
+ ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php"><?=$otherSystemCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve.php">ระบบจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve-category.php">หมวดหมู่นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">ชื่อนิทรรศการ</li>
@@ -134,12 +151,17 @@ unset($thumb_meta);
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-ve.php'); ?>
+			<?php
+			include ('inc/inc-left-content-ve.php');
+ ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
 				<h1><?=$catName ?></h1>
+				<div class="box-btn">
+					<a href="<? echo $backPage ?>" class="btn red">ย้อนกลับ</a>
+				</div>
 			</div>
 			<div class="box-newsdetail-main">
 				<div class="box-slide-big">
@@ -223,8 +245,8 @@ unset($thumb_meta);
 							if (nvl($rowContent['PLACE_DESC'], '') == '')
 								$placeClass = ' class="text-des"  style="height: 15px;" ';
 							$hasLinkToMap = FALSE;
-							if ((nvl($rowContent['LAT'], '') != '') && (nvl($rowContent['LON'], '')!= '')) {
-								echo '<a href="http://maps.google.com/?q='.$rowContent['LAT'].','.$rowContent['LON'].'" target="_blank">';
+							if ((nvl($rowContent['LAT'], '') != '') && (nvl($rowContent['LON'], '') != '')) {
+								echo '<a href="http://maps.google.com/?q=' . $rowContent['LAT'] . ',' . $rowContent['LON'] . '" target="_blank">';
 								$hasLinkToMap = TRUE;
 							}
 								?>
@@ -251,11 +273,11 @@ unset($thumb_meta);
 					<a href="<?=$gp_link ?>" onclick="sharegp('<?=$title ?>',$(this).attr('href')); return false;" class="btn g"></a>
 					<a href="<?=$line ?>" target="_blank" class="btn line"></a>
 				</div>
-				<div class="part-tumb-main" <?=$extraStyle?>>
+				<div class="part-tumb-main" <?=$extraStyle ?>>
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black"><?=$seeAllCap?></a>
+							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black"><?=$seeAllCap ?></a>
 						</div>
 					</div>
 					<div class="box-slide-small">
@@ -280,7 +302,7 @@ unset($thumb_meta);
 ?>
 				<div class="box-otherfile-main">
 					<div class="box-title cf">
-						<h2><?=$other_file?></h2>
+						<h2><?=$other_file ?></h2>
 					</div>
 					<div class="box-news-main gray">
 					<?php
@@ -306,7 +328,7 @@ unset($thumb_meta);
 								</p>
 							</div>
 							<div class="box-btn cf">
-								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap?></a>
+								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap ?></a>
 							</div>
 						</div>
 					<?php } } ?>
@@ -315,7 +337,7 @@ unset($thumb_meta);
 <?php } ?>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						<?=$lastEditCap?> :  <?= ConvertDate($rowContent['LAST_DATE']) ?>
+						<?=$lastEditCap ?> :  <?= ConvertDate($lastDate) ?>
 					</div>
 					<div class="box-plugin-social">
 						<div class="fb-share-button" data-href="<?=$path ?>" data-layout="button_count"></div>
@@ -324,7 +346,8 @@ unset($thumb_meta);
 						<span>
 						<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
 						<script type="text/javascript">
-													new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>","withUrl":true});
+																											new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>
+																					","withUrl":true});
 						</script>
 						</span>
 					</div>
