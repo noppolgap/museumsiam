@@ -1,29 +1,38 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>
+<?
+	require ('inc_meta.php');
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/contact.css" />
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$(".menutop li.menu8,.menu-left li.menu1").addClass("active");
-	});
+	}); 
 </script>
 
 </head>
 
 <body id="contact">
 
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>
+<?php
+	include ('inc/inc-top-bar.php');
+	include ('inc/inc-menu.php');
+
+	if ($_SESSION['LANG'] == 'TH')
+		$picFolderName = 'th';
+	else
+		$picFolderName = 'en';
+ ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
@@ -42,13 +51,15 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-contact.php'); ?>
+			<?php
+			include ('inc/inc-left-content-contact.php');
+ ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
 				<h1>
-					<img src="images/th/contact/title1.png" alt="E-MAIL SUBMIT FORM ADDRESS & MAP"/>
+					<img src="images/<?=$picFolderName?>/contact/title1.png" alt="E-MAIL SUBMIT FORM ADDRESS & MAP"/>
 				</h1>
 			</div>
 
@@ -68,9 +79,8 @@ require("assets/configs/function.inc.php");
 
 											<?php
 
-												$sql = " SELECT * FROM  trn_content_category Where REF_MODULE_ID = ".$contact_us." AND FLAG = 0 ";
-												$rs = mysql_query($sql) or die(mysql_error());
-
+											$sql = " SELECT * FROM  trn_content_category Where REF_MODULE_ID = " . $contact_us . " AND FLAG = 0 ";
+											$rs = mysql_query($sql) or die(mysql_error());
 											?>
 
 											<select class="p-Absolute" name="position" id="positionTxt">
@@ -80,7 +90,7 @@ require("assets/configs/function.inc.php");
 
 													<option value="<?=$row["CONTENT_CAT_ID"] ?>" ><? echo $row["CONTENT_CAT_DESC_LOC"] ?></option>
 
-												<?	}  ?>
+												<?	} ?>
 
 											</select>
 										</div>
@@ -195,10 +205,10 @@ require("assets/configs/function.inc.php");
 			</div>
 			<div class="box-map2d-main">
 				<div class="box-map">
-					<a href="images/th/map.jpg" class="lightbox"><img src="images/contact/2dmap-small.jpg"></a>
+					<a href="images/<?=$picFolderName?>/map.jpg" class="lightbox"><img src="images/contact/2dmap-small.jpg"></a>
 				</div>
 				<div class="box-btn cf">
-					<a href="images/th/map.jpg" class="btn black lightbox">ดูทั้งหมด</a>
+					<a href="images/<?=$picFolderName?>/map.jpg" class="btn black lightbox">ดูทั้งหมด</a>
 				</div>
 			</div>
 			<div class="box-mapgoogle-main">
@@ -217,7 +227,9 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>
+<?php
+	include ('inc/inc-footer.php');
+ ?>
 <script type="text/javascript" src="//www.google.com/recaptcha/api.js"></script>
 <script type="text/javascript" src="js/contact.js"></script>
 </body>
