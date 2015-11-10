@@ -337,6 +337,16 @@ $( document ).ready(function() {
     if($( ".tabs" ).length > 0){
 		$( ".tabs" ).tabs();
 	}
+
+    if(localStorage.getItem('menu_cat') != null){
+        var cat = localStorage.getItem('menu_cat');
+        var id  = localStorage.getItem('menu_id');
+
+
+        $('div.bodyBlock').eq(cat).addClass('bodyBlockActive');
+        $( "div.bodyBlockActive .submenutab a").eq(id).find('span').addClass('menutab_active');
+    }
+
 });
 function thumbBox(path,file){
 	var res = file.split("/");
@@ -821,4 +831,8 @@ function delHeroBannerEdit(id , path){
 				});
 		});
 	}
+}
+function menuaction(cat,id){
+	localStorage.setItem('menu_cat', cat);
+	localStorage.setItem('menu_id', id);
 }

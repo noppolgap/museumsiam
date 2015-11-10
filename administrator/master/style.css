@@ -136,14 +136,17 @@ header{
 .submenutab .menutab{
 	display: none;
 }
-.bodyBlock:hover{
+.bodyBlock:hover , .bodyBlockActive{
 	height: auto;
 	background-color: #f0f0f0;
 }
-.bodyBlock:hover .submenutab .menutab{
+.bodyBlockActive{
+	border-bottom: 1px solid #000;
+}
+.bodyBlock:hover .submenutab .menutab , .bodyBlockActive .submenutab .menutab{
 	display: block;
 }
-.bodyBlock:hover .submenutab  span.sub_menutab{
+.bodyBlock:hover .submenutab  span.sub_menutab , .bodyBlockActive .submenutab  span.sub_menutab{
     padding: 5px 0 5px 35px;
 	background-position: 20px center;
 }
