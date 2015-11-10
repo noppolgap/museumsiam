@@ -52,7 +52,7 @@
 			<a onclick="menuaction(3,13);" href="../mod_faq/index.php"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">คำถามที่พบบ่อย</span></a>
 
 			<a onclick="menuaction(3,14);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ติดต่อเรา</span></a>
-			<a onclick="menuaction(3,15);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">Address & Map</span></a>
+			<a onclick="menuaction(3,15);" href="../mod_network_museum/editMuseum.php?MID=-1"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">Address & Map</span></a>
 			<a onclick="menuaction(3,16);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">e-Mail Submit form</span></a>
 			<a onclick="menuaction(3,17);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">e-Application</span></a>
 			<a onclick="menuaction(3,18);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">เก็บข้อมูลผู้ที่ส่งเรื่องมา</span></a>
