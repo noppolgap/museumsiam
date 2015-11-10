@@ -104,7 +104,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							}
 							else {
 									unset($_SESSION['text']);
-							}	
+							}
 
 						$contentSqlStr .= "	ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
@@ -192,7 +192,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							}
 							else {
 									unset($_SESSION['text']);
-							}	
+							}
 							$contentSqlStr .= "		ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
@@ -279,8 +279,8 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							}
 							else {
 									unset($_SESSION['text']);
-							}	
-							
+							}
+
 							$contentSqlStr .=	"ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
@@ -368,7 +368,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							}
 							else {
 									unset($_SESSION['text']);
-							}	
+							}
 
 							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
@@ -448,7 +448,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
-							
+
 							if (isset($_GET['search'])) {
 								if (isset($_POST['str_search']))
 									$_SESSION['text'] = $_POST['str_search'];
@@ -456,9 +456,9 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							}
 							else {
 									unset($_SESSION['text']);
-							}	
+							}
 
-							
+
 							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
@@ -538,7 +538,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
-							
+
 							if (isset($_GET['search'])) {
 								if (isset($_POST['str_search']))
 									$_SESSION['text'] = $_POST['str_search'];
@@ -546,9 +546,9 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							}
 							else {
 									unset($_SESSION['text']);
-							}	
+							}
 
-							
+
 							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
@@ -622,7 +622,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				//// ส่วนคำถาม
 				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE , VISIT_COUNT FROM trn_webboard
 						WHERE REF_WEBBOARD_ID = 0 AND FLAG = 0 ";
-				
+
 				if (isset($_GET['search'])) {
 					if (isset($_POST['str_search']))
 						$_SESSION['text'] = $_POST['str_search'];
@@ -630,12 +630,12 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				}
 				else {
 						unset($_SESSION['text']);
-				}	
+				}
 
-							
+
 				$sq_qa .= "ORDER BY ORDER_DATA DESC Limit 0,15 ";
 
-						
+
 
 				$query_qa = mysql_query($sq_qa, $conn);
 				?>

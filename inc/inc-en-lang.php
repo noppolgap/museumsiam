@@ -196,5 +196,6 @@ $booking_no = "Booking No.";
 $booking_date = "Booking Date";
 $sum = "Sum";
 $status = "Status";
+$report_webboard = 'Report';
 
 ?>

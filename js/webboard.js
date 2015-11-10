@@ -52,6 +52,16 @@ $(document).ready(function(){
 		}
 	});
 
+	if($('.reportBtn').length > 0){
+		$('.reportBtn').colorbox({
+			iframe:true,
+			width:"400px",
+			height:"250px",
+			onClosed:function(){
+				alert('Save Complete');
+			}
+		});
+	}
 });
 function editAccout(){
 	if(confirm(card)){

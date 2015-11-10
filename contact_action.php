@@ -19,7 +19,7 @@ if (isset($_GET['add'])) {
 	$max++;
 
 	unset($insert);
-	$insert['CAT_ID'] =  "'" . $_POST['position'] . "'"; 
+	$insert['CAT_ID'] =  "'" . $_POST['position'] . "'";
 	$insert['CONTENT_DESC_LOC'] = "'" . $_POST['txtName'] . "'";
 	$insert['PLACE_DESC_LOC'] = "'" . $_POST['txtAddress'] . "'";
 	$insert['PLACE_DESC_ENG'] = "'" . $_POST['txtMail'] . "'";
@@ -30,10 +30,10 @@ if (isset($_GET['add'])) {
 	$insert['USER_CREATE'] = "'".$_SESSION['user_name'] ."'";
 	$insert['CREATE_DATE'] = "NOW()";
 
-	
 
-    echo $sql = "INSERT INTO trn_content_detail (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
-	
+
+    $sql = "INSERT INTO trn_content_detail (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+
 	mysql_query($sql, $conn) or die($sql);
 
 
@@ -43,7 +43,7 @@ if (isset($_GET['add'])) {
 
 if (isset($_GET['edit'])) {
 
-	
+
 
 	$update = "";
 
@@ -56,7 +56,7 @@ if (isset($_GET['edit'])) {
 	$update[] = "LAST_UPDATE_USER = '".$_SESSION['user_name'] ."'";
 	$update[] = "LAST_UPDATE_DATE = NOW()";
 
-	
+
 	$sql = "UPDATE trn_content_detail SET  " . implode(",", $update) . " WHERE CONTENT_ID = " .$conid;
 	mysql_query($sql, $conn);
 

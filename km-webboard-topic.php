@@ -87,6 +87,9 @@ if($id == 0){
 			<div class="box-title-system cf">
 				<h1><?=$webboardCap?></h1>
 				<div class="box-btn">
+				<? if(isset($_SESSION['UID'])){ ?>
+					<a href="km-webboard-report.php?p=<?=$id?>" class="btn red reportBtn" style="margin-right:15px;"><?=$report_webboard?></a>
+				<? } ?>
 					<a href="km-webboard.php" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
@@ -218,6 +221,8 @@ if(mysql_num_rows($query) > 0){
 
 <?php include('inc/inc-footer.php'); ?>
 
+<link rel="stylesheet" type="text/css" href="assets/plugin/colorbox/colorbox.css" media="all" >
+<script type="text/javascript" src="assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="assets/plugin/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" src="js/webboard.js"></script>
 <script type="text/javascript">
@@ -229,3 +234,4 @@ if(mysql_num_rows($query) > 0){
 </script>
 </body>
 </html>
+<? CloseDB(); ?>

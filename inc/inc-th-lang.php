@@ -196,5 +196,6 @@ $booking_no = "เลขที่จอง";
 $booking_date = "วันที่จอง";
 $sum = "รวม";
 $status = "สถานะ";
+$report_webboard = 'แจ้งลบ';
 
 ?>
