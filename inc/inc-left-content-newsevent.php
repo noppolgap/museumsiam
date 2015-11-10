@@ -22,7 +22,7 @@
 					<li class="submenu3"><a href="news-event-notice-all.php"><?=$procurementCap?></a></li>
 				</ul>
 			</li>
-			<li class="menu2 sub"><a href="news-event.php"><?=$allEventAndNewsAllSystemCap?></a>
+			<li class="menu2 sub"><a href="news-event-month.php"><?=$allEventAndNewsAllSystemCap?></a>
 				<ul class="submenu-left <?=(isset($menu_newsevent)) ? 'dBlock' : ''?>">
 				<?php if(($menu_newsevent == 1) || ($menu_newsevent == 2) || ($menu_newsevent == 3)){ ?>
 					<li class="submenu1 <?=$menu_newsevent == 3 ? 'active' : ''?>"><a href="news-event-month.php"><?=$monthlyCap?></a></li>

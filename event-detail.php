@@ -121,9 +121,9 @@ require("assets/configs/function.inc.php");
 
 				$sql = " SELECT ";
 				if ($_SESSION['LANG'] == 'TH'){
-					$sql .= 'cat.CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC , content.CONTENT_DESC_LOC AS CONTENT_LOC , content.CONTENT_DETAIL_LOC AS CONTENT_DETAIL , content.BRIEF_LOC AS CONTENT_BRIEF';
+					$sql .= 'cat.CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC , content.CONTENT_DESC_LOC AS CONTENT_LOC , content.CONTENT_DETAIL_LOC AS CONTENT_DETAIL , content.BRIEF_LOC AS CONTENT_BRIEF ,content.PRICE_RATE_LOC as PRICE_RATE ,content.PLACE_DESC_LOC as PLACE_DESC , tmd.MUSEUM_NAME_LOC as MUSEUM_DESC ';
 				}else if ($_SESSION['LANG'] == 'EN'){
-					$sql .= 'cat.CONTENT_CAT_DESC_ENG AS CONTENT_CAT_LOC , content.CONTENT_DESC_ENG AS CONTENT_LOC , content.CONTENT_DETAIL_ENG AS CONTENT_DETAIL , content.BRIEF_ENG AS CONTENT_BRIEF';
+					$sql .= 'cat.CONTENT_CAT_DESC_ENG AS CONTENT_CAT_LOC , content.CONTENT_DESC_ENG AS CONTENT_LOC , content.CONTENT_DETAIL_ENG AS CONTENT_DETAIL , content.BRIEF_ENG AS CONTENT_BRIEF ,content.PRICE_RATE_ENG as PRICE_RATE ,content.PLACE_DESC_LOC as PLACE_DESC , tmd.MUSEUM_NAME_ENG as MUSEUM_DESC ';
 				}
 				 	$sql .= ",
 						cat.CONTENT_CAT_ID,
@@ -134,11 +134,12 @@ require("assets/configs/function.inc.php");
 						content.CREATE_DATE ,
 						content.LAST_UPDATE_DATE ,
 						content.USER_CREATE,
-						content.PLACE_DESC_LOC,
-						IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
+						content.LAT , content.LON , content.EVENT_START_TIME , content.EVENT_END_TIME ,
+						IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE ,content.MUSUEM_ID 
 						FROM
 							trn_content_category cat
-						INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+						left JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+						left join  trn_museum_detail tmd on tmd.MUSEUM_DETAIL_ID = content.MUSUEM_ID
 						WHERE
 							cat.REF_MODULE_ID = $MID
 						AND cat.flag = 0
@@ -149,6 +150,7 @@ require("assets/configs/function.inc.php");
 						AND content.CONTENT_ID = $NID
 						ORDER BY content.ORDER_DATA desc ";
 
+						 
 			$query = mysql_query($sql, $conn);
 
 			$num_rows = mysql_num_rows($query);
@@ -237,7 +239,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-text">
 							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>
-							<p class="text-des">By <? echo $row['USER_CREATE'] ?></p>
+							<p class="text-des">By <? echo $row['MUSEUM_DESC'] ?></p>
 						</div>
 					</div>
 				</div>
@@ -270,19 +272,29 @@ require("assets/configs/function.inc.php");
 						</div>
 					</div>
 				</div>
+				<?
+				$textLocation = ' class="text-location" ';
+if (nvl($rowContent['PLACE_DESC'], '') == '')
+	$textLocation = ' class="text-des"  style="height: 15px;" ';
+
+$textTicket = ' class="text-ticket" ';
+if (nvl($rowContent['PRICE_RATE'], '') == '')
+	$textTicket = ' class="text-des"  style="height: 15px;" ';
+?>
+				?>
 				<div class="box-when">
 					<h3>WHEN</h3>
 					<p class="text-date"><? echo ConvertDate($row['EVENT_START_DATE']) ?> - <? echo ConvertDate($row['EVENT_END_DATE']) ?></p>
-					<p class="text-time">10.30 น. - 18.00 น.</p>
-					<p class="text-location"><? echo $row['PLACE_DESC_LOC'] ?></p>
+					<p class="text-time"><? echo $row['EVENT_START_TIME'] ?> - <? echo $row['EVENT_END_TIME'] ?></p>
+					<p <?=$textLocation ?>><? echo nvl($rowContent['PLACE_DESC'], '')  ?></p>
 				</div>
 				<div class="box-ticket">
 					<h3>TICKET</h3>
-					<p class="text-ticket">Free with Museum Admission</p>
+					<p <?=$textTicket?>><?= nvl($rowContent['PRICE_RATE'], '') ?></p>
 				</div>
 				<div class="box-news-text">
 					<p>
-						<?=nl2br(strip_tags($row['CONTENT_DETAIL'], '<p><br>')); ?>
+						<?=nl2br(strip_tags($row['CONTENT_DETAIL'], $allowTag)); ?>
 					</p>
 				</div>
 

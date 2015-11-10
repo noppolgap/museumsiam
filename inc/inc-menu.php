@@ -43,7 +43,7 @@ else
 							<li class="sub3">
 								<?=$resturantCap ?>
 							</li></a>
-							<a href="#">
+							<a href="service-museshop.php">
 							<li class="sub4">
 								Muse Shop
 							</li></a>
@@ -75,7 +75,7 @@ else
 							<li class="sub1">
 								<?=$activityNewsMuseumCap ?>
 							</li></a>
-							<a href="news-event.php">
+							<a href="news-event-month.php">
 							<li class="sub2">
 								<?=$allEventAndNewsAllSystemCap ?>
 							</li></a>

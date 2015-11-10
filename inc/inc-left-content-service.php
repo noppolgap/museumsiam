@@ -16,7 +16,7 @@
 			<li class="menu1"><a href="service-knowledge.php">ห้องคลังความรู้</a></li>
 			<li class="menu2"><a href="service-archive.php">ห้องคลังโบราณวัตถุ</a></li>
 			<li class="menu3"><a href="service-restaurant.php">ร้านอาหาร</a></li>
-			<li class="menu4"><a href="#">Muse Shop</a></li>
+			<li class="menu4"><a href="service-museshop.php">Muse Shop</a></li>
 			<li class="menu5"><a href="service-spaceforrent.php">พื้นที่ให้เช่า</a></li>			
 		</ul>
 	</div>
