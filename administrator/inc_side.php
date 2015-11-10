@@ -40,7 +40,7 @@
 			<a href="../mod_content_cms/index.php?gp=KM"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ห้องคลังความรู้</span></a>
 			<a href="../mod_content_cms/index.php?gp=ARC"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ห้องคลังโบราณวัตถุ</span></a>
 			<a href="../mod_content_cms/index.php?gp=KITCHEN"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ร้านอาหาร</span></a>
-			<span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">Muse Shop</span>
+			<a href="../mod_content_cms/index.php?gp=SHOP"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">Muse Shop</span></a>
 			<a href="../mod_content_cms/index.php?gp=RENT"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">พื้นที่ให้เช่า</span></a>
 			<a href="../mod_content_cms/privilege_edit.php?cmsid=17"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">สิทธิพิเศษ</span></a>
 			<span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">กิจกรรมและข่าวสาร</span>
