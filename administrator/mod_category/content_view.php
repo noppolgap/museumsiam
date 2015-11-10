@@ -9,9 +9,9 @@ require ("../../inc/inc-cat-id-conf.php");
 		$LV = intval($_GET['LV']);
 		$SCID = $_GET['SCID'];
 
-
-	     if ($MID == $contact_us){
+	     if ($CID == $eapp_sub_cat){
 			$display_hide = "style = 'display:none'";
+			$hide_edit = "style='display:none' ";
 
 		 } 
 
@@ -26,9 +26,9 @@ require ("../../inc/inc-cat-id-conf.php");
 			}
 		}
 
-		if($MID == $e_aaplication){
-			$hide_edit = "style='display:none' ";  //"contact_eapp_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";-->
-		}
+	
+			  //"contact_eapp_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";-->
+		
 
 ?>
 <!doctype html>
@@ -46,8 +46,8 @@ require ('../inc_header.php');
 <div class="main-container">
 	<div class="main-body marginC">
 		<?
-		require ('../inc_side.php');
- ?>
+			require ('../inc_side.php');
+ 		?>
 		<?
 
 		$subfixAddAndEdit = '&LV=' . $LV;
@@ -85,7 +85,12 @@ require ('../inc_header.php');
 				$navigateBackPage .= '&SCID=' . $row['REF_SUB_CONTENT_CAT_ID'];
 		}
 		
-		$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
+			if($CID == $position_sub_cat){
+				$link = "../mod_position/content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
+			}
+			else{
+				$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
+			}
 
 		?>
 		<div class="mod-body">
@@ -236,9 +241,12 @@ require ('../inc_header.php');
 						<div class="floatL EditContent">
 
 						<?
-							if($MID == $contact_us){
+							if($CID == $eapp_sub_cat){
 
 								$link_edit = "contact_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
+							}
+							else if($CID == $position_sub_cat){
+								$link_edit = "../mod_position/content_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
 							}
 							
 							else{

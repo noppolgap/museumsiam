@@ -12,12 +12,6 @@
 
 if (isset($_GET['add'])) {
 
-	$sql_max = "SELECT MAX( ORDER_DATA ) AS MAX_ORDER FROM trn_content_detail WHERE FLAG <>2 AND REF_WEBBOARD_ID= 0 AND cat_id = 17 ";
-	$query_max = mysql_query($sql_max, $conn);
-	$row_max = mysql_fetch_array($query_max);
-	$max = $row_max['MAX_ORDER'];
-	$max++;
-
 	unset($insert);
 	$insert['CAT_ID'] =  "'" . $_POST['position'] . "'";
 	$insert['CONTENT_DESC_LOC'] = "'" . $_POST['txtName'] . "'";
@@ -25,7 +19,6 @@ if (isset($_GET['add'])) {
 	$insert['PLACE_DESC_ENG'] = "'" . $_POST['txtMail'] . "'";
 	$insert['BRIEF_LOC'] = "'" . $_POST['txtTel'] . "'";
 	$insert['CONTENT_DETAIL_LOC'] = "'" . $_POST['txtText'] . "'";
-	$insert['ORDER_DATA'] = "'" . $max . "'";
 	$insert['CONTENT_STATUS_FLAG'] = 2;
 	$insert['USER_CREATE'] = "'".$_SESSION['user_name'] ."'";
 	$insert['CREATE_DATE'] = "NOW()";
