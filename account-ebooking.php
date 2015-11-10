@@ -3,16 +3,6 @@ require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
 
-	$search_sql = "";
-	unset($_SESSION['text']);
-
-	if (isset($_GET['search'])) {
-			if (isset($_POST['str_search'])){
-				$_SESSION['text'] = $_POST['str_search'];
-				$search_sql .= " AND u.NAME like '%".$_POST['str_search']."%' ";
-		}
-	}
-
 ?>
 <!doctype html>
 <html>
@@ -81,26 +71,25 @@ require("assets/configs/function.inc.php");
 				</div>
 
 				<?php 
-			        $sql= " SELECT p.PRODUCT_DESC_LOC, prod.CREATE_DATE, pic.QUANTITY, prod.PRICE, pic.SUMPRICE
-							FROM trn_order AS prod
-							LEFT JOIN (
 
-							SELECT ORDER_ID, PRODUCT_ID
-							FROM (
+					if ($_SESSION['LANG'] == 'TH') {
+						$LANG_SQL = "PRODUCT_DESC_LOC AS CAT_DESC";
+						$LANG_STATUS = "STATUS_NAME_LOC";
+					} else if ($_SESSION['LANG'] == 'EN') {
+						$LANG_SQL = "PRODUCT_DESC_ENG AS CAT_DESC";
+						$LANG_STATUS = "STATUS_NAME_ENG";
+					}
 
-							SELECT * 
-							FROM trn_order_detail
-							ORDER BY ORDER_DETAIL_ID ASC
-							) AS my_table_tmp
-							GROUP BY ORDER_ID
-							) AS pic ON prod.ORDER_ID = pic.ORDER_ID
-							AND prod.ORDER_ID = pic.ORDER_ID
+			        $sql= " SELECT ".$LANG_SQL.", ".$LANG_STATUS.", prod.CREATE_DATE, pic.QUANTITY, pic.PRICE, prod.SUMPRICE
+							FROM trn_order AS prod 
+							LEFT JOIN ( SELECT ORDER_ID, PRODUCT_ID, QUANTITY, PRICE FROM ( SELECT * FROM trn_order_detail ORDER BY ORDER_DETAIL_ID ASC ) AS my_table_tmp GROUP BY ORDER_ID ) AS pic 
+							ON prod.ORDER_ID = pic.ORDER_ID AND prod.ORDER_ID = pic.ORDER_ID 
+							LEFT JOIN sys_app_user u ON u.USER_ID = prod.CUSTOMER_ID 
+							LEFT JOIN trn_product p ON p.PRODUCT_ID = pic.PRODUCT_ID
+							LEFT JOIN trn_order_status s ON s.STATUS_ID = prod.FLAG 
+							WHERE prod.CUSTOMER_ID = '".$_SESSION['UID']."' AND (prod.TYPE = 'ticket' OR prod.TYPE = 'booking') ";  
 
-							LEFT JOIN sys_app_user u ON u.USER_ID = prod.CUSTOMER_ID
-							LEFT JOIN trn_product p ON p.PRODUCT_ID = pic.PRODUCT_ID 
-							WHERE u.USER_ID  = 'wan.ball@gmail.com2' ";  
-
-				echo	$sql .= "order by prod.ORDER_ID desc";
+				    $sql .= "order by prod.ORDER_ID desc";
 
 				   	$query = mysql_query($sql,$conn);  
 
@@ -108,101 +97,18 @@ require("assets/configs/function.inc.php");
 
  				?>
 
-
 					<div class="table-row list cf">
 						<div class="column order">158686047</div>
-						<div class="column date"><? echo $row_proc['CREATE_DATE']; ?></div>
-						<div class="column name"><? echo $row_proc['PRODUCT_DESC_LOC']; ?></div>
-						<div class="column num"><? echo $row_proc['QUANTITY']; ?></div>
-						<div class="column price"><? echo $row_proc['PRICE']; ?></div>
-						<div class="column total"><? echo $row_proc['SUMPRICE']; ?></div>
-						<div class="column status">จองเรียบร้อย</div>
+						<div class="column date"><? echo ConvertDate($row['CREATE_DATE']); ?></div>
+						<div class="column name"><? echo $row['PRODUCT_DESC_LOC']; ?></div>
+						<div class="column num"><? echo $row['QUANTITY']; ?></div>
+						<div class="column price"><? echo $row['PRICE']; ?></div>
+						<div class="column total"><? echo $row['SUMPRICE']; ?></div>
+						<div class="column status"><? echo $row['STATUS_NAME_LOC']; ?></div>
 					</div>
 
 				<? } ?>
-				<!--<div class="table-row list cf"> ".$_SESSION['UID']." ";
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-				<div class="table-row list cf">
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-				<div class="table-row list cf">
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-				<div class="table-row list cf">
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-				<div class="table-row list cf">
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-				<div class="table-row list cf">
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-				<div class="table-row list cf">
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-				<div class="table-row list cf">
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-				<div class="table-row list cf">
-					<div class="column order">158686047</div>
-					<div class="column date">11/06/2015</div>
-					<div class="column name">มองใหม่ด้ายไหม</div>
-					<div class="column num">999,999</div>
-					<div class="column price">999,999</div>
-					<div class="column total">999,999,999</div>
-					<div class="column status">จองเรียบร้อย</div>
-				</div>
-			-->
-				
+								
 				<div class="box-pagination-main cf">
 					<ul class="pagination">
 						<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
