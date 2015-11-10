@@ -6,7 +6,7 @@ require("assets/configs/function.inc.php");
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>	
+<? require('inc_meta.php'); ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/account.css" />
@@ -19,13 +19,13 @@ require("assets/configs/function.inc.php");
 			}
 	});
 </script>
-	
+
 </head>
 
 <body id="account-booking">
-	
+
 <?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>	
+<?php include('inc/inc-menu.php'); ?>
 
 <div class="part-nav-main">
 	<div class="container">
@@ -44,7 +44,7 @@ require("assets/configs/function.inc.php");
 		<div class="box-titlepage">
 			<p>
 				<img src="images/th/title-accout.png" alt="ACCOUNT SETTINGS"/>
-			</p>	
+			</p>
 		</div>
 	</div>
 </div>
@@ -69,7 +69,7 @@ require("assets/configs/function.inc.php");
 					<div class="column status"><?=$status?></div>
 				</div>
 
-				<?php 
+				<?php
 
 					if ($_SESSION['LANG'] == 'TH') {
 						$LANG_SQL = "PRODUCT_DESC_LOC AS CAT_DESC";
@@ -80,17 +80,17 @@ require("assets/configs/function.inc.php");
 					}
 
 			        $sql= " SELECT ".$LANG_SQL.", ".$LANG_STATUS.", prod.CREATE_DATE, pic.QUANTITY, pic.PRICE, prod.SUMPRICE
-							FROM trn_order AS prod 
-							LEFT JOIN ( SELECT ORDER_ID, PRODUCT_ID, QUANTITY, PRICE FROM ( SELECT * FROM trn_order_detail ORDER BY ORDER_DETAIL_ID ASC ) AS my_table_tmp GROUP BY ORDER_ID ) AS pic 
-							ON prod.ORDER_ID = pic.ORDER_ID AND prod.ORDER_ID = pic.ORDER_ID 
-							LEFT JOIN sys_app_user u ON u.USER_ID = prod.CUSTOMER_ID 
+							FROM trn_order AS prod
+							LEFT JOIN ( SELECT ORDER_ID, PRODUCT_ID, QUANTITY, PRICE FROM ( SELECT * FROM trn_order_detail ORDER BY ORDER_DETAIL_ID ASC ) AS my_table_tmp GROUP BY ORDER_ID ) AS pic
+							ON prod.ORDER_ID = pic.ORDER_ID AND prod.ORDER_ID = pic.ORDER_ID
+							LEFT JOIN sys_app_user u ON u.USER_ID = prod.CUSTOMER_ID
 							LEFT JOIN trn_product p ON p.PRODUCT_ID = pic.PRODUCT_ID
-							LEFT JOIN trn_order_status s ON s.STATUS_ID = prod.FLAG 
-							WHERE prod.CUSTOMER_ID = '".$_SESSION['UID']."' AND prod.TYPE = 'shopping' ";  
+							LEFT JOIN trn_order_status s ON s.STATUS_ID = prod.FLAG
+							WHERE prod.CUSTOMER_ID = '".$_SESSION['UID']."' AND prod.TYPE = 'shopping' ";
 
 				    $sql .= "order by prod.ORDER_ID desc";
 
-				   	$query = mysql_query($sql,$conn);  
+				   	$query = mysql_query($sql,$conn);
 
 				   	while($row = mysql_fetch_array($query)) {
 
@@ -106,9 +106,9 @@ require("assets/configs/function.inc.php");
 					<div class="column status"><? echo $row['STATUS_NAME_LOC']; ?></div>
 				</div>
 
-				<? } ?>
-				
-				
+				<? } /* ?>
+
+
 				<div class="box-pagination-main cf">
 					<ul class="pagination">
 						<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
@@ -119,7 +119,7 @@ require("assets/configs/function.inc.php");
 						<li><a href="" class="btn-arrow-right"></a></li>
 					</ul>
 				</div>
-			
+<? */ ?>
 			</div>
 		</div>
 	</div>
@@ -131,7 +131,8 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>	
+<?php include('inc/inc-footer.php'); ?>
 
 </body>
 </html>
+<? CloseDB(); ?>
