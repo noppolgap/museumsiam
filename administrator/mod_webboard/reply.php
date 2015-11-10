@@ -20,7 +20,7 @@ require("../../assets/configs/function.inc.php");
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="actionReply.php?delete">
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('orderReply.php?web_id=<?=$_GET['web_id']?>');">
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
-				
+
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -65,12 +65,16 @@ require("../../assets/configs/function.inc.php");
 					<?php while($row = mysql_fetch_array($query)) { ?>
 					<div class="Main_Content" data-id="<?=$row['WEBBOARD_ID']?>">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['WEBBOARD_ID']?>"></div>
+						<? /*
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock"></a>
 						</div>
+						*/ ?>
 						<div class="floatL nameContent">
 							<div><? echo '<a href="detail.php?web_id='.$row['WEBBOARD_ID'].'&ref_id='.$row['REF_WEBBOARD_ID'].' ">'.$row['CONTENT'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo  ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
+						</div>
+						<div class="floatL thumbContent">
 						</div>
 						<div class="floatL stausContent">
 

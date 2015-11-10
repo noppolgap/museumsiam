@@ -110,12 +110,17 @@ $num_rows = mysql_num_rows($query);
 					<?php while($row = mysql_fetch_array($query)) { ?>
 					<div class="Main_Content" data-id="<?=$row['WEBBOARD_ID'] ?>">
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['WEBBOARD_ID'] ?>"></div>
+						<? /*
 						<div class="floatL thumbContent">
 							<a href="view.php" class="dBlock"></a>
 						</div>
+						*/ ?>
 						<div class="floatL nameContent">
 							<div><? echo '<a href="reply.php?web_id='.$row['WEBBOARD_ID'].' ">'.$row['CONTENT'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
+						</div>
+						<div class="floatL thumbContent">
+
 						</div>
 						<div class="floatL stausContent">
 
