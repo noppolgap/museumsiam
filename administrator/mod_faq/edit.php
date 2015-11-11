@@ -43,7 +43,7 @@ require ("../../assets/configs/function.inc.php");
 									?>
 									<div>
 										<div class="floatL form_name">
-											คำถาม
+											คำถามภาษาไทย
 										</div>
 										<div class="floatL form_input">
 											<input type="text" name="question" value="<? echo $row['CONTENT'] ?>" class="w90p" />
@@ -51,6 +51,16 @@ require ("../../assets/configs/function.inc.php");
 										<div class="clear"></div>
 									</div>
 
+<div>
+										<div class="floatL form_name">
+											คำถามภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<input type="text" name="questionEn" value="<? echo $row['CONTENT_ENG'] ?>" class="w90p" />
+										</div>
+										<div class="clear"></div>
+									</div>
+									
 									<div class="btn_action">
 										<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 										<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">

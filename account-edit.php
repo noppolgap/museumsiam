@@ -269,13 +269,13 @@ $row = mysql_fetch_array($rs);
 					<div class="box-right">
 						<div class="box-input-text">
 							<div>
-								<div class="SearchMenu-item province_box box-select">
-									<span title="- เลือกจังหวัด -"><?=$row['DISTRICT_DESC'] ?></span>
+								<div class="SearchMenu-item district_box box-select">
+									<span title="- เลือกเขต -"><?=$row['DISTRICT_DESC'] ?></span>
 
 									<select class="p-Absolute" id='cmbDistrict' name = 'cmbDistrict'>
-										<option value="0">เขตจตุจักร</option>
+										
 									<?php
-									$sql = "SELECT district_id , province_id , district_desc_loc , district_desc_eng FROM mas_district ";
+									$sql = "SELECT district_id , province_id , district_desc_loc , district_desc_eng FROM mas_district where province_id = '".$row["PROVINCE_ID"]."'";
 									$query = mysql_query($sql, $conn);
 									while ($rowDistrict = mysql_fetch_array($query)) {
 										if ($row["DISTRICT_ID"] == $rowDistrict["district_id"])
@@ -298,12 +298,12 @@ $row = mysql_fetch_array($rs);
 					<div class="box-right">
 						<div class="box-input-text">
 							<div>
-								<div class="SearchMenu-item province_box box-select">
-									<span title="- เลือกจังหวัด -"><?=$row['SUB_DISTRICT_DESC'] ?></span>
+								<div class="SearchMenu-item sub_district_box box-select">
+									<span title="- เลือกแขวง -"><?=$row['SUB_DISTRICT_DESC'] ?></span>
 									<select class="p-Absolute" id='cmbSubDistrict' name = 'cmbSubDistrict'>>
 	
 									<?php
-									$sql = "SELECT sub_district_id , district_id , sub_district_desc_loc , sub_district_desc_eng FROM mas_sub_district ";
+									$sql = "SELECT sub_district_id , district_id , sub_district_desc_loc , sub_district_desc_eng FROM mas_sub_district where district_id = '".$row["DISTRICT_ID"]."'";
 									$query = mysql_query($sql, $conn);
 									while ($rowSubDis = mysql_fetch_array($query)) {
 										if ($row["SUB_DISTRICT_ID"] == $rowSubDis["sub_district_id"])
@@ -377,7 +377,7 @@ $row = mysql_fetch_array($rs);
 			<div class="box-btn-main cf">
 				<div class="box-btn">
 					 <a class="btn black" href="account-edit.php"><?=$cancel?></a>
-					<a class="btn black btnSubmit" ><?=$Submit?></a>
+					<a class="btn black btnSubmit" ><?=$submit?></a>
 				</div>
 			</div>
 		</div>

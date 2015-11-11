@@ -2,7 +2,7 @@
 	<ul class="cf menu-left">
 		<li class=" cf menu1 ac"><a href="account.php"><?=$profile?></a></li>
 		<li class="menu2 ed "><a href="account-edit.php"><?=$edit?></a></li>
-		<li class="menu3 ps"><a href="account-password.php"><?=$chang_pas?></a></li>
+		<li class="menu3 ps"><a href="account-password.php"><?=$chang_pass?></a></li>
 		<li class="menu4 pc sub"><a href="account-ebooking.php"><?=$history_shop?></a>
 			<ul class="cf submenu-left">
 				<li class="submenu1 eb"><a href="account-ebooking.php">e-Booking</a></li>

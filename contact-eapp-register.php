@@ -1,41 +1,48 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
+require ("inc/inc-cat-id-conf.php");
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>
+<?
+	require ('inc_meta.php');
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/contact.css" />
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$(".menutop li.menu8,.menu-left li.menu2,.menu-left li.menu2 .submenu3").addClass("active");
-			if ($('.menu-left li.menu2').hasClass("active")){
-				$('.menu-left li.menu2').children(".submenu-left").css("display","block");
-			}
-	});
+		if ($('.menu-left li.menu2').hasClass("active")) {
+			$('.menu-left li.menu2').children(".submenu-left").css("display", "block");
+		}
+	}); 
 </script>
 
 </head>
 
 <body id="register">
 
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>
+<?php
+	include ('inc/inc-top-bar.php');
+ ?>
+<?php
+	include ('inc/inc-menu.php');
+ ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li>ติดต่อเรา&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><?=$contactUsCap ?>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li>E-APPLICATION&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">กรอกข้อมูล</li>
+				<li class="active"><?=$fillInfoCap ?></li>
 			</ol>
 		</div>
 	</div>
@@ -46,17 +53,38 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-contact.php'); ?>
+			<?php
+			include ('inc/inc-left-content-contact.php');
+ ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
 				<h1>E-APPLICATION
-					<span>เงื่อนไขข้อกำหนด</span>
+					<span><?=$term_and_condition ?></span>
 				</h1>
 			</div>
 			<hr class="line-gray"/>
 
+
+			<?php
+
+	if ($_SESSION['LANG'] == 'TH') {
+		$LANG_SQL = "CONTENT_DESC_LOC AS CONTENT_DESC";
+	} else if ($_SESSION['LANG'] == 'EN') {
+		$LANG_SQL = "CONTENT_DESC_ENG AS CONTENT_DESC";
+	}
+
+	$sql = " SELECT " . $LANG_SQL . "
+							FROM trn_content_detail  
+							WHERE CONTENT_STATUS_FLAG = 0 AND CAT_ID = $position_sub_cat AND CONTENT_ID = " . nvl($CONID, -2);
+
+	$sql .= " order by ORDER_DATA desc";
+
+	$query = mysql_query($sql, $conn);
+	$row = mysql_fetch_array($query);
+	$positionName = $row['CONTENT_DESC'];
+			?>
 
 				<form action="e-application-action.php?add" method="post" name="formcms" id = "myform" enctype="multipart/form-data" >
 					<div class="box-contact-from">
@@ -66,13 +94,15 @@ require("assets/configs/function.inc.php");
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
-									<div><input type="text" name="jobname" id="jobname"></div>
+									
+										<div><input type="text" name="jobname" id="jobname" value="<?=$positionName ?>"></div>
+									
 								</div>
 							</div>
 						</div>
 						<div class="box-row cf">
 							<div class="box-left">
-								<p class="con">ชื่อ นามสกุล</p>
+								<p class="con"><?=$nameCap ?> <?=$sureName ?></p>
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
@@ -92,7 +122,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-row cf">
 							<div class="box-left">
-								<p class="con">เพศ</p>
+								<p class="con"><?=$gender ?></p>
 							</div>
 							<div class="box-right">
 								<div class="box-input-text radio">
@@ -103,7 +133,7 @@ require("assets/configs/function.inc.php");
 						</div>
 						<div class="box-row cf">
 							<div class="box-left">
-								<p class="con">วันเกิด</p>
+								<p class="con"><?=$birthDate ?></p>
 							</div>
 							<div class="box-right">
 								<div class="box-input-text">
@@ -254,7 +284,9 @@ require("assets/configs/function.inc.php");
 
 
 
-<?php include('inc/inc-footer.php'); ?>
+<?php
+	include ('inc/inc-footer.php');
+ ?>
 <script type="text/javascript" src="//www.google.com/recaptcha/api.js"></script>
 <script type="text/javascript" src="js/contact_eapp.js"></script>
 

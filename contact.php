@@ -7,7 +7,7 @@ require ("assets/configs/function.inc.php");
 <html>
 <head>
 <?
-	require ('inc_meta.php');
+require ('inc_meta.php');
  ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
@@ -17,7 +17,7 @@ require ("assets/configs/function.inc.php");
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu8,.menu-left li.menu1").addClass("active");
-	}); 
+	});
 </script>
 
 </head>
@@ -25,13 +25,13 @@ require ("assets/configs/function.inc.php");
 <body id="contact">
 
 <?php
-	include ('inc/inc-top-bar.php');
-	include ('inc/inc-menu.php');
+include ('inc/inc-top-bar.php');
+include ('inc/inc-menu.php');
 
-	if ($_SESSION['LANG'] == 'TH')
-		$picFolderName = 'th';
-	else
-		$picFolderName = 'en';
+if ($_SESSION['LANG'] == 'TH')
+	$picFolderName = 'th';
+else
+	$picFolderName = 'en';
  ?>
 
 <div class="part-nav-main"  id="firstbox">
@@ -59,7 +59,7 @@ require ("assets/configs/function.inc.php");
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
 				<h1>
-					<img src="images/<?=$picFolderName?>/contact/title1.png" alt="E-MAIL SUBMIT FORM ADDRESS & MAP"/>
+					<img src="images/<?=$picFolderName ?>/contact/title1.png" alt="E-MAIL SUBMIT FORM ADDRESS & MAP"/>
 				</h1>
 			</div>
 
@@ -188,27 +188,45 @@ require ("assets/configs/function.inc.php");
 				</div>
 			</form>
 
+<?
+if ($_SESSION['LANG'] == 'TH') {
 
+	$selectedColumn = " tmd.ADDRESS1  as ADDRESS_DESC , province.PROVINCE_DESC_LOC as PROVINCE_DESC , district.DISTRICT_DESC_LOC as DISTRICT_DESC ,subDis.SUB_DISTRICT_DESC_LOC as SUB_DISTRICT_DESC ";
+
+} else {
+
+	$selectedColumn = " tmd.ADDRESS2  as ADDRESS_DESC , province.PROVINCE_DESC_ENG as PROVINCE_DESC , district.DISTRICT_DESC_ENG as DISTRICT_DESC ,subDis.SUB_DISTRICT_DESC_ENG as SUB_DISTRICT_DESC ";
+
+}
+$museumSql = "SELECT
+					tmd.*, " . $selectedColumn . " from trn_museum_detail tmd    
+LEFT JOIN mas_province province ON province.PROVINCE_ID = tmd.PROVINCE_ID
+				LEFT JOIN mas_district district ON district.DISTRICT_ID = tmd.DISTRICT_ID
+				LEFT JOIN mas_sub_district subDis ON subDis.SUB_DISTRICT_ID = tmd.SUB_DISTRICT_ID 
+				where MUSEUM_DETAIL_ID = -1";
+$rs = mysql_query($museumSql) or die(mysql_error());
+$rowMuseum = mysql_fetch_array($rs);
+?>
 				<div class="box-right">
 					<div class="box-top"></div>
 					<div class="box-bottom">
-						<p class="text-pin">เลขที่ 4 ถนนสนามไชย แขวงบรมมหาราชวัง เขตพระนคร กรุงเทพฯ<br><br>
-							ละติจูด   : 13.767397<br>
-							ลองติจูด : 100.498604
+						<p class="text-pin"><?=$rowMuseum['ADDRESS_DESC'] . ' ' . $rowMuseum['SUB_DISTRICT_DESC'] . ' ' . $rowMuseum['DISTRICT_DESC'] . ' ' . $rowMuseum['PROVINCE_DESC'] ?> <br><br><!-- เลขที่ 4 ถนนสนามไชย แขวงบรมมหาราชวัง เขตพระนคร กรุงเทพฯ -->
+							ละติจูด   : <?=$rowMuseum['LAT'] ?><!-- 13.767397 --><br>
+							ลองติจูด : <?=$rowMuseum['LON'] ?> <!-- 100.498604 -->
 
 						</p>
-						<p class="text-tel">โทรศัพท์  : <a href="tel:022552777">02 255 2777</a><br>
-						โทรสาร   : <a href="tel:022552777">02 255 2775</a></p>
-						<p class="text-email"><a href="mailto:webmaster@ndmi.or.th">webmaster@ndmi.or.th</a></p>
+						<p class="text-tel">โทรศัพท์  : <a href="tel:<?=$rowMuseum['TELEPHONE'] ?>"><?=$rowMuseum['TELEPHONE'] ?></a><br>
+						โทรสาร   : <a href="tel:<?=$rowMuseum['FAX'] ?>"><?=$rowMuseum['FAX'] ?></a></p>
+						<p class="text-email"><a href="mailto:<?=$rowMuseum['EMAIL'] ?>"><?=$rowMuseum['EMAIL'] ?></a></p>
 					</div>
 				</div>
 			</div>
 			<div class="box-map2d-main">
 				<div class="box-map">
-					<a href="images/<?=$picFolderName?>/map.jpg" class="lightbox"><img src="images/contact/2dmap-small.jpg"></a>
+					<a href="images/<?=$picFolderName ?>/map.jpg" class="lightbox"><img src="images/contact/2dmap-small.jpg"></a>
 				</div>
 				<div class="box-btn cf">
-					<a href="images/<?=$picFolderName?>/map.jpg" class="btn black lightbox">ดูทั้งหมด</a>
+					<a href="images/<?=$picFolderName ?>/map.jpg" class="btn black lightbox">ดูทั้งหมด</a>
 				</div>
 			</div>
 			<div class="box-mapgoogle-main">
@@ -228,7 +246,7 @@ require ("assets/configs/function.inc.php");
 
 
 <?php
-	include ('inc/inc-footer.php');
+include ('inc/inc-footer.php');
  ?>
 <script type="text/javascript" src="//www.google.com/recaptcha/api.js"></script>
 <script type="text/javascript" src="js/contact.js"></script>

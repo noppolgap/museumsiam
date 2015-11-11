@@ -49,11 +49,12 @@ if (isset($_GET['add'])) {
 
 	unset($insert);
 	$insert['CONTENT'] = "'" . $_POST['question'] . "'";
+	$insert['CONTENT_ENG'] = "'" . $_POST['questionEn'] . "'"; 
 	$insert['ORDER_DATA'] = "'" . $max . "'";
 	$insert['FLAG'] = 0;
-	$insert['USER_CREATE'] = "'". $_SESSION['UID'];
+	$insert['USER_CREATE'] = "'". $_SESSION['user_name']."'";
 	$insert['CREATE_DATE'] = "NOW()";
-	$insert['LAST_UPDATE_USER'] = "'". $_SESSION['UID'];
+	$insert['LAST_UPDATE_USER'] = "'". $_SESSION['user_name']."'";
 	$insert['LAST_UPDATE_DATE'] = "NOW()";
 
 	$sql = "INSERT INTO trn_qa (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
@@ -68,7 +69,8 @@ if (isset($_GET['edit'])) {
 	$update = "";
 	$id = $_GET['qa_id'];
 	$update[] = "CONTENT = '" . $_POST['question'] . "'";
-	$update[] = "LAST_UPDATE_USER = '". $_SESSION['UID'];
+	$update[] = "CONTENT_ENG = '" . $_POST['questionEn'] . "'";
+	$update[] = "LAST_UPDATE_USER = '". $_SESSION['user_name']."'";
 	$update[] = "LAST_UPDATE_DATE = NOW()";
 
 	$sql = "UPDATE trn_qa SET  " . implode(",", $update) . " WHERE QA_ID =" . $id;

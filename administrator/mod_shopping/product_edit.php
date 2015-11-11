@@ -91,8 +91,13 @@ require ("../../assets/configs/function.inc.php");
 								<div class="clear"></div>
 							</div>		
 							<div class="bigForm">
-								<div class="floatL form_name">รายละเอียด</div>
+								<div class="floatL form_name">รายละเอียด TH</div>
 								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p"><? echo $row['DETAIL']; ?></textarea></div>
+								<div class="clear"></div>
+							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">รายละเอียด EN</div>
+								<div class="floatL form_input"><textarea name="detailEn" class="mytextarea w90p"><? echo $row['DETAIL_ENG']; ?></textarea></div>
 								<div class="clear"></div>
 							</div>
 							<div class="bigForm">

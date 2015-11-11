@@ -281,7 +281,7 @@ $textTicket = ' class="text-ticket" ';
 if (nvl($rowContent['PRICE_RATE'], '') == '')
 	$textTicket = ' class="text-des"  style="height: 15px;" ';
 ?>
-				?>
+				
 				<div class="box-when">
 					<h3>WHEN</h3>
 					<p class="text-date"><? echo ConvertDate($row['EVENT_START_DATE']) ?> - <? echo ConvertDate($row['EVENT_END_DATE']) ?></p>

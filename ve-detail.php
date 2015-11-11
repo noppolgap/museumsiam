@@ -140,7 +140,7 @@ include ('inc/inc-menu.php');
 				<li><a href="other-system.php"><?=$otherSystemCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve.php">ระบบจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve-category.php">หมวดหมู่นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ชื่อนิทรรศการ</li>
+				<li class="active"><?=$title?></li>
 			</ol>
 		</div>
 	</div>

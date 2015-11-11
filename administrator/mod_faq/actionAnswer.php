@@ -49,6 +49,7 @@ if (isset($_GET['add'])) {
 
 	unset($insert);
 	$insert['CONTENT'] = "'" . $_POST['answer'] . "'";
+	$insert['CONTENT_ENG'] = "'" . $_POST['answerEng'] . "'";
 	$insert['REF_QA_ID'] = "'" . $_GET['qa_id'] . "'";
 	$insert['ORDER_DATA'] = "'" . $max . "'";
 	$insert['FLAG'] = 0;
@@ -68,7 +69,8 @@ if (isset($_GET['edit'])) {
 
 	$update = "";
 	$id = $_GET['qa_id'];
-	$update[] = "CONTENT = '" . $_POST['question'] . "'";
+	$update[] = "CONTENT = '" . $_POST['answer'] . "'";
+	$update[] = "CONTENT_ENG = '" . $_POST['answerEng'] . "'";
 	$update[] = "USER_CREATE = 'admin'";
 	$update[] = "CREATE_DATE= NOW()";
 	$update[] = "LAST_UPDATE_USER = 'admin'";

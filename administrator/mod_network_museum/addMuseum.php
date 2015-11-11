@@ -9,9 +9,8 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 	<head>
 		<?
 		require ('../inc_meta.php');
- ?>
+		?>
 
-		
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#cmbProvince').val('-1');
@@ -78,6 +77,11 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 					$('#addressError').show();
 					ret = false;
 				}
+				if ($('#txtAddressEng').val() == '') {
+					$('#addressEngError').show();
+					ret = false;
+				}
+				
 				if ($('#cmbProvince').val() == '-1') {
 					$('#provinceError').show();
 					ret = false;
@@ -129,7 +133,7 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 	<body>
 		<?
 		require ('../inc_header.php');
- ?>
+		?>
 
 		<div class="main-container">
 			<div class="main-body marginC">
@@ -182,11 +186,22 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 
 									<div  class="bigForm">
 										<div class="floatL form_name">
-											ที่อยู่
+											ที่อยู่ไทย
 										</div>
 										<div class="floatL form_input">
 											<textarea id= "txtAddress" name="txtAddress" class="w90p mytextarea2"></textarea>
-											<span class="error" >* <span id = "addressError" style="display:none">กรุณาระบุที่อยู่ </span> </span>
+											<span class="error" >* <span id = "addressError" style="display:none">กรุณาระบุที่อยู่ภาษาไทย </span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
+
+									<div  class="bigForm">
+										<div class="floatL form_name">
+											ที่อยู่อังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<textarea id= "txtAddressEng" name="txtAddressEng" class="w90p mytextarea2"></textarea>
+											<span class="error" >* <span id = "addressEngError" style="display:none">กรุณาระบุที่อยู่ภาษาอังกฤษ </span> </span>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -270,7 +285,27 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 										</div>
 										<div class="clear"></div>
 									</div>
+									<div>
+										<div class="floatL form_name">
+											โทรศัพท์มือถือ
+										</div>
+										<div class="floatL form_input">
+											<input  id = "txtMobile" type="text" name="txtMobile" value="" class="w90p" />
+											<span class="error" > <span id = "mobileError" style="display:none">กรุณาระบุเบอร์โทรศัพท์มือถือ</span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
 
+									<div>
+										<div class="floatL form_name">
+											โทรสาร
+										</div>
+										<div class="floatL form_input">
+											<input  id = "txtFax" type="text" name="txtFax" value="" class="w90p" />
+											<span class="error" > <span id = "faxError" style="display:none">กรุณาระบุเบอร์โทรสาร</span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
 									<div>
 										<div class="floatL form_name">
 											Email
@@ -281,6 +316,17 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 										</div>
 										<div class="clear"></div>
 									</div>
+<div>
+										<div class="floatL form_name">
+											Website
+										</div>
+										<div class="floatL form_input">
+											<input  id = "txtWebsite" type="text" name="txtWebsite" value="" class="w90p" />
+											<span class="error" > <span id = "websiteError" style="display:none">กรุณาระบุ Website</span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
+
 
 									<div  class="bigForm">
 										<div class="floatL form_name">
@@ -324,7 +370,147 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 										</div>
 										<div class="clear"></div>
 									</div>
+ 									
+ 									<div>
+										<div class="floatL form_name">
+											ราคาเข้าชมไทย
+										</div>
+										<div class="floatL form_input">
+											<input  id = "txtPriceLoc" type="text" name="txtPriceLoc" value="" class="w90p" />
+											<span class="error" >* <span id = "priceLocError" style="display:none">กรุณาระบุราคาภาษาไทย</span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+									<div>
+										<div class="floatL form_name">
+											ราคาเข้าชมอังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<input  id = "txtPriceEng" type="text" name="txtPriceEng" value="" class="w90p" />
+											<span class="error" >* <span id = "priceEngError" style="display:none">กรุณาระบุราคาภาษาอังกฤษ</span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+									<div  class="bigForm">
+										<div class="floatL form_name">
+											การเดินทางภาษาไทย
+										</div>
+										<div class="floatL form_input">
+											<textarea id= "txtTransportLoc" name="txtTransportLoc" class="w90p mytextarea2"></textarea>
+										</div>
+										<div class="clear"></div>
+									</div>
+									<div  class="bigForm">
+										<div class="floatL form_name">
+											การเดินทางภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<textarea id= "txtTransportEng" name="txtTransportEng" class="w90p mytextarea2"></textarea>
+											
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+									<div  class="bigForm">
+										<div class="floatL form_name">
+											ความเป็นมาภาษาไทย
+										</div>
+										<div class="floatL form_input">
+											<textarea id= "txtStoryLoc" name="txtStoryLoc" class="w90p mytextarea2"></textarea>
+										</div>
+										<div class="clear"></div>
+									</div>
+									<div  class="bigForm">
+										<div class="floatL form_name">
+											ความเป็นมาภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<textarea id= "txtStoryEng" name="txtStoryEng" class="w90p mytextarea2"></textarea>
+											
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+									<div  class="bigForm">
+										<div class="floatL form_name">
+											ลักษณะทางกายภาพภาษาไทย
+										</div>
+										<div class="floatL form_input">
+											<textarea id= "txtPhysicalLoc" name="txtPhysicalLoc" class="w90p mytextarea2"></textarea>
+										</div>
+										<div class="clear"></div>
+									</div>
+									<div  class="bigForm">
+										<div class="floatL form_name">
+											ลักษณะทางกายภาพภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<textarea id= "txtPhysicalEng" name="txtPhysicalEng" class="w90p mytextarea2"></textarea>
+											
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+									<!-- MAP_IMG_PATH_LOC
+									MAP_IMG_PATH_ENG
+							
+									LANDSCAPE_LOC
+									LANDSCAPE_ENG
+									EXHIBITION_LOC
+									EXHIBITION_ENG
+									ARCHIVE_LOC
+									ARCHIVE_ENG
+									TOP_ARCHIVE_LOC
+									TOP_ARCHIVE_ENG
+									STORAGE_LOC
+									STORAGE_ENG
+									TARGET_LOC
+									TARGET_ENG
+									PUBLIC_INFOR_LOC
+									PUBLIC_INFOR_ENG
+									RESPONSIBLE_LOC
+									RESPONSIBLE_ENG
+									NEARBY_LOC
+									NEARBY_ENG -->
+									 
+									 
+									 
 
+<div>
+										<div class="floatL form_name">
+											Facebook Link
+										</div>
+										<div class="floatL form_input">
+											<input  id = "txtFacebook" type="text" name="txtFacebook" value="" class="w90p" />
+											<span class="error" >* <span id = "facebookError" style="display:none">กรุณาระบุ Facebook</span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+<div>
+										<div class="floatL form_name">
+											Twitter Link
+										</div>
+										<div class="floatL form_input">
+											<input  id = "txtTwitter" type="text" name="txtTwitter" value="" class="w90p" />
+											<span class="error" >* <span id = "twitterError" style="display:none">กรุณาระบุ Twitter</span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+									<div>
+										<div class="floatL form_name">
+											Youtube Link
+										</div>
+										<div class="floatL form_input">
+											<input  id = "txtYoutube" type="text" name="txtYoutube" value="" class="w90p" />
+											<span class="error" >* <span id = "youtubeError" style="display:none">กรุณาระบุ Youtube</span> </span>
+										</div>
+										<div class="clear"></div>
+									</div>
+									
 									<div class="btn_action">
 										<input type="button" name="save" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="onValidate()" >
 										<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
@@ -341,8 +527,8 @@ $indexPage = "/administrator/mod_museum_map/index.php";
 		</div>
 
 		<?
-	require ('../inc_footer.php');
- ?>
+		require ('../inc_footer.php');
+		?>
 
 		<link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 		<link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />

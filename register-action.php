@@ -66,6 +66,14 @@ if ($_GET["type"] == "province") {
 	mysql_query($sql, $conn) or die($sql);
 	$retrunID = mysql_insert_id();
 
+	unset($insert);
+
+	$insert['USER_ID'] = "'" . $_POST['email'] . "'";
+
+	$insert['USER_TYPE_ID'] = "'2'";
+
+	$sql = "INSERT INTO  sys_mapping_user_type (" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
+	mysql_query($sql, $conn) or die($sql);
 	$body = "";
 	if ($_SESSION['LANG'] == 'TH') {
 		$filePath = 'mail/register_th.html';
@@ -74,7 +82,7 @@ if ($_GET["type"] == "province") {
 
 	}
 
-	$objFopen = fopen($filePath,"r");
+	$objFopen = fopen($filePath, "r");
 	if ($objFopen) {
 		while (!feof($objFopen)) {
 			$file = fgets($objFopen, 4096);
@@ -83,22 +91,20 @@ if ($_GET["type"] == "province") {
 		fclose($objFopen);
 	}
 
-		$to = 	$_POST['email'];
-		$to_name = $_POST['name'].' '.$_POST['surname'];
-		$send = _MAIL_USER_;
-		$send_name = 'System Museumsiam';
-		$subject = 'ยินดีต้อนรับสู่ Museumsiam.org';
-		$body = str_replace('|@|Path|@|', _FULL_SITE_PATH_, $body);
-		$body = str_replace('|@|Email|@|', $_POST['email'], $body);
-		$body = str_replace('|@|parameter|@|', 'p='.base64_encode(md5(substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 12)).'0l0'.$retrunID), $body);
+	$to = $_POST['email'];
+	$to_name = $_POST['name'] . ' ' . $_POST['surname'];
+	$send = _MAIL_USER_;
+	$send_name = 'System Museumsiam';
+	$subject = 'ยินดีต้อนรับสู่ Museumsiam.org';
+	$body = str_replace('|@|Path|@|', _FULL_SITE_PATH_, $body);
+	$body = str_replace('|@|Email|@|', $_POST['email'], $body);
+	$body = str_replace('|@|parameter|@|', 'p=' . base64_encode(md5(substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 12)) . '0l0' . $retrunID), $body);
 
-	if(!mysendMail($to, $to_name, $send, $send_name, $subject, $body)){
+	if (!mysendMail($to, $to_name, $send, $send_name, $subject, $body)) {
 		mysendMail($to, $to_name, $send, $send_name, $subject, $body);
 	}
 
 	header('Location: ' . 'check-email.php');
-
-
 
 }
 

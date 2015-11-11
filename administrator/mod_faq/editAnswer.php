@@ -43,13 +43,22 @@ require ("../../assets/configs/function.inc.php");
 									?>
 									<div class="bigForm">
 										<div class="floatL form_name">
-											คำตอบ
+											คำตอบภาษาไทย
 										</div>
 										<div class="floatL form_input">
-											<textarea name="question" class="mytextarea w90p"><? echo $row['CONTENT'] ?></textarea>
+											<textarea name="answer" class="mytextarea w90p"><? echo $row['CONTENT'] ?></textarea>
 </div>										<div class="clear"></div>
 									</div>
 
+<div class="bigForm">
+										<div class="floatL form_name">
+											คำตอบภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<textarea name="answerEng" class="mytextarea w90p"><? echo $row['CONTENT_ENG'] ?></textarea>
+</div>										<div class="clear"></div>
+									</div>
+									
 									<div class="btn_action">
 										<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 										<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">

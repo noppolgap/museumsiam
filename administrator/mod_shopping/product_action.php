@@ -56,6 +56,7 @@ if (isset($_GET['add'])) {
 	$insert['PRICE'] = "'" . $_POST['price'] . "'";
 	$insert['SALE'] = "'" . $_POST['sale'] . "'";
 	$insert['DETAIL'] = "'" . $_POST['detail'] . "'";
+	$insert['DETAIL_ENG'] = "'" . $_POST['detailEn'] . "'";
 	$insert['EVENT_START_DATE'] = "'" . ConvertDateToDB($_POST['start']) . "'";
 	$insert['EVENT_END_DATE'] = "'" . ConvertDateToDB($_POST['end']) . "'";
 	$insert['BRIEF_LOC'] = "'" . $_POST['brief_name_th'] . "'";
@@ -104,6 +105,8 @@ if (isset($_GET['edit'])) {
 	$update[] = "PRICE = '" . $_POST['price'] . "'";
 	$update[] = "SALE='" . $_POST['sale'] . "'";
 	$update[] = "DETAIL= '" . $_POST['detail'] . "'";
+	$update[] = "DETAIL_ENG= '" . $_POST['detailEn'] . "'";
+
 	$update[] = "LAST_UPDATE_USER = '". $_SESSION['user_name']."'";
 	$update[] = "LAST_UPDATE_DATE = NOW()";
 

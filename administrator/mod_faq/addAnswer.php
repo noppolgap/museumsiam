@@ -33,13 +33,20 @@ require ("../../assets/configs/function.inc.php");
 								<form action="actionAnswer.php?add&qa_id=<?=$_GET['qa_id'] ?>" method="post" name="formcms">
 									<div class="bigForm">
 										<div class="floatL form_name">
-											คำตอบ
+											คำตอบภาษาไทย
 										</div>
 										<div class="floatL form_input">
 											<textarea name="answer" class="mytextarea w90p"></textarea>
 </div>										<div class="clear"></div>
 									</div>
-
+<div class="bigForm">
+										<div class="floatL form_name">
+											คำตอบภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<textarea name="answerEng" class="mytextarea w90p"></textarea>
+</div>										<div class="clear"></div>
+									</div>
 									<div class="btn_action">
 										<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button">
 										<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">

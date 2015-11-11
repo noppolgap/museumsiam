@@ -29,7 +29,7 @@ require ("../../assets/configs/function.inc.php");
 					<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>
 					<div class="formCms">
 						<? $id = $_GET['cid']; ?>
-						<form action="product_action.php?add&MID=<?=$_GET['MID']?>&cid=<?=$id?>&LV=<?=$_GET['LV']?>" method="post" name="formcms">
+						<form action="product_action.php?add&MID=<?=$_GET['MID']?>&cid=<?=$id?>&LV=<?=$_GET['LV']?>" method="post" name="formcms" id = "frmcms">
 							<?php
 							$sql = "SELECT CONTENT_CAT_DESC_LOC FROM trn_content_category WHERE Flag <> 2 AND  REF_MODULE_ID = ".$_GET['MID']." AND CONTENT_CAT_ID = $id";
 							$query = mysql_query($sql, $conn);
@@ -97,8 +97,13 @@ require ("../../assets/configs/function.inc.php");
 								<div class="clear"></div>
 							</div>
 							<div class="bigForm">
-								<div class="floatL form_name">รายละเอียด</div>
+								<div class="floatL form_name">รายละเอียด TH</div>
 								<div class="floatL form_input"><textarea name="detail" class="mytextarea w90p"></textarea></div>
+								<div class="clear"></div>
+							</div>
+							<div class="bigForm">
+								<div class="floatL form_name">รายละเอียด EN</div>
+								<div class="floatL form_input"><textarea name="detailEn" class="mytextarea w90p"></textarea></div>
 								<div class="clear"></div>
 							</div>
 							<div class="bigForm">

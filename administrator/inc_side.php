@@ -31,17 +31,17 @@
 			<h3 class="menutab dBlock">Web Portal </h3>
 			<div class="submenutab">
 				<a onclick="menuaction(3,0);" href="../mod_hero_banner/hero_banner_view.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">Hero Banner</span></a>
-				<a onclick="menuaction(3,1);" href="../mod_hero_banner/hero_banner_view.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">Visitor</span></a>
+				<a onclick="menuaction(3,1);" href="../mod_content_cms/index.php?gp=VISITOR_INDEX"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">Visitor</span></a>
 
 			<span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">รู้จักเรา</span>
-			<a onclick="menuaction(3,2);" href="../mod_content_cms/index.php?gp=VISITOR"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ความเป็นมาของเรา</span></a>
+			<a onclick="menuaction(3,2);" href="../mod_content_cms/index.php?gp=STORY_INDEX"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ความเป็นมาของเรา</span></a>
 			<a onclick="menuaction(3,3);" href="../mod_organization/index.php"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">โครงสร้างของเรา</span></a>
 			<span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">บริการของเรา</span>
-			<a onclick="menuaction(3,4);" href="../mod_content_cms/index.php?gp=KM"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ห้องคลังความรู้</span></a>
-			<a onclick="menuaction(3,5);" href="../mod_content_cms/index.php?gp=ARC"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ห้องคลังโบราณวัตถุ</span></a>
-			<a onclick="menuaction(3,6);" href="../mod_content_cms/index.php?gp=KITCHEN"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ร้านอาหาร</span></a>
-			<a onclick="menuaction(3,7);" href="../mod_content_cms/index.php?gp=SHOP"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">Muse Shop</span></a>
-			<a onclick="menuaction(3,8);" href="../mod_content_cms/index.php?gp=RENT"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">พื้นที่ให้เช่า</span></a>
+			<a onclick="menuaction(3,4);" href="../mod_content_cms/index.php?gp=KM_INDEX"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ห้องคลังความรู้</span></a>
+			<a onclick="menuaction(3,5);" href="../mod_content_cms/index.php?gp=ARC_INDEX"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ห้องคลังโบราณวัตถุ</span></a>
+			<a onclick="menuaction(3,6);" href="../mod_content_cms/index.php?gp=KITCHEN_INDEX"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ร้านอาหาร</span></a>
+			<a onclick="menuaction(3,7);" href="../mod_content_cms/index.php?gp=SHOP_INDEX"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">Muse Shop</span></a>
+			<a onclick="menuaction(3,8);" href="../mod_content_cms/index.php?gp=RENT_INDEX"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">พื้นที่ให้เช่า</span></a>
 			<a onclick="menuaction(3,9);" href="../mod_content_cms/privilege_edit.php?cmsid=17"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">สิทธิพิเศษ</span></a>
 			<span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">กิจกรรมและข่าวสาร</span>
 			<a onclick="menuaction(3,10);" href="../mod_category/content_view.php?cid=60&MID=12&LV=0&SCID=130"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">กิจกรรม</span></a>

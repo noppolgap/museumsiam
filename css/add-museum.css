@@ -1,0 +1,123 @@
+.mT{
+	margin-top: 25px;
+}
+.row-main{
+	margin-bottom: 10px;
+}
+.row-main>div{
+	width: 50%;
+}
+.box-row div.box-left{
+	width: 176px;
+}
+.box-row div.box-right{
+	 width:249px;
+}
+.box-row>.box-left>p{
+	line-height: initial;
+	padding-top: 8px;
+	text-transform: uppercase;
+}
+.box-row>.box-left>p:after{
+	top: 7px;
+}
+
+.box-row .box-input-text .box-btn{
+/* 	width: 50%; */
+	float: left;
+	margin-right: 10px;
+}
+.box-row .box-input-text span.con{
+	width: 50%;
+	float: left;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+.box-input-text .box-tumb{
+	margin: 0 12px;
+	float: left;
+	border: 4px solid #9a5350;
+	width: 131px;
+	height: 100px;
+	background: url(../images/account/pic.png) center center no-repeat #8e070b;
+}
+.box-input-text .box-tumb:first-child{
+	margin-left: 0px;
+}
+.box-input-text .box-tumb:last-child{
+	margin-right: 0px;
+}
+.box-input-text .box-tumb .btn-delete{
+	width: 24px;
+	height: 24px;
+	background: url(../images/account/icon-close.png) center center no-repeat;
+	background-color: rgba(0, 0, 0, 0.65);
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.box-input-text .box-tumb .btn-delete:hover{
+	background-color: rgba(0, 0, 0, 1);
+}
+.box-row .box-input-text.checkbox div{
+	height: 35px;
+	line-height: 50px;
+}
+.box-row .box-input-text.checkbox div span{
+	top: -3px;
+}
+.box-row .box-input-text.checkbox div:after{
+	top: 24px;
+}
+.row-main>div.addW {
+	width: 100%;
+}
+.row-main>div.addW div.box-right{
+	 width: 600px;
+}
+.box-line{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.box-line hr{
+	width: 754px;
+	height: 1px;
+	float: right;
+	background-color: #8e070b;
+}
+.box-input-text.date>div{
+	float: left;
+}
+.box-input-text.date>div input[type="text"]{
+	width: 110px;
+}
+.box-input-text.date>div span{
+	color: #b28f50;
+	font-size: 14px;
+	line-height: 35px;
+	margin: 0 13px;
+	font-style: normal;
+}
+.row-main > div.box-left-full{
+	width: 100%;
+}
+.box-row div.box-right-full{
+	width: calc(100% - 176px);;
+}
+.box-row div.box-right-full ul.catItems{
+	width: 100%;
+	text-align: left;
+}
+.box-row div.box-right-full ul.catItems li{
+	float: none;
+	height: 40px;
+}
+.box-row div.box-right-full .box-input-text.checkbox div{
+	height: auto;
+	width: 100%;
+}

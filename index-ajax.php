@@ -5,6 +5,10 @@ if(isset($_POST['connect'])){
 	include ("assets/configs/connectdb.inc.php");
 	include ("assets/configs/function.inc.php");
 	include ("inc/inc-cat-id-conf.php");
+	if($_SESSION['LANG'] == 'TH')
+		include ("inc/inc-th-lang.php");
+	else 
+		include ("inc/inc-en-lang.php");
 }
 
 //$whereDate = " AND (EVENT_START_DATE <= '" . date('Y-m-d') . "' AND EVENT_END_DATE >= '" . date('Y-m-d') . "')";
@@ -104,56 +108,7 @@ while ($row = mysql_fetch_array($query_event)) {
 		$shortMonth = $dt -> format("M");
 		$DayOfWeek = $dt -> format("l");
 	}
-	/*
-	 echo '<div class="box-content-slide cf">';
-	 echo '<div class="box-left">';
-	 echo '<div class="box-date cf sun">';
-	 echo '<div class="box-left">';
-	 echo '<p>';
-	 echo $date[0];
-	 echo '</p>';
-	 echo '</div>';
-	 echo '<div class="box-right">';
-	 echo '<p>';
-	 echo $DayOfWeek;
-	 echo '<br>';
-	 echo '<span>' . $shortMonth . ' '. ShowYear($row['EVENT_START_DATE']) .'</span>';
-	 echo '</p>';
-	 echo '</div>';
-	 echo '</div>';
-	 echo '<div class="box-text">';
-	 echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '">';
-	 echo '<p class="text-title TcolorRed">';
-	 echo $title;
-	 echo '</p> </a>';
-	 echo '<p class="text-date TcolorGray">';
-	 echo ConvertDate($row['LAST_DATE']);
-	 echo '</p>';
-	 echo '<p class="text-des TcolorBlack">';
-	 echo $detail;
-	 echo '</p>';
-	 echo '<div class="box-btn cf">';
-	 echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '" class="btn red">อ่านเพิ่มเติม</a>';
-	 echo '<div class="box-btn-social cf">';
-
-	 echo '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
-	 echo '<a href="' . $fullpath . '" onclick="shareTW(\'' . $row_row1['CONTENT_ID'] . '\',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
-
-	 echo '</div>';
-	 echo '</div>';
-	 echo '</div>';
-	 echo '</div>';
-	 echo '<div class="box-right">';
-	 echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '">';
-	 echo '<div class="box-pic">';
-	 echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
-	 echo '</div>';
-	 echo '<div class="box-tag-cate">';
-	 echo $row['PLACE_DESC'];
-	 echo '</div> </a>';
-	 echo '</div>';
-	 echo '</div>';
-	 */
+	
 
 ?>
 <div class="box-content-slide cf">
@@ -184,7 +139,7 @@ while ($row = mysql_fetch_array($query_event)) {
 				<?=$detail?>
 			</p>
 			<div class="box-btn cf">
-				<a href="" class="btn red">อ่านเพิ่มเติม</a>
+				<a href="event-detail.php?MID=<?=$MID?>&CID=<?=$row['CAT_ID']?>&SID=<?=$row['SUB_CAT_ID']?>&CONID=<?=$row['CONTENT_ID']?>" class="btn red"><?=$seeAllCap?></a>
 				<div class="box-btn-social cf">
 <?php
 					echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
@@ -195,7 +150,7 @@ while ($row = mysql_fetch_array($query_event)) {
 		</div>
 	</div>
 	<div class="box-right">
-		<a href="">
+		<a href="event-detail.php?MID=<?=$MID?>&CID=<?=$row['CAT_ID']?>&SID=<?=$row['SUB_CAT_ID']?>&CONID=<?=$row['CONTENT_ID']?>">
 		<div class="box-pic">
 			<img src="<?=callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true)?>">
 		</div>

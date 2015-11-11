@@ -8,57 +8,13 @@ if ($_SESSION['LANG'] == 'TH') {
 	$selectedColumn = 'CMS_TEXT_ENG';
 }
 ?>
-			<div class="box-pic-main">
-				<img src="images/<?=$picFolder?>/service/knowledge/pic-service1.jpg"/>
-			</div>
-			<div class="box-text1-main cf">
-				<p class="text1"><img src="images/<?=$picFolder?>/service/knowledge/title1.png"/></p>
-				<!-- KM_STORY -->
-				<?php
-						$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KM_STORY' AND ACTIVE_FLAG = 1";
-						$rsContent = mysql_query($sql) or die(mysql_error());
-						$rowContent = mysql_fetch_array($rsContent);
-						echo str_replace('../../', '',$rowContent['CMS_TEXT']);
-						?>
 
-			</div>
-			<hr class="line-gray"/>
-			<div class="box-text2-main cf">
-				<p class="text1"><img src="images/<?=$picFolder?>/service/knowledge/title2.png"/></p>
-				<p class="text2">
-					<img src="images/<?=$picFolder?>/service/knowledge/pic-service2.png"/>
-				</p>
-				<!-- KM_INFOR_MGR -->
-				<?php
-						$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KM_INFOR_MGR' AND ACTIVE_FLAG = 1";
-						$rsContent = mysql_query($sql) or die(mysql_error());
-						$rowContent = mysql_fetch_array($rsContent);
-						echo str_replace('../../', '',$rowContent['CMS_TEXT']);
-						?>
+<?php
+$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KM_PAGE' AND ACTIVE_FLAG = 1";
+$rsContent = mysql_query($sql) or die(mysql_error());
+$rowContent = mysql_fetch_array($rsContent);
+echo str_replace('../../', '', $rowContent['CMS_TEXT']);
+?>
 
-				<p class="text5">
-					<img src="images/<?=$picFolder?>/service/knowledge/title3.png"/>
-				</p>
-				<p class="text6">
-					<a href="#" target="_blank"><img src="images/th/service/knowledge/pic-service3.png"/></a>
-				</p>
-			</div>
-			<hr class="line-gray"/>
-			
-			<div class="box-text3-main cf">
-				<p class="text1"><img src="images/<?=$picFolder?>/service/knowledge/title4.png"/></p>
-				<!-- KM_ADDRESS -->
-				<?php
-						$sql = "select " . $selectedColumn . " as CMS_TEXT from trn_content_cms where CMS_KEY ='KM_ADDRESS' AND ACTIVE_FLAG = 1";
-						$rsContent = mysql_query($sql) or die(mysql_error());
-						$rowContent = mysql_fetch_array($rsContent);
-						echo str_replace('../../', '',$rowContent['CMS_TEXT']);
-						?>
-				<p class="text3">
-					<img src="images/<?=$picFolder?>/service/knowledge/title5.png"/>
-				</p>
-				<div class="box-btn cf">
-					<a href="#" class="btn black">ดูแผนที่</a>
-				</div>
-			</div>
+
 
