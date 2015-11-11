@@ -41,6 +41,7 @@ $pleaseCapchaAuthenCap = 'กรุณาคลิกปุ่มตรวจส
 $msgCap = 'ข้อความ';
 $eAppCap = 'สมัครงาน (e-Application)';
 $positionCap = 'ตำแหน่งงาน';
+$position_nameCap = 'ชื่อตำแหน่งงาน';
 $detailCap = 'รายละเอียด';
 $applyJobCap = 'สมัครงาน';
 $positionUnitCap = 'อัตรา';

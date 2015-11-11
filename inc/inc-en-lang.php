@@ -40,6 +40,7 @@ $pleaseCapchaAuthenCap = 'Please authenticate with recapcha to help cut down on 
 $msgCap = 'Message';
 $eAppCap = 'e-Application';
 $positionCap = 'Position';
+$position_nameCap = "Position Name";
 $detailCap = 'Detail';
 $applyJobCap = 'Apply Job';
 $positionUnitCap = 'Position';

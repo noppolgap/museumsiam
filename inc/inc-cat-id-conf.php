@@ -15,6 +15,7 @@ $e_aaplication = 26;
 
 $museum_event_cat_id = 60;
 $all_event_cat_id = 61;
+$position_cat_id = 26;
 // End Category ID
 
 // Module ID
@@ -32,6 +33,7 @@ $event_sub_cat_id = 130;
 $mesum_sub_cat_id = 131;
 $ebook_sub_cat = 74;
 $eapp_sub_cat = 76;
+$position_sub_cat = 96;
 
 // End Module ID
 

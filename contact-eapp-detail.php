@@ -2,6 +2,10 @@
 require("assets/configs/config.inc.php");
 require("assets/configs/connectdb.inc.php");
 require("assets/configs/function.inc.php");
+require ("inc/inc-cat-id-conf.php");
+
+$CONID = intval($_GET['CONID']);
+
 ?>
 <!doctype html>
 <html>
@@ -33,10 +37,10 @@ require("assets/configs/function.inc.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li>ติดต่อเรา&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><?=$contactUsCap?>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li>E-APPLICATION&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="contact-eapp.php">ตำแหน่งงาน</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ชื่อตำแหน่งงาน</li>
+				<li><a href="contact-eapp.php"><?=$positionCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=$position_nameCap?></li>
 				
 			</ol>
 		</div>
@@ -53,22 +57,43 @@ require("assets/configs/function.inc.php");
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
-				<h1>E-APPLICATION
-					<span>เงื่อนไขข้อกำหนด</span>
+				<h1>
+					<img src="images/th/contact/title5.png" alt="รายละเอียดตำแหน่งงาน"/>
 				</h1>
 			</div>
 			<hr class="line-gray"/>
+
+			<?php 
+
+					if ($_SESSION['LANG'] == 'TH') {
+						$LANG_SQL = "CONTENT_DESC_LOC AS CONTENT_DESC";
+					} else if ($_SESSION['LANG'] == 'EN') {
+						$LANG_SQL = "CONTENT_DESC_ENG AS CONTENT_DESC";
+					}
+
+			        $sql= " SELECT ".$LANG_SQL.", CONTENT_ID , PRICE_RATE_LOC, CREATE_DATE, CONTENT_DETAIL_LOC
+							FROM trn_content_detail  
+							WHERE CONTENT_STATUS_FLAG = 0 AND CAT_ID = $position_sub_cat AND CONTENT_ID = $CONID " ;  
+
+				    $sql .= "order by ORDER_DATA desc";
+
+				   	$query = mysql_query($sql,$conn);  
+
+				   	while($row = mysql_fetch_array($query)) {
+
+ 			?>
+
 			
 			<div class="box-carrer-main">
 				<div class="box-row">
 					<div class="box-top cf">
-						<h3>ผู้จัดการฝ่ายพัฒนาธุรกิจ</h3>
-						<div class="number"><span>2</span> อัตรา</div>
+						<h3><? echo $row['CONTENT_DESC'] ?></h3>
+						<div class="number"><span><? echo $row['PRICE_RATE_LOC'] ?></span> อัตรา</div>
 					</div>
 					<div class="box-bottom cf">
 						<div class="box-footer-content cf">
 							<div class="box-date-modified">
-								วันที่แก้ไขล่าสุด :  28 พ.ย. 2559
+								<?=$lastEditCap?> :  <? echo ConvertDate($row['CREATE_DATE']) ?>
 							</div>
 						</div>
 					</div>
@@ -76,21 +101,18 @@ require("assets/configs/function.inc.php");
 			</div>
 			
 			<div class="box-detail-main">
-				<p>
-					มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ ซึ่งเอามาใช้แทนการเขียนว่า ‘ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา' ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ ปัจจุบันมีแพ็กเกจของซอฟท์แวร์การทำสื่อสิ่งพิมพ์ และซอฟท์แวร์การสร้างเว็บเพจ (Web Page Editor) หลายตัวที่ใช้ Lorem Ipsum เป็นแบบจำลองเนื้อหาที่เป็นค่าตั้งต้น และเวลาที่เสิร์ชด้วยคำว่า 'lorem ipsum' ผลการเสิร์ชที่ได้ก็จะไม่พบบรรดาเว็บไซต์ที่ยังคงอยู่ในช่วงเริ่มสร้างด้วย โดยหลายปีที่ผ่านมาก็มีการคิดค้นเวอร์ชั่นต่างๆ ของ Lorem Ipsum ขึ้นมาใช้ บ้างก็เป็นความบังเอิญ บ้างก็เป็นความตั้งใจ (เช่น การแอบแทรกมุกตลก)
-				</p>
-				<p>
-					มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ ซึ่งเอามาใช้แทนการเขียนว่า ‘ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา' ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ ปัจจุบันมีแพ็กเกจของซอฟท์แวร์การทำสื่อสิ่งพิมพ์ และซอฟท์แวร์การสร้างเว็บเพจ (Web Page Editor) หลายตัวที่ใช้ Lorem Ipsum เป็นแบบจำลองเนื้อหาที่เป็นค่าตั้งต้น และเวลาที่เสิร์ชด้วยคำว่า 'lorem ipsum' ผลการเสิร์ชที่ได้ก็จะไม่พบบรรดาเว็บไซต์ที่ยังคงอยู่ในช่วงเริ่มสร้างด้วย โดยหลายปีที่ผ่านมาก็มีการคิดค้นเวอร์ชั่นต่างๆ ของ Lorem Ipsum ขึ้นมาใช้ บ้างก็เป็นความบังเอิญ บ้างก็เป็นความตั้งใจ (เช่น การแอบแทรกมุกตลก)
-				</p>
+				<? echo $row['CONTENT_DETAIL_LOC'] ?>
 				
 				<div class="box-btn cf">
 					<a href="contact-eapp-register.php" class="btn red">Apply job</a>
 				</div>
 
 			</div>
+
+			<? } ?>
 			<div class="box-pagination-main cf">
 				<div class="box-btn">
-					<a href="contact-eapp.php" class="btn black">ย้อนกลับ</a>
+					<a href="contact-eapp.php" class="btn black"><?=$backCap?></a>
 				</div>
 			</div>					
 		</div>
