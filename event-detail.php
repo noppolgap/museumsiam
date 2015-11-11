@@ -157,7 +157,7 @@ require("assets/configs/function.inc.php");
 			$row = mysql_fetch_array($query);
 
 			$date = ConvertBoxDate($row['EVENT_START_DATE']);
-
+$dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 	   ?>
 
 			<div class="box-newsdetail-main">
@@ -233,9 +233,9 @@ require("assets/configs/function.inc.php");
 					<a class="btn-arrow-slide pev"></a>
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
-						<div class="box-date-tumb">
-							<p class="date"><?=$date[0]?></p>
-							<p class="month"><?=$date[1]?></p>
+						<div class="box-date-tumb type2">
+							<p class="date"><?=$date[0].'-'.$dateEnd[0]?></p>
+							<p class="month"><?=$date[1].'-'.$dateEnd[1]?></p>
 						</div>
 						<div class="box-text">
 							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>

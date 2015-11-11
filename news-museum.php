@@ -145,7 +145,7 @@ require("assets/configs/function.inc.php");
 						echo  '</p>';
 						echo  '</a>';
 						echo  '<p class="text-date TcolorGray">';
-						echo   ConvertDate($row['CREATE_DATE']);
+						echo   ConvertDate($row['LAST_DATE']);
 						echo  '</p>';
 						echo  '<p class="text-des TcolorBlack">';
 						echo  $detail;

@@ -139,6 +139,7 @@ $_SESSION['EVENT_PREV_PG'] = $current_url;
 									}
 
 									$date = ConvertBoxDate($row['EVENT_START_DATE']);
+									$dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 									$categoryID = $row['CAT_ID'];
 
 									/*social*/
@@ -159,9 +160,9 @@ $_SESSION['EVENT_PREV_PG'] = $current_url;
 									echo '<div class="box-tag-cate">';
 									echo $row['MUSEUM_DESC'];
 									echo '</div>';
-									echo '<div class="box-date-tumb">';
-									echo '<p class="date">' . $date[0] . '</p>';
-									echo '<p class="month">' . $date[1] . '</p>';
+									echo '<div class="box-date-tumb type2">';
+									echo '<p class="date">' . $date[0] . '-' . $dateEnd[0] . '</p>';
+									echo '<p class="month">' . $date[1] . '-' . $dateEnd[1] . '</p>';
 									echo '</div>';
 									echo '</div>';
 									echo '</a>';

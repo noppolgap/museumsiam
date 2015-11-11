@@ -16,7 +16,7 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
-	});
+	}); 
 </script>
 
 </head>
@@ -81,10 +81,11 @@ include ('inc/inc-menu.php');
 						<?  $link_page = "";
 						$catId = $rowSUB_CAT['CONTENT_CAT_ID'];
 						$SCID = $rowSUB_CAT['SUB_CONTENT_CAT_ID'];
-
+						$isEvent = FALSE;
 						if ($rowSUB_CAT['SUB_CONTENT_CAT_ID'] == $museumDataNetworkEventSubCat) {
 							$link_page = "event-month.php?CID=" . $catId . "&SCID=" . $SCID;
-								$detailPage = "event-detail.php"; 
+							$detailPage = "event-detail.php";
+							$isEvent = TRUE;
 						} else {
 							$link_page = "news-month.php?CID=" . $catId . "&SCID=" . $SCID;
 							$detailPage = "news-detail.php";
@@ -152,14 +153,14 @@ include ('inc/inc-menu.php');
 
 						$query = mysql_query($sql, $conn);
 
-$contentCount = 0 ; 
+						$contentCount = 0;
 						while ($row = mysql_fetch_array($query)) {
 
 							$IMG_PATH = str_replace("../../", "", $row['IMG_PATH']);
 
-							if ( $contentCount == 3) {
+							if ($contentCount == 3) {
 								echo '<hr class="line-gray"/>';
-								$contentCount=  0 ; 
+								$contentCount = 0;
 							}
 
 							$gap = "";
@@ -167,13 +168,14 @@ $contentCount = 0 ;
 								$gap = "mid";
 							}
 
-						// if ($rowSUB_CAT['SUB_CONTENT_CAT_ID'] == $museumDataNetworkEventSubCat)
-								$date = ConvertBoxDate($row['EVENT_START_DATE']);
+							// if ($rowSUB_CAT['SUB_CONTENT_CAT_ID'] == $museumDataNetworkEventSubCat)
+							$date = ConvertBoxDate($row['EVENT_START_DATE']);
+							$dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 							//else
-								//$date = ConvertBoxDate($row['LAST_DATE']);
+							//$date = ConvertBoxDate($row['LAST_DATE']);
 
 							/*social*/
-							$path = $detailPage.'?MID=' . $MID . '%26CID=' . $row['CAT_ID'] . '%26SID=' . $row['SUB_CAT_ID'] . '%26CONID=' . $row['CONTENT_ID'] . '%26date=month';
+							$path = $detailPage . '?MID=' . $MID . '%26CID=' . $row['CAT_ID'] . '%26SID=' . $row['SUB_CAT_ID'] . '%26CONID=' . $row['CONTENT_ID'] . '%26date=month';
 							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $row['CONTENT_ID'];
 							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
@@ -184,20 +186,28 @@ $contentCount = 0 ;
 							/*social*/
 
 							echo '<div class="box-tumb ' . $gap . ' ">';
-							echo '<a href="'.$detailPage.'?MID=' . $MID . '&CID=' . $row['CAT_ID'] . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=month">';
+							echo '<a href="' . $detailPage . '?MID=' . $MID . '&CID=' . $row['CAT_ID'] . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=month">';
 							echo '<div class="box-pic">';
 							echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true) . '">';
 							echo '<div class="box-tag-cate">';
 							echo $row['MUSEUM_DESC'];
 							echo '</div>';
-							echo '<div class="box-date-tumb">';
-							echo '<p class="date">' . $date[0] . '</p>';
-							echo '<p class="month">' . $date[1] . '</p>';
-							echo '</div>';
+							if ($isEvent) {
+
+								echo '<div class="box-date-tumb type2">';
+								echo '<p class="date">' . $date[0] . '-' . $dateEnd[0] . '</p>';
+								echo '<p class="month">' . $date[1] . '-' . $dateEnd[1] . '</p>';
+								echo '</div>';
+							} else {
+								echo '<div class="box-date-tumb">';
+								echo '<p class="date">' . $date[0] . '</p>';
+								echo '<p class="month">' . $date[1] . '</p>';
+								echo '</div>';
+							}
 							echo '</div>';
 							echo '</a>';
 							echo '<div class="box-text">';
-							echo '<a href="'.$detailPage.'?MID=' . $MID . '&CID=' . $row['CAT_ID'] . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=month">';
+							echo '<a href="' . $detailPage . '?MID=' . $MID . '&CID=' . $row['CAT_ID'] . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=month">';
 							echo '<p class="text-title TcolorRed">';
 							echo $title;
 							echo '</p>';
@@ -209,7 +219,7 @@ $contentCount = 0 ;
 							echo $detail;
 							echo '</p>';
 							echo '<div class="box-btn cf">';
-							echo '<a href="'.$detailPage.'?MID=' . $MID . '&CID=' . $row['CAT_ID'] . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=month" class="btn red">' . $txt_more . '</a>';
+							echo '<a href="' . $detailPage . '?MID=' . $MID . '&CID=' . $row['CAT_ID'] . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=month" class="btn red">' . $txt_more . '</a>';
 							echo '<div class="box-btn-social cf">';
 							echo '<a href="' . $fb_link . '" onclick="shareFB(\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
 							echo '<a href="' . $fullpath . '" onclick="shareTW(\'' . $row_row1['CONTENT_ID'] . '\',\'' . $title . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
@@ -219,9 +229,9 @@ $contentCount = 0 ;
 							echo '</div>';
 
 							// if ($index == 3) {
-								// echo '<hr class="line-gray"/>';
-								// $index = 0;
-								// }
+							// echo '<hr class="line-gray"/>';
+							// $index = 0;
+							// }
 							$index++;
 							$contentCount++;
 						}

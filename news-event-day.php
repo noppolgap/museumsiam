@@ -31,7 +31,7 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
-	}); 
+	});
 </script>
 
 </head>
@@ -96,10 +96,11 @@ include ('inc/inc-menu.php');
 						$catId = $rowSUB_CAT['CONTENT_CAT_ID'];
 						$SCID = $rowSUB_CAT['SUB_CONTENT_CAT_ID'];
 						$detailPage = "";
-
+						$isEvent = FALSE;
 						if ($rowSUB_CAT['SUB_CONTENT_CAT_ID'] == $museumDataNetworkEventSubCat) {
 							$link_page = "event-day.php?CID=" . $catId . "&SCID=" . $SCID;
 							$detailPage = "event-detail.php";
+							$isEvent = TRUE;
 
 						} else {
 							$link_page = "news-day.php?CID=" . $catId . "&SCID=" . $SCID;
@@ -173,9 +174,10 @@ include ('inc/inc-menu.php');
 							}
 
 							//if ($rowSUB_CAT['SUB_CONTENT_CAT_ID'] == $museumDataNetworkEventSubCat)
-								$date = ConvertBoxDate($row['EVENT_START_DATE']);
+							$date = ConvertBoxDate($row['EVENT_START_DATE']);
+							$dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 							//else
-								//$date = ConvertBoxDate($row['LAST_DATE']);
+							//$date = ConvertBoxDate($row['LAST_DATE']);
 
 							/*social*/
 							$path = $detailPage . '?MID=' . $MID . '%26CID=' . $row['CAT_ID'] . '%26SID=' . $row['SUB_CAT_ID'] . '%26CONID=' . $row['CONTENT_ID'] . '%26date=month';
@@ -195,10 +197,17 @@ include ('inc/inc-menu.php');
 							echo '<div class="box-tag-cate">';
 							echo $row['MUSEUM_DESC'];
 							echo '</div>';
-							echo '<div class="box-date-tumb">';
-							echo '<p class="date">' . $date[0] . '</p>';
-							echo '<p class="month">' . $date[1] . '</p>';
-							echo '</div>';
+							if ($isEvent) {
+								echo '<div class="box-date-tumb type2">';
+								echo '<p class="date">' . $date[0] . '-' . $dateEnd[0] . '</p>';
+								echo '<p class="month">' . $date[1] . '-' . $dateEnd[1] . '</p>';
+								echo '</div>';
+							} else {
+								echo '<div class="box-date-tumb">';
+								echo '<p class="date">' . $date[0] . '</p>';
+								echo '<p class="month">' . $date[1] . '</p>';
+								echo '</div>';
+							}
 							echo '</div>';
 							echo '</a>';
 							echo '<div class="box-text">';

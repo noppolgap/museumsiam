@@ -112,6 +112,7 @@ LIMIT 0,
 									}
 
 									$date = ConvertBoxDate($row['EVENT_START_DATE']);
+									$dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 									/*social*/
 									$path = 'mdn-event-detail.php?MID=' . $MID . '%26CID=' . $CID . '%26SID=' . $row['SUB_CAT_ID'] . '%26CONID=' . $row['CONTENT_ID'] . '';
 									$fullpath = _FULL_SITE_PATH_ . '/' . $path;
@@ -130,12 +131,12 @@ LIMIT 0,
 									echo '<a href="mdn-event-detail.php?CID=' . $CID . '&SCID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&MDNID=' . $row['MUSUEM_ID'] . '">';
 									echo '<div class="box-pic">';
 									echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $CID, true) . '">';
-									echo '<div class="box-date-tumb">';
+									echo '<div class="box-date-tumb type2">';
 									echo '<p class="date">';
-									echo $date[0];
+									echo $date[0] . '-' . $dateEnd[0];
 									echo '</p>';
 									echo '<p class="month">';
-									echo $date[1];
+									echo $date[1] . '-' . $dateEnd[1];
 									echo '</p>';
 									echo '</div>';
 									echo '</div> </a>';
