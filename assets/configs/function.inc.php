@@ -1978,4 +1978,28 @@ function backend_move_single_image_upload_dir($dir, $file) {
 		return "";
 
 }
+
+function callHeroBannerThumbListByID($picID,$staus) {
+	global $conn;
+
+	$sql = "SELECT IMG_PATH FROM trn_hero_banner WHERE PIC_ID = ".$picID." AND IMG_TYPE = 1  ORDER BY ORDER_ID ASC LIMIT 0 , 1";
+	$query = mysql_query($sql, $conn);
+	$num = mysql_num_rows($query);
+	if ($num == 1) {
+		$row = mysql_fetch_array($query);
+		if ($staus) {
+			return $row['IMG_PATH'];
+		} else {
+			return 'style="background-image: url(\'' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '\');"';
+		}
+
+	} else {
+		if ($staus) {
+			return '../images/logo_thumb.jpg';
+		} else {
+			return '';
+		}
+	}
+
+}
 ?>

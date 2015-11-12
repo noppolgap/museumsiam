@@ -117,7 +117,7 @@ require("assets/configs/function.inc.php");
 
 				<? } ?>
 
-					<div class="box-pagination-main cf Noborder">
+					<div class="box-pagination-main cf Noborder" style="display: none">
 						<ul class="pagination">
 							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
 							<li class="active"><a href="">1</a></li>
