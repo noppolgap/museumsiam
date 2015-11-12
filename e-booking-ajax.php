@@ -5,16 +5,16 @@ require ("assets/configs/function.inc.php");
 require ("inc/inc-cat-id-conf.php");
 
 header("Content-type: application/javascript; charset=UTF-8");
-
+/*
 if ($_SESSION['LANG'] == 'TH'){
 	$LANG_SQL = 'CONTENT_DESC_LOC AS CONTENT_LOC ,';
 }else if ($_SESSION['LANG'] == 'EN'){
 	$LANG_SQL = 'CONTENT_DESC_ENG AS CONTENT_LOC ,';
 }
-
+*/
 $dates = array();
 $tips = array();
-
+/*
 $sql =  "SELECT CONTENT_CAT_ID FROM trn_content_category WHERE REF_MODULE_ID = ".$new_and_event." ORDER BY ORDER_DATA DESC";
 $query_CAT = mysql_query($sql, $conn);
 while($row_CAT = mysql_fetch_array($query_CAT)) {
@@ -44,9 +44,10 @@ while($row_CAT = mysql_fetch_array($query_CAT)) {
 		}
 	}
 }
-
+*/
 echo "var dates = [".implode(",", $dates)."];";
 echo "\n";
 echo "var tips  = [".implode(",", $tips)."];";
 CloseDB();
+
 ?>
