@@ -3,13 +3,11 @@ require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
 
-
 if ($_SESSION['LANG'] == 'TH') {
 	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTENT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
 } else if ($_SESSION['LANG'] == 'EN') {
 	$LANG_SQL = "cat.CONTENT_CAT_DESC_ENG AS CAT_DESC , content.CONTENT_DESC_ENG AS CONTENT_DESC , content.BRIEF_ENG AS BRIEF_LOC";
 }
-
 ?>
 <!doctype html>
 <html>
@@ -36,9 +34,9 @@ include ('inc/inc-top-bar.php');
 include ('inc/inc-menu.php');
 
 //get Module ID
-if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
+if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')) {
 	$MID = $km_module_id;
-}else{
+} else {
 	$MID = $_GET['MID'];
 }
 ?>
@@ -47,8 +45,8 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active"><?=getModuleDescription($km_module_id);?></li>
+				<li><a href="other-system.php"><?=$otherSystemCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=getModuleDescription($km_module_id); ?></li>
 			</ol>
 		</div>
 	</div>
@@ -66,9 +64,137 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 		<div class="box-right main-content">
 
 
+<?php
+if ($_SESSION['LANG'] == 'TH') {
+	$selectedColumn = "CONTENT_CAT_DESC_LOC as CAT_DESC , ";
+} else {
+	$selectedColumn = "CONTENT_CAT_DESC_ENG as CAT_DESC , ";
+}
+
+$sql = " SELECT " . $selectedColumn . " CONTENT_CAT_ID , 
+IS_LAST_NODE , 
+LINK_URL 
+FROM
+trn_content_category
+WHERE
+REF_MODULE_ID = " . $km_module_id;
+$sql .= " AND flag  = 0
+order by order_data desc ";
+
+$categoryName = '';
+$categoryID = 0;
+
+$rs = mysql_query($sql) or die(mysql_error());
+$catCount = 1;
+
+while ($row = mysql_fetch_array($rs)) {
+	$categoryID = $row['CONTENT_CAT_ID'];
+	$categoryName = $row['CAT_DESC'];
+
+	$divGroupExtraClass = ' BGray';
+	$btnExtraClass = 'btn black';
+
+	if ($catCount == 1) {
+		$divGroupExtraClass = ' BBlack';
+		$btnExtraClass = 'btn gold';
+	}
+
+	echo '<div class="box-category-main news ' . $divGroupExtraClass . '">';
+
+	echo '<div class="box-title cf">';
+	echo '<h2>' . $categoryName . '</h2>';
+	echo '<div class="box-btn">';
+
+	echo '<a href="' . $row['LINK_URL'] . '?MID=' . $MID . '&CID=' . $categoryID . '" class="' . $btnExtraClass . '">' . $seeAllCap . '</a>';
+	echo '</div>';
+	echo '</div>';
+	echo '<div class="box-news-main">';
+	echo '<div class="box-tumb-main cf ">';
+
+	$contentSqlStr = "SELECT " . $LANG_SQL;
+	$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
+												content.CONTENT_ID,
+												content.EVENT_START_DATE,
+												content.EVENT_END_DATE,
+												content.CREATE_DATE ,
+												content.LAST_UPDATE_DATE ,
+												IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
+											FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $MID
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = $categoryID
+											AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 ";
+
+	if (isset($_GET['search'])) {
+		if (isset($_POST['str_search']))
+			$_SESSION['text'] = $_POST['str_search'];
+		$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" . $_SESSION['text'] . "%' or  content.CONTENT_DESC_ENG like '%" . $_SESSION['text'] . "%')";
+	} else {
+		unset($_SESSION['text']);
+	}
+
+	$contentSqlStr .= "	ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+
+	// start Loop Activity
+	$i = 1;
+	$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
+	while ($rowContent = mysql_fetch_array($rsContent)) {
+		$extraClass = '';
+		if ($i == 2) {
+			$extraClass = ' mid';
+		}
+
+		$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
+		$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+		$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+		$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
+		$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+		$tw_link = $fullpath;
+
+		echo '<div class="box-tumb cf' . $extraClass . '">';
+		echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '"> ';
+		echo ' <div class="box-pic" > ';
+		echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
+		echo ' </div> </a> ';
+		echo ' <div class="box-text">';
+		echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
+		echo ' <p class="text-title">';
+		echo $rowContent['CONTENT_DESC'];
+		echo ' </p> </a>';
+		echo ' <p class="text-date">';
+		echo ConvertDate($rowContent['LAST_DATE']);
+		echo ' </p>';
+		echo ' <p class="text-des">';
+		echo $rowContent['BRIEF_LOC'];
+		echo ' </p>';
+		echo ' <div class="box-btn cf">';
+		echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">' . $txt_more . '</a>';
+		echo ' <div class="box-btn-social cf">';
+		echo ' <a href="' . $fb_link . '" onclick="shareFB(\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+		echo ' <a href="' . $fullpath . '" onclick="shareTW(\'' . $rowContent['CONTENT_ID'] . '\',\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+		echo ' </div>';
+		echo ' </div>';
+		echo ' </div>';
+		echo ' </div>';
+		$i++;
+	}
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
+	$catCount++;
+}
+  ?>
 
 
-			 <div class="box-category-main news BBlack">
+
+
+
+
+			 <!-- <div class="box-category-main news BBlack">
 				<div class="box-title cf">
 					<h2><?=$activityCap?></h2>
 					<div class="box-btn">
@@ -76,10 +202,10 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 					</div>
 				</div>
 				<div class="box-news-main">
-					<div class="box-tumb-main cf ">
-						<?php
+					<div class="box-tumb-main cf "> -->
+						<!-- <?php
 						$categoryID = $event_cat_id;
-						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr = "SELECT " . $LANG_SQL;
 						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
 												content.EVENT_START_DATE,
@@ -97,14 +223,13 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}
+						if (isset($_GET['search'])) {
+							if (isset($_POST['str_search']))
+								$_SESSION['text'] = $_POST['str_search'];
+							$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" . $_SESSION['text'] . "%' or  content.CONTENT_DESC_ENG like '%" . $_SESSION['text'] . "%')";
+						} else {
+							unset($_SESSION['text']);
+						}
 
 						$contentSqlStr .= "	ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
@@ -112,7 +237,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 						$i = 1;
 						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
 						while ($rowContent = mysql_fetch_array($rsContent)) {
-						$extraClass = '';
+							$extraClass = '';
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
@@ -125,12 +250,12 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '"> ';
 							echo ' <div class="box-pic" > ';
 							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 							echo ' <div class="box-text">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo ' <p class="text-title">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -141,16 +266,16 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">' . $txt_more . '</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
-							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+							echo ' <a href="' . $fb_link . '" onclick="shareFB(\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="' . $fullpath . '" onclick="shareTW(\'' . $rowContent['CONTENT_ID'] . '\',\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							$i++;
-							}
+						}
 						?>
 					</div>
 				</div>
@@ -160,7 +285,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>นิทรรศการ</h2>
 					<div class="box-btn">
-						<a href="km-exhibition.php" class="btn black"><?=$seeAllCap?></a>
+						<a href="km-exhibition.php" class="btn black"><?=$seeAllCap ?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -168,7 +293,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 
 						<?php
 						$categoryID = $exhibition_cat_id;
-						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr = "SELECT " . $LANG_SQL;
 						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
 												content.EVENT_START_DATE,
@@ -185,21 +310,20 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND cat.CONTENT_CAT_ID = $categoryID
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
-											if (isset($_GET['search'])) {
+						if (isset($_GET['search'])) {
 							if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}
-							$contentSqlStr .= "		ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+								$_SESSION['text'] = $_POST['str_search'];
+							$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" . $_SESSION['text'] . "%' or  content.CONTENT_DESC_ENG like '%" . $_SESSION['text'] . "%')";
+						} else {
+							unset($_SESSION['text']);
+						}
+						$contentSqlStr .= "		ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
 						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
 						while ($rowContent = mysql_fetch_array($rsContent)) {
-						$extraClass = '';
+							$extraClass = '';
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
@@ -212,12 +336,12 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '"> ';
 							echo ' <div class="box-pic" > ';
 							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 							echo ' <div class="box-text">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo ' <p class="text-title">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -228,16 +352,16 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">' . $txt_more . '</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
-							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+							echo ' <a href="' . $fb_link . '" onclick="shareFB(\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="' . $fullpath . '" onclick="shareTW(\'' . $rowContent['CONTENT_ID'] . '\',\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							$i++;
-							}
+						}
 						?>
 					</div>
 				</div>
@@ -247,14 +371,14 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>การค้นคว้าและอ้างอิง</h2>
 					<div class="box-btn">
-						<a href="km-reseach.php" class="btn black"><?=$seeAllCap?></a>
+						<a href="km-reseach.php" class="btn black"><?=$seeAllCap ?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						<?php
 						$categoryID = $reseach_cat_id;
-						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr = "SELECT " . $LANG_SQL;
 						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
 												content.EVENT_START_DATE,
@@ -272,22 +396,21 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}
+						if (isset($_GET['search'])) {
+							if (isset($_POST['str_search']))
+								$_SESSION['text'] = $_POST['str_search'];
+							$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" . $_SESSION['text'] . "%' or  content.CONTENT_DESC_ENG like '%" . $_SESSION['text'] . "%')";
+						} else {
+							unset($_SESSION['text']);
+						}
 
-							$contentSqlStr .=	"ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+						$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
 						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
 						while ($rowContent = mysql_fetch_array($rsContent)) {
-						$extraClass = '';
+							$extraClass = '';
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
@@ -300,12 +423,12 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '"> ';
 							echo ' <div class="box-pic" > ';
 							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 							echo ' <div class="box-text">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo ' <p class="text-title">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -316,16 +439,16 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">' . $txt_more . '</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
-							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+							echo ' <a href="' . $fb_link . '" onclick="shareFB(\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="' . $fullpath . '" onclick="shareTW(\'' . $rowContent['CONTENT_ID'] . '\',\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							$i++;
-							}
+						}
 						?>
 					</div>
 				</div>
@@ -335,7 +458,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>ระบบการศึกษา</h2>
 					<div class="box-btn">
-						<a href="km-education.php" class="btn black"><?=$seeAllCap?></a>
+						<a href="km-education.php" class="btn black"><?=$seeAllCap ?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -343,7 +466,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 
 						<?php
 						$categoryID = $education_cat_id;
-						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr = "SELECT " . $LANG_SQL;
 						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
 												content.EVENT_START_DATE,
@@ -361,22 +484,21 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}
+						if (isset($_GET['search'])) {
+							if (isset($_POST['str_search']))
+								$_SESSION['text'] = $_POST['str_search'];
+							$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" . $_SESSION['text'] . "%' or  content.CONTENT_DESC_ENG like '%" . $_SESSION['text'] . "%')";
+						} else {
+							unset($_SESSION['text']);
+						}
 
-							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+						$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
 						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
 						while ($rowContent = mysql_fetch_array($rsContent)) {
-						$extraClass = '';
+							$extraClass = '';
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
@@ -389,12 +511,12 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '"> ';
 							echo ' <div class="box-pic" > ';
 							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 							echo ' <div class="box-text">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo ' <p class="text-title">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -405,16 +527,16 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">' . $txt_more . '</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
-							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+							echo ' <a href="' . $fb_link . '" onclick="shareFB(\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="' . $fullpath . '" onclick="shareTW(\'' . $rowContent['CONTENT_ID'] . '\',\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							$i++;
-							}
+						}
 						?>
 					</div>
 				</div>
@@ -424,14 +546,14 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>สัมมนาและอบรม</h2>
 					<div class="box-btn">
-						<a href="km-seminar.php" class="btn black"><?=$seeAllCap?></a>
+						<a href="km-seminar.php" class="btn black"><?=$seeAllCap ?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
 					<div class="box-tumb-main cf ">
 						<?php
 						$categoryID = $seminar_cat_id;
-						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr = "SELECT " . $LANG_SQL;
 						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
 												content.EVENT_START_DATE,
@@ -449,23 +571,21 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}
+						if (isset($_GET['search'])) {
+							if (isset($_POST['str_search']))
+								$_SESSION['text'] = $_POST['str_search'];
+							$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" . $_SESSION['text'] . "%' or  content.CONTENT_DESC_ENG like '%" . $_SESSION['text'] . "%')";
+						} else {
+							unset($_SESSION['text']);
+						}
 
-
-							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+						$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
 						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
 						while ($rowContent = mysql_fetch_array($rsContent)) {
-						$extraClass = '';
+							$extraClass = '';
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
@@ -478,12 +598,12 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '"> ';
 							echo ' <div class="box-pic" > ';
 							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 							echo ' <div class="box-text">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo ' <p class="text-title">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -494,16 +614,16 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">' . $txt_more . '</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
-							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+							echo ' <a href="' . $fb_link . '" onclick="shareFB(\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="' . $fullpath . '" onclick="shareTW(\'' . $rowContent['CONTENT_ID'] . '\',\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							$i++;
-							}
+						}
 						?>
 					</div>
 				</div>
@@ -513,7 +633,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				<div class="box-title cf ">
 					<h2>สื่อการเรียนรู้</h2>
 					<div class="box-btn">
-						<a href="km-media.php" class="btn black"><?=$seeAllCap?></a>
+						<a href="km-media.php" class="btn black"><?=$seeAllCap ?></a>
 					</div>
 				</div>
 				<div class="box-news-main">
@@ -521,7 +641,7 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 
 						<?php
 						$categoryID = $media_cat_id;
-						$contentSqlStr  = "SELECT ".$LANG_SQL;
+						$contentSqlStr = "SELECT " . $LANG_SQL;
 						$contentSqlStr .= "   , cat.CONTENT_CAT_ID,
 												content.CONTENT_ID,
 												content.EVENT_START_DATE,
@@ -539,23 +659,21 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 
-							if (isset($_GET['search'])) {
-								if (isset($_POST['str_search']))
-									$_SESSION['text'] = $_POST['str_search'];
-									$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" .$_SESSION['text']. "%' or  content.CONTENT_DESC_ENG like '%" .$_SESSION['text']. "%')";
-							}
-							else {
-									unset($_SESSION['text']);
-							}
+						if (isset($_GET['search'])) {
+							if (isset($_POST['str_search']))
+								$_SESSION['text'] = $_POST['str_search'];
+							$contentSqlStr .= " AND (content.CONTENT_DESC_LOC like '%" . $_SESSION['text'] . "%' or  content.CONTENT_DESC_ENG like '%" . $_SESSION['text'] . "%')";
+						} else {
+							unset($_SESSION['text']);
+						}
 
-
-							$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
+						$contentSqlStr .= "ORDER BY content.ORDER_DATA desc LIMIT 0,3 ";
 
 						// start Loop Activity
 						$i = 1;
 						$rsContent = mysql_query($contentSqlStr) or die(mysql_error());
 						while ($rowContent = mysql_fetch_array($rsContent)) {
-						$extraClass = '';
+							$extraClass = '';
 							if ($i == 2) {
 								$extraClass = ' mid';
 							}
@@ -563,17 +681,17 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
 							$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
 							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
-							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' .$rowContent['CONTENT_ID'];
+							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
 							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'"> ';
+							echo '<a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '"> ';
 							echo ' <div class="box-pic" > ';
 							echo '	<img  style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 							echo ' <div class="box-text">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'">';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '">';
 							echo ' <p class="text-title">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -584,40 +702,40 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 							echo $rowContent['BRIEF_LOC'];
 							echo ' </p>';
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="km-detail.php?MID='.$MID.'&CID='.$categoryID.'&CONID='.$rowContent['CONTENT_ID'].'" class="btn red">'.$txt_more.'</a>';
+							echo ' <a href="km-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&CONID=' . $rowContent['CONTENT_ID'] . '" class="btn red">' . $txt_more . '</a>';
 							echo ' <div class="box-btn-social cf">';
-							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
-							echo ' <a href="'.$fullpath.'" onclick="shareTW(\''.$rowContent['CONTENT_ID'].'\',\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
+							echo ' <a href="' . $fb_link . '" onclick="shareFB(\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';
+							echo ' <a href="' . $fullpath . '" onclick="shareTW(\'' . $rowContent['CONTENT_ID'] . '\',\'' . $rowContent['CONTENT_DESC'] . '\',$(this).attr(\'href\')); return false;" class="btn-socila tw"></a>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							echo ' </div>';
 							$i++;
-							}
+						}
 						?>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="box-category-main news">
 				<div class="box-title cf">
-					<h2><?=$webboardCap?></h2>
+					<h2><?=$webboardCap ?></h2>
 					<div class="box-btn">
-						<a href="km-webboard.php" class="btn gold"><?=$seeAllCap?></a>
+						<a href="km-webboard.php" class="btn gold"><?=$seeAllCap ?></a>
 					</div>
 				</div>
 
 
 				<?php
 
-			    $badword = null;
-			    $goodword = null;
-			    $sql_weo = "SELECT trn_weo_word , trn_weo_replace FROM trn_weo";
-			    $query_weo=mysql_query($sql_weo);
-			    while($Row_weo=mysql_fetch_row($query_weo)){
-			    	$badword[] = $Row_weo[0];
-			    	$goodword[] = $Row_weo[1];
-			    }
+				$badword = null;
+				$goodword = null;
+				$sql_weo = "SELECT trn_weo_word , trn_weo_replace FROM trn_weo";
+				$query_weo = mysql_query($sql_weo);
+				while ($Row_weo = mysql_fetch_row($query_weo)) {
+					$badword[] = $Row_weo[0];
+					$goodword[] = $Row_weo[1];
+				}
 
 				//// ส่วนคำถาม
 				$sq_qa = " SELECT WEBBOARD_ID, CONTENT, USER_CREATE, LAST_UPDATE_DATE , VISIT_COUNT FROM trn_webboard
@@ -626,16 +744,12 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				if (isset($_GET['search'])) {
 					if (isset($_POST['str_search']))
 						$_SESSION['text'] = $_POST['str_search'];
-						$sq_qa .= " AND CONTENT like '%" .$_SESSION['text']. "%' ";
+					$sq_qa .= " AND CONTENT like '%" . $_SESSION['text'] . "%' ";
+				} else {
+					unset($_SESSION['text']);
 				}
-				else {
-						unset($_SESSION['text']);
-				}
-
 
 				$sq_qa .= "ORDER BY ORDER_DATA DESC Limit 0,15 ";
-
-
 
 				$query_qa = mysql_query($sq_qa, $conn);
 				?>
@@ -645,11 +759,11 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 
 						<div class="table-row head cf">
 							<div class="column list">เลขที่กระทู้</div>
-							<div class="column topic"><?=$subjectC?></div>
-							<div class="column name"><?=$nameCap?></div>
-							<div class="column reply"><?=$answerCap?></div>
-							<div class="column view"><?=$readCap?></div>
-							<div class="column date"><?=$lastUpdateCap?></div>
+							<div class="column topic"><?=$subjectC ?></div>
+							<div class="column name"><?=$nameCap ?></div>
+							<div class="column reply"><?=$answerCap ?></div>
+							<div class="column view"><?=$readCap ?></div>
+							<div class="column date"><?=$lastUpdateCap ?></div>
 						</div>
 
 
@@ -670,8 +784,8 @@ if ((!isset($_GET['MID'])) OR ($_GET['MID'] == '')){
 				?>
 
 				<div class="table-row list cf">
-					<div class="column list"><?=str_pad($row['WEBBOARD_ID'], 5, 0, STR_PAD_LEFT)?></div>
-					<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID'] ?>"><?=$content?></a></div>
+					<div class="column list"><?=str_pad($row['WEBBOARD_ID'], 5, 0, STR_PAD_LEFT) ?></div>
+					<div class="column topic"><a href="km-webboard-topic.php?web_id=<?=$row['WEBBOARD_ID'] ?>"><?=$content ?></a></div>
 					<div class="column name"><span><? echo $row['USER_CREATE'] ?></span></div>
 					<div class="column reply"><? echo $row_ans['ans'] ?></div>
 					<div class="column view"><? echo $row['VISIT_COUNT'] ?></div>

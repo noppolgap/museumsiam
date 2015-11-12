@@ -14,11 +14,6 @@ require ("../../assets/configs/function.inc.php");
 		<script type="text/javascript">
 			$(document).ready(function() {
 
-				// $('#cmbProvince').val('-1');
-
-				//defaultDistrict();
-				//defaultSubDistrict();
-
 				$('#cmbProvince').bind('change', function() {
 					defaultDistrict();
 					$('#cmbDistrict [data-ref="' + $('#cmbProvince').val() + '"]').show();
@@ -32,8 +27,83 @@ require ("../../assets/configs/function.inc.php");
 
 				});
 
+				$('.deleteMap').bind('click', function(e) {
+					if (confirm('ต้องการลบรูปภาพหรือไม่?')) {
+						$('#hid' + $(this).attr('data-id')).val('DEL');
+						$('#img' + $(this).attr('data-id')).attr('src', '');
+						e.preventDefault();
+						e.stopPropagation();
+					}
+				});
+
+				$("#browseMapEng").change(function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader();
+						reader.onload = imageIsLoadedMapEng;
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+
+				$("#browseMapLoc").change(function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader();
+						reader.onload = imageIsLoadedMapLoc;
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+
+				$("#browseParkingEng").change(function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader();
+						reader.onload = imageIsLoadedParkingEng;
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+
+				$("#browseParkingLoc").change(function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader();
+						reader.onload = imageIsLoadedParkingLoc;
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+
+				$("#browseTransportationEng").change(function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader();
+						reader.onload = imageIsLoadedTransportationEng;
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+
+				$("#browseTransportationLoc").change(function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader();
+						reader.onload = imageIsLoadedTransportationLoc;
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
 			});
 
+			function imageIsLoadedMapEng(e) {
+				$('#imgMapEng').attr('src', e.target.result);
+			};
+			function imageIsLoadedMapLoc(e) {
+				$('#imgMapLoc').attr('src', e.target.result);
+			};
+
+			function imageIsLoadedParkingEng(e) {
+				$('#imgParkingEng').attr('src', e.target.result);
+			};
+			function imageIsLoadedParkingLoc(e) {
+				$('#imgParkingLoc').attr('src', e.target.result);
+			};
+			function imageIsLoadedTransportationEng(e) {
+				$('#imgTransportationEng').attr('src', e.target.result);
+			};
+			function imageIsLoadedTransportationLoc(e) {
+				$('#imgTransportationLoc').attr('src', e.target.result);
+			};
 			function defaultSubDistrict() {
 				$('#cmbSubDistrict').val('-1');
 				$('#cmbSubDistrict option').hide();
@@ -63,7 +133,7 @@ require ("../../assets/configs/function.inc.php");
 				$('#latError').hide();
 				$('#lonError').hide();
 				$('#faxError').hide();
-				
+
 				if ($('#txtNameLoc').val() == '') {
 					$('#nameLocError').show();
 					ret = false;
@@ -89,33 +159,6 @@ require ("../../assets/configs/function.inc.php");
 					$('#subDistrictError').show();
 					ret = false;
 				}
-
-				/*
-				 if ($('#txtDisplayName').val() == '') {
-				 $('#displayNameError').show();
-				 ret = false;
-				 }
-				 if ($('#txtPostCode').val() == '') {
-				 $('#postCodeError').show();
-				 ret = false;
-				 }
-				 if ($('#txtTelephone').val() == '') {
-				 $('#telephoneError').show();
-				 ret = false;
-				 }
-
-				 if ($('#txtEmail').val() == '') {
-				 $('#emailError').show();
-				 ret = false;
-				 }
-				 if ($('#txtDetailLoc').val() == '') {
-				 $('#detailLocError').show();
-				 ret = false;
-				 }
-				 if ($('#txtDetailEng').val() == '') {
-				 $('#detailEngError').show();
-				 ret = false;
-				 }*/
 
 				if (ret) {
 					document.getElementById("frmcms").submit();
@@ -159,7 +202,7 @@ require ("../../assets/configs/function.inc.php");
 						<div class="mod-body-main-content">
 							<!--<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>-->
 							<div class="formCms">
-								<form action="?" method="post" name="formcms" id = "frmcms" >
+								<form action="?" method="post" name="formcms" id = "frmcms" enctype="multipart/form-data">
 									<div >
 										<div class="floatL form_name">
 											ชื่อพิพิธภัณฑ์ภาษาไทย
@@ -192,9 +235,9 @@ require ("../../assets/configs/function.inc.php");
 										<div class="clear"></div>
 									</div>
 
-									<div  class="bigForm">
+									<div  >
 										<div class="floatL form_name">
-											ที่อยู่
+											ที่อยู่ภาษาไทย
 										</div>
 										<div class="floatL form_input">
 											<textarea id= "txtAddress" name="txtAddress" class="w90p mytextarea2"><?php echo $rowMuseum['ADDRESS1']?></textarea>
@@ -202,7 +245,20 @@ require ("../../assets/configs/function.inc.php");
 										</div>
 										<div class="clear"></div>
 									</div>
+									<div   >
+										<div class="floatL form_name">
+											ที่อยู่ภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+											<textarea id= "txtAddressEng" name="txtAddressEng" class="w90p mytextarea2"><?php echo $rowMuseum['ADDRESS2']?></textarea>																																												
+											
 
+
+
+
+										</div>
+										<div class="clear"></div>
+									</div>
 									<div>
 										<div class="floatL form_name">
 											จังหวัด
@@ -357,6 +413,168 @@ require ("../../assets/configs/function.inc.php");
 										<div class="clear"></div>
 									</div>
 
+									<div>
+										<div class="floatL form_name">
+											แผนที่ภาษาไทย
+										</div>
+										<div class="floatL form_input">
+
+											<div class="box-input-text cf">
+												<input type='file' name ="browseMapLoc" id ="browseMapLoc"  accept="image/*" />
+											</div>
+
+											<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'" data-id="'+index+'">
+												<div class="thumbBoxImage">
+
+													<div class="box-pic"><img id="imgMapLoc" src="<?=$rowMuseum['MAP_IMG_PATH_LOC']?>">
+														<input type="hidden" id = "hidMapLoc"  name = "hidMapLoc" value="" />
+													</div>
+													<div class="thumbBoxAction dNone p-Absolute">
+														<a class="btn-delete deleteMap" data-id="MapLoc"> <img alt="" src="../images/small-n-flat/sign-ban.svg" /> </a>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+										<div class="clear"></div>
+									</div>
+
+									<div>
+										<div class="floatL form_name">
+											แผนที่ภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+
+											<div class="box-input-text cf">
+												<input type='file' name ="browseMapEng" id ="browseMapEng"  accept="image/*" />
+											</div>
+
+											<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'" data-id="'+index+'">
+												<div class="thumbBoxImage">
+
+													<div class="box-pic"><img id="imgMapEng" src="<?=$rowMuseum['MAP_IMG_PATH_ENG']?>">
+														<input type="hidden" id = "hidMapEng"  name = "hidMapEng" value="" />
+													</div>
+													<div class="thumbBoxAction dNone p-Absolute">
+														<a class="btn-delete deleteMap" data-id="MapEng"> <img alt="" src="../images/small-n-flat/sign-ban.svg" /> </a>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+										<div class="clear"></div>
+									</div>
+
+									<div>
+										<div class="floatL form_name">
+											ที่จอดรถภาษาไทย
+										</div>
+										<div class="floatL form_input">
+
+											<div class="box-input-text cf">
+												<input type='file' name ="browseParkingLoc" id ="browseParkingLoc"  accept="image/*" />
+											</div>
+
+											<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'" data-id="'+index+'">
+												<div class="thumbBoxImage">
+
+													<div class="box-pic"><img id="imgParkingLoc" src="<?=$rowMuseum['PARKING_IMG_PATH_LOC']?>">
+														<input type="hidden" id = "hidParkingLoc"  name = "hidParkingLoc" value="" />
+													</div>
+													<div class="thumbBoxAction dNone p-Absolute">
+														<a class="btn-delete deleteMap" data-id="ParkingLoc"> <img alt="" src="../images/small-n-flat/sign-ban.svg" /> </a>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+										<div class="clear"></div>
+									</div>
+
+									<div>
+										<div class="floatL form_name">
+											ที่จอดรถภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+
+											<div class="box-input-text cf">
+												<input type='file' name ="browseParkingEng" id ="browseParkingEng"  accept="image/*" />
+											</div>
+
+											<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'" data-id="'+index+'">
+												<div class="thumbBoxImage">
+
+													<div class="box-pic"><img id="imgParkingEng" src="<?=$rowMuseum['PARKING_IMG_PATH_ENG']?>">
+														<input type="hidden" id = "hidParkingEng"  name = "hidParkingEng" value="" />
+													</div>
+													<div class="thumbBoxAction dNone p-Absolute">
+														<a class="btn-delete deleteMap" data-id="ParkingEng"> <img alt="" src="../images/small-n-flat/sign-ban.svg" /> </a>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+										<div class="clear"></div>
+									</div>
+
+									<div>
+										<div class="floatL form_name">
+											การเดินทางภาษาไทย
+										</div>
+										<div class="floatL form_input">
+
+											<div class="box-input-text cf">
+												<input type='file' name ="browseTransportationLoc" id ="browseTransportationLoc"  accept="image/*" />
+											</div>
+
+											<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'" data-id="'+index+'">
+												<div class="thumbBoxImage">
+
+													<div class="box-pic"><img id="imgTransportationLoc" src="<?=$rowMuseum['TRANSPORTATION_IMG_PATH_LOC']?>">
+														<input type="hidden" id = "hidTransportationLoc"  name = "hidTransportationLoc" value="" />
+													</div>
+													<div class="thumbBoxAction dNone p-Absolute">
+														<a class="btn-delete deleteMap" data-id="TransportationLoc"> <img alt="" src="../images/small-n-flat/sign-ban.svg" /> </a>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+										<div class="clear"></div>
+									</div>
+
+									<div>
+										<div class="floatL form_name">
+											ที่จอดรถภาษาอังกฤษ
+										</div>
+										<div class="floatL form_input">
+
+											<div class="box-input-text cf">
+												<input type='file' name ="browseTransportationEng" id ="browseTransportationEng"  accept="image/*" />
+											</div>
+
+											<div class="thumbBoxEdit floatL p-Relative" id="img_'+res+'" data-id="'+index+'">
+												<div class="thumbBoxImage">
+
+													<div class="box-pic"><img id="imgTransportationEng" src="<?=$rowMuseum['TRANSPORTATION_IMG_PATH_ENG']?>">
+														<input type="hidden" id = "hidTransportationEng"  name = "hidTransportationEng" value="" />
+													</div>
+													<div class="thumbBoxAction dNone p-Absolute">
+														<a class="btn-delete deleteMap" data-id="TransportationEng"> <img alt="" src="../images/small-n-flat/sign-ban.svg" /> </a>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+										<div class="clear"></div>
+									</div>
+
 									<div class="btn_action">
 										<input type="button" name="save" value="บันทึก" class="buttonAction emerald-flat-button"  onclick="onValidate()" >
 										<input type="reset" value="ล้าง" class="buttonAction alizarin-flat-button">
@@ -387,7 +605,79 @@ require ("../../assets/configs/function.inc.php");
 		<?php
 
 		if (isset($_POST["action"]) && $_POST["action"] == "submit") {
+
 			$mid = $_POST['MID'];
+			$update = "";
+			if (isset($_POST['hidMapEng'])) {
+				if ($_POST['hidMapEng'] == 'DEL')
+					$update[] = "MAP_IMG_PATH_ENG = ''";
+			}
+			if (isset($_POST['hidMapLoc'])) {
+				if ($_POST['hidMapLoc'] == 'DEL')
+					$update[] = "MAP_IMG_PATH_LOC = ''";
+			}
+
+			if (isset($_POST['hidParkingEng'])) {
+				if ($_POST['hidParkingEng'] == 'DEL')
+					$update[] = "PARKING_IMG_PATH_ENG = ''";
+			}
+			if (isset($_POST['hidParkingLoc'])) {
+				if ($_POST['hidParkingLoc'] == 'DEL')
+					$update[] = "PARKING_IMG_PATH_LOC = ''";
+			}
+			if (isset($_POST['hidTransportationEng'])) {
+				if ($_POST['hidTransportationEng'] == 'DEL')
+					$update[] = "TRANSPORTATION_IMG_PATH_ENG = ''";
+			}
+			if (isset($_POST['hidTransportationLoc'])) {
+				if ($_POST['hidTransportationLoc'] == 'DEL')
+					$update[] = "TRANSPORTATION_IMG_PATH_LOC = ''";
+			}
+
+			if (isset($_FILES['browseMapLoc'])) {
+				if ($_FILES['browseMapLoc']["name"] != '') {
+					$filename = backend_move_single_image_upload_dir('MUSEUM_' . $mid, $_FILES['browseMapLoc']);
+					$update[] = "MAP_IMG_PATH_LOC = '" . $filename . "'";
+				}
+			}
+
+			if (isset($_FILES['browseMapEng'])) {
+				if ($_FILES['browseMapEng']["name"] != '') {
+					$filename = backend_move_single_image_upload_dir('MUSEUM_' . $mid, $_FILES['browseMapEng']);
+					$update[] = "MAP_IMG_PATH_ENG = '" . $filename . "'";
+				}
+			}
+
+			if (isset($_FILES['browseParkingLoc'])) {
+				if ($_FILES['browseParkingLoc']["name"] != '') {
+					$filename = backend_move_single_image_upload_dir('MUSEUM_' . $mid, $_FILES['browseParkingLoc']);
+					$update[] = "PARKING_IMG_PATH_LOC = '" . $filename . "'";
+				}
+			}
+
+			if (isset($_FILES['browseParkingEng'])) {
+				if ($_FILES['browseParkingEng']["name"] != '') {
+					$filename = backend_move_single_image_upload_dir('MUSEUM_' . $mid, $_FILES['browseParkingEng']);
+					$update[] = "PARKING_IMG_PATH_ENG = '" . $filename . "'";
+				}
+			}
+
+			if (isset($_FILES['browseTransportationLoc'])) {
+				if ($_FILES['browseTransportationLoc']["name"] != '') {
+					$filename = backend_move_single_image_upload_dir('MUSEUM_' . $mid, $_FILES['browseTransportationLoc']);
+					$update[] = "TRANSPORTATION_IMG_PATH_LOC = '" . $filename . "'";
+				}
+			}
+
+			if (isset($_FILES['browseTransportationEng'])) {
+				if ($_FILES['browseTransportationEng']["name"] != '') {
+					$filename = backend_move_single_image_upload_dir('MUSEUM_' . $mid, $_FILES['browseTransportationEng']);
+					$update[] = "TRANSPORTATION_IMG_PATH_ENG = '" . $filename . "'";
+				}
+			}
+
+			$update[] = "ADDRESS2 = '" . $_POST['txtAddressEng"'] . "'";
+			$update[] = "FAX = '" . $_POST['txtFax'] . "'";
 			$txtNameLoc = $_POST['txtNameLoc'];
 			$txtNameEng = $_POST['txtNameEng'];
 
@@ -424,6 +714,10 @@ require ("../../assets/configs/function.inc.php");
 			$strSQL .= " ,LAST_FUNCTION = 'U'";
 			$strSQL .= " where MUSEUM_DETAIL_ID = '" . $mid . "'";
 			$objQuery = mysql_query($strSQL);
+
+			$sql = "UPDATE trn_museum_detail SET  " . implode(",", $update) . " WHERE MUSEUM_DETAIL_ID = " . $mid;
+		//	echo $sql;
+			mysql_query($sql);
 
 			$indexPage = "/administrator/mod_network_museum/editMuseum.php?MID=" . $mid;
 			if ($objQuery) {

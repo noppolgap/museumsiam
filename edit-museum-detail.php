@@ -2,6 +2,7 @@
 require ("assets/configs/config.inc.php");
 require ("assets/configs/connectdb.inc.php");
 require ("assets/configs/function.inc.php");
+require ("inc/inc-cat-id-conf.php");
 ?>
 <!doctype html>
 <html>
@@ -11,10 +12,16 @@ require ('inc_meta.php');
  ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
-<link rel="stylesheet" type="text/css" href="css/account.css" />
-<link rel="stylesheet" type="text/css" href="css/account-detail.css" />
+<link rel="stylesheet" type="text/css" href="css/add-account.css" />
+<link rel="stylesheet" type="text/css" href="css/add-museum-detail.css" />
 <link rel="stylesheet" type="text/css" href="css/add-museum.css" />
 <link rel="stylesheet" type="text/css" href="css/styleForUploadPhoto.css" />
+<script type="text/javascript" src="js/add-museum-detail.js"></script>
+<script type="text/javascript" src="assets/plugin/upload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="assets/plugin//upload/jquery.fileupload.js"></script>
+
+<link rel="stylesheet" type="text/css" href="assets/plugin/colorbox/colorbox.css" media="all" >
+<script type="text/javascript" src="assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="js/scriptForUploadPhoto.js"></script>
 <script>
 	 
@@ -24,7 +31,7 @@ require ('inc_meta.php');
 		ul.catItems {
 			text-align: center;
 			list-style-type: none;
-			color: #d9c3c3;
+			/*color: #d9c3c3;*/
 		}
 		ul.catItems li {
 			float: left;
@@ -32,6 +39,9 @@ require ('inc_meta.php');
 		ul.catItems li:nth-child(3n+4) {
 			clear: left;
 			float: left;
+		}
+		.myCheck div span{
+			color: #000000 !important;
 		}
 	</style>
 </head>
@@ -75,6 +85,7 @@ $mdnSql .= "	FROM
 $mdnSql .= "	AND tmd.ACTIVE_FLAG = 1
 				AND tmd.IS_GIS_MUSEUM = 'N' ";
 
+			//	echo $mdnSql ;
 $rs = mysql_query($mdnSql) or die(mysql_error());
 $row = mysql_fetch_array($rs);
 ?>
@@ -83,12 +94,12 @@ $row = mysql_fetch_array($rs);
  
 
 <div class="part-account-main">
-	<form name="myform" id="myform" method="post" action="add-museum-action.php" enctype="multipart/form-data">
+	<form name="myform" id="myform" method="post" action="add-museum-action.php?edit" enctype="multipart/form-data">
 	<div class="container cf" style="width:800px;">
 	 
 		<div class="box-account-right cf" style="width:100%">
 			<div class="box-title">
-				<h1>จัดการพิพิธภัณฑ์ - รายละเอียดพิพิธภัณฑ์</h1>
+				<h1>แก้ไขพิพิธภัณฑ์</h1>
 			</div>
 			<input type="hidden" name = "museumId" value="<?=$row['MUSEUM_DETAIL_ID'] ?>" />
 			<input type="hidden" name = "methodType" value="<?=$methodType ?>" />
@@ -459,7 +470,7 @@ $row = mysql_fetch_array($rs);
 						}
 						?>
 						<div class="box-right">
-							<div class="box-input-text checkbox">
+							<div class="box-input-text checkbox myCheck">
 
 								<div>
 									<input type="checkbox" name = "auto_open[]" value="1" <?=$monSelected ?>><span>จ</span>
@@ -845,39 +856,7 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<!-- <div class="row-main cf">
-				<div class="box-left addW">
-					<div class="box-row cf ">
-						<div class="box-left">
-
-						</div>
-						<div class="box-right ">
-							<div class="box-input-text cf">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
+			
 			<div class="box-line cf"><hr></div>
 
 			<div class="row-main cf">
@@ -924,35 +903,7 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<!-- <div class="row-main cf">
-				<div class="box-left addW">
-					<div class="box-row cf ">
-						<div class="box-left">
-
-						</div>
-						<div class="box-right ">
-							<div class="box-input-text cf">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
+			
 			<div class="box-line cf"><hr></div>
 
 			<div class="row-main cf">
@@ -1295,15 +1246,6 @@ $row = mysql_fetch_array($rs);
 
 
 
-<?php
-include ('inc/inc-footer.php');
- ?>
-<script type="text/javascript" src="js/account-museum-detail.js"></script>
-<script type="text/javascript" src="assets/plugin/upload/jquery.iframe-transport.js"></script>
-<script type="text/javascript" src="assets/plugin//upload/jquery.fileupload.js"></script>
-
-<link rel="stylesheet" type="text/css" href="assets/plugin/colorbox/colorbox.css" media="all" >
-<script type="text/javascript" src="assets/plugin/colorbox/jquery.colorbox-min.js"></script>
 
 </body>
 </html>

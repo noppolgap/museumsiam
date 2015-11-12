@@ -154,8 +154,9 @@ include ('inc/inc-menu.php');
 						$query = mysql_query($sql, $conn);
 
 						$contentCount = 0;
+						$noData = TRUE ; 
 						while ($row = mysql_fetch_array($query)) {
-
+$noData = FALSE ; 
 							$IMG_PATH = str_replace("../../", "", $row['IMG_PATH']);
 
 							if ($contentCount == 3) {
@@ -234,6 +235,11 @@ include ('inc/inc-menu.php');
 							// }
 							$index++;
 							$contentCount++;
+						}
+
+						if($noData)
+						{
+							echo '<div class="noDataText">'. $noDataCap.'</div>';
 						}
 					?>
 

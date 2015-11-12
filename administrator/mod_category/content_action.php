@@ -261,7 +261,9 @@ if (isset($_GET['edit'])) {
 	///$_POST['cmbCategory'] . "'";
 	$update[] = "SUB_CAT_ID = '" . $subCatID . "'";
 
+ 
 	$update[] = "EVENT_START_DATE = '" . ConvertDateToDB($_POST['txtStartDate']) . "'";
+	
 	$update[] = "EVENT_END_DATE = '" . ConvertDateToDB($_POST['txtEndDate']) . "'";
 
 	$update[] = "PLACE_DESC_LOC = '" . nvl($_POST['txtPlaceLoc'], "") . "'";

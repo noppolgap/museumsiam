@@ -1947,4 +1947,35 @@ function callMDNThumbListFrontEnd($mid, $genBgStyle) {
 	}
 
 }
+
+
+function backend_move_single_image_upload_dir($dir, $file) {
+	$path1 = '../../upload';
+	$path2 = $path1 . '/' . $dir;
+	$path3 = $path2 . '/' . date("Y_m") . '/';
+
+	if (!is_dir($path1)) { mkdir($path1, 0777);
+	} else { chmod($path1, 0777);
+	}
+	if (!is_dir($path2)) { mkdir($path2, 0777);
+	} else { chmod($path2, 0777);
+	}
+	if (!is_dir($path3)) { mkdir($path3, 0777);
+	} else { chmod($path3, 0777);
+	}
+
+	chmod($path1, 0755);
+	chmod($path2, 0755);
+	chmod($path3, 0755);
+
+	$target_file = $target_dir_museum . basename($file["name"]);
+	$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+	$target_save_file = $path3 . time() . '_' . rand(111, 999) . '.' . $imageFileType;
+
+	if (move_uploaded_file($file["tmp_name"], $target_save_file))
+		return $target_save_file;
+	else
+		return "";
+
+}
 ?>

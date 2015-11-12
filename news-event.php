@@ -58,7 +58,7 @@ include ('inc/inc-menu.php');
 	<div class="container cf">
 		<div class="box-left main-content">
 			<?php
-			$menu_newsevent = 2;
+			$menu_newsevent = 0;
 			include ('inc/inc-left-content-newsevent.php');
 			include ('inc/inc-left-content-calendar.php');
 			?>

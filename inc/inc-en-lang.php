@@ -199,4 +199,6 @@ $sum = "Sum";
 $status = "Status";
 $report_webboard = 'Report';
 
+$noDataCap = "Data not found";
+$newAndEventDate = "Events & News Date : ";
 ?>

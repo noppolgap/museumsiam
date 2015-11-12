@@ -56,7 +56,13 @@ require ('../inc_meta.php');
 								,sb.order_data DESC
 							) a
 						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID 
-						where cd.CONTENT_STATUS_FLAG <>  2  ORDER BY cd.ORDER_DATA desc ";
+						where cd.CONTENT_STATUS_FLAG <>  2 ";
+						
+						if (isset($SCID) && nvl($SCID, '0') != '0') {
+				$sql .= "	AND cd.SUB_CAT_ID = $SCID ";
+			}
+								
+						$sql .= " ORDER BY cd.ORDER_DATA desc ";
 
 			     $query = mysql_query($sql,$conn);
 			     while($row = mysql_fetch_array($query)) {
@@ -72,7 +78,7 @@ require ('../inc_meta.php');
 <script type="text/javascript" src="../master/script.js"></script>	
 <script>
 	var listOrder = new Array();
-	var countList = $('#sortable li').length; 
+	var countList = $('#sortable li').length;
 </script>
 </body>
 </html>

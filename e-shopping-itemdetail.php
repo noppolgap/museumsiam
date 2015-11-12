@@ -118,7 +118,8 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 								<? echo $row_detail['PRODUCT_DESC']; ?>
 							</div>
 							<div class="text-detail">
-								<? echo $row_detail['DETAIL']; ?>
+								<?=nl2br(strip_tags($row_detail['DETAIL'], $allowTag)); ?>
+								<!-- <? echo $row_detail['DETAIL']; ?> -->
 							</div>
 							<div class="text-price">
 								<p>

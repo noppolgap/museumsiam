@@ -1,20 +1,20 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
 
-
-					$MID = intval($_GET['MID']);
-					$CID = intval($_GET['CID']);
-					$SID = intval($_GET['SID']);
-					$NID = intval($_GET['CONID']);
-					$date_page = $_GET['date'];
-
+$MID = intval($_GET['MID']);
+$CID = intval($_GET['CID']);
+$SID = intval($_GET['SID']);
+$NID = intval($_GET['CONID']);
+$date_page = $_GET['date'];
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>
+<?
+	require ('inc_meta.php');
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/news-event.css" />
@@ -26,20 +26,29 @@ require("assets/configs/function.inc.php");
 
 <body>
 
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>
+<?php
+	include ('inc/inc-top-bar.php');
+ ?>
+<?php
+	include ('inc/inc-menu.php');
+ ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php"><?=$newsAndEventCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-event-museum.php"><?=$activityNewsMuseumCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="news-museum.php"><?=$activityMuseumCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="news-event-museum.php"><?=$newsAndEventCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="news-event-museum.php"><?=$activityNewsMuseumCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="news-museum.php"><?=$activityMuseumCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 
 				<?
-				    $sql_title = " select CONTENT_DESC_LOC from trn_content_detail where CONTENT_ID = $NID";
+					if($_SESSION['LANG'] == 'TH')
+						$selectedColumn = " CONTENT_DESC_LOC as CONTENT_DESC ";
+					else 
+						$selectedColumn = " CONTENT_DESC_ENG as CONTENT_DESC ";
+					
+				    $sql_title = " select ".$selectedColumn." from trn_content_detail where CONTENT_ID = $NID";
 
 					$query_title = mysql_query($sql_title, $conn);
 
@@ -47,7 +56,7 @@ require("assets/configs/function.inc.php");
 					while($row_title = mysql_fetch_array($query_title)) {
 				?>
 
-					<li class="active"><? echo $row_title['CONTENT_DESC_LOC'] ?></li>
+					<li class="active"><? echo $row_title['CONTENT_DESC'] ?></li>
 
 				<? } ?>
 			</ol>
@@ -60,72 +69,75 @@ require("assets/configs/function.inc.php");
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-newsevent.php'); ?>
-			<?php include('inc/inc-left-content-calendar.php'); ?>
+			<?php
+			include ('inc/inc-left-content-newsevent.php');
+ ?>
+			<?php
+				include ('inc/inc-left-content-calendar.php');
+ ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
-				<h1><?=$activityMuseumCap?></h1>
+				<h1><?=$activityMuseumCap ?></h1>
 				<div class="box-btn">
 
 				 <?
-				  $back_link = "";
+				$back_link = "";
 
-				  switch ($date_page) {
-				    case "date":
-				        $back_link = "news-event-day.php";
-				        break;
-				    case "month":
-				        $back_link = "news-event-month.php";
-				        break;
-				    case "week":
-				        $back_link = "news-event-week.php";
-				        break;
-				    case "eventall":
-				    	$back_link = "news-event-museum.php";
-				    break;
-				    case "newsall":
-				    	$back_link = "news-event-museum.php";
-				    break;
-				    case "news_month":
-				    	$back_link = "news-month.php";
-				    break;
-				    case "event_month":
-				    	$back_link = "event-month.php";
-				    break;
-				    case "event_week":
-				    	$back_link = "event-week.php";
-				    break;
-				    case "news_week":
-				    	$back_link = "news-week.php";
-				    break;
-				    case "news_day":
-				    	$back_link = "news-day.php";
-				    break;
-				    case "event_day":
-				    	$back_link = "event-day.php";
-				    break;
-				    case "":
-				    	$back_link = "event-museum.php";
-				    break;
+				switch ($date_page) {
+					case "date" :
+						$back_link = "news-event-day.php";
+						break;
+					case "month" :
+						$back_link = "news-event-month.php";
+						break;
+					case "week" :
+						$back_link = "news-event-week.php";
+						break;
+					case "eventall" :
+						$back_link = "news-event-museum.php";
+						break;
+					case "newsall" :
+						$back_link = "news-event-museum.php";
+						break;
+					case "news_month" :
+						$back_link = "news-month.php";
+						break;
+					case "event_month" :
+						$back_link = "event-month.php";
+						break;
+					case "event_week" :
+						$back_link = "event-week.php";
+						break;
+					case "news_week" :
+						$back_link = "news-week.php";
+						break;
+					case "news_day" :
+						$back_link = "news-day.php";
+						break;
+					case "event_day" :
+						$back_link = "event-day.php";
+						break;
+					case "" :
+						$back_link = "event-museum.php";
+						break;
 				}
-
 				?>
 
-					<a href="<? echo $back_link ?>" class="btn red"><?=$backToActivityCap?></a>
+					<a href="<? echo $back_link ?>" class="btn red"><?=$backToActivityCap ?></a>
 				</div>
 			</div>
 
 		<?
 
-				$sql = " SELECT ";
-				if ($_SESSION['LANG'] == 'TH'){
-					$sql .= 'cat.CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC , content.CONTENT_DESC_LOC AS CONTENT_LOC , content.CONTENT_DETAIL_LOC AS CONTENT_DETAIL , content.BRIEF_LOC AS CONTENT_BRIEF ,content.PRICE_RATE_LOC as PRICE_RATE ,content.PLACE_DESC_LOC as PLACE_DESC , tmd.MUSEUM_NAME_LOC as MUSEUM_DESC ';
-				}else if ($_SESSION['LANG'] == 'EN'){
-					$sql .= 'cat.CONTENT_CAT_DESC_ENG AS CONTENT_CAT_LOC , content.CONTENT_DESC_ENG AS CONTENT_LOC , content.CONTENT_DETAIL_ENG AS CONTENT_DETAIL , content.BRIEF_ENG AS CONTENT_BRIEF ,content.PRICE_RATE_ENG as PRICE_RATE ,content.PLACE_DESC_LOC as PLACE_DESC , tmd.MUSEUM_NAME_ENG as MUSEUM_DESC ';
-				}
-				 	$sql .= ",
+		$sql = " SELECT ";
+		if ($_SESSION['LANG'] == 'TH') {
+			$sql .= 'cat.CONTENT_CAT_DESC_LOC AS CONTENT_CAT_LOC , content.CONTENT_DESC_LOC AS CONTENT_LOC , content.CONTENT_DETAIL_LOC AS CONTENT_DETAIL , content.BRIEF_LOC AS CONTENT_BRIEF ,content.PRICE_RATE_LOC as PRICE_RATE ,content.PLACE_DESC_LOC as PLACE_DESC , tmd.MUSEUM_NAME_LOC as MUSEUM_DESC ';
+		} else if ($_SESSION['LANG'] == 'EN') {
+			$sql .= 'cat.CONTENT_CAT_DESC_ENG AS CONTENT_CAT_LOC , content.CONTENT_DESC_ENG AS CONTENT_LOC , content.CONTENT_DETAIL_ENG AS CONTENT_DETAIL , content.BRIEF_ENG AS CONTENT_BRIEF ,content.PRICE_RATE_ENG as PRICE_RATE ,content.PLACE_DESC_LOC as PLACE_DESC , tmd.MUSEUM_NAME_ENG as MUSEUM_DESC ';
+		}
+		$sql .= ",
 						cat.CONTENT_CAT_ID,
 						content.SUB_CAT_ID,
 						content.CONTENT_ID,
@@ -150,14 +162,13 @@ require("assets/configs/function.inc.php");
 						AND content.CONTENT_ID = $NID
 						ORDER BY content.ORDER_DATA desc ";
 
-						 
-			$query = mysql_query($sql, $conn);
+		$query = mysql_query($sql, $conn);
 
-			$num_rows = mysql_num_rows($query);
-			$row = mysql_fetch_array($query);
+		$num_rows = mysql_num_rows($query);
+		$row = mysql_fetch_array($query);
 
-			$date = ConvertBoxDate($row['EVENT_START_DATE']);
-$dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
+		$date = ConvertBoxDate($row['EVENT_START_DATE']);
+		$dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 	   ?>
 
 			<div class="box-newsdetail-main">
@@ -234,11 +245,11 @@ $dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 					<a class="btn-arrow-slide next"></a>
 					<div class="box-title-main">
 						<div class="box-date-tumb type2">
-							<p class="date"><?=$date[0].'-'.$dateEnd[0]?></p>
-							<p class="month"><?=$date[1].'-'.$dateEnd[1]?></p>
+							<p class="date"><?=$date[0] . '-' . $dateEnd[0] ?></p>
+							<p class="month"><?=$date[1] . '-' . $dateEnd[1] ?></p>
 						</div>
 						<div class="box-text">
-							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>
+							<p class="text-title"><? echo $row['CONTENT_LOC'] ?></p>
 							<p class="text-des">By <? echo $row['MUSEUM_DESC'] ?></p>
 						</div>
 					</div>
@@ -246,51 +257,51 @@ $dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 				<div class="box-social-main cf">
 				<?php
 
-						$path = 'event-detail.php?MID='.$MID.'%26CID='.$CID.'%26SID='.$SID.'%26CONID='.$CONID;
-						$fullpath = _FULL_SITE_PATH_.'/'.$path;
-						$redirect_uri = _FULL_SITE_PATH_.'/callback.php?p='.$CONID;
-						$fb_link = 'https://www.facebook.com/dialog/share?app_id='._FACEBOOK_ID_.'&display=popup&href='.$fullpath.'&redirect_uri='.$redirect_uri;
-						$gp_link = 'https://plus.google.com/share?url='.$fullpath;
-						$tw_link = $fullpath;
-						$line = 'http://line.me/R/msg/text/?'.$title.'%0D%0A'.$fullpath;
+				$path = 'event-detail.php?MID=' . $MID . '%26CID=' . $CID . '%26SID=' . $SID . '%26CONID=' . $CONID;
+				$fullpath = _FULL_SITE_PATH_ . '/' . $path;
+				$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $CONID;
+				$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
+				$gp_link = 'https://plus.google.com/share?url=' . $fullpath;
+				$tw_link = $fullpath;
+				$line = 'http://line.me/R/msg/text/?' . $title . '%0D%0A' . $fullpath;
 				?>
-					<a href="<?=$fb_link?>" onclick="shareFB('<?=$title?>',$(this).attr('href')); return false;" class="btn fb"></a>
-					<a href="<?=str_replace("%26","&amp;",$fullpath)?>" onclick="shareTW(<?=$CONID?>,'<?=$title?>',$(this).attr('href')); return false;" class="btn tw"></a>
-					<a href="<?=$gp_link?>" onclick="sharegp('<?=$title?>',$(this).attr('href')); return false;" class="btn g"></a>
-					<a href="<?=$line?>" target="_blank" class="btn line"></a>
+					<a href="<?=$fb_link ?>" onclick="shareFB('<?=$title ?>',$(this).attr('href')); return false;" class="btn fb"></a>
+					<a href="<?=str_replace("%26", "&amp;", $fullpath) ?>" onclick="shareTW(<?=$CONID ?>,'<?=$title ?>',$(this).attr('href')); return false;" class="btn tw"></a>
+					<a href="<?=$gp_link ?>" onclick="sharegp('<?=$title ?>',$(this).attr('href')); return false;" class="btn g"></a>
+					<a href="<?=$line ?>" target="_blank" class="btn line"></a>
 				</div>
-				<div class="part-tumb-main" <?=$extraStyle?>>
+				<div class="part-tumb-main" <?=$extraStyle ?>>
 					<div  class="text-title cf">
 						<p>แกลเลอรี</p>
 						<div class="box-btn">
-							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black"><?=$seeAllCap?></a>
+							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black"><?=$seeAllCap ?></a>
 						</div>
 					</div>
 					<div class="box-slide-small">
 						<div id="sync2" class="owl-carousel">
-							<?=$thumbRender?>
+							<?=$thumbRender ?>
 						</div>
 					</div>
 				</div>
 				<?
 				$textLocation = ' class="text-location" ';
-if (nvl($rowContent['PLACE_DESC'], '') == '')
-	$textLocation = ' class="text-des"  style="height: 15px;" ';
+				if (nvl($row['PLACE_DESC'], '') == '')
+					$textLocation = ' class="text-des"  style="height: 15px;" ';
 
-$textTicket = ' class="text-ticket" ';
-if (nvl($rowContent['PRICE_RATE'], '') == '')
-	$textTicket = ' class="text-des"  style="height: 15px;" ';
-?>
+				$textTicket = ' class="text-ticket" ';
+				if (nvl($row['PRICE_RATE'], '') == '')
+					$textTicket = ' class="text-des"  style="height: 15px;" ';
+			?>
 				
 				<div class="box-when">
 					<h3>WHEN</h3>
 					<p class="text-date"><? echo ConvertDate($row['EVENT_START_DATE']) ?> - <? echo ConvertDate($row['EVENT_END_DATE']) ?></p>
 					<p class="text-time"><? echo $row['EVENT_START_TIME'] ?> - <? echo $row['EVENT_END_TIME'] ?></p>
-					<p <?=$textLocation ?>><? echo nvl($rowContent['PLACE_DESC'], '')  ?></p>
+					<p <?=$textLocation ?>><? echo nvl($row['PLACE_DESC'], '')  ?></p>
 				</div>
 				<div class="box-ticket">
 					<h3>TICKET</h3>
-					<p <?=$textTicket?>><?= nvl($rowContent['PRICE_RATE'], '') ?></p>
+					<p <?=$textTicket ?>><?= nvl($row['PRICE_RATE'], '') ?></p>
 				</div>
 				<div class="box-news-text">
 					<p>
@@ -327,12 +338,12 @@ if (nvl($rowContent['PRICE_RATE'], '') == '')
 							<div class="box-text">
 								<p class="text-title"><?=$rowFile['IMG_NAME'] ?></p>
 								<p class="text-detail">
-									<span><?=$typeCap?>: .<?=$ext ?></span>
-									<span><?=$sizeCap?>: <?=$size ?></span>
+									<span><?=$typeCap ?>: .<?=$ext ?></span>
+									<span><?=$sizeCap ?>: <?=$size ?></span>
 								</p>
 							</div>
 							<div class="box-btn cf">
-								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap?></a>
+								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap ?></a>
 							</div>
 						</div>
 					<?php } } ?>
@@ -343,7 +354,7 @@ if (nvl($rowContent['PRICE_RATE'], '') == '')
 
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						<?=$lastEditCap?> :  <? echo ConvertDate($row['LAST_UPDATE_DATE']) ?>
+						<?=$lastEditCap ?> :  <? echo ConvertDate($row['LAST_UPDATE_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						<div class="fb-share-button" data-href="<?=$path ?>" data-layout="button_count"></div>
@@ -352,7 +363,8 @@ if (nvl($rowContent['PRICE_RATE'], '') == '')
 						<span>
 						<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
 						<script type="text/javascript">
-													new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>","withUrl":true});
+																				new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>
+							","withUrl":true});
 						</script>
 						</span>
 					</div>
@@ -362,7 +374,7 @@ if (nvl($rowContent['PRICE_RATE'], '') == '')
 
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="<? echo $back_link ?>" class="btn red"><?=$backToActivityCap?></a>
+					<a href="<? echo $back_link ?>" class="btn red"><?=$backToActivityCap ?></a>
 				</div>
 			</div>
 		</div>
@@ -374,8 +386,8 @@ if (nvl($rowContent['PRICE_RATE'], '') == '')
 
 
 <?php
-include('inc/inc-footer.php');
-include('inc/inc-social-network.php');
+include ('inc/inc-footer.php');
+include ('inc/inc-social-network.php');
 ?>
 <? if($audioPlayer){ ?>
 <link rel="stylesheet" href="assets/plugin/circle-player/skin/circle.player.css">
@@ -384,7 +396,7 @@ include('inc/inc-social-network.php');
 <script type="text/javascript" src="assets/plugin/circle-player/js/jquery.grab.js"></script>
 <script type="text/javascript" src="assets/plugin/circle-player/js/mod.csstransforms.min.js"></script>
 <script type="text/javascript" src="assets/plugin/circle-player/js/circle.player.js"></script>
-<script type="text/javascript" src="audiolist.php?NAME=voice&amp;CID=<?=$CID?>&amp;CONID=<?=$CONID?>"></script>
+<script type="text/javascript" src="audiolist.php?NAME=voice&amp;CID=<?=$CID ?>&amp;CONID=<?=$CONID ?>"></script>
 <? } ?>
 
 </body>

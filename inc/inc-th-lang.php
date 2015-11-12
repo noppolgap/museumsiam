@@ -199,4 +199,6 @@ $sum = "รวม";
 $status = "สถานะ";
 $report_webboard = 'แจ้งลบ';
 
+$noDataCap = "ไม่มีข้อมูล";
+$newAndEventDate = "กิจกรรมและข่าวสาร วันที่ ";
 ?>

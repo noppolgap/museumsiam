@@ -113,29 +113,30 @@ require ('../inc_header.php');
 								<span class="error" >* <span id = "detailEnError" style="display:none">กรุณาระบุรายละเอียด EN</span> </span>
 								<div class="clear"></div>
 							</div>
-
-							<? if($SCID == $museumDataNetworkNewsSubCat || $SCID == $mesum_sub_cat_id ) { ?>
-
-							<div>
-								<div class="floatL form_name">วันที่</div>
-								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="<?=ConvertDate($row['EVENT_START_DATE']) ?>" class="DatePicker" /></div>
-								<div class="clear"></div>
-							</div>
 							
-							<? }else{ ?>
-
+							<?
+							$displayStyle = "style='display:block'";
+							if ($SCID == $museumDataNetworkNewsSubCat || $SCID == $mesum_sub_cat_id) {
+								$dateStartCaption = "วันที่";
+								$displayStyle = "style='display:none'";
+							} else {
+								$dateStartCaption = "วันที่เริ่ม";
+								$endCaption = "วันที่สิ้นสุด";
+							}
+ ?>
+							
 							<div>
-								<div class="floatL form_name">วันที่เริ่ม</div>
+								<div class="floatL form_name"><?=$dateStartCaption ?></div>
 								<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="<?=ConvertDate($row['EVENT_START_DATE']) ?>" class="DatePicker" /></div>
 								<div class="clear"></div>
 							</div>
-							<div>
-								<div class="floatL form_name">วันที่สิ้นสุด</div>
+							<div <?=$displayStyle ?>>
+								<div class="floatL form_name"><?=$endCaption ?></div>
 								<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="<?=ConvertDate($row['EVENT_END_DATE']) ?>" class="DatePicker" /></div>
 								<div class="clear"></div>
 							</div>
 
-							<? } ?>
+						
 
 							<div>
 								<div class="floatL form_name">เวลาเริ่ม</div>

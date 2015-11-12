@@ -21,6 +21,7 @@
 /* --------------------------------------------------- Slide Big --------------------------------------------------- */
 #sync1{
 	width: 462px;
+	height:344px;
 	margin: 0 auto 10px;
 }
 #sync1 img{
@@ -514,7 +515,8 @@
 	background-size: 100% auto;
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 562px;
+	height: 344px;
+	/*height: 562px;*/
 }
 .slideProductImage img{
 	opacity: 0;

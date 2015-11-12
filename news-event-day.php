@@ -31,7 +31,7 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
-	});
+	}); 
 </script>
 
 </head>
@@ -72,7 +72,16 @@ include ('inc/inc-menu.php');
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
-				<h1><?=$dailyCap ?></h1>
+				
+				<?
+					$showDate = "";
+					if (isset($_GET['date'])) {
+						$showDate = $newAndEventDate . ConvertDate($_GET['date']);
+					} else {
+						$showDate = $dailyCap;
+					}
+				?>
+				<h1><?=$showDate ?></h1>
 			</div>
 		<?php
 			if ($_SESSION['LANG'] == 'TH'){

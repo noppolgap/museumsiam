@@ -36,10 +36,10 @@
 .box-input-text .box-tumb{
 	margin: 0 12px;
 	float: left;
-	border: 4px solid #9a5350;
+	border: 4px solid #D3D3D3;
 	width: 131px;
 	height: 100px;
-	background: url(../images/account/pic.png) center center no-repeat #8e070b;
+	background: url(../images/account/pic.png) center center no-repeat #D3D3D3;
 }
 .box-input-text .box-tumb:first-child{
 	margin-left: 0px;

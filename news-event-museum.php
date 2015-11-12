@@ -138,14 +138,14 @@ if (isset($_GET['search'])) {
 						echo '<div class="box-tumb ' . $gap . ' ">';
 						echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=eventall">';
 						echo '<div class="box-pic">';
-						echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
+						echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
 						// echo '<div class="box-tag-cate">';
 						// echo $title;
 						// echo '</div>';
-						// echo '<div class="box-date-tumb type2">';
-						// echo '<p class="date">' . $date[0] . '-' . $dateEnd[0] . '</p>';
-						// echo '<p class="month">' . $date[1] . '-' . $dateEnd[1] . '</p>';
-						// echo '</div>';
+						echo '<div class="box-date-tumb type2">';
+						echo '<p class="date">' . $date[0] . '-' . $dateEnd[0] . '</p>';
+						echo '<p class="month">' . $date[1] . '-' . $dateEnd[1] . '</p>';
+						echo '</div>';
 						echo '</div>';
 						echo '</a>';
 						echo '<div class="box-text">';
@@ -177,12 +177,53 @@ if (isset($_GET['search'])) {
 					</div>
 					<div class="box-pagination-main cf" style="display: none">
 						<ul class="pagination">
-							<li class="deactive"><a href="" class="btn-arrow-left"></a></li>
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">...</a></li>
-							<li><a href="" class="btn-arrow-right"></a></li>
+						<?php
+
+					$countContentSql = "SELECT count(1) as ROW_COUNT FROM
+												trn_content_category cat
+											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
+											WHERE
+												cat.REF_MODULE_ID = $new_and_event
+											AND cat.flag = 0
+											AND cat.CONTENT_CAT_ID = $museum_event_cat_id
+											AND content.SUB_CAT_ID = $event_sub_cat_id
+											AND content.APPROVE_FLAG = 'Y'
+											AND content.CONTENT_STATUS_FLAG  = 0 ";
+
+					$countContentSql .= $search_sql;
+
+					$queryCount = mysql_query($countContentSql, $conn);
+
+					$dataCount = mysql_fetch_assoc($queryCount);
+
+					$contentCount = $dataCount['ROW_COUNT'];
+
+					$maxPage = ceil($contentCount / 30);
+
+					$extraClass = '';
+					if (nvl($currentPage,-1))
+						$currentPage = 1;
+					if ($currentPage == 1) {
+						$extraClass = 'class="deactive"';
+					}
+					echo $pageStart;
+					echo '<li ' . $extraClass . '><a href="?PG=' . ($currentPage - 1) . '" class="btn-arrow-left"></a></li>';
+
+					for ($idx = 0; $idx < 3; $idx++) {
+						if (($currentPage + $idx) > $maxPage)
+							break;
+						$activeClass = '';
+						if ($idx == 0) {
+							$activeClass = ' class="active"';
+						}
+						echo '<li ' . $activeClass . '><a href="?PG=' . ($currentPage + $idx) . '">' . ($currentPage + $idx) . '</a></li>';
+					}
+					$extraClassAtEnd = '';
+					if (($currentPage + 1) >= $maxPage) {
+						$extraClassAtEnd = 'class="deactive"';
+					}
+					echo '<li ' . $extraClassAtEnd . '><a href="?PG=' . ($currentPage + 1) . '" class="btn-arrow-right"></a></li>';
+									?>
 						</ul>
 					</div>
 				</div>
@@ -270,7 +311,7 @@ if (isset($_GET['search'])) {
 							echo '<div class="box-tumb ' . $gap . '">';
 							echo '<a href="news-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=newsall">';
 							echo '<div class="box-pic">';
-							echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
+							echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
 							echo '</div>';
 							echo '</a>';
 							echo '<div class="box-text">';

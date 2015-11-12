@@ -19,6 +19,18 @@ require ("assets/configs/function.inc.php");
 				$("li.menu1").addClass("active");
 			});
 		</script>
+		<style type="text/css">
+			.wrapperA {
+				/*width: 200px;*/
+				height: 420px;
+				overflow: hidden;
+				/*border: solid 1px #9f0000;*/
+				/*margin: 0 0 20px 0;*/
+				background-size: auto 102%;
+				background-position: center center;
+				
+			}
+		</style>
 	</head>
 
 	<body>
@@ -64,7 +76,7 @@ require ("assets/configs/function.inc.php");
 							<img src="images/<?=$picFolderName ?>/index/part2-pic1.png" />
 						</div>
 <?php
-		/*
+		 
 		$Now = date('d');
 		list($start_date, $end_date) = x_week_range(date('Y-m-d'));
 
@@ -89,7 +101,9 @@ require ("assets/configs/function.inc.php");
 			if(($dayNow == $Now)){
 				$class .= ' today';
 			}
-		*/
+		 
+		
+		/*
 		$first_date = '';
 		$first_action = true;
 
@@ -97,8 +111,9 @@ require ("assets/configs/function.inc.php");
 		$sql_event = "SELECT DISTINCT (content.EVENT_START_DATE) AS START_DATE  FROM trn_content_detail AS content WHERE
 				content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG  = 0 AND DATE(content.EVENT_START_DATE) >= DATE(NOW()) AND
 				content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category where REF_MODULE_ID = ".$new_and_event." )
-				and content.SUB_CAT_ID  <> " . $procurementSubCat . 
+				and content.SUB_CAT_ID  in ( " . $event_sub_cat_id . " , " . $museumDataNetworkEventSubCat . " ) ". 
 				" ORDER BY EVENT_START_DATE LIMIT 0 , 7";
+				//echo $sql_event ; 
 			    $query_event = mysql_query($sql_event, $conn);
 				while($row_event = mysql_fetch_array($query_event)) {
 					if($first_action){
@@ -113,7 +128,7 @@ require ("assets/configs/function.inc.php");
 						$DayOfWeek = returnThaiDayOfWeek(date( "l" , $time_string ));
 					}else if ($_SESSION['LANG'] == 'EN'){
 						$Month = date( "F" , $time_string );
-						$DayOfWeek = date( "l" , $time_string );
+						$DayOfWeek = date( "D" , $time_string );
 					}
 					$dayNow = date( "d" , $time_string);
 					$class  = 'box-tumb-date ';
@@ -121,6 +136,7 @@ require ("assets/configs/function.inc.php");
 					if(($dayNow == $Now)){
 						$class .= ' today';
 					}
+		 * */
 		?>
 			<a href="#" onclick="loadEvent('<?=date('Y-m-d', $time_string) ?>'); return false;">
 				<div class="<?=$class ?>">
@@ -218,10 +234,10 @@ require ("assets/configs/function.inc.php");
 		$index = 0;
 		while ($row_all_exh = mysql_fetch_array($query_all_exh)) {
 			$extraSCID = '';
-								if ($row_all_exh['SUB_CAT_ID'] > 0) {
-									$extraSCID = '&SID=' . $row_all_exh['SUB_CAT_ID'];
-								}
-								
+			if ($row_all_exh['SUB_CAT_ID'] > 0) {
+				$extraSCID = '&SID=' . $row_all_exh['SUB_CAT_ID'];
+			}
+
 			$path = 'event-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $row_all_exh['CONTENT_ID'] . $extraSCID;
 			$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 			$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $row_all_exh['CONTENT_ID'];
@@ -709,8 +725,7 @@ ORDER BY RAND() LIMIT 0,4 ";
 							while ($rowContent = mysql_fetch_array($rsContent)) {
 								$categoryID = $rowContent['CONTENT_CAT_ID'];
 
-								$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
-								;
+								$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID']; ;
 								$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 								$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
 								$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;

@@ -35,8 +35,6 @@ require ('../inc_header.php');
 		 
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add_museum.php'">
-				
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 			<div class="mod-body-inner">
@@ -69,8 +67,14 @@ FROM
 	trn_museum_detail
 WHERE
 	MUSEUM_DETAIL_ID <> - 1
+AND MUSEUM_DETAIL_ID NOT IN (
+	SELECT
+		MUSEUM_DETAIL_ID
+	FROM
+		mapping_museum_admin
+)
 AND IS_GIS_MUSEUM = 'N'
-AND ACTIVE_FLAG = 1 ";
+AND ACTIVE_FLAG = 1";
 
 			$sql .= $search_sql . " ORDER BY MUSEUM_DETAIL_ID ASC ";
 
@@ -87,7 +91,7 @@ AND ACTIVE_FLAG = 1 ";
 							
 							
 						 <?
-						$nextPage = 'view_museum_detail.php?MID=' . $row['MUSEUM_DETAIL_ID'];
+						$nextPage = 'mapping_admin_museum.php?MID=' . $row['MUSEUM_DETAIL_ID'];
 								 ?>
 							
 							<div ><? echo '<a href="'.$nextPage.'">'. $row['MUSEUM_NAME_LOC'].'</a>' ?></div>
@@ -98,15 +102,14 @@ AND ACTIVE_FLAG = 1 ";
 						
 						 </div>
 						<div class="floatL EditContent">
-							<a href="edit_museum.php?MID=<?=$row['MUSEUM_DETAIL_ID'] ?>" class="EditContentBtn">Edit</a>
-							<a href="#" data-id=<?=$row['MUSEUM_DETAIL_ID'] ?> class="DeleteContentBtn">Delete</a>
+							 
 						</div>
 						<div class="clear"></div>	
 				</div>
 							<?php } ?>
 					<!-- end loop -->
 				</div>
-				<div class="pagination_box" style="display: none">
+				<!-- <div class="pagination_box" style="display: none">
 					<div class="floatL">จำนวนทั้งหมด  <span class='RowCount'><? echo $num_rows; ?></span>  รายการ</div>
 					<div class="floatR pagination_action">
 						<a href="#"><img src="../images/skip-previous.svg" alt="first" /></a>
@@ -121,10 +124,10 @@ AND ACTIVE_FLAG = 1 ";
 					</div>
 					<div class="floatR">หน้า 1 จาก 10</div>
 					<div class="clear"></div>	
-				</div>
+				</div> -->
 			</div>	
 			<div class="buttonActionBox">
-				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add_museum.php'">
+				<!-- <input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'add_museum.php'"> -->
 			
 				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>

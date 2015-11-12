@@ -11,10 +11,11 @@ if(isset($_POST['connect'])){
 		include ("inc/inc-en-lang.php");
 }
 
-//$whereDate = " AND (EVENT_START_DATE <= '" . date('Y-m-d') . "' AND EVENT_END_DATE >= '" . date('Y-m-d') . "')";
-//$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE(NOW()) ";
-$whereDate = " AND (EVENT_START_DATE <= '" . $first_date . "' AND EVENT_END_DATE >= '" . $first_date . "')";
-$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE('".$first_date."') ";
+$whereDate = " AND (EVENT_START_DATE <= '" . date('Y-m-d') . "' AND EVENT_END_DATE >= '" . date('Y-m-d') . "')";
+$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE(NOW()) ";
+
+// $whereDate = " AND (EVENT_START_DATE <= '" . $first_date . "' AND EVENT_END_DATE >= '" . $first_date . "')";
+// $sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE('".$first_date."') ";
 if (isset($_POST['date'])) {
 	$whereDate = " AND (EVENT_START_DATE <= '" . $_POST['date'] . "' AND EVENT_END_DATE >= '" . $_POST['date'] . "')";
 	$sqlCount = " select * from trn_manual_event_order where EVENT_DATE = DATE('" . $_POST['date'] . "') ";
@@ -51,7 +52,7 @@ if ($hasManualOrder) {
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											AND content.SUB_CAT_ID  <> " . $procurementSubCat . 
+											and content.SUB_CAT_ID  in ( " . $event_sub_cat_id . " , " . $museumDataNetworkEventSubCat . " ) ".
 											" AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
 where
 REF_MODULE_ID = " . $new_and_event . " )";
@@ -74,14 +75,14 @@ REF_MODULE_ID = " . $new_and_event . " )";
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											and content.SUB_CAT_ID  <> " . $procurementSubCat . 
+											and content.SUB_CAT_ID  in ( " . $event_sub_cat_id . " , " . $museumDataNetworkEventSubCat . " ) ". 
 											" AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
 where
 REF_MODULE_ID = " . $new_and_event . " )";
 	$sql .= $whereDate;
 	$sql .= " ORDER BY content.MUSUEM_ID asc , content.ORDER_DATA desc Limit 20 offset 0";
 }
-//echo $sql;
+echo $sql;
 
 $query_event = mysql_query($sql, $conn);
 while ($row = mysql_fetch_array($query_event)) {
@@ -106,7 +107,7 @@ while ($row = mysql_fetch_array($query_event)) {
 	} else if ($_SESSION['LANG'] == 'EN') {
 		$Month = $dt -> format("F");
 		$shortMonth = $dt -> format("M");
-		$DayOfWeek = $dt -> format("l");
+		$DayOfWeek = $dt ->  format("D");//format("l");
 	}
 	
 
@@ -151,8 +152,11 @@ while ($row = mysql_fetch_array($query_event)) {
 	</div>
 	<div class="box-right">
 		<a href="event-detail.php?MID=<?=$MID?>&CID=<?=$row['CAT_ID']?>&SID=<?=$row['SUB_CAT_ID']?>&CONID=<?=$row['CONTENT_ID']?>">
-		<div class="box-pic">
-			<img src="<?=callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true)?>">
+	
+	
+	
+		<div class="box-pic wrapperA" style="background-image: url('<?=callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true)?>');">
+			<!-- <img src="<?=callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true)?>"> -->
 		</div>
 		<div class="box-tag-cate">
 			<?=$row['PLACE_DESC']?>

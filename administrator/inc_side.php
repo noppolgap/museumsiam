@@ -46,7 +46,7 @@
 			<span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">กิจกรรมและข่าวสาร</span>
 			<a onclick="menuaction(3,10);" href="../mod_category/content_view.php?cid=60&MID=12&LV=0&SCID=130"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">กิจกรรม</span></a>
 			<a onclick="menuaction(3,11);" href="../mod_category/content_view.php?cid=60&MID=12&LV=0&SCID=131"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">ข่าวสาร</span></a>
-			<a onclick="menuaction(3,12);" href="../mod_category/content_view.php?cid=60&MID=12&LV=0&SCID=132"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">จัดซื้อจัดจ้าง</span></a>
+			<a onclick="menuaction(3,12);" href="../mod_category/content_view.php?cid=59&MID=11&LV=0"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">จัดซื้อจัดจ้าง</span></a>
 			<span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">การจัดการกิจกรรมและข่าวสาร</span>
 			<span class="menutab dBlock" style="background-image: url('../images/small-n-flat/directory.svg');">การอนุมัติกิจกรรมและข่าวสารจากระบบย่อย</span>
 			<a onclick="menuaction(3,13);" href="../mod_faq/index.php"><span class="menutab dBlock sub_menutab" style="background-image: url('../images/small-n-flat/house.svg');">คำถามที่พบบ่อย</span></a>
@@ -68,12 +68,12 @@
 				<a onclick="menuaction(4,2);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">อนุมัติการลบกระทู้</span></a>
 
 				<a onclick="menuaction(4,3);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">Museum Data Network</span></a>
-				<a onclick="menuaction(4,4);" href="../mod_network_museum/pending_museum_view.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการพิพิธภัณฑ์</span></a>
+				<a onclick="menuaction(4,4);" href="../mod_network_museum/index.php"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการพิพิธภัณฑ์</span></a>
 
 				<a onclick="menuaction(4,5);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">การจัดการกิจกรรมและข่าวสาร</span></a>
-				<a onclick="menuaction(4,6);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">กิจกรรมและข่าวสาร</span></a>
-				<a onclick="menuaction(4,7);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">กิจกรรม</span></a>
-				<a onclick="menuaction(4,8);" href="#"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ข่าวสาร</span></a>
+				<a onclick="menuaction(4,6);" href="../mod_category/main_sub_category_view.php?cid=61&MID=12&LV=0&h"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">กิจกรรมและข่าวสาร</span></a>
+				<a onclick="menuaction(4,7);" href="../mod_category/content_view.php?cid=61&MID=12&LV=0&SCID=141&h"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">กิจกรรม</span></a>
+				<a onclick="menuaction(4,8);" href="../mod_category/content_view.php?cid=61&MID=12&LV=0&SCID=142&h"><span class="menutab dBlock" style="background-image: url('../images/small-n-flat/house.svg');">ข่าวสาร</span></a>
 
 			</div>
 		</div>

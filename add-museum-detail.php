@@ -12,8 +12,8 @@ require ('inc_meta.php');
  ?>
 
 <link rel="stylesheet" type="text/css" href="css/form.css" />
-<link rel="stylesheet" type="text/css" href="css/account.css" />
-<link rel="stylesheet" type="text/css" href="css/account-detail.css" />
+<link rel="stylesheet" type="text/css" href="css/add-account.css" />
+<link rel="stylesheet" type="text/css" href="css/add-museum-detail.css" />
 <link rel="stylesheet" type="text/css" href="css/add-museum.css" />
 <link rel="stylesheet" type="text/css" href="css/styleForUploadPhoto.css" />
 
@@ -33,7 +33,7 @@ require ('inc_meta.php');
 		ul.catItems {
 			text-align: center;
 			list-style-type: none;
-			color: #d9c3c3;
+			/*color: #d9c3c3;*/
 		}
 		ul.catItems li {
 			float: left;
@@ -41,6 +41,9 @@ require ('inc_meta.php');
 		ul.catItems li:nth-child(3n+4) {
 			clear: left;
 			float: left;
+		}
+		.myCheck div span{
+			color: #000000 !important;
 		}
 	</style>
 </head>
@@ -450,7 +453,7 @@ if (isset($_GET['MID']))
 						}
 						?>
 						<div class="box-right">
-							<div class="box-input-text checkbox">
+							<div class="box-input-text checkbox myCheck">
 
 								<div>
 									<input type="checkbox" name = "auto_open[]" value="1" <?=$monSelected ?>><span>จ</span>
@@ -1218,9 +1221,6 @@ if (isset($_GET['MID']))
 
 
 
-<?php
-include ('inc/inc-footer.php');
- ?>
 
 
 </body>

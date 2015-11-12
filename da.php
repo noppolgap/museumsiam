@@ -140,6 +140,9 @@ if ($_SESSION['LANG'] == 'TH') {
 												cat.REF_MODULE_ID = $digial_module_id
 											AND cat.flag = 0
 											AND cat.CONTENT_CAT_ID = " . $rowCat['CONTENT_CAT_ID'];
+						if ($rowCat['IS_LAST_NODE'] == 'N'){
+							$contentSql.=" AND content.SUB_CAT_ID in ( select SUB_CONTENT_CAT_ID from trn_content_sub_category where CONTENT_CAT_ID = ".$rowCat['CONTENT_CAT_ID']  . "  AND FLAG = 0 ) " ; 
+						}					
 						$contentSql .= "		AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 /*and content.EVENT_START_DATE <= now() and content.EVENT_END_DATE >= now()*/";
 

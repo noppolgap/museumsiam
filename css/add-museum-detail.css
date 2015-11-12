@@ -1,0 +1,116 @@
+.box-account-right>.box-left{
+	width: 600px;
+	margin-bottom: 30px;
+}
+.box-row{
+	width: 100%;
+	line-height: initial;
+	margin-bottom: 15px;
+	line-height: 35px;
+	min-height: 35px;
+}
+.box-row>.box-left{
+	width: 30%;
+	padding-left: 20px;
+}
+.box-row>.box-right{
+	width: 70%;
+	padding-left: 30px;
+}
+.box-row>.box-left>p:after{
+	content: ":";
+	display:block;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+.box-row>.box-left>p{
+	color: #000000;
+}
+.box-row>.box-right>p{
+	color: #fff;
+}
+.box-row .box-input-text.radio div{
+	padding-left: 0px;
+	margin-right: 50px;
+}
+.box-row .box-input-text.radio input[type="radio"]{
+	margin-right: 20px;
+}
+.box-row .box-input-text.radio{
+	color: #000000;
+}
+textarea{
+	padding: 7px 10px;
+	height: 120px;
+}
+.SearchMenu-item{
+	padding-left: 10px;
+}
+.box-btn .btn.black:hover {
+	background-color: #b39151;
+	color: #000;
+}
+
+#account-pass .box-account-right>.box-left{
+	float: none;
+	margin: 0 auto;
+	padding: 20px 0 50px;
+}
+
+/* --------------------------------------------------- Detail Booking Table--------------------------------------------------- */
+
+
+.box-table-main{
+	width: 960px;
+	margin-left: 20px;
+}
+.table-row.head{
+	width: 960px;
+	height: 47px;
+	line-height: 47px;
+	display: table;
+}
+.table-row.head>div{
+	float: left;
+	text-align: center;
+	color: #000;
+	font-size: 16px;
+	background-color: #c9b3b2;
+	border-left: 1px solid #6e0904;
+}
+.table-row>div{
+	float: left;
+	text-align: center;
+}
+.table-row>div:first-child{
+	border-left: none;
+}
+
+
+.table-row .order{ width:  110px; }
+.table-row .date{ width:  110px; }
+.table-row .name{ width:  335px;  padding: 0 15px;}
+.table-row .num{ width:  90px; }
+.table-row .price{ width:  90px; }
+.table-row .total{ width:  115px; }
+.table-row .status{ width:  110px; }
+
+.table-row.list{
+	background-color: #7e0808;
+	width: 960px;
+	color: #c9b3b2;
+	font-size: 16px;
+}
+.table-row.list:nth-child(odd){
+	background-color: #6e0904;
+}
+.table-row.list>div{
+	border-left: 1px solid transparent;
+	vertical-align: middle;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+
+
