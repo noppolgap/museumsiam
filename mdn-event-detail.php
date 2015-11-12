@@ -165,7 +165,7 @@ $path = str_replace("../../","",$path);
 
 								}else{
 								echo '<img class="img-slide-show" data-type="image" style="max-width:754px;max-height: 562px" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
-								$thumbRender .= '<img src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
+								$thumbRender .= '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEndByID($rowPic['PIC_ID'], $rowPic['CAT_ID'], true) . '">'."\n\t";
 								}
 								echo '</div>'."\n\t";
 								$thumbRender .= '</div>'."\n\t";

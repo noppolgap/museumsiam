@@ -157,7 +157,7 @@ $_SESSION['EVENT_PREV_PG'] = $current_url;
 									echo '<div class="box-tumb ' . $gap . ' ">';
 									echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=event_week">';
 									echo '<div class="box-pic">';
-									echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $categoryID, true) . '">';
+									echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $categoryID, true) . '">';
 									echo '<div class="box-tag-cate">';
 									echo $row['MUSEUM_DESC'];
 									echo '</div>';

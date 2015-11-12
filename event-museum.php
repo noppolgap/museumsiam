@@ -143,7 +143,7 @@ include ('inc/inc-menu.php');
 						echo '<div class="box-tumb ' . $gap . ' ">';
 						echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '">';
 						echo '<div class="box-pic">';
-						echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
+						echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
 						// echo '<div class="box-tag-cate">';
 						// echo $title;
 						// echo '</div>';

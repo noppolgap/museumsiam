@@ -101,7 +101,7 @@ require ("assets/configs/function.inc.php");
 			if(($dayNow == $Now)){
 				$class .= ' today';
 			}
-		 
+		 	 $timestr = $dt->format( "Y-m-d" );
 		
 		/*
 		$first_date = '';
@@ -138,7 +138,7 @@ require ("assets/configs/function.inc.php");
 					}
 		 * */
 		?>
-			<a href="#" onclick="loadEvent('<?=date('Y-m-d', $time_string) ?>'); return false;">
+			<a href="#" onclick="loadEvent('<?=$timestr ?>'); return false;">
 				<div class="<?=$class ?>">
 					<div class="text-date">
 						<?=$DayOfWeek ?>
@@ -331,12 +331,12 @@ require ("assets/configs/function.inc.php");
 					</div>
 				</div>
 
-				<div class="box-right">
-					<div class="box-museum-news-main">
+				<div class="box-right" style="min-height:635px;">
+					<div class="box-museum-news-main" style="min-height:635px;">
 						<div class="box-title">
 							<img src="images/<?=$picFolderName ?>/index/part3-pic3.png" />
 						</div>
-						<div class="box-museum-news">
+						<div class="box-museum-news" >
 
 							<?php
 

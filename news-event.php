@@ -25,7 +25,7 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
-	}); 
+	});
 </script>
 
 </head>
@@ -153,9 +153,10 @@ if ($_SESSION['LANG'] == 'TH'){
 						//" ORDER BY content.ORDER_DATA desc LIMIT 0,9 ";
 
 						$query = mysql_query($sql, $conn) or die($sql);
+						$noData = TRUE;
 
 						while ($row = mysql_fetch_array($query)) {
-
+							$noData = FALSE;
 							$IMG_PATH = str_replace("../../", "", $row['IMG_PATH']);
 
 							if ($index == 4 || $index == 7) {
@@ -187,7 +188,7 @@ if ($_SESSION['LANG'] == 'TH'){
 							echo '<div class="box-tumb ' . $gap . ' ">';
 							echo '<a href="' . $detailPage . '?MID=' . $MID . '&CID=' . $row['CAT_ID'] . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '">';
 							echo '<div class="box-pic">';
-							echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true) . '">';
+							echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true) . '">';
 							echo '<div class="box-tag-cate">';
 							echo $row['MUSEUM_DESC'];
 							echo '</div>';
@@ -231,6 +232,10 @@ if ($_SESSION['LANG'] == 'TH'){
 							// $index = 0;
 							// }
 							$index++;
+						}
+
+						if ($noData) {
+							echo '<div class="noDataText">' . $noDataCap . '</div>';
 						}
 					?>
 

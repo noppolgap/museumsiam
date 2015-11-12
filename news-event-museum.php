@@ -19,7 +19,7 @@ if (isset($_GET['search'])) {
 <html>
 <head>
 <?
-	require ('inc_meta.php');
+require ('inc_meta.php');
  ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
@@ -31,10 +31,10 @@ if (isset($_GET['search'])) {
 <body>
 
 <?php
-	include ('inc/inc-top-bar.php');
+include ('inc/inc-top-bar.php');
  ?>
 <?php
-	include ('inc/inc-menu.php');
+include ('inc/inc-menu.php');
  ?>
 
 <div class="part-nav-main"  id="firstbox">
@@ -56,7 +56,7 @@ if (isset($_GET['search'])) {
 			include ('inc/inc-left-content-newsevent.php');
  ?>
 			<?php
-				include ('inc/inc-left-content-calendar.php');
+			include ('inc/inc-left-content-calendar.php');
  ?>
 		</div>
 		<div class="box-right main-content">
@@ -108,8 +108,10 @@ if (isset($_GET['search'])) {
 
 					$query = mysql_query($sql, $conn);
 
-					while ($row = mysql_fetch_array($query)) {
+					$noData = TRUE;
 
+					while ($row = mysql_fetch_array($query)) {
+						$noData = FALSE;
 						$IMG_PATH = str_replace("../../", "", $row['IMG_PATH']);
 
 						if ($index == 4) {
@@ -172,6 +174,9 @@ if (isset($_GET['search'])) {
 
 						$index++;
 					}
+					if ($noData) {
+						echo '<div class="noDataText">' . $noDataCap . '</div>';
+					}
 					?>
 
 					</div>
@@ -179,7 +184,7 @@ if (isset($_GET['search'])) {
 						<ul class="pagination">
 						<?php
 
-					$countContentSql = "SELECT count(1) as ROW_COUNT FROM
+						$countContentSql = "SELECT count(1) as ROW_COUNT FROM
 												trn_content_category cat
 											INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
 											WHERE
@@ -190,39 +195,39 @@ if (isset($_GET['search'])) {
 											AND content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0 ";
 
-					$countContentSql .= $search_sql;
+						$countContentSql .= $search_sql;
 
-					$queryCount = mysql_query($countContentSql, $conn);
+						$queryCount = mysql_query($countContentSql, $conn);
 
-					$dataCount = mysql_fetch_assoc($queryCount);
+						$dataCount = mysql_fetch_assoc($queryCount);
 
-					$contentCount = $dataCount['ROW_COUNT'];
+						$contentCount = $dataCount['ROW_COUNT'];
 
-					$maxPage = ceil($contentCount / 30);
+						$maxPage = ceil($contentCount / 30);
 
-					$extraClass = '';
-					if (nvl($currentPage,-1))
-						$currentPage = 1;
-					if ($currentPage == 1) {
-						$extraClass = 'class="deactive"';
-					}
-					echo $pageStart;
-					echo '<li ' . $extraClass . '><a href="?PG=' . ($currentPage - 1) . '" class="btn-arrow-left"></a></li>';
-
-					for ($idx = 0; $idx < 3; $idx++) {
-						if (($currentPage + $idx) > $maxPage)
-							break;
-						$activeClass = '';
-						if ($idx == 0) {
-							$activeClass = ' class="active"';
+						$extraClass = '';
+						if (nvl($currentPage, -1))
+							$currentPage = 1;
+						if ($currentPage == 1) {
+							$extraClass = 'class="deactive"';
 						}
-						echo '<li ' . $activeClass . '><a href="?PG=' . ($currentPage + $idx) . '">' . ($currentPage + $idx) . '</a></li>';
-					}
-					$extraClassAtEnd = '';
-					if (($currentPage + 1) >= $maxPage) {
-						$extraClassAtEnd = 'class="deactive"';
-					}
-					echo '<li ' . $extraClassAtEnd . '><a href="?PG=' . ($currentPage + 1) . '" class="btn-arrow-right"></a></li>';
+						echo $pageStart;
+						echo '<li ' . $extraClass . '><a href="?PG=' . ($currentPage - 1) . '" class="btn-arrow-left"></a></li>';
+
+						for ($idx = 0; $idx < 3; $idx++) {
+							if (($currentPage + $idx) > $maxPage)
+								break;
+							$activeClass = '';
+							if ($idx == 0) {
+								$activeClass = ' class="active"';
+							}
+							echo '<li ' . $activeClass . '><a href="?PG=' . ($currentPage + $idx) . '">' . ($currentPage + $idx) . '</a></li>';
+						}
+						$extraClassAtEnd = '';
+						if (($currentPage + 1) >= $maxPage) {
+							$extraClassAtEnd = 'class="deactive"';
+						}
+						echo '<li ' . $extraClassAtEnd . '><a href="?PG=' . ($currentPage + 1) . '" class="btn-arrow-right"></a></li>';
 									?>
 						</ul>
 					</div>
@@ -283,8 +288,10 @@ if (isset($_GET['search'])) {
 
 						$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 						$query = mysql_query($sql, $conn);
+						$noData = TRUE;
 
 						while ($row = mysql_fetch_array($query)) {
+							$noData = FALSE;
 							$IMG_PATH = str_replace("../../", "", $row['IMG_PATH']);
 
 							if ($index == 4) {
@@ -312,6 +319,7 @@ if (isset($_GET['search'])) {
 							echo '<a href="news-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=newsall">';
 							echo '<div class="box-pic">';
 							echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true) . '">';
+
 							echo '</div>';
 							echo '</a>';
 							echo '<div class="box-text">';
@@ -337,6 +345,9 @@ if (isset($_GET['search'])) {
 							echo '</div>';
 
 							$index++;
+						}
+						if ($noData) {
+							echo '<div class="noDataText">' . $noDataCap . '</div>';
 						}
 					?>
 
@@ -393,9 +404,10 @@ if (isset($_GET['search'])) {
 
 			   <? while($row = mysql_fetch_array($query)) {
 			   		$IMG_PATH = str_replace("../../","",$row['IMG_PATH']);
+			   		$iconType = getEXT($IMG_PATH);
 			   	?>
 
-					<div class="box-notice pdf">
+					<div class="box-notice iconFile <?=$iconType?>">
 						<div class="box-text">
 							<p class="text-title"><? echo $row['CONTENT_DESC_LOC'] ?></p>
 							<p class="text-detail">

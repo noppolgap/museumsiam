@@ -23,7 +23,7 @@
 				</ul>
 			</li>
 			<li class="menu2 sub"><a href="news-event.php" <?=$menu_newsevent == 0 ? 'active' : ''?>><?=$allEventAndNewsAllSystemCap?></a>
-				<ul class="submenu-left <?=(isset($menu_newsevent)) ? 'dBlock' : ''?>">
+				<ul class="submenu-left <?=(isset($menu_newsevent)) ? 'dBlock' : ''?>" style="display:<?=(isset($menu_newsevent)) ? 'block' : 'none'?>" >
 				<?php if(($menu_newsevent == 1) || ($menu_newsevent == 2) || ($menu_newsevent == 3)){ ?>
 					<li class="submenu1 <?=$menu_newsevent == 3 ? 'active' : ''?>"><a href="news-event-month.php"><?=$monthlyCap?></a></li>
 					<li class="submenu2 <?=$menu_newsevent == 2 ? 'active' : ''?>"><a href="news-event-week.php"><?=$weeklyCap?></a></li>

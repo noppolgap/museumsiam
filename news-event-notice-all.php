@@ -99,9 +99,10 @@ require("assets/configs/function.inc.php");
 
 			   <? while($row = mysql_fetch_array($query)) {
 			   		$IMG_PATH = str_replace("../../","",$row['IMG_PATH']);
+			   		$iconType  = getEXT($IMG_PATH) ; 
 			   	?>
 
-					<div class="box-notice pdf">
+					<div class="box-notice iconFile <?=$iconType?>">
 						<div class="box-text">
 							<p class="text-title"><? echo $row['CONTENT_DESC'] ?></p>
 							<p class="text-detail">

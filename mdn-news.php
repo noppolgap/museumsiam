@@ -129,7 +129,7 @@ LIMIT 0,
 
 									echo '<a href="mdn-news-detail.php?CID=' . $CID . '&SCID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&MDNID=' . $row['MUSUEM_ID'] . '">';
 									echo '<div class="box-pic">';
-									echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $CID, true) . '">';
+									echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $CID, true) . '">';
 									echo '</div> </a>';
 
 									echo '<div class="box-text">';

@@ -125,9 +125,10 @@ require ("assets/configs/function.inc.php");
 								$sql .= " ORDER BY content.ORDER_DATA desc LIMIT 0,30 ";
 
 								$query = mysql_query($sql, $conn);
+								$noData = TRUE;
 
 								while ($row = mysql_fetch_array($query)) {
-
+									$noData = FALSE;
 									$IMG_PATH = str_replace("../../", "", $row['IMG_PATH']);
 
 									if ($index == 4) {
@@ -156,7 +157,7 @@ require ("assets/configs/function.inc.php");
 									echo '<div class="box-tumb ' . $gap . ' ">';
 									echo '<a href="news-detail.php?MID=' . $MID . '&CID=' . $categoryID . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=news_week">';
 									echo '<div class="box-pic">';
-									echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $categoryID, true) . '">';
+									echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $categoryID, true) . '">';
 									echo '<div class="box-tag-cate">';
 									echo $row['MUSEUM_DESC'];
 									echo '</div>';
@@ -193,6 +194,9 @@ require ("assets/configs/function.inc.php");
 										$index = 0;
 									}
 									$index++;
+								}
+								if ($noData) {
+									echo '<div class="noDataText">' . $noDataCap . '</div>';
 								}
 								?>
 							</div>
@@ -252,6 +256,5 @@ AND content.SUB_CAT_ID in (" . $mesum_sub_cat_id . " , " . $museumDataNetworkNew
 		<?php
 		include ('inc/inc-footer.php');
 		?>
-
 	</body>
 </html>

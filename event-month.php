@@ -156,7 +156,7 @@ $dateEnd = ConvertBoxDate($row['EVENT_END_DATE']);
 									echo '<div class="box-tumb ' . $gap . ' ">';
 									echo '<a href="event-detail.php?MID=' . $MID . '&CID=' . $row['CAT_ID']  . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=event_month">';
 									echo '<div class="box-pic">';
-									echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'] , true) . '">';
+									echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'] , true) . '">';
 									echo '<div class="box-tag-cate">';
 									echo $row['MUSEUM_DESC'];
 									echo '</div>';

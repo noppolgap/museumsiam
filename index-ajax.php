@@ -82,7 +82,7 @@ REF_MODULE_ID = " . $new_and_event . " )";
 	$sql .= $whereDate;
 	$sql .= " ORDER BY content.MUSUEM_ID asc , content.ORDER_DATA desc Limit 20 offset 0";
 }
-echo $sql;
+//echo $sql;
 
 $query_event = mysql_query($sql, $conn);
 while ($row = mysql_fetch_array($query_event)) {

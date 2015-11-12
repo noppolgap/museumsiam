@@ -131,7 +131,7 @@ require("assets/configs/function.inc.php");
 						echo '<div class="box-tumb '.$gap.'">';
 						echo '<a href="news-detail.php?MID='.$MID.'&CID='.$categoryID.'&SID='.$row['SUB_CAT_ID'].'&CONID='.$row['CONTENT_ID'].'">';
 						echo '<div class="box-pic">';
-						echo '<img src="'.callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true).'">';
+						echo '<img style="max-height: 186px;height: 186px;" src="'.callThumbListFrontEnd($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], true).'">';
 						echo '</div>';
 						echo  '</a>';
 						echo  '<div class="box-text">';

@@ -26,7 +26,7 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menutop li.menu5,.menu-left li.menu2").addClass("active");
-	}); 
+	});
 </script>
 
 </head>
@@ -157,8 +157,10 @@ include ('inc/inc-menu.php');
 
 						$query = mysql_query($sql, $conn) or die($sql);
 
-						while ($row = mysql_fetch_array($query)) {
+						$noData = TRUE;
 
+						while ($row = mysql_fetch_array($query)) {
+							$noData = FALSE;
 							$IMG_PATH = str_replace("../../", "", $row['IMG_PATH']);
 
 							if ($index == 4) {
@@ -191,7 +193,7 @@ include ('inc/inc-menu.php');
 							echo '<div class="box-tumb ' . $gap . ' ">';
 							echo '<a href="' . $detailPage . '?MID=' . $MID . '&CID=' . $row['CAT_ID'] . '&SID=' . $row['SUB_CAT_ID'] . '&CONID=' . $row['CONTENT_ID'] . '&date=week">';
 							echo '<div class="box-pic">';
-							echo '<img src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true) . '">';
+							echo '<img style="max-height: 186px;height: 186px;" src="' . callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true) . '">';
 							echo '<div class="box-tag-cate">';
 							echo $row['MUSEUM_DESC'];
 							echo '</div>';
@@ -232,6 +234,9 @@ include ('inc/inc-menu.php');
 							echo '</div>';
 
 							$index++;
+						}
+						if ($noData) {
+							echo '<div class="noDataText">' . $noDataCap . '</div>';
 						}
 					?>
 
