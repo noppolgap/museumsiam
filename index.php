@@ -28,7 +28,7 @@ require ("assets/configs/function.inc.php");
 				/*margin: 0 0 20px 0;*/
 				background-size: auto 102%;
 				background-position: center center;
-				
+
 			}
 		</style>
 	</head>
@@ -76,7 +76,7 @@ require ("assets/configs/function.inc.php");
 							<img src="images/<?=$picFolderName ?>/index/part2-pic1.png" />
 						</div>
 <?php
-		 
+		 /*
 		$Now = date('d');
 		list($start_date, $end_date) = x_week_range(date('Y-m-d'));
 
@@ -102,8 +102,8 @@ require ("assets/configs/function.inc.php");
 				$class .= ' today';
 			}
 		 	 $timestr = $dt->format( "Y-m-d" );
-		
-		/*
+
+
 		$first_date = '';
 		$first_action = true;
 
@@ -111,9 +111,9 @@ require ("assets/configs/function.inc.php");
 		$sql_event = "SELECT DISTINCT (content.EVENT_START_DATE) AS START_DATE  FROM trn_content_detail AS content WHERE
 				content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG  = 0 AND DATE(content.EVENT_START_DATE) >= DATE(NOW()) AND
 				content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category where REF_MODULE_ID = ".$new_and_event." )
-				and content.SUB_CAT_ID  in ( " . $event_sub_cat_id . " , " . $museumDataNetworkEventSubCat . " ) ". 
+				and content.SUB_CAT_ID  in ( " . $event_sub_cat_id . " , " . $museumDataNetworkEventSubCat . " ) ".
 				" ORDER BY EVENT_START_DATE LIMIT 0 , 7";
-				//echo $sql_event ; 
+				//echo $sql_event ;
 			    $query_event = mysql_query($sql_event, $conn);
 				while($row_event = mysql_fetch_array($query_event)) {
 					if($first_action){
@@ -137,8 +137,52 @@ require ("assets/configs/function.inc.php");
 						$class .= ' today';
 					}
 		 * */
+		$dateShow = array();
+		$sql_event = "SELECT DATE(content.EVENT_START_DATE) AS START_DATE , DATE(content.EVENT_END_DATE) AS END_DATE
+					FROM trn_content_detail AS content WHERE content.APPROVE_FLAG = 'Y'
+					AND content.CONTENT_STATUS_FLAG = 0 AND DATE(content.EVENT_START_DATE) >= DATE(NOW())
+					AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category where REF_MODULE_ID = 12 )
+					AND content.SUB_CAT_ID in ( " . $event_sub_cat_id . " , " . $museumDataNetworkEventSubCat . " )
+					ORDER BY EVENT_START_DATE LIMIT 0 , 40";
+					//echo $sql_event ;
+		$query_event = mysql_query($sql_event, $conn);
+		while($row_event = mysql_fetch_array($query_event)) {
+			$date = $row_event['START_DATE'];
+			$end_date = $row_event['END_DATE'];
+			while (strtotime($date) <= strtotime($end_date)) {
+
+						$str_to_time = strtotime($date);
+		               	$dateShow[] = $str_to_time;
+                		$date = date ("Y-m-d", strtotime("+1 day", $str_to_time));
+
+			}
+		}
+
+		$result = array_unique($dateShow);
+		sort($result);
+		for($i=0;$i<7;$i++){
+			if($result[$i] != ''){
+				$MYDATE = date("Y-m-d", $result[$i]);
+				if($first_action){
+					$first_action = false;
+					$first_date = $MYDATE;
+				}
+
+				if ($_SESSION['LANG'] == 'TH'){
+					$Month = returnThaiMonth(date( "m" , $result[$i] ));
+					$DayOfWeek = returnThaiDayOfWeek(date( "l" , $result[$i] ));
+				}else if ($_SESSION['LANG'] == 'EN'){
+					$Month = date( "F" , $result[$i] );
+					$DayOfWeek = date( "D" , $result[$i] );
+				}
+				$dayNow = date( "d" , $result[$i]);
+				$class  = 'box-tumb-date ';
+				$class .= strtolower(date( "D" , $result[$i]));
+				if(($dayNow == $Now)){
+					$class .= ' today';
+				}
 		?>
-			<a href="#" onclick="loadEvent('<?=$timestr ?>'); return false;">
+			<a href="#" onclick="loadEvent('<?=$MYDATE?>'); return false;">
 				<div class="<?=$class ?>">
 					<div class="text-date">
 						<?=$DayOfWeek ?>
@@ -150,7 +194,7 @@ require ("assets/configs/function.inc.php");
 				</div>
 			</a>
 		<?
-		}
+		} }
 	?>
 <a href="#">
 						<div class="box-tumb-date btn-all">
@@ -409,10 +453,10 @@ ORDER BY RAND() LIMIT 0,4 ";
 							$_SESSION['MU_EVENT_PREV_PG'] = $current_url;
 							?>
 
-							
-							<div class="box-btn cf">
-								<a href="news-event-museum.php" class="btn black"><?=$seeAllCap ?></a>
-							</div>
+
+						</div>
+						<div class="box-btn cf">
+							<a href="news-event-museum.php" class="btn black"><?=$seeAllCap ?></a>
 						</div>
 					</div>
 				</div>

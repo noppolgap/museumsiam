@@ -54,7 +54,7 @@ require("assets/configs/function.inc.php");
 	<div class="container cf">
 		<div class="box-left main-content">
 			<?php include('inc/inc-left-content-shopping.php'); ?>
-			<?php include('inc/inc-left-content-calendar.php'); ?>
+			<?php include('inc/inc-left-calendar-shopping.php'); ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
@@ -88,7 +88,7 @@ require("assets/configs/function.inc.php");
 
 											WHERE prod.CAT_ID = ".$ebook_sub_cat ." AND prod.FLAG = 0 ";
 
-							
+
 
 							$sql_proc  .= $search_sql."	ORDER BY prod.ORDER_DATA DESC LIMIT 0,6";
 

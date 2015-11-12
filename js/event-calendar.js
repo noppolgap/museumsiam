@@ -1,8 +1,16 @@
 $(function() {
-    $.getScript( "event-day-ajax.php" )
-      .done(function( script, textStatus ) {
-        datepickerStart();
-    });
+
+    if($('.booking_calendar').length > 0){
+        $.getScript( "e-booking-ajax.php" )
+          .done(function( script, textStatus ) {
+            datepickerStart();
+        });
+    }else{
+        $.getScript( "event-day-ajax.php" )
+          .done(function( script, textStatus ) {
+            datepickerStart();
+        });
+    }
 });
 function datepickerStart(){
     $( "#datepicker" ).datepicker({

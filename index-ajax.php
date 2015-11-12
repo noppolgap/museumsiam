@@ -7,7 +7,7 @@ if(isset($_POST['connect'])){
 	include ("inc/inc-cat-id-conf.php");
 	if($_SESSION['LANG'] == 'TH')
 		include ("inc/inc-th-lang.php");
-	else 
+	else
 		include ("inc/inc-en-lang.php");
 }
 
@@ -75,7 +75,7 @@ REF_MODULE_ID = " . $new_and_event . " )";
 											WHERE
 											    content.APPROVE_FLAG = 'Y'
 											AND content.CONTENT_STATUS_FLAG  = 0
-											and content.SUB_CAT_ID  in ( " . $event_sub_cat_id . " , " . $museumDataNetworkEventSubCat . " ) ". 
+											and content.SUB_CAT_ID  in ( " . $event_sub_cat_id . " , " . $museumDataNetworkEventSubCat . " ) ".
 											" AND content.CAT_ID in (select CONTENT_CAT_ID from trn_content_category
 where
 REF_MODULE_ID = " . $new_and_event . " )";
@@ -98,7 +98,7 @@ while ($row = mysql_fetch_array($query_event)) {
 	$title = htmlspecialchars(trim($row['CONTENT_LOC']));
 	$detail = strip_tags(trim($row['CONTENT_BRIEF']));
 	/*social*/
-	$dt = new DateTime($row['EVENT_START_DATE']);
+	$dt = new DateTime($_POST['date']);
 
 	if ($_SESSION['LANG'] == 'TH') {
 		$Month = returnThaiMonth($dt -> format("m"));
@@ -109,15 +109,15 @@ while ($row = mysql_fetch_array($query_event)) {
 		$shortMonth = $dt -> format("M");
 		$DayOfWeek = $dt ->  format("D");//format("l");
 	}
-	
+
 
 ?>
 <div class="box-content-slide cf">
 	<div class="box-left">
-		<div class="box-date cf sun">
+		<div class="box-date cf <?=strtolower($dt -> format("D"))?>">
 			<div class="box-left">
 				<p>
-					<?=$date[0]?>
+					<?=$dt -> format("j")?>
 				</p>
 			</div>
 			<div class="box-right">
@@ -152,9 +152,9 @@ while ($row = mysql_fetch_array($query_event)) {
 	</div>
 	<div class="box-right">
 		<a href="event-detail.php?MID=<?=$MID?>&CID=<?=$row['CAT_ID']?>&SID=<?=$row['SUB_CAT_ID']?>&CONID=<?=$row['CONTENT_ID']?>">
-	
-	
-	
+
+
+
 		<div class="box-pic wrapperA" style="background-image: url('<?=callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true)?>');">
 			<!-- <img src="<?=callThumbListFrontEnd($row['CONTENT_ID'], $row['CAT_ID'], true)?>"> -->
 		</div>
