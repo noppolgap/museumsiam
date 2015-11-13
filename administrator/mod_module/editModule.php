@@ -113,17 +113,19 @@ $indexPage = "/administrator/mod_module/index.php";
 									</div>
 
 									<div class="bigForm">
-										<div class="floatL form_name">รูปภาพ Iconขนาดใหญ่ (ขนาด 209 x 218)</div>
+										<div class="floatL form_name">
+											รูปภาพ Iconขนาดใหญ่ (ขนาด 209 x 218)
+										</div>
 										<div class="floatL form_input">
 											<?=admin_upload_icon_edit('BigIcon', 'BIG', $moduleID, NULL) ?>
-											</div>
+										</div>
 										<div class="clear"></div>
 									</div>
 
 									<!-- <div class="bigForm">
-										<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
-										<div class="floatL form_input"><?=admin_upload_icon_edit('SmallIcon', 'SMALL', $moduleID, NULL) ?></div>
-										<div class="clear"></div>
+									<div class="floatL form_name">รูปภาพ Iconขนาดเล็ก</div>
+									<div class="floatL form_input"><?=admin_upload_icon_edit('SmallIcon', 'SMALL', $moduleID, NULL) ?></div>
+									<div class="clear"></div>
 									</div>	 -->
 
 									<div>
@@ -140,6 +142,24 @@ $indexPage = "/administrator/mod_module/index.php";
 										</div>
 										<div class="clear"></div>
 									</div>
+
+									<div>
+										<?
+										$checked = "";
+										if ($rowModule['RENDER_ON_FRONT'] == "Y")
+											$checked = "checked";
+										?>
+										<div class="floatL form_name">
+											&nbsp;&nbsp;
+										</div>
+										<div class="floatL form_input">
+											<input  id = "chkShowOnMenu" type="checkbox" name="chkShowOnMenu" <?=$checked ?>>
+											&nbsp;แสดงเมนูที่หน้าหลัก</input>
+
+										</div>
+										<div class="clear"></div>
+									</div>
+
 							</div>
 
 							<div class="btn_action">
@@ -167,7 +187,7 @@ $indexPage = "/administrator/mod_module/index.php";
 
 		<link rel="stylesheet" type="text/css" href="../../assets/font/ThaiSans-Neue/font.css" media="all" >
 		<link rel="stylesheet" type="text/css" href="../master/style.css" media="all" />
-<script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
+		<script type="text/javascript" src="../../assets/plugin/upload/jquery.iframe-transport.js"></script>
 		<script type="text/javascript" src="../../assets/plugin//upload/jquery.fileupload.js"></script>
 		<script type="text/javascript" src="../master/script.js"></script>
 
@@ -191,6 +211,11 @@ $indexPage = "/administrator/mod_module/index.php";
 			else
 				$isLastNode = "Y";
 
+if ($_POST['chkShowOnMenu'])
+		$showOnMenu = "Y";
+	else
+		$showOnMenu = "N";
+	
 			mysql_query("BEGIN");
 
 			$strSQL = "update sys_app_module ";
@@ -200,6 +225,8 @@ $indexPage = "/administrator/mod_module/index.php";
 			$strSQL .= " ,LAST_UPDATE_USER = 'Test'";
 			$strSQL .= " ,LAST_FUNCTION = 'U'";
 			$strSQL .= " ,IS_LAST_NODE = '" . $isLastNode . "'";
+			$strSQL .= " ,RENDER_ON_FRONT = '" . $showOnMenu . "'";
+			$strSQL .= " ,LINK_URL = '" . $txtUrlLink . "'";
 			$strSQL .= " where MODULE_ID = '" . $mid . "'";
 			$objQueryAppModule = mysql_query($strSQL);
 

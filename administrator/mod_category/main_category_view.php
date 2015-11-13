@@ -38,13 +38,19 @@ require ("../../inc/inc-cat-id-conf.php");
 		$sql = "SELECT * FROM sys_app_module where MODULE_ID = '" . $MID . "' ";
 		$rs = mysql_query($sql) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
+		
+		
+		$hideBack = "" ;
+		if (strpos($hideBackBtnListFromMID , $MID."," ) !== false) {
+			$hideBack = "style='display:none'";
+		}
 		?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'category_add.php?MID=<?=$MID ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="category_action.php?delete" >
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('category_order.php?MID=<?=$MID?>');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
+				<input type="button" <?=$hideBack?> value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -152,7 +158,7 @@ require ("../../inc/inc-cat-id-conf.php");
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'category_add.php?MID=<?=$MID ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="category_action.php?delete" >
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('category_order.php?MID=<?=$MID?>');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
+				<input type="button" <?=$hideBack?> value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = 'index.php'">
 			</div>
 		</div>
 		<div class="clear"></div>	

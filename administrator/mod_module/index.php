@@ -63,8 +63,8 @@ require ("../../assets/configs/function.inc.php");
 						<?php
 							//active_flag 0 = disable , 1 = Enable ,  2 = Delete
 						    
-							$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 ";
-						    $sql .= $search_sql."order by ORDER_DATA DESC ";
+							$sql = "SELECT * FROM sys_app_module where ACTIVE_FLAG <> 2 and IS_FOR_OTHER_LINK = 'N'";
+						    $sql .= $search_sql." order by ORDER_DATA DESC ";
 							$rs = mysql_query($sql) or die(mysql_error());
 
 							$i = 0;

@@ -17,18 +17,23 @@ require ("assets/configs/function.inc.php");
 		<script>
 			$(document).ready(function() {
 				$("li.menu1").addClass("active");
+
+				$('.eventDateClick').click(function() {
+					$('div .box-tumb-date').removeClass('active');
+
+					$('div[data-attr="date' + $(this).attr('data-attr') + '"]').addClass('active');
+				});
 			});
 		</script>
 		<style type="text/css">
 			.wrapperA {
 				/*width: 200px;*/
-				height: 420px;
+				height: 426px;
 				overflow: hidden;
 				/*border: solid 1px #9f0000;*/
 				/*margin: 0 0 20px 0;*/
 				background-size: auto 102%;
 				background-position: center center;
-
 			}
 		</style>
 	</head>
@@ -42,11 +47,15 @@ require ("assets/configs/function.inc.php");
 		<div class="part-banner" id="firstbox">
 			<div class="slide-herobanner">
 				<?php
-				$heroBannerSql = "SELECT pic_ID, IMG_PATH FROM trn_hero_banner WHERE img_type = 1 ORDER BY ORDER_ID";
+				if ($_SESSION['LANG'] == 'TH')
+					$selectdHeroColumn = " IMG_PATH as IMG_PATH , URL_LOC as URL_LOC";
+				else
+					$selectdHeroColumn = " ifnull(IMG_PATH_ENG,IMG_PATH)  as IMG_PATH  , URL_ENG as URL_LOC ";
+				$heroBannerSql = "SELECT pic_ID, " . $selectdHeroColumn . " FROM trn_hero_banner WHERE img_type = 1 ORDER BY ORDER_ID";
 
 				$rsHeroBanner = mysql_query($heroBannerSql) or die(mysql_error());
 				while ($rowHeroBanner = mysql_fetch_array($rsHeroBanner)) {
-					echo '	<div class="slide" style="background-image: url(' . callHeroBannerFrontEnd($rowHeroBanner['pic_ID'], $rowHeroBanner['IMG_PATH'], true) . ');"></div> ';
+					echo '<a target="_blank" href="' . $rowHeroBanner['URL_LOC'] . '"><div class="slide" style="background-image: url(' . callHeroBannerFrontEnd($rowHeroBanner['pic_ID'], $rowHeroBanner['IMG_PATH'], true) . ');"></div></a>';
 				}
 				?>
 			</div>
@@ -56,11 +65,15 @@ require ("assets/configs/function.inc.php");
 		include ('inc/inc-menu.php');
 		?>
 
-		<div  class="part-detail-museum">
-			<?php
-			include ('inc/inc-detail-museum-th.php');
-			?>
+<!--
+		<div  class="part-vdo">
+			<div class="container">
+				<div class="box-vdo">
+					<iframe width="889" height="500" src="https://www.youtube.com/embed/zXoI5N3_1qU?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
 		</div>
+-->
 
 		<?php
 		if ($_SESSION['LANG'] == 'TH')
@@ -160,6 +173,7 @@ require ("assets/configs/function.inc.php");
 
 		$result = array_unique($dateShow);
 		sort($result);
+		$boxCount = 1;
 		for($i=0;$i<7;$i++){
 			if($result[$i] != ''){
 				$MYDATE = date("Y-m-d", $result[$i]);
@@ -181,9 +195,11 @@ require ("assets/configs/function.inc.php");
 				if(($dayNow == $Now)){
 					$class .= ' today';
 				}
+				
+				
 		?>
-			<a href="#" onclick="loadEvent('<?=$MYDATE?>'); return false;">
-				<div class="<?=$class ?>">
+			<a href="#" class="eventDateClick" onclick="loadEvent('<?=$MYDATE ?>'); return false;" data-attr="<?=$boxCount ?>">
+				<div class="<?=$class ?>" data-attr="date<?=$boxCount ?>">
 					<div class="text-date">
 						<?=$DayOfWeek ?>
 						<span><?=$dayNow ?></span>
@@ -194,7 +210,9 @@ require ("assets/configs/function.inc.php");
 				</div>
 			</a>
 		<?
-		} }
+		}
+		$boxCount++;
+		}
 	?>
 <a href="#">
 						<div class="box-tumb-date btn-all">
@@ -264,19 +282,20 @@ require ("assets/configs/function.inc.php");
 				INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
 				WHERE
 					cat.REF_MODULE_ID = $new_and_event
-				AND cat.flag = 0
-				AND cat.CONTENT_CAT_ID = $all_event_cat_id
-				AND content.APPROVE_FLAG = 'Y'
+				AND cat.flag = 0 AND content.SUB_CAT_ID in ( " . $mesum_sub_cat_id . " , " . $museumDataNetworkNewsSubCat . " ) ";
+		//AND cat.CONTENT_CAT_ID = $all_event_cat_id
+		$sql_all_exh .= " AND content.APPROVE_FLAG = 'Y'
 				AND content.CONTENT_STATUS_FLAG  = 0
 				ORDER BY
 					content.ORDER_DATA desc
 				LIMIT 0,4 ";
-
+//echo $sql_all_exh ; 
 		$query_all_exh = mysql_query($sql_all_exh, $conn);
 		$num_rows = mysql_num_rows($query_all_exh);
 
 		$index = 0;
 		while ($row_all_exh = mysql_fetch_array($query_all_exh)) {
+			$categoryID = $row_all_exh['CONTENT_CAT_ID'] ; 
 			$extraSCID = '';
 			if ($row_all_exh['SUB_CAT_ID'] > 0) {
 				$extraSCID = '&SID=' . $row_all_exh['SUB_CAT_ID'];
@@ -314,7 +333,7 @@ require ("assets/configs/function.inc.php");
 								<a href="<?=$exh_path[0] ?>">
 								<div class="box-pic">
 									<img src="<?=$exhimg_path[0] ?>" width="274" height="205">
-									<div class="box-tag-cate"><?=$exh_title[0] ?></div>
+									<!-- <div class="box-tag-cate"><?=$exh_title[0] ?></div> -->
 								</div> </a>
 								<div class="box-text">
 									<a href="<?=$exh_path[0] ?>">
@@ -347,14 +366,14 @@ require ("assets/configs/function.inc.php");
 								<a href="<?=$exh_path[$i] ?>">
 								<div class="box-pic">
 									<img src="<?=$exhimg_path[$i] ?>" width="274" height="205">
-									<div class="box-tag-cate">
+									<!-- <div class="box-tag-cate">
 										<?=$exh_title[$i] ?>
-									</div>
+									</div> -->
 								</div> </a>
 								<div class="box-text">
 									<a href="<?=$exh_path[$i] ?>">
 									<p class="text-title TcolorRed">
-										<?=$exh_detail[$i] ?>
+										<?=$exh_title[$i] ?>
 									</p> </a>
 									<p class="text-date TcolorGray">
 										<?=$exhimg_date[$i] ?>
@@ -769,7 +788,8 @@ ORDER BY RAND() LIMIT 0,4 ";
 							while ($rowContent = mysql_fetch_array($rsContent)) {
 								$categoryID = $rowContent['CONTENT_CAT_ID'];
 
-								$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID']; ;
+								$path = 'km-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+								;
 								$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 								$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $rowContent['CONTENT_ID'];
 								$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
@@ -816,7 +836,12 @@ ORDER BY RAND() LIMIT 0,4 ";
 				<!--End KM -->
 			</div>
 		</div>
-
+		
+		<div  class="part-detail-museum">
+			<?php
+			include ('inc/inc-detail-museum-th.php');
+			?>
+		</div>
 		<?php
 		include ('inc/inc-footer.php');
 		include ('inc/inc-social-network.php');

@@ -2,7 +2,7 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
-
+require ("../../inc/inc-cat-id-conf.php");
 ?>
 <!doctype html>
 <html>

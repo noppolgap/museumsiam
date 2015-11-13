@@ -62,7 +62,6 @@ $indexPage = "/administrator/mod_module/index.php";
               <div class="floatL titleBox">เพิ่มระบบ</div>
             </div>
             <div class="mod-body-main-content">
-              <!--<div class="imageMain marginC"><img src="../images/logo_thumb.jpg" /></div>-->
               <div class="formCms">
                 <form action="?" method="post" name="formcms" id = "frmcms" >
 				 <div >
@@ -112,6 +111,16 @@ $indexPage = "/administrator/mod_module/index.php";
                     </div>
                     <div class="clear"></div>
                   </div>
+                  
+                    <div>
+                    <div class="floatL form_name">&nbsp;&nbsp;</div>
+                    <div class="floatL form_input">
+                      <input  id = "chkShowOnMenu" type="checkbox" name="chkShowOnMenu" >&nbsp;แสดงเมนูที่หน้าหลัก</input>
+
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  
 				   </div>
 
                   <div class="btn_action">
@@ -158,6 +167,11 @@ if (isset($_POST["action"]) && $_POST["action"] == "submit") {
 	else
 		$isLastNode = "Y";
 
+	if ($_POST['chkShowOnMenu'])
+		$showOnMenu = "Y";
+	else
+		$showOnMenu = "N";
+
 	$bigIconName = "";
 	$smallIconName = "";
 
@@ -180,11 +194,10 @@ if (isset($_POST["action"]) && $_POST["action"] == "submit") {
 	$max = $row_max['MAX_ORDER'];
 	$max++;
 
-
 	$strSQL = "INSERT INTO sys_app_module ";
-	$strSQL .= "(MODULE_NAME_LOC,MODULE_NAME_ENG , USER_CREATE , CREATE_DATE , LAST_FUNCTION , IS_LAST_NODE , ORDER_DATA ) ";
+	$strSQL .= "(MODULE_NAME_LOC,MODULE_NAME_ENG , USER_CREATE , CREATE_DATE , LAST_FUNCTION , IS_LAST_NODE , ORDER_DATA , RENDER_ON_FRONT , IS_FOR_OTHER_LINK  , LINK_URL) ";
 	$strSQL .= "VALUES ";
-	$strSQL .= "('" . $txtNameLoc . "','" . $txtNameEng . "','Test' , now() , 'A' , '" . $isLastNode . "' , ".$max.") ";
+	$strSQL .= "('" . $txtNameLoc . "','" . $txtNameEng . "','Test' , now() , 'A' , '" . $isLastNode . "' , " . $max . " , '".$showOnMenu."' ,'N' , '".$txtUrlLink."') ";
 	$objQueryAppModule = mysql_query($strSQL);
 	$last_id = mysql_insert_id($conn);
 

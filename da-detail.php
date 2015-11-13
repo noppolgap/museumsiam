@@ -127,7 +127,7 @@ include ('inc/inc-menu.php');
 			<div class="box-title-system cf news">
 				<h1><?=$catName ?></h1>
 				<div class="box-btn">
-					<a href="<?=$backPage ?>" class="btn red"><?=$backCap?></a>
+					<a href="<?=$backPage ?>" class="btn red"><?=$backCap ?></a>
 				</div>
 			</div>
 			<div class="box-newsdetail-main">
@@ -250,16 +250,16 @@ include ('inc/inc-menu.php');
 					<a href="<?=$line ?>" target="_blank" class="btn line"></a>
 				</div>
 
-				<div class="part-tumb-main" <?=$extraStyle?>>
+				<div class="part-tumb-main" <?=$extraStyle ?>>
 					<div  class="text-title cf">
-						<p><?=$galleryCap?></p>
+						<p><?=$galleryCap ?></p>
 						<div class="box-btn">
 						<?php
 						if ($preview360 > 0) {
 							echo '<a href="view-360.php?CID=' . $CID . '&amp;CONID=' . $CONID . '" target="_blank" class="btn black b360">ดู</a>';
 						}
 						?>
-							<a href="all-media.php?CID=<?=$CID ?>&amp;CONID=<?=$CONID ?>" target="_blank" class="btn black"><?=$seeAllCap?></a>
+							<a href="all-media.php?CID=<?=$CID ?>&amp;CONID=<?=$CONID ?>" target="_blank" class="btn black"><?=$seeAllCap ?></a>
 						</div>
 					</div>
 					<div class="box-slide-small">
@@ -270,7 +270,8 @@ include ('inc/inc-menu.php');
 				</div>
 				<div class="box-news-text">
 					<?=
-					nl2br(strip_tags(str_replace("../../","",$rowContent['DETAIL_DESC']), $allowTag));
+					$rowContent['DETAIL_DESC'];
+					//(strip_tags(str_replace("../../", "", $rowContent['DETAIL_DESC']), $allowTag));
 						?>
 				</div>
 
@@ -282,7 +283,7 @@ include ('inc/inc-menu.php');
 ?>
 				<div class="box-otherfile-main">
 					<div class="box-title cf">
-						<h2><?=$other_file?></h2>
+						<h2><?=$other_file ?></h2>
 					</div>
 					<div class="box-news-main gray">
 					<?php
@@ -303,12 +304,12 @@ include ('inc/inc-menu.php');
 							<div class="box-text">
 								<p class="text-title"><?=$rowFile['IMG_NAME'] ?></p>
 								<p class="text-detail">
-									<span><?=$typeCap?> : .<?=$ext ?></span>
-									<span><?=$sizeCap?>: <?=$size ?></span>
+									<span><?=$typeCap ?> : .<?=$ext ?></span>
+									<span><?=$sizeCap ?>: <?=$size ?></span>
 								</p>
 							</div>
 							<div class="box-btn cf">
-								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap?></a>
+								<a href="<?=$link ?>" target="_blank" class="btn red"><?=$downloadCap ?></a>
 							</div>
 						</div>
 					<?php } } ?>
@@ -317,7 +318,7 @@ include ('inc/inc-menu.php');
 <?php } ?>
 				<div class="box-footer-content cf">
 					<div class="box-date-modified">
-						<?=$lastEditCap?> :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
+						<?=$lastEditCap ?> :   <?= ConvertDate($rowContent['LAST_DATE']) ?>
 					</div>
 					<div class="box-plugin-social">
 						<div class="fb-share-button" data-href="<?=$path ?>" data-layout="button_count"></div>
@@ -326,8 +327,8 @@ include ('inc/inc-menu.php');
 						<span>
 						<script type="text/javascript" src="//media.line.me/js/line-button.js?v=20140411" ></script>
 						<script type="text/javascript">
-													new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>
-							","withUrl":true});
+																				new media_line_me.LineButton({"pc":false,"lang":"en","type":"a","text":"<?=$path ?>
+														","withUrl":true});
 						</script>
 						</span>
 					</div>
@@ -335,7 +336,7 @@ include ('inc/inc-menu.php');
 			</div>
 			<div class="part-btn-back">
 				<div class="box-btn cf">
-					<a href="<?=$backPage ?>" class="btn red"><?=$backCap?></a>
+					<a href="<?=$backPage ?>" class="btn red"><?=$backCap ?></a>
 				</div>
 			</div>
 		</div>
@@ -359,8 +360,9 @@ include ('inc/inc-social-network.php');
 <script type="text/javascript" src="assets/plugin/circle-player/js/mod.csstransforms.min.js"></script>
 <script type="text/javascript" src="assets/plugin/circle-player/js/circle.player.js"></script>
 <script type="text/javascript" src="audiolist.php?NAME=voice&amp;CID=<?=$CID ?>&amp;CONID=<?=$CONID ?>"></script>
-<? } ?>
 
+<? } ?>
+<script type="text/javascript" src="//e.issuu.com/embed.js" async="true"></script>
 </body>
 </html>
 <? CloseDB(); ?>

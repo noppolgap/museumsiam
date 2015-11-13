@@ -50,8 +50,7 @@ if (isset($_GET['edit'])) {
 
 	
 	if (move_uploaded_file($_FILES["browseAvarta"]["tmp_name"], $target_save_file)) {
-		$update[] = "IMAGE_PATH = '".$target_save_file. "'";
-	//echo "Upload Complete";
+		$update[] = "IMAGE_PATH = '../../".$target_save_file. "'";
 	}
 	else 
 		{

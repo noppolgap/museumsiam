@@ -182,7 +182,7 @@ if (isset($_GET['SCID'])) {
 
 
 							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
-							$path = 've-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$path = 've-detail.php?MID=' . $MID . '%26CID=' . $CID . '%26CONID=' . $rowContent['CONTENT_ID'];
 							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' .$rowContent['CONTENT_ID'];
 							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;

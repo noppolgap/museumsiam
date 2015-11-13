@@ -6,7 +6,7 @@ require ("assets/configs/function.inc.php");
 $CID = intval($_GET['CID']);
 $CONID = intval($_GET['CONID']);
 
-echo	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND CAT_ID = ".$CID." AND ( DIV_NAME !=  'Other' OR DIV_NAME IS NULL ) AND IMG_TYPE != 5 ORDER BY DIV_NAME ASC , ORDER_ID ASC";
+	$sql = "SELECT * FROM trn_content_picture WHERE CONTENT_ID = ".$CONID." AND CAT_ID = ".$CID." AND ( DIV_NAME !=  'Other' OR DIV_NAME IS NULL ) AND IMG_TYPE != 5 ORDER BY DIV_NAME ASC , ORDER_ID ASC";
     $query = mysql_query($sql, $conn) or die($sql);
 ?>
 <!doctype html>

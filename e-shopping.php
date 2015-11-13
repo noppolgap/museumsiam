@@ -24,7 +24,7 @@ require("inc/inc-cat-id-conf.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu3").addClass("active");
+		//$(".menutop li.menu6,.menu-left li.menu3").addClass("active");
 	});
 </script>
 
@@ -40,7 +40,7 @@ require("inc/inc-cat-id-conf.php");
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="online-system.php?MID=<?=$_GET['MID']?>">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">e-SHOPPING</li>
 			</ol>
@@ -102,7 +102,7 @@ require("inc/inc-cat-id-conf.php");
 				$sql_cat  .= "FROM trn_content_category cc
 					JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
 					WHERE cc.REF_MODULE_ID = ".$education_cat_id."
-					AND cc.FLAG = 0 ";
+					AND cc.FLAG = 0 order by cc.ORDER_DATA desc ";
 
 			    $query_cat = mysql_query($sql_cat,$conn);
 
@@ -146,14 +146,14 @@ require("inc/inc-cat-id-conf.php");
 
 
 					<div class="item">
-						<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>">
+						<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>&cid=<?=$row['CONTENT_CAT_ID']?>">
 							<div class="box-pic">
 								<span class="helper"></span>
 								<img src="<?=str_replace('../../','',$row_proc['IMG_PATH'])?>">
 							</div>
 						</a>
 						<div class="box-text">
-							<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>">
+							<a href="e-shopping-itemdetail.php?proid=<?=$row_proc['PRODUCT_ID']?>&cid=<?=$row['CONTENT_CAT_ID']?>">
 								<p class="text-title">
 									<? echo $row_proc['PRODUCT_DESC']; ?>
 								</p>

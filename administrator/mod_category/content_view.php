@@ -4,32 +4,33 @@ require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
 require ("../../inc/inc-cat-id-conf.php");
 
-		$MID = intval($_GET['MID']);
-		$CID = intval($_GET['cid']);
-		$LV = intval($_GET['LV']);
-		$SCID = $_GET['SCID'];
+$MID = intval($_GET['MID']);
+$CID = intval($_GET['cid']);
+$LV = intval($_GET['LV']);
+$SCID = $_GET['SCID'];
 
-	     if ($CID == $eapp_sub_cat){
-			$display_hide = "style = 'display:none'";
-			$hide_edit = "style='display:none' ";
+if ($CID == $eapp_sub_cat) {
+	$display_hide = "style = 'display:none'";
+	$hide_edit = "style='display:none' ";
 
-		 } 
+}
 
+$hideBack = "";
+if (strpos($hideBackBtnList, $CID . ",") !== false) {
+	$hideBack = "style='display:none'";
+}
 
-		 $search_sql = "";
-		unset($_SESSION['text']);
+$search_sql = "";
+unset($_SESSION['text']);
 
-		if (isset($_GET['search'])) {
-			if (isset($_POST['str_search'])){
-				$_SESSION['text'] = $_POST['str_search'];
-				$search_sql = "AND ( cd.CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or cd.CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )"; 
-			}
-		}
+if (isset($_GET['search'])) {
+	if (isset($_POST['str_search'])) {
+		$_SESSION['text'] = $_POST['str_search'];
+		$search_sql = "AND ( cd.CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or cd.CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )";
+	}
+}
 
-	
-			  //"contact_eapp_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";-->
-		
-
+//"contact_eapp_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";-->
 ?>
 <!doctype html>
 <html>
@@ -46,7 +47,7 @@ require ('../inc_header.php');
 <div class="main-container">
 	<div class="main-body marginC">
 		<?
-			require ('../inc_side.php');
+		require ('../inc_side.php');
  		?>
 		<?
 
@@ -72,7 +73,7 @@ require ('../inc_header.php');
 		$navigateBackPage = '';
 		if (nvl($row['IS_LAST_NODE'], 'Y') == 'Y') {
 			//if ($LV == 0) {
-				//if have subCatID must return to page main_sub_cat
+			//if have subCatID must return to page main_sub_cat
 			if (isset($SCID) && nvl($SCID, '') != '') {
 				$navigateBackPage = 'main_sub_category_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . $LV;
 			} else {
@@ -84,21 +85,21 @@ require ('../inc_header.php');
 			if (nvl($row['REF_SUB_CONTENT_CAT_ID'], '0') != '0')
 				$navigateBackPage .= '&SCID=' . $row['REF_SUB_CONTENT_CAT_ID'];
 		}
-		
-			if($CID == $position_sub_cat){
-				$link = "../mod_position/content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
-			}
-			else{
-				$link = "content_add.php?MID=".$MID."&cid=".$CID . $subfixAddAndEdit;
-			}
 
+		if ($CID == $position_sub_cat) {
+			$link = "../mod_position/content_add.php?MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit;
+		} else if ($CID == $all_event_cat_id) {
+			$link = "museum_content_add.php?MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit;
+		} else {
+			$link = "content_add.php?MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit;
+		}
 		?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
-				<input type="button" <?=$display_hide?> value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = '<?=$link?>'">
+				<input type="button" <?=$display_hide ?> value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = '<?=$link ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="content_action.php?delete">
-				<input type="button" <?=$display_hide?> value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$navigateBackPage ?>'">
+				<input type="button" <?=$display_hide ?> value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>');">
+				<input type="button" <?=$hideBack ?> value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$navigateBackPage ?>'">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -106,24 +107,24 @@ require ('../inc_header.php');
 					<div class="floatR searchBox">
 						<?
 
-							$CID_S = "";
-				
-							if($CID != ""){
-								$CID_S = "&cid=$CID";
-							}
-							if($MID != ""){
-								$CID_S .="&MID=$MID";
-							}
-							if($LV != ""){
-								$CID_S .="&LV=$LV";
-							}
-							if($SCID != ""){
-								$CID_S .="&SCID=$SCID";
-							}
+						$CID_S = "";
+
+						if ($CID != "") {
+							$CID_S = "&cid=$CID";
+						}
+						if ($MID != "") {
+							$CID_S .= "&MID=$MID";
+						}
+						if ($LV != "") {
+							$CID_S .= "&LV=$LV";
+						}
+						if ($SCID != "") {
+							$CID_S .= "&SCID=$SCID";
+						}
 						 ?>
 
 
-						<form name="search" action="?search<?=$CID_S?>" method="post">
+						<form name="search" action="?search<?=$CID_S ?>" method="post">
 							<input type="search" name="str_search" value="<?=$_SESSION['text'] ?>" />
 							<input type="image" name="search_submit" src="../images/small-n-flat/search.svg" alt="Submit Form" class="p-Relative" />
 						</form>
@@ -161,28 +162,29 @@ require ('../inc_header.php');
 							WHERE cc.REF_MODULE_ID = $MID
 								AND cc.flag <> 2
 								AND cc.CONTENT_CAT_ID  = $CID ";
-							if (isset($SCID) && nvl($SCID, '0') != '0') {
-								$sql .= "	AND sb.SUB_CONTENT_CAT_ID =  $SCID ";
-							}
-			
+
+			if (isset($SCID) && nvl($SCID, '0') != '0') {
+				$sql .= "	AND sb.SUB_CONTENT_CAT_ID =  $SCID ";
+			}
 
 			/*if (isset($_GET['search'])) {
-				$sql .= " AND ( CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )";
-			}*/
-			$sql .=  "ORDER BY cc.ORDER_DATA DESC
+			 $sql .= " AND ( CONTENT_DESC_LOC like '%" . $_POST['str_search'] . "%' or CONTENT_DESC_ENG like '%" . $_POST['str_search'] . "%' )";
+			 }*/
+			$sql .= "ORDER BY cc.ORDER_DATA DESC
 								,sb.order_data DESC
 							) a
 						LEFT JOIN trn_content_detail cd ON a.CONTENT_CAT_ID = cd.CAT_ID ";
 
-						
-						$sql .= " where cd.CONTENT_STATUS_FLAG <>  2 " ;
-						
-						
-						if (isset($SCID) && nvl($SCID, '0') != '0') {
+			$sql .= " where cd.CONTENT_STATUS_FLAG <>  2 ";
+
+			if ($CID == $all_event_cat_id) {
+				$sql .= " AND cd.MUSUEM_ID <> -1 ";
+			}
+			if (isset($SCID) && nvl($SCID, '0') != '0') {
 				$sql .= "	AND cd.SUB_CAT_ID =  $SCID ";
 			}
-						
-			 $sql .= $search_sql."	ORDER BY cd.ORDER_DATA desc ";
+
+			$sql .= $search_sql . "	ORDER BY cd.ORDER_DATA desc ";
 
 			$query = mysql_query($sql, $conn);
 
@@ -196,42 +198,41 @@ require ('../inc_header.php');
 						<div class="floatL checkboxContent"><input type="checkbox" name="check" value="<?=$row['CONTENT_ID'] ?>"></div>
 
 						<?
+						$link_detail = "";
+
+						if ($CID == $eapp_sub_cat) {
+							$link_detail = "contact-eapp-detail.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+						} else {
 							$link_detail = "";
-
-							if($CID == $eapp_sub_cat){
-								$link_detail = "contact-eapp-detail.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
-							}
-							else{
-								$link_detail = "";
-							}
-
+						}
 						?>
 
+<?
+
+if ($MID == $contact_us) {
+
+	$link_detail = "contact_detail.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+} else if ($MID == $e_aaplication) {
+	$link_detail = "contact_eapp_view.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+} else if ($CID == $all_event_cat_id) {
+	$link_detail = "museum_content_detail.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+} else {
+
+	$link_detail = "content_detail.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+}
+							?>
+							
 						<div class="floatL thumbContent">
-							<a href="content_detail.php?conid=<?=$row['CONTENT_ID']?>&MID=<?=$MID?>&cid=<?=$CID.$subfixAddAndEdit ?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], false) ?> ></a>
+							<a href="<?=$link_detail ?>" class="dBlock" <?=callThumbList($row['CONTENT_ID'], $row['CONTENT_CAT_ID'], false) ?> ></a>
 						</div>
 						<div class="floatL nameContent">
 
-							<?
-
-							if($MID == $contact_us){
-
-								$link_detail = "contact_detail.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID .$subfixAddAndEdit." ";
-							}
-							else if($MID == $e_aaplication ){
-								$link_detail = "contact_eapp_view.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
-							}
-							else{
-
-								$link_detail = "content_detail.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID .$subfixAddAndEdit." ";
-							}
-
-							?>
+							
 
 							<div><? echo '<a href="'.$link_detail.'">'. $row['CONTENT_DESC_LOC'].'</a>' ?></div>
 							<div>วันที่สร้าง <? echo ConvertDate($row['CREATE_DATE']); ?> | วันที่ปรับปรุง <? echo ConvertDate($row['LAST_UPDATE_DATE']); ?></div>
 						</div>
-						<div class="floatL stausContent" <?=$hide_edit?> <?=$display_hide?>>
+						<div class="floatL stausContent" <?=$hide_edit ?> <?=$display_hide ?>>
 
 						<? if($row['CONTENT_STATUS_FLAG'] == 0){ ?>
 							<span class="staus1"></span> <a href="content_action.php?enable&conid=<?=$row['CONTENT_ID'] ?>&vis=<?=$row['CONTENT_STATUS_FLAG'] ?>&MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>">
@@ -241,22 +242,20 @@ require ('../inc_header.php');
 						<div class="floatL EditContent">
 
 						<?
-							if($CID == $eapp_sub_cat){
+						if ($CID == $eapp_sub_cat) {
 
-								$link_edit = "contact_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
-							}
-							else if($CID == $position_sub_cat){
-								$link_edit = "../mod_position/content_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
-							}
-							
-							else{
+							$link_edit = "contact_edit.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+						} else if ($CID == $position_sub_cat) {
+							$link_edit = "../mod_position/content_edit.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+						} else if ($CID == $all_event_cat_id) {
+							$link_edit = "museum_content_edit.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+						} else {
 
-								$link_edit = "content_edit.php?conid=".$row['CONTENT_ID']."&MID=".$MID."&cid=".$CID . $subfixAddAndEdit." ";
-							}
-
+							$link_edit = "content_edit.php?conid=" . $row['CONTENT_ID'] . "&MID=" . $MID . "&cid=" . $CID . $subfixAddAndEdit . " ";
+						}
 						?>
 
-							<a href="<?=$link_edit?>" <?=$hide_edit?> class="EditContentBtn">Edit</a>
+							<a href="<?=$link_edit ?>" <?=$hide_edit ?> class="EditContentBtn">Edit</a>
 							<a href="#" data-id="<?=$row['CONTENT_ID'] ?>" class="DeleteContentBtn">Delete</a>
 						</div>
 						<div class="clear"></div>
@@ -285,10 +284,10 @@ require ('../inc_header.php');
 				</div>
 			</div>
 			<div class="buttonActionBox">
-			<input type="button" <?=$display_hide?> value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'content_add.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>'">
+			<input type="button" <?=$display_hide ?> value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'content_add.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="content_action.php?delete">
-				<input type="button" <?=$display_hide?> value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$navigateBackPage ?>'">
+				<input type="button" <?=$display_hide ?> value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('content_order.php?MID=<?=$MID ?>&cid=<?=$CID . $subfixAddAndEdit ?>');">
+				<input type="button" <?=$hideBack ?> value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?=$navigateBackPage ?>'">
 			</div>
 		</div>
 		<div class="clear"></div>

@@ -1,29 +1,43 @@
 <?php
-require("assets/configs/config.inc.php");
-require("assets/configs/connectdb.inc.php");
-require("assets/configs/function.inc.php");
+require ("assets/configs/config.inc.php");
+require ("assets/configs/connectdb.inc.php");
+require ("assets/configs/function.inc.php");
 
 $PROID = intval($_GET['proid']);
+$CID = intval($_GET['cid']);
 
-	if ($_SESSION['LANG'] == 'TH') {
-		$sql_proc_lang = 'PRODUCT_DESC_LOC AS PRODUCT_DESC';
-	} else if ($_SESSION['LANG'] == 'EN') {
-		$sql_proc_lang = 'PRODUCT_DESC_ENG AS PRODUCT_DESC';
-	}
 
+if ($_SESSION['LANG'] == 'TH') {
+$sql_cat_lang = "cc.CONTENT_CAT_DESC_LOC AS CONTENT_LOC ";
+$sql_proc_lang = 'PRODUCT_DESC_LOC AS PRODUCT_DESC';
+} else if ($_SESSION['LANG'] == 'EN') {
+$sql_cat_lang = "cc.CONTENT_CAT_DESC_ENG AS CONTENT_LOC ";
+$sql_proc_lang = 'PRODUCT_DESC_ENG AS PRODUCT_DESC';
+}
 
 $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_ID FROM trn_product pro
-		LEFT JOIN trn_content_category cc ON pro.CAT_ID = cc.CONTENT_CAT_ID
-		WHERE pro.PRODUCT_ID = ".$PROID." AND pro.FLAG = 0 ";
+LEFT JOIN trn_content_category cc ON pro.CAT_ID = cc.CONTENT_CAT_ID
+WHERE pro.PRODUCT_ID = ".$PROID." AND pro.FLAG = 0 ";
 
-	$query = mysql_query($sql,$conn);
-	$row_detail = mysql_fetch_array($query);
+$query = mysql_query($sql,$conn);
+$row_detail = mysql_fetch_array($query);
 
+$sql_cat = "SELECT " . $sql_cat_lang . " , cc.CONTENT_CAT_ID
+FROM trn_content_category cc
+JOIN sys_app_module am ON cc.REF_MODULE_ID = am.MODULE_ID
+WHERE cc.REF_MODULE_ID = 7 AND cc.CONTENT_CAT_ID = " . $CID . "
+AND cc.FLAG = 0 ";
+
+$query_cat = mysql_query($sql_cat, $conn);
+$rowCat = mysql_fetch_array($query_cat);
+//echo $sql_cat;
 ?>
 <!doctype html>
 <html>
 <head>
-<? require('inc_meta.php'); ?>
+<?
+	require ('inc_meta.php');
+ ?>
 
 <link rel="stylesheet" type="text/css" href="css/template.css" />
 <link rel="stylesheet" type="text/css" href="css/shopping.css" />
@@ -34,19 +48,23 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 
 <body>
 
-<?php include('inc/inc-top-bar.php'); ?>
-<?php include('inc/inc-menu.php'); ?>
+<?php
+	include ('inc/inc-top-bar.php');
+ ?>
+<?php
+	include ('inc/inc-menu.php');
+ ?>
 
 <div class="part-nav-main"  id="firstbox">
 	<div class="container">
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#">ระบบอื่นๆ ที่เกี่ยวข้อง</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#">e-SHOPPING</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="#">หมวดหมู่</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li class="active">ชื่อสินค้า</li>
+				<li><a href="other-system.php"><?=$otherSystemCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="online-system.php">ONLINE SYSTEM</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="e-shopping.php">e-SHOPPING</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="e-shopping-category.php?cid=<?=$CID ?>"><?=$rowCat['CONTENT_LOC'] ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li class="active"><?=$row_detail['PRODUCT_DESC']?></li>
 			</ol>
 		</div>
 	</div>
@@ -57,33 +75,39 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 <div class="part-main">
 	<div class="container cf">
 		<div class="box-left main-content">
-			<?php include('inc/inc-left-content-shopping.php'); ?>
+			<?php
+			include ('inc/inc-left-content-shopping.php');
+ ?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf">
 				<h1>e-SHOPPING</h1>
 				<div class="box-btn">
-					<a href="e-shopping-category.php?cid=<?=$row_detail['CAT_ID']?>" class="btn red">ย้อนกลับ</a>
+					<a href="e-shopping-category.php?cid=<?=$row_detail['CAT_ID'] ?>" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 			<?php
-			$sql = "SELECT SUM(trn_shopping_cart_Quantity)  FROM `trn_shopping_cart` WHERE `trn_shopping_cart_SSID` = '".session_id()."'";
+			$sql = "SELECT SUM(trn_shopping_cart_Quantity)  FROM `trn_shopping_cart` WHERE `trn_shopping_cart_SSID` = '" . session_id() . "'";
 			$query = mysql_query($sql, $conn) or die($sql);
 			$row = mysql_fetch_row($query);
 			?>
 			<div class="box-btn-cart">
-				<a href="e-shopping-cart.php" class="btn-cart">ตะกร้าสินค้า <span><?=$row[0]?></span></a>
+				<a href="e-shopping-cart.php" class="btn-cart"><?=$cart?> <span><?=$row[0] ?></span></a>
 			</div>
 
 			<form action="product_action.php?add'" method="post" name="formcms">
 
 			<input type="hidden" name="cus_id" value="1">
-			<input type="hidden" name="price" value="<?=$row_detail['PRICE']?>">
-			<input type="hidden" name="proid" value="<?=$row_detail['PRODUCT_ID']?>">
-			<input type="hidden" name="cid" value="<?=$row_detail['CAT_ID']?>">
+			<input type="hidden" name="price" value="<?=$row_detail['PRICE'] ?>">
+			<input type="hidden" name="proid" value="<?=$row_detail['PRODUCT_ID'] ?>">
+			<input type="hidden" name="cid" value="<?=$row_detail['CAT_ID'] ?>">
 
 			<div class="box-category-main">
+				<div class="box-title cf">
+					<h2><? echo $rowCat['CONTENT_LOC']; ?></h2>
+				</div>
+				
 				<div class="box-detailitem-main cf">
 					<div class="box-left">
 						<div class="slide-gallery-main">
@@ -92,11 +116,11 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 
 						<?
 						$thumb = '';
-						$getPicSql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = ".$row_detail['PRODUCT_ID']." AND CAT_ID = ".$row_detail['CAT_ID']." ORDER BY ORDER_ID ASC";
-						$query_pic = mysql_query($getPicSql,$conn);
-						while($row_pic = mysql_fetch_array($query_pic)){
-							$path = str_replace('../../','',$row_pic['IMG_PATH']);
-							echo $show = '<div class="slide-content slideProductImage" style="background-image: url(\''.$path.'\');"> <img src="'.$path.'"> </div>';
+						$getPicSql = "SELECT IMG_PATH FROM trn_content_picture WHERE CONTENT_ID = " . $row_detail['PRODUCT_ID'] . " AND CAT_ID = " . $row_detail['CAT_ID'] . " ORDER BY ORDER_ID ASC";
+						$query_pic = mysql_query($getPicSql, $conn);
+						while ($row_pic = mysql_fetch_array($query_pic)) {
+							$path = str_replace('../../', '', $row_pic['IMG_PATH']);
+							echo $show = '<div class="slide-content slideProductImage" style="background-image: url(\'' . $path . '\');"> <img src="' . $path . '"> </div>';
 							$thumb .= $show;
 						}
 						?>
@@ -106,10 +130,10 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 							</div>
 							<div class="box-slide-small">
 								<div id="sync2" class="owl-carousel">
-									<?=$thumb?>
+									<?=$thumb ?>
 								</div>
 							</div>
-							<div class="text-id">รหัสสินค้า : <?=str_pad($row_detail['PRODUCT_ID'], 5, 0, STR_PAD_LEFT);?></div>
+							<div class="text-id"><?=$product_code?> : <?=str_pad($row_detail['PRODUCT_ID'], 5, 0, STR_PAD_LEFT); ?></div>
 						</div>
 					</div>
 					<div class="box-right">
@@ -124,11 +148,11 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 							<div class="text-price">
 								<p>
 									<?php
-									if($row_detail['SALE'] > 0){
-										echo '<span>ราคาปกติ : '.$row_detail['PRICE'].' บาท</span>';
-										echo 'ราคาพิเศษ : '.$row_detail['SALE'].' บาท';
-									}else{
-										echo '<strong>ราคา : '.$row_detail['PRICE'].' บาท</strong>';
+									if ($row_detail['SALE'] > 0) {
+										echo '<span>'.$normalPrice.' : ' . $row_detail['PRICE'] . ' '.$bath.'</span>';
+										echo $sale.' : ' . $row_detail['SALE'] . ' '.$bath;
+									} else {
+										echo '<strong>ราคา : ' . $row_detail['PRICE'] . ' '.$bath.'</strong>';
 									}
 									?>
 								</p>
@@ -137,7 +161,7 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 								Free Shipping
 							</div>
 							<div class="box-btn">
-								<a href="#" onclick="addtocart(<?=$row_detail['PRODUCT_ID']?>,'shopping');" class="btn red">หยิบสินค้าลงตะกร้า</a>
+								<a href="#" onclick="addtocart(<?=$row_detail['PRODUCT_ID'] ?>,'shopping');" class="btn red">หยิบสินค้าลงตะกร้า</a>
 							</div>
 						</div>
 					</div>
@@ -153,7 +177,9 @@ $sql  = " SELECT ".$sql_proc_lang." , DETAIL , PRODUCT_ID , PRICE , SALE , CAT_I
 
 
 
-<?php include('inc/inc-footer.php'); ?>
+<?php
+	include ('inc/inc-footer.php');
+ ?>
 <script src="js/cart.js"></script>
 
 </body>

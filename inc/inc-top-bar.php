@@ -67,7 +67,7 @@ require ("inc-cat-id-conf.php");
 						if(isset($_SESSION['FB'])){
 							echo '<img src="http://graph.facebook.com/'.$_SESSION['FB'].'/picture" alt="" />';
 						}else if(isset($_SESSION['IMAGE_PATH'])){
-							echo '<img src="'.$_SESSION['IMAGE_PATH'].'" />';
+							echo '<img src="'.str_replace("../../", "",$_SESSION['IMAGE_PATH']).'" />';
 						}else{
 							echo '<img src="images/icon-humen.png" alt="icon-humen" />';
 						}

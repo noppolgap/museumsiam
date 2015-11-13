@@ -1791,11 +1791,11 @@ function frontend_mdn_upload_image_edit($name, $picTypeId, $museumId) {
 
 		$str .= '<div class="box-pic">' . "\n\t";
 		$str .= '<a onclick="popupImage(\'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
-		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '" alt="">' . "\n\t";
+		$str .= '<img src="' . str_replace("../../", "",str_replace_last('/', '/thumbnail/', $row['IMG_PATH'])) . '" alt="">' . "\n\t";
 		$str .= '</a>' . "\n\t";
 		$str .= '</div>' . "\n\t";
 
-		$str .= '<a class="btn-delete" onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<a class="btn-delete" onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . str_replace("../../", "",$row['IMG_PATH'] ). '\'); return false;" href="#">' . "\n\t";
 
 		$str .= '</a>' . "\n\t";
 
@@ -1847,7 +1847,7 @@ function frontend_move_image_upload_dir($dir, $file, $width, $height, $crop, $th
 	chmod($path3, 0755);
 	chmod($path4, 0755);
 
-	return $path3 . $output;
+	return '../../'.$path3 . $output;
 }
 
 function frontend_move_single_image_upload_dir($dir, $file) {
@@ -1874,7 +1874,7 @@ function frontend_move_single_image_upload_dir($dir, $file) {
 	$target_save_file = $path3 . time() . '_' . rand(111, 999) . '.' . $imageFileType;
 
 	if (move_uploaded_file($file["tmp_name"], $target_save_file))
-		return $target_save_file;
+		return '../../'.$target_save_file;
 	else
 		return "";
 
@@ -1901,12 +1901,12 @@ function frontend_mdn_content_upload_image_edit($name, $conId, $catId) {
 		$str .= '<div id="img_edit_' . $row['PIC_ID'] . '" data-id="' . $row['PIC_ID'] . '" class="box-tumb museumbox-thumb">' . "\n\t";
 
 		$str .= '<div class="box-pic">' . "\n\t";
-		$str .= '<a onclick="popupImage(\'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
-		$str .= '<img src="' . str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) . '" alt="">' . "\n\t";
+		$str .= '<a onclick="popupImage(\'' .str_replace("../../", "", $row['IMG_PATH']) . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<img src="' . str_replace("../../", "",str_replace_last('/', '/thumbnail/', $row['IMG_PATH']) ). '" alt="">' . "\n\t";
 		$str .= '</a>' . "\n\t";
 		$str .= '</div>' . "\n\t";
 
-		$str .= '<a class="btn-delete" onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . $row['IMG_PATH'] . '\'); return false;" href="#">' . "\n\t";
+		$str .= '<a class="btn-delete" onclick="delImageEdit(\'' . $row['PIC_ID'] . '\' , \'' . str_replace("../../", "",$row['IMG_PATH']) . '\'); return false;" href="#">' . "\n\t";
 
 		$str .= '</a>' . "\n\t";
 
@@ -1927,7 +1927,7 @@ function frontend_mdn_content_upload_image_edit($name, $conId, $catId) {
 function callMDNThumbListFrontEnd($mid, $genBgStyle) {
 	global $conn;
 
-	$sql = "SELECT IMG_PATH FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $mid . " AND IMG_TYPE = 9 ORDER BY ORDER_DATA ASC LIMIT 0 , 1";
+	$sql = "SELECT IMG_PATH FROM trn_museum_profile_picture WHERE MUSEUM_ID = " . $mid . " AND IMG_TYPE = 8 ORDER BY ORDER_DATA ASC LIMIT 0 , 1";
 	$query = mysql_query($sql, $conn);
 	$num = mysql_num_rows($query);
 	if ($num == 1) {

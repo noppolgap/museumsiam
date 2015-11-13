@@ -144,7 +144,11 @@ if ($_SESSION['LANG'] == 'TH') {
 							<p class="text-title"><a href="e-shopping-itemdetail.php?proid=<?=$row['PRODUCT_ID']?>"><? echo $row['CAT_DESC']; ?></a></p>
 							<p class="text-id"><?=$product_code?> : <span><?=str_pad($row['PRODUCT_ID'], 5, 0, STR_PAD_LEFT);?></span></p>
 							<p class="text-cate"><?=$product_category?> : <span><? echo $row['CAT_DESC_LOC']; ?></span></p>
-							<p class="text-detail"><? echo $row['DETAIL']; ?></p>
+							<p class="text-detail"><? echo
+							
+							 strip_tags(str_replace("../../", "",$row['DETAIL']), $ShippingallowTag); ?>
+						 
+							 </p>
 						</div>
 					</div>
 					<div class="column price"><?=number_format($price,2)?></div>

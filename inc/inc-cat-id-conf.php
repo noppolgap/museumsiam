@@ -1,7 +1,9 @@
 <?
 //allow tag in strip_tags
-$allowTag = "<p><br><img><a><b><span><strong>";
-
+$allowTag = "<p><br><img><a><b><span><strong><div><iframe>";
+$ShippingallowTag = "<br><img><a><b><span><strong><div><iframe>";
+$hideBackBtnListFromMID = "12,";
+$hideBackBtnList = "61,60,";
 // Category ID
 $event_cat_id = 4;
 $exhibition_cat_id = 5;
@@ -23,6 +25,7 @@ $procurement_cat_id = 59;
 $km_module_id = 2;
 $digial_module_id = 3;
 $museum_data_network_module_id = 4 ; 
+$online_system_module_id = 7;
 
 $visual_exhibition = 5;
 $style_exhibition = 20;

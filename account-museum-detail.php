@@ -375,7 +375,7 @@ $row = mysql_fetch_array($rs);
 							</div>
 							<div class="box-input-text cf ">
 								<div class="box-tumb">
-									<div class="box-pic"><img id="imgMapLoc"  src="<?=$row['MAP_IMG_PATH_LOC'] ?>"></div>
+									<div class="box-pic"><img id="imgMapLoc"  src="<?=str_replace("../../", "",$row['MAP_IMG_PATH_LOC']) ?>"></div>
 									<a class="btn-delete deleteMap" data-id="MapLoc" ></a>
 									<input type='file' name ="browseMapLoc" id ="browseMapLoc" style="display:none" accept="image/*" />
 									<input type="hidden" id = "hidMapLoc" name = "hidMapLoc"  value=""/>
@@ -398,7 +398,7 @@ $row = mysql_fetch_array($rs);
 							</div>
 							<div class="box-input-text cf ">
 								<div class="box-tumb">
-									<div class="box-pic"><img id="imgMapEng" src="<?=$row['MAP_IMG_PATH_ENG'] ?>"></div>
+									<div class="box-pic"><img id="imgMapEng" src="<?=str_replace("../../", "",$row['MAP_IMG_PATH_ENG'])?>"></div>
 									<a class="btn-delete deleteMap" data-id="MapEng"></a>
 									<input type='file' name ="browseMapEng" id ="browseMapEng" style="display:none" accept="image/*" />
 									<input type="hidden" id = "hidMapEng"  name = "hidMapEng" value="" />
@@ -870,39 +870,7 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<!-- <div class="row-main cf">
-				<div class="box-left addW">
-					<div class="box-row cf ">
-						<div class="box-left">
-
-						</div>
-						<div class="box-right ">
-							<div class="box-input-text cf">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
+		
 			<div class="box-line cf"><hr></div>
 
 			<div class="row-main cf">
@@ -949,35 +917,7 @@ $row = mysql_fetch_array($rs);
 					</div>
 				</div>
 			</div>
-			<!-- <div class="row-main cf">
-				<div class="box-left addW">
-					<div class="box-row cf ">
-						<div class="box-left">
-
-						</div>
-						<div class="box-right ">
-							<div class="box-input-text cf">
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-								<div class="box-tumb">
-									<div class="box-pic"><img src="http://placehold.it/274x205"></div>
-									<a class="btn-delete"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
+			
 			<div class="box-line cf"><hr></div>
 
 			<div class="row-main cf">

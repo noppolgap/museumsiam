@@ -336,7 +336,7 @@ $row = mysql_fetch_array($rs);
 						if((isset($_SESSION['FB'])) AND ($avatarPath == '')){
 							$avatarPath = 'http://graph.facebook.com/'.$_SESSION['FB'].'/picture?type=normal';
 						}else{
-							$avatarPath = nvl( $row['IMAGE_PATH'] , 'images/account/user.jpg');
+							$avatarPath = str_replace("../../", "", nvl($row['IMAGE_PATH'], 'images/account/user.jpg'));
 						}
 					?>
 						

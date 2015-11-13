@@ -2,6 +2,7 @@
 require ("../../assets/configs/config.inc.php");
 require ("../../assets/configs/connectdb.inc.php");
 require ("../../assets/configs/function.inc.php");
+require ("../../inc/inc-cat-id-conf.php");
 ?>
 <!doctype html>
 <html>
@@ -55,13 +56,20 @@ require ('../inc_header.php');
 			if (nvl($row['REF_SUB_CONTENT_CAT_ID'], '0') != '0')
 				$backPage .= '&SCID=' . $row['REF_SUB_CONTENT_CAT_ID'];
 		}
+		if (isset($_GET['h']))
+			$hideBack = " style='display:none'";
+
+		$hideBack = "";
+		if (strpos($hideBackBtnList, $CID . ",") !== false) {
+			$hideBack = "style='display:none'";
+		}
 	?>
 		<div class="mod-body">
 			<div class="buttonActionBox">
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_category_add.php?MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="sub_category_action.php?delete" >
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('sub_category_order.php?MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?= $backPage ?>'">
+				<input type="button" value="ย้อนกลับ" <?=$hideBack ?> class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?= $backPage ?>'">
 			</div>
 			<div class="mod-body-inner">
 				<div class="mod-body-inner-header">
@@ -114,7 +122,7 @@ while ($row = mysql_fetch_array($query)) {
 							$nextPage = '';
 							if (nvl($row['IS_LAST_NODE'], 'Y') == 'Y') {
 								//content no LV use current LV
-								$nextPage = 'content_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . $LV  . '&SCID=' . $row['SUB_CONTENT_CAT_ID'];
+								$nextPage = 'content_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . $LV . '&SCID=' . $row['SUB_CONTENT_CAT_ID'];
 							} else {
 								//recursive to self page
 								$nextPage = 'main_sub_category_view.php?cid=' . $CID . '&MID=' . $MID . '&LV=' . ($LV + 1) . '&SCID=' . $row['SUB_CONTENT_CAT_ID'];
@@ -127,8 +135,8 @@ while ($row = mysql_fetch_array($query)) {
 							<div>วันที่สร้าง <?
 							echo ConvertDate($row['CREATE_DATE']);
 						?> | วันที่ปรับปรุง <?
-echo ConvertDate($row['LAST_UPDATE_DATE']);
-?></div>
+						echo ConvertDate($row['LAST_UPDATE_DATE']);
+					?></div>
 						</div>
 						<div class="floatL stausContent">
 
@@ -179,7 +187,7 @@ echo ConvertDate($row['LAST_UPDATE_DATE']);
 				<input type="button" value="สร้างใหม่" class="buttonAction emerald-flat-button" onclick="window.location.href = 'sub_category_add.php?MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>'">
 				<input type="button" value="ลบ" class="buttonAction alizarin-flat-button" onclick="deleteCheck();" data-pageDelete="sub_category_action.php?delete" >
 				<input type="button" value="จัดเรียง" class="buttonAction peter-river-flat-button" onclick="orderPage('sub_category_order.php?MID=<?= $MID ?>&cid=<?= $CID . $subfixAddAndEdit ?>');">
-				<input type="button" value="ย้อนกลับ" class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?= $backPage ?>'">
+				<input type="button" value="ย้อนกลับ" <?=$hideBack ?> class="buttonAction peter-river-flat-button" onclick="window.location.href = '<?= $backPage ?>'">
 			</div>
 		</div>
 		<div class="clear"></div>

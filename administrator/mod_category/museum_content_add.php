@@ -53,8 +53,34 @@ require ('../inc_header.php');
 
 
 
-						<form action="content_action.php?add&MID=<?=$MID . $subfixAddAndEdit ?>" method="post" name="formcms">
+						<form action="museum_content_action.php?add&MID=<?=$MID . $subfixAddAndEdit ?>" method="post" name="formcms">
 
+<div>
+								<div class="floatL form_name">พิพิธภัณฑ์เครื่อข่าย</div>
+								<div class="floatL form_input">
+									<select name= "cmbMuseum" id= "cmbMuseum">
+										<option value="-1">กรุณาเลือกพิพิธภัณฑ์</option>
+										<?
+										$museumSql = "SELECT
+															*
+														FROM
+															trn_museum_detail
+														WHERE
+															MUSEUM_DETAIL_ID <> - 1
+														AND ACTIVE_FLAG = 1
+														AND APPROVE_FLAG = 'Y'";
+										$museumQuery = mysql_query($museumSql, $conn);
+										while ($museumRow = mysql_fetch_array($museumQuery)) {
+											echo '<option value= "' . $museumRow['MUSEUM_DETAIL_ID'] . '">' . $museumRow['MUSEUM_NAME_LOC'] . '</option>';
+										}
+										?>
+										</select>
+									
+								</div>
+								<span class="error" >* <span id = "museumError" style="display:none">กรุณาเลือกพิพิธภัณฑ์</span> </span>
+								<div class="clear"></div>
+							</div>
+							
 							<div>
 								<div class="floatL form_name">ชื่อ TH</div>
 								<div class="floatL form_input"><input type="text" name="txtDescLoc" id ="txtDescLoc" value="" class="w90p" /></div>
@@ -92,31 +118,30 @@ require ('../inc_header.php');
 								<span class="error" >* <span id = "detailEnError" style="display:none">กรุณาระบุรายละเอียด EN</span> </span>
 								<div class="clear"></div>
 							</div>
- 
- 
-							<? if($SCID == $museumDataNetworkNewsSubCat || $SCID == $mesum_sub_cat_id ) { ?>
+ <?
+$dateStartCap = "วันที่เริ่ม";
+$hideEndDate = "";
+
+if ($SCID == $museumDataNetworkNewsSubCat) {
+	$dateStartCap = "วันที่";
+	$hideEndDate = " style='display:none'";
+}
+ ?>
+
+							 
 
 								<div>
-									<div class="floatL form_name">วันที่</div>
+									<div class="floatL form_name"><?=$dateStartCap ?></div>
 									<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="" class="DatePicker" /></div>
 									<div class="clear"></div>
 								</div>
-								
-							<? } else { ?>
-
-								<div>
-									<div class="floatL form_name">วันที่เริ่ม</div>
-									<div class="floatL form_input"><input type="text" name="txtStartDate" id="txtStartDate" value="" class="DatePicker" /></div>
-									<div class="clear"></div>
-								</div>
-								<div>
+								<div <?=$hideEndDate ?>>
 									<div class="floatL form_name">วันที่สิ้นสุด</div>
 									<div class="floatL form_input"><input type="text" name="txtEndDate" id = "txtEndDate" value="" class="DatePicker" /></div>
 									<div class="clear"></div>
 								</div>
-						   <? } ?>
-
-							<div>
+						   
+							<div <?=$hideEndDate ?>>
 								<div class="floatL form_name">เวลาเริ่ม</div>
 								<div class="floatL form_input">
 									<select name="cmbHourStart">
@@ -142,7 +167,7 @@ require ('../inc_header.php');
 									</div>
 								<div class="clear"></div>
 							</div>
-							<div>
+							<div <?=$hideEndDate ?>>
 								<div class="floatL form_name">เวลาสิ้นสุด</div>
 								<div class="floatL form_input">
 									
@@ -170,40 +195,40 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 							
-							<div>
+							<div <?=$hideEndDate ?>>
 									<div class="floatL form_name">ราคาเข้าชม (ไทย)</div>
 									<div class="floatL form_input"><input type="text" name="txtPriceLoc" id = "txtPriceLoc" value=""  /></div>
 									<div class="clear"></div>
 								</div>
 								
-								<div>
+								<div <?=$hideEndDate ?>>
 									<div class="floatL form_name">ราคาเข้าชม (อังกฤษ)</div>
 									<div class="floatL form_input"><input type="text" name="txtPriceEng" id = "txtPriceEng" value=""   /></div>
 									<div class="clear"></div>
 								</div>
 								
-							<div>
+							<div <?=$hideEndDate ?>>
 								<div class="floatL form_name">สถานที่ TH</div>
 								<div class="floatL form_input"><input type="text" name="txtPlaceLoc" id="txtPlaceLoc" value="" class="w90p" /></div>
 								<span class="error" ><span id = "placeThError" style="display:none">กรุณาระบุสถานที่ TH</span> </span>
 								<div class="clear"></div>
 							</div>
 
-							<div>
+							<div <?=$hideEndDate ?>>
 								<div class="floatL form_name">สถานที่  EN</div>
 								<div class="floatL form_input"><input type="text" name="txtPlaceEng" id="txtPlaceEng" value="" class="w90p" /></div>
 								<span class="error" ><span id = "placeEnError" style="display:none">กรุณาระบุสถานที่ EN</span> </span>
 								<div class="clear"></div>
 							</div>
 
-							<div>
+							<div <?=$hideEndDate ?>>
 								<div class="floatL form_name">Lattitude</div>
 								<div class="floatL form_input"><input type="text" name="txtLat" id="txtLat" value="" class="w90p" /></div>
 								<span class="error" ><span id = "lattitudeError" style="display:none">กรุณาระบุ Lattitude</span> </span>
 								<div class="clear"></div>
 							</div>
 
-							<div>
+							<div <?=$hideEndDate ?>>
 								<div class="floatL form_name">Longtitude</div>
 								<div class="floatL form_input"><input type="text" name="txtLon" id="txtLon" value="" class="w90p" /></div>
 								<span class="error" ><span id = "lontitudeError" style="display:none">กรุณาระบุ Lontitude</span> </span>
@@ -216,33 +241,14 @@ require ('../inc_header.php');
 								<div class="clear"></div>
 							</div>
 
-							<div class="bigForm">
-								<div class="floatL form_name">Video</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('video', 'video');
-									echo $uploadvideo[0];
-									$formUploadVideo .= $uploadvideo[1];
-  ?></div>
+							<div>
+								<div class="floatL form_name">Youtube Link</div>
+								<div class="floatL form_input">
+									<input type="text"   id = "txtYoutube"  name = "txtYoutube" class="w90p"/>
+									<input type="hidden" name="hidYoutube" value="" id="hidYoutube"/>
+								</div>
 								<div class="clear"></div>
 							</div>
-
-							<div class="bigForm">
-								<div class="floatL form_name">Sound</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('voice', 'sound');
-									echo $uploadvideo[0];
-									$formUploadVideo .= $uploadvideo[1];
-  ?></div>
-								<div class="clear"></div>
-							</div>
-
-							<div class="bigForm">
-								<div class="floatL form_name">Other File</div>
-								<div class="floatL form_input"><? $uploadvideo = admin_upload_video('other', 'all');
-									echo $uploadvideo[0];
-									$formUploadVideo .= $uploadvideo[1];
-  ?></div>
-								<div class="clear"></div>
-							</div>
-
 
 							<div class="btn_action">
 								<input type="submit" value="บันทึก" class="buttonAction emerald-flat-button" onclick="return onValidate();">
@@ -276,7 +282,23 @@ require ('../inc_footer.php');
 <script type="text/javascript">
 	$(document).ready(function() {
 		//divSubCatCmbZone  , divSubCat
+		$('#txtYoutube').bind('change', function(e) {
+			if ($('#txtYoutube').val() != '') {
 
+				if (!youtube_parser($('#txtYoutube').val())) {
+					alert('Link Youtube ไม่ถูกต้อง');
+					$('#txtYoutube').val('');
+				} else {
+					//short video
+					var shortName = youtube_parser($('#txtYoutube').val());
+					$('#hidYoutube').val(shortName);
+				}
+
+			} else {
+				$('#txtYoutube').val('');
+			}
+
+		});
 	});
 
 	function onValidate() {
@@ -288,7 +310,12 @@ require ('../inc_footer.php');
 		$('#briefEnError').hide();
 		$('#detailThError').hide();
 		$('#detailEnError').hide();
+		$('#museumError').hide();
 
+		if ($('#cmbMuseum').val() == '-1') {
+			ret = false;
+			$('#museumError').show();
+		}
 		if ($('#txtDescLoc').val() == '') {
 			ret = false;
 			$('#nameThError').show();
@@ -312,6 +339,17 @@ require ('../inc_footer.php');
 			return false;
 
 	}
+
+	function youtube_parser(url) {
+		var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+		var match = url.match(regExp);
+		if (match && match[7].length == 11) {
+			return match[7];
+		} else {
+			return false;
+		}
+	}
+
 </script>
  <style  >
 	.error, .error span {

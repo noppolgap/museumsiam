@@ -203,5 +203,5 @@ $noDataCap = "Data not found";
 $newAndEventDate = "Events & News Date : ";
 
 $knowledge_system = "Knowledge System";
-
+$normalPrice = "Normal price";
 ?>

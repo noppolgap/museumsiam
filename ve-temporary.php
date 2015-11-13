@@ -24,10 +24,10 @@ require("assets/configs/function.inc.php");
 
 <script>
 	$(document).ready(function(){
-		$(".menutop li.menu6,.menu-left li.menu2,.menu-left li.menu2 .submenu2").addClass("active");
-			if ($('.menu-left li.menu2').hasClass("active")){
-				$('.menu-left li.menu2').children(".submenu-left").css("display","block");
-			}
+		// $(".menutop li.menu6,.menu-left li.menu2,.menu-left li.menu2 .submenu2").addClass("active");
+			// if ($('.menu-left li.menu2').hasClass("active")){
+				// $('.menu-left li.menu2').children(".submenu-left").css("display","block");
+			// }
 	});
 </script>
 
@@ -42,13 +42,15 @@ include('inc/inc-menu.php');
 $MID = $visual_exhibition;//$_GET['MID'];
 $CID = intval($_GET['c']);//$_GET['CID'];
 if($CID == 0){
-	$CID = $temporary_exhibition;
+	$CID = $style_exhibition;
 }
 
 
 $SCID = "-1";
 if (isset($_GET['SCID']))
 	$SCID = $_GET['SCID'];
+else 
+	$SCID = $temporary_exhibition ; 
 
 $currentPage = 1;
 if (isset($_GET['PG']))
@@ -65,14 +67,14 @@ if (isset($_SESSION['VE_PREV_PG'])){
 				}
 else
 	{
-		$backPage = "ve-temporary.php?MID=".$km_module_id;
+		$backPage = "ve-temporary.php?MID=".$visual_exhibition;
 	}
 //$backPage = "km.php?MID=" . $MID . "&CID=" . $CID;
 $currentParam = "?MID=" . $MID . "&CID=" . $CID;
-if (isset($_GET['SCID'])) {
+//if (isset($_GET['SCID'])) {
 	//$backPage .= "$SCID=" . $SCID;
-	$currentParam .= "$SCID=" . $SCID;
-}
+	$currentParam .= "&SCID=" . $SCID;
+//}
 
 if ($_SESSION['LANG'] == 'TH') {
 	$LANG_SQL = "cat.CONTENT_CAT_DESC_LOC AS CAT_DESC , content.CONTENT_DESC_LOC AS CONTENT_DESC , content.BRIEF_LOC AS BRIEF_LOC";
@@ -90,7 +92,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php"><?=$otherSystemCap?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve.php">ระบบจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="ve-exhibition.php.php">นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="ve-exhibition.php">นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active">นิทรรศการชั่วคราว</li>
 			</ol>
 		</div>
@@ -109,7 +111,7 @@ if ($_SESSION['LANG'] == 'TH') {
 
 
 //query name cat
-$sql = "SELECT ".$LANG_SQL_SUB_CAT." , SUB_CONTENT_CAT_ID FROM trn_content_sub_category WHERE FLAG = 0 AND SUB_CONTENT_CAT_ID = ".$CID;
+$sql = "SELECT ".$LANG_SQL_SUB_CAT." , SUB_CONTENT_CAT_ID FROM trn_content_sub_category WHERE FLAG = 0 AND SUB_CONTENT_CAT_ID = ".$SCID;
 $query = mysql_query($sql, $conn);
 $row = mysql_fetch_array($query);
 $cat_name = $row['CAT_DESC'];
@@ -138,7 +140,7 @@ $cat_name = $row['CAT_DESC'];
 											WHERE
 												cat.REF_MODULE_ID = $MID
 											AND cat.flag  = 0
-											AND content.SUB_CAT_ID = $CID ";
+											AND content.CAT_ID = $CID ";
 						if (isset($_GET['SCID']))
 							$getContentSql .= " AND content.SUB_CAT_ID = $SCID ";
 						 	$getContentSql .= " AND content.APPROVE_FLAG = 'Y'
@@ -147,6 +149,7 @@ $cat_name = $row['CAT_DESC'];
 												content.ORDER_DATA desc
 											Limit 9 offset  " . (9 * ($currentPage - 1));
 
+//echo $getContentSql;
 					//	echo 'Page '.$currentPage.' Command'. $getContentSql;
 						$i = 1;
 
@@ -164,20 +167,20 @@ $cat_name = $row['CAT_DESC'];
 
 
 							$rowContent['CONTENT_DESC'] = htmlspecialchars($rowContent['CONTENT_DESC']);
-							$path = 've-detail.php?MID=' . $MID . '%26CID=' . $categoryID . '%26CONID=' . $rowContent['CONTENT_ID'];
+							$path = 've-detail.php?MID=' . $MID . '%26CID=' . $CID . '%26CONID=' . $rowContent['CONTENT_ID'];
 							$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 							$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' .$rowContent['CONTENT_ID'];
 							$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG='.$currentPage.'&link=temp"> ';
+							echo '<a href="ve-detail.php' . $currentParam . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG='.$currentPage.'&link=temp"> ';
 							echo ' <div class="box-pic"> ';
 							echo '	<img style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 
 							echo ' <div class="box-text">';
-							echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']. '&PG='.$currentPage.'&link=temp">';
+							echo ' <a href="ve-detail.php' . $currentParam . '&CONID=' . $rowContent['CONTENT_ID']. '&PG='.$currentPage.'&link=temp">';
 							echo ' <p class="text-title TcolorRed">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -191,7 +194,7 @@ $cat_name = $row['CAT_DESC'];
 							echo ' </p>';
 
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']  . '&PG='.$currentPage.'&link=temp" class="btn red">'.$readMoreCap.'</a>';
+							echo ' <a href="ve-detail.php' . $currentParam . '&CONID=' . $rowContent['CONTENT_ID']  . '&PG='.$currentPage.'&link=temp" class="btn red">'.$readMoreCap.'</a>';
 
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';

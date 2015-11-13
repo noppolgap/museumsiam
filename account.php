@@ -16,7 +16,7 @@ require ('inc_meta.php');
 <script>
 	$(document).ready(function() {
 		$(".menu-left li.menu1").addClass("active");
-	});
+	}); 
 </script>
 
 </head>
@@ -25,17 +25,17 @@ require ('inc_meta.php');
 
 
 <?php
-	include ('inc/inc-top-bar.php');
+include ('inc/inc-top-bar.php');
  ?>
 <?php
-	include ('inc/inc-menu.php');
+include ('inc/inc-menu.php');
  ?>
 <?php
 require ('inc/inc-require-userlogin.php');
 if ($_SESSION['LANG'] == 'TH') {
- $picFolder = 'th';
+	$picFolder = 'th';
 } else {
- $picFolder = 'en';
+	$picFolder = 'en';
 }
 ?>
 
@@ -44,7 +44,7 @@ if ($_SESSION['LANG'] == 'TH') {
 		<div class="box-nav">
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><?=$account_setting?>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><?=$account_setting ?>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active"><?=$profile ?></li>
 			</ol>
 		</div>
@@ -55,7 +55,7 @@ if ($_SESSION['LANG'] == 'TH') {
 	<div class="container">
 		<div class="box-titlepage">
 			<p>
-				<img src="images/<?=$picFolder?>/title-accout.png" alt="ACCOUNT SETTINGS"/>
+				<img src="images/<?=$picFolder ?>/title-accout.png" alt="ACCOUNT SETTINGS"/>
 			</p>
 		</div>
 	</div>
@@ -91,29 +91,29 @@ if ($_SESSION['LANG'] == 'TH') {
 						u.USER_ID = '" . $_SESSION['user_name'] . "'
 					AND ACTIVE_FLAG = '1' ";
 
-			//		echo $sqlUser ;
+		//		echo $sqlUser ;
 		$rs = mysql_query($sqlUser) or die(mysql_error());
 		$row = mysql_fetch_array($rs);
 		?>
 
 		<div class="box-account-right cf">
 			<div class="box-title">
-				<h1><?=$profile?></h1>
+				<h1><?=$profile ?></h1>
 			</div>
 			<div class="box-left">
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$nameCap?> - <?=$sureName?></p>
+						<p><?=$nameCap ?> - <?=$sureName ?></p>
 					</div>
 					<div class="box-right">
 
-						<p><?=$row['TITLE_DESC']." ". $row['NAME'] . " " . $row['LAST_NAME'] ?></p>
+						<p><?=$row['TITLE_DESC'] . " " . $row['NAME'] . " " . $row['LAST_NAME'] ?></p>
 
 					</div>
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$gender?></p>
+						<p><?=$gender ?></p>
 					</div>
 					<div class="box-right">
 
@@ -123,7 +123,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$birthDate?></p>
+						<p><?=$birthDate ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=displaydateformatlong($row['BIRTHDAY']) ?></p>
@@ -131,7 +131,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$tel?></p>
+						<p><?=$tel ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['TELEPHONE'] ?></p>
@@ -139,7 +139,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$mobile?></p>
+						<p><?=$mobile ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['MOBILE_PHONE'] ?></p>
@@ -147,7 +147,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$fax?></p>
+						<p><?=$fax ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['FAX'] ?></p>
@@ -155,7 +155,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$idCard?></p>
+						<p><?=$idCard ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['CITIZEN_ID'] ?></p>
@@ -163,7 +163,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$address?></p>
+						<p><?=$address ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['ADDRESS1'] ?></p>
@@ -171,7 +171,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$sub_district?></p>
+						<p><?=$sub_district ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['SUB_DISTRICT_DESC'] ?></p>
@@ -179,7 +179,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$district?></p>
+						<p><?=$district ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['DISTRICT_DESC'] ?></p>
@@ -187,7 +187,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$province?></p>
+						<p><?=$province ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['PROVINCE_DESC'] ?></p>
@@ -195,7 +195,7 @@ if ($_SESSION['LANG'] == 'TH') {
 				</div>
 				<div class="box-row cf">
 					<div class="box-left">
-						<p><?=$postcode?></p>
+						<p><?=$postcode ?></p>
 					</div>
 					<div class="box-right">
 						<p><?=$row['POST_CODE'] ?></p>
@@ -206,41 +206,41 @@ if ($_SESSION['LANG'] == 'TH') {
 				<div class="box-user">
 					<div class="box-pic">
 					<?php
-						if((isset($_SESSION['FB'])) AND ($avatarPath == '')){
-							$avatarPath = 'http://graph.facebook.com/'.$_SESSION['FB'].'/picture?type=normal';
-						}else{
-							$avatarPath = nvl( $row['IMAGE_PATH'] , 'images/account/user.jpg');
-						}
+					if ((isset($_SESSION['FB'])) AND ($avatarPath == '')) {
+						$avatarPath = 'http://graph.facebook.com/' . $_SESSION['FB'] . '/picture?type=normal';
+					} else {
+						$avatarPath = str_replace("../../", "", nvl($row['IMAGE_PATH'], 'images/account/user.jpg'));
+					}
 					?>
-						<img src="<?=$avatarPath?>"/>
+						<img src="<?=$avatarPath ?>"/>
 					</div>
 					<div class="box-detail cf">
 						<div class="box-name">
-							<h2><?=$row['TITLE_DESC']." ".$row['NAME'] . " " . $row['LAST_NAME'] ?></h2>
+							<h2><?=$row['TITLE_DESC'] . " " . $row['NAME'] . " " . $row['LAST_NAME'] ?></h2>
 						</div>
-						<p>LOG IN <?=$last?></p>
+						<p>LOG IN <?=$last ?></p>
 						<div class="row cf">
 							<?php
-							if(!isset($_SESSION['FB'])){
+							if (!isset($_SESSION['FB'])) {
 								$USER_ID = $_SESSION['user_name'];
-							}else{
+							} else {
 								$USER_ID = $_SESSION['FB'];
 							}
 
-							$logSql = "select max(LOGIN_DATE) as LOGIN_DATE from log_user_login where USER_ID = '" . $USER_ID  . "'";
+							$logSql = "select max(LOGIN_DATE) as LOGIN_DATE from log_user_login where USER_ID = '" . $USER_ID . "'";
 							$rsLog = mysql_query($logSql) or die(mysql_error());
 							$rowLog = mysql_fetch_array($rsLog);
 							?>
 							<div class="box-left">
-								<?=$date?>
+								<?=$date ?>
 							</div>
 							<div class="box-right">
-								<?=displaydateformatlong($rowLog['LOGIN_DATE'] )?>
+								<?=displaydateformatlong($rowLog['LOGIN_DATE']) ?>
 							</div>
 						</div>
 						<div class="row cf">
 							<div class="box-left">
-								<?=$time?>
+								<?=$time ?>
 							</div>
 							<div class="box-right">
 								<?=displayTime($rowLog['LOGIN_DATE']) ?>
@@ -250,10 +250,10 @@ if ($_SESSION['LANG'] == 'TH') {
 					<div class="box-btn cf">
 						<div class="row cf">
 							<div class="box-left">
-								<a href="account-edit.php" class="ed"><?=$edit?></a>
+								<a href="account-edit.php" class="ed"><?=$edit ?></a>
 							</div>
 							<div class="box-right">
-								<a href="logout.php" class="lu"><?=$exit?></a>
+								<a href="logout.php" class="lu"><?=$exit ?></a>
 							</div>
 						</div>
 					</div>
