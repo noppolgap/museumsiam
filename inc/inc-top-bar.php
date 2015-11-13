@@ -49,7 +49,7 @@ require ("inc-cat-id-conf.php");
 					<a target="_blank" href="https://instagram.com/museumsiam" class="btn-socila ig"></a>
 				</div>
 				<div class="box-search">
-					<form name="search_form" method="post" action="system-search.php">
+					<form name="search_form" method="post" action="search.php">
 					<input type="search" name="txt_search_form" placeholder="<?=$txt_find?>">
 					<input type="submit" name="save_search_form" >
 					</form>

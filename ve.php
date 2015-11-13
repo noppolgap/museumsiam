@@ -93,25 +93,25 @@ $cat_name[$row['SUB_CONTENT_CAT_ID']] = $row['CAT_DESC'];
 			IFNULL(content.LAST_UPDATE_DATE , content.CREATE_DATE) as LAST_DATE
 			FROM trn_content_category cat INNER JOIN trn_content_detail content ON content.CAT_ID = cat.CONTENT_CAT_ID
 			WHERE cat.flag = 0 AND cat.REF_MODULE_ID = ".$MID." AND cat.CONTENT_CAT_ID = ".$style_exhibition." AND content.APPROVE_FLAG = 'Y' AND content.CONTENT_STATUS_FLAG = 0";
-    $sqlCategory .= $search_sql." ORDER BY content.SUB_CAT_ID desc , content.ORDER_DATA desc";
+echo    $sqlCategory .= $search_sql." ORDER BY content.SUB_CAT_ID desc , content.ORDER_DATA desc";
 	
 	$query_Category = mysql_query($sqlCategory, $conn);
 	while ($row_Category = mysql_fetch_array($query_Category)) {
 
 			$row_Category['CONTENT_DESC'] = htmlspecialchars($row_Category['CONTENT_DESC']);
-			$path = 've-detail.php?MID=' . $MID . '%26CID=' . $row_Category['SUB_CAT_ID'] . '%26CONID=' . $row_Category['CONTENT_ID'];
+			$path = 've-detail.php?MID=' . $MID . '%26CID='. $row_Category['CONTENT_CAT_ID'] . '%26CONID=' . $row_Category['CONTENT_ID'];
 			$fullpath = _FULL_SITE_PATH_ . '/' . $path;
 			$redirect_uri = _FULL_SITE_PATH_ . '/callback.php?p=' . $row_Category['CONTENT_ID'];
 			$fb_link = 'https://www.facebook.com/dialog/share?app_id=' . _FACEBOOK_ID_ . '&display=popup&href=' . $fullpath . '&redirect_uri=' . $redirect_uri;
 			$tw_link = $fullpath;
 
-		if(($permanent_exhibition_show) && ($row_Category['SUB_CAT_ID'] == $permanent_exhibition)){
+		if(($permanent_exhibition_show) && ($row_Category['CONTENT_CAT_ID'] == $permanent_exhibition)){
 
 			$permanent_exhibition_show = false;
 ?>
 			<div class="box-category-main news BBlack w100">
 				<div class="box-title cf">
-					<h2><?=$cat_name[$row_Category['SUB_CAT_ID']]?></h2>
+					<h2><?=$cat_name[$row_Category['CONTENT_CAT_ID']]?></h2>
 					<div class="box-btn">
 						<a href="ve-permanent.php" class="btn gold"><?=$seeAllCap ?></a>
 					</div>

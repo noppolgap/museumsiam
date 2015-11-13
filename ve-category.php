@@ -189,13 +189,13 @@ if (isset($_GET['SCID'])) {
 							$tw_link = $fullpath;
 
 							echo '<div class="box-tumb cf' . $extraClass . '">';
-							echo '<a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG='.$currentPage.'&link=category"> ';
+							echo '<a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID'] . '&PG='.$currentPage.'&link=cat&c='.$_GET['c'].'"> ';
 							echo ' <div class="box-pic"> ';
 							echo '	<img style="width:250px;height:187px;" src="' . callThumbListFrontEnd($rowContent['CONTENT_ID'], $rowContent['CONTENT_CAT_ID'], true) . '"> ';
 							echo ' </div> </a> ';
 
 							echo ' <div class="box-text">';
-							echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']. '&PG='.$currentPage.'&link=category">';
+							echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']. '&PG='.$currentPage.'&link=cat&c='.$_GET['c'].'">';
 							echo ' <p class="text-title TcolorRed">';
 							echo $rowContent['CONTENT_DESC'];
 							echo ' </p> </a>';
@@ -209,7 +209,7 @@ if (isset($_GET['SCID'])) {
 							echo ' </p>';
 
 							echo ' <div class="box-btn cf">';
-							echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']  . '&PG='.$currentPage.'&link=category" class="btn red">'.$readMoreCap.'</a>';
+							echo ' <a href="ve-detail.php?MID=' . $MID . '&CID=' . $CID . '&CONID=' . $rowContent['CONTENT_ID']  . '&PG='.$currentPage.'&link=cat&c='.$_GET['c'].'" class="btn red">'.$readMoreCap.'</a>';
 
 							echo ' <div class="box-btn-social cf">';
 							echo ' <a href="'.$fb_link.'" onclick="shareFB(\''.$rowContent['CONTENT_DESC'].'\',$(this).attr(\'href\')); return false;" class="btn-socila fb"></a>';

@@ -22,10 +22,12 @@ $catName = "";
 
 $backPage = "";
 $link_back = $_GET['link'];
+$link_sub_back = $_GET['c'];
+
 
 switch ($link_back) {
-	case "category" :
-		$backPage = "ve-category.php";
+	case "cat" :
+		$backPage = "ve-category.php?c=$link_sub_back";
 		break;
 	case "exh" :
 		$backPage = "ve-exhibition.php";
@@ -39,6 +41,8 @@ switch ($link_back) {
 	case "" :
 		$backPage = "ve.php";
 		break;
+
+
 }
 
 $sqlCategory = "";
@@ -138,7 +142,7 @@ include ('inc/inc-menu.php');
 			<ol class="cf">
 				<li><a href="index.php"><img src="images/icon-home.png"/></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="other-system.php"><?=$otherSystemCap ?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
-				<li><a href="ve.php">ระบบจัดการความรู้</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
+				<li><a href="ve.php"><?=$knowledge_system?></a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li><a href="ve-category.php">หมวดหมู่นิทรรศการ</a>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;</li>
 				<li class="active"><?=$title?></li>
 			</ol>
@@ -153,14 +157,14 @@ include ('inc/inc-menu.php');
 		<div class="box-left main-content">
 			<?php
 			include ('inc/inc-left-content-ve.php');
- ?>
+ 			?>
 		</div>
 		<div class="box-right main-content">
 			<hr class="line-red"/>
 			<div class="box-title-system cf news">
 				<h1><?=$catName ?></h1>
 				<div class="box-btn">
-					<a href="<? echo $backPage ?>" class="btn red">ย้อนกลับ</a>
+					<a href="<?=$backPage?>" class="btn red"><?=$backCap?></a>
 				</div>
 			</div>
 			<div class="box-newsdetail-main">
@@ -275,7 +279,7 @@ include ('inc/inc-menu.php');
 				</div>
 				<div class="part-tumb-main" <?=$extraStyle ?>>
 					<div  class="text-title cf">
-						<p>แกลเลอรี</p>
+						<p><?=$galleryCap?></p>
 						<div class="box-btn">
 							<a target="_blank" href="all-media.php?CID=<? echo $CID ?>&CONID=<? echo $CONID ?>" class="btn black"><?=$seeAllCap ?></a>
 						</div>
@@ -323,8 +327,8 @@ include ('inc/inc-menu.php');
 							<div class="box-text">
 								<p class="text-title"><?=$rowFile['IMG_NAME'] ?></p>
 								<p class="text-detail">
-									<span>ประเภท: .<?=$ext ?></span>
-									<span>ขนาด: <?=$size ?></span>
+									<span><?=$typeCap?>: .<?=$ext ?></span>
+									<span><?=$sizeCap?>: <?=$size ?></span>
 								</p>
 							</div>
 							<div class="box-btn cf">

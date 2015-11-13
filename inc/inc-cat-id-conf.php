@@ -16,6 +16,7 @@ $e_aaplication = 26;
 $museum_event_cat_id = 60;
 $all_event_cat_id = 61;
 $position_cat_id = 26;
+$procurement_cat_id = 59;
 // End Category ID
 
 // Module ID

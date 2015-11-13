@@ -201,4 +201,7 @@ $report_webboard = 'Report';
 
 $noDataCap = "Data not found";
 $newAndEventDate = "Events & News Date : ";
+
+$knowledge_system = "Knowledge System";
+
 ?>

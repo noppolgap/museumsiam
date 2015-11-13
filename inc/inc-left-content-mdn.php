@@ -22,26 +22,28 @@ if (!isset($_GET['CID'])) {
 	</div>
 </div>
 
-<div class="part-left-search">
-	<div class="box-search">
-		<input type="text" placeholder="ค้นหา">
+<form name="search_form" method="post" action="system-search.php?MID=<?=$museum_data_network_module_id?>">
+	<div class="part-left-search">
+		<div class="box-search">
+			<input type="text" name="txt_search_form" value="<?=$_POST['txt_search_form'] ?>" placeholder="<?=$searchCap?>">
+		</div>
 	</div>
-</div>
+</form>
 
 <div class="part-menu-left">
 	<div class="box-menu-left">
 		<ul class="menu-left">
 			<li class="menu1">
-				<a href="mdn.php">หน้าหลัก</a>
+				<a href="mdn.php"><?=$mainPageCap?></a>
 			</li>
 			<li class="menu2 sub">
-				<a href="mdn-news-event.php">กิจกรรมและข่าวประชาสัมพันธ์</a>
+				<a href="mdn-news-event.php"><?=$activityAndNewsCap?></a>
 				<ul class="submenu-left">
 					<li class="submenu1">
-						<a href="mdn-event.php">กิจกรรม</a>
+						<a href="mdn-event.php"><?=$activityCa?></a>
 					</li>
 					<li class="submenu2">
-						<a href="mdn-news.php">ข่าวประชาสัมพันธ์</a>
+						<a href="mdn-news.php"><?=$newsCap?></a>
 					</li>
 				</ul>
 			</li>

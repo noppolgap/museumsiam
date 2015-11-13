@@ -201,4 +201,7 @@ $report_webboard = 'แจ้งลบ';
 
 $noDataCap = "ไม่มีข้อมูล";
 $newAndEventDate = "กิจกรรมและข่าวสาร วันที่ ";
+$knowledge_system ="ระบบจัดการความรู้";
+
+
 ?>

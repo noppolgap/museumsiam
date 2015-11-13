@@ -4,10 +4,12 @@
 	</div>
 </div>
 
-<form name="search" action="?search" method="post">
+<!--<form name="search" action="?search" method="post">-->
+
+<form name="search_form" method="post" action="system-search.php?MID=<?=$new_and_event?>">
 	<div class="part-left-search">
 		<div class="box-search">
-			<input type="text" name="str_search" value="<?=$_SESSION['text'] ?>"  placeholder="<?=$searchCap?>">
+			<input type="text" name="txt_search_form" value="<?=$_POST['txt_search_form'] ?>"  placeholder="<?=$searchCap?>">
 		</div>
 	</div>
 </form>

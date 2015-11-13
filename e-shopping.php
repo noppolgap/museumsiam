@@ -138,7 +138,7 @@ require("inc/inc-cat-id-conf.php");
 
 							
 
-							$sql_proc  .= $search_sql."	ORDER BY prod.ORDER_DATA DESC LIMIT 0,6";
+							$sql_proc  .= $search_sql."	ORDER BY prod.ORDER_DATA DESC";
 
 						     $query_proc = mysql_query($sql_proc,$conn);
 
